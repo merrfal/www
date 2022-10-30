@@ -36,14 +36,14 @@ export default function Home() {
                       <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8'>
                         <div className='h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100'>
                           <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg'
+                            src='https://images.pexels.com/photos/6348119/pexels-photo-6348119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
                             alt=''
                             className='h-full w-full object-cover object-center'
                           />
                         </div>
                         <div className='h-64 w-44 overflow-hidden rounded-lg'>
                           <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg'
+                            src='https://images.pexels.com/photos/10160718/pexels-photo-10160718.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
                             alt=''
                             className='h-full w-full object-cover object-center'
                           />
@@ -52,7 +52,7 @@ export default function Home() {
                       <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8'>
                         <div className='h-64 w-44 overflow-hidden rounded-lg'>
                           <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg'
+                            src='https://images.pexels.com/photos/7345444/pexels-photo-7345444.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
                             alt=''
                             className='h-full w-full object-cover object-center'
                           />
@@ -142,6 +142,37 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <div className="bg-gray-50">
+      <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <span className="block">Bamirësia nuk e pakëson pasurinë</span>
+          <span className="block text-indigo-600">Jep Fal ndihmo komunitetin</span>
+        </h2>
+        <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+          <div className="inline-flex rounded-md shadow">
+          <Link href='/posts/add'>
+            <a
+              href="#"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700"
+            >
+            Dhuro Falas
+            </a>
+            </Link>
+          </div>
+          <div className="ml-3 inline-flex rounded-md shadow">
+          <Link href='/landings'>
+            <a
+              href="#"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600 hover:bg-indigo-50"
+            >
+              Merr Falas
+            </a>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
     </Normal>
   );
 }
