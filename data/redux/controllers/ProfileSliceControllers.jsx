@@ -8,6 +8,8 @@ const SetProfile = (state, action) => {
   state.FullName = user.FullName;
   state.Email = user.Email;
   state.Avatar = user.Avatar;
+  state.Bio = user.Bio;
+  state.Website = user.Website;
   state.Role = user.Role;
   state.Plan = user.Plan;
   state.NewPassword = user.NewPassword || "";
@@ -25,7 +27,9 @@ const UnsetProfile = (state) => {
   state.LastName = null;
   state.Email = null;
   state.Avatar = null;
-  state.Role = null;
+  state.Role = null; 
+  state.Website = null;
+  state.Bio = null;
   state.Plan = null;
   state.NewPassword = "";
   state.Upload = null;
