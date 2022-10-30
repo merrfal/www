@@ -3,12 +3,66 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
 import { LandingDownvote, LandingUpvote, PagesList, UserGoogle } from '../../../controllers/front';
+import { Fragment, useState } from 'react'
+import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 
+const products = [
+  {
+    id: 1,
+    name: 'Basic Tee',
+    href: '#',
+    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+    imageAlt: "Front of men's Basic Tee in black.",
+    price: '$35',
+    color: 'Black',
+  },
+  // More products...
+]
+
+const sortOptions = [
+  { name: 'Most Popular', href: '#', current: true },
+  { name: 'Best Rating', href: '#', current: false },
+  { name: 'Newest', href: '#', current: false },
+  { name: 'Price: Low to High', href: '#', current: false },
+  { name: 'Price: High to Low', href: '#', current: false },
+]
+const subCategories = [
+  { name: 'Veshje', href: '#' },
+  { name: 'Shtëpi', href: '#' },
+  { name: 'Teknologji', href: '#' },
+  { name: 'Mjete', href: '#' },
+]
+const filters = [
+  {
+    id: 'color',
+    name: 'Qyteti',
+    options: [
+      { value: 'Prishtinë', label: 'Prishtinë', checked: false },
+      { value: 'Mitrovicë', label: 'Mitrovicë', checked: false },
+      { value: 'Gjilan', label: 'Gjilan', checked: true },
+      { value: 'Prizren', label: 'Prizren', checked: false },
+      { value: 'Pejë', label: 'Pejë', checked: false },
+      { value: 'Gjakovë', label: 'Gjakovë', checked: false },
+    ],
+  },
+]
+
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 export default function Landings() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
   const pages = useSelector((state) => state.pages);
+  const page = useSelector((state) => state.page);
+
+  
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  
 
   const AuthWithGoogle = () => {
     fetch(`https://api.ipregistry.co/?key=${process.env.NEXT_PUBLIC_IP_KEY}`)
@@ -19,43 +73,318 @@ export default function Landings() {
   useEffect(() => {
     if (pages.Loaded === false) PagesList(dispatch);
   }, [pages]);
-
   return (
     <Normal>
-      <section 
+      <div className="bg-white">
+        <div>
+          {/* Mobile filter dialog */}
+          <Transition.Root show={mobileFiltersOpen} as={Fragment}>
+            <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
+              <Transition.Child
+                as={Fragment}
+                enter="transition-opacity ease-linear duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="transition-opacity ease-linear duration-300"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <div className="fixed inset-0 bg-black bg-opacity-25" />
+              </Transition.Child>
+
+              <div className="fixed inset-0 z-40 flex">
+                <Transition.Child
+                  as={Fragment}
+                  enter="transition ease-in-out duration-300 transform"
+                  enterFrom="translate-x-full"
+                  enterTo="translate-x-0"
+                  leave="transition ease-in-out duration-300 transform"
+                  leaveFrom="translate-x-0"
+                  leaveTo="translate-x-full"
+                >
+                  <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+                    <div className="flex items-center justify-between px-4">
+                      <h2 className="text-lg font-medium text-gray-900">Filters</h2>
+                      <button
+                        type="button"
+                        className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
+                        onClick={() => setMobileFiltersOpen(false)}
+                      >
+                        <span className="sr-only">Close menu</span>
+                        <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
+                    </div>
+
+                    {/* Filters */}
+                    <form className="mt-4 border-t border-gray-200">
+                      <h3 className="sr-only">Categories</h3>
+                      <ul role="list" className="px-2 py-3 font-medium text-gray-900">
+                        {subCategories.map((category) => (
+                          <li key={category.name}>
+                            <a href={category.href} className="block px-2 py-3">
+                              {category.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {filters.map((section) => (
+                        <Disclosure as="div" key={section.id} className="border-t border-gray-200 px-4 py-6">
+                          {({ open }) => (
+                            <>
+                              <h3 className="-mx-2 -my-3 flow-root">
+                                <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
+                                  <span className="font-medium text-gray-900">{section.name}</span>
+                                  <span className="ml-6 flex items-center">
+                                    {open ? (
+                                      <MinusIcon className="h-5 w-5" aria-hidden="true" />
+                                    ) : (
+                                      <PlusIcon className="h-5 w-5" aria-hidden="true" />
+                                    )}
+                                  </span>
+                                </Disclosure.Button>
+                              </h3>
+                              <Disclosure.Panel className="pt-6">
+                                <div className="space-y-6">
+                                  {section.options.map((option, optionIdx) => (
+                                    <div key={option.value} className="flex items-center">
+                                      <input
+                                        id={`filter-mobile-${section.id}-${optionIdx}`}
+                                        name={`${section.id}[]`}
+                                        defaultValue={option.value}
+                                        type="radio"
+                                        // defaultChecked={option.checked}
+                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                      />
+                                      <label
+                                        htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
+                                        className="ml-3 min-w-0 flex-1 text-gray-500"
+                                      >
+                                        {option.label}
+                                      </label>
+                                    </div>
+                                  ))}
+                                </div>
+                              </Disclosure.Panel>
+                            </>
+                          )}
+                        </Disclosure>
+                      ))}
+                    </form>
+                  </Dialog.Panel>
+                </Transition.Child>
+              </div>
+            </Dialog>
+          </Transition.Root>
+
+          <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex items-baseline justify-between border-b border-gray-200 pt-24 pb-6">
+              <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
+
+              <div className="flex items-center">
+                <Menu as="div" className="relative inline-block text-left">
+                  <div>
+                    <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                      Sort
+                      <ChevronDownIcon
+                        className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                        aria-hidden="true"
+                      />
+                    </Menu.Button>
+                  </div>
+
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <div className="py-1">
+                        {sortOptions.map((option) => (
+                          <Menu.Item key={option.name}>
+                            {({ active }) => (
+                              <a
+                                href={option.href}
+                                className={classNames(
+                                  option.current ? 'font-medium text-gray-900' : 'text-gray-500',
+                                  active ? 'bg-gray-100' : '',
+                                  'block px-4 py-2 text-sm'
+                                )}
+                              >
+                                {option.name}
+                              </a>
+                            )}
+                          </Menu.Item>
+                        ))}
+                      </div>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+
+                <button type="button" className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
+                  <span className="sr-only">View grid</span>
+                  <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
+                  onClick={() => setMobileFiltersOpen(true)}
+                >
+                  <span className="sr-only">Filters</span>
+                  <FunnelIcon className="h-5 w-5" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+
+            <section aria-labelledby="products-heading" className="pt-6 pb-24">
+              <h2 id="products-heading" className="sr-only">
+                Products
+              </h2>
+
+              <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+                {/* Filters */}
+                <form className="hidden lg:block">
+                  <h3 className="sr-only">Categories</h3>
+                  <ul role="list" className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900">
+                    {subCategories.map((category) => (
+                      <li key={category.name}>
+                        <a href={category.href}>{category.name}</a>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {filters.map((section) => (
+                    <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
+                      {({ open }) => (
+                        <>
+                          <h3 className="-my-3 flow-root">
+                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                              <span className="font-medium text-gray-900">{section.name}</span>
+                              <span className="ml-6 flex items-center">
+                                {open ? (
+                                  <MinusIcon className="h-5 w-5" aria-hidden="true" />
+                                ) : (
+                                  <PlusIcon className="h-5 w-5" aria-hidden="true" />
+                                )}
+                              </span>
+                            </Disclosure.Button>
+                          </h3>
+                          <Disclosure.Panel className="pt-6">
+                            <div className="space-y-4">
+                              {section.options.map((option, optionIdx) => (
+                                <div key={option.value} className="flex items-center">
+                                  <input
+                                    id={`filter-${section.id}-${optionIdx}`}
+                                    name={`${section.id}[]`}
+                                    defaultValue={option.value}
+                                    type="radio"
+                                    defaultChecked={option.checked}
+                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                  />
+                                  <label
+                                    htmlFor={`filter-${section.id}-${optionIdx}`}
+                                    className="ml-3 text-sm text-gray-600"
+                                  >
+                                    {option.label}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                  ))}
+                </form>
+
+
+
+                {/* Product grid */}
+                <div className="lg:col-span-3">
+                  {/* Replace with your content */}
+
+                  {/* <div className="h-96 rounded-lg border-4 border-dashed border-gray-200 lg:h-full"> */}
+                  {/* <div className="bg-white"> */}
+                  <div className="mx-auto max-w-2xl py-0 px-4 sm:py-0 sm:px-6 lg:max-w-7xl lg:px-8">
+
+                    <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                      {pages.Loaded === false
+                        ? 'loading pages...'
+                        : pages.Pages.map((page, index) => (
+                          <div className="group relative">
+                            <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                              <img
+                                src='https://www.charleskeith.com/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-ck-products/default/dw830e46ae/images/hi-res/2022-L2-CK2-20270818-17-1.jpg?sw=1152&sh=1536'
+                                // alt={product.imageAlt}
+                                className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                              />
+                            </div>
+                            <div className="mt-4 flex justify-between">
+                              <div>
+                                <h3 className="text-sm text-gray-700">
+                                  <a href={`/landings/${page.Slug}`}>
+                                    <span aria-hidden="true" className="absolute inset-0" />
+                                    {page.Name}
+                                  </a>
+                                </h3>
+                                <p className="mt-1 text-sm text-gray-500">{page.Description}</p>
+                                
+                              </div>
+                              <p className="text-sm font-medium text-gray-900">{page.Upvotes.length}</p>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* /End replace */}
+              {/* </div> */}
+              {/* </div> */}
+            </section>
+          </main>
+        </div>
+      </div>
+
+
+      {/* <section
         style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', padding: '1em', gap: '1em' }}>
         {pages.Loaded === false
           ? 'loading pages...'
           : pages.Pages.map((page, index) => (
-              <Link href={`/landings/${page.Slug}`} key={index}>
-                <div
-                   style={{
-                    width: '250px',
-                    height: '420px',
-                    border: '1px solid #ccc',
-                    borderRadius: '1em',
-                    padding: '.5em',
-                  }}>
-                  <h2>Name: {page.Name}</h2>
-                  <p>Tagline: {page.Tagline}</p>
-                  <p>Website: {page.Website}</p>
-                  {/* <p>User: {page.User}</p> */}
-                  <div>
-                    {page.Categories.map((item, index) => (
-                      <p key={index}>{item}</p>
-                    ))}
-                  </div>
-                  <p>Description: {page.Description}</p>
-                  {/* <p>Links: {page.Links[0]}</p> */}
-                  {/* <p>Gallery: {page.Gallery[0]}</p> */}
-                  <Link href={`/landings/${page.Slug}`}>
-                      <button>View Landing Page</button>
-                    </Link>
-                    <div>
-                      Total Votes: {page.Upvotes.length} &nbsp;
-                      {
-                        user.Auth ? 
-                        page.Upvotes.includes(user.Id) ?
+            <Link href={`/landings/${page.Slug}`} key={index}>
+              <div
+                style={{
+                  width: '250px',
+                  height: '420px',
+                  border: '1px solid #ccc',
+                  borderRadius: '1em',
+                  padding: '.5em',
+                }}>
+                <h2>Name: {page.Name}</h2>
+                <p>Tagline: {page.Tagline}</p>
+                <p>Website: {page.Website}</p>
+                <p>User: {page.User}</p>
+                <div>
+                  {page.Categories.map((item, index) => (
+                    <p key={index}>{item}</p>
+                  ))}
+                </div>
+                <p>Description: {page.Description}</p>
+                <p>Links: {page.Links[0]}</p>
+                <p>Gallery: {page.Gallery[0]}</p>
+                <Link href={`/landings/${page.Slug}`}>
+                  <button>View Landing Page</button>
+                </Link>
+                <div>
+                  Total Votes: {page.Upvotes.length} &nbsp;
+                  {
+                    user.Auth ?
+                      page.Upvotes.includes(user.Id) ?
                         <button onClick={(e) => {
                           e.stopPropagation();
                           LandingDownvote(page._id, user.Id, dispatch, "Pages")
@@ -65,17 +394,17 @@ export default function Landings() {
                           e.stopPropagation();
                           LandingUpvote(page._id, user.Id, dispatch, "Pages")
                         }}>Upvote</button>
-                        : 
-                        <button onClick={(e) => {
-                          e.stopPropagation();
-                          AuthWithGoogle()
-                        }}>Upvote</button>
-                      }
-                    </div>
+                      :
+                      <button onClick={(e) => {
+                        e.stopPropagation();
+                        AuthWithGoogle()
+                      }}>Upvote</button>
+                  }
                 </div>
-              </Link>
-            ))}
-      </section>
+              </div>
+            </Link>
+          ))}
+      </section> */}
     </Normal>
   );
 }
