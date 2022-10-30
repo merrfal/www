@@ -111,7 +111,7 @@ export default function Home() {
               Produktet e fundit
             </h3>
             <p class='mt-1 max-w-2xl text-l text-gray-500'>
-              Këtu janë renditur 12 produkte e fundit të listuar.
+              Këtu janë renditur produktet e fundit të listuar.
             </p>
           </div>
 
