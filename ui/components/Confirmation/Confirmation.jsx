@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 export default function Confirmation() {
   const confirmation = useSelector(state => state.confirmation);
 
-  confirmation && return (
+  return (
     <div
       class='relative z-10'
       aria-labelledby='modal-title'
