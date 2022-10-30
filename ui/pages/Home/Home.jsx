@@ -94,7 +94,7 @@ export default function Home() {
                 <Link href='/produktet'>
                   <a
                     href='#'
-                    className='inline-block rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-center font-medium text-white hover:bg-indigo-700'>
+                    className='inline-block rounded-md border border-transparent bg-[#377DFF] py-3 px-8 text-center font-medium text-white hover:bg-[#377DFF90]'>
                     Shfleto Produktet
                   </a>
                 </Link>
@@ -132,7 +132,7 @@ export default function Home() {
                         {page.Upvotes.length} Likes | {page.Upvotes.length}{' '}
                         Views
                       </h3> */}
-                      <h3 class='mt-4 text-sm text-gray-700'>Earthen Bottle</h3>
+                      <h3 class='mt-4 text-sm text-gray-700'>{page.Address, page.City, page.Zip}</h3>
                       <p class='mt-1 text-lg font-medium text-gray-900'>
                         {page.Name}
                       </p>

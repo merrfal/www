@@ -20,9 +20,9 @@ export default function Header() {
   return (
     <div class='relative bg-white'>
       <div class='mx-auto max-w-7xl px-4 sm:px-6'>
-        <div class='flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10'>
+        <div class='flex items-center justify-between border-b border-gray-100 py-6 md:justify-start md:space-x-10'>
           <div class='flex justify-start lg:w-0 lg:flex-1'>
-            <a href='#'>
+            <Link href='/'>
               <svg
                 width='140px'
                 viewBox='0 0 382 67'
@@ -69,7 +69,7 @@ export default function Header() {
                   fill='black'
                 />
               </svg>
-            </a>
+            </Link>
           </div>
           <div class='-my-2 -mr-2 md:hidden'>
             <button
@@ -115,7 +115,7 @@ export default function Header() {
               {user.Auth ? (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <Link href='/posts/add'>
-                    <button class='ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-3 py-1.5 text-base font-medium text-white shadow-sm hover:bg-indigo-700'>
+                    <button class='ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-[#377DFF] px-3 py-1.5 text-base font-medium text-white shadow-sm hover:bg-[#377DFF90]'>
                       Dhuro Diçka
                     </button>
                   </Link>
