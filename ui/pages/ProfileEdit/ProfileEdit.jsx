@@ -9,10 +9,7 @@ export default function Profile() {
   const user = useSelector((state) => state.user);
   const profile = useSelector((state) => state.profile);
 
-  useEffect(() => {
-    if (profile.Loaded === false && user.Auth)
-      UserView(dispatch, user.Username);
-  }, [profile, user]);
+  useEffect(() => { if (profile.Loaded === false && user.Auth) UserView(dispatch, user.Username) }, [profile, user]);
 
   //   return (
   //     <section style={{ padding: "1em" }} class="container mx-auto px-4 py-4">

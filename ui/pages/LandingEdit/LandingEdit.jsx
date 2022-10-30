@@ -11,9 +11,7 @@ export default function LandingEdit() {
 
   const page = useSelector((state) => state.page);
 
-  useEffect(() => {
-    if (page.Loaded === false) PageView(dispatch, slug);
-  }, [page, slug]);
+  useEffect(() => { if (page.Loaded === false) PageView(dispatch, slug) }, [page, slug]);
 
   return (
     <Normal>
