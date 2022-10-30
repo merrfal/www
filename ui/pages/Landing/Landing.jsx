@@ -28,54 +28,13 @@ export default function LandingEdit() {
         {page.Loaded === false ? (
           'loading page...'
         ) : (
-          <div>
-            <h1>{page.Page.Name}</h1>
-            <i>{page.Page.Tagline}</i>
-            <b>Website: {page.Page.Website}</b>
-            <p>{page.Page.Description}</p>
-            {/* <p>User: {page.Page.User}</p> */}
-            <hr />
-            <div>{page.Page.Categories.map((i, k) => <p key={k}>{i}</p>)}</div>
-            <div>{page.Page.Links.map((i, k) => <p key={k}>{i}</p>)}</div>
-            {/* <p>Gallery: {page.Page.Gallery[0]}</p> */}
-            <br />
-            <div>
-              Total Votes: {page.Page.Upvotes.length} &nbsp;
-              {user.Auth ? (
-                page.Page.Upvotes.includes(user.Id) ? (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      LandingDownvote(page.Page._id, user.Id, dispatch, 'Page', page.Page.Slug,);
-                    }}>
-                    Downvote
-                  </button>
-                ) : (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      LandingUpvote(page.Page._id, user.Id, dispatch, 'Page', page.Page.Slug);
-                    }}>
-                    Upvote
-                  </button>
-                )
-              ) : (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    AuthWithGoogle();
-                  }}>
-                  Upvote
-                </button>
-              )}
-            </div>
-          </div>
-        )}
-      </section>
 
-      <div className="bg-white">
+
+          <div>
+
+<div className="bg-white">
         <div className="pt-6">
-          <nav aria-label="Breadcrumb">
+          {/* <nav aria-label="Breadcrumb">
             <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
               <li>
                 <div className="flex items-center">
@@ -96,10 +55,10 @@ export default function LandingEdit() {
               </li>
 
               <li className="text-sm">
-                <a href="#" aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">Basic Tee 6-Pack</a>
+                <a href="#" aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">{page.Page.Name}</a>
               </li>
             </ol>
-          </nav>
+          </nav> */}
 
           <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
             <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
@@ -120,12 +79,12 @@ export default function LandingEdit() {
 
           <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
             <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Basic Tee 6-Pack</h1>
+              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{page.Page.Name}</h1>
             </div>
 
             <div className="mt-4 lg:row-span-3 lg:mt-0">
-              <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight text-gray-900">$192</p>
+              <h2 className="sr-only">Product information </h2>
+              <p className="text-3xl tracking-tight text-gray-900">Shkup City</p>
 
               <div className="mt-6">
                 <h3 className="sr-only">Reviews</h3>
@@ -151,13 +110,13 @@ export default function LandingEdit() {
                       <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
                     </svg>
                   </div>
-                  <p className="sr-only">4 out of 5 stars</p>
+                  <p className="sr-only">5out of 5 stars</p>
                   <a href="#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">117 reviews</a>
                 </div>
               </div>
 
               <form className="mt-10">
-                <div>
+                {/* <div>
                   <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
                   <fieldset className="mt-4">
@@ -184,15 +143,15 @@ export default function LandingEdit() {
                       </label>
                     </div>
                   </fieldset>
-                </div>
+                </div> */}
 
                 <div className="mt-10">
-                  <div className="flex items-center justify-between">
+                  {/* <div className="flex items-center justify-between">
                     <h3 className="text-sm font-medium text-gray-900">Size</h3>
                     <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">Size guide</a>
-                  </div>
+                  </div> */}
 
-                  <fieldset className="mt-4">
+                  {/* <fieldset className="mt-4">
                     <legend className="sr-only">Choose a size</legend>
                     <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
                       <label className="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-gray-50 text-gray-200 cursor-not-allowed">
@@ -254,19 +213,19 @@ export default function LandingEdit() {
                         <span className="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
                       </label>
                     </div>
-                  </fieldset>
+                  </fieldset> */}
                 </div>
 
-                <button type="submit" className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add to bag</button>
+                <button type="submit" className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Te lutem me thirr</button>
               </form>
             </div>
 
             <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
               <div>
-                <h3 className="sr-only">Description</h3>
+                {/* <h3 className="sr-only">{page.Page.Description}</h3> */}
 
                 <div className="space-y-6">
-                  <p className="text-base text-gray-900">The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: &quot;Black&quot;. Need to add an extra pop of color to your outfit? Our white tee has you covered.</p>
+                  <p className="text-base text-gray-900">{page.Page.Description}</p>
                 </div>
               </div>
 
@@ -297,6 +256,52 @@ export default function LandingEdit() {
           </div>
         </div>
       </div>
+
+            {/* <h1>{page.Page.Name}</h1> */}
+            {/* <i>{page.Page.Tagline}</i> */}
+            {/* <b>Website: {page.Page.Website}</b> */}
+            {/* <p>{page.Page.Description}</p> */}
+            {/* <p>User: {page.Page.User}</p> */}
+            <hr />
+            {/* <div>{page.Page.Categories.map((i, k) => <p key={k}>{i}</p>)}</div> */}
+            {/* <div>{page.Page.Links.map((i, k) => <p key={k}>{i}</p>)}</div> */}
+            {/* <p>Gallery: {page.Page.Gallery[0]}</p> */}
+            <br />
+            {/* <div>
+              Total Votes: {page.Page.Upvotes.length} &nbsp;
+              {user.Auth ? (
+                page.Page.Upvotes.includes(user.Id) ? (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      LandingDownvote(page.Page._id, user.Id, dispatch, 'Page', page.Page.Slug,);
+                    }}>
+                    Downvote
+                  </button>
+                ) : (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      LandingUpvote(page.Page._id, user.Id, dispatch, 'Page', page.Page.Slug);
+                    }}>
+                    Upvote
+                  </button>
+                )
+              ) : (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    AuthWithGoogle();
+                  }}>
+                  Upvote
+                </button>
+              )}
+            </div> */}
+          </div>
+        )}
+      </section>
+
+      
     </Normal>
   );
 }
