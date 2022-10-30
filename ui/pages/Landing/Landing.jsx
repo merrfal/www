@@ -3,12 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { PageView } from '../../../controllers/front';
 import { Normal } from '../../layouts';
 import { useRouter } from 'next/router';
-
-import {
-  LandingDownvote,
-  LandingUpvote,
-  UserGoogle,
-} from '../../../controllers/front';
+import { LandingDownvote, LandingUpvote, UserGoogle } from '../../../controllers/front';
 
 export default function LandingEdit() {
   const dispatch = useDispatch();
