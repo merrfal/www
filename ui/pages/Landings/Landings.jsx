@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
@@ -18,7 +19,6 @@ const products = [
     price: '$35',
     color: 'Black',
   },
-  // More products...
 ]
 
 const sortOptions = [
@@ -28,12 +28,14 @@ const sortOptions = [
   { name: 'Price: Low to High', href: '#', current: false },
   { name: 'Price: High to Low', href: '#', current: false },
 ]
+
 const subCategories = [
   { name: 'Veshje', href: '#' },
   { name: 'Shtëpi', href: '#' },
   { name: 'Teknologji', href: '#' },
   { name: 'Mjete', href: '#' },
 ]
+
 const filters = [
   {
     id: 'color',
@@ -49,10 +51,10 @@ const filters = [
   },
 ]
 
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
+
 export default function Landings() {
   const dispatch = useDispatch();
 
@@ -60,24 +62,20 @@ export default function Landings() {
   const pages = useSelector((state) => state.pages);
   const page = useSelector((state) => state.page);
 
-  
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   
-
   const AuthWithGoogle = () => {
     fetch(`https://api.ipregistry.co/?key=${process.env.NEXT_PUBLIC_IP_KEY}`)
       .then((res) => res.json())
       .then((payload) => UserGoogle(dispatch, payload));
   };
 
-  useEffect(() => {
-    if (pages.Loaded === false) PagesList(dispatch);
-  }, [pages]);
+  useEffect(() => {  if (pages.Loaded === false) PagesList(dispatch) }, [pages]);
+
   return (
     <Normal>
       <div className="bg-white">
         <div>
-          {/* Mobile filter dialog */}
           <Transition.Root show={mobileFiltersOpen} as={Fragment}>
             <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
               <Transition.Child
@@ -115,7 +113,6 @@ export default function Landings() {
                       </button>
                     </div>
 
-                    {/* Filters */}
                     <form className="mt-4 border-t border-gray-200">
                       <h3 className="sr-only">Categories</h3>
                       <ul role="list" className="px-2 py-3 font-medium text-gray-900">
@@ -153,7 +150,6 @@ export default function Landings() {
                                         name={`${section.id}[]`}
                                         defaultValue={option.value}
                                         type="radio"
-                                        // defaultChecked={option.checked}
                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                       />
                                       <label
@@ -246,7 +242,6 @@ export default function Landings() {
               </h2>
 
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-                {/* Filters */}
                 <form className="hidden lg:block">
                   <h3 className="sr-only">Categories</h3>
                   <ul role="list" className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900">
@@ -303,14 +298,8 @@ export default function Landings() {
 
 
 
-                {/* Product grid */}
                 <div className="lg:col-span-3">
-                  {/* Replace with your content */}
-
-                  {/* <div className="h-96 rounded-lg border-4 border-dashed border-gray-200 lg:h-full"> */}
-                  {/* <div className="bg-white"> */}
                   <div className="mx-auto max-w-2xl py-0 px-4 sm:py-0 sm:px-6 lg:max-w-7xl lg:px-8">
-
                     <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                       {pages.Loaded === false
                         ? 'loading pages...'
@@ -319,7 +308,6 @@ export default function Landings() {
                             <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
                               <img
                                 src='https://www.charleskeith.com/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-ck-products/default/dw830e46ae/images/hi-res/2022-L2-CK2-20270818-17-1.jpg?sw=1152&sh=1536'
-                                // alt={product.imageAlt}
                                 className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                               />
                             </div>
@@ -342,69 +330,10 @@ export default function Landings() {
                   </div>
                 </div>
               </div>
-              {/* /End replace */}
-              {/* </div> */}
-              {/* </div> */}
             </section>
           </main>
         </div>
       </div>
-
-
-      {/* <section
-        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', padding: '1em', gap: '1em' }}>
-        {pages.Loaded === false
-          ? 'loading pages...'
-          : pages.Pages.map((page, index) => (
-            <Link href={`/landings/${page.Slug}`} key={index}>
-              <div
-                style={{
-                  width: '250px',
-                  height: '420px',
-                  border: '1px solid #ccc',
-                  borderRadius: '1em',
-                  padding: '.5em',
-                }}>
-                <h2>Name: {page.Name}</h2>
-                <p>Tagline: {page.Tagline}</p>
-                <p>Website: {page.Website}</p>
-                <p>User: {page.User}</p>
-                <div>
-                  {page.Categories.map((item, index) => (
-                    <p key={index}>{item}</p>
-                  ))}
-                </div>
-                <p>Description: {page.Description}</p>
-                <p>Links: {page.Links[0]}</p>
-                <p>Gallery: {page.Gallery[0]}</p>
-                <Link href={`/landings/${page.Slug}`}>
-                  <button>View Landing Page</button>
-                </Link>
-                <div>
-                  Total Votes: {page.Upvotes.length} &nbsp;
-                  {
-                    user.Auth ?
-                      page.Upvotes.includes(user.Id) ?
-                        <button onClick={(e) => {
-                          e.stopPropagation();
-                          LandingDownvote(page._id, user.Id, dispatch, "Pages")
-                        }}>Downvote</button>
-                        :
-                        <button onClick={(e) => {
-                          e.stopPropagation();
-                          LandingUpvote(page._id, user.Id, dispatch, "Pages")
-                        }}>Upvote</button>
-                      :
-                      <button onClick={(e) => {
-                        e.stopPropagation();
-                        AuthWithGoogle()
-                      }}>Upvote</button>
-                  }
-                </div>
-              </div>
-            </Link>
-          ))}
-      </section> */}
     </Normal>
   );
 }
