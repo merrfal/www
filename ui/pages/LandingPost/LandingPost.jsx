@@ -74,52 +74,50 @@ export default function LaningPost() {
                     </p>
                   </div>
 
-                  <div class='bg-white px-4 py-5 sm:p-6'>
-                    <div class='grid grid-cols-6 gap-6'>
-                      <div class='col-span-6'>
-                        <label
-                          for='street-address'
-                          class='block text-sm font-medium text-gray-700'>
-                          Adresa e Banimit
-                        </label>
-                        <input
-                          type='text'
-                          name='street-address'
-                          id='street-address'
-                          autocomplete='street-address'
-                          class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                        />
-                      </div>
+                  <div class='grid grid-cols-6 gap-6'>
+                    <div class='col-span-6'>
+                      <label
+                        for='street-address'
+                        class='block text-sm font-medium text-gray-700'>
+                        Adresa e Banimit
+                      </label>
+                      <input
+                        type='text'
+                        name='street-address'
+                        id='street-address'
+                        autocomplete='street-address'
+                        class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                      />
+                    </div>
 
-                      <div class='col-span-6 sm:col-span-6 lg:col-span-2'>
-                        <label
-                          for='city'
-                          class='block text-sm font-medium text-gray-700'>
-                          Qyteti
-                        </label>
-                        <input
-                          type='text'
-                          name='city'
-                          id='city'
-                          autocomplete='address-level2'
-                          class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                        />
-                      </div>
+                    <div class='col-span-6 sm:col-span-6 lg:col-span-2'>
+                      <label
+                        for='city'
+                        class='block text-sm font-medium text-gray-700'>
+                        Qyteti
+                      </label>
+                      <input
+                        type='text'
+                        name='city'
+                        id='city'
+                        autocomplete='address-level2'
+                        class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                      />
+                    </div>
 
-                      <div class='col-span-6 sm:col-span-3 lg:col-span-2'>
-                        <label
-                          for='postal-code'
-                          class='block text-sm font-medium text-gray-700'>
-                          Kodi Postar
-                        </label>
-                        <input
-                          type='text'
-                          name='postal-code'
-                          id='postal-code'
-                          autocomplete='postal-code'
-                          class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                        />
-                      </div>
+                    <div class='col-span-6 sm:col-span-3 lg:col-span-2'>
+                      <label
+                        for='postal-code'
+                        class='block text-sm font-medium text-gray-700'>
+                        Kodi Postar
+                      </label>
+                      <input
+                        type='text'
+                        name='postal-code'
+                        id='postal-code'
+                        autocomplete='postal-code'
+                        class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                      />
                     </div>
                   </div>
 

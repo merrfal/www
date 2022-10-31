@@ -7,6 +7,7 @@ import LandingEdit from './LandingEdit';
 import LandingPost from './LandingPost';
 import Error from './Error';
 import UserLandingPages from './UserLandingPages';
+import Loader from './Loader';
 
 export {
   Home,
@@ -18,4 +19,5 @@ export {
   LandingPost,
   Error,
   UserLandingPages,
+  Loader,
 };

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { PagesList, UserGoogle} from '../../../controllers/front';
+import { PagesList} from '../../../controllers/front';
 import { Normal } from '../../layouts';
 
 import Link from 'next/link';
@@ -21,9 +21,7 @@ export default function Home() {
                 Dhuro sepse asnjëhere nuk është pakësuar.
               </h1>
               <p className='mt-4 text-xl text-gray-500'>
-                Kush do t’i japë Allahut një hua të bukur, që Ai t’ia kthejë
-                shpërblimin shumëfish? Allahu e shtrëngon (riskun) dhe e liron;
-                tek Ai do të ktheheni. [2:245]
+                Merr Fal është projekt vullnetarë për shoqërinë shqiptare për ndihmë dhe mbështetje të njëri tjetrit.
               </p>
             </div>
             <div>
