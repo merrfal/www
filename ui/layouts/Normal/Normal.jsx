@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { UserAuth } from '../../../controllers/front';
 import { SetUserNotAuthenticated } from '../../../data/redux/UserSlice';
+import { Loader } from '../../pages';
 
 export default function Normal(props) {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function Normal(props) {
     else dispatch(SetUserNotAuthenticated())
   }, [user]);
 
-  if(user.Loading === true) return <div>loading...</div>
+  if(user.Loading === true) return <Loader />
 
   else return (
     <Container>

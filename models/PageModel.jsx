@@ -6,25 +6,10 @@ const PageSchema = new Schema({
         required: true,
         default: '',
     },
-    Tagline: {
-        type: String,
-        required: true,
-        default: '',
-    },
     Description: {
         type: String,
         required: true,
         default: '',
-    },
-    Website: {
-        type: String,
-        required: true,
-        default: ''
-    },
-    Links: {
-        type: Array,
-        required: false,
-        default: [],
     },
     Gallery: {
         type: Array,
@@ -36,7 +21,7 @@ const PageSchema = new Schema({
         required: true,
         unique: true,
     },
-    Categories: {
+    Category: {
         type: Array,
         required: false,
         default: [],
@@ -45,10 +30,33 @@ const PageSchema = new Schema({
         type: String,
         required: true,
     },
-    Upvotes: {
+    Views: {
+        type: String,
+        default: 0,
+    },
+    Saves: {
         type: Array,
         required: true,
         default: [],
+    },
+    Phone: {
+        type: String,
+        required: true,
+    },
+    Zip: {
+        type: String,
+        required: false,
+        default: '',
+    },
+    Address: {
+        type: String,
+        required: false,
+        default: '',
+    },
+    City: {
+        type: String,
+        required: false,
+        default: '',
     }
 });
 

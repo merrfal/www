@@ -58,7 +58,7 @@ export default function Footer() {
             </div>
 
             <p class='mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500'>
-             Merr Fal është projekt vullnetarë për shoqërinë shqiptare për ndihmë dhe mbështetje të njëri tjetrit.
+             AMerr Fal është projekt vullnetarë për shoqërinë shqiptare për ndihmë dhe mbështetje të njëri tjetrit.
             </p>
 
             <nav aria-label='Footer Nav' class='mt-12'>
