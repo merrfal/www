@@ -21,7 +21,7 @@ export default function Home() {
                 Dhuro sepse asnjëhere nuk është pakësuar.
               </h1>
               <p className='mt-4 text-xl text-gray-500'>
-                Merr Fal është projekt vullnetarë për shoqërinë shqiptare për ndihmë dhe mbështetje të njëri tjetrit.
+                Merr Fal është projekt vullnetarë për shoqërinë shqiptare për ndihmë dhe mbështetje të njëri tjetrit duke falur produkte të ndryshme.
               </p>
             </div>
             <div>
@@ -126,11 +126,8 @@ export default function Home() {
                           class='h-full w-full object-cover object-center group-hover:opacity-75'
                         />
                       </div>
-                      {/* <h3 class='mt-4 text-sm text-gray-700'>
-                        {page.Upvotes.length} Likes | {page.Upvotes.length}{' '}
-                        Views
-                      </h3> */}
-                      <h3 class='mt-4 text-sm text-gray-700'>{page.Address, page.City, page.Zip}</h3>
+                      12 Views, 12 Saves
+                      <h3 class='mt-4 text-sm text-gray-700'>{`${page.Address},  ${page.City} + ${page.Zip}`}</h3>
                       <p class='mt-1 text-lg font-medium text-gray-900'>
                         {page.Name}
                       </p>
@@ -143,8 +140,8 @@ export default function Home() {
 
       <div style={{marginBottom: '1em'}} className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block">Bamirësia nuk e pakëson pasurinë</span>
-          <span className="block text-indigo-600">Jep Fal ndihmo komunitetin</span>
+          <span className="block">Kush do t’i japë Allahut një hua të bukur,</span>
+          <span className="block text-indigo-600">që Ai t’ia kthejë shpërblimin shumëfish?</span>
         </h2>
         <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
           <div className="inline-flex rounded-md shadow">
@@ -153,7 +150,7 @@ export default function Home() {
               href="#"
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700"
             >
-            Dhuro Falas
+            Jep Falas
             </a>
             </Link>
           </div>
@@ -165,7 +162,7 @@ export default function Home() {
             >
               Merr Falas
             </a>
-            </Link>
+          </Link>
         </div>
       </div>
     </div>
