@@ -16,8 +16,8 @@ const PageUpdate = async (dispatch, page) => {
       Notifier(
         {
           dispatch: dispatch,
-          notificationMessage: res.message,
-          notificationType: 'success',
+          Title: res.message,
+          Type: 'success',
         }
       );
     }
@@ -25,8 +25,8 @@ const PageUpdate = async (dispatch, page) => {
         Notifier(
           {
             dispatch: dispatch,
-            notificationMessage: res.message,
-            notificationType: 'error',
+            Title: res.message,
+            Type: 'error',
           }
         );
     }
@@ -34,8 +34,8 @@ const PageUpdate = async (dispatch, page) => {
     Notifier(
       {
         dispatch: dispatch,
-        notificationMessage: "Something wen't wrong while updating the page.",
-        notificationType: 'error',
+        Title: "Something wen't wrong while updating the page.",
+        Type: 'error',
       }
     );
   }

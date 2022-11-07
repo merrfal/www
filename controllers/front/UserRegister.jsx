@@ -29,15 +29,15 @@ const UserRegister = async (user, dispatch, informations) => {
     else {
       Notifier({
         dispatch: dispatch,
-        notificationMessage: res.message,
-        notificationType: 'error',
+        Title: res.message,
+        Type: 'error',
       });
     }
   } catch (error) {
     Notifier({
       dispatch: dispatch,
-      notificationMessage: '',
-      notificationType: 'error',
+      Title: '',
+      Type: 'error',
     });
   }
 };

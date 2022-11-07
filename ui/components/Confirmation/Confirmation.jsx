@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 export default function Confirmation() {
   const confirmation = useSelector(state => state.confirmation);
 
+  if(confirmation.Visibility)
   return (
     <div
       class='relative z-10'

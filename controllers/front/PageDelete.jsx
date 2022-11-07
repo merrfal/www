@@ -18,8 +18,8 @@ const PageDelete = async (dispatch, landingId, userId, redirect = null) => {
         Notifier(
           {
             dispatch: dispatch,
-            notificationMessage: res.message,
-            notificationType: 'error',
+            Title: res.message,
+            Type: 'error',
           }
         );
     }
@@ -27,8 +27,8 @@ const PageDelete = async (dispatch, landingId, userId, redirect = null) => {
     Notifier(
       {
         dispatch: dispatch,
-        notificationMessage: '',
-        notificationType: 'error',
+        Title: '',
+        Type: 'error',
       }
     );
   }

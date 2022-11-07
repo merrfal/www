@@ -1,171 +1,177 @@
+import Link from 'next/link';
+
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { PagesList} from '../../../controllers/front';
+import { PagesList, CategoryList } from '../../../controllers/front';
 import { Normal } from '../../layouts';
-
-import Link from 'next/link';
+import { Product } from '../../components';
 
 export default function Home() {
   const dispatch = useDispatch();
   const pages = useSelector((state) => state.pages);
+  const categories = useSelector((state) => state.categories);
 
-  useEffect(() => { if (pages.Loaded === false) PagesList(dispatch)}, [pages]);
+  useEffect(() => {
+    if (pages.Loaded === false) PagesList(dispatch);
+  }, [pages]);
+
+  useEffect(() => {
+    if (categories.Loaded === false) CategoryList(dispatch);
+  }, [categories]);
 
   return (
     <Normal>
-      <div className='relative overflow-hidden bg-white'>
-        <div className='pt-16 pb-80 sm:pt-24 sm:pb-40 lg:pt-40 lg:pb-48'>
-          <div className='relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8'>
-            <div className='sm:max-w-lg'>
-              <h1 className='font text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-                Dhuro sepse asnjëhere nuk është pakësuar.
-              </h1>
-              <p className='mt-4 text-xl text-gray-500'>
-                Merr Fal është projekt vullnetarë për shoqërinë shqiptare për ndihmë dhe mbështetje të njëri tjetrit duke falur produkte të ndryshme.
-              </p>
-            </div>
-            <div>
-              <div className='mt-10'>
-                <div
-                  aria-hidden='true'
-                  className='Sointer-events-none lg:absolute lg:inset-y-0 lg:mx-auto lg:w-full lg:max-w-7xl'>
-                  <div className='absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8'>
-                    <div className='flex items-center space-x-6 lg:space-x-8'>
-                      <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8'>
-                        <div className='h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100'>
-                          <img
-                            src='https://images.pexels.com/photos/6348119/pexels-photo-6348119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                            alt=''
-                            className='h-full w-full object-cover object-center'
-                          />
-                        </div>
-                        <div className='h-64 w-44 overflow-hidden rounded-lg'>
-                          <img
-                            src='https://images.pexels.com/photos/10160718/pexels-photo-10160718.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                            alt=''
-                            className='h-full w-full object-cover object-center'
-                          />
-                        </div>
-                      </div>
-                      <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8'>
-                        <div className='h-64 w-44 overflow-hidden rounded-lg'>
-                          <img
-                            src='https://images.pexels.com/photos/7345444/pexels-photo-7345444.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                            alt=''
-                            className='h-full w-full object-cover object-center'
-                          />
-                        </div>
-                        <div className='h-64 w-44 overflow-hidden rounded-lg'>
-                          <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg'
-                            alt=''
-                            className='h-full w-full object-cover object-center'
-                          />
-                        </div>
-                        <div className='h-64 w-44 overflow-hidden rounded-lg'>
-                          <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg'
-                            alt=''
-                            className='h-full w-full object-cover object-center'
-                          />
-                        </div>
-                      </div>
-                      <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8'>
-                        <div className='h-64 w-44 overflow-hidden rounded-lg'>
-                          <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg'
-                            alt=''
-                            className='h-full w-full object-cover object-center'
-                          />
-                        </div>
-                        <div className='h-64 w-44 overflow-hidden rounded-lg'>
-                          <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg'
-                            alt=''
-                            className='h-full w-full object-cover object-center'
-                          />
-                        </div>
+      <div class='bg-white'>
+        <main>
+          <div className='mt-12'>
+            <div class='relative'>
+              <div class='absolute inset-x-0 bottom-0 h-1/2'></div>
+              <div class='max-w-7xl mx-auto sm:px-6 lg:px-8'>
+                <div class='relative shadow-xl sm:rounded-2xl sm:overflow-hidden'>
+                  <div class='absolute inset-0'>
+                    <img
+                      class='h-full w-full object-cover'
+                      src='/assets/sadakah-box.jpg'
+                      alt='Dikush duke dhuruar dicka'
+                    />
+                    <div class='absolute inset-0 bg-[#377DFF] mix-blend-multiply'></div>
+                  </div>
+                  <div class='relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8'>
+                    <h1 class='text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl'>
+                      <span class='block text-white text-center'>
+                        Dhuro se nuk pakësohet.
+                      </span>
+                    </h1>
+                    <p class='mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl'>
+                      Merr Fal është projekt vullnetarë për shqipëfolësit me qëllim mbështetje të njëri tjetrit me anë të
+                      dhurimit të gjërave të ndryshme që nuk përodrim ose thjesht qe duam ti ndajm me të tjerët.
+                    </p>
+                    <div class='mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center'>
+                      <div class='space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5'>
+                        <Link href="/posts/add">
+                          <a
+                            href='/posts/add'
+                            class='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-[#377DFF] bg-white hover:bg-indigo-50 sm:px-8'>
+                            Dhuro Diçka
+                          </a>
+                        </Link>
+
+                        <Link href="/produktet">
+                          <a
+                            href='/produktet'
+                            class='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#377DFF35] bg-opacity-60 hover:bg-opacity-70 sm:px-8'>
+                            Shfleto Produktet
+                          </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 </div>
-                <Link href='/produktet'>
-                  <a
-                    href='#'
-                    className='inline-block rounded-md border border-transparent bg-[#377DFF] py-3 px-8 text-center font-medium text-white hover:bg-[#377DFF90]'>
-                    Shfleto Produktet
-                  </a>
-                </Link>
               </div>
             </div>
+          </div>
+        </main>
+      </div>
+
+      <div class='bg-white'>
+        <div class='py-16 sm:py-24 xl:max-w-7xl xl:mx-auto xl:px-8'>
+          <div class='px-4 sm:px-6 sm:flex sm:items-center sm:justify-between lg:px-8 xl:px-0'>
+            <h2 class='text-2xl font-extrabold tracking-tight text-gray-900'>
+              Shfletoni Kategoritë
+            </h2>
+            <a
+              href='#'
+              class='hidden text-sm font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block'>
+              Shfleto të gjitha Kategoritë<span aria-hidden='true'> &rarr;</span>
+            </a>
+          </div>
+
+          <div class='mt-4 flow-root'>
+            <div class='-my-2'>
+              <div class='box-content py-2 relative h-80 overflow-x-auto xl:overflow-visible'>
+                <div class='absolute min-w-screen-xl px-4 flex space-x-8 sm:px-6 lg:px-8 xl:relative xl:px-0 xl:space-x-0 xl:grid xl:grid-cols-5 xl:gap-x-8'>
+                  {
+                    categories.Loaded === false ? 'Loading categories' : 
+                    categories.Categories.map((category, index) => {
+                      return (
+                        <a
+                        key={index}
+                    href='#'
+                    class='relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto'>
+                    <span aria-hidden='true' class='absolute inset-0'>
+                      <img
+                        src='https://tailwindui.com/img/ecommerce-images/home-page-01-category-01.jpg'
+                        alt=''
+                        class='w-full h-full object-center object-cover'
+                      />
+                    </span>
+                    <span
+                      aria-hidden='true'
+                      class='absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50'></span>
+                    <span class='relative mt-auto text-center text-xl font-bold text-white'>
+                      {category.Name}
+                    </span>
+                  </a>
+                      )
+                    })
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class='mt-6 px-4 sm:hidden'>
+            <a
+              href='#'
+              class='block text-sm font-semibold text-indigo-600 hover:text-indigo-500'>
+              Browse all categories<span aria-hidden='true'> &rarr;</span>
+            </a>
           </div>
         </div>
       </div>
 
       <div class='bg-white'>
-        <div class='mx-auto max-w-2xl py-2 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
-          <div style={{ marginBottom: '1.25em' }}>
-            <h3 class='text-2xl font-bold leading-6 text-gray-900 mb-2'>
-              Produktet e fundit
-            </h3>
-            <p class='mt-1 max-w-2xl text-l text-gray-500'>
-              Këtu janë renditur produktet e fundit të listuar.
-            </p>
+        <div class='max-w-2xl mt-[-4rem] mx-auto mb-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
+          <div class='px-4 sm:px-6 sm:flex sm:items-center sm:justify-between lg:px-8 xl:px-0'>
+            <h2 class='text-2xl font-extrabold tracking-tight text-gray-900'>
+            Shfleto Produktet
+            </h2>
+            <a
+              href='#'
+              class='hidden text-sm font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block'>
+              Shfleto të gjitha Produktet<span aria-hidden='true'> &rarr;</span>
+            </a>
           </div>
-
-          <div class='grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8'>
-            {pages.Loaded === false
+          <div class='mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8'>
+          {pages.Loaded === false
               ? 'loading...'
-              : pages.Pages.map((page, index) => (
-                  <Link href={`/landings/${page.Slug}`} key={index}>
-                    <a href='#' class='group'>
-                      <div class='aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8'>
-                        <img
-                          src='https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg'
-                          alt='Tall slender porcelain bottle with natural clay textured body and cork stopper.'
-                          class='h-full w-full object-cover object-center group-hover:opacity-75'
-                        />
-                      </div>
-                      12 Views, 12 Saves
-                      <h3 class='mt-4 text-sm text-gray-700'>{`${page.Address},  ${page.City} + ${page.Zip}`}</h3>
-                      <p class='mt-1 text-lg font-medium text-gray-900'>
-                        {page.Name}
-                      </p>
-                    </a>
-                  </Link>
-                ))}
+              : pages.Pages.map((page, index) => <Product product={page} key={index} />)}
+            <div>
+              </div>
           </div>
         </div>
       </div>
-
-      <div style={{marginBottom: '1em'}} className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block">Kush do t’i japë Allahut një hua të bukur,</span>
-          <span className="block text-indigo-600">që Ai t’ia kthejë shpërblimin shumëfish?</span>
-        </h2>
-        <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-          <div className="inline-flex rounded-md shadow">
-          <Link href='/posts/add'>
+      <div class='bg-white'>
+        <div class='max-w-4xl mx-auto pb-16 mt-[-4rem] px-4 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 lg:flex lg:items-center lg:justify-between'>
+          <h2 class='text-4xl font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
+            <span class='block'>Dëshironi të dhuroni?</span>
+            <span class='block bg-[#377DFF] from-purple-600 to-indigo-600 bg-clip-text text-transparent'>
+              Bëje, sepse nuk bëhesh i varfër duke dhënë.
+            </span>
+          </h2>
+          <div class='mt-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-5'>
             <a
-              href="#"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700"
-            >
-            Jep Falas
+              href='#'
+              class='flex items-center justify-center bg-[#377DFF] from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white hover:from-purple-700 hover:to-indigo-700'>
+              Dhuroni Diçka
             </a>
-            </Link>
+            <a
+              href='#'
+              class='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-[#377DFF] bg-indigo-50 hover:bg-indigo-100'>
+              Shfletoni Produktet
+            </a>
           </div>
-          <div className="ml-3 inline-flex rounded-md shadow">
-          <Link href='/landings'>
-            <a
-              href="#"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600 hover:bg-indigo-50"
-            >
-              Merr Falas
-            </a>
-          </Link>
         </div>
       </div>
-    </div>
     </Normal>
   );
 }

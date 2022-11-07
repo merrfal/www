@@ -3,7 +3,7 @@ import { SetPage } from '../../data/redux/PageSlice';
 
 const PageView = async (dispatch, slug) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/pages/PageView/${slug}`;
-  const config = ConfigBuilder('G', 'JSON', {}, false);
+  const config = ConfigBuilder('G', 'JSON', {}, false, false, false);
 
   try {
     const req = await fetch(url, config);
@@ -14,8 +14,8 @@ const PageView = async (dispatch, slug) => {
         Notifier(
           {
             dispatch: dispatch,
-            notificationMessage: res.message,
-            notificationType: 'error',
+            Title: res.message,
+            Type: 'error',
           }
         );
     }
@@ -23,8 +23,8 @@ const PageView = async (dispatch, slug) => {
     Notifier(
       {
         dispatch: dispatch,
-        notificationMessage: '',
-        notificationType: 'error',
+        Title: 'Dicka shkoi gabim duke tentuar ta shikoni produktin.',
+        Type: 'error',
       }
     );
   }

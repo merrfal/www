@@ -13,8 +13,8 @@ const UserDelete = async (dispatch, id) => {
       Notifier(
         {
           dispatch: dispatch,
-          notificationMessage: res.message,
-          notificationType: 'error',
+          Title: res.message,
+          Type: 'error',
         }
       );
     }
@@ -22,8 +22,8 @@ const UserDelete = async (dispatch, id) => {
       Notifier(
         {
           dispatch: dispatch,
-          notificationMessage: res.message,
-          notificationType: 'error',
+          Title: res.message,
+          Type: 'error',
         }
       );
     }
@@ -31,8 +31,8 @@ const UserDelete = async (dispatch, id) => {
     Notifier(
       {
         dispatch: dispatch,
-        notificationMessage: `Something wen't wrong trying to authenticate you!`,
-        notificationType: 'error',
+        Title: `Something wen't wrong trying to authenticate you!`,
+        Type: 'error',
       }
     );
   }

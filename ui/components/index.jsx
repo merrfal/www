@@ -3,6 +3,8 @@ import Footer from './Footer';
 import Notification from './Notification';
 import Confirmation from './Confirmation';
 import Auth from './Auth';
+import Product from './Product';
+import Search from './Search';
 
 export {
     Header,
@@ -10,4 +12,6 @@ export {
     Notification,
     Confirmation,
     Auth,
+    Product,
+    Search
 }

@@ -14,8 +14,8 @@ const UserLogin = async (uid, dispatch) => {
         Notifier(
           {
             dispatch: dispatch,
-            notificationMessage: `Something wen't wrong trying to authenticate you!`,
-            notificationType: 'error',
+            Title: `Something wen't wrong trying to authenticate you!`,
+            Type: 'error',
           }
         );
     }
@@ -23,8 +23,8 @@ const UserLogin = async (uid, dispatch) => {
     Notifier(
       {
         dispatch: dispatch,
-        notificationMessage: `Something wen't wrong trying to authenticate you!`,
-        notificationType: 'error',
+        Title: `Something wen't wrong trying to authenticate you!`,
+        Type: 'error',
       }
     );
   }

@@ -2,7 +2,9 @@ import { Page } from '../../models';
 
 export default async function connection(req, res) {
   try {
-    const _new = new Page(req.body);
+    let path = req.body.Name;
+    path = path.toLowerCase().replace(/ /g, '-');
+    const _new = new Page({...req.body, Slug: path});
     const _page = await _new.save();
 
     if (_page) {

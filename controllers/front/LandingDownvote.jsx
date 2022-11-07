@@ -17,15 +17,15 @@ const LandingDownvote = async (landingId, userId, dispatch, target = 'Pages', la
     else {
       Notifier({
         dispatch: dispatch,
-        notificationMessage: res.message,
-        notificationType: 'error',
+        Title: res.message,
+        Type: 'error',
       });
     }
   } catch (error) {
     Notifier({
       dispatch: dispatch,
-      notificationMessage: res.message,
-      notificationType: 'error',
+      Title: res.message,
+      Type: 'error',
     });
   }
 };

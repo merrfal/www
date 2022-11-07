@@ -22,9 +22,9 @@ const PageSchema = new Schema({
         unique: true,
     },
     Category: {
-        type: Array,
-        required: false,
-        default: [],
+        type: String,
+        required: true,
+        default: '',
     },
     User: {
         type: String,
@@ -34,29 +34,42 @@ const PageSchema = new Schema({
         type: String,
         default: 0,
     },
-    Saves: {
-        type: Array,
-        required: true,
-        default: [],
-    },
     Phone: {
         type: String,
         required: true,
+        default: ''
     },
     Zip: {
         type: String,
-        required: false,
+        required: true,
         default: '',
     },
     Address: {
         type: String,
-        required: false,
+        required: true,
         default: '',
     },
     City: {
         type: String,
-        required: false,
+        required: true,
         default: '',
+    },
+    Country: {
+        type: String,
+        required: true,
+        default: 'Kosovo'
+    },
+    Status: {
+        type: String,
+        required: true,
+        default: 'published',
+        enum: [
+            'published', 
+            'sold', 
+            'in-review', 
+            'rejected', 
+            'unpublished'
+        ],
     }
 });
 

@@ -6,10 +6,10 @@ import {
 const Notifier = (props) => {
   props.dispatch(
     ShowNotification({
-      notificationTitle: props.notificationTitle || '',
-      notificationMessage: props.notificationMessage || '',
-      notificationType: props.notificationType || 'success',
-      notificationIsShowing: true,
+      Title: props.Title || '',
+      Message: props.Message || '',
+      Type: props.Type || 'success',
+      Visibility: true,
     })
   );
 

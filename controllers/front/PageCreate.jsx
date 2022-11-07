@@ -2,24 +2,24 @@ import { ConfigBuilder, Notifier } from '../../utils';
 
 const PageCreate = async (dispatch, page) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/pages/PageCreate`;
-  const config = ConfigBuilder('P', 'JSON', page, true, false, false);
+  const config = ConfigBuilder('P', 'JSON', page, false, false, false);
+  console.log('res', page, config, url)
 
   try {
     const req = await fetch(url, config);
     const res = await req.json();
+    console.log('res', res)
 
     if (res.status === true) {
       dispatch(UnsetPrepage());
 
-      window.location.href="/posts"
+      window.location.href="/produktet/" + res.data._id;
 
       Notifier(
         {
           dispatch: dispatch,
-          notificationMessage: res.message,
-          notificationType: 'success',
-          // viewPage: true,
-          // viewPage: `/landings/${res.data.Slug}`,
+          Title: res.message,
+          Type: 'success',
         }
       );
     }
@@ -27,17 +27,18 @@ const PageCreate = async (dispatch, page) => {
       Notifier(
         {
           dispatch: dispatch,
-          notificationMessage: res.message,
-          notificationType: 'error',
+          Title: res.message,
+          Type: 'error',
         }
       );
     }
   } catch (error) {
+    console.log('res', error)
     Notifier(
       {
         dispatch: dispatch,
-        notificationMessage: "Something wen't wrong while creating this page.",
-        notificationType: 'error',
+        Title: "Something wen't wrong while creating this page.",
+        Type: 'error',
       }
     );
   }

@@ -1,5 +1,5 @@
 import { Container, Page } from './Components';
-import { Header, Footer } from "../../components";
+import { Header, Footer, Confirmation, Search, Notification } from "../../components";
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { UserAuth } from '../../../controllers/front';
@@ -23,6 +23,9 @@ export default function Normal(props) {
   else return (
     <Container>
       <Header />
+      <Confirmation />
+      <Notification />
+      <Search />
       <Page>{props.children}</Page>
       <Footer />
     </Container>

@@ -4,12 +4,17 @@ export default async function connection(req, res) {
   try {
     const page = await Page.find({ Slug: req.query.slug });
 
-    if (page) {
+    let Views = parseInt(page[0].Views);
+    Views = Views + 1;
+
+    const product = await Page.findOneAndUpdate({Slug: req.query.slug}, {Views: Views}, {new: true})
+
+    if (product) {
       res.status(200).send(
         {
           status: true,
           message: 'Landing page was fetched successfully.',
-          data: page[0],
+          data: product,
           code: 200,
         }
       );

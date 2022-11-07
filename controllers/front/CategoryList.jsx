@@ -1,8 +1,8 @@
 import { ConfigBuilder, Notifier } from '../../utils';
-import { SetCategories } from '../../data/redux/CategorySlice';
+import { SetCategories } from '../../data/redux/CategoriesSlice';
 
 const CategoryList = async (dispatch) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/category/CategoryList`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/categories/CategoryList`;
   const config = ConfigBuilder('G', 'JSON', {}, false, false, false);
 
   try {
@@ -14,8 +14,8 @@ const CategoryList = async (dispatch) => {
       Notifier(
         {
           dispatch: dispatch,
-          notificationMessage: res.message,
-          notificationType: 'error',
+          Title: res.message,
+          Type: 'error',
         }
       );
     }
@@ -23,8 +23,8 @@ const CategoryList = async (dispatch) => {
     Notifier(
       {
         dispatch: dispatch,
-        notificationMessage: 'Internal server error while fetching the categories.',
-        notificationType: 'error',
+        Title: 'Internal server error while fetching the categories.',
+        Type: 'error',
       }
     );
   }

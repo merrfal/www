@@ -61,7 +61,7 @@ export default function Profile() {
   //                                     value={profile.Name}
   //                                     name="company-website"
   //                                     id="company-website"
-  //                                     className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+  //                                     className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
   //   placeholder="Emri"
   //                                     value={profile.Name}
   // onChange={(e) =>
@@ -137,57 +137,8 @@ export default function Profile() {
   //                                 />
   //                                 <br />
 
-  //                                 <label>Website</label>
-  //                                 <input
-  //                                   placeholder="Website"
-  //                                   value={profile.Website}
-  //                                   onChange={(e) =>
-  //                                     dispatch(
-  //                                       SetProfileField({
-  //                                         Field: "Website",
-  //                                         Value: e.target.value,
-  //                                       })
-  //                                     )
-  //                                   }
-  //                                 />
-  //                                 <br />
-
-  //                                 <div style={{ display: "flex" }}>
-  //                                   <div
-  //                                     style={{
-  //                                       display: "flex",
-  //                                       flexDirection: "column",
-  //                                     }}
-  //                                   >
-  //                                     <label>Avatar</label>
-  //                                     <input
-  //                                       placeholder="Avater"
-  //                                       value={profile.Upload}
-  //                                       type="file"
-  //                                       // onChange={(e) =>
-  //                                       //   dispatch(
-  //                                       //     SetProfileField({
-  //                                       //       Field: 'Upload',
-  //                                       //       Value: e.target.value,
-  //                                       //     })
-  //                                       //   )
-  //                                       // }
-  //                                     />
-  //                                   </div>
-
-  //                                   {profile.Avatar === "" ? (
-  //                                     "no photo uploaded"
-  //                                   ) : (
-  //                                     <img
-  //                                       src={profile.Avatar}
-  //                                       width="120px"
-  //                                       height="120px"
-  //                                     />
-  //                                   )}
-
-  //                                   <br />
-  //                                 </div>
-  //                                 {/*
+  //                        
+  //                       
   //               <label>New Password</label>
   //               <input
   //                 placeholder='New Password'
@@ -200,30 +151,7 @@ export default function Profile() {
   //                     })
   //                   )
   //                 }
-  //               /> */}
-  //                                 <br />
-
-  //                                 <button
-  //                                   onClick={() => UserUpdate(dispatch, profile)}
-  //                                 >
-  //                                   Save Changes
-  //                                 </button>
-  //                                 {/* <button>Close Account</button> */}
-  //                               </div>
-  //                             </div>
-  //                           </div>
-  //                         </div>
-  //                       </div>
-  //                     </form>
-  //                   </div>
-  //                 )}
-  //               </section>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       </Normal>
-  //     </section>
-  //   );
+  //               /> 
   // }
 
   return (
@@ -231,28 +159,25 @@ export default function Profile() {
       <div class="relative bg-white">
         <div class="mx-auto max-w-7xl px-4 sm:px-6">
           <div class="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
-            <Normal style={{ padding: "1em" }}>
-              <div style={{ margin: "15% 0" }}>
+            <Normal>
+            <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
+            <h1 className='text-3xl font-extrabold tracking-tight text-gray-900'>
+            Profili Yt
+          </h1>
+          <p className='mt-4 max-w-xl text-sm text-gray-700'>
+            Këtu mundë ta rifreskoni profilin tuaj me të dhënat e rreja, keni kujdes cdo përdisim afekton në moment të gjithë platformën.
+          </p>
+          <div className="mt-12">
                 <div className="mt-10 sm:mt-0">
-                  <div className="md:grid md:grid-cols-3 md:gap-6">
-                    <div className="md:col-span-1">
-                      <div className="px-4 sm:px-0">
-                        <h3 className="text-lg font-medium leading-6 text-gray-900">
-                          Personal Information
-                        </h3>
-                        <p className="mt-1 text-sm text-gray-600">
-                          Use a permanent address where you can receive mail.
-                        </p>
-                      </div>
-                    </div>
+                  <div className="w-full">
                     <div className="mt-5 md:col-span-2 md:mt-0">
                       <form action="#" method="POST">
-                        <div className="overflow-hidden shadow sm:rounded-md">
-                          <div className="bg-white px-4 py-5 sm:p-6">
-                            <div className="grid grid-cols-6 gap-6">
+                        <div className="overflow-hidden">
+                          <div className="w-full bg-white">
+                            <div className=" grid grid-cols-6 gap-6">
                               <div className="col-span-6 sm:col-span-3">
                                 <label className="block text-sm font-medium text-gray-700">
-                                  Photo
+                                  Fotogorafia
                                 </label>
                                 <div className="mt-1 flex items-center">
                                   <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
@@ -274,9 +199,9 @@ export default function Profile() {
                                   </span>
                                   <button
                                     type="button"
-                                    className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#387DFF] focus:ring-offset-2"
                                   >
-                                    Change
+                                    Ndryshoje
                                   </button>
                                 </div>
                               </div>
@@ -286,17 +211,25 @@ export default function Profile() {
                                   htmlFor="company-website"
                                   className="block text-sm font-medium text-gray-700"
                                 >
-                                  Website
+                                  Uebfaqja
                                 </label>
                                 <div className="mt-1 flex rounded-md shadow-sm">
-                                  {/* <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
-                                    http://
-                                  </span> */}
+                                  <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
+                                    https:
+                                  </span>
                                   <input
                                     type="text"
                                     name="company-website"
+                                    onChange={(e) =>
+                                    dispatch(
+                                    SetProfileField({
+                                     Field: "Website",
+                                     Value: e.target.value,
+                                    })
+                                    )}
+                                    value={profile.Website}
                                     id="company-website"
-                                    className="block w-full p-2 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                    className="block w-full p-2 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
                                     placeholder="www.example.com"
                                   />
                                 </div>
@@ -324,7 +257,7 @@ export default function Profile() {
                                       })
                                     )
                                   }
-                                  className="mt-1 block p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  className="mt-1 block p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
                                 />
                               </div>
 
@@ -350,7 +283,7 @@ export default function Profile() {
                                   name="last-name"
                                   id="last-name"
                                   autoComplete="family-name"
-                                  className="mt-1 block p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  className="mt-1 block p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
                                 />
                               </div>
 
@@ -359,14 +292,14 @@ export default function Profile() {
                                   htmlFor="email-address"
                                   className="block text-sm font-medium text-gray-700"
                                 >
-                                  Email address
+                                  Adresa Elektronike
                                 </label>
                                 <input
                                   type="text"
                                   name="email-address"
                                   id="email-address"
                                   autoComplete="email"
-                                  className="mt-1 block p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  className="mt-1 block p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
                                   placeholder="Email"
                                   disabled
                                   value={profile.Email}
@@ -385,14 +318,14 @@ export default function Profile() {
                                   htmlFor="email-address"
                                   className="block text-sm font-medium text-gray-700"
                                 >
-                                  Bio
+                                  Përshkrimi
                                 </label>
                                 <input
                                   type="text"
                                   name="email-address"
                                   id="email-address"
                                   autoComplete="email"
-                                  className="mt-1 block p-2  w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  className="mt-1 block p-2  w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
                                   placeholder="Bio"
                                   value={profile.Bio}
                                   onChange={(e) =>
@@ -411,14 +344,14 @@ export default function Profile() {
                                   htmlFor="street-address"
                                   className="block text-sm font-medium text-gray-700"
                                 >
-                                  Street address
+                                  Adresa
                                 </label>
                                 <input
                                   type="text"
                                   name="street-address"
                                   id="street-address"
                                   autoComplete="street-address"
-                                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
                                 />
                               </div>
 
@@ -427,14 +360,14 @@ export default function Profile() {
                                   htmlFor="city"
                                   className="block text-sm font-medium text-gray-700"
                                 >
-                                  City
+                                  Country
                                 </label>
                                 <input
                                   type="text"
                                   name="city"
                                   id="city"
                                   autoComplete="address-level2"
-                                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
                                 />
                               </div>
 
@@ -443,14 +376,14 @@ export default function Profile() {
                                   htmlFor="region"
                                   className="block text-sm font-medium text-gray-700"
                                 >
-                                  State / Province
+                                  Qyteti
                                 </label>
                                 <input
                                   type="text"
                                   name="region"
                                   id="region"
                                   autoComplete="address-level1"
-                                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
                                 />
                               </div>
 
@@ -459,25 +392,25 @@ export default function Profile() {
                                   htmlFor="postal-code"
                                   className="block text-sm font-medium text-gray-700"
                                 >
-                                  ZIP / Postal code
+                                  Kodi Postal
                                 </label>
                                 <input
                                   type="text"
                                   name="postal-code"
                                   id="postal-code"
                                   autoComplete="postal-code"
-                                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                          <div className="mt-8 text-right">
                             <button
                               onClick={() => UserUpdate(dispatch, profile)}
                               type="submit"
-                              className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                              className="inline-flex justify-center rounded-md border border-transparent bg-[#387DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-[#387DFF] focus:ring-offset-2"
                             >
-                              Save
+                              Përditëso
                             </button>
                           </div>
                         </div>
@@ -486,6 +419,8 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
+        </div>
+              
             </Normal>
           </div>
         </div>

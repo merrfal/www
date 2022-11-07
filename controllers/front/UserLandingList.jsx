@@ -14,8 +14,8 @@ const UserLandingList = async (dispatch, id) => {
       Notifier(
         {
           dispatch: dispatch,
-          notificationMessage: res.message,
-          notificationType: 'error',
+          Title: res.message,
+          Type: 'error',
         }
       );
     }
@@ -23,8 +23,8 @@ const UserLandingList = async (dispatch, id) => {
     Notifier(
       {
         dispatch: dispatch,
-        notificationMessage: 'Internal server error while fetching the landing pages.',
-        notificationType: 'error',
+        Title: 'Internal server error while fetching the landing pages.',
+        Type: 'error',
       }
     );
   }

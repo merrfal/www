@@ -19,8 +19,8 @@ const UserGoogle = async (dispatch, informations) => {
       Notifier(
         {
           dispatch: dispatch,
-          notificationMessage: `Something wen't wrong trying to authenticate you!`,
-          notificationType: 'error',
+          Title: `Something wen't wrong trying to authenticate you!`,
+          Type: 'error',
         }
       );
     }
@@ -28,8 +28,8 @@ const UserGoogle = async (dispatch, informations) => {
     Notifier(
       {
         dispatch: dispatch,
-        notificationMessage: `Something wen't wrong trying to authenticate you!`,
-        notificationType: 'error',
+        Title: `Something wen't wrong trying to authenticate you!`,
+        Type: 'error',
       }
     );
   }

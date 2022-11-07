@@ -8,6 +8,8 @@ import LandingPost from './LandingPost';
 import Error from './Error';
 import UserLandingPages from './UserLandingPages';
 import Loader from './Loader';
+import Contact from './Contact';
+import About from './About';
 
 export {
   Home,
@@ -20,4 +22,6 @@ export {
   Error,
   UserLandingPages,
   Loader,
+  Contact,
+  About
 };

@@ -12,16 +12,16 @@ const UserUpdate = async (dispatch, profile) => {
       Notifier(
         {
           dispatch: dispatch,
-          notificationMessage: res.message,
-          notificationType: 'success',
+          Title: res.message,
+          Type: 'success',
         }
       );
     } else {
         Notifier(
           {
             dispatch: dispatch,
-            notificationMessage: res.message,
-            notificationType: 'error',
+            Title: res.message,
+            Type: 'error',
           }
         );
     }
@@ -29,8 +29,8 @@ const UserUpdate = async (dispatch, profile) => {
     Notifier(
       {
         dispatch: dispatch,
-        notificationMessage: `Something wen't wrong trying to update your profile.`,
-        notificationType: 'error',
+        Title: `Something wen't wrong trying to update your profile.`,
+        Type: 'error',
       }
     );
   }

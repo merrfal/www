@@ -18,8 +18,8 @@ const LandingDownvote = async (landingId, userId, dispatch, target = 'Pages', la
       Notifier(
         {
           dispatch: dispatch,
-          notificationMessage: res.message,
-          notificationType: 'error',
+          Title: res.message,
+          Type: 'error',
         }
       );
     }
@@ -27,8 +27,8 @@ const LandingDownvote = async (landingId, userId, dispatch, target = 'Pages', la
     Notifier(
       {
         dispatch: dispatch,
-        notificationMessage: res.message,
-        notificationType: 'error',
+        Title: res.message,
+        Type: 'error',
       }
     );
   }

@@ -13,6 +13,8 @@ import UserView from './UserView';
 import LandingDownvote from './LandingDownvote';
 import LandingUpvote from './LandingUpvote';
 import UserLandingList from './UserLandingList';
+import AuthWithGoogle from './AuthWithGoogle';
+import CategoryList from './CategoryList';
 
 export {
   PageCreate,
@@ -30,4 +32,6 @@ export {
   UserView,
   LandingUpvote,
   UserLandingList,
+  AuthWithGoogle,
+  CategoryList
 };

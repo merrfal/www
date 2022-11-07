@@ -1,179 +1,186 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { PageView, PageDelete, PageUpdate } from '../../../controllers/front';
+import { PageView, PageDelete, PageUpdate, CategoryList } from '../../../controllers/front';
 import { Normal } from '../../layouts';
 import { useRouter } from 'next/router';
 import { SetField } from '../../../data/redux/PageSlice';
+import { Loader} from '../../pages';
 
 export default function LandingEdit() {
   const dispatch = useDispatch();
   const slug = useRouter().query.slug || '';
 
   const page = useSelector((state) => state.page);
+  const categories = useSelector((state) => state.categories);
 
-  useEffect(() => { if (page.Loaded === false) PageView(dispatch, slug) }, [page, slug]);
+  useEffect(() => {
+    if (categories.Loaded === false) CategoryList(dispatch);
+  }, [categories]);
+
+  useEffect(() => { 
+    if (page.Loaded === false) PageView(dispatch, slug)
+  }, [page, slug]);
+
 
   return (
     <Normal>
       <div class='bg-white'>
-        <div class='mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
-          <section style={{ padding: '1em' }}>
-            {page.Loaded === false ? (
-              'Loading...'
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <label>Name</label>
-                <input
-                  placeholder='Name'
-                  value={page.Page.Name}
-                  onChange={(e) =>
-                    dispatch(SetField({ Field: 'Name', Value: e.target.value }))
-                  }
-                />
-
-                <label>Website</label>
-                <input
-                  placeholder='Website'
-                  value={page.Page.Website}
-                  onChange={(e) =>
-                    dispatch(
-                      SetField({ Field: 'Website', Value: e.target.value })
-                    )
-                  }
-                />
-
-                <label>Tagline</label>
-                <input
-                  placeholder='Tagline'
-                  value={page.Page.Tagline}
-                  onChange={(e) =>
-                    dispatch(
-                      SetField({ Field: 'Tagline', Value: e.target.value })
-                    )
-                  }
-                />
-
-                <label>Description</label>
-                <input
-                  placeholder='Description'
-                  value={page.Page.Description}
-                  onChange={(e) =>
-                    dispatch(
-                      SetField({ Field: 'Description', Value: e.target.value })
-                    )
-                  }
-                />
-
-                <label>Slug</label>
-                <input
-                  placeholder='Slug'
-                  value={page.Page.Slug}
-                  onChange={(e) =>
-                    dispatch(SetField({ Field: 'Slug', Value: e.target.value }))
-                  }
-                />
-
-                <br />
-
-                <button onClick={() => PageUpdate(dispatch, page.Page)}>
-                  update
-                </button>
-
-                <br />
-
-                <button
-                  onClick={() => PageDelete(dispatch, page.Page._id, '/posts')}>
-                  delete post
-                </button>
-
-                <div>
-                  <div class='md:grid md:grid-cols-3 md:gap-6'>
-                    <div class='md:col-span-1'>
-                      <div class='px-4 sm:px-0'>
-                        <h3 class='text-lg font-medium leading-6 text-gray-900'>
-                          Profile
-                        </h3>
-                        <p class='mt-1 text-sm text-gray-600'>
-                          This information will be displayed publicly so be
-                          careful what you share.
-                        </p>
-                      </div>
-                    </div>
-                    <div class='mt-5 md:col-span-2 md:mt-0'>
+        <div class='mx-auto max-w-2xl lg:max-w-7xl'>
+            {page.Loaded === false || categories.Loaded === false ? <Loader /> : (
+              <div>
+              <div className='relative bg-white'>
+              <div className='mx-auto max-w-7xl px-4 sm:px-6'>
+                  <div className='md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16'>
+                    <div className='mt-5 md:col-span-2 md:mt-0'>
                       <form action='#' method='POST'>
-                        <div class='shadow sm:overflow-hidden sm:rounded-md'>
-                          <div class='space-y-6 bg-white px-4 py-5 sm:p-6'>
-                            <div class='grid grid-cols-3 gap-6'>
-                              <div class='col-span-3 sm:col-span-2'>
-                                <label
-                                  for='company-website'
-                                  class='block text-sm font-medium text-gray-700'>
-                                  Website
-                                </label>
-                                <div class='mt-1 flex rounded-md shadow-sm'>
-                                  <span class='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500'>
-                                    http://
-                                  </span>
-                                  <input
-                                    type='text'
-                                    name='company-website'
-                                    id='company-website'
-                                    class='block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                    placeholder='www.example.com'
-                                  />
-                                </div>
-                              </div>
+                        <div className='sm:overflow-hidden sm:rounded-md'>
+                          <div className='space-y-6 bg-white'>
+                          <h3 class="text-3xl font-bold leading-6 text-gray-900 mb-10">Redakto Produktin</h3>
+                            <div className='col-span-6 sm:col-span-4'>
+                              <label
+                                for='email-address'
+                                className='block text-sm font-medium text-gray-700'>
+                                Titulli i Produktit
+                              </label>
+                              <input
+                                onChange={(e) =>
+                                  dispatch(
+                                    SetField({
+                                      Field: 'Name',
+                                      Value: e.target.value,
+                                    })
+                                  )
+                                }
+                                value={page.Page.Name}
+                                type='text'
+                                name='email-address'
+                                id='email-address'
+                                autocomplete='email'
+                                className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                              />
                             </div>
-
+      
+                            <div className='col-span-6 sm:col-span-4'>
+                              <label
+                                for='email-address'
+                                className='block text-sm font-medium text-gray-700'>
+                                Phone
+                              </label>
+                              <input
+                                onChange={(e) =>
+                                  dispatch(
+                                    SetField({
+                                      Field: 'Phone',
+                                      Value: e.target.value,
+                                    })
+                                  )
+                                }
+                                value={page.Page.Phone}
+                                type='text'
+                                name='email-address'
+                                id='email-address'
+                                autocomplete='email'
+                                className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                              />
+                            </div>
+      
                             <div>
                               <label
                                 for='about'
-                                class='block text-sm font-medium text-gray-700'>
-                                About
+                                className='block text-sm font-medium text-gray-700'>
+                                Përshkrimi
                               </label>
-                              <div class='mt-1'>
+                              <div className='mt-1'>
                                 <textarea
+                                  onChange={(e) =>
+                                    dispatch(
+                                      SetField({
+                                        Field: 'Description',
+                                        Value: e.target.value,
+                                      })
+                                    )
+                                  }
+                                  value={page.Page.Description}
                                   id='about'
                                   name='about'
                                   rows='3'
-                                  class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                  placeholder='you@example.com'></textarea>
+                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                  />
                               </div>
-                              <p class='mt-2 text-sm text-gray-500'>
-                                Brief description for your profile. URLs are
-                                hyperlinked.
+                              <p className='mt-2 text-sm text-gray-500'>
+                                Përshkrimi i gjatë i produktit tuaj. Me të gjitha
+                                karakteristikat.
                               </p>
                             </div>
-
-                            <div>
-                              <label class='block text-sm font-medium text-gray-700'>
-                                Photo
-                              </label>
-                              <div class='mt-1 flex items-center'>
-                                <span class='inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100'>
-                                  <svg
-                                    class='h-full w-full text-gray-300'
-                                    fill='currentColor'
-                                    viewBox='0 0 24 24'>
-                                    <path d='M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z' />
-                                  </svg>
-                                </span>
-                                <button
-                                  type='button'
-                                  class='ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
-                                  Change
-                                </button>
+      
+                            <div className='grid grid-cols-6 gap-6'>
+                              <div className='col-span-6'>
+                                <label
+                                  for='street-address'
+                                  className='block text-sm font-medium text-gray-700'>
+                                  Adresa e Banimit
+                                </label>
+                                <input
+                                  type='text'
+                                  name='street-address'
+                                  id='street-address'
+                                  autocomplete='street-address'
+                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                />
                               </div>
+      
+                              <div className='col-span-6 sm:col-span-6 lg:col-span-2'>
+                                <label
+                                  for='city'
+                                  className='block text-sm font-medium text-gray-700'>
+                                  Qyteti
+                                </label>
+                                <input
+                                  type='text'
+                                  name='city'
+                                  id='city'
+                                  autocomplete='address-level2'
+                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                />
+                              </div>
+      
+                              <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
+                                <label
+                                  for='postal-code'
+                                  className='block text-sm font-medium text-gray-700'>
+                                  Kodi Postar
+                                </label>
+                                <input
+                                  type='text'
+                                  name='postal-code'
+                                  id='postal-code'
+                                  autocomplete='postal-code'
+                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                />
+                              </div>
+      
+                              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                      <label for="country" class="block text-sm font-medium text-gray-700">Kategoria</label>
+                      <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                        {
+                                  categories.isLoaded === true && 
+                                  categories.Categories.map((category, index) => {
+                                    return (
+                                      <option>{category.Name}</option>
+                                    )
+                                  })
+                                }
+                      </select>
+                    </div>
                             </div>
-
                             <div>
-                              <label class='block text-sm font-medium text-gray-700'>
-                                Cover photo
+                              <label className='block text-sm font-medium text-gray-700'>
+                                Fotoja Kryesore
                               </label>
-                              <div class='mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6'>
-                                <div class='space-y-1 text-center'>
+                              <div className='mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6'>
+                                <div className='space-y-1 text-center'>
                                   <svg
-                                    class='mx-auto h-12 w-12 text-gray-400'
+                                    className='mx-auto h-12 w-12 text-gray-400'
                                     stroke='currentColor'
                                     fill='none'
                                     viewBox='0 0 48 48'
@@ -185,32 +192,40 @@ export default function LandingEdit() {
                                       stroke-linejoin='round'
                                     />
                                   </svg>
-                                  <div class='flex text-sm text-gray-600'>
+                                  <div className='flex text-sm text-gray-600'>
                                     <label
                                       for='file-upload'
-                                      class='relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500'>
-                                      <span>Upload a file</span>
+                                      className='relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500'>
+                                      <span className='text-[#377DFF]'>Ngarko një Fotografi</span>
                                       <input
                                         id='file-upload'
                                         name='file-upload'
                                         type='file'
-                                        class='sr-only'
+                                        className='sr-only'
                                       />
                                     </label>
-                                    <p class='pl-1'>or drag and drop</p>
+                                    <p className='pl-1'>ose tërhiqe një këtu.</p>
                                   </div>
-                                  <p class='text-xs text-gray-500'>
-                                    PNG, JPG, GIF up to 10MB
+                                  <p className='text-xs text-gray-500'>
+                                    PNG, JPG, që nuj tejkalonë madhësin e 3MB
                                   </p>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class='bg-gray-50 px-4 py-3 text-right sm:px-6'>
+                          <div className='text-right'>
                             <button
+                             onClick={() => PageDelete(dispatch, page.Page._id, '/posts')}
                               type='submit'
-                              class='inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
-                              Save
+                              className='inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
+                              Fshij
+                            </button>
+
+                            <button
+                              onClick={() => PageUpdate(dispatch, page.Page)}
+                              type='submit'
+                              className='inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
+                              Redakto
                             </button>
                           </div>
                         </div>
@@ -218,328 +233,9 @@ export default function LandingEdit() {
                     </div>
                   </div>
                 </div>
-
-                <div class='hidden sm:block' aria-hidden='true'>
-                  <div class='py-5'>
-                    <div class='border-t border-gray-200'></div>
-                  </div>
-                </div>
-
-                <div class='mt-10 sm:mt-0'>
-                  <div class='md:grid md:grid-cols-3 md:gap-6'>
-                    <div class='md:col-span-1'>
-                      <div class='px-4 sm:px-0'>
-                        <h3 class='text-lg font-medium leading-6 text-gray-900'>
-                          Personal Information
-                        </h3>
-                        <p class='mt-1 text-sm text-gray-600'>
-                          Use a permanent address where you can receive mail.
-                        </p>
-                      </div>
-                    </div>
-                    <div class='mt-5 md:col-span-2 md:mt-0'>
-                      <form action='#' method='POST'>
-                        <div class='overflow-hidden shadow sm:rounded-md'>
-                          <div class='bg-white px-4 py-5 sm:p-6'>
-                            <div class='grid grid-cols-6 gap-6'>
-                              <div class='col-span-6 sm:col-span-3'>
-                                <label
-                                  for='first-name'
-                                  class='block text-sm font-medium text-gray-700'>
-                                  First name
-                                </label>
-                                <input
-                                  type='text'
-                                  name='first-name'
-                                  id='first-name'
-                                  autocomplete='given-name'
-                                  class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                />
-                              </div>
-
-                              <div class='col-span-6 sm:col-span-3'>
-                                <label
-                                  for='last-name'
-                                  class='block text-sm font-medium text-gray-700'>
-                                  Last name
-                                </label>
-                                <input
-                                  type='text'
-                                  name='last-name'
-                                  id='last-name'
-                                  autocomplete='family-name'
-                                  class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                />
-                              </div>
-
-                              <div class='col-span-6 sm:col-span-4'>
-                                <label
-                                  for='email-address'
-                                  class='block text-sm font-medium text-gray-700'>
-                                  Email address
-                                </label>
-                                <input
-                                  type='text'
-                                  name='email-address'
-                                  id='email-address'
-                                  autocomplete='email'
-                                  class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                />
-                              </div>
-
-                              <div class='col-span-6 sm:col-span-3'>
-                                <label
-                                  for='country'
-                                  class='block text-sm font-medium text-gray-700'>
-                                  Country
-                                </label>
-                                <select
-                                  id='country'
-                                  name='country'
-                                  autocomplete='country-name'
-                                  class='mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'>
-                                  <option>United States</option>
-                                  <option>Canada</option>
-                                  <option>Mexico</option>
-                                </select>
-                              </div>
-
-                              <div class='col-span-6'>
-                                <label
-                                  for='street-address'
-                                  class='block text-sm font-medium text-gray-700'>
-                                  Street address
-                                </label>
-                                <input
-                                  type='text'
-                                  name='street-address'
-                                  id='street-address'
-                                  autocomplete='street-address'
-                                  class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                />
-                              </div>
-
-                              <div class='col-span-6 sm:col-span-6 lg:col-span-2'>
-                                <label
-                                  for='city'
-                                  class='block text-sm font-medium text-gray-700'>
-                                  City
-                                </label>
-                                <input
-                                  type='text'
-                                  name='city'
-                                  id='city'
-                                  autocomplete='address-level2'
-                                  class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                />
-                              </div>
-
-                              <div class='col-span-6 sm:col-span-3 lg:col-span-2'>
-                                <label
-                                  for='region'
-                                  class='block text-sm font-medium text-gray-700'>
-                                  State / Province
-                                </label>
-                                <input
-                                  type='text'
-                                  name='region'
-                                  id='region'
-                                  autocomplete='address-level1'
-                                  class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                />
-                              </div>
-
-                              <div class='col-span-6 sm:col-span-3 lg:col-span-2'>
-                                <label
-                                  for='postal-code'
-                                  class='block text-sm font-medium text-gray-700'>
-                                  ZIP / Postal code
-                                </label>
-                                <input
-                                  type='text'
-                                  name='postal-code'
-                                  id='postal-code'
-                                  autocomplete='postal-code'
-                                  class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div class='bg-gray-50 px-4 py-3 text-right sm:px-6'>
-                            <button
-                              type='submit'
-                              class='inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
-                              Save
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-
-                <div class='hidden sm:block' aria-hidden='true'>
-                  <div class='py-5'>
-                    <div class='border-t border-gray-200'></div>
-                  </div>
-                </div>
-
-                <div class='mt-10 sm:mt-0'>
-                  <div class='md:grid md:grid-cols-3 md:gap-6'>
-                    <div class='md:col-span-1'>
-                      <div class='px-4 sm:px-0'>
-                        <h3 class='text-lg font-medium leading-6 text-gray-900'>
-                          Notifications
-                        </h3>
-                        <p class='mt-1 text-sm text-gray-600'>
-                          Decide which communications you'd like to receive and
-                          how.
-                        </p>
-                      </div>
-                    </div>
-                    <div class='mt-5 md:col-span-2 md:mt-0'>
-                      <form action='#' method='POST'>
-                        <div class='overflow-hidden shadow sm:rounded-md'>
-                          <div class='space-y-6 bg-white px-4 py-5 sm:p-6'>
-                            <fieldset>
-                              <legend class='sr-only'>By Email</legend>
-                              <div
-                                class='text-base font-medium text-gray-900'
-                                aria-hidden='true'>
-                                By Email
-                              </div>
-                              <div class='mt-4 space-y-4'>
-                                <div class='flex items-start'>
-                                  <div class='flex h-5 items-center'>
-                                    <input
-                                      id='comments'
-                                      name='comments'
-                                      type='checkbox'
-                                      class='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                    />
-                                  </div>
-                                  <div class='ml-3 text-sm'>
-                                    <label
-                                      for='comments'
-                                      class='font-medium text-gray-700'>
-                                      Comments
-                                    </label>
-                                    <p class='text-gray-500'>
-                                      Get notified when someones posts a comment
-                                      on a posting.
-                                    </p>
-                                  </div>
-                                </div>
-                                <div class='flex items-start'>
-                                  <div class='flex h-5 items-center'>
-                                    <input
-                                      id='candidates'
-                                      name='candidates'
-                                      type='checkbox'
-                                      class='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                    />
-                                  </div>
-                                  <div class='ml-3 text-sm'>
-                                    <label
-                                      for='candidates'
-                                      class='font-medium text-gray-700'>
-                                      Candidates
-                                    </label>
-                                    <p class='text-gray-500'>
-                                      Get notified when a candidate applies for
-                                      a job.
-                                    </p>
-                                  </div>
-                                </div>
-                                <div class='flex items-start'>
-                                  <div class='flex h-5 items-center'>
-                                    <input
-                                      id='offers'
-                                      name='offers'
-                                      type='checkbox'
-                                      class='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                    />
-                                  </div>
-                                  <div class='ml-3 text-sm'>
-                                    <label
-                                      for='offers'
-                                      class='font-medium text-gray-700'>
-                                      Offers
-                                    </label>
-                                    <p class='text-gray-500'>
-                                      Get notified when a candidate accepts or
-                                      rejects an offer.
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </fieldset>
-                            <fieldset>
-                              <legend class='contents text-base font-medium text-gray-900'>
-                                Push Notifications
-                              </legend>
-                              <p class='text-sm text-gray-500'>
-                                These are delivered via SMS to your mobile
-                                phone.
-                              </p>
-                              <div class='mt-4 space-y-4'>
-                                <div class='flex items-center'>
-                                  <input
-                                    id='push-everything'
-                                    name='push-notifications'
-                                    type='radio'
-                                    class='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                  />
-                                  <label
-                                    for='push-everything'
-                                    class='ml-3 block text-sm font-medium text-gray-700'>
-                                    Everything
-                                  </label>
-                                </div>
-                                <div class='flex items-center'>
-                                  <input
-                                    id='push-email'
-                                    name='push-notifications'
-                                    type='radio'
-                                    class='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                  />
-                                  <label
-                                    for='push-email'
-                                    class='ml-3 block text-sm font-medium text-gray-700'>
-                                    Same as email
-                                  </label>
-                                </div>
-                                <div class='flex items-center'>
-                                  <input
-                                    id='push-nothing'
-                                    name='push-notifications'
-                                    type='radio'
-                                    class='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                  />
-                                  <label
-                                    for='push-nothing'
-                                    class='ml-3 block text-sm font-medium text-gray-700'>
-                                    No push notifications
-                                  </label>
-                                </div>
-                              </div>
-                            </fieldset>
-                          </div>
-                          <div class='bg-gray-50 px-4 py-3 text-right sm:px-6'>
-                            <button
-                              type='submit'
-                              class='inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
-                              Save
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            </div>
+            </div>
             )}
-          </section>
         </div>
       </div>
     </Normal>

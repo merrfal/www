@@ -58,12 +58,10 @@ const ConfirmationDefaultState = {
   Visibility: false,
 };
 
-const CategoryDefaultState = {
-  Title: null,
-  Message: null,
-  Action: null,
-  Type: null,
-  Visibility: false,
+const CategoriesDefaultState = {
+  Categories: null,
+  Loading: true,
+  Loaded: false,
 };
 
 const NotificationDefaultState = {
@@ -89,5 +87,5 @@ export {
   ProfileDefaultState,
   ErrorDefaultState,
   UserLandingPagesDefaultState,
-  CategoryDefaultState
+  CategoriesDefaultState
 };
