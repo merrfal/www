@@ -2,8 +2,6 @@
 
 module.exports = {
   content: [],
-  theme: {
-    extend: {},
-  },
+  theme: {extend: {}},
   plugins: [require('@tailwindcss/forms')],
 };

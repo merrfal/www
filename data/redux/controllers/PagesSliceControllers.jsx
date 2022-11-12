@@ -1,6 +1,6 @@
 const SetPages = (state, action) => {
   let data = action.payload;
-
+  
   state.Pages = data;
   state.Loading = false;
   state.Loaded = true;

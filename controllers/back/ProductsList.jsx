@@ -1,0 +1,37 @@
+import { Product } from '../../models';
+
+export default async function connection(req, res) {
+  try {
+    const products = await Product.find({});
+
+    if (products) {
+      res.status(200).send(
+        {
+          status: true,
+          message: 'Të gjitha produktet u morën me sukses.',
+          data: products,
+          code: 200,
+        }
+      );
+    } else {
+      res.status(404).send(
+        {
+          status: false,
+          message: 'Asnjë produkt nuk u gjet në platformë.',
+          data: null,
+          code: 404,
+        }
+      );
+    }
+  } catch (error) {
+    res.status(500).send(
+      {
+        status: false,
+        message: 'Gabim i brendshëm i serverit gjatë gjetjes së produkteve.',
+        sysError: error,
+        data: null,
+        code: 404,
+      }
+    );
+  }
+}

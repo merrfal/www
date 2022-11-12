@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
-import { Product } from '../../components';
-import { PagesList, CategoryList } from '../../../controllers/front';
+import { Product, Empty } from '../../components';
+import { ProductsList, CategoryList } from '../../../controllers/front';
 
 export default function Landings() {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export default function Landings() {
   const [isSortOpen, setIsSortOpen] = useState(false);
 
   useEffect(() => {
-    if (pages.Loaded === false) PagesList(dispatch);
+    if (pages.Loaded === false) ProductsList(dispatch);
   }, [pages]);
 
   useEffect(() => {
@@ -65,7 +65,9 @@ export default function Landings() {
                     className='px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400'
                     aria-controls='filter-section-0'
                     aria-expanded='false'>
-                    <span className='font-medium text-gray-900'>Kategoritë</span>
+                    <span className='font-medium text-gray-900'>
+                      Kategoritë
+                    </span>
                     <span className='ml-6 flex items-center'>
                       <svg
                         className='rotate-0 h-5 w-5 transform'
@@ -332,53 +334,52 @@ export default function Landings() {
                   </button>
                 </div>
 
-                {
-                  isSortOpen &&
+                {isSortOpen && (
                   <div
-                  className='origin-top-left absolute left-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'
-                  role='menu'
-                  aria-orientation='vertical'
-                  aria-labelledby='menu-button'
-                  tabindex='-1'>
-                  <div className='py-1' role='none'>
-                    <a
-                      href='#'
-                      className='font-medium text-gray-900 block px-4 py-2 text-sm'
-                      role='menuitem'
-                      tabindex='-1'
-                      id='menu-item-0'>
-                      Më popullorja
-                    </a>
+                    className='origin-top-left absolute left-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'
+                    role='menu'
+                    aria-orientation='vertical'
+                    aria-labelledby='menu-button'
+                    tabindex='-1'>
+                    <div className='py-1' role='none'>
+                      <a
+                        href='#'
+                        className='font-medium text-gray-900 block px-4 py-2 text-sm'
+                        role='menuitem'
+                        tabindex='-1'
+                        id='menu-item-0'>
+                        Më popullorja
+                      </a>
 
-                    <a
-                      href='#'
-                      className='font-medium text-gray-900 block px-4 py-2 text-sm'
-                      role='menuitem'
-                      tabindex='-1'
-                      id='menu-item-0'>
-                      Më jo popullorja
-                    </a>
+                      <a
+                        href='#'
+                        className='font-medium text-gray-900 block px-4 py-2 text-sm'
+                        role='menuitem'
+                        tabindex='-1'
+                        id='menu-item-0'>
+                        Më jo popullorja
+                      </a>
 
-                    <a
-                      href='#'
-                      className='text-gray-500 block px-4 py-2 text-sm'
-                      role='menuitem'
-                      tabindex='-1'
-                      id='menu-item-1'>
-                      Më të rejat
-                    </a>
+                      <a
+                        href='#'
+                        className='text-gray-500 block px-4 py-2 text-sm'
+                        role='menuitem'
+                        tabindex='-1'
+                        id='menu-item-1'>
+                        Më të rejat
+                      </a>
 
-                    <a
-                      href='#'
-                      className='text-gray-500 block px-4 py-2 text-sm'
-                      role='menuitem'
-                      tabindex='-1'
-                      id='menu-item-2'>
-                      Më te vjetrat
-                    </a>
+                      <a
+                        href='#'
+                        className='text-gray-500 block px-4 py-2 text-sm'
+                        role='menuitem'
+                        tabindex='-1'
+                        id='menu-item-2'>
+                        Më te vjetrat
+                      </a>
                     </div>
                   </div>
-                }               
+                )}
               </div>
 
               <button
@@ -415,49 +416,48 @@ export default function Landings() {
                         </svg>
                       </button>
 
-                      {
-                        isCategoryOpen &&
+                      {isCategoryOpen && (
                         <div className='origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none'>
-                        <form className='space-y-4'>
-                          <div className='flex items-center'>
-                            <input
-                              id='filter-category-0'
-                              name='category[]'
-                              value='new-arrivals'
-                              type='checkbox'
-                              className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                            />
-                            <label
-                              for='filter-category-0'
-                              className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                              Të gjitha kategoritë
-                            </label>
-                          </div>
+                          <form className='space-y-4'>
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-category-0'
+                                name='category[]'
+                                value='new-arrivals'
+                                type='checkbox'
+                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                              />
+                              <label
+                                for='filter-category-0'
+                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
+                                Të gjitha kategoritë
+                              </label>
+                            </div>
 
-                          {
-                            !categories.isLoaded && 
-                            categories.Categories.map((category, index) => {
-                              return (
-                                <div key={index} className='flex items-center'>
-                            <input
-                              id='filter-category-2'
-                              name='category[]'
-                              value='objects'
-                              type='checkbox'
-                              className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                            />
-                            <label
-                              for='filter-category-2'
-                              className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                              {category.Name}
-                            </label>
-                          </div>
-                              )
-                            })
-                          }
-                        </form>
-                      </div>
-                      }
+                            {!categories.isLoaded &&
+                              categories.Categories.map((category, index) => {
+                                return (
+                                  <div
+                                    key={index}
+                                    className='flex items-center'>
+                                    <input
+                                      id='filter-category-2'
+                                      name='category[]'
+                                      value='objects'
+                                      type='checkbox'
+                                      className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                                    />
+                                    <label
+                                      for='filter-category-2'
+                                      className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
+                                      {category.Name}
+                                    </label>
+                                  </div>
+                                );
+                              })}
+                          </form>
+                        </div>
+                      )}
                     </div>
 
                     <div className='px-4 relative inline-block text-left'>
@@ -481,102 +481,101 @@ export default function Landings() {
                         </svg>
                       </button>
 
-                      {
-                        isCityOpen && 
+                      {isCityOpen && (
                         <div className='origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none'>
-                        <form className='space-y-4'>
-                          <div className='flex items-center'>
-                            <input
-                              id='filter-sizes-0'
-                              name='sizes[]'
-                              value='s'
-                              type='checkbox'
-                              className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                            />
-                            <label
-                              for='filter-sizes-0'
-                              className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                              Prishtina
-                            </label>
-                          </div>
+                          <form className='space-y-4'>
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-sizes-0'
+                                name='sizes[]'
+                                value='s'
+                                type='checkbox'
+                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                              />
+                              <label
+                                for='filter-sizes-0'
+                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
+                                Prishtina
+                              </label>
+                            </div>
 
-                          <div className='flex items-center'>
-                            <input
-                              id='filter-sizes-1'
-                              name='sizes[]'
-                              value='m'
-                              type='checkbox'
-                              className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                            />
-                            <label
-                              for='filter-sizes-1'
-                              className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                              Mitrovicë
-                            </label>
-                          </div>
-                
-                          <div className='flex items-center'>
-                            <input
-                              id='filter-sizes-2'
-                              name='sizes[]'
-                              value='l'
-                              type='checkbox'
-                              className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                            />
-                            <label
-                              for='filter-sizes-2'
-                              className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-sizes-1'
+                                name='sizes[]'
+                                value='m'
+                                type='checkbox'
+                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                              />
+                              <label
+                                for='filter-sizes-1'
+                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
+                                Mitrovicë
+                              </label>
+                            </div>
+
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-sizes-2'
+                                name='sizes[]'
+                                value='l'
+                                type='checkbox'
+                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                              />
+                              <label
+                                for='filter-sizes-2'
+                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
                                 Gjilan
-                            </label>
-                          </div>
+                              </label>
+                            </div>
 
-                          <div className='flex items-center'>
-                            <input
-                              id='filter-sizes-2'
-                              name='sizes[]'
-                              value='l'
-                              type='checkbox'
-                              className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                            />
-                            <label
-                              for='filter-sizes-2'
-                              className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                                          Prizren
-                            </label>
-                          </div>
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-sizes-2'
+                                name='sizes[]'
+                                value='l'
+                                type='checkbox'
+                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                              />
+                              <label
+                                for='filter-sizes-2'
+                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
+                                Prizren
+                              </label>
+                            </div>
 
-                          <div className='flex items-center'>
-                            <input
-                              id='filter-sizes-2'
-                              name='sizes[]'
-                              value='l'
-                              type='checkbox'
-                              className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                            />
-                            <label
-                              for='filter-sizes-2'
-                              className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-sizes-2'
+                                name='sizes[]'
+                                value='l'
+                                type='checkbox'
+                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                              />
+                              <label
+                                for='filter-sizes-2'
+                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
                                 Pejë
-                            </label>
-                          </div>
+                              </label>
+                            </div>
 
-                          <div className='flex items-center'>
-                            <input
-                              id='filter-sizes-2'
-                              name='sizes[]'
-                              value='l'
-                              type='checkbox'
-                              className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                            />
-                            <label
-                              for='filter-sizes-2'
-                              className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                                 Gjakovë
-                            </label>
-                          </div>
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-sizes-2'
+                                name='sizes[]'
+                                value='l'
+                                type='checkbox'
+                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                              />
+                              <label
+                                for='filter-sizes-2'
+                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
+                                Gjakovë
+                              </label>
+                            </div>
                           </form>
                         </div>
-                      }
+                      )}
                     </div>
                   </div>
                 </div>
@@ -624,11 +623,17 @@ export default function Landings() {
       </div>
 
       <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
-      <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
-        {pages.Loaded === false
-          ? 'loading pages...'
-          : pages.Pages.map((page, index) => <Product product={page} key={index} />)}
-      </div>
+        <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
+          {pages.Loaded === false
+            ? 'loading pages...'
+            : pages.Pages.map((page, index) => (
+                <Product product={page} key={index} />
+              ))}
+
+              {
+                pages.Pages.length === 0 && <Empty />
+              }
+        </div>
       </div>
     </Normal>
   );

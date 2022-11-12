@@ -1,9 +1,9 @@
-import Page from "./PageModel";
+import Product from "./ProductModel";
 import User from "./UserModel";
 import Category from "./CategoryModel";
 
 export {
-    Page,
+    Product,
     User,
     Category,
 }

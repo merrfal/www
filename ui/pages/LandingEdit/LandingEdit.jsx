@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { PageView, PageDelete, PageUpdate, CategoryList } from '../../../controllers/front';
+import { ProductView, ProductDelete, ProductUpdate, CategoryList } from '../../../controllers/front';
 import { Normal } from '../../layouts';
 import { useRouter } from 'next/router';
 import { SetField } from '../../../data/redux/PageSlice';
@@ -18,7 +18,7 @@ export default function LandingEdit() {
   }, [categories]);
 
   useEffect(() => { 
-    if (page.Loaded === false) PageView(dispatch, slug)
+    if (page.Loaded === false) ProductView(dispatch, slug)
   }, [page, slug]);
 
 
@@ -215,14 +215,14 @@ export default function LandingEdit() {
                           </div>
                           <div className='text-right'>
                             <button
-                             onClick={() => PageDelete(dispatch, page.Page._id, '/posts')}
+                             onClick={() => ProductDelete(dispatch, page.Page._id, '/posts')}
                               type='submit'
                               className='inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
                               Fshij
                             </button>
 
                             <button
-                              onClick={() => PageUpdate(dispatch, page.Page)}
+                              onClick={() => ProductUpdate(dispatch, page.Page)}
                               type='submit'
                               className='inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
                               Redakto

@@ -11,162 +11,21 @@ export default function Profile() {
 
   useEffect(() => { if (profile.Loaded === false && user.Auth) UserView(dispatch, user.Username) }, [profile, user]);
 
-  //   return (
-  //     <section style={{ padding: "1em" }} class="container mx-auto px-4 py-4">
-  //       <Normal style={{ padding: "1em", border: "2px solid black" }}>
-  //         <div clas>
-  //           <div>
-  //             <div className="md:grid md:grid-cols-3 md:gap-6">
-  //               <div className="md:col-span-1">
-  //                 <div className="px-4 sm:px-0">
-  //                   <h3 className="text-lg font-medium leading-6 text-gray-900">
-  //                     Profile
-  //                   </h3>
-  //                   <p className="mt-1 text-sm text-gray-600">
-  //                     This information will be displayed publicly so be careful
-  //                     what you share.
-  //                   </p>
-  //                 </div>
-  //               </div>
-  //               <section
-  //                 style={{ padding: "1em" }}
-  //                 class="container mx-auto px-4 py-4"
-  //               >
-  //                 {profile.Loaded === false ? (
-  //                   "Loading..."
-  //                 ) : (
-  //                   <div className="mt-5 md:col-span-2 md:mt-0">
-  //                     <form action="#" method="POST">
-  //                       <div className="shadow sm:overflow-hidden sm:rounded-md">
-  //                         <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
-  //                           <div className="grid grid-cols-3 gap-6">
-  //                             <div className="col-span-3 sm:col-span-2">
-  //                               <div
-  //                                 style={{
-  //                                   display: "flex",
-  //                                   flexDirection: "column",
-  //                                 }}
-  //                               >
-  //                                 <label
-  //                                   htmlFor="company-website"
-  //                                   className="block text-sm font-medium text-gray-700"
-  //                                 >
-  //                                   Emri
-  //                                 </label>
-  //                                 <div className="mt-1 flex rounded-md shadow-sm">
-
-  //                                   <input
-  //                                     type="text"
-  //                                     placeholder="Emri"
-  //                                     value={profile.Name}
-  //                                     name="company-website"
-  //                                     id="company-website"
-  //                                     className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
-  //   placeholder="Emri"
-  //                                     value={profile.Name}
-  // onChange={(e) =>
-  //                                     dispatch(
-  //                                       SetProfileField({
-  //                                         Field: "Name",
-  //                                         Value: e.target.value,
-  //                                       })
-  //                                     )
-  //                                   }
-  //                                   />
-  //                                 </div>
-
-  //                                 <br />
-
-  //                                 <label>Last Name</label>
-  //                                 <input
-  //                                   placeholder="Surname"
-  //                                   value={profile.Surname}
-  //                                   onChange={(e) =>
-  //                                     dispatch(
-  //                                       SetProfileField({
-  //                                         Field: "Surname",
-  //                                         Value: e.target.value,
-  //                                       })
-  //                                     )
-  //                                   }
-  //                                 />
-  //                                 <br />
-
-  //                                 <label>Username</label>
-  //                                 <input
-  //                                   placeholder="Username"
-  //                                   value={profile.Username}
-  //                                   onChange={(e) =>
-  //                                     dispatch(
-  //                                       SetProfileField({
-  //                                         Field: "Username",
-  //                                         Value: e.target.value,
-  //                                       })
-  //                                     )
-  //                                   }
-  //                                 />
-  //                                 <br />
-
-  //                                 <label>Email</label>
-  //                                 <input
-  //                                   placeholder="Email"
-  //                                   value={profile.Email}
-  //                                   onChange={(e) =>
-  //                                     dispatch(
-  //                                       SetProfileField({
-  //                                         Field: "Email",
-  //                                         Value: e.target.value,
-  //                                       })
-  //                                     )
-  //                                   }
-  //                                 />
-  //                                 <br />
-
-  //                                 <label>Bio</label>
-  //                                 <input
-  //                                   placeholder="Bio"
-  //                                   value={profile.Bio}
-  //                                   onChange={(e) =>
-  //                                     dispatch(
-  //                                       SetProfileField({
-  //                                         Field: "Bio",
-  //                                         Value: e.target.value,
-  //                                       })
-  //                                     )
-  //                                   }
-  //                                 />
-  //                                 <br />
-
-  //                        
-  //                       
-  //               <label>New Password</label>
-  //               <input
-  //                 placeholder='New Password'
-  //                 value={profile.NewPassword}
-  //                 onChange={(e) =>
-  //                   dispatch(
-  //                     SetProfileField({
-  //                       Field: 'NewPassword',
-  //                       Value: e.target.value,
-  //                     })
-  //                   )
-  //                 }
-  //               /> 
-  // }
-
   return (
-    <>
       <div class="relative bg-white">
         <div class="mx-auto max-w-7xl px-4 sm:px-6">
           <div class="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
             <Normal>
-            <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
-            <h1 className='text-3xl font-extrabold tracking-tight text-gray-900'>
-            Profili Yt
-          </h1>
-          <p className='mt-4 max-w-xl text-sm text-gray-700'>
-            Këtu mundë ta rifreskoni profilin tuaj me të dhënat e rreja, keni kujdes cdo përdisim afekton në moment të gjithë platformën.
-          </p>
+        <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+  <div class="fixed inset-0 z-10 overflow-y-auto">
+    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+      <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Deactivate account</h3>
+              <div class="mt-2">
           <div className="mt-12">
                 <div className="mt-10 sm:mt-0">
                   <div className="w-full">
@@ -404,27 +263,28 @@ export default function Profile() {
                               </div>
                             </div>
                           </div>
-                          <div className="mt-8 text-right">
-                            <button
-                              onClick={() => UserUpdate(dispatch, profile)}
-                              type="submit"
-                              className="inline-flex justify-center rounded-md border border-transparent bg-[#387DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-[#387DFF] focus:ring-offset-2"
-                            >
-                              Përditëso
-                            </button>
-                          </div>
                         </div>
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
+              </div>
+            </div>
+          </div>
         </div>
-              
+        <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <button onClick={() => UserUpdate(dispatch, profile)} type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-[#387DFF] px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#387DFF] focus:outline-none focus:ring-2 focus:ring-[#387DFF] focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Përditëso</button>
+          <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#387DFF] focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
             </Normal>
           </div>
         </div>
       </div>
-    </>
   );
 }

@@ -1,37 +1,37 @@
-import PageCreate from "./PageCreate";
-import PageDelete from "./PageDelete";
-import PagesList from "./PagesList";
-import PageView from "./PageView";
-import PageUpdate from "./PageUpdate";
+import ProductCreate from "./ProductCreate";
+import ProductDelete from "./ProductDelete";
+import ProductsList from "./ProductsList";
+import ProductView from "./ProductView";
+import ProductUpdate from "./ProductUpdate";
 import UserAuth from "./UserAuth";
 import UserDelete from "./UserDelete";
 import UserLogin from "./UserLogin";
 import UserRegister from "./UserRegister";
 import UserUpdate from "./UserUpdate";
 import UserView from "./UserView";
-import LandingDownvote from './LandingDownvote';
-import LandingUpvote from './LandingUpvote';
-import UserLandingList from './UserLandingList';
+import ProductUnsave from './ProductUnsave';
+import ProductSave from './ProductSave';
+import UserProductList from './UserProductList';
 import CategoryDelete from './CategoryDelete';
-import CategoryUpdate from './CategoryCreate';
+import CategoryUpdate from './CategoryUpdate';
 import CategoryList from './CategoryList';
 import CategoryCreate from './CategoryCreate';
 
 export {
-    PageCreate,
-    PageDelete,
-    PagesList,
-    PageView,
-    PageUpdate,
+    ProductCreate,
+    ProductDelete,
+    ProductsList,
+    ProductView,
+    ProductUpdate,
     UserAuth,
     UserDelete,
     UserLogin,
     UserRegister,
     UserUpdate,
     UserView,
-    LandingDownvote,
-    LandingUpvote,
-    UserLandingList,
+    ProductUnsave,
+    ProductSave,
+    UserProductList,
     CategoryDelete,
     CategoryUpdate,
     CategoryList,

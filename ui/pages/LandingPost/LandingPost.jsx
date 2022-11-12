@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
 import { SetPrepageField } from '../../../data/redux/PageSlice';
-import { PageCreate, CategoryList } from '../../../controllers/front';
+import { ProductCreate, CategoryList } from '../../../controllers/front';
 import { useEffect } from 'react';
 import { Loader} from '../../pages';
 
@@ -249,7 +249,7 @@ export default function LaningPost() {
                       <button
                         onClick={(e) => {
                           e.preventDefault();
-                          PageCreate(dispatch, page.Prepage)
+                          ProductCreate(dispatch, page.Prepage)
                         }}
                         type='submit'
                         className='inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>

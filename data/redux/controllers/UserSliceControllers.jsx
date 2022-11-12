@@ -9,6 +9,12 @@ const LogoutUser = (state) => {
   state.Avatar = null;
   state.Role = null;
   state.Plan = null;
+  state.Cover = null;
+  state.Country = null;
+  state.Phone = null;
+  state.City = null;
+  state.Zip = null;
+  state.Address = null;
 
   state.Auth = false;
   state.Loading = false;

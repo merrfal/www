@@ -31,14 +31,14 @@ export default async function connection(req, res) {
     if (user) {
       res.status(200).send({
         status: true,
-        message: 'User was updated successfully.',
+        message: 'Përdoruesi u përditësua me sukses.',
         data: userWithoutPassword,
         code: 200,
       });
     } else {
       res.status(404).send({
         status: false,
-        message: 'User was not found in the database.',
+        message: 'Përdoruesi nuk u gjet në bazën e të dhënave.',
         data: null,
         code: 404,
       });
@@ -46,7 +46,7 @@ export default async function connection(req, res) {
   } catch (error) {
     res.status(500).send({
       status: false,
-      message: 'An error occurred while trying to update the user.',
+      message: 'Ndodhi një gabim gjatë përpjekjes për të përditësuar përdoruesin.',
       data: null,
       code: 500,
     });

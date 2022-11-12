@@ -1,8 +1,9 @@
-import { PageDelete, UserLandingList } from '../../../controllers/front';
+import { ProductDelete, UserProductList } from '../../../controllers/front';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
 import { Loader } from '../../pages';
+import { OpenConfirmation } from '../../../data/redux/ConfirmationSlice'
 
 export default function Landings() {
   const dispatch = useDispatch();
@@ -14,30 +15,26 @@ export default function Landings() {
     const pagesLoaded = userLandingPages.Loaded;
     const userIsAuth = user.Auth;
 
-    if (pagesLoaded === false && userIsAuth) UserLandingList(dispatch, user.Id);
+    if (pagesLoaded === false && userIsAuth) UserProductList(dispatch, user.Id);
   }, [userLandingPages, user]);
 
   return (
     <Normal>
       <div className='max-w-7xl mx-auto pt-16 px-4 sm:px-6 lg:px-8'>
         <h1 className='text-3xl font-extrabold tracking-tight text-gray-900'>
-          Produktet e Mija
+          Produktet e Mia
         </h1>
         <p className='mt-4 max-w-xl text-sm text-gray-700'>
           Këtu janë të listuara të gjitha produktet që ju keni ngarkuar për
-          komunitetin, prej këtu mundet ti menagjoni ato dhe të shtoni të tjera
-          falas pa ndonjë kosto për platformën.
+          ti dhuruar në shoqëri, prej këtu mundet ti menagjoni ato dhe të shtoni të tjera.
         </p>
       </div>
       <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
         <section className='container'>
-          {userLandingPages.Loaded === false ? (
-            <Loader />
-          ) : (
+          {userLandingPages.Loaded === false ? <Loader /> : 
+          (
             userLandingPages.Pages.map((page, index) => (
-              <div
-                key={index}
-                className='lg:flex lg:items-center mb-4 lg:justify-between appearance-none min-w-0 w-full bg-white border border-gray-100 rounded-lg p-6 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500'>
+              <div key={index} className='lg:flex lg:items-center mb-4 lg:justify-between appearance-none min-w-0 w-full bg-white border border-gray-100 rounded-lg p-6 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#387CFF] focus:ring-1 focus:ring-[#387CFF]'>
                 <div className='min-w-0 flex-1'>
                   <h2 className='text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-4'>
                     {page.Name}
@@ -57,14 +54,13 @@ export default function Landings() {
                           d='M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z'
                         />
                       </svg>
-
                       {
                         {
-                          published: 'Botuar',
-                          sold: 'shitur',
+                          published: 'Publikuar',
+                          sold: 'E Dhënë',
                           'in-review': 'Në Shqyrtim',
                           rejected: 'Refuzuar',
-                          unpublished: 'E Pabotuar',
+                          unpublished: 'Jo Publikuar',
                         }[page.Status]
                       }
                     </div>
@@ -113,13 +109,13 @@ export default function Landings() {
                   </div>
                 </div>
                 <div className='mt-5 flex lg:mt-0 lg:ml-4'>
-                  <span className='hidden sm:block'>
+                  <span>
                     <button
                       onClick={() =>
                         window.open(`/posts/${page.Slug}`, '_blank')
                       }
                       type='button'
-                      className='inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
+                      className='inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#387CFF] focus:ring-offset-2'>
                       <svg
                         className='h-4'
                         xmlns='http://www.w3.org/2000/svg'
@@ -136,11 +132,18 @@ export default function Landings() {
                     </button>
                   </span>
 
-                  <span className='ml-3 hidden sm:block'>
+                  <span className='ml-3'>
                     <button
-                      onClick={() => PageDelete(dispatch, page._id, user.Id)}
+                      onClick={() => {
+                        dispatch(OpenConfirmation({
+                          dispatch: dispatch,
+                          Title: 'Fshini Produktin?',
+                          Message: 'A jeni sigurt qe deshironi ta fshni kete produkt, kjo do ta largoj produktin nga platforma pergjithmone.',
+                          Action: () => ProductDelete(dispatch, page._id, user.Id)
+                        }))
+                      }}
                       type='button'
-                      className='inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
+                      className='inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#387CFF] focus:ring-offset-2'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
                         fill='none'
@@ -157,21 +160,18 @@ export default function Landings() {
                     </button>
                   </span>
 
-                  <span className='ml-3 hidden sm:block'>
+                  <span className='ml-3'>
                     <button
-                      onClick={() =>
-                        window.open(`/landings/${page.Slug}`, '_blank')
-                      }
+                      onClick={() => window.open(`/landings/${page.Slug}`, '_blank')}
                       type='button'
-                      className='inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
+                      className='inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#387CFF] focus:ring-offset-2'>
                       <svg
-                        className='-ml-1 mr-2 h-5 w-5 text-gray-500'
+                        className='h-4'
                         xmlns='http://www.w3.org/2000/svg'
                         fill='none'
-                        viewBox='0 0 24 24'
-                        stroke-width='1.5'
                         stroke='currentColor'
-                        className='h-4'>
+                        viewBox='0 0 24 24'
+                        strokeWidth='1.5'>
                         <path
                           stroke-linecap='round'
                           stroke-linejoin='round'

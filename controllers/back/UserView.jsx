@@ -10,7 +10,7 @@ export default async function connection(req, res) {
         {
           status: true,
           data: data,
-          message: 'User was found successfully.',
+          message: 'Përdoruesi u gjet me sukses dhe të dhënat e tij u ngarkuan.',
           code: 200,
         }
       );
@@ -18,7 +18,7 @@ export default async function connection(req, res) {
       res.status(404).send(
         {
           status: false,
-          message: 'User was not found in the database.',
+          message: 'Përdoruesi nuk u gjet në bazën e të dhënave.',
           data: null,
           code: 404,
         }
@@ -28,7 +28,7 @@ export default async function connection(req, res) {
     res.status(500).send(
       {
         status: false,
-        message: 'An error occurred while trying to find the user.',
+        message: 'Ndodhi një gabim gjatë përpjekjes për të gjetur përdoruesin.',
         sysErrors: error,
         data: null,
         code: 500,

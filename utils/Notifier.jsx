@@ -13,7 +13,7 @@ const Notifier = (props) => {
     })
   );
 
-  setTimeout(() => props.dispatch(HideNotification()), 3000);
+  setTimeout(() => props.dispatch(HideNotification()), 5000);
 };
 
 export default Notifier;

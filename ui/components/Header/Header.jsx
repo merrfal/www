@@ -19,6 +19,7 @@ export default function Header() {
           <div className='h-16 flex items-center justify-between'>
             <div className='flex-1 flex items-center lg:hidden'>
               <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 type='button'
                 className='-ml-2 bg-white p-2 rounded-md text-gray-400'>
                 <span className='sr-only'>Open menu</span>
@@ -153,7 +154,7 @@ export default function Header() {
             </Link>
 
             <div className='flex-1 flex items-center justify-end'>
-              <a
+            <a
                 href='#'
                 className='hidden ml-6 p-2 text-gray-400 hover:text-gray-500 lg:block'>
                 <span className='sr-only'>Search</span>
@@ -171,7 +172,7 @@ export default function Header() {
                     d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
                   />
                 </svg>
-              </a>
+              </a> 
 
               {user.Auth && (
                 <Link href='/posts/add'>
@@ -210,13 +211,13 @@ export default function Header() {
 
                   {isProfileOpen && (
                     <div
-                      className='absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
+                      className='absolute right-0 z-10 mt-2 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
                       role='menu'
                       aria-orientation='vertical'
                       aria-labelledby='menu-button'
                       tabindex='-1'>
                       <div className='py-1' role='none'>
-                        <Link href={`/account`}>
+                        {/* <Link href={`/account`}>
                           <a
                             href='#'
                             className='text-gray-700 block px-4 py-2 text-sm'
@@ -225,18 +226,18 @@ export default function Header() {
                             id='menu-item-0'>
                             Redakto Profilin
                           </a>
-                        </Link>
-                        <Link href={`/users/${user.Username}`}>
+                        </Link> */}
+                        <Link href={`/profili/${user.Username}`}>
                           <a
                             href='#'
                             className='text-gray-700 block px-4 py-2 text-sm'
                             role='menuitem'
                             tabindex='-1'
                             id='menu-item-0'>
-                            Profili Publik
+                            Profili Im
                           </a>
                         </Link>
-                        <Link href={`/posts`}>
+                        <Link href={`/postimet`}>
                           <a
                             href='#'
                             className='text-gray-700 block px-4 py-2 text-sm'
@@ -263,7 +264,7 @@ export default function Header() {
 
               {!user.Auth && (
                 <div
-                  onClick={() => AuthWithGoogle()}
+                  onClick={() => AuthWithGoogle(dispatch)}
                   className='p-2 text-gray-400 hover:text-gray-500 lg:ml-4'>
                   <span className='sr-only'>Llogaria</span>
                   <svg

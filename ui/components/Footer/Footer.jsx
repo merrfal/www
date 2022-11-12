@@ -1,6 +1,11 @@
 import Link from 'next/link';
 
+import { useState } from 'react';
+
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+
   return (
     <footer aria-labelledby='footer-heading' class='bg-white mb-8'>
       <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -31,39 +36,43 @@ export default function Footer() {
                   <h3 class='text-sm font-medium text-gray-900'>Kategoritë</h3>
                   <ul role='list' class='mt-6 space-y-6'>
                     <li class='text-sm'>
-                      <a href='#' class='text-gray-500 hover:text-gray-600'>
-                        Makina
-                      </a>
+                      <Link href={`/produktet?kategoria="Biznes dhe Punë"`}>
+                        <a class='text-gray-500 hover:text-gray-600'>
+                          Biznes dhe Punë
+                        </a>
+                      </Link>
                     </li>
 
                     <li class='text-sm'>
-                      <a href='#' class='text-gray-500 hover:text-gray-600'>
-                        Vendbanime
-                      </a>
+                      <Link href={`/produktet?kategoria="Veshje"`}>
+                        <a class='text-gray-500 hover:text-gray-600'>
+                          Veshje
+                        </a>
+                      </Link>
                     </li>
 
                     <li class='text-sm'>
-                      <a href='#' class='text-gray-500 hover:text-gray-600'>
-                        Shtepi dhe familje
-                      </a>
+                      <Link href={`/produktet?kategoria="Elektronika"`}>
+                        <a class='text-gray-500 hover:text-gray-600'>
+                          Elektronika
+                        </a>
+                      </Link>
                     </li>
 
                     <li class='text-sm'>
-                      <a href='#' class='text-gray-500 hover:text-gray-600'>
-                        Elektronika
-                      </a>
+                      <Link href={`/produktet?kategoria="Sport"`}>
+                        <a class='text-gray-500 hover:text-gray-600'>
+                          Sport
+                        </a>
+                      </Link>
                     </li>
 
                     <li class='text-sm'>
-                      <a href='#' class='text-gray-500 hover:text-gray-600'>
-                        Sport dhe rekracion
-                      </a>
-                    </li>
-
-                    <li class='text-sm'>
-                      <a href='#' class='text-gray-500 hover:text-gray-600'>
-                        Biznes dhe pune
-                      </a>
+                      <Link href={`/produktet?kategoria="Shtëpi"`}>
+                        <a class='text-gray-500 hover:text-gray-600'>
+                          Shtëpi
+                        </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -71,33 +80,43 @@ export default function Footer() {
                   <h3 class='text-sm font-medium text-gray-900'>Më Shumë</h3>
                   <ul role='list' class='mt-6 space-y-6'>
                     <li class='text-sm'>
-                      <a href='#' class='text-gray-500 hover:text-gray-600'>
-                        Rreth Nesh
-                      </a>
+                      <Link href={`/rreth-nesh`}>
+                        <a class='text-gray-500 hover:text-gray-600'>
+                          Rreth Nesh
+                        </a>
+                      </Link>
                     </li>
 
                     <li class='text-sm'>
-                      <a href='#' class='text-gray-500 hover:text-gray-600'>
-                        Kontribo
-                      </a>
+                      <Link href={`/kontribo`}>
+                        <a class='text-gray-500 hover:text-gray-600'>
+                          Kontribo
+                        </a>
+                      </Link>
                     </li>
 
                     <li class='text-sm'>
-                      <a href='#' class='text-gray-500 hover:text-gray-600'>
-                        Kushtet e Shërbimit
-                      </a>
+                      <Link href={`/kushtet-e-shërbimit`}>
+                        <a class='text-gray-500 hover:text-gray-600'>
+                          Kushtet e Shërbimit
+                        </a>
+                      </Link>
                     </li>
 
                     <li class='text-sm'>
-                      <a href='#' class='text-gray-500 hover:text-gray-600'>
-                        Politika e privatësisë
-                      </a>
+                      <Link href={`/politika-e-privatësisë`}>
+                        <a class='text-gray-500 hover:text-gray-600'>
+                          Politika e privatësisë
+                        </a>
+                      </Link>
                     </li>
 
                     <li class='text-sm'>
-                      <a href='#' class='text-gray-500 hover:text-gray-600'>
-                        Na Kontaktoni
-                      </a>
+                      <Link href={`/na-kontaktoni`}>
+                        <a class='text-gray-500 hover:text-gray-600'>
+                          Na Kontaktoni
+                        </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -108,26 +127,26 @@ export default function Footer() {
                 </h3>
                 <ul role='list' class='mt-6 space-y-6'>
                   <li class='text-sm'>
-                    <a href='#' class='text-gray-500 hover:text-gray-600'>
+                    <a href='https://ummah.io' target="_blank" class='text-gray-500 hover:text-gray-600'>
                       Ummah
                     </a>
                   </li>
 
                   <li class='text-sm'>
-                    <a href='#' class='text-gray-500 hover:text-gray-600'>
+                    <a href='https://muslim-tab.com/install' target="_blank" class='text-gray-500 hover:text-gray-600'>
                       Muslim Tab
                     </a>
                   </li>
 
                   <li class='text-sm'>
-                    <a href='#' class='text-gray-500 hover:text-gray-600'>
+                    <a href='https://muslimani-ideal.org/' target="_blank" class='text-gray-500 hover:text-gray-600'>
                       Muslimani Ideal
                     </a>
                   </li>
 
                   <li class='text-sm'>
-                    <a href='#' class='text-gray-500 hover:text-gray-600'>
-                      Fappa
+                    <a href='https://muslimani-ideal.org/' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                      Pyetje dhe Përgjigje
                     </a>
                   </li>
                 </ul>
@@ -148,8 +167,9 @@ export default function Footer() {
                 <input
                   id='email-address'
                   type='text'
-                  autocomplete='email'
                   required
+                  value={email}
+                  onChange={e => setEmail(e)}
                   class='appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500'
                 />
                 <div class='ml-4 flex-shrink-0'>
@@ -164,7 +184,7 @@ export default function Footer() {
           </div>
         </div>
         <p class='text-sm text-gray-500'>
-          &copy; 2022 Merr Fal. Të gjitha të drejtat e rezervuara.
+          &copy; {currentYear} Merr Fal. Të gjitha të drejtat e rezervuara.
         </p>
       </div>
     </footer>

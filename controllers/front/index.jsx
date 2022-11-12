@@ -1,8 +1,8 @@
-import PageCreate from './PageCreate';
-import PageDelete from './PageDelete';
-import PagesList from './PagesList';
-import PageUpdate from './PageUpdate';
-import PageView from './PageView';
+import ProductCreate from './ProductCreate';
+import ProductDelete from './ProductDelete';
+import ProductsList from './ProductsList';
+import ProductUpdate from './ProductUpdate';
+import ProductView from './ProductView';
 import UserAuth from './UserAuth';
 import UserDelete from './UserDelete';
 import UserGoogle from './UserGoogle';
@@ -10,28 +10,28 @@ import UserLogin from './UserLogin';
 import UserRegister from './UserRegister';
 import UserUpdate from './UserUpdate';
 import UserView from './UserView';
-import LandingDownvote from './LandingDownvote';
-import LandingUpvote from './LandingUpvote';
-import UserLandingList from './UserLandingList';
+import ProductUnsave from './ProductUnsave';
+import ProductSave from './ProductSave';
+import UserProductList from './UserProductList';
 import AuthWithGoogle from './AuthWithGoogle';
 import CategoryList from './CategoryList';
 
 export {
-  PageCreate,
-  PageDelete,
-  PagesList,
-  PageUpdate,
-  PageView,
+  ProductCreate,
+  ProductDelete,
+  ProductsList,
+  ProductUpdate,
+  ProductView,
   UserAuth,
   UserDelete,
   UserGoogle,
   UserLogin,
   UserRegister,
   UserUpdate,
-  LandingDownvote,
+  ProductUnsave,
   UserView,
-  LandingUpvote,
-  UserLandingList,
+  ProductSave,
+  UserProductList,
   AuthWithGoogle,
   CategoryList
 };

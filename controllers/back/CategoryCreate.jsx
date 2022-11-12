@@ -9,7 +9,7 @@ export default async function connection(req, res) {
       res.status(200).send(
         {
           status: true,
-          message: 'New category was added to the Database.',
+          message: 'Kategoria e re u shtua në bazën e të dhënave.',
           data: _category,
           code: 200,
         }
@@ -20,7 +20,7 @@ export default async function connection(req, res) {
       res.status(400).send(
         {
           status: false,
-          message: 'Something went wrong while trying to create a new category.',
+          message: 'Ndodhi një gabim gjatë përpjekjes për të krijuar një kategori të re.',
           data: null,
           code: 404,
         }
@@ -30,7 +30,7 @@ export default async function connection(req, res) {
     res.status(500).send(
       {
         status: false,
-        message: 'Internal server error while creating this category.',
+        message: 'Gabim i brendshëm i serverit gjatë krijimit të kësaj kategorie.',
         sysError: error,
         data: null,
         code: 500,

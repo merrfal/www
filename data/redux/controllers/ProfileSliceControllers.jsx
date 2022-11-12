@@ -14,6 +14,12 @@ const SetProfile = (state, action) => {
   state.Plan = user.Plan;
   state.NewPassword = user.NewPassword || "";
   state.Upload = user.Upload || null;
+  state.Cover = user.Cover;
+  state.Country = user.Country;
+  state.Phone = user.Phone;
+  state.City = user.City;
+  state.Zip = user.Zip;
+  state.Address = user.Address;
 
   state.Loading = false;
   state.Loaded = true;
@@ -33,6 +39,12 @@ const UnsetProfile = (state) => {
   state.Plan = null;
   state.NewPassword = "";
   state.Upload = null;
+  state.Cover = null;
+  state.Country = null;
+  state.Phone = null;
+  state.City = null;
+  state.Zip = null;
+  state.Address = null;
 
   state.Loading = true;
   state.Loaded = false;

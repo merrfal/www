@@ -8,6 +8,7 @@ const UserLogin = async (uid, dispatch) => {
   try {
     const req = await fetch(url, config);
     const res = await req.json();
+    console.log('res', res)
 
     if (res.status === true) dispatch(SetUser(res.data));
     else {

@@ -1,4 +1,3 @@
-import { Container, Page } from './Components';
 import { Header, Footer, Confirmation, Search, Notification } from "../../components";
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -21,13 +20,13 @@ export default function Normal(props) {
   if(user.Loading === true) return <Loader />
 
   else return (
-    <Container>
+    <main>
       <Header />
       <Confirmation />
       <Notification />
       <Search />
-      <Page>{props.children}</Page>
+      <section>{props.children}</section>
       <Footer />
-    </Container>
+    </main>
   );
 }

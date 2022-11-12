@@ -29,7 +29,7 @@ export default async function connection(req, res) {
         {
           status: true,
           data: {...user._doc, Token},
-          message: 'User registered successfully.',
+          message: 'Përdoruesi u regjistrua me sukses.',
           code: 200,
         }
       );
@@ -37,7 +37,7 @@ export default async function connection(req, res) {
       res.status(404).send(
         {
           status: false,
-          message: 'Something went wrong while registering user.',
+          message: 'Ndodhi një gabim gjatë regjistrimit të përdoruesit.',
           data: null,
           code: 404,
         }
@@ -47,7 +47,7 @@ export default async function connection(req, res) {
     res.status(500).send(
       {
         status: false,
-        message: 'Internal server error while registering user.',
+        message: 'Gabim i brendshëm i serverit gjatë regjistrimit të përdoruesit.',
         sysError: error,
         data: null,
         code: 500,

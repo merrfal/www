@@ -1,5 +1,6 @@
 const SetPage = (state, action) => {
   let data = action.payload;
+  console.log('data', data)
 
   state.Page = data;
   state.Loading = false;

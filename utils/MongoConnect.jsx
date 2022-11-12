@@ -1,4 +1,8 @@
 import mongoose from 'mongoose';
-const URI = process.env.MONGO_URI;
-const MongoConnect = async () => mongoose.connect(URI);
+
+const MongoConnect = async () => {
+    const URI = process.env.MONGO_URI;
+    return mongoose.connect(URI);
+}
+
 export default MongoConnect;

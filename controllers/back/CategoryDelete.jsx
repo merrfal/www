@@ -8,7 +8,7 @@ export default async function connection(req, res) {
       res.status(200).send(
         {
           status: true,
-          message: 'This category was deleted successfully.',
+          message: 'Kjo kategori u fshi me sukses.',
           data: null,
           code: 200,
         }
@@ -18,7 +18,7 @@ export default async function connection(req, res) {
       res.status(404).send(
         {
           status: false,
-          message: 'This category was not deleted.',
+          message: 'Kjo kategori nuk u fshi.',
           data: null,
           code: 404,
         }
@@ -28,7 +28,7 @@ export default async function connection(req, res) {
     res.status(500).send(
       {
         status: false,
-        message: 'Internal server error while deleting this category.',
+        message: 'Gabim i brendshëm i serverit gjatë fshirjes së kësaj kategorie.',
         sysError: error,
         data: null,
         code: 500,

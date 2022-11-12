@@ -1,4 +1,3 @@
-import { Container } from './Components';
 
 export default function Loader() {
   const lottie = {
@@ -10,10 +9,18 @@ export default function Loader() {
     autoplay: true
   }
 
+  const container = {
+    width: '100%',
+    height: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+
   return (
-    <Container>
+    <main style={container}>
       <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
       <lottie-player {...lottie} />
-    </Container>
+    </main>
   );
 }

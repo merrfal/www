@@ -1,6 +1,8 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { HideNotification } from '../../../data/redux/NotificationSlice';
 
 export default function Notification() {
+  const dispatch = useDispatch();
   const notification = useSelector((state) => state.notification);
 
   if (notification.Visibility)
@@ -70,7 +72,7 @@ export default function Notification() {
                   </p>
                 </div>
                 <div class='ml-4 flex-shrink-0 flex'>
-                  <button class='bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                  <button onClick={() => dispatch(HideNotification())} class='bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#387CFF]'>
                     <span class='sr-only'>Mbylle</span>
                     <svg
                       class='h-5 w-5'
