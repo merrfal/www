@@ -7,6 +7,7 @@ import ProfileSlice from "./ProfileSlice";
 import ErrorSlice from "./ErrorSlice";
 import UserLandingPagesSlice from "./UserLandingPagesSlice";
 import CategoriesSlice from "./CategoriesSlice";
+import FavoritesSlice from "./FavoritesSlice";
 
 export {
     UserSlice,
@@ -17,5 +18,6 @@ export {
     ProfileSlice,
     ErrorSlice,
     UserLandingPagesSlice,
-    CategoriesSlice
+    CategoriesSlice,
+    FavoritesSlice
 }

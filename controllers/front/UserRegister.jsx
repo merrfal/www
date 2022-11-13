@@ -14,7 +14,6 @@ const UserRegister = async (user, dispatch, informations) => {
     Name,
     Surname,
     Email,
-    Password: Math.random().toString(36).substring(2, 15),
     Avatar,
     Info: informations,
   };

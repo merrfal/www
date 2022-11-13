@@ -2,10 +2,10 @@ import { ProductDelete, UserProductList } from '../../../controllers/front';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
-import { Loader } from '../../pages';
+import { Loading, None } from '../../components'
 import { OpenConfirmation } from '../../../data/redux/ConfirmationSlice'
 
-export default function Landings() {
+export default function UserProducts() {
   const dispatch = useDispatch();
 
   const userLandingPages = useSelector((state) => state.userLandingPages);
@@ -31,8 +31,8 @@ export default function Landings() {
       </div>
       <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
         <section className='container'>
-          {userLandingPages.Loaded === false ? <Loader /> : 
-          (
+          {userLandingPages.Loaded === false ? <Loading /> : 
+           userLandingPages.Pages.length === 0 ? <None /> :
             userLandingPages.Pages.map((page, index) => (
               <div key={index} className='lg:flex lg:items-center mb-4 lg:justify-between appearance-none min-w-0 w-full bg-white border border-gray-100 rounded-lg p-6 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#387CFF] focus:ring-1 focus:ring-[#387CFF]'>
                 <div className='min-w-0 flex-1'>
@@ -111,9 +111,7 @@ export default function Landings() {
                 <div className='mt-5 flex lg:mt-0 lg:ml-4'>
                   <span>
                     <button
-                      onClick={() =>
-                        window.open(`/posts/${page.Slug}`, '_blank')
-                      }
+                      onClick={() => window.open(`/postimet/${page.Slug}`, '_blank')}
                       type='button'
                       className='inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#387CFF] focus:ring-offset-2'>
                       <svg
@@ -187,7 +185,7 @@ export default function Landings() {
                   </span>
                 </div>
               </div>
-            ))
+            )
           )}
         </section>
       </div>

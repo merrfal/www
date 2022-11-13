@@ -1,12 +1,41 @@
 import Link from 'next/link';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { ProductSave, ProductUnsave } from '../../../controllers/front';
+
 export default function Product(props) {
-  const { Slug, Name, Gallery, City, Zip, Address } = props.product;
+  const dispatch = useDispatch();
+
+  const { Slug, Name, Gallery, City, Zip, Address, } = props.product;
+
+  const user = useSelector(state => state.user);
+
+  const inSaves = user.Favorites.includes(props.product._id);
+
+  const handleSaver = (e) => {
+    e.stopPropagation();
+
+    if(inSaves) {
+        ProductUnsave(
+          props.product._id,
+          user.Id,
+          dispatch
+        )
+    }
+
+    else {
+        ProductSave(
+          props.product._id,
+          user.Id,
+          dispatch
+        )
+    }
+  };
 
   return (
     <Link href={`/produktet/${Slug}`} key={props.index}>
       <div className='group relative'>
-        <div className='min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80'>
+        <div className='hover:cursor-pointer min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80'>
           <img
             src={Gallery.length === 0 ? '/assets/product-no.png' : Gallery[0]}
             className='h-full w-full object-cover object-center lg:h-full lg:w-full'
@@ -14,7 +43,7 @@ export default function Product(props) {
         </div>
         <div class='flex items-center py-4'>
           <div class='flex-auto'>
-            <div class='flex mb-1'>
+            <div class='flex mb-1 hover:cursor-pointer'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -38,19 +67,19 @@ export default function Product(props) {
                 {Address}, {Zip}, {City}
               </p>
             </div>
-            <div class='font-medium'>
+            <div class='font-medium hover:cursor-pointer'>
               {Name.length > 28 ? Name.substring(0, 27) + '...' : Name}
             </div>
           </div>
-          <div class='flex'>
+          <div onClick={(e) => handleSaver(e)} class='flex hover:cursor-pointer'>
             <div class='pointer-events-auto ml-2 flex-none rounded-md h-8 w-8 flex justify-center align-center items-center px-2 font-medium text-slate-700 shadow-sm ring-1 ring-slate-700/10 hover:bg-slate-50'>
               <svg
                 className='h-8'
                 xmlns='http://www.w3.org/2000/svg'
-                fill='none'
+                fill={inSaves ? '#377DFF' : 'none'}
                 viewBox='0 0 24 24'
                 strokeWidth='2'
-                stroke='currentColor'
+                stroke={inSaves ? '#377DFF' : 'currentColor'}
                 class='w-6 h-6'>
                 <path
                   stroke-linecap='round'

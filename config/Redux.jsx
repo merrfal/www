@@ -10,7 +10,8 @@ import {
   ProfileSlice,
   ErrorSlice,
   UserLandingPagesSlice,
-  CategoriesSlice
+  CategoriesSlice,
+  FavoritesSlice
 } from '../data/redux';
 
 const combinedReducer = combineReducers({
@@ -22,7 +23,8 @@ const combinedReducer = combineReducers({
   confirmation: ConfirmationSlice,
   error: ErrorSlice,
   userLandingPages: UserLandingPagesSlice,
-  categories: CategoriesSlice
+  categories: CategoriesSlice,
+  favorites: FavoritesSlice
 });
 
 const masterReducer = (state, action) => combinedReducer(state, action);

@@ -20,6 +20,7 @@ const SetProfile = (state, action) => {
   state.City = user.City;
   state.Zip = user.Zip;
   state.Address = user.Address;
+  state.Products = user.Products;
 
   state.Loading = false;
   state.Loaded = true;
@@ -45,6 +46,7 @@ const UnsetProfile = (state) => {
   state.City = null;
   state.Zip = null;
   state.Address = null;
+  state.Products = null;
 
   state.Loading = true;
   state.Loaded = false;

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { SetField } from '../../../data/redux/PageSlice';
 import { Loader} from '../../pages';
 
-export default function LandingEdit() {
+export default function ProductEdit() {
   const dispatch = useDispatch();
   const slug = useRouter().query.slug || '';
 
@@ -34,7 +34,7 @@ export default function LandingEdit() {
                     <div className='mt-5 md:col-span-2 md:mt-0'>
                       <form action='#' method='POST'>
                         <div className='sm:overflow-hidden sm:rounded-md'>
-                          <div className='space-y-6 bg-white'>
+                          <div className='space-y-6 bg-white p-2'>
                           <h3 class="text-3xl font-bold leading-6 text-gray-900 mb-10">Redakto Produktin</h3>
                             <div className='col-span-6 sm:col-span-4'>
                               <label
@@ -56,7 +56,7 @@ export default function LandingEdit() {
                                 name='email-address'
                                 id='email-address'
                                 autocomplete='email'
-                                className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                               />
                             </div>
       
@@ -64,7 +64,7 @@ export default function LandingEdit() {
                               <label
                                 for='email-address'
                                 className='block text-sm font-medium text-gray-700'>
-                                Phone
+                               Numri i telefonit
                               </label>
                               <input
                                 onChange={(e) =>
@@ -80,7 +80,7 @@ export default function LandingEdit() {
                                 name='email-address'
                                 id='email-address'
                                 autocomplete='email'
-                                className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                               />
                             </div>
       
@@ -104,7 +104,7 @@ export default function LandingEdit() {
                                   id='about'
                                   name='about'
                                   rows='3'
-                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                                   />
                               </div>
                               <p className='mt-2 text-sm text-gray-500'>
@@ -118,14 +118,14 @@ export default function LandingEdit() {
                                 <label
                                   for='street-address'
                                   className='block text-sm font-medium text-gray-700'>
-                                  Adresa e Banimit
+                                  Adresa e marrjes
                                 </label>
                                 <input
                                   type='text'
                                   name='street-address'
                                   id='street-address'
                                   autocomplete='street-address'
-                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                                 />
                               </div>
       
@@ -140,7 +140,7 @@ export default function LandingEdit() {
                                   name='city'
                                   id='city'
                                   autocomplete='address-level2'
-                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                                 />
                               </div>
       
@@ -155,13 +155,13 @@ export default function LandingEdit() {
                                   name='postal-code'
                                   id='postal-code'
                                   autocomplete='postal-code'
-                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                                 />
                               </div>
       
                               <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                       <label for="country" class="block text-sm font-medium text-gray-700">Kategoria</label>
-                      <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                      <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                         {
                                   categories.isLoaded === true && 
                                   categories.Categories.map((category, index) => {
@@ -175,7 +175,7 @@ export default function LandingEdit() {
                             </div>
                             <div>
                               <label className='block text-sm font-medium text-gray-700'>
-                                Fotoja Kryesore
+                                Fotot e Produktit
                               </label>
                               <div className='mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6'>
                                 <div className='space-y-1 text-center'>
@@ -195,7 +195,7 @@ export default function LandingEdit() {
                                   <div className='flex text-sm text-gray-600'>
                                     <label
                                       for='file-upload'
-                                      className='relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500'>
+                                      className='relative cursor-pointer rounded-md bg-white font-medium text-[#377DFF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#377DFF] focus-within:ring-offset-2 hover:text-[#377DFF]'>
                                       <span className='text-[#377DFF]'>Ngarko një Fotografi</span>
                                       <input
                                         id='file-upload'
@@ -217,14 +217,14 @@ export default function LandingEdit() {
                             <button
                              onClick={() => ProductDelete(dispatch, page.Page._id, '/posts')}
                               type='submit'
-                              className='inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
+                              className='inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none focus:ring-2 focus:ring-[#377DFF] focus:ring-offset-2'>
                               Fshij
                             </button>
 
                             <button
                               onClick={() => ProductUpdate(dispatch, page.Page)}
                               type='submit'
-                              className='inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
+                              className='inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none focus:ring-2 focus:ring-[#377DFF] focus:ring-offset-2'>
                               Redakto
                             </button>
                           </div>

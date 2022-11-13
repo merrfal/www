@@ -15,6 +15,7 @@ import ProductSave from './ProductSave';
 import UserProductList from './UserProductList';
 import AuthWithGoogle from './AuthWithGoogle';
 import CategoryList from './CategoryList';
+import ProductSaves from './ProductSaves';
 
 export {
   ProductCreate,
@@ -33,5 +34,6 @@ export {
   ProductSave,
   UserProductList,
   AuthWithGoogle,
-  CategoryList
+  CategoryList,
+  ProductSaves,
 };

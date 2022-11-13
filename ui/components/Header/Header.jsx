@@ -22,7 +22,7 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 type='button'
                 className='-ml-2 bg-white p-2 rounded-md text-gray-400'>
-                <span className='sr-only'>Open menu</span>
+                <span className='sr-only'>Hap menunë</span>
                 <svg
                   className='h-6 w-6'
                   xmlns='http://www.w3.org/2000/svg'
@@ -40,9 +40,8 @@ export default function Header() {
               </button>
 
               <a
-                href='#'
-                className='ml-2 p-2 text-gray-400 hover:text-gray-500'>
-                <span className='sr-only'>Search</span>
+                className='hover:cursor-pointer ml-2 p-2 text-gray-400 hover:text-gray-500'>
+                <span className='sr-only'>Kërko</span>
                 <svg
                   className='w-6 h-6'
                   xmlns='http://www.w3.org/2000/svg'
@@ -103,7 +102,7 @@ export default function Header() {
             </div>
 
             <Link href='/'>
-              <a href='/' className='flex'>
+              <a className='flex'>
                 <svg
                   className='h-6 w-auto'
                   viewBox='0 0 382 67'
@@ -155,9 +154,8 @@ export default function Header() {
 
             <div className='flex-1 flex items-center justify-end'>
             <a
-                href='#'
-                className='hidden ml-6 p-2 text-gray-400 hover:text-gray-500 lg:block'>
-                <span className='sr-only'>Search</span>
+                className='hover:cursor-pointer hidden ml-6 p-2 text-gray-400 hover:text-gray-500 lg:block'>
+                <span className='sr-only'>Kërko</span>
                 <svg
                   className='w-6 h-6'
                   xmlns='http://www.w3.org/2000/svg'
@@ -175,11 +173,10 @@ export default function Header() {
               </a> 
 
               {user.Auth && (
-                <Link href='/posts/add'>
+                <Link href='/postimet/shto'>
                   <a
-                    href='#'
                     className='hidden ml-4 p-1 text-gray-400 hover:text-gray-500 lg:block'>
-                    <span className='sr-only'>Post</span>
+                    <span className='sr-only'>Shto</span>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       fill='none'
@@ -206,7 +203,7 @@ export default function Header() {
                     id='menu-button'
                     aria-expanded='true'
                     aria-haspopup='true'>
-                    <img className='w-6 h-6 rounded-full' src={user.Avatar} />
+                    <img className='w-6 h-6 rounded-full' src={user.Avatar === null ? '/assets/avatar-no.png' : user.Avatar} />
                   </button>
 
                   {isProfileOpen && (
@@ -217,19 +214,8 @@ export default function Header() {
                       aria-labelledby='menu-button'
                       tabindex='-1'>
                       <div className='py-1' role='none'>
-                        {/* <Link href={`/account`}>
-                          <a
-                            href='#'
-                            className='text-gray-700 block px-4 py-2 text-sm'
-                            role='menuitem'
-                            tabindex='-1'
-                            id='menu-item-0'>
-                            Redakto Profilin
-                          </a>
-                        </Link> */}
                         <Link href={`/profili/${user.Username}`}>
                           <a
-                            href='#'
                             className='text-gray-700 block px-4 py-2 text-sm'
                             role='menuitem'
                             tabindex='-1'
@@ -237,9 +223,17 @@ export default function Header() {
                             Profili Im
                           </a>
                         </Link>
+                        <Link href={`/preferuarat`}>
+                          <a
+                            className='text-gray-700 block px-4 py-2 text-sm'
+                            role='menuitem'
+                            tabindex='-1'
+                            id='menu-item-0'>
+                           Të Preferuarat
+                          </a>
+                        </Link>
                         <Link href={`/postimet`}>
                           <a
-                            href='#'
                             className='text-gray-700 block px-4 py-2 text-sm'
                             role='menuitem'
                             tabindex='-1'

@@ -34,6 +34,7 @@ import {
 } from './PageSliceControllers';
 
 import { SetPages, UnsetPages } from './PagesSliceControllers';
+import { SetFavorites, UnsetFavorites } from './FavoritesSliceControllers';
 
 import {
   SetUserLandingPages,
@@ -66,4 +67,6 @@ export {
   UnsetPrepage,
   SetCategories,
   UnsetCategories,
+  SetFavorites,
+  UnsetFavorites
 };

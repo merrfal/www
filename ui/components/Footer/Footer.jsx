@@ -11,7 +11,8 @@ export default function Footer() {
       <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div class='border-t border-gray-200 py-20'>
           <div class='grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min'>
-            <div class='col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1'>
+          <Link href="/">
+            <div class='hover:cursor-pointer col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1'>
               <svg
                 class='h-8 w-auto'
                 width='95'
@@ -29,6 +30,7 @@ export default function Footer() {
                 />
               </svg>
             </div>
+            </Link>
 
             <div class='mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6'>
               <div class='grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8'>

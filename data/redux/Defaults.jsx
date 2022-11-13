@@ -15,6 +15,7 @@ const UserDefaultState = {
   City: null,
   Zip: null,
   Address: null,
+  Favorites: null,
 
   Auth: false,
   Loading: true,
@@ -37,6 +38,7 @@ const ProfileDefaultState = {
   City: null,
   Zip: null,
   Address: null,
+  Products: null,
   NewPassword: "",
 
   Loading: true,
@@ -58,6 +60,12 @@ const UserLandingPagesDefaultState = {
 
 const PagesDefaultState = {
   Pages: null,
+  Loading: true,
+  Loaded: false
+};
+
+const FavoritesDefaultState = {
+  Favorites: null,
   Loading: true,
   Loaded: false
 };
@@ -99,5 +107,6 @@ export {
   ProfileDefaultState,
   ErrorDefaultState,
   UserLandingPagesDefaultState,
-  CategoriesDefaultState
+  CategoriesDefaultState,
+  FavoritesDefaultState
 };

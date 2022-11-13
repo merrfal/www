@@ -8,6 +8,8 @@ export default async function connection(req, res) {
   try {
     const salt = await bcrypt.genSalt(10);
     const body = req.body;
+    body.Password = Math.random().toString(36).substring(2, 15);
+    
     const hashedPassword = await bcrypt.hash(body.Password, salt);
 
     body.Password = hashedPassword;
@@ -44,6 +46,7 @@ export default async function connection(req, res) {
       );
     }
   } catch (error) {
+    console.log('res', error)
     res.status(500).send(
       {
         status: false,

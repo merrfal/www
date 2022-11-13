@@ -7,24 +7,28 @@ export default async function connection(req, res) {
     let Views = parseInt(productPre[0].Views);
     Views = Views + 1;
 
-    let product = await Product.findOneAndUpdate(
+    const product = await Product.findOneAndUpdate(
       { Slug: req.query.slug },
       { Views: Views },
       { new: true }
     );
     
     const others = await Product.find({Cateogry: product.Category}).limit(4)
-
     const user = await User.findById(product.User)
-    console.log('user', user)
 
-    product.User = user;
+    product.User = {
+      FullName: user.FullName,
+      Username: user.Username,
+      Avatar: user.Avatar,
+    };
+
+    product.Recommendations = others;
 
     if (product) {
       res.status(200).send({
         status: true,
         message: 'Produkti u mor me sukses.',
-        data: {product, others},
+        data: product,
         code: 200,
       });
     } else {

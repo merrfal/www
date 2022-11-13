@@ -1,3 +1,3 @@
-import { UserLandingPages } from '../../ui/pages';
-const Route = () => <UserLandingPages />;
+import { UserProducts } from '../../ui/pages';
+const Route = () => <UserProducts />;
 export default Route;

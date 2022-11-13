@@ -5,6 +5,7 @@ import {
   LogoutUser as CallLogoutUser,
   SetUserNotAuthenticated as CallSetUserNotAuthenticated,
   SetUser as CallSetUser,
+  SetFavorites as CallSetFavorites,
 } from './controllers';
 
 export const UserSlice = createSlice({
@@ -14,9 +15,10 @@ export const UserSlice = createSlice({
     LogoutUser: (state, action) => CallLogoutUser(state, action),
     SetUserNotAuthenticated: (state) => CallSetUserNotAuthenticated(state),
     SetUser: (state, action) => CallSetUser(state, action),
+    SetFavorites: (state, action) => CallSetFavorites(state, action),
   },
 });
 
-export const { LogoutUser, SetUserNotAuthenticated, SetUser } = UserSlice.actions;
+export const { LogoutUser, SetUserNotAuthenticated, SetUser, SetFavorites } = UserSlice.actions;
 
 export default UserSlice.reducer;

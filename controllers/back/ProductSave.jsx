@@ -1,14 +1,15 @@
-import { Product } from '../../models';
+import { Product, User } from '../../models';
 
 export default async function connection(req, res) {
   try {
     const userId = req.query.userId;
     const productId = req.query.productId;
 
-    const product = await Product.findById(productId);
-    let productList = product.Upvotes;
+    const user = await User.findById(userId)
 
-    if (productList.includes(userId)) {
+    let savedList = user.Favorites;
+
+    if (savedList.includes(productId)) {
       res.status(401).send(
         {
           status: true,
@@ -19,20 +20,20 @@ export default async function connection(req, res) {
       );
     }
     
-    else productList.push(userId);
+    else  savedList.push(productId);
 
-    const updatedLandingPage = await Product.findByIdAndUpdate(
-      productId,
-      { Upvotes: productList },
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { Favorites: savedList },
       { new: true }
     );
 
-    if (updatedLandingPage) {
+    if (updatedUser) {
       res.status(200).send(
         {
           status: true,
-          message: 'Landing page was updated successfully.',
-          data: updatedLandingPage,
+          message: 'Produkti u ruajt në listën e preferuar të përdoruesit.',
+          data: updatedUser,
           code: 200,
         }
       );
@@ -41,7 +42,7 @@ export default async function connection(req, res) {
       res.status(404).send(
         {
           status: true,
-          message: 'Landing page was not updated.',
+          message: 'Produkti nuk u ruajt në listën e preferuar të përdoruesit.',
           data: null,
           code: 404,
         }
@@ -51,7 +52,7 @@ export default async function connection(req, res) {
     res.status(500).send(
       {
         status: false,
-        message: 'Gabim i brendshëm i serverit gjatë favorizimit të produktit.',
+        message: 'Gabim i brendshëm i serverit ndërsa preferoni këtë produkt specifik, kontaktoni ekipin nëse ky problem shfaqet përsëri.',
         sysError: err,
         data: null,
         code: 500,

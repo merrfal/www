@@ -15,6 +15,8 @@ const LogoutUser = (state) => {
   state.City = null;
   state.Zip = null;
   state.Address = null;
+  state.Favorites = null;
+
 
   state.Auth = false;
   state.Loading = false;
@@ -49,6 +51,14 @@ const SetUser = (state, action) => {
   state.Avatar = user.Avatar;
   state.Role = user.Role;
   state.Plan = user.Plan;
+  state.Favorites = [...user.Favorites];
+  state.Address = user.Address;
+  state.Country = user.Country;
+  state.Zip = user.Zip;
+  state.City = user.City;
+  state.Cover = user.Cover;
+  state.Phone = user.Phone;
+
 
   localStorage.setItem('token', token);
   localStorage.setItem('user', user._id);
@@ -58,4 +68,20 @@ const SetUser = (state, action) => {
   state.Loading = false;
 };
 
-export { LogoutUser, SetUserNotAuthenticated, SetUser };
+const SetFavorites =(state, action) => {
+  const mode = action.payload.mode
+  const productId = action.payload.productId;
+
+  if(mode === 'delete') {
+    const newFavorites = state.Favorites.filter((favorite) => favorite !== productId);
+    state.Favorites = [...newFavorites];
+  }
+
+  else {
+    const newFavorites = state.Favorites;
+    newFavorites.push(productId);
+    state.Favorites = [...newFavorites];
+  }
+}
+
+export { LogoutUser, SetUserNotAuthenticated, SetUser, SetFavorites };

@@ -1,12 +1,10 @@
-import Link from 'next/link';
-
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
-import { Product, Empty } from '../../components';
+import { Product, Empty, Loading } from '../../components';
 import { ProductsList, CategoryList } from '../../../controllers/front';
 
-export default function Landings() {
+export default function Products() {
   const dispatch = useDispatch();
   const pages = useSelector((state) => state.pages);
   const categories = useSelector((state) => state.categories);
@@ -623,16 +621,13 @@ export default function Landings() {
       </div>
 
       <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
-        <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
-          {pages.Loaded === false
-            ? 'loading pages...'
-            : pages.Pages.map((page, index) => (
-                <Product product={page} key={index} />
-              ))}
-
-              {
-                pages.Pages.length === 0 && <Empty />
-              }
+        <div className={pages.Loaded === false ? 'w-full' : pages.Pages.length === 0 ? 'w-full' : 'mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'}>
+          {
+            pages.Loaded === false ? 
+            <Loading /> : 
+            pages.Pages.length === 0 ? <Empty heading="Nuk u gjet asnjë produkt" message="Nuk u gjet asnjë produkt në platformë me këto filtrime.." /> :
+            pages.Pages.map((page, index) => <Product product={page} key={index} />)
+          }
         </div>
       </div>
     </Normal>

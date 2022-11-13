@@ -1,3 +1,3 @@
-import { LandingEdit } from '../../../ui/pages';
-const Route = () => <LandingEdit />;
+import { ProductEdit } from '../../../ui/pages';
+const Route = () => <ProductEdit />;
 export default Route;

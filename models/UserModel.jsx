@@ -22,12 +22,12 @@ const UserSchema = new Schema({
   },
   Bio: {
     type: String,
-    required: true,
+    required: false,
     default: '',
   },
   Verification: {
     type: Boolean,
-    required: true,
+    required: false,
     default: false,
   },
   Email: {
@@ -42,7 +42,7 @@ const UserSchema = new Schema({
   },
   Cover: {
     type: String,
-    required: true,
+    required: false,
     default: null,
   },
   Username: {
@@ -56,13 +56,8 @@ const UserSchema = new Schema({
   },
   Info: {
     type: Object,
-    required: true,
-    default: {},
-  },
-  Bio: {
-    type: String,
     required: false,
-    default: "",
+    default: {},
   },
   Website: {
     type: String,
@@ -71,49 +66,49 @@ const UserSchema = new Schema({
   },
   Products: {
     type: Array,
-    required: true,
+    required: false,
     default: [],
   },
   Role: {
     type: String,
-    required: true,
+    required: false,
     enum: ['Admin', 'User'],
     default: 'User',
   },
   Plan: {
     type: String,
-    required: true,
+    required: false,
     enum: ['Free', 'Premium'],
     default: 'Free',
   },
   Favorites: {
     type: Array,
-    required: true,
+    required: false,
     default: [],
   },
   Phone: {
     type: String,
-    required: true,
+    required: false,
     default: ''
   },
   Zip: {
       type: String,
-      required: true,
+      required: false,
       default: '',
   },
   Address: {
       type: String,
-      required: true,
+      required: false,
       default: '',
   },
   City: {
       type: String,
-      required: true,
+      required: false,
       default: '',
   },
   Country: {
       type: String,
-      required: true,
+      required: false,
       default: 'Kosovo'
   }
 });

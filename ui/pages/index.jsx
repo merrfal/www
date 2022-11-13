@@ -1,27 +1,29 @@
 import Home from './Home';
 import Profile from './Profile';
 import ProfileEdit from './ProfileEdit';
-import Landings from './Landings';
-import Landing from './Landing';
-import LandingEdit from './LandingEdit';
-import LandingPost from './LandingPost';
+import Products from './Products';
+import Product from './Product';
+import ProductEdit from './ProductEdit';
+import ProductPost from './ProductPost';
 import Error from './Error';
-import UserLandingPages from './UserLandingPages';
+import UserProducts from './UserProducts';
 import Loader from './Loader';
 import Contact from './Contact';
 import About from './About';
+import UserSaves from './UserSaves';
 
 export {
   Home,
-  Landing,
-  LandingEdit,
-  Landings,
+  Product,
+  ProductEdit,
+  Products,
   Profile,
   ProfileEdit,
-  LandingPost,
+  ProductPost,
   Error,
-  UserLandingPages,
+  UserProducts,
   Loader,
   Contact,
-  About
+  About,
+  UserSaves
 };

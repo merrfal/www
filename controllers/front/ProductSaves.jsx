@@ -1,19 +1,15 @@
 import { ConfigBuilder, Notifier } from '../../utils';
-import { ProductSaves } from './';
-import { SetFavorites } from '../../data/redux/UserSlice';
+import { SetFavorites } from '../../data/redux/FavoritesSlice';
 
-const ProductSave = async (productId, userId, dispatch) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductSave/${productId}/${userId}`;
+const ProductSaves = async (userId, dispatch) => {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductSaves/${userId}`;
   const config = ConfigBuilder('G', 'JSON', {}, false, false, false);
 
   try {
     const req = await fetch(url, config);
     const res = await req.json();
 
-    if (res.status === true) {
-      dispatch(SetFavorites({mode: 'add', productId: productId}));
-      ProductSaves(userId, dispatch);
-    }
+    if (res.status === true) dispatch(SetFavorites(res.data));
     else {
       Notifier(
         {
@@ -27,11 +23,11 @@ const ProductSave = async (productId, userId, dispatch) => {
     Notifier(
       {
         dispatch: dispatch,
-        Title: 'Problem',
+        Title: res.message,
         Type: 'error',
       }
     );
   }
 };
 
-export default ProductSave;
+export default ProductSaves;

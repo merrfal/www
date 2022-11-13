@@ -16,6 +16,7 @@ import CategoryDelete from './CategoryDelete';
 import CategoryUpdate from './CategoryUpdate';
 import CategoryList from './CategoryList';
 import CategoryCreate from './CategoryCreate';
+import ProductSaves from './ProductSaves';
 
 export {
     ProductCreate,
@@ -35,5 +36,6 @@ export {
     CategoryDelete,
     CategoryUpdate,
     CategoryList,
-    CategoryCreate
+    CategoryCreate,
+    ProductSaves,
 }
