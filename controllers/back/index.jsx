@@ -16,6 +16,10 @@ import CategoryDelete from './CategoryDelete';
 import CategoryUpdate from './CategoryCreate';
 import CategoryList from './CategoryList';
 import CategoryCreate from './CategoryCreate';
+import ContactCreate from "./ContactCreate"
+import ContactsList from "./ContactsList"
+import ContactDelete from "./ContactDelete"
+import ContactView from "./ContactView"
 
 export {
     PageCreate,
@@ -35,5 +39,9 @@ export {
     CategoryDelete,
     CategoryUpdate,
     CategoryList,
-    CategoryCreate
+    CategoryCreate,
+    ContactCreate,
+    ContactsList,
+    ContactDelete,
+    ContactView
 }

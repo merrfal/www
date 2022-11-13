@@ -15,6 +15,7 @@ import LandingUpvote from './LandingUpvote';
 import UserLandingList from './UserLandingList';
 import AuthWithGoogle from './AuthWithGoogle';
 import CategoryList from './CategoryList';
+import ContactCreate from './ContactCreate'
 
 export {
   PageCreate,
@@ -33,5 +34,6 @@ export {
   LandingUpvote,
   UserLandingList,
   AuthWithGoogle,
-  CategoryList
+  CategoryList,
+  ContactCreate
 };

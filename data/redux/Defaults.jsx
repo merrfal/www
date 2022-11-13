@@ -77,6 +77,13 @@ const ErrorDefaultState = {
   Message: null,
   Code: null,
 };
+const ContactDefaultState = {
+  Contact: null,
+  Loading: true,
+  Loaded: false,
+  Precontact: {},
+};
+
 
 export {
   UserDefaultState,
@@ -87,5 +94,6 @@ export {
   ProfileDefaultState,
   ErrorDefaultState,
   UserLandingPagesDefaultState,
-  CategoriesDefaultState
+  CategoriesDefaultState,
+  ContactDefaultState
 };

@@ -42,6 +42,16 @@ import {
 
 import { SetError, UnsetError } from './ErrorSliceControllers';
 
+
+import {
+  SetContact,
+  UnsetContact,
+  SetContactField,
+  SetPrecontactField,
+  UnsetPrecontact,
+} from './ContactSliceControllers';
+
+
 export {
   LogoutUser,
   SetUserNotAuthenticated,
@@ -66,4 +76,9 @@ export {
   UnsetPrepage,
   SetCategories,
   UnsetCategories,
+  SetContact,
+  UnsetContact,
+  SetContactField,
+  SetPrecontactField,
+  UnsetPrecontact,
 };

@@ -1,6 +1,8 @@
 import Link from 'next/link';
 
 export default function Footer() {
+
+
   return (
     <footer aria-labelledby='footer-heading' class='bg-white mb-8'>
       <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -146,6 +148,7 @@ export default function Footer() {
                   Adresa elektronike
                 </label>
                 <input
+                  placeholder='name@gmail.com'
                   id='email-address'
                   type='text'
                   autocomplete='email'
