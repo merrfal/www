@@ -1,5 +1,12 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  uploadBytes
+} from "firebase/storage";
 
 const Config = {
   apiKey: process.env.NEXT_PUBLIC_FB_API_KEY,
@@ -15,6 +22,9 @@ let FB_ERROR = 'Firebase initialization error.';
 
 try { Firebase = initializeApp(Config) }
 catch (err) { if (!/already exists/.test(err.message)) console.error(FB_ERROR, err.stack) }
+// Firebase storage reference
+const storage = getStorage(Firebase);
+export { storage, ref, uploadBytesResumable,uploadBytes, getDownloadURL };
 
 export const FirebaseAuth = getAuth(Firebase);
 export default Firebase;
