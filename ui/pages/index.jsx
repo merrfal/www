@@ -1,6 +1,5 @@
 import Home from './Home';
 import Profile from './Profile';
-import ProfileEdit from './ProfileEdit';
 import Products from './Products';
 import Product from './Product';
 import ProductEdit from './ProductEdit';
@@ -18,7 +17,6 @@ export {
   ProductEdit,
   Products,
   Profile,
-  ProfileEdit,
   ProductPost,
   Error,
   UserProducts,
