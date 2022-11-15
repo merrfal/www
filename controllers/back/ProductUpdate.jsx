@@ -1,6 +1,6 @@
 import { Product } from '../../models';
 
-export default async function connection(req, res) {
+export default async function ProductUpdate(req, res) {
   try {
     const data = req.body;
     const id = req.query.id;

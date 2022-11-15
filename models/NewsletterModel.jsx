@@ -1,31 +1,22 @@
 import { Schema, model, models } from 'mongoose';
 
-const CategorySchema = new Schema({
-  Name: {
-    type: String,
-    required: true,
-    unique: false,
-    default: '',
+const NewsletterSchema = new Schema(
+  {
+    Email: {
+      type: String,
+      required: true,
+    },
+    Active: {
+      type: String,
+      required: false,
+      default: true
+    },
   },
-  Slug: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  Description: {
-    type: String,
-    required: false,
-    unique: false,
-    default: '',
-  },
-  Icon: {
-    type: String,
-    required: false,
-    unique: false,
-    default: ''
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
-const Category = models.Category || model('Category', CategorySchema);
+const Newsletter = models.Newsletter || model('Newsletter', NewsletterSchema);
 
-export default Category;
+export default Newsletter;

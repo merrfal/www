@@ -1,6 +1,6 @@
 import { Product, User } from '../../models';
 
-export default async function connection(req, res) {
+export default async function ProductSaves(req, res) {
   try {
     const userId = req.query.userId;
     const user = await User.findById(userId);
@@ -9,8 +9,12 @@ export default async function connection(req, res) {
     const products = [];
 
     for (let i = 0; i < savesIds.length; i++) {
-      const product = await Product.findById(savesIds[i]);
-      products.push(product)
+      const current = savesIds[i];
+
+      if(current.length === 24){
+        const product = await Product.findById(current);
+        products.push(product);
+      }
     }
 
     if (products) {
@@ -34,6 +38,7 @@ export default async function connection(req, res) {
       );
     }
   } catch (err) {
+    console.log(err)
     res.status(500).send(
       {
         status: false,

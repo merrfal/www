@@ -1,18 +1,15 @@
 import { ConfigBuilder, Notifier } from '../../utils';
+import { UnsetPrepage } from '../../data/redux/PageSlice';
 
-const ProductCreate = async (dispatch, page) => {
+const ProductCreate = async (page, dispatch) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductCreate`;
-  const config = ConfigBuilder('P', 'JSON', page, false, false, false);
+  const config = ConfigBuilder('P', 'JSON', page, true, false, false);
 
   try {
     const req = await fetch(url, config);
     const res = await req.json();
 
     if (res.status === true) {
-      dispatch(UnsetPrepage());
-
-      window.location.href="/produktet/" + res.data._id;
-
       Notifier(
         {
           dispatch: dispatch,
@@ -20,6 +17,10 @@ const ProductCreate = async (dispatch, page) => {
           Type: 'success',
         }
       );
+
+      dispatch(UnsetPrepage());
+
+      window.location.href="/produktet/" + res.data.Slug;
     }
     else {
       Notifier(
@@ -31,7 +32,6 @@ const ProductCreate = async (dispatch, page) => {
       );
     }
   } catch (error) {
-    console.log('res', error)
     Notifier(
       {
         dispatch: dispatch,

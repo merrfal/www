@@ -3,27 +3,22 @@ import { Schema, model, models } from 'mongoose';
 const ProductSchema = new Schema({
     Name: {
         type: String,
-        required: true,
         default: '',
     },
     Description: {
         type: String,
-        required: true,
         default: '',
     },
     Gallery: {
         type: Array,
-        required: true,
         default: [],
     },
     Slug: {
         type: String,
-        required: true,
         unique: true,
     },
     Category: {
         type: String,
-        required: true,
         default: '',
     },
     User: {
@@ -36,32 +31,26 @@ const ProductSchema = new Schema({
     },
     Phone: {
         type: String,
-        required: true,
         default: ''
     },
     Zip: {
         type: String,
-        required: true,
         default: '',
     },
     Address: {
         type: String,
-        required: true,
         default: '',
     },
     City: {
         type: String,
-        required: true,
         default: '',
     },
     Country: {
         type: String,
-        required: true,
         default: 'Kosovo'
     },
     Status: {
         type: String,
-        required: true,
         default: 'published',
         enum: [
             'published', 

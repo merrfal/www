@@ -13,7 +13,12 @@ export default function Normal(props) {
     const id = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-    if(user && token) UserAuth(dispatch, id);
+    if(user && token) {
+      if(!user.Auth){
+        UserAuth(dispatch, id);
+      }
+    }
+    
     else dispatch(SetUserNotAuthenticated())
   }, [user]);
 

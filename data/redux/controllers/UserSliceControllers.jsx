@@ -68,20 +68,9 @@ const SetUser = (state, action) => {
   state.Loading = false;
 };
 
-const SetFavorites =(state, action) => {
-  const mode = action.payload.mode
-  const productId = action.payload.productId;
-
-  if(mode === 'delete') {
-    const newFavorites = state.Favorites.filter((favorite) => favorite !== productId);
-    state.Favorites = [...newFavorites];
-  }
-
-  else {
-    const newFavorites = state.Favorites;
-    newFavorites.push(productId);
-    state.Favorites = [...newFavorites];
-  }
+const SetFavorites = (state, action) => {
+  const favorites = action.payload
+  state.Favorites = favorites;
 }
 
 export { LogoutUser, SetUserNotAuthenticated, SetUser, SetFavorites };

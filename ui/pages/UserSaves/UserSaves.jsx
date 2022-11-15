@@ -11,9 +11,8 @@ export default function UserSaves() {
   const favorites = useSelector((state) => state.favorites);
 
   useEffect(() => {
-    if (favorites.Loaded === false && user.Auth === true) {
-      ProductSaves(user.Id, dispatch)
-    }
+    const state = favorites.Loaded === false && user.Auth === true;
+    if (state) ProductSaves(user.Id, dispatch)
   }, [user]);
 
   return (
@@ -31,7 +30,7 @@ export default function UserSaves() {
           {
             favorites.Loaded === false ? <Loading /> : 
             favorites.Favorites.length === 0 ? <Empty heading="Nuk u gjet asnjë produkt" message="Nuk u gjet asnjë produkt në listën e të preferuarave." /> :
-            favorites.Favorites.map((product, index) =>  <Product product={product} key={index} />)
+            favorites.Favorites.map((product, index) =>  product !== null && <Product product={product} key={index} />)
           }
         </section>
       </div>

@@ -1,6 +1,6 @@
 import { Category } from '../../models';
 
-export default async function connection(req, res) {
+export default async function CategoryDelete(req, res) {
   try {
     const category = await Category.findByIdAndDelete(req.query.id);
 

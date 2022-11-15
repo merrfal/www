@@ -1,6 +1,6 @@
 import { Category } from '../../models';
 
-export default async function connection(req, res) {
+export default async function CategoryCreate(req, res) {
   try {
     const _new = new Category(req.body);
     const _category = await _new.save();

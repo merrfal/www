@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 // TODO: check if the user uses the same email as another user and also the username.
 
-export default async function connection(req, res) {
+export default async function UserUpdate(req, res) {
   try {
     const body = req.body;
     const id = req.query.id;

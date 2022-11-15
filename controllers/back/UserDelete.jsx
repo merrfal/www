@@ -1,6 +1,6 @@
 import { User } from '../../models';
 
-export default async function connection(req, res) {
+export default async function UserDelete(req, res) {
   try {
     const user = await User.findByIdAndDelete(req.query.id);
 

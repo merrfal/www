@@ -2,7 +2,7 @@ import { User } from '../../models';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-export default async function connection(req, res) {
+export default async function UserRegister(req, res) {
   const JWTACCESSKEY = process.env.JWT_SECRET;
 
   try {
@@ -46,7 +46,6 @@ export default async function connection(req, res) {
       );
     }
   } catch (error) {
-    console.log('res', error)
     res.status(500).send(
       {
         status: false,

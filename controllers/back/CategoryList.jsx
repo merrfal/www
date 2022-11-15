@@ -1,6 +1,6 @@
 import { Category } from '../../models';
 
-export default async function connection(req, res) {
+export default async function CategoryList(req, res) {
   try {
     const categories = await Category.find({});
 

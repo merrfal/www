@@ -33,6 +33,7 @@ import {
   UnsetPrepage,
 } from './PageSliceControllers';
 
+import { OpenSearch, CloseSearch, SetSearchTerm, SetSearch} from './SearchSliceControllers';
 import { SetPages, UnsetPages } from './PagesSliceControllers';
 import { SetFavorites, UnsetFavorites } from './FavoritesSliceControllers';
 
@@ -68,5 +69,9 @@ export {
   SetCategories,
   UnsetCategories,
   SetFavorites,
-  UnsetFavorites
+  UnsetFavorites,
+  OpenSearch, 
+  CloseSearch, 
+  SetSearchTerm,
+  SetSearch
 };

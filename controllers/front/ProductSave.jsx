@@ -2,7 +2,9 @@ import { ConfigBuilder, Notifier } from '../../utils';
 import { ProductSaves } from './';
 import { SetFavorites } from '../../data/redux/UserSlice';
 
-const ProductSave = async (productId, userId, dispatch) => {
+const ProductSave = async (productId, userId, newFavorites, setIsSaving, dispatch) => {
+  setIsSaving(true);
+
   const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductSave/${productId}/${userId}`;
   const config = ConfigBuilder('G', 'JSON', {}, false, false, false);
 
@@ -11,9 +13,10 @@ const ProductSave = async (productId, userId, dispatch) => {
     const res = await req.json();
 
     if (res.status === true) {
-      dispatch(SetFavorites({mode: 'add', productId: productId}));
+      dispatch(SetFavorites(newFavorites));
       ProductSaves(userId, dispatch);
     }
+    
     else {
       Notifier(
         {
@@ -31,6 +34,9 @@ const ProductSave = async (productId, userId, dispatch) => {
         Type: 'error',
       }
     );
+  }
+  finally{
+    setIsSaving(false);
   }
 };
 

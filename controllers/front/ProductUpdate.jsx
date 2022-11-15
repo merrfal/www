@@ -8,8 +8,6 @@ const PageUpdate = async (dispatch, page) => {
     const req = await fetch(url, config);
     const res = await req.json();
 
-    console.log('res', res, url)
-
     if (res.status === true) {
       window.location.reload();
 

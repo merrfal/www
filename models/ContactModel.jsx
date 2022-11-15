@@ -1,31 +1,35 @@
 import { Schema, model, models } from 'mongoose';
 
-const CategorySchema = new Schema({
-  Name: {
-    type: String,
-    required: true,
-    unique: false,
-    default: '',
+const ContactSchema = new Schema(
+  {
+    Name: {
+      type: String,
+      required: true,
+    },
+    Surname: {
+      type: String,
+      required: true,
+    },
+    Email: {
+      type: String,
+      required: true,
+    },
+    Message: {
+      type: String,
+      required: true,
+    },
+    Status: {
+      type: String,
+      required: false,
+      enum: ['open', 'closed'],
+      default: 'open',
+    },
   },
-  Slug: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  Description: {
-    type: String,
-    required: false,
-    unique: false,
-    default: '',
-  },
-  Icon: {
-    type: String,
-    required: false,
-    unique: false,
-    default: ''
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
-const Category = models.Category || model('Category', CategorySchema);
+const Contact = models.Contact || model('Contact', ContactSchema);
 
-export default Category;
+export default Contact;

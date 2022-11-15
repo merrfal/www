@@ -13,7 +13,7 @@ export const UserSlice = createSlice({
   initialState: UserDefaultState,
   reducers: {
     LogoutUser: (state, action) => CallLogoutUser(state, action),
-    SetUserNotAuthenticated: (state) => CallSetUserNotAuthenticated(state),
+    SetUserNotAuthenticated: (state, action) => CallSetUserNotAuthenticated(state, action),
     SetUser: (state, action) => CallSetUser(state, action),
     SetFavorites: (state, action) => CallSetFavorites(state, action),
   },

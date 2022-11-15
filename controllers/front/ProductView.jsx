@@ -9,7 +9,10 @@ const PageView = async (dispatch, slug) => {
     const req = await fetch(url, config);
     const res = await req.json();
 
-    if (res.status === true) dispatch(SetPage(res.data));
+    if (res.status === true) {
+      dispatch(SetPage(res.data))
+    }
+
     else {
         Notifier(
           {
@@ -19,7 +22,8 @@ const PageView = async (dispatch, slug) => {
           }
         );
     }
-  } catch (error) {
+  } 
+  catch (error) {
     Notifier(
       {
         dispatch: dispatch,

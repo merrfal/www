@@ -16,6 +16,9 @@ import UserProductList from './UserProductList';
 import AuthWithGoogle from './AuthWithGoogle';
 import CategoryList from './CategoryList';
 import ProductSaves from './ProductSaves';
+import ContactCreate from './ContactCreate';
+import NewsletterCreate from './NewsletterCreate';
+import ProductsSearch from './ProductsSearch';
 
 export {
   ProductCreate,
@@ -36,4 +39,7 @@ export {
   AuthWithGoogle,
   CategoryList,
   ProductSaves,
+  ContactCreate,
+  NewsletterCreate,
+  ProductsSearch
 };

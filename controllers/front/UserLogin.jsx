@@ -1,5 +1,6 @@
 import { SetUser } from '../../data/redux/UserSlice';
 import { ConfigBuilder, Notifier } from '../../utils';
+import { UserLogout } from '../../data/redux/UserSlice'
 
 const UserLogin = async (uid, dispatch) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/users/UserLogin/${uid}`;
@@ -18,6 +19,8 @@ const UserLogin = async (uid, dispatch) => {
             Type: 'error',
           }
         );
+        
+        dispatch(LogoutUser())
     }
   } catch (error) {
     Notifier(
@@ -27,6 +30,8 @@ const UserLogin = async (uid, dispatch) => {
         Type: 'error',
       }
     );
+    
+    dispatch(LogoutUser())
   }
 };
 

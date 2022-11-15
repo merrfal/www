@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ProductView, ProductDelete, ProductUpdate, CategoryList } from '../../../controllers/front';
 import { Normal } from '../../layouts';
 import { useRouter } from 'next/router';
+import { Loading } from '../../components';
 import { SetField } from '../../../data/redux/PageSlice';
-import { Loader} from '../../pages';
 
 export default function ProductEdit() {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ export default function ProductEdit() {
     <Normal>
       <div class='bg-white'>
         <div class='mx-auto max-w-2xl lg:max-w-7xl'>
-            {page.Loaded === false || categories.Loaded === false ? <Loader /> : (
+            {page.Loaded === false || categories.Loaded === false ? <Loading /> : (
               <div>
               <div className='relative bg-white'>
               <div className='mx-auto max-w-7xl px-4 sm:px-6'>
@@ -135,13 +135,25 @@ export default function ProductEdit() {
                                   className='block text-sm font-medium text-gray-700'>
                                   Qyteti
                                 </label>
-                                <input
-                                  type='text'
-                                  name='city'
-                                  id='city'
-                                  autocomplete='address-level2'
-                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
-                                />
+                                <select
+                  onChange={(e) =>
+                    dispatch(
+                                      SetField({
+                                        Field: 'City',
+                                        Value: e.target.value,
+                                      })
+                                    )
+                  }
+                  value={page.Page.City}
+                id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                <option value="prishtinë">Prishtinë</option>
+                                <option value="mitrovicë">Mitrovicë</option>
+                                <option value="gjilan">Gjilan</option>
+                                <option value="prizren">Prizren</option>
+                                <option value="pejë">Pejë</option>
+                                <option value="gjakovë">Gjakovë</option>
+
+                </select>
                               </div>
       
                               <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
@@ -163,7 +175,7 @@ export default function ProductEdit() {
                       <label for="country" class="block text-sm font-medium text-gray-700">Kategoria</label>
                       <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                         {
-                                  categories.isLoaded === true && 
+                                  categories.Loaded === true && 
                                   categories.Categories.map((category, index) => {
                                     return (
                                       <option>{category.Name}</option>
@@ -213,14 +225,7 @@ export default function ProductEdit() {
                               </div>
                             </div>
                           </div>
-                          <div className='text-right'>
-                            <button
-                             onClick={() => ProductDelete(dispatch, page.Page._id, '/posts')}
-                              type='submit'
-                              className='inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none focus:ring-2 focus:ring-[#377DFF] focus:ring-offset-2'>
-                              Fshij
-                            </button>
-
+                          <div className='text-right mb-2 mr-2'>
                             <button
                               onClick={() => ProductUpdate(dispatch, page.Page)}
                               type='submit'

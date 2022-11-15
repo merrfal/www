@@ -1,6 +1,6 @@
 import { Product, User } from '../../models';
 
-export default async function connection(req, res) {
+export default async function ProductSave(req, res) {
   try {
     const userId = req.query.userId;
     const productId = req.query.productId;

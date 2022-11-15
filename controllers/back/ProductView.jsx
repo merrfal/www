@@ -1,10 +1,11 @@
 import { Product, User } from '../../models';
 
-export default async function connection(req, res) {
+export default async function ProductView(req, res) {
   try {
     const productPre = await Product.find({ Slug: req.query.slug });
 
     let Views = parseInt(productPre[0].Views);
+
     Views = Views + 1;
 
     const product = await Product.findOneAndUpdate(
@@ -15,20 +16,18 @@ export default async function connection(req, res) {
     
     const others = await Product.find({Cateogry: product.Category}).limit(4)
     const user = await User.findById(product.User)
-
-    product.User = {
+    
+    const newUser = {
       FullName: user.FullName,
       Username: user.Username,
       Avatar: user.Avatar,
     };
 
-    product.Recommendations = others;
-
     if (product) {
       res.status(200).send({
         status: true,
         message: 'Produkti u mor me sukses.',
-        data: product,
+        data: {...product._doc, Recommendations: others, User: newUser},
         code: 200,
       });
     } else {

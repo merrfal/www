@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { AuthWithGoogle } from '../../../controllers/front';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogoutUser } from '../../../data/redux/UserSlice';
+import { OpenSearch } from '../../../data/redux/SearchSlice';
 import { useState } from 'react';
 
 export default function Header() {
@@ -10,7 +11,7 @@ export default function Header() {
   const user = useSelector((state) => state.user);
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen]  = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <header className='relative bg-white'>
@@ -39,7 +40,8 @@ export default function Header() {
                 </svg>
               </button>
 
-              <a
+              <div
+                onClick={() => dispatch(OpenSearch())}
                 className='hover:cursor-pointer ml-2 p-2 text-gray-400 hover:text-gray-500'>
                 <span className='sr-only'>Kërko</span>
                 <svg
@@ -56,7 +58,7 @@ export default function Header() {
                     d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
                   />
                 </svg>
-              </a>
+              </div>
             </div>
 
             <div className='hidden lg:flex-1 lg:block lg:self-stretch'>
@@ -153,7 +155,8 @@ export default function Header() {
             </Link>
 
             <div className='flex-1 flex items-center justify-end'>
-            <a
+              <div
+                onClick={() => dispatch(OpenSearch())}
                 className='hover:cursor-pointer hidden ml-6 p-2 text-gray-400 hover:text-gray-500 lg:block'>
                 <span className='sr-only'>Kërko</span>
                 <svg
@@ -170,12 +173,11 @@ export default function Header() {
                     d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
                   />
                 </svg>
-              </a> 
+              </div>
 
               {user.Auth && (
                 <Link href='/postimet/shto'>
-                  <a
-                    className='hidden ml-4 p-1 text-gray-400 hover:text-gray-500 lg:block'>
+                  <a className='hidden ml-4 p-1 text-gray-400 hover:text-gray-500 lg:block'>
                     <span className='sr-only'>Shto</span>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -203,7 +205,14 @@ export default function Header() {
                     id='menu-button'
                     aria-expanded='true'
                     aria-haspopup='true'>
-                    <img className='w-6 h-6 rounded-full' src={user.Avatar === null ? '/assets/avatar-no.png' : user.Avatar} />
+                    <img
+                      className='w-6 h-6 rounded-full'
+                      src={
+                        user.Avatar === null
+                          ? '/assets/avatar-no.png'
+                          : user.Avatar
+                      }
+                    />
                   </button>
 
                   {isProfileOpen && (
@@ -229,7 +238,7 @@ export default function Header() {
                             role='menuitem'
                             tabindex='-1'
                             id='menu-item-0'>
-                           Të Preferuarat
+                            Të Preferuarat
                           </a>
                         </Link>
                         <Link href={`/postimet`}>
@@ -259,7 +268,7 @@ export default function Header() {
               {!user.Auth && (
                 <div
                   onClick={() => AuthWithGoogle(dispatch)}
-                  className='p-2 text-gray-400 hover:text-gray-500 lg:ml-4'>
+                  className='p-2 text-gray-400 hover:text-gray-500 lg:ml-4 hover:cursor-pointer'>
                   <span className='sr-only'>Llogaria</span>
                   <svg
                     className='w-6 h-6'

@@ -1,6 +1,6 @@
 import { User, Product } from '../../models';
 
-export default async function connection(req, res) {
+export default async function UserView(req, res) {
   try {
     const user = await User.find({ Username: req.query.username });
     const { Password, ...data } = user[0]._doc;

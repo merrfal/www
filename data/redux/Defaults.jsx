@@ -52,6 +52,13 @@ const PageDefaultState = {
   Prepage: {},
 };
 
+const SearchDefaultState = {
+  Results: null,
+  Term: "",
+  Loading: true,
+  Visibility: false,
+};
+
 const UserLandingPagesDefaultState = {
   Pages: null,
   Loading: true,
@@ -108,5 +115,6 @@ export {
   ErrorDefaultState,
   UserLandingPagesDefaultState,
   CategoriesDefaultState,
-  FavoritesDefaultState
+  FavoritesDefaultState,
+  SearchDefaultState
 };

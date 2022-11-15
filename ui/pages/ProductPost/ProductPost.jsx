@@ -19,11 +19,9 @@ export default function ProductPost() {
     if (categories.Loaded === false) CategoryList(dispatch);
   }, [categories]);
 
-
   return (
     <Normal>
-      {
-        categories.Loaded === false ? <Loading /> :
+      { categories.Loaded === false ? <Loading /> :
       <div className='relative bg-white'>
         <div className='mx-auto max-w-7xl px-4 sm:px-6'>
             <div className='md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16'>
@@ -140,22 +138,25 @@ export default function ProductPost() {
                             className='block text-sm font-medium text-gray-700'>
                             Qyteti
                           </label>
-                          <input
-                            type='text'
-                            name='city'
-                            id='city'
-                            onChange={(e) =>
-                              dispatch(
-                                SetPrepageField({
-                                  Field: 'City',
-                                  Value: e.target.value,
-                                })
-                              )
-                            }
-                            value={page.Prepage.City}
-                            autocomplete='address-level2'
-                            className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
-                          />
+                          <select
+                  onChange={(e) =>
+                    dispatch(
+                      SetPrepageField({
+                        Field: 'City',
+                        Value: e.target.value,
+                      })
+                    )
+                  }
+                  value={page.Prepage.City}
+                id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                <option value="prishtinë">Prishtinë</option>
+                                <option value="mitrovicë">Mitrovicë</option>
+                                <option value="gjilan">Gjilan</option>
+                                <option value="prizren">Prizren</option>
+                                <option value="pejë">Pejë</option>
+                                <option value="gjakovë">Gjakovë</option>
+
+                </select>
                         </div>
 
                         <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
@@ -188,7 +189,7 @@ export default function ProductPost() {
                   onChange={(e) =>
                     dispatch(
                       SetPrepageField({
-                        Field: 'Zip',
+                        Field: 'Category',
                         Value: e.target.value,
                       })
                     )
@@ -198,7 +199,7 @@ export default function ProductPost() {
                   {
                             categories.Categories.map((category, index) => {
                               return (
-                                <option>{category.Name}</option>
+                                <option value={category.Name}>{category.Name}</option>
                               )
                             })
                           }
@@ -245,15 +246,15 @@ export default function ProductPost() {
                         </div>
                       </div>
                     </div>
-                    <div className='text-right'>
+                    <div className='text-right mb-2 mr-2'>
                       <button
                         onClick={(e) => {
                           e.preventDefault();
-                          ProductCreate(dispatch, page.Prepage)
+                          ProductCreate(page.Prepage, dispatch)
                         }}
                         type='submit'
                         className='inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none focus:ring-2 focus:ring-[#377DFF] focus:ring-offset-2'>
-                        Bismilah, Listo Produktin
+                       Publiko Produktin
                       </button>
                     </div>
                   </div>

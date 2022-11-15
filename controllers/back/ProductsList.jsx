@@ -1,6 +1,6 @@
 import { Product } from '../../models';
 
-export default async function connection(req, res) {
+export default async function ProductsList(req, res) {
   try {
     const products = await Product.find({});
 

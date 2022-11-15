@@ -17,6 +17,10 @@ import CategoryUpdate from './CategoryUpdate';
 import CategoryList from './CategoryList';
 import CategoryCreate from './CategoryCreate';
 import ProductSaves from './ProductSaves';
+import ContactCreate from './ContactCreate';
+import NewsletterCreate from './NewsletterCreate';
+import ProductsFilters from './ProductsFilters';
+import ProductsSearch from './ProductsSearch';
 
 export {
     ProductCreate,
@@ -38,4 +42,8 @@ export {
     CategoryList,
     CategoryCreate,
     ProductSaves,
+    ContactCreate,
+    NewsletterCreate,
+    ProductsSearch,
+    ProductsFilters
 }

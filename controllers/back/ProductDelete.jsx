@@ -1,6 +1,6 @@
 import { Product } from '../../models';
 
-export default async function connection(req, res) {
+export default async function ProductDelete(req, res) {
   try {
     const product = await Product.findByIdAndDelete(req.query.id);
 
@@ -11,7 +11,9 @@ export default async function connection(req, res) {
         data: null,
         code: 200,
       });
-    } else {
+    } 
+    
+    else {
       res.status(404).send({
         status: false,
         message: 'Produkti nuk u fshi nga platforma.',

@@ -2,7 +2,8 @@ import { ConfigBuilder, Notifier } from '../../utils';
 import { ProductSaves } from './';
 import { SetFavorites } from '../../data/redux/UserSlice';
 
-const LandingDownvote = async (productId, userId, dispatch) => {
+const LandingDownvote = async (productId, userId, newFavorites, setIsSaving, dispatch) => {
+  setIsSaving(true);
   const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductUnsave/${productId}/${userId}`;
   const config = ConfigBuilder('G', 'JSON', {}, false);
 
@@ -11,9 +12,10 @@ const LandingDownvote = async (productId, userId, dispatch) => {
     const res = await req.json();
 
     if (res.status === true) {
-      dispatch(SetFavorites({mode: 'delete', productId: productId}));
+      dispatch(SetFavorites(newFavorites));
       ProductSaves(userId, dispatch);
     }
+    
     else {
       Notifier({
         dispatch: dispatch,
@@ -27,6 +29,9 @@ const LandingDownvote = async (productId, userId, dispatch) => {
       Title: 'Problem',
       Type: 'error',
     });
+  }
+  finally{
+    setIsSaving(false);
   }
 };
 

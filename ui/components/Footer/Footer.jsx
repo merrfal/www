@@ -1,10 +1,16 @@
 import Link from 'next/link';
 
 import { useState } from 'react';
+import { useDispatch } from 'react-redux'
+import { NewsletterCreate } from '../../../controllers/front';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer aria-labelledby='footer-heading' class='bg-white mb-8'>
@@ -162,7 +168,7 @@ export default function Footer() {
               <p class='mt-6 text-sm text-gray-500'>
                 Merni njoftime të ndryshime për platformen e tjera...
               </p>
-              <form class='mt-2 flex sm:max-w-md'>
+              <form class='mt-2 flex sm:max-w-md' style={loading ? {pointerEvents: 'none', opacity: '.75'} : {}}>
                 <label for='email-address' class='sr-only'>
                   Adresa elektronike
                 </label>
@@ -171,11 +177,15 @@ export default function Footer() {
                   type='text'
                   required
                   value={email}
-                  onChange={e => setEmail(e)}
+                  onChange={e => setEmail(e.target.value)}
                   class='appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500'
                 />
                 <div class='ml-4 flex-shrink-0'>
                   <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      NewsletterCreate(email, setEmail, setLoading, dispatch)
+                    }}
                     type='submit'
                     class='w-full bg-[#377DFF] border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                     Abonohu

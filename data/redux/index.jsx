@@ -8,6 +8,7 @@ import ErrorSlice from "./ErrorSlice";
 import UserLandingPagesSlice from "./UserLandingPagesSlice";
 import CategoriesSlice from "./CategoriesSlice";
 import FavoritesSlice from "./FavoritesSlice";
+import SearchSlice from "./SearchSlice";
 
 export {
     UserSlice,
@@ -19,5 +20,6 @@ export {
     ErrorSlice,
     UserLandingPagesSlice,
     CategoriesSlice,
-    FavoritesSlice
+    FavoritesSlice,
+    SearchSlice
 }

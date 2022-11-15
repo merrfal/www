@@ -51,6 +51,8 @@ export default function Profile() {
                       </h1>
                       <p>@{profile.Username}</p>
                     </div>
+                    {
+                      profile.Id === user.Id &&
                     <div class='mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4'>
                       <button
                         onClick={() => setIsEdit(!isEdit)}
@@ -73,6 +75,7 @@ export default function Profile() {
                         <span>Edit Profile</span>
                       </button>
                     </div>
+                  }
                   </div>
                 </div>
                 <div class='hidden sm:block md:hidden mt-6 min-w-0 flex-1'>
@@ -96,18 +99,13 @@ export default function Profile() {
                       <div class='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
                         <div class='sm:flex sm:items-start'>
                           <div class='mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'>
-                            <h3
-                              class='text-lg font-medium leading-6 text-gray-900'
-                              id='modal-title'>
-                              Redakto profilin
-                            </h3>
-                            <div class='mt-2'>
-                              <div className='mt-12'>
+                            <div>
+                              <div>
                                 <div className='mt-10 sm:mt-0'>
                                   <div className='w-full'>
-                                    <div className='mt-5 md:col-span-2 md:mt-0'>
+                                    <div className=' mt-5 md:col-span-2 md:mt-0'>
                                       <form action='#' method='POST'>
-                                        <div className='overflow-hidden'>
+                                        <div className='p-2 overflow-hidden'>
                                           <div className='w-full bg-white'>
                                             <div className=' grid grid-cols-6 gap-6'>
                                               <div className='col-span-6 sm:col-span-3'>
