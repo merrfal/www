@@ -11,7 +11,7 @@ export default function Hero() {
               <div class='absolute inset-0'>
                 <img
                   class='h-full w-full object-cover'
-                  src='/assets/mosque-sahat-kulla.jpg'
+                  src='/assets/happiness.png'
                   alt='Dikush duke dhuruar dicka'
                 />
                 <div class='absolute inset-0 bg-[#377DFF] mix-blend-multiply'></div>
