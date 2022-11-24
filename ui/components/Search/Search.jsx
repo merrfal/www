@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { OpenSearch, CloseSearch, SetSearchTerm } from '../../../data/redux/SearchSlice'
 import { ProductsSearch } from '../../../controllers/front/'
-import { Loading } from '..';
 
 export default function Search() {
   const dispatch = useDispatch();
