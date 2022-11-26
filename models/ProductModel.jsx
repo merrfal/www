@@ -49,6 +49,10 @@ const ProductSchema = new Schema({
         type: String,
         default: 'Kosovo'
     },
+    createdAt: {
+        type: Date,
+        default: new Date()
+    },
     Status: {
         type: String,
         default: 'published',

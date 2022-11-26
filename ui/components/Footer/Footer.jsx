@@ -44,7 +44,7 @@ export default function Footer() {
                   <h3 class='text-sm font-medium text-gray-900'>Kategoritë</h3>
                   <ul role='list' class='mt-6 space-y-6'>
                     <li class='text-sm'>
-                      <Link href={`/produktet?kategoria="Biznes dhe Punë"`}>
+                      <Link href={`/produktet?kategoria=Biznes dhe Punë`}>
                         <a class='text-gray-500 hover:text-gray-600'>
                           Biznes dhe Punë
                         </a>
@@ -52,7 +52,7 @@ export default function Footer() {
                     </li>
 
                     <li class='text-sm'>
-                      <Link href={`/produktet?kategoria="Veshje"`}>
+                      <Link href={`/produktet?kategoria=Veshje`}>
                         <a class='text-gray-500 hover:text-gray-600'>
                           Veshje
                         </a>
@@ -60,7 +60,7 @@ export default function Footer() {
                     </li>
 
                     <li class='text-sm'>
-                      <Link href={`/produktet?kategoria="Elektronika"`}>
+                      <Link href={`/produktet?kategoria=Elektronika`}>
                         <a class='text-gray-500 hover:text-gray-600'>
                           Elektronika
                         </a>
@@ -68,7 +68,7 @@ export default function Footer() {
                     </li>
 
                     <li class='text-sm'>
-                      <Link href={`/produktet?kategoria="Sport"`}>
+                      <Link href={`/produktet?kategoria=Sport`}>
                         <a class='text-gray-500 hover:text-gray-600'>
                           Sport
                         </a>
@@ -76,7 +76,7 @@ export default function Footer() {
                     </li>
 
                     <li class='text-sm'>
-                      <Link href={`/produktet?kategoria="Shtëpi"`}>
+                      <Link href={`/produktet/?kategoria=Shtëpi`}>
                         <a class='text-gray-500 hover:text-gray-600'>
                           Shtëpi
                         </a>

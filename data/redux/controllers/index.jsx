@@ -34,6 +34,7 @@ import {
 } from './PageSliceControllers';
 
 import { OpenSearch, CloseSearch, SetSearchTerm, SetSearch} from './SearchSliceControllers';
+import {SetFilterTerm, SetFilter} from './FilterSliceControllers';
 import { SetPages, UnsetPages } from './PagesSliceControllers';
 import { SetFavorites, UnsetFavorites } from './FavoritesSliceControllers';
 
@@ -73,5 +74,7 @@ export {
   OpenSearch, 
   CloseSearch, 
   SetSearchTerm,
-  SetSearch
+  SetSearch,
+  SetFilter,
+  SetFilterTerm
 };

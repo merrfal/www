@@ -59,6 +59,13 @@ const SearchDefaultState = {
   Visibility: false,
 };
 
+const FilterDefaultState = {
+  Results: null,
+  Term: "",
+  Loading: true,
+  Visibility: false,
+};
+
 const UserLandingPagesDefaultState = {
   Pages: null,
   Loading: true,
@@ -116,5 +123,6 @@ export {
   UserLandingPagesDefaultState,
   CategoriesDefaultState,
   FavoritesDefaultState,
-  SearchDefaultState
+  SearchDefaultState,
+  FilterDefaultState
 };

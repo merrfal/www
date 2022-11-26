@@ -1,15 +1,30 @@
 import Link from 'next/link';
-
+import React from "react";
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { UserView } from '../../../controllers/front';
+import { UserView, UserUpdate } from '../../../controllers/front';
 import { Normal } from '../../layouts';
 import { Loading, Empty, Product } from '../../components';
 import { useRouter } from 'next/router';
+import ImageUploading from "react-images-uploading";
+import { SetProfileField } from '../../../data/redux/ProfileSlice';
+
+
 
 export default function Profile() {
   const dispatch = useDispatch();
   const username = useRouter().query.username || '';
+  console.log("username", useRouter())
+  const [image, setImage] = React.useState(null);
+  const [loading, setIsLoading] = React.useState(false);
+  const maxNumber = 69;
+
+  const onChange = (imageList, addUpdateIndex) => {
+    // data for submit
+    setImage(imageList[0]);
+  };
+
+  console.log("image", image)
 
   const profile = useSelector((state) => state.profile);
   const user = useSelector((state) => state.user);
@@ -19,6 +34,7 @@ export default function Profile() {
   useEffect(() => {
     if (profile.Loaded === false) UserView(dispatch, username);
   }, [profile, username]);
+
 
   return (
     <Normal>
@@ -53,29 +69,29 @@ export default function Profile() {
                     </div>
                     {
                       profile.Id === user.Id &&
-                    <div class='mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4'>
-                      <button
-                        onClick={() => setIsEdit(!isEdit)}
-                        type='button'
-                        class='inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500'>
-                        <svg
-                          xmlns='http://www.w3.org/2000/svg'
-                          fill='none'
-                          viewBox='0 0 24 24'
-                          stroke-width='1.5'
-                          stroke='currentColor'
-                          class='-ml-1 mr-2 h-5 w-5 text-gray-400'>
-                          <path
-                            stroke-linecap='round'
-                            stroke-linejoin='round'
-                            d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10'
-                          />
-                        </svg>
+                      <div class='mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4'>
+                        <button
+                          onClick={() => setIsEdit(!isEdit)}
+                          type='button'
+                          class='inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500'>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            stroke-width='1.5'
+                            stroke='currentColor'
+                            class='-ml-1 mr-2 h-5 w-5 text-gray-400'>
+                            <path
+                              stroke-linecap='round'
+                              stroke-linejoin='round'
+                              d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10'
+                            />
+                          </svg>
 
-                        <span>Edit Profile</span>
-                      </button>
-                    </div>
-                  }
+                          <span>Edit Profile</span>
+                        </button>
+                      </div>
+                    }
                   </div>
                 </div>
                 <div class='hidden sm:block md:hidden mt-6 min-w-0 flex-1'>
@@ -87,7 +103,9 @@ export default function Profile() {
               </div>
             </div>
             {isEdit && (
+
               <div
+                style={loading ? { opacity: '.75', pointerEvents: 'none' } : {}}
                 class='relative z-10'
                 aria-labelledby='modal-title'
                 role='dialog'
@@ -108,63 +126,84 @@ export default function Profile() {
                                         <div className='p-2 overflow-hidden'>
                                           <div className='w-full bg-white'>
                                             <div className=' grid grid-cols-6 gap-6'>
-                                              <div className='col-span-6 sm:col-span-3'>
+                                              <div className='col-span-12 sm:col-span-6'>
                                                 <label className='block text-sm font-medium text-gray-700'>
                                                   Fotogorafia
                                                 </label>
-                                                <div className='mt-1 flex items-center'>
-                                                  <span className='inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100'>
-                                                    {!profile.Avatar ? (
-                                                      <svg
-                                                        className='h-full w-full text-gray-300'
-                                                        fill='currentColor'
-                                                        viewBox='0 0 24 24'>
-                                                        <path d='M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z' />
-                                                      </svg>
-                                                    ) : (
-                                                      <img
-                                                        src={profile.Avatar}
-                                                        width='120px'
-                                                        height='120px'
-                                                      />
-                                                    )}
-                                                  </span>
-                                                  <button
-                                                    type='button'
-                                                    className='ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#387DFF] focus:ring-offset-2'>
-                                                    Ndryshoje
-                                                  </button>
-                                                </div>
+
+                                                <ImageUploading
+                                                  // multiple
+                                                  value={image}
+                                                  onChange={onChange}
+                                                  maxNumber={maxNumber}
+                                                  dataURLKey="data_url"
+                                                  acceptType={["jpg", "png"]}
+                                                >
+                                                  {({
+                                                    onImageUpdate,
+                                                    onImageRemove,
+                                                  }) => (
+
+
+                                                    <div className='mt-1 flex items-center'>
+                                                      <span>
+                                                        <img class='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image) ? (image ? image.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
+                                                      </span>
+
+                                                      <button
+                                                        class='h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4'
+                                                        style={{ position: 'relative', background: 'white', right: '15px', top: '25px' }}
+                                                        onClick={(e) => {
+                                                          onImageUpdate(0)
+                                                          e.preventDefault()
+                                                        }}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                          <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                                        </svg></button>
+                                                      <button
+                                                        style={{ position: 'relative', background: 'white', right: '35px', bottom: '30px' }}
+                                                        class='h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4'
+
+                                                        onClick={(e) => {
+                                                          image && profile.Avatar ?
+                                                            (
+                                                              () => {
+                                                                setImage(null);
+                                                                dispatch(
+                                                                  SetProfileField({
+                                                                    Field: 'Avatar',
+                                                                    Value: null,
+                                                                  })
+                                                                )
+                                                              }
+                                                            ) :
+                                                            (image ? setImage(null) :
+                                                              dispatch(
+                                                                SetProfileField({
+                                                                  Field: 'Avatar',
+                                                                  Value: null,
+                                                                })
+                                                              ))
+                                                          e.preventDefault()
+                                                        }
+                                                        }
+                                                      ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+
+                                                      </button>
+
+
+                                                    </div>
+
+
+                                                  )}
+                                                </ImageUploading>
+
+                                                {/* </div> */}
                                               </div>
 
-                                              <div className='col-span-8 sm:col-span-3 mt-5'>
-                                                <label
-                                                  htmlFor='company-website'
-                                                  className='block text-sm font-medium text-gray-700'>
-                                                  Uebfaqja
-                                                </label>
-                                                <div className='mt-1 flex rounded-md shadow-sm'>
-                                                  <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500'>
-                                                    https:
-                                                  </span>
-                                                  <input
-                                                    type='text'
-                                                    name='company-website'
-                                                    onChange={(e) =>
-                                                      dispatch(
-                                                        SetProfileField({
-                                                          Field: 'Website',
-                                                          Value: e.target.value,
-                                                        })
-                                                      )
-                                                    }
-                                                    value={profile.Website}
-                                                    id='company-website'
-                                                    className='block w-full p-2 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm'
-                                                    placeholder='www.example.com'
-                                                  />
-                                                </div>
-                                              </div>
+
 
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
@@ -227,9 +266,10 @@ export default function Profile() {
                                                   name='email-address'
                                                   id='email-address'
                                                   autoComplete='email'
-                                                  className='mt-1 block p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm'
+                                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm'
+                                                  // className='mt-1 block p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm'
                                                   placeholder='Email'
-                                                  disabled
+                                                  disabled={true}
                                                   value={profile.Email}
                                                   onChange={(e) =>
                                                     dispatch(
@@ -376,14 +416,14 @@ export default function Profile() {
                                                 <label
                                                   htmlFor='zip'
                                                   className='block text-sm font-medium text-gray-700'>
-                                                  Kodi Postal
+                                                  Kodi Postar
                                                 </label>
                                                 <input
                                                   value={profile.Zip}
                                                   onChange={(e) =>
                                                     dispatch(
                                                       SetProfileField({
-                                                        Field: 'City',
+                                                        Field: 'Zip',
                                                         Value: e.target.value,
                                                       })
                                                     )
@@ -407,22 +447,30 @@ export default function Profile() {
                       </div>
                       <div class='bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6'>
                         <button
-                          onClick={() => UserUpdate(dispatch, profile)}
+                          onClick={() => {
+                            UserUpdate(dispatch, profile, image, setIsEdit, setIsLoading, setImage)
+                          }
+                          }
                           type='button'
                           class='inline-flex w-full justify-center rounded-md border border-transparent bg-[#387DFF] px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#387DFF] focus:outline-none focus:ring-2 focus:ring-[#387DFF] focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm'>
                           Përditëso
                         </button>
                         <button
+                          onClick={() => {
+                            setIsEdit(false)
+                            setImage(null)
+                          }}
                           type='button'
                           class='mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#387DFF] focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'>
-                          Cancel
+                          Anulo
                         </button>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            )}
+            )
+            }
             <main
               class='max-w-2xl mx-auto py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8'
               aria-labelledby='order-history-heading'>
@@ -455,9 +503,9 @@ export default function Profile() {
               </div>
               <div></div>
             </main>
-          </div>
+          </div >
         )}
-      </section>
-    </Normal>
+      </section >
+    </Normal >
   );
 }

@@ -9,6 +9,7 @@ import UserLandingPagesSlice from "./UserLandingPagesSlice";
 import CategoriesSlice from "./CategoriesSlice";
 import FavoritesSlice from "./FavoritesSlice";
 import SearchSlice from "./SearchSlice";
+import FilterSlice from './FilterSlice'
 
 export {
     UserSlice,
@@ -21,5 +22,6 @@ export {
     UserLandingPagesSlice,
     CategoriesSlice,
     FavoritesSlice,
-    SearchSlice
+    SearchSlice,
+    FilterSlice
 }

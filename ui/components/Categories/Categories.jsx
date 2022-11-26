@@ -6,7 +6,6 @@ import { Category, Loading, Empty } from "..";
 export default function Categories() {
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.categories);
-
     useEffect(() => {
         if (categories.Loaded === false) {
           CategoryList(dispatch);
@@ -21,7 +20,7 @@ export default function Categories() {
               Shfletoni Kategoritë
             </h2>
             <a
-              href='#'
+              href='/produktet'
               class='hidden text-sm font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block'>
               Shfleto të gjitha Kategoritë
               <span aria-hidden='true'> &rarr;</span>
