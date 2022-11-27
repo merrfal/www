@@ -35,6 +35,7 @@ export default function ProductEdit() {
                       <form action='#' method='POST'>
                         <div className='sm:overflow-hidden sm:rounded-md'>
                           <div className='space-y-6 bg-white p-2'>
+
                             <h3 class="text-3xl font-bold leading-6 text-gray-900 mb-10">Redakto Produktin</h3>
                             <div className='col-span-6 sm:col-span-4'>
                               <label
@@ -53,8 +54,8 @@ export default function ProductEdit() {
                                 }
                                 value={page.Page.Name}
                                 type='text'
-                                name='email-address'
-                                id='email-address'
+                                name='titulli'
+                                id='titulli'
                                 autocomplete='email'
                                 className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                               />
@@ -88,7 +89,7 @@ export default function ProductEdit() {
                               <label
                                 for='about'
                                 className='block text-sm font-medium text-gray-700'>
-                                Përshkrimi
+                                Përshkrimi i Produktit
                               </label>
                               <div className='mt-1'>
                                 <textarea
@@ -138,7 +139,7 @@ export default function ProductEdit() {
                                 />
                               </div>
 
-                              <div className='col-span-6 sm:col-span-6 lg:col-span-2'>
+                              <div className='col-span-6 sm:col-span-3 lg:col-span-3'>
                                 <label
                                   for='city'
                                   className='block text-sm font-medium text-gray-700'>
@@ -165,7 +166,7 @@ export default function ProductEdit() {
                                 </select>
                               </div>
 
-                              <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
+                              {/* <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
                                 <label
                                   for='postal-code'
                                   className='block text-sm font-medium text-gray-700'>
@@ -187,9 +188,9 @@ export default function ProductEdit() {
                                   autocomplete='postal-code'
                                   className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                                 />
-                              </div>
+                              </div> */}
 
-                              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                              <div class="col-span-6 sm:col-span-3 lg:col-span-3">
                                 <label for="country" class="block text-sm font-medium text-gray-700">Kategoria</label>
                                 <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                   {
@@ -237,7 +238,7 @@ export default function ProductEdit() {
                                     <p className='pl-1'>ose tërhiqe një këtu.</p>
                                   </div>
                                   <p className='text-xs text-gray-500'>
-                                    PNG, JPG, që nuj tejkalonë madhësin e 3MB
+                                    PNG, JPG, që nuk tejkalon madhësinë e 3MB
                                   </p>
                                 </div>
                               </div>
@@ -264,3 +265,4 @@ export default function ProductEdit() {
     </Normal>
   );
 }
+	
