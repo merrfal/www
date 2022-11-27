@@ -2,16 +2,22 @@ import { Product } from '../../models';
 
 export default async function ProductsFilters(req, res) {
   try {
-    const products = await Product.find({});
-    const term = req.query.term;
+    const term = req.body.term;
+    console.log("term", term)
+    let products =  []
+    if (term === '') {
+      products = await Product.find({}).sort({createdAt: -1});
+    }
+    else {
+      products = await Product.find({ Category: term }).sort({createdAt: -1});
+    }
 
-    searchMachine(clients.clients, query);
 
     if (products) {
       res.status(200).send(
         {
           status: true,
-          message: 'Të gjitha produktet u morën me sukses.',
+          message: 'Të gjitha produktet u morën me sukses.' + req.query.slug ,
           data: products,
           code: 200,
         }

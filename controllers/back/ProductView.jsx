@@ -6,6 +6,7 @@ export default async function ProductView(req, res) {
 
     let Views = parseInt(productPre[0].Views);
 
+    
     Views = Views + 1;
 
     const product = await Product.findOneAndUpdate(
@@ -14,7 +15,7 @@ export default async function ProductView(req, res) {
       { new: true }
     );
     
-    const others = await Product.find({Cateogry: product.Category}).limit(4)
+    const others = await Product.find({Category: product.Category}).limit(4)
     const user = await User.findById(product.User)
     
     const newUser = {

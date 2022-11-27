@@ -2,16 +2,50 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
 import { Product, Empty, Loading } from '../../components';
-import { ProductsList, CategoryList } from '../../../controllers/front';
+import { ProductsList, CategoryList, ProductsFilters } from '../../../controllers/front';
+import Pagination from './Pagination';
+import { SetFilterTerm } from '../../../data/redux/FilterSlice';
+import { useRouter } from 'next/router';
+
+
 
 export default function Products() {
+  let category = useRouter().query.kategoria;
+  console.log("kategoria", category)
+
   const dispatch = useDispatch();
   const pages = useSelector((state) => state.pages);
   const categories = useSelector((state) => state.categories);
+  const filter = useSelector((state) => state.filter);
+
 
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isCityOpen, setIsCityOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(8);
+
+  const indexOfLastRecord = currentPage * recordsPerPage
+  const indexOFirstRecord = indexOfLastRecord - recordsPerPage
+
+  const currentRecords = filter?.Results?.slice(indexOFirstRecord, indexOfLastRecord)
+
+  const nPages = Math.ceil(filter?.Results?.length / recordsPerPage)
+
+
+  useEffect(() => {
+    if (filter.Loading === true) {
+      ProductsFilters(filter.Term, dispatch);
+    }
+  }, [filter])
+
+
+  useEffect(() => {
+    if (category) {
+      dispatch(SetFilterTerm(category))
+    }
+  }, [category])
+
 
   useEffect(() => {
     if (pages.Loaded === false) ProductsList(dispatch);
@@ -422,8 +456,13 @@ export default function Products() {
                                 id='filter-category-0'
                                 name='category[]'
                                 value='new-arrivals'
-                                type='checkbox'
-                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                                type='radio'
+                                onClick={(e) => {
+                                  dispatch(SetFilterTerm(''))
+                                  setCurrentPage(1)
+                                  e.preventDefault()
+                                }}
+                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500 background-black'
                               />
                               <label
                                 for='filter-category-0'
@@ -442,7 +481,16 @@ export default function Products() {
                                       id='filter-category-2'
                                       name='category[]'
                                       value='objects'
-                                      type='checkbox'
+                                      // value={search.Term}
+                                      onClick={(e) => {
+                                       
+                                        dispatch(SetFilterTerm(category.Name))
+                                        setCurrentPage(1)
+                                        
+                                        e.preventDefault()
+
+                                      }}
+                                      type='radio'
                                       className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
                                     />
                                     <label
@@ -593,27 +641,37 @@ export default function Products() {
                 className='hidden w-px h-5 bg-gray-300 sm:block sm:ml-4'></div>
 
               <div className='mt-2 sm:mt-0 sm:ml-4'>
-                <div className='-m-1 flex flex-wrap items-center'>
-                  <span className='m-1 inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900'>
-                    <span>Objects</span>
-                    <button
-                      type='button'
-                      className='flex-shrink-0 ml-1 h-4 w-4 p-1 rounded-full inline-flex text-gray-400 hover:bg-gray-200 hover:text-gray-500'>
-                      <span className='sr-only'>Remove filter for Objects</span>
-                      <svg
-                        className='h-2 w-2'
-                        stroke='currentColor'
-                        fill='none'
-                        viewBox='0 0 8 8'>
-                        <path
-                          stroke-linecap='round'
-                          stroke-width='1.5'
-                          d='M1 1l6 6m0-6L1 7'
-                        />
-                      </svg>
-                    </button>
-                  </span>
-                </div>
+                {
+                  filter.Term ?
+                    <div className='-m-1 flex flex-wrap items-center'>
+                      <span className='m-1 inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900'>
+                        <span>{filter.Term}</span>
+                        <button
+                          onClick={(e) => {
+                            // location.href = '/produktet';
+                            dispatch(SetFilterTerm(''))
+                            e.preventDefault()
+
+                          }}
+                          type='button'
+                          className='flex-shrink-0 ml-1 h-4 w-4 p-1 rounded-full inline-flex text-gray-400 hover:bg-gray-200 hover:text-gray-500'>
+                          <span className='sr-only'>Remove filter for Objects</span>
+                          <svg
+                            className='h-2 w-2'
+                            stroke='currentColor'
+                            fill='none'
+                            viewBox='0 0 8 8'>
+                            <path
+                              stroke-linecap='round'
+                              stroke-width='1.5'
+                              d='M1 1l6 6m0-6L1 7'
+                            />
+                          </svg>
+                        </button>
+                      </span>
+                    </div> :
+                    null
+                }
               </div>
             </div>
           </div>
@@ -623,13 +681,18 @@ export default function Products() {
       <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
         <div className={pages.Loaded === false ? 'w-full' : pages.Pages.length === 0 ? 'w-full' : 'mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'}>
           {
-            pages.Loaded === false ? 
-            <Loading /> : 
-            pages.Pages.length === 0 ? <Empty heading="Nuk u gjet asnjë produkt" message="Nuk u gjet asnjë produkt në platformë me këto filtrime.." /> :
-            pages.Pages.map((page, index) => <Product product={page} key={index} />)
+            pages.Loaded === false ?
+              <Loading /> :
+              pages.Pages.length === 0 ? <Empty heading="Nuk u gjet asnjë produkt" message="Nuk u gjet asnjë produkt në platformë me këto filtrime.." /> :
+                currentRecords?.map((page, index) => <Product product={page} key={index} />)
           }
         </div>
+        <Pagination
+          nPages={nPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage} />
       </div>
+
     </Normal>
   );
 }

@@ -1,10 +1,15 @@
+
+
 export default function Category(props) {
   const { Name, Icon, Slug } = props.category;
 
-  const Link = () => window.open(`/produktet/?=kategoria=${Slug}`, '_blank');
-
+  const Link = () => window.open(`/produktet/?kategoria=${Name}`, '_blank');
+  // href={`/produktet/?kategoria=Shtëpi`}
   return (
-    <div onClick={() => Link()} key={props.index} href={`/produktet?kategoria="${Name}"`} class='hover:cursor-pointer relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto'>
+    <div onClick={() => {
+      Link()
+    }
+    } key={props.index} href={`/produktet?kategoria="${Name}"`} class='hover:cursor-pointer relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto'>
       <span class='absolute inset-0'>
         <img src={Icon === '' ? '/assets/category-no.png' : Icon} alt={Name} class='w-full h-full object-center object-cover' />
       </span>

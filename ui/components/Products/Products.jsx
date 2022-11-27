@@ -13,15 +13,17 @@ export default function Products() {
     }
   }, [pages]);
 
+  const currentRecords = pages?.Pages?.slice(0, 16)
+
   return (
     <div class='bg-white'>
       <div class='max-w-2xl mt-[-4rem] mx-auto mb-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
         <div class='px-4 sm:px-6 sm:flex sm:items-center sm:justify-between lg:px-8 xl:px-0'>
           <h2 class='text-2xl font-extrabold tracking-tight text-gray-900'>
-            Shfleto Produktet
+            Shfleto Produktet e Fundit
           </h2>
           <a
-            href='#'
+            href='/produktet'
             class='hidden text-sm font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block'>
             Shfleto të gjitha Produktet<span aria-hidden='true'> &rarr;</span>
           </a>
@@ -37,7 +39,7 @@ export default function Products() {
           ) : pages.Pages.length === 0 ? (
             <Empty heading="Nuk u gjet asnjë produkt" message="Nuk u gjet asnjë produkt i shtuar ne platformë."/>
           ) : (
-            pages.Pages.map((page, index) => <Product product={page} key={index} />)
+            currentRecords.map((page, index) => <Product product={page} key={index} />)
           )}
         </div>
       </div>

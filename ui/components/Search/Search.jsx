@@ -28,7 +28,7 @@ export default function Search() {
   }, [])
 
   useEffect(() => {
-      if(search.Loading === false) {
+      if(search.Loading === true) {
         ProductsSearch(search.Term, dispatch);
       }
   }, [search])
@@ -52,7 +52,7 @@ export default function Search() {
 
   if(search.Visibility) 
     return (
-    <div class='fixed inset-0 z-10 p-4 sm:p-6 md:p-20 overflow-hidden'>
+    <div class='fixed inset-0 z-20 p-4 sm:p-6 md:p-20 overflow-hidden'>
       <div onClick={() => dispatch(CloseSearch())} class='fixed inset-0 bg-gray-700 bg-opacity-25 transition-opacity overflow-hidden'></div>
       <div class='mx-auto max-w-xl transform divide-y divide-gray-100 rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all overflow-hidden'>
         <div class='relative'>

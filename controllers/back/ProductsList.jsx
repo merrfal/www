@@ -2,7 +2,7 @@ import { Product } from '../../models';
 
 export default async function ProductsList(req, res) {
   try {
-    const products = await Product.find({});
+    const products = await Product.find({}).sort({createdAt: -1});
 
     if (products) {
       res.status(200).send(

@@ -10,22 +10,26 @@ export default function Product() {
   const dispatch = useDispatch();
 
   const slug = useRouter().query.slug || '';
-
+  console.log("slug",useRouter().query)
   const user = useSelector((state) => state.user);
   const page = useSelector((state) => state.page);
+  const [mainImage, setMainImage] = useState("")
 
   useEffect(() => {
     if (page.Loaded === false && slug !== '') ProductView(dispatch, slug);
+    if (page?.Page?.Gallery[0]) setMainImage(page?.Page?.Gallery[0])
   }, [page, slug]);
 
   const [inSaves, setIsSaves] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+
   useEffect(() => {
-    if(user.Auth === true){
-      if(page.Loaded === true){
+    if (user.Auth === true) {
+      if (page.Loaded === true) {
         const bool = user.Favorites.includes(page.Page._id);
         setIsSaves(bool);
+
       }
     }
   }, [user])
@@ -33,36 +37,36 @@ export default function Product() {
   const handleSaver = (e) => {
     e.stopPropagation();
 
-    if(inSaves) {
-        let newFavorites = user.Favorites.filter((f) => f !== page.Page._id);
+    if (inSaves) {
+      let newFavorites = user.Favorites.filter((f) => f !== page.Page._id);
 
-        ProductUnsave(
-          page.Page._id,
-          user.Id,
-          newFavorites,
-          setIsSaving,
-          dispatch
-        )
+      ProductUnsave(
+        page.Page._id,
+        user.Id,
+        newFavorites,
+        setIsSaving,
+        dispatch
+      )
     }
 
     else {
       let newFavorites = structuredClone(user.Favorites);
       newFavorites.push(page.Page._id);
 
-        ProductSave(
-          page.Page._id,
-          user.Id,
-          newFavorites,
-          setIsSaving,
-          dispatch
-        )
+      ProductSave(
+        page.Page._id,
+        user.Id,
+        newFavorites,
+        setIsSaving,
+        dispatch
+      )
     }
   };
 
   return (
     <Normal>
       <section style={{ padding: '1em' }}>
-        { page.Loaded === false ? ( <Loading /> ) : (
+        {page.Loaded === false ? (<Loading />) : (
           <div>
             <div className='bg-white'>
               <main className='max-w-7xl mx-auto sm:pt-16 sm:px-6 lg:px-8'>
@@ -70,30 +74,42 @@ export default function Product() {
                   <div className='lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start'>
                     <div className='flex flex-col-reverse'>
                       <div className='hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none'>
+
                         <div
-                          className='grid grid-cols-4 gap-6'
+                          className='grid grid-cols-4 gap-6 '
                           aria-orientation='horizontal'
                           role='tablist'>
-                          <button
-                            id='tabs-2-tab-1'
-                            className='relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50'
-                            aria-controls='tabs-2-panel-1'
-                            role='tab'
-                            type='button'>
-                            <span className='sr-only'>Angled view </span>
-                            <span className='absolute inset-0 rounded-md overflow-hidden'>
-                              <img
-                                src='https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg'
-                                alt=''
-                                className='w-full h-full object-center object-cover'
-                              />
-                            </span>
-                            <span
-                              className='ring-transparent absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none'
-                              aria-hidden='true'></span>
-                          </button>
+                          {
+                            page.Page.Gallery &&
+                            page.Page.Gallery.map((image) => (
+                              <button
+                                
+                                id='tabs-2-tab-1'
+                                className='relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50'
+                                aria-controls='tabs-2-panel-1'
+                                onClick={() => { setMainImage(image) }}
+                                role='tab'
+                                type='button'>
+                                <span className='sr-only'>Angled view </span>
+                                <span className='absolute inset-0 rounded-md overflow-hidden'>
+                                  <img
+                                    src={image}
+                                    // src='https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg'
+                                    alt=''
+                                    className='w-full h-full object-center object-cover'
+                                  />
+
+                                </span>
+
+                                <span
+                                  className='ring-transparent absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none'
+                                  aria-hidden='true'></span>
+                              </button>
+                            ))
+                          }
                         </div>
                       </div>
+
 
                       <div className='w-full aspect-w-1 aspect-h-1'>
                         <div
@@ -102,7 +118,7 @@ export default function Product() {
                           role='tabpanel'
                           tabindex='0'>
                           <img
-                            src='https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg'
+                            src={mainImage ? mainImage : '/assets/product-no.png'}
                             alt='Angled front view with bag zipped and handles upright.'
                             className='w-full h-full object-center object-cover sm:rounded-lg'
                           />
@@ -134,7 +150,7 @@ export default function Product() {
                           </svg>
 
                           <p className='text-m text-gray-900 ml-2'>
-                            {page.Page.Address}, {page.Page.Zip}, {page.Page.City},
+                            {page.Page.Address}, {page.Page.Zip}, {page.Page.City}
                           </p>
                         </div>
                       </div>
@@ -153,17 +169,17 @@ export default function Product() {
 
                       <form className='mt-6'>
                         <div className='mt-10 flex sm:flex-col1'>
-                            <button
-                              type='submit'
-                              onClick={() => window.open("tel:" + page.Page.Phone, "_self")}
-                              className='max-w-xs flex-1 bg-[#387CFF] border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-[#387CFF95] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-[#387CFF] sm:w-full'>
-                              Thirr në +{page.Page.Phone}
-                            </button>
+                          <button
+                            type='submit'
+                            onClick={() => window.open("tel:" + page.Page.Phone, "_self")}
+                            className='max-w-xs flex-1 bg-[#387CFF] border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-[#387CFF95] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-[#387CFF] sm:w-full'>
+                            Thirr në +{page.Page.Phone}
+                          </button>
 
                           <button
                             onClick={(e) => handleSaver(e)}
                             type='button'
-                            style={isSaving ? {pointerEvents: 'none', opacity: '.75'} : {}}
+                            style={isSaving ? { pointerEvents: 'none', opacity: '.75' } : {}}
                             className='ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500'>
                             <svg
                               className='h-6 w-6 flex-shrink-0'

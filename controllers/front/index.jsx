@@ -19,6 +19,7 @@ import ProductSaves from './ProductSaves';
 import ContactCreate from './ContactCreate';
 import NewsletterCreate from './NewsletterCreate';
 import ProductsSearch from './ProductsSearch';
+import ProductsFilters from './ProductsFilters';
 
 export {
   ProductCreate,
@@ -41,5 +42,6 @@ export {
   ProductSaves,
   ContactCreate,
   NewsletterCreate,
-  ProductsSearch
+  ProductsSearch,
+  ProductsFilters
 };
