@@ -3,7 +3,7 @@ import { Product } from '../../models';
 export default async function ProductsFilters(req, res) {
   try {
     const term = req.body.term;
-    console.log("term", term)
+    console.log("term backkk ", term)
     let products =  []
     if (term === '') {
       products = await Product.find({}).sort({createdAt: -1});
@@ -17,7 +17,7 @@ export default async function ProductsFilters(req, res) {
       res.status(200).send(
         {
           status: true,
-          message: 'Të gjitha produktet u morën me sukses.' + req.query.slug ,
+          message: 'Të gjitha produktet u morën me sukses.', term ,
           data: products,
           code: 200,
         }

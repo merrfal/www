@@ -50,8 +50,7 @@ const ProductSchema = new Schema({
         default: 'Kosovo'
     },
     createdAt: {
-        type: Date,
-        default: new Date()
+        type: Date
     },
     Status: {
         type: String,

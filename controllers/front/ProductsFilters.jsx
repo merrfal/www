@@ -6,6 +6,8 @@ const ProductsFilters = async (term, dispatch) => {
   const config = ConfigBuilder('P', 'JSON', {term}, true, false, false);
 
   console.log("url", url)
+  console.log("term", term)
+  console.log("config", config)
   try {
     const req = await fetch(url, config);
     const res = await req.json();
