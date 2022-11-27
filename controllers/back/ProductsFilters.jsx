@@ -3,13 +3,20 @@ import { Product } from '../../models';
 export default async function ProductsFilters(req, res) {
   try {
     const term = req.body.term;
+    const cityTerm = req.body.cityTerm;
     console.log("term", term)
     let products =  []
-    if (term === '') {
-      products = await Product.find({}).sort({createdAt: -1});
+    if (term === '' && cityTerm !== '') {
+      products = await Product.find({ City: cityTerm }).sort({createdAt: -1});
+    }
+    else if (term !== '' && cityTerm === '') {
+      products = await Product.find({ Category: term }).sort({createdAt: -1});
+    }
+    else if (term !== '' && cityTerm !== '') {
+      products = await Product.find({ Category: term, City: cityTerm }).sort({createdAt: -1});
     }
     else {
-      products = await Product.find({ Category: term }).sort({createdAt: -1});
+      products = await Product.find({}).sort({createdAt: -1});
     }
 
 
@@ -17,7 +24,7 @@ export default async function ProductsFilters(req, res) {
       res.status(200).send(
         {
           status: true,
-          message: 'Të gjitha produktet u morën me sukses.' + req.query.slug ,
+          message: 'Të gjitha produktet u morën me sukses.',
           data: products,
           code: 200,
         }
