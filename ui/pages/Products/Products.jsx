@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
 import { Product, Empty, Loading } from '../../components';
@@ -35,8 +35,7 @@ export default function Products() {
 
   useEffect(() => {
     if (filter.Loading === true) {
-      ProductsFilters(filter.Term, filter.CityTerm ,dispatch);
-
+      ProductsFilters(filter.Term, filter.CityTerm, dispatch);
     }
   }, [filter])
 
@@ -55,6 +54,23 @@ export default function Products() {
   useEffect(() => {
     if (categories.Loaded === false) CategoryList(dispatch);
   }, [categories]);
+
+
+
+  let clickOutside = (handler) => {
+    let domNode = useRef();
+
+    useEffect(() => {
+      let maybeHandler = (event) => !domNode.current.contains(event.target) && handler();
+      document.addEventListener("mousedown", maybeHandler);
+      return () => document.removeEventListener("mousedown", maybeHandler);
+    });
+
+    return domNode;
+  };
+
+  let domNodeCategory = clickOutside(() => setIsCategoryOpen(false));
+  let domNodeCity = clickOutside(() => setIsCityOpen(false));
 
   return (
     <Normal>
@@ -424,7 +440,7 @@ export default function Products() {
               <div className='hidden sm:block'>
                 <div className='flow-root'>
                   <div className='-mx-4 flex items-center divide-x divide-gray-200'>
-                    <div className='px-4 relative inline-block text-left'>
+                    <div ref={domNodeCategory} className='px-4 relative inline-block text-left'>
                       <button
                         onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                         type='button'
@@ -457,9 +473,9 @@ export default function Products() {
                                 onClick={(e) => {
                                   dispatch(SetFilterTerm(''))
                                   setCurrentPage(1)
-                                  e.preventDefault()
+                                  // e.preventDefault()
                                 }}
-                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 background-black'
+                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 focus-visible'
                               />
                               <label
                                 for='filter-category-0'
@@ -480,11 +496,11 @@ export default function Products() {
                                       value='objects'
                                       // value={search.Term}
                                       onClick={(e) => {
-                                       
+
                                         dispatch(SetFilterTerm(category.Name))
                                         setCurrentPage(1)
-                                        
-                                        e.preventDefault()
+
+                                        // e.preventDefault()
 
                                       }}
                                       type='radio'
@@ -503,7 +519,7 @@ export default function Products() {
                       )}
                     </div>
 
-                    <div className='px-4 relative inline-block text-left'>
+                    <div ref={domNodeCity} className='px-4 relative inline-block text-left'>
                       <button
                         onClick={() => setIsCityOpen(!isCityOpen)}
                         type='button'
@@ -537,7 +553,7 @@ export default function Products() {
                                 onClick={(e) => {
                                   dispatch(SetCityFilterTerm('Prishtinë'))
                                   setCurrentPage(1)
-                                  e.preventDefault()
+                                  // e.preventDefault()
                                 }}
                               />
                               <label
@@ -557,7 +573,7 @@ export default function Products() {
                                 onClick={(e) => {
                                   dispatch(SetCityFilterTerm('Mitrovicë'))
                                   setCurrentPage(1)
-                                  e.preventDefault()
+                                  // e.preventDefault()
                                 }}
                               />
                               <label
@@ -577,7 +593,7 @@ export default function Products() {
                                 onClick={(e) => {
                                   dispatch(SetCityFilterTerm('Gjilan'))
                                   setCurrentPage(1)
-                                  e.preventDefault()
+                                  // e.preventDefault()
                                 }}
                               />
                               <label
@@ -597,7 +613,7 @@ export default function Products() {
                                 onClick={(e) => {
                                   dispatch(SetCityFilterTerm('Prizren'))
                                   setCurrentPage(1)
-                                  e.preventDefault()
+                                  // e.preventDefault()
                                 }}
                               />
                               <label
@@ -617,7 +633,7 @@ export default function Products() {
                                 onClick={(e) => {
                                   dispatch(SetCityFilterTerm('Pejë'))
                                   setCurrentPage(1)
-                                  e.preventDefault()
+                                  // e.preventDefault()
                                 }}
                               />
                               <label
@@ -637,7 +653,7 @@ export default function Products() {
                                 onClick={(e) => {
                                   dispatch(SetCityFilterTerm('Gjakovë'))
                                   setCurrentPage(1)
-                                  e.preventDefault()
+                                  // e.preventDefault()
                                 }}
                               />
                               <label
