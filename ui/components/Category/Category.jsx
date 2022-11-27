@@ -4,7 +4,6 @@ export default function Category(props) {
   const { Name, Icon, Slug } = props.category;
 
   const Link = () => window.open(`/produktet/?kategoria=${Name}`, '_blank');
-  // href={`/produktet/?kategoria=Shtëpi`}
   return (
     <div onClick={() => {
       Link()

@@ -4,6 +4,7 @@ export default async function ProductUpdate(req, res) {
   try {
     const data = req.body;
     const id = req.query.id;
+    console.log("daataa", data)
     const product = await Product.findByIdAndUpdate(id, data, { new: true });
 
     if (product) {

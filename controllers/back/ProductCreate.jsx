@@ -4,7 +4,7 @@ export default async function connection(req, res) {
   try {
     let path = req.body.Name;
     path = path.toLowerCase().replace(/ /g, '-');
-    const _new = new Product({ ...req.body, Slug: path });
+    const _new = new Product({ ...req.body, Slug: path, createdAt: new Date() });
     const product = await _new.save();
 
     if (product) {

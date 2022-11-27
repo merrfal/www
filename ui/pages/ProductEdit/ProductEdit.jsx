@@ -17,7 +17,7 @@ export default function ProductEdit() {
     if (categories.Loaded === false) CategoryList(dispatch);
   }, [categories]);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (page.Loaded === false) ProductView(dispatch, slug)
   }, [page, slug]);
 
@@ -26,16 +26,16 @@ export default function ProductEdit() {
     <Normal>
       <div class='bg-white'>
         <div class='mx-auto max-w-2xl lg:max-w-7xl'>
-            {page.Loaded === false || categories.Loaded === false ? <Loading /> : (
-              <div>
+          {page.Loaded === false || categories.Loaded === false ? <Loading /> : (
+            <div>
               <div className='relative bg-white'>
-              <div className='mx-auto max-w-7xl px-4 sm:px-6'>
+                <div className='mx-auto max-w-7xl px-4 sm:px-6'>
                   <div className='md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16'>
                     <div className='mt-5 md:col-span-2 md:mt-0'>
                       <form action='#' method='POST'>
                         <div className='sm:overflow-hidden sm:rounded-md'>
                           <div className='space-y-6 bg-white p-2'>
-                          <h3 class="text-3xl font-bold leading-6 text-gray-900 mb-10">Redakto Produktin</h3>
+                            <h3 class="text-3xl font-bold leading-6 text-gray-900 mb-10">Redakto Produktin</h3>
                             <div className='col-span-6 sm:col-span-4'>
                               <label
                                 for='email-address'
@@ -59,12 +59,12 @@ export default function ProductEdit() {
                                 className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                               />
                             </div>
-      
+
                             <div className='col-span-6 sm:col-span-4'>
                               <label
                                 for='email-address'
                                 className='block text-sm font-medium text-gray-700'>
-                               Numri i telefonit
+                                Numri i telefonit
                               </label>
                               <input
                                 onChange={(e) =>
@@ -83,7 +83,7 @@ export default function ProductEdit() {
                                 className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                               />
                             </div>
-      
+
                             <div>
                               <label
                                 for='about'
@@ -105,14 +105,14 @@ export default function ProductEdit() {
                                   name='about'
                                   rows='3'
                                   className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
-                                  />
+                                />
                               </div>
                               <p className='mt-2 text-sm text-gray-500'>
                                 Përshkrimi i gjatë i produktit tuaj. Me të gjitha
                                 karakteristikat.
                               </p>
                             </div>
-      
+
                             <div className='grid grid-cols-6 gap-6'>
                               <div className='col-span-6'>
                                 <label
@@ -121,6 +121,15 @@ export default function ProductEdit() {
                                   Adresa e marrjes
                                 </label>
                                 <input
+                                  onChange={(e) =>
+                                    dispatch(
+                                      SetField({
+                                        Field: 'Address',
+                                        Value: e.target.value,
+                                      })
+                                    )
+                                  }
+                                  value={page.Page.Address}
                                   type='text'
                                   name='street-address'
                                   id='street-address'
@@ -128,7 +137,7 @@ export default function ProductEdit() {
                                   className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                                 />
                               </div>
-      
+
                               <div className='col-span-6 sm:col-span-6 lg:col-span-2'>
                                 <label
                                   for='city'
@@ -136,26 +145,26 @@ export default function ProductEdit() {
                                   Qyteti
                                 </label>
                                 <select
-                  onChange={(e) =>
-                    dispatch(
+                                  onChange={(e) =>
+                                    dispatch(
                                       SetField({
                                         Field: 'City',
                                         Value: e.target.value,
                                       })
                                     )
-                  }
-                  value={page.Page.City}
-                id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
-                                <option value="prishtinë">Prishtinë</option>
-                                <option value="mitrovicë">Mitrovicë</option>
-                                <option value="gjilan">Gjilan</option>
-                                <option value="prizren">Prizren</option>
-                                <option value="pejë">Pejë</option>
-                                <option value="gjakovë">Gjakovë</option>
+                                  }
+                                  value={page.Page.City}
+                                  id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                  <option value="prishtinë">Prishtinë</option>
+                                  <option value="mitrovicë">Mitrovicë</option>
+                                  <option value="gjilan">Gjilan</option>
+                                  <option value="prizren">Prizren</option>
+                                  <option value="pejë">Pejë</option>
+                                  <option value="gjakovë">Gjakovë</option>
 
-                </select>
+                                </select>
                               </div>
-      
+
                               <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
                                 <label
                                   for='postal-code'
@@ -163,6 +172,15 @@ export default function ProductEdit() {
                                   Kodi Postar
                                 </label>
                                 <input
+                                onChange={(e) =>
+                                  dispatch(
+                                    SetField({
+                                      Field: 'Zip',
+                                      Value: e.target.value,
+                                    })
+                                  )
+                                }
+                                value={page.Page.Zip}
                                   type='text'
                                   name='postal-code'
                                   id='postal-code'
@@ -170,20 +188,20 @@ export default function ProductEdit() {
                                   className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                                 />
                               </div>
-      
+
                               <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                      <label for="country" class="block text-sm font-medium text-gray-700">Kategoria</label>
-                      <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
-                        {
-                                  categories.Loaded === true && 
-                                  categories.Categories.map((category, index) => {
-                                    return (
-                                      <option>{category.Name}</option>
-                                    )
-                                  })
-                                }
-                      </select>
-                    </div>
+                                <label for="country" class="block text-sm font-medium text-gray-700">Kategoria</label>
+                                <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                  {
+                                    categories.Loaded === true &&
+                                    categories.Categories.map((category, index) => {
+                                      return (
+                                        <option>{category.Name}</option>
+                                      )
+                                    })
+                                  }
+                                </select>
+                              </div>
                             </div>
                             <div>
                               <label className='block text-sm font-medium text-gray-700'>
@@ -238,9 +256,9 @@ export default function ProductEdit() {
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
-            </div>
-            )}
+          )}
         </div>
       </div>
     </Normal>

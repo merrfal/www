@@ -4,6 +4,7 @@ const PageUpdate = async (dispatch, page) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductUpdate/${page._id}`;
   const config = ConfigBuilder('P', 'JSON', page, true, false, false);
 
+  console.log("url", url)
   try {
     const req = await fetch(url, config);
     const res = await req.json();
