@@ -1,154 +1,171 @@
 import { Normal } from '../../layouts';
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function About() {
   return (
     <Normal>
-
-<div className="isolate bg-white">
-      {/* <div className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
-        <svg
-          className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
-          viewBox="0 0 1155 678"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)"
-            fillOpacity=".3"
-            d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
-          />
-          <defs>
-            <linearGradient
-              id="45de2b6b-92d5-4d68-a6a0-9b9b2abad533"
-              x1="1155.49"
-              x2="-78.208"
-              y1=".177"
-              y2="474.645"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#9089FC" />
-              <stop offset={1} stopColor="#FF80B5" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-       */}
-      <main>
-        <div className="relative px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl pt-5 pb-16 sm:pt-12 sm:pb-10">
-            <div>
-              <div>
-                <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
-                    Merr Fal vendi ku ndihma jote i jep shpresë dikujt që është më i pafat se ty!
-                </h1>
-                <p className="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
-                  Me këtë platformë ju mund ti ndihmoni të gjith njerëzit në nevojë kudo që ndodhen.
-                  Kjo platformë mundëson dhurimin e mjeteve të ndryshme të cilat ju mund ti dërgoni tek ata të cilët kan nevojë.
-                  Misioni ynë është që të ju gjindemi afër të gjithë njerëzve në nevojë duke ju ofruar ndihmë me anë të platformës sonë.
-                  Të kthejmë lotët e dëshpërimit në lot gëzimi!
-                  Faleminderit dhe Zoti ju bekoftë ju dhe familjet tuaja!
-                </p>
-              </div>
-              {/* <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-                <svg
-                  className="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"
-                  viewBox="0 0 1155 678"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill="url(#ecb5b0c9-546c-4772-8c71-4d3f06d544bc)"
-                    fillOpacity=".3"
-                    d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
-                  />
-                  <defs>
-                    <linearGradient
-                      id="ecb5b0c9-546c-4772-8c71-4d3f06d544bc"
-                      x1="1155.49"
-                      x2="-78.208"
-                      y1=".177"
-                      y2="474.645"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop stopColor="#9089FC" />
-                      <stop offset={1} stopColor="#FF80B5" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div> */}
-            </div>
-          </div>
+      <div class='isolate bg-white'>
+        <div class='absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]'>
+          <svg
+            class='relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]'
+            viewBox='0 0 1155 678'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'>
+            <path
+              fill='url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)'
+              fill-opacity='.3'
+              d='M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z'
+            />
+            <defs>
+              <linearGradient
+                id='45de2b6b-92d5-4d68-a6a0-9b9b2abad533'
+                x1='1155.49'
+                x2='-78.208'
+                y1='.177'
+                y2='474.645'
+                gradientUnits='userSpaceOnUse'>
+                <stop stop-color='#9089FC'></stop>
+                <stop offset='1' stop-color='#FF80B5'></stop>
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
-      </main>
-    </div>
-
-
-
-
-
-
-
-    <div class='bg-white'>
-      <div className='mt-12'>
-        <div class='relative'>
-          <div class='absolute inset-x-0 bottom-0 h-1/2'></div>
-          <div class='max-w-7xl mx-auto sm:px-6 lg:px-8'>
-            <div class='relative shadow-xl sm:rounded-2xl sm:overflow-hidden'>
-              <div class='absolute inset-0'>
-                <img
-                  class='h-full w-full object-cover'
-                  src='/assets/Prizren1.jpg'
-                  alt='Dikush duke dhuruar dicka'
-                />
-                <div class='absolute inset-0 bg-[#377DFF] mix-blend-multiply'></div>
-              </div>
-              <div class='relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8'>
-                <h1 class='text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl'>
-                  <span class='block text-white text-center'>
-                  Ne jemi këtu për të ndihmuar njerëzit të ndihmojnë njëri-tjetrin
-                  </span>
-                </h1>
-                <p class='mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl'>
-                Merr Fal është një platformë për mbledhjen e gjërave të ndryshme të fuqizuara 
-                nga komuniteti. Ne besojmë se ndihma është e fuqishme, prandaj jemi të përkushtuar 
-                ta bëjmë të sigurt dhe të lehtë për këdo që të japë dhe të marrë ndihmë.
-                </p>
-                <div class='mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center'>
-                  <div class='space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5'>
-                    <Link href='/posts/add'>
-                      <a
-                        href='/posts/add'
-                        class='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-[#377DFF] bg-white hover:bg-indigo-50 sm:px-8'>
-                        Jep Fal
+        <main>
+          <div class='relative px-6 lg:px-8'>
+            <div class='mx-auto max-w-3xl pt-20 pb-32 sm:pt-48 sm:pb-40'>
+              <div>
+                <div class='hidden sm:mb-8 sm:flex sm:justify-center'>
+                  <div class='relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20'>
+                    <span class='text-gray-600'>
+                      Announcing our next round of funding.
+                      <a href='#' class='font-semibold text-indigo-600'>
+                        <span
+                          class='absolute inset-0'
+                          aria-hidden='true'></span>
+                        Read more <span aria-hidden='true'>&rarr;</span>
                       </a>
-                    </Link>
-
-                    <Link href='/produktet'>
-                      <a
-                        href='/produktet'
-                        class='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#377DFF35] bg-opacity-60 hover:bg-opacity-70 sm:px-8'>
-                        Merr Fal
-                      </a>
-                    </Link>
+                    </span>
                   </div>
+                </div>
+                <div>
+                  <h1 class='text-4xl font-bold tracking-tight sm:text-center sm:text-6xl'>
+                    Inicativa për ndryshimin e gjendjes shoqërore
+                  </h1>
+                  <p class='mt-6 text-lg leading-8 text-gray-600 sm:text-center'>
+                    Qëllimi i platformës tonë është të ofroj një pikë bashkimi mes dhuruesëve të produkteve prej llojeve më të ndryshme që ata dëshirojnë ti ndajnë me të tjerët dhe mes atyre që kan nevoja për produkte të ndryshme.
+                  </p>
+                  <div class='mt-8 flex gap-x-4 sm:justify-center'>
+                    <a
+                      href='#'
+                      class='inline-block rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700'>
+                      Get started
+                      <span class='text-indigo-200' aria-hidden='true'>
+                        &rarr;
+                      </span>
+                    </a>
+                    <a
+                      href='#'
+                      class='inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20'>
+                      Live demo
+                      <span class='text-gray-400' aria-hidden='true'>
+                        &rarr;
+                      </span>
+                    </a>
+                  </div>
+                </div>
+                <div class='absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]'>
+                  <svg
+                    class='relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]'
+                    viewBox='0 0 1155 678'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'>
+                    <path
+                      fill='url(#ecb5b0c9-546c-4772-8c71-4d3f06d544bc)'
+                      fill-opacity='.3'
+                      d='M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z'
+                    />
+                    <defs>
+                      <linearGradient
+                        id='ecb5b0c9-546c-4772-8c71-4d3f06d544bc'
+                        x1='1155.49'
+                        x2='-78.208'
+                        y1='.177'
+                        y2='474.645'
+                        gradientUnits='userSpaceOnUse'>
+                        <stop stop-color='#9089FC'></stop>
+                        <stop offset='1' stop-color='#FF80B5'></stop>
+                      </linearGradient>
+                    </defs>
+                  </svg>
                 </div>
               </div>
             </div>
           </div>
+        </main>
+      </div>
+
+      <div class="bg-white py-24 sm:py-32 lg:py-40">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="sm:text-center">
+      <h2 class="text-lg font-semibold leading-8 text-indigo-600">Transactions</h2>
+      <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">A better way to send money</p>
+      <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600">Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.</p>
+    </div>
+
+    <div class="mt-20 max-w-lg sm:mx-auto md:max-w-none">
+      <div class="grid grid-cols-1 gap-y-16 md:grid-cols-2 md:gap-x-12 md:gap-y-16">
+        <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500 text-white sm:shrink-0">
+            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+            </svg>
+          </div>
+          <div class="sm:min-w-0 sm:flex-1">
+            <p class="text-lg font-semibold leading-8 text-gray-900">Competitive exchange rates</p>
+            <p class="mt-2 text-base leading-7 text-gray-600">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
+          </div>
+        </div>
+
+        <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500 text-white sm:shrink-0">
+            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
+            </svg>
+          </div>
+          <div class="sm:min-w-0 sm:flex-1">
+            <p class="text-lg font-semibold leading-8 text-gray-900">No hidden fees</p>
+            <p class="mt-2 text-base leading-7 text-gray-600">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
+          </div>
+        </div>
+
+        <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500 text-white sm:shrink-0">
+            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+            </svg>
+          </div>
+          <div class="sm:min-w-0 sm:flex-1">
+            <p class="text-lg font-semibold leading-8 text-gray-900">Transfers are instant</p>
+            <p class="mt-2 text-base leading-7 text-gray-600">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
+          </div>
+        </div>
+
+        <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500 text-white sm:shrink-0">
+            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+            </svg>
+          </div>
+          <div class="sm:min-w-0 sm:flex-1">
+            <p class="text-lg font-semibold leading-8 text-gray-900">Mobile notifications</p>
+            <p class="mt-2 text-base leading-7 text-gray-600">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-
-
-
-
-   </Normal>
+    </Normal>
   );
 }
-
-
-
-
-// Ne jemi këtu për të ndihmuar njerëzit të ndihmojnë njëri-tjetrin GoFundMe është një platformë për mbledhjen e fondeve të fuqizuara nga komuniteti. Ne besojmë se ndihma është e fuqishme, prandaj jemi të përkushtuar ta bëjmë të sigurt dhe të lehtë për këdo që të japë dhe të marrë ndihmë.
