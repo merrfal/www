@@ -3,7 +3,6 @@ import { UnsetPrepage } from '../../data/redux/PageSlice';
 import { storage } from '../../config/Firebase';
 import { v4 } from 'uuid'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { useState } from 'react';
 
 const ProductCreate = async (page, dispatch, images, setIsLoading) => {
   let product = structuredClone(page)
@@ -11,6 +10,7 @@ const ProductCreate = async (page, dispatch, images, setIsLoading) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductCreate`;
   const config = ConfigBuilder('P', 'JSON', page, true, false, false);
   setIsLoading(true)
+  
   if (images.length !== 0) {
     let id = v4()
     for (let i = 0; i < images.length; i++) {
