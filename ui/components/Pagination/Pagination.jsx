@@ -15,10 +15,10 @@ export default function Pagination({ nPages, currentPage, setCurrentPage }) {
 
   return (
     nPages >= 2 && (
-      <div class='flex justify-center m-10'>
+      <div className='flex justify-center m-10'>
         <nav>
-          <ul class='flex list-style-none'>
-            <li onClick={prevPage} style={currentPage === 1 ? { display: 'none' } : {}} class='mr-2 page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none cursor-pointer'>
+          <ul className='flex list-style-none'>
+            <li onClick={prevPage} style={currentPage === 1 ? { display: 'none' } : {}} className='mr-2 page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none cursor-pointer'>
                 E mëparshmja
             </li>
 
@@ -26,7 +26,7 @@ export default function Pagination({ nPages, currentPage, setCurrentPage }) {
               <li
                 onClick={() => setCurrentPage(pgNumber)}
                 key={pgNumber}
-                class={
+                className={
                     currentPage === pgNumber
                     ? 'page-link relative block text-gray-800 focus:shadow-none bg-gray-200 page-item w-9 h-9 flex justify-center items-center rounded border-0 cursor-pointer bg-transparent outline-none transition-all duration-300 cursor-pointer mr-2'
                     : 'page-link relative block text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none page-item w-9 h-9 flex justify-center items-center rounded border-0 cursor-pointer bg-transparent outline-none transition-all duration-300 cursor-pointer mr-2' 
@@ -35,7 +35,7 @@ export default function Pagination({ nPages, currentPage, setCurrentPage }) {
               </li>
             ))}
 
-            <li class='page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none cursor-pointer' onClick={nextPage} style={currentPage === nPages ? { display: 'none' } : {}}>
+            <li className='page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none cursor-pointer' onClick={nextPage} style={currentPage === nPages ? { display: 'none' } : {}}>
                 Tjetra
             </li>
           </ul>

@@ -42,41 +42,41 @@ export default function Profile() {
             <div className='max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8'>
               <div>
                 <img
-                  class='h-32 rounded w-full object-cover lg:h-64'
+                  className='h-32 rounded w-full object-cover lg:h-64'
                   src={profile.Cover === null ? '/assets/cover-no.png' : profile.Cover}
                   alt={profile.Name}
                 />
               </div>
-              <div class='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8'>
-                <div class='-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5'>
-                  <div class='flex'>
+              <div className='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8'>
+                <div className='-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5'>
+                  <div className='flex'>
                     <img
-                      class='h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32'
+                      className='h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32'
                       src={profile.Avatar === null ? '/assets/avatar-no.png' : profile.Avatar}
                       alt={profile.Name}
                     />
                   </div>
-                  <div class='mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1'>
-                    <div class='sm:hidden md:block mt-6 min-w-0 flex-1'>
-                      <h1 class='text-2xl font-bold text-gray-900 truncate'>
+                  <div className='mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1'>
+                    <div className='sm:hidden md:block mt-6 min-w-0 flex-1'>
+                      <h1 className='text-2xl font-bold text-gray-900 truncate'>
                         {profile.Name} {profile.Surname}
                       </h1>
                       <p>@{profile.Username}</p>
                     </div>
                     {
                       profile.Id === user.Id &&
-                      <div class='mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4'>
+                      <div className='mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4'>
                         <button
                           onClick={() => setIsEdit(!isEdit)}
                           type='button'
-                          class='inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500'>
+                          className='inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500'>
                           <svg
                             xmlns='http://www.w3.org/2000/svg'
                             fill='none'
                             viewBox='0 0 24 24'
                             stroke-width='1.5'
                             stroke='currentColor'
-                            class='-ml-1 mr-2 h-5 w-5 text-gray-400'>
+                            className='-ml-1 mr-2 h-5 w-5 text-gray-400'>
                             <path
                               stroke-linecap='round'
                               stroke-linejoin='round'
@@ -90,8 +90,8 @@ export default function Profile() {
                     }
                   </div>
                 </div>
-                <div class='hidden sm:block md:hidden mt-6 min-w-0 flex-1'>
-                  <h1 class='text-2xl font-bold text-gray-900 truncate'>
+                <div className='hidden sm:block md:hidden mt-6 min-w-0 flex-1'>
+                  <h1 className='text-2xl font-bold text-gray-900 truncate'>
                     {profile.Name} {profile.Surname}
                   </h1>
                   <p>@{profile.Username}</p>
@@ -102,17 +102,17 @@ export default function Profile() {
 
               <div
                 style={loading ? { opacity: '.75', pointerEvents: 'none' } : {}}
-                class='relative z-10'
+                className='relative z-10'
                 aria-labelledby='modal-title'
                 role='dialog'
                 aria-modal='true'>
-                <div class='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity'></div>
-                <div class='fixed inset-0 z-10 overflow-y-auto'>
-                  <div class='flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0'>
-                    <div class='relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg'>
-                      <div class='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
-                        <div class='sm:flex sm:items-start'>
-                          <div class='mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'>
+                <div className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity'></div>
+                <div className='fixed inset-0 z-10 overflow-y-auto'>
+                  <div className='flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0'>
+                    <div className='relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg'>
+                      <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
+                        <div className='sm:flex sm:items-start'>
+                          <div className='mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'>
                             <div>
                               <div>
                                 <div className='mt-10 sm:mt-0'>
@@ -143,11 +143,11 @@ export default function Profile() {
 
                                                     <div className='mt-1 flex items-center'>
                                                       <span>
-                                                        <img class='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image) ? (image ? image.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
+                                                        <img className='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image) ? (image ? image.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
                                                       </span>
 
                                                       <button
-                                                        class='h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4'
+                                                        className='h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4'
                                                         style={{ position: 'relative', background: 'white', right: '15px', top: '25px' }}
                                                         onClick={(e) => {
                                                           onImageUpdate(0)
@@ -158,7 +158,7 @@ export default function Profile() {
                                                         </svg></button>
                                                       <button
                                                         style={{ position: 'relative', background: 'white', right: '35px', bottom: '30px' }}
-                                                        class='h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4'
+                                                        className='h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4'
 
                                                         onClick={(e) => {
                                                           image && profile.Avatar ?
@@ -441,14 +441,14 @@ export default function Profile() {
                           </div>
                         </div>
                       </div>
-                      <div class='bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6'>
+                      <div className='bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6'>
                         <button
                           onClick={() => {
                             UserUpdate(dispatch, profile, image, setIsEdit, setIsLoading, setImage)
                           }
                           }
                           type='button'
-                          class='inline-flex w-full justify-center rounded-md border border-transparent bg-[#387DFF] px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#387DFF] focus:outline-none focus:ring-2 focus:ring-[#387DFF] focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm'>
+                          className='inline-flex w-full justify-center rounded-md border border-transparent bg-[#387DFF] px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#387DFF] focus:outline-none focus:ring-2 focus:ring-[#387DFF] focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm'>
                           Përditëso
                         </button>
                         <button
@@ -457,7 +457,7 @@ export default function Profile() {
                             setImage(null)
                           }}
                           type='button'
-                          class='mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#387DFF] focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'>
+                          className='mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#387DFF] focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'>
                           Anulo
                         </button>
                       </div>
@@ -468,20 +468,20 @@ export default function Profile() {
             )
             }
             <main
-              class='max-w-2xl mx-auto py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8'
+              className='max-w-2xl mx-auto py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8'
               aria-labelledby='order-history-heading'>
-              <div class='max-w-xl'>
+              <div className='max-w-xl'>
                 <h1
                   id='order-history-heading'
-                  class='text-3xl font-extrabold tracking-tight text-gray-900'>
+                  className='text-3xl font-extrabold tracking-tight text-gray-900'>
                   Produktet e dhuruara
                 </h1>
-                <p class='mt-2 text-sm text-gray-500'>
+                <p className='mt-2 text-sm text-gray-500'>
                   Ketu listohen produktet e {profile.Name} {profile.Surname}'t.
                 </p>
               </div>
               <div
-                class={
+                className={
                   profile.Products.length === 0
                     ? 'w-full'
                     : 'mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4'

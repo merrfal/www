@@ -14,20 +14,20 @@ export default function Products() {
   const currentRecords = pages?.Pages?.slice(0, 16)
 
   return (
-    <div class='bg-white'>
-      <div class='max-w-2xl mt-[-4rem] mx-auto mb-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
-        <div class='px-4 sm:px-6 sm:flex sm:items-center sm:justify-between lg:px-8 xl:px-0'>
-          <h2 class='text-2xl font-extrabold tracking-tight text-gray-900'>
+    <div className='bg-white'>
+      <div className='max-w-2xl mt-[-4rem] mx-auto mb-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
+        <div className='px-4 sm:px-6 sm:flex sm:items-center sm:justify-between lg:px-8 xl:px-0'>
+          <h2 className='text-2xl font-extrabold tracking-tight text-gray-900'>
             Shfleto Produktet e Fundit
           </h2>
           <a
             href='/produktet'
-            class='hidden text-sm font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block'>
+            className='hidden text-sm font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block'>
             Shfleto të gjitha Produktet<span aria-hidden='true'> &rarr;</span>
           </a>
         </div>
         <div
-          class={
+          className={
             pages.Loaded
               ? pages.Pages.length === 0 ? 'w-full' : 'mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8'
               : 'w-full'

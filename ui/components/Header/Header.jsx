@@ -28,7 +28,6 @@ export default function Header() {
 
   let domNode = clickOutside(() => setIsProfileOpen(false));
 
-
   return (
     <header className='relative bg-white'>
       <nav aria-label='Top' className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -80,13 +79,13 @@ export default function Header() {
             <div className='hidden lg:flex-1 lg:block lg:self-stretch'>
               <div className='h-full flex space-x-8'>
                 <div className='flex'>
-                  <Link href='/produktet'>
+                  <Link href='/'>
                     <div className='relative flex'>
                       <button
                         type='button'
                         className='text-gray-700 hover:text-gray-800 relative z-10 flex items-center justify-center transition-colors ease-out duration-200 text-sm font-medium'
                         aria-expanded='false'>
-                        Produktet
+                        Ballina
                         <span
                           className='absolute bottom-0 inset-x-0 h-0.5 transition-colors ease-out duration-200 sm:mt-5 sm:transform sm:translate-y-px'
                           aria-hidden='true'></span>
@@ -95,17 +94,15 @@ export default function Header() {
                   </Link>
 
                   <div className='absolute z-10 top-full inset-x-0'>
-                    <div
-                      className='absolute inset-0 top-1/2 bg-white shadow'
-                      aria-hidden='true'></div>
+                    <div className='absolute inset-0 top-1/2 bg-white shadow' />
                   </div>
                 </div>
 
-                <Link href='/rreth-nesh'>
+                <Link href='/produktet'>
                   <a
-                    href='/rreth-nesh'
+                    href='/produktet'
                     className='flex items-center text-sm font-medium text-gray-700 hover:text-gray-800'>
-                    Rreth Nesh
+                    Produktet
                   </a>
                 </Link>
 
