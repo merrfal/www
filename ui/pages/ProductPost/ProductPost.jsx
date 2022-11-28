@@ -6,7 +6,7 @@ import { SetPrepageField } from '../../../data/redux/PageSlice';
 import { ProductCreate, CategoryList } from '../../../controllers/front';
 import { useEffect, useState } from 'react';
 import { Loading } from '../../components';
-import { ProductPost as Meta } from '../../../data/metas'; 
+import { ProductPost as Meta } from '../../../data/metas';
 
 export default function ProductPost() {
   const dispatch = useDispatch();
@@ -43,8 +43,7 @@ export default function ProductPost() {
                   <div className='sm:overflow-hidden sm:rounded-md'>
                     <div className='space-y-6 bg-white p-2'>
                       <h3 class="text-3xl font-bold leading-6 text-gray-900 mb-10">Shto një produkt falas</h3>
-                      <hr/>
-
+                      <hr />
                       {
                         loading === true ? <Loading /> :
                           <>
@@ -72,7 +71,6 @@ export default function ProductPost() {
                                 className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                               />
                             </div>
-
                             <div>
                               <label
                                 for='about'
@@ -97,38 +95,34 @@ export default function ProductPost() {
                                   className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                                 />
                               </div>
-                              {/* <p className='mt-2 text-sm text-gray-500'>
-                                Përshkrimi i gjatë i produktit tuaj. Me të gjitha
-                                karakteristikat.
-                              </p> */}
+                            </div>
+
+                            <div className='col-span-6'>
+                              <label
+                                for='street-address'
+                                className='block text-sm font-medium text-gray-700'>
+                                Adresa e marrjes
+                              </label>
+                              <input
+                                type='text'
+                                name='street-address'
+                                id='street-address'
+                                onChange={(e) =>
+                                  dispatch(
+                                    SetPrepageField({
+                                      Field: 'Address',
+                                      Value: e.target.value,
+                                    })
+                                  )
+                                }
+                                value={page.Prepage.Address}
+                                placeholder='Rruga Adem Jashari, Nr 00, Prishtine'
+                                className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
+                              />
                             </div>
 
                             <div className='grid grid-cols-6 gap-6'>
-                              <div className='col-span-6'>
-                                <label
-                                  for='street-address'
-                                  className='block text-sm font-medium text-gray-700'>
-                                  Adresa e marrjes
-                                </label>
-                                <input
-                                  type='text'
-                                  name='street-address'
-                                  id='street-address'
-                                  onChange={(e) =>
-                                    dispatch(
-                                      SetPrepageField({
-                                        Field: 'Address',
-                                        Value: e.target.value,
-                                      })
-                                    )
-                                  }
-                                  value={page.Prepage.Address}
-                                  placeholder='Rruga Adem Jashari, Nr 00, Prishtine'
-                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
-                                />
-                              </div>
-
-                              <div className='col-span-6 sm:col-span-4'>
+                              <div className='col-span-6 sm:col-span-3'>
                                 <label
                                   for='nr-telefonit'
                                   className='block text-sm font-medium text-gray-700'>
@@ -149,19 +143,43 @@ export default function ProductPost() {
                                   name='nr-telefonit'
                                   id='nr-telefonit'
                                   placeholder="04X-XXX-XXX"
-                                  autocomplete='email'
                                   className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                                 />
                               </div>
 
-                              <div className='col-span-6 sm:col-span-6 lg:col-span-3'>
+                              <div className='col-span-6 sm:col-span-3 lg:col-span-3'>
+                                <label
+                                  for='user-show'
+                                  className='block text-sm font-medium text-gray-700'>
+                                  A deshironi te i publikoni te dhenat e juaja?
+                                </label>
+                                <select
+                                  defaultValue={"Përcakto statusin"}
+                                  value={page.Prepage.UserShow}
+                                  onChange={(e) => {
+                                    dispatch(
+                                      SetPrepageField({
+                                        Field: 'UserShow',
+                                        Value: e.target.value,
+                                      })
+                                    )
+                                  }
+                                  }
+                                  id="user-show" name="user-show" autocomplete="user-show-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                  <option disabled value="Përcakto statusin">Zgjedh statusin</option>
+                                  <option value="Anonime">Anonime</option>
+                                  <option value="Publike">Publike</option>
+                                </select>
+                              </div>
+
+                              <div className='col-span-6 sm:col-span-3 lg:col-span-3'>
                                 <label
                                   for='city'
                                   className='block text-sm font-medium text-gray-700'>
                                   Qyteti
                                 </label>
                                 <select
-                                  defaultValue={"Zgjedh Qytetin"}
+                                  defaultValue={"Përcakto qytetin"}
                                   value={page.Prepage.City}
                                   onChange={(e) => {
                                     dispatch(
@@ -170,11 +188,10 @@ export default function ProductPost() {
                                         Value: e.target.value,
                                       })
                                     )
-                                    console.log("e", e.target.value)
                                   }
                                   }
-                                  id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
-                                  <option disabled value="Përcakto qytetin">Përcakto qytetin</option>
+                                  id="city" name="city" autocomplete="city-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                  <option disabled value="Përcakto qytetin">Zgjedh qytetin</option>
                                   <option value="Prishtinë">Prishtinë</option>
                                   <option value="Mitrovicë">Mitrovicë</option>
                                   <option value="Gjilan">Gjilan</option>
@@ -185,32 +202,8 @@ export default function ProductPost() {
                                 </select>
                               </div>
 
-                              {/* <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
-                                <label
-                                  for='postal-code'
-                                  className='block text-sm font-medium text-gray-700'>
-                                  Kodi Postar
-                                </label>
-                                <input
-                                  type='text'
-                                  name='postal-code'
-                                  id='postal-code'
-                                  onChange={(e) =>
-                                    dispatch(
-                                      SetPrepageField({
-                                        Field: 'Zip',
-                                        Value: e.target.value,
-                                      })
-                                    )
-                                  }
-                                  value={page.Prepage.Zip}
-                                  autocomplete='postal-code'
-                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
-                                />
-                              </div> */}
-
                               <div class="col-span-6 sm:col-span-3 lg:col-span-3">
-                                <label for="country" class="block text-sm font-medium text-gray-700">Kategoria</label>
+                                <label for="category" class="block text-sm font-medium text-gray-700">Kategoria</label>
                                 <select
                                   onChange={(e) =>
                                     dispatch(
@@ -222,7 +215,7 @@ export default function ProductPost() {
                                   }
                                   defaultValue={"Përcakto kategorin"}
                                   value={page.Prepage.Category}
-                                  id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                  id="category" name="category" autocomplete="category-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                   <option disabled value="Përcakto kategorin">Zgjedh kategorinë</option>
                                   {
                                     categories.Categories.map((category, index) => {
@@ -277,8 +270,6 @@ export default function ProductPost() {
                                         </svg>
                                         <div className='flex text-sm text-gray-600' >
                                           <label
-                                            // for='file-upload'
-
                                             className='relative cursor-pointer rounded-md bg-white font-medium text-[#377DFF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#377DFF] focus-within:ring-offset-2 hover:text-[#377DFF]'>
                                             <span className='text-[#377DFF]'>Ngarko një Fotografi</span>
 
@@ -292,7 +283,7 @@ export default function ProductPost() {
                                       </div>
                                     </div>
 
-                                    <div class="flex flex-wrap justify-center m-10">
+                                    <div class="flex flex-wrap justify-center mt-10 mb-10">
                                       {imageList.map((image, index) => (
 
                                         <div key={index} class="w-6/12 sm:w-4/12 px-4">
@@ -312,8 +303,6 @@ export default function ProductPost() {
                                               </button>
                                             </div>
                                           </div>
-
-
                                         </div>
 
                                       ))}
@@ -335,7 +324,7 @@ export default function ProductPost() {
                         className={
                           (
                             page.Prepage?.Name && page.Prepage.Phone && page.Prepage?.City &&
-                            page.Prepage?.Category && page.Prepage.Address && page.Prepage?.Zip && images.length !== 0) ? "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none focus:ring-2 focus:ring-[#377DFF] focus:ring-offset-2"
+                            page.Prepage?.Category && page.Prepage.Address && page.Prepage?.UserShow && images.length !== 0) ? "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none focus:ring-2 focus:ring-[#377DFF] focus:ring-offset-2"
                             : "bg-blue-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed"}
                         onClick={(e) => {
                           e.preventDefault();
