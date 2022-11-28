@@ -131,30 +131,42 @@ export default function Footer() {
               </div>
               <div>
                 <h3 class='text-sm font-medium text-gray-900'>
-                  Produktet Tjera
+                  Projekte tjera
                 </h3>
                 <ul role='list' class='mt-6 space-y-6'>
                   <li class='text-sm'>
-                    <a href='https://ummah.io' target="_blank" class='text-gray-500 hover:text-gray-600'>
-                      Ummah
+                    <a href='https://igerma.com/' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                      Instituti Germa
                     </a>
                   </li>
 
                   <li class='text-sm'>
-                    <a href='https://muslim-tab.com/install' target="_blank" class='text-gray-500 hover:text-gray-600'>
-                      Muslim Tab
+                    <a href='https://dhurataebajramit.com' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                      Dhurata E Bajramit
                     </a>
                   </li>
 
                   <li class='text-sm'>
-                    <a href='https://muslimani-ideal.org/' target="_blank" class='text-gray-500 hover:text-gray-600'>
-                      Muslimani Ideal
+                    <a href='https://ekonomiaislame.com' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                      Ekonomia Islame
+                    </a>
+                  </li>
+                  
+                  <li class='text-sm'>
+                    <a href='https://strehajone.com' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                      Streha Jonë
                     </a>
                   </li>
 
                   <li class='text-sm'>
-                    <a href='https://muslimani-ideal.org/' target="_blank" class='text-gray-500 hover:text-gray-600'>
-                      Pyetje dhe Përgjigje
+                    <a href='https://literaturaislame.com' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                      Literatura Islame
+                    </a>
+                  </li>
+
+                  <li class='text-sm'>
+                    <a href='https://pergjigje.net' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                      Pyetje dhe Përgjigje Islame
                     </a>
                   </li>
                 </ul>
@@ -163,10 +175,10 @@ export default function Footer() {
 
             <div class='mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4'>
               <h3 class='text-sm font-medium text-gray-900'>
-                Regjistrohu për lajmet e rreja
+                Regjistrohu për lajmet e reja
               </h3>
               <p class='mt-6 text-sm text-gray-500'>
-                Merni njoftime të ndryshime për platformen e tjera...
+                Merrni njoftime të ndryshme për platformën dhe shumë të tjera...
               </p>
               <form class='mt-2 flex sm:max-w-md' style={loading ? {pointerEvents: 'none', opacity: '.75'} : {}}>
                 <label for='email-address' class='sr-only'>

@@ -33,20 +33,21 @@ export default function ProductPost() {
     <Normal>
       {categories.Loaded === false ? <Loading /> :
         <div className='relative bg-white'>
-          <div className='mx-auto max-w-7xl px-4 sm:px-6'>
+          <div className='mx-auto max-w-4xl px-4 sm:px-6'>
             <div className='md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16'>
               <div className='mt-5 md:col-span-2 md:mt-0'>
                 <form action='#' method='POST'>
                   <div className='sm:overflow-hidden sm:rounded-md'>
                     <div className='space-y-6 bg-white p-2'>
-                      <h3 class="text-3xl font-bold leading-6 text-gray-900 mb-10">Shto Produktin</h3>
+                      <h3 class="text-3xl font-bold leading-6 text-gray-900 mb-10">Shto një produkt falas</h3>
+                      <hr/>
 
                       {
                         loading === true ? <Loading /> :
                           <>
                             <div className='col-span-6 sm:col-span-4'>
                               <label
-                                for='email-address'
+                                for='titulli'
                                 className='block text-sm font-medium text-gray-700'>
                                 Titulli i Produktit
                               </label>
@@ -62,34 +63,9 @@ export default function ProductPost() {
                                 }
                                 value={page.Prepage.Name}
                                 type='text'
-                                name='email-address'
-                                id='email-address'
-                                autocomplete='email'
-                                className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
-                              />
-                            </div>
-
-                            <div className='col-span-6 sm:col-span-4'>
-                              <label
-                                for='email-address'
-                                className='block text-sm font-medium text-gray-700'>
-                                Numri i telefonit
-                              </label>
-                              <input
-                                onChange={(e) =>
-                                  dispatch(
-                                    SetPrepageField({
-                                      Field: 'Phone',
-                                      Value: e.target.value,
-                                    })
-                                  )
-                                }
-                                // pattern="[+]{1}[0-9]{11,14}"
-                                value={page.Prepage.Phone}
-                                type='text'
-                                name='email-address'
-                                id='email-address'
-                                autocomplete='email'
+                                name='titulli'
+                                id='titulli'
+                                placeholder='Jakne për fëmijë'
                                 className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                               />
                             </div>
@@ -98,7 +74,7 @@ export default function ProductPost() {
                               <label
                                 for='about'
                                 className='block text-sm font-medium text-gray-700'>
-                                Përshkrimi
+                                Përshkrimi i Produktit
                               </label>
                               <div className='mt-1'>
                                 <textarea
@@ -113,14 +89,15 @@ export default function ProductPost() {
                                   value={page.Prepage.Description}
                                   id='about'
                                   name='about'
+                                  placeholder="Përshkrimi i gjatë i produktit tuaj, me të gjitha karakteristikat."
                                   rows='3'
                                   className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                                 />
                               </div>
-                              <p className='mt-2 text-sm text-gray-500'>
+                              {/* <p className='mt-2 text-sm text-gray-500'>
                                 Përshkrimi i gjatë i produktit tuaj. Me të gjitha
                                 karakteristikat.
-                              </p>
+                              </p> */}
                             </div>
 
                             <div className='grid grid-cols-6 gap-6'>
@@ -143,19 +120,45 @@ export default function ProductPost() {
                                     )
                                   }
                                   value={page.Prepage.Address}
-                                  autocomplete='street-address'
+                                  placeholder='Rruga Adem Jashari, Nr 00, Prishtine'
                                   className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                                 />
                               </div>
 
-                              <div className='col-span-6 sm:col-span-6 lg:col-span-2'>
+                              <div className='col-span-6 sm:col-span-4'>
+                                <label
+                                  for='nr-telefonit'
+                                  className='block text-sm font-medium text-gray-700'>
+                                  Numri i telefonit
+                                </label>
+                                <input
+                                  onChange={(e) =>
+                                    dispatch(
+                                      SetPrepageField({
+                                        Field: 'Phone',
+                                        Value: e.target.value,
+                                      })
+                                    )
+                                  }
+                                  // pattern="[+]{1}[0-9]{11,14}"
+                                  value={page.Prepage.Phone}
+                                  type='text'
+                                  name='nr-telefonit'
+                                  id='nr-telefonit'
+                                  placeholder="04X-XXX-XXX"
+                                  autocomplete='email'
+                                  className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
+                                />
+                              </div>
+
+                              <div className='col-span-6 sm:col-span-6 lg:col-span-3'>
                                 <label
                                   for='city'
                                   className='block text-sm font-medium text-gray-700'>
                                   Qyteti
                                 </label>
                                 <select
-                                  defaultValue={"Përcakto qytetin"}
+                                  defaultValue={"Zgjedh Qytetin"}
                                   value={page.Prepage.City}
                                   onChange={(e) => {
                                     dispatch(
@@ -179,7 +182,7 @@ export default function ProductPost() {
                                 </select>
                               </div>
 
-                              <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
+                              {/* <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
                                 <label
                                   for='postal-code'
                                   className='block text-sm font-medium text-gray-700'>
@@ -201,9 +204,9 @@ export default function ProductPost() {
                                   autocomplete='postal-code'
                                   className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm'
                                 />
-                              </div>
+                              </div> */}
 
-                              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                              <div class="col-span-6 sm:col-span-3 lg:col-span-3">
                                 <label for="country" class="block text-sm font-medium text-gray-700">Kategoria</label>
                                 <select
                                   onChange={(e) =>
@@ -217,7 +220,7 @@ export default function ProductPost() {
                                   defaultValue={"Përcakto kategorin"}
                                   value={page.Prepage.Category}
                                   id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
-                                  <option disabled value="Përcakto kategorin">Përcakto kategorin</option>
+                                  <option disabled value="Përcakto kategorin">Zgjedh kategorinë</option>
                                   {
                                     categories.Categories.map((category, index) => {
                                       return (
@@ -280,7 +283,7 @@ export default function ProductPost() {
                                           <p className='pl-1'>ose tërhiqe një këtu.</p>
                                         </div>
                                         <p className='text-xs text-gray-500'>
-                                          PNG, JPG, që nuj tejkalonë madhësin e 3MB
+                                          PNG, JPG, që nuk tejkalon madhësinë e 3MB
                                         </p>
 
                                       </div>
