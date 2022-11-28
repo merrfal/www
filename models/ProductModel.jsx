@@ -49,18 +49,21 @@ const ProductSchema = new Schema({
         type: String,
         default: 'Kosovo'
     },
+    UserShow: {
+        type: String,
+        default: ''
+    },
     createdAt: {
-        type: Date,
-        default: new Date()
+        type: Date
     },
     Status: {
         type: String,
         default: 'published',
         enum: [
-            'published', 
-            'sold', 
-            'in-review', 
-            'rejected', 
+            'e publikuar', 
+            'e marr', 
+            'e refuzuar', 
+            'e rezervuar', 
             'unpublished'
         ],
     }

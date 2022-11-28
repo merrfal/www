@@ -1,17 +1,14 @@
 import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
-import { Product, Empty, Loading } from '../../components';
+import { Product, Empty, Loading, Pagination } from '../../components';
 import { ProductsList, CategoryList, ProductsFilters } from '../../../controllers/front';
-import Pagination from './Pagination';
 import { SetFilterTerm, SetCityFilterTerm } from '../../../data/redux/FilterSlice';
 import { useRouter } from 'next/router';
-
-
+import { Products as Meta } from '../../../data/metas'; 
 
 export default function Products() {
   let category = useRouter().query.kategoria;
-  console.log("kategoria", category)
 
   const dispatch = useDispatch();
   const pages = useSelector((state) => state.pages);
@@ -24,6 +21,7 @@ export default function Products() {
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(8);
+  const [menuMobileOpen, setMenuMobileOpen] = useState(false);
 
   const indexOfLastRecord = currentPage * recordsPerPage
   const indexOFirstRecord = indexOfLastRecord - recordsPerPage
@@ -41,9 +39,7 @@ export default function Products() {
 
 
   useEffect(() => {
-    if (category) {
-      dispatch(SetFilterTerm(category))
-    }
+    if (category) dispatch(SetFilterTerm(category))
   }, [category])
 
 
@@ -74,14 +70,11 @@ export default function Products() {
 
   return (
     <Normal>
+      <Meta />
       <div className='bg-white'>
-        <div
-          className='fixed inset-0 flex z-40 sm:hidden'
-          role='dialog'
-          aria-modal='true'>
+        <div className='fixed inset-0 flex z-40 sm:hidden'>
           <div
-            className='fixed inset-0 bg-black bg-opacity-25'
-            aria-hidden='true'></div>
+            className='fixed inset-0 bg-black bg-opacity-25' />
           <div className='ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto'>
             <div className='px-4 flex items-center justify-between'>
               <h2 className='text-lg font-medium text-gray-900'>Filtrat</h2>
@@ -146,117 +139,39 @@ export default function Products() {
                       <label
                         for='filter-mobile-category-0'
                         className='ml-3 text-sm text-gray-500'>
-                        All New Arrivals
+                        Të gjitha kategoritë
                       </label>
                     </div>
 
-                    <div className='flex items-center'>
+                    {categories.isLoaded === true &&
+                              categories.Categories.map((category, index) => {
+                                return (
+                                  <div className='flex items-center'>
                       <input
+                      key={index}
                         id='filter-mobile-category-1'
                         name='category[]'
                         value='tees'
+                        onClick={(e) => {
+                                       
+                          dispatch(SetFilterTerm(category.Name))
+                          setCurrentPage(1)
+                          
+                          e.preventDefault()
+
+                        }}
                         type='checkbox'
                         className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
                       />
                       <label
                         for='filter-mobile-category-1'
                         className='ml-3 text-sm text-gray-500'>
-                        Tees
+                        {category.Name}
                       </label>
                     </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-category-2'
-                        name='category[]'
-                        value='objects'
-                        type='checkbox'
-                        checked
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-category-2'
-                        className='ml-3 text-sm text-gray-500'>
-                        Objects
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className='border-t border-gray-200 px-4 py-6'>
-                <h3 className='-mx-2 -my-3 flow-root'>
-                  <button
-                    type='button'
-                    className='px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400'
-                    aria-controls='filter-section-1'
-                    aria-expanded='false'>
-                    <span className='font-medium text-gray-900'>Color</span>
-                    <span className='ml-6 flex items-center'>
-                      <svg
-                        className='rotate-0 h-5 w-5 transform'
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 20 20'
-                        fill='currentColor'
-                        aria-hidden='true'>
-                        <path
-                          fill-rule='evenodd'
-                          d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                          clip-rule='evenodd'
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                </h3>
-                <div className='pt-6' id='filter-section-1'>
-                  <div className='space-y-6'>
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-color-0'
-                        name='color[]'
-                        value='white'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-color-0'
-                        className='ml-3 text-sm text-gray-500'>
-                        {' '}
-                        White{' '}
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-color-1'
-                        name='color[]'
-                        value='beige'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-color-1'
-                        className='ml-3 text-sm text-gray-500'>
-                        {' '}
-                        Beige{' '}
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-color-2'
-                        name='color[]'
-                        value='blue'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-color-2'
-                        className='ml-3 text-sm text-gray-500'>
-                        {' '}
-                        Blue{' '}
-                      </label>
-                    </div>
+                                );
+                              })}
+                    
                   </div>
                 </div>
               </div>
@@ -268,7 +183,7 @@ export default function Products() {
                     className='px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400'
                     aria-controls='filter-section-2'
                     aria-expanded='false'>
-                    <span className='font-medium text-gray-900'> Sizes </span>
+                    <span className='font-medium text-gray-900'>Qytetet</span>
                     <span className='ml-6 flex items-center'>
                       <svg
                         className='rotate-0 h-5 w-5 transform'
@@ -298,8 +213,7 @@ export default function Products() {
                       <label
                         for='filter-mobile-sizes-0'
                         className='ml-3 text-sm text-gray-500'>
-                        {' '}
-                        S{' '}
+                        Prishtinë
                       </label>
                     </div>
 
@@ -314,8 +228,7 @@ export default function Products() {
                       <label
                         for='filter-mobile-sizes-1'
                         className='ml-3 text-sm text-gray-500'>
-                        {' '}
-                        M{' '}
+                        Mitrovicë
                       </label>
                     </div>
 
@@ -330,8 +243,67 @@ export default function Products() {
                       <label
                         for='filter-mobile-sizes-2'
                         className='ml-3 text-sm text-gray-500'>
-                        {' '}
-                        L{' '}
+                        Gjilan
+                      </label>
+                    </div>
+
+                    <div className='flex items-center'>
+                      <input
+                        id='filter-mobile-sizes-2'
+                        name='sizes[]'
+                        value='l'
+                        type='checkbox'
+                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                      />
+                      <label
+                        for='filter-mobile-sizes-2'
+                        className='ml-3 text-sm text-gray-500'>
+                       Prizren
+                      </label>
+                    </div>
+
+                    <div className='flex items-center'>
+                      <input
+                        id='filter-mobile-sizes-2'
+                        name='sizes[]'
+                        value='l'
+                        type='checkbox'
+                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                      />
+                      <label
+                        for='filter-mobile-sizes-2'
+                        className='ml-3 text-sm text-gray-500'>
+                        Pejë
+                      </label>
+                    </div>
+
+                    <div className='flex items-center'>
+                      <input
+                        id='filter-mobile-sizes-2'
+                        name='sizes[]'
+                        value='l'
+                        type='checkbox'
+                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                      />
+                      <label
+                        for='filter-mobile-sizes-2'
+                        className='ml-3 text-sm text-gray-500'>
+                        Gjakovë
+                      </label>
+                    </div>
+
+                    <div className='flex items-center'>
+                      <input
+                        id='filter-mobile-sizes-2'
+                        name='sizes[]'
+                        value='l'
+                        type='checkbox'
+                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                      />
+                      <label
+                        for='filter-mobile-sizes-2'
+                        className='ml-3 text-sm text-gray-500'>
+                        Gjilan
                       </label>
                     </div>
                   </div>
@@ -383,7 +355,7 @@ export default function Products() {
                   </button>
                 </div> */}
 
-                {isSortOpen && (
+                {/* {isSortOpen && (
                   <div
                     className='origin-top-left absolute left-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'
                     role='menu'
@@ -428,13 +400,13 @@ export default function Products() {
                       </a>
                     </div>
                   </div>
-                )}
+                )} */}
               </div>
 
               <button
                 type='button'
                 className='inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden'>
-                Filters
+                Filtrat
               </button>
 
               <div className='hidden sm:block'>
@@ -484,7 +456,7 @@ export default function Products() {
                               </label>
                             </div>
 
-                            {!categories.isLoaded &&
+                            {categories.isLoaded === true &&
                               categories.Categories.map((category, index) => {
                                 return (
                                   <div
@@ -675,8 +647,8 @@ export default function Products() {
           <div className='bg-gray-100'>
             <div className='max-w-7xl mx-auto py-3 px-4 sm:flex sm:items-center sm:px-6 lg:px-8'>
               <h3 className='text-xs font-semibold uppercase tracking-wide text-gray-500'>
-                Filters
-                <span className='sr-only'>, active</span>
+              Filtrat
+                <span className='sr-only'>, aktive</span>
               </h3>
 
               <div
@@ -763,10 +735,12 @@ export default function Products() {
                 currentRecords?.map((page, index) => <Product product={page} key={index} />)
           }
         </div>
+
         <Pagination
           nPages={nPages}
           currentPage={currentPage}
-          setCurrentPage={setCurrentPage} />
+          setCurrentPage={setCurrentPage} 
+        />
       </div>
 
     </Normal>

@@ -8,6 +8,7 @@ export default async function UserUpdate(req, res) {
     const body = req.body;
     const id = req.query.id;
 
+    console.log("body", body)
     if (body.NewPassword) {
       const salt = await bcrypt.genSalt(10);
       const password = await bcrypt.hash(req.body.NewPassword, salt);

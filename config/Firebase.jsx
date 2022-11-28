@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import {getStorage, } from 'firebase/storage'
+import { getStorage } from 'firebase/storage'
+
 const Config = {
   apiKey: process.env.NEXT_PUBLIC_FB_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FB_AUTH_DOMAIN,
@@ -13,10 +14,12 @@ const Config = {
 let Firebase;
 let FB_ERROR = 'Firebase initialization error.';
 let storage;
+
 try { 
   Firebase = initializeApp(Config) 
   storage = getStorage(Firebase)
 }
+
 catch (err) { if (!/already exists/.test(err.message)) console.error(FB_ERROR, err.stack) }
 
 export const FirebaseAuth = getAuth(Firebase);

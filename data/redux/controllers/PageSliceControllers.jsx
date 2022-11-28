@@ -13,9 +13,10 @@ const UnsetPage = (state) => {
 };
 
 const SetField = (state, action) => {
-  let data = action.payload;
-  state.Page[data.Field] = data.Value;
+  const { Field, Value } = action.payload;
+  state.Page[Field] = Value;
 }
+
 
 const UnsetPrepage = (state) => {
   state.Prepage = {};
@@ -25,5 +26,6 @@ const SetPrepageField = (state, action) => {
   const { Field, Value } = action.payload;
   state.Prepage[Field] = Value;
 }
+
 
 export { SetPage, UnsetPage, SetField, UnsetPrepage, SetPrepageField };

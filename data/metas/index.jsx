@@ -1,18 +1,43 @@
-import Head from 'next/head';
+import Terms from './Terms';
+import Privacy from './Privacy';
+import Error from './Error';
+import Home from './Home';
+import Loader from './Loader';
+import Product from './Product';
+import ProductEdit from './ProductEdit';
+import ProductPost from './ProductPost';
+import Products from './Products';
+import Profile from './Profile';
+import UserProducts from './UserProducts';
+import UserSaves from './UserSaves';
 
-const About = () => {
-  return (
-    <Head>
-      <meta charset='UTF-8' />
-      <meta name='description' content='' />
-      <meta name='keywords' content='' />
-      <meta name='author' content='' />
-      <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-      <meta property='og:title' content='' />
-      <meta property='og:description' content='' />
-      <meta property='og:image' content='/assets/thumbnail.png' />
-    </Head>
-  );
-};
+export {
+  Terms,
+  Privacy,
+  Error,
+  Home,
+  Loader,
+  Product,
+  Products,
+  ProductEdit,
+  ProductPost,
+  Profile,
+  UserProducts,
+  UserSaves
+}
 
-export default About;
+// a po i sheh qito meta tags?
+// qito perdoren per me qit titullin e faqes
+// apo edhe desccription ne google search ose searches tjera
+// Amazon.com. Spend less. Smile more. qikjo osht titulli
+// qikjo osht description i amazon;
+// Free shipping on millions of items. Get the best of Shopping and Entertainment with Prime. Enjoy low prices and great deals on the largest selection of ...
+// e qellimi osht shtash me i bo na per secilen page qe kur ta publikojna te shfqet qysh duhet okej?
+
+// e tash un qito i kom kriu per sicilen faqe
+
+// edhe e kom qit ka njo default dhe i kom bo import te scila faqe te njejta
+// e tash duhesh me i ndryshu per secilen qe me u shfaq si duhet
+// un e kom kry veq per Home e ty qito tjerat kejt, kontentin e mendon vet 
+
+// psh nese osht edit produkti e qet titullin: Editimi i produktit - Merr Fal

@@ -1,4 +1,5 @@
-import '../ui/styles/Global.css';
+import '../ui/styles/merrfal.css';
+import '../ui/styles/tailwind.css';
 
 import { Redux } from '../config/Redux';
 import { Provider} from 'react-redux';

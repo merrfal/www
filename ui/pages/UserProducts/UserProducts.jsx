@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
 import { Loading, None } from '../../components'
 import { OpenConfirmation } from '../../../data/redux/ConfirmationSlice'
+import { UserProducts as Meta } from '../../../data/metas'; 
 
 export default function UserProducts() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function UserProducts() {
 
   return (
     <Normal>
+      <Meta />
       <div className='max-w-7xl mx-auto pt-16 px-4 sm:px-6 lg:px-8'>
         <h1 className='text-3xl font-extrabold tracking-tight text-gray-900'>
           Produktet e Mia

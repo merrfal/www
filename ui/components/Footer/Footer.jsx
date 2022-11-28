@@ -41,7 +41,7 @@ export default function Footer() {
             <div class='mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6'>
               <div class='grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8'>
                 <div>
-                  <h3 class='text-sm font-medium text-gray-900'>Kategoritë</h3>
+                  <h3 class='text-sm font-medium text-gray-900 select-none'>Kategoritë</h3>
                   <ul role='list' class='mt-6 space-y-6'>
                     <li class='text-sm'>
                       <Link href={`/produktet?kategoria=Biznes dhe Punë`}>
@@ -85,7 +85,7 @@ export default function Footer() {
                   </ul>
                 </div>
                 <div>
-                  <h3 class='text-sm font-medium text-gray-900'>Më Shumë</h3>
+                  <h3 class='text-sm font-medium text-gray-900 select-none'>Më Shumë</h3>
                   <ul role='list' class='mt-6 space-y-6'>
                     <li class='text-sm'>
                       <Link href={`/rreth-nesh`}>
@@ -104,7 +104,7 @@ export default function Footer() {
                     </li>
 
                     <li class='text-sm'>
-                      <Link href={`/kushtet-e-shërbimit`}>
+                      <Link href={`/kushtet-e-sherbimit`}>
                         <a class='text-gray-500 hover:text-gray-600'>
                           Kushtet e Shërbimit
                         </a>
@@ -112,7 +112,7 @@ export default function Footer() {
                     </li>
 
                     <li class='text-sm'>
-                      <Link href={`/politika-e-privatësisë`}>
+                      <Link href={`/politika-e-privatesise`}>
                         <a class='text-gray-500 hover:text-gray-600'>
                           Politika e privatësisë
                         </a>
@@ -130,30 +130,42 @@ export default function Footer() {
                 </div>
               </div>
               <div>
-                <h3 class='text-sm font-medium text-gray-900'>
-                  Produktet Tjera
+                <h3 class='text-sm font-medium text-gray-900 select-none'>
+                  Projekte tjera
                 </h3>
                 <ul role='list' class='mt-6 space-y-6'>
                   <li class='text-sm'>
-                    <a href='https://ummah.io' target="_blank" class='text-gray-500 hover:text-gray-600'>
-                      Ummah
+                    <a href='https://igerma.com/' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                      Instituti Germa
                     </a>
                   </li>
 
                   <li class='text-sm'>
-                    <a href='https://muslim-tab.com/install' target="_blank" class='text-gray-500 hover:text-gray-600'>
-                      Muslim Tab
+                    <a href='https://dhurataebajramit.com' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                      Dhurata E Bajramit
                     </a>
                   </li>
 
                   <li class='text-sm'>
-                    <a href='https://muslimani-ideal.org/' target="_blank" class='text-gray-500 hover:text-gray-600'>
-                      Muslimani Ideal
+                    <a href='https://ekonomiaislame.com' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                      Ekonomia Islame
+                    </a>
+                  </li>
+                  
+                  <li class='text-sm'>
+                    <a href='https://strehajone.com' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                      Streha Jonë
                     </a>
                   </li>
 
                   <li class='text-sm'>
-                    <a href='https://muslimani-ideal.org/' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                    <a href='https://literaturaislame.com' target="_blank" class='text-gray-500 hover:text-gray-600'>
+                      Literatura Islame
+                    </a>
+                  </li>
+
+                  <li class='text-sm'>
+                    <a href='https://pergjigje.net' target="_blank" class='text-gray-500 hover:text-gray-600'>
                       Pyetje dhe Përgjigje
                     </a>
                   </li>
@@ -162,13 +174,13 @@ export default function Footer() {
             </div>
 
             <div class='mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4'>
-              <h3 class='text-sm font-medium text-gray-900'>
-                Regjistrohu për lajmet e rreja
+              <h3 class='text-sm font-medium text-gray-900 select-none'>
+                Regjistrohu për lajmet e reja
               </h3>
               <p class='mt-6 text-sm text-gray-500'>
-                Merni njoftime të ndryshime për platformen e tjera...
+                Merrni njoftime të ndryshme rreth produkteve ose për platformën tonë ose platforma tjera të ngjajshme.
               </p>
-              <form class='mt-2 flex sm:max-w-md' style={loading ? {pointerEvents: 'none', opacity: '.75'} : {}}>
+              <form class='mt-4 flex sm:max-w-md' style={loading ? {pointerEvents: 'none', opacity: '.75'} : {}}>
                 <label for='email-address' class='sr-only'>
                   Adresa elektronike
                 </label>
@@ -176,6 +188,7 @@ export default function Footer() {
                   id='email-address'
                   type='text'
                   required
+                  placeholder="emaili@juaj.com"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   class='appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500'

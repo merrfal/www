@@ -1,28 +1,23 @@
 import Link from 'next/link';
-import React from "react";
+import ImageUploading from "react-images-uploading";
+
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { UserView, UserUpdate } from '../../../controllers/front';
 import { Normal } from '../../layouts';
 import { Loading, Empty, Product } from '../../components';
 import { useRouter } from 'next/router';
-import ImageUploading from "react-images-uploading";
 import { SetProfileField } from '../../../data/redux/ProfileSlice';
-
-
+import { Profile as Meta } from '../../../data/metas'; 
 
 export default function Profile() {
   const dispatch = useDispatch();
   const username = useRouter().query.username || '';
-  console.log("username", useRouter())
-  const [image, setImage] = React.useState(null);
-  const [loading, setIsLoading] = React.useState(false);
+  const [image, setImage] = useState(null);
+  const [loading, setIsLoading] = useState(false);
   const maxNumber = 69;
 
-  const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    setImage(imageList[0]);
-  };
+  const onChange = (imageList, addUpdateIndex) => setImage(imageList[0]);
 
   console.log("image", image)
 
@@ -38,6 +33,7 @@ export default function Profile() {
 
   return (
     <Normal>
+      <Meta />
       <section style={{ padding: '1em' }}>
         {profile.Loaded === false ? (
           <Loading />
@@ -88,7 +84,7 @@ export default function Profile() {
                             />
                           </svg>
 
-                          <span>Edit Profile</span>
+                          <span>Redakto llogarinë</span>
                         </button>
                       </div>
                     }

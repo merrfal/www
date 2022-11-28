@@ -4,7 +4,7 @@ export default async function ProductsFilters(req, res) {
   try {
     const term = req.body.term;
     const cityTerm = req.body.cityTerm;
-    console.log("term", term)
+
     let products =  []
     if (term === '' && cityTerm !== '') {
       products = await Product.find({ City: cityTerm }).sort({createdAt: -1});

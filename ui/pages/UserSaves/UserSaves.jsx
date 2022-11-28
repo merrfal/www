@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
-import { Loading, Empty, Product } from '../../components'
+import { Loading, Empty, Product, Pagination } from '../../components'
 import { ProductSaves } from '../../../controllers/front';
-import Pagination from '../Products/Pagination';
+import { UserSaves as Meta } from '../../../data/metas'; 
 
 export default function UserSaves() {
   const dispatch = useDispatch();
@@ -21,8 +21,6 @@ export default function UserSaves() {
 
   const currentRecords = savedPosts?.slice(indexOFirstRecord, indexOfLastRecord)
 
-  console.log("current ", currentRecords)
-
   const nPages = Math.ceil((savedPosts?.length) / recordsPerPage)
 
   useEffect(() => {
@@ -32,6 +30,7 @@ export default function UserSaves() {
 
   return (
     <Normal>
+      <Meta />
       <div className='max-w-7xl mx-auto pt-16 px-4 sm:px-6 lg:px-8'>
         <h1 className='text-3xl font-extrabold tracking-tight text-gray-900'>
           Të preferuarat

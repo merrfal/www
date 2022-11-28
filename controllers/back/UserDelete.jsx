@@ -22,7 +22,7 @@ export default async function UserDelete(req, res) {
   } catch (error) {
     res.status(500).send({
       status: false,
-      message: 'Internal server error whiGabim i brendshëm i serverit gjatë përpjekjes për të fshirë përdoruesin dhe produktet e tij.',
+      message: 'Gabim i brendshëm i serverit gjatë përpjekjes për të fshirë përdoruesin dhe produktet e tij.',
       sysErrors: error,
       data: null,
       code: 500,

@@ -5,8 +5,6 @@ const ProductsFilters = async (term, cityTerm, dispatch) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductsFilters`;
   const config = ConfigBuilder('P', 'JSON', {term, cityTerm}, true, false, false);
 
-  console.log("url", url)
-  console.log("cityterm", cityTerm)
   try {
     const req = await fetch(url, config);
     const res = await req.json();

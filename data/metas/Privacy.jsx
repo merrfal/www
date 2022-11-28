@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-const Profile = () => {
+const Privacy = () => {
   return (
     <Head>
       <meta charset='UTF-8' />
@@ -16,4 +16,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Privacy;

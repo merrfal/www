@@ -5,6 +5,10 @@ const ProductsSearch = async (term, dispatch) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductsSearch`;
   const config = ConfigBuilder('P', 'JSON', {term}, true, false, false);
 
+  console.log("url", url)
+  console.log("url", term)
+  console.log("config", config)
+
   try {
     const req = await fetch(url, config);
     const res = await req.json();

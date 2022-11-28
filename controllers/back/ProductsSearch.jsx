@@ -6,6 +6,7 @@ export default async function ProductsSearch(req, res) {
     const unfiltered = await Product.find({});
     const term = req.body.term;
 
+
     const products = Searcher(unfiltered, term);
 
     if (products) {

@@ -8,9 +8,7 @@ export default function Products() {
   const pages = useSelector((state) => state.pages);
 
   useEffect(() => {
-    if (pages.Loaded === false) {
-      ProductsList(dispatch);
-    }
+    if (pages.Loaded === false) ProductsList(dispatch);
   }, [pages]);
 
   const currentRecords = pages?.Pages?.slice(0, 16)
