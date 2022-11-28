@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { AuthWithGoogle } from '../../../controllers/front';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useEffect } from 'react';
 import { LogoutUser } from '../../../data/redux/UserSlice';
 import { OpenSearch } from '../../../data/redux/SearchSlice';
 import { useState } from 'react';
@@ -12,6 +13,21 @@ export default function Header() {
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  let clickOutside = (handler) => {
+    let domNode = useRef();
+
+    useEffect(() => {
+      let maybeHandler = (event) => !domNode.current.contains(event.target) && handler();
+      document.addEventListener("mousedown", maybeHandler);
+      return () => document.removeEventListener("mousedown", maybeHandler);
+    });
+
+    return domNode;
+  };
+
+  let domNode = clickOutside(() => setIsProfileOpen(false));
+
 
   return (
     <header className='relative bg-white'>
@@ -197,7 +213,7 @@ export default function Header() {
               )}
 
               {user.Auth && (
-                <div className='relative'>
+                <div ref={domNode} className='relative'>
                   <button
                     type='button'
                     onClick={() => setIsProfileOpen(!isProfileOpen)}

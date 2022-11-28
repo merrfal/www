@@ -4,6 +4,11 @@ const SetFilterTerm = (state, action) => {
     state.Results = null;
   }
   
+  const SetCityFilterTerm = (state, action) => {
+    state.CityTerm = action.payload;
+    state.Loading = true;
+    state.Results = null;
+  }
   
   const SetFilter = (state, action) => {
     const data = action.payload;
@@ -11,5 +16,5 @@ const SetFilterTerm = (state, action) => {
     state.Loading = false;
   }
   
-  export {SetFilterTerm, SetFilter };
+  export {SetFilterTerm, SetFilter, SetCityFilterTerm };
   

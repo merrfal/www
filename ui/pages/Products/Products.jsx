@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
 import { Product, Empty, Loading, Pagination } from '../../components';
 import { ProductsList, CategoryList, ProductsFilters } from '../../../controllers/front';
-import { SetFilterTerm } from '../../../data/redux/FilterSlice';
+import { SetFilterTerm, SetCityFilterTerm } from '../../../data/redux/FilterSlice';
 import { useRouter } from 'next/router';
 import { Products as Meta } from '../../../data/metas'; 
 
@@ -32,7 +32,9 @@ export default function Products() {
 
 
   useEffect(() => {
-    if (filter.Loading === true) ProductsFilters(filter.Term, dispatch);
+    if (filter.Loading === true) {
+      ProductsFilters(filter.Term, filter.CityTerm, dispatch);
+    }
   }, [filter])
 
 
@@ -48,6 +50,23 @@ export default function Products() {
   useEffect(() => {
     if (categories.Loaded === false) CategoryList(dispatch);
   }, [categories]);
+
+
+
+  let clickOutside = (handler) => {
+    let domNode = useRef();
+
+    useEffect(() => {
+      let maybeHandler = (event) => !domNode.current.contains(event.target) && handler();
+      document.addEventListener("mousedown", maybeHandler);
+      return () => document.removeEventListener("mousedown", maybeHandler);
+    });
+
+    return domNode;
+  };
+
+  let domNodeCategory = clickOutside(() => setIsCategoryOpen(false));
+  let domNodeCity = clickOutside(() => setIsCityOpen(false));
 
   return (
     <Normal>
@@ -299,8 +318,8 @@ export default function Products() {
             Të gjitha Produktet
           </h1>
           <p className='mt-4 max-w-xl text-sm text-gray-700'>
-            Këtu mundë ti gjeni të gjitha produktet e listuara në platform nga
-            dhurues publik dhe të fshehur.
+            Këtu mund t'i gjeni të gjitha produktet e listuara në platformë nga
+            dhurues publik dhe anonim.
           </p>
         </div>
 
@@ -312,7 +331,7 @@ export default function Products() {
           <div className='relative z-10 bg-white border-b border-gray-200 pb-4'>
             <div className='max-w-7xl mx-auto px-4 flex items-center justify-between sm:px-6 lg:px-8'>
               <div className='relative inline-block text-left'>
-                <div>
+                {/* <div>
                   <button
                     onClick={() => setIsSortOpen(!isSortOpen)}
                     type='button'
@@ -334,7 +353,7 @@ export default function Products() {
                       />
                     </svg>
                   </button>
-                </div>
+                </div> */}
 
                 {/* {isSortOpen && (
                   <div
@@ -393,17 +412,13 @@ export default function Products() {
               <div className='hidden sm:block'>
                 <div className='flow-root'>
                   <div className='-mx-4 flex items-center divide-x divide-gray-200'>
-                    <div className='px-4 relative inline-block text-left'>
+                    <div ref={domNodeCategory} className='px-4 relative inline-block text-left'>
                       <button
                         onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                         type='button'
                         className='group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900'
                         aria-expanded='false'>
                         <span>Kategoritë</span>
-
-                        <span className='ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs font-semibold text-gray-700 tabular-nums'>
-                          1
-                        </span>
                         <svg
                           className='flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500'
                           xmlns='http://www.w3.org/2000/svg'
@@ -430,9 +445,9 @@ export default function Products() {
                                 onClick={(e) => {
                                   dispatch(SetFilterTerm(''))
                                   setCurrentPage(1)
-                                  e.preventDefault()
+                                  // e.preventDefault()
                                 }}
-                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500 background-black'
+                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 focus-visible'
                               />
                               <label
                                 for='filter-category-0'
@@ -453,15 +468,15 @@ export default function Products() {
                                       value='objects'
                                       // value={search.Term}
                                       onClick={(e) => {
-                                       
+
                                         dispatch(SetFilterTerm(category.Name))
                                         setCurrentPage(1)
-                                        
-                                        e.preventDefault()
+
+                                        // e.preventDefault()
 
                                       }}
                                       type='radio'
-                                      className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                                      className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                     />
                                     <label
                                       for='filter-category-2'
@@ -476,7 +491,7 @@ export default function Products() {
                       )}
                     </div>
 
-                    <div className='px-4 relative inline-block text-left'>
+                    <div ref={domNodeCity} className='px-4 relative inline-block text-left'>
                       <button
                         onClick={() => setIsCityOpen(!isCityOpen)}
                         type='button'
@@ -505,8 +520,13 @@ export default function Products() {
                                 id='filter-sizes-0'
                                 name='sizes[]'
                                 value='s'
-                                type='checkbox'
-                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                                type='radio'
+                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                onClick={(e) => {
+                                  dispatch(SetCityFilterTerm('Prishtinë'))
+                                  setCurrentPage(1)
+                                  // e.preventDefault()
+                                }}
                               />
                               <label
                                 for='filter-sizes-0'
@@ -520,8 +540,13 @@ export default function Products() {
                                 id='filter-sizes-1'
                                 name='sizes[]'
                                 value='m'
-                                type='checkbox'
-                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                                type='radio'
+                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                onClick={(e) => {
+                                  dispatch(SetCityFilterTerm('Mitrovicë'))
+                                  setCurrentPage(1)
+                                  // e.preventDefault()
+                                }}
                               />
                               <label
                                 for='filter-sizes-1'
@@ -535,8 +560,13 @@ export default function Products() {
                                 id='filter-sizes-2'
                                 name='sizes[]'
                                 value='l'
-                                type='checkbox'
-                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                                type='radio'
+                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                onClick={(e) => {
+                                  dispatch(SetCityFilterTerm('Gjilan'))
+                                  setCurrentPage(1)
+                                  // e.preventDefault()
+                                }}
                               />
                               <label
                                 for='filter-sizes-2'
@@ -550,8 +580,13 @@ export default function Products() {
                                 id='filter-sizes-2'
                                 name='sizes[]'
                                 value='l'
-                                type='checkbox'
-                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                                type='radio'
+                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                onClick={(e) => {
+                                  dispatch(SetCityFilterTerm('Prizren'))
+                                  setCurrentPage(1)
+                                  // e.preventDefault()
+                                }}
                               />
                               <label
                                 for='filter-sizes-2'
@@ -565,8 +600,13 @@ export default function Products() {
                                 id='filter-sizes-2'
                                 name='sizes[]'
                                 value='l'
-                                type='checkbox'
-                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                                type='radio'
+                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                onClick={(e) => {
+                                  dispatch(SetCityFilterTerm('Pejë'))
+                                  setCurrentPage(1)
+                                  // e.preventDefault()
+                                }}
                               />
                               <label
                                 for='filter-sizes-2'
@@ -580,8 +620,13 @@ export default function Products() {
                                 id='filter-sizes-2'
                                 name='sizes[]'
                                 value='l'
-                                type='checkbox'
-                                className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
+                                type='radio'
+                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                onClick={(e) => {
+                                  dispatch(SetCityFilterTerm('Gjakovë'))
+                                  setCurrentPage(1)
+                                  // e.preventDefault()
+                                }}
                               />
                               <label
                                 for='filter-sizes-2'
@@ -620,6 +665,39 @@ export default function Products() {
                           onClick={(e) => {
                             // location.href = '/produktet';
                             dispatch(SetFilterTerm(''))
+                            e.preventDefault()
+
+                          }}
+                          type='button'
+                          className='flex-shrink-0 ml-1 h-4 w-4 p-1 rounded-full inline-flex text-gray-400 hover:bg-gray-200 hover:text-gray-500'>
+                          <span className='sr-only'>Remove filter for Objects</span>
+                          <svg
+                            className='h-2 w-2'
+                            stroke='currentColor'
+                            fill='none'
+                            viewBox='0 0 8 8'>
+                            <path
+                              stroke-linecap='round'
+                              stroke-width='1.5'
+                              d='M1 1l6 6m0-6L1 7'
+                            />
+                          </svg>
+                        </button>
+                      </span>
+                    </div> :
+                    null
+                }
+              </div>
+              <div className='mt-2 sm:mt-0 sm:ml-4'>
+                {
+                  filter.CityTerm ?
+                    <div className='-m-1 flex flex-wrap items-center'>
+                      <span className='m-1 inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900'>
+                        <span>{filter.CityTerm}</span>
+                        <button
+                          onClick={(e) => {
+                            // location.href = '/produktet';
+                            dispatch(SetCityFilterTerm(''))
                             e.preventDefault()
 
                           }}
