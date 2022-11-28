@@ -12,6 +12,7 @@ import Category from './Category';
 import Hero from './Hero';
 import Loading from './Loading';
 import None from './None';
+import Pagination from './Pagination'
 
 export {
     Header,
@@ -27,5 +28,6 @@ export {
     Category,
     Hero,
     Loading,
-    None
+    None,
+    Pagination
 }

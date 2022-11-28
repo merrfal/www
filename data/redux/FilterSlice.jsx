@@ -7,7 +7,7 @@ import {
 } from './controllers';
 
 export const FilterSlice = createSlice({
-  name: 'Filter',
+  name: 'filter',
   initialState: FilterDefaultState,
   reducers: {
     SetFilterTerm: (state, action) => CallSetFilterTerm(state, action),

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ContactCreate } from '../../../controllers/front';
 import { Loading } from '../../components';
 import { useDispatch } from 'react-redux';
+import { Contact as Meta } from '../../../data/metas'; 
 
 export default function Contact() { 
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function Contact() {
 
   return (
     <Normal>
+      <Meta />
       <div class='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
           <h1 class='text-3xl font-extrabold tracking-tight text-gray-900'>
           Na Kontaktoni

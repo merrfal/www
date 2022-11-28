@@ -15,7 +15,3 @@ body {
     overflow: scroll;
     background: white;
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

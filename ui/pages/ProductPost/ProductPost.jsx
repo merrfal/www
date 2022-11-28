@@ -1,10 +1,12 @@
+import ImageUploading from "react-images-uploading";
+
 import { useSelector, useDispatch } from 'react-redux';
 import { Normal } from '../../layouts';
 import { SetPrepageField } from '../../../data/redux/PageSlice';
 import { ProductCreate, CategoryList } from '../../../controllers/front';
 import { useEffect, useState } from 'react';
 import { Loading } from '../../components';
-import ImageUploading from "react-images-uploading";
+import { ProductPost as Meta } from '../../../data/metas'; 
 
 export default function ProductPost() {
   const dispatch = useDispatch();
@@ -31,6 +33,7 @@ export default function ProductPost() {
 
   return (
     <Normal>
+      <Meta />
       {categories.Loaded === false ? <Loading /> :
         <div className='relative bg-white'>
           <div className='mx-auto max-w-4xl px-4 sm:px-6'>

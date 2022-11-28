@@ -8,8 +8,8 @@ import Error from './Error';
 import UserProducts from './UserProducts';
 import Loader from './Loader';
 import Contact from './Contact';
-import About from './About';
 import UserSaves from './UserSaves';
+import Page from './Page';
 
 export {
   Home,
@@ -22,6 +22,6 @@ export {
   UserProducts,
   Loader,
   Contact,
-  About,
+  Page,
   UserSaves
 };

@@ -1,18 +1,29 @@
-import Head from 'next/head';
+import Terms from './Terms';
+import Privacy from './Privacy';
+import About from './About';
+import Error from './Error';
+import Home from './Home';
+import Loader from './Loader';
+import Product from './Product';
+import ProductEdit from './ProductEdit';
+import ProductPost from './ProductPost';
+import Products from './Products';
+import Profile from './Profile';
+import UserProducts from './UserProducts';
+import UserSaves from './UserSaves';
 
-const About = () => {
-  return (
-    <Head>
-      <meta charset='UTF-8' />
-      <meta name='description' content='' />
-      <meta name='keywords' content='' />
-      <meta name='author' content='' />
-      <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-      <meta property='og:title' content='' />
-      <meta property='og:description' content='' />
-      <meta property='og:image' content='/assets/thumbnail.png' />
-    </Head>
-  );
-};
-
-export default About;
+export {
+  Terms,
+  Privacy,
+  About,
+  Error,
+  Home,
+  Loader,
+  Product,
+  Products,
+  ProductEdit,
+  ProductPost,
+  Profile,
+  UserProducts,
+  UserSaves
+}

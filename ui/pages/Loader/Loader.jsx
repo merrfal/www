@@ -1,3 +1,4 @@
+import { Loader as Meta } from '../../../data/metas'; 
 
 export default function Loader() {
   const lottie = {
@@ -19,6 +20,7 @@ export default function Loader() {
 
   return (
     <main style={container}>
+      <Meta />
       <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
       <lottie-player {...lottie} />
     </main>

@@ -1,3 +1,5 @@
+import ImageUploading from "react-images-uploading";
+
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ProductView, ProductDelete, ProductUpdate, CategoryList } from '../../../controllers/front';
@@ -5,10 +7,10 @@ import { Normal } from '../../layouts';
 import { useRouter } from 'next/router';
 import { Loading } from '../../components';
 import { SetField } from '../../../data/redux/PageSlice';
-import ImageUploading from "react-images-uploading";
 import { useState } from 'react';
 import { deleteObject, ref } from 'firebase/storage';
 import { storage } from '../../../config/Firebase';
+import { ProductEdit as Meta } from '../../../data/metas'; 
 
 export default function ProductEdit() {
   const dispatch = useDispatch();
@@ -20,9 +22,7 @@ export default function ProductEdit() {
 
   const [images, setImages] = useState([]);
 
-  const onChange = (imageList, addUpdateIndex) => {
-    setImages(imageList);
-  };
+  const onChange = (imageList, addUpdateIndex) => setImages(imageList);
 
   useEffect(() => {
     if (categories.Loaded === false) CategoryList(dispatch);
@@ -40,17 +40,13 @@ export default function ProductEdit() {
     const name = image.split('/products%2F').pop().split('?alt')[0];
     const desertRef = ref(storage, `products/${name}`);
     await deleteObject(desertRef)
-
   }
-  console.log("imagesFront", images)
-
 
   const product = page?.Page
 
-  console.log("name", product)
-
   return (
     <Normal>
+      <Meta />
       <div class='bg-white'>
         <div class='mx-auto max-w-2xl lg:max-w-7xl'>
           {page.Loaded === false || categories.Loaded === false ? <Loading /> : (
@@ -326,17 +322,13 @@ export default function ProductEdit() {
                                           <p className='text-xs text-gray-500'>
                                             PNG, JPG, që nuj tejkalonë madhësin e 3MB
                                           </p>
-
                                         </div>
                                       </div>
-
-
                                     </div>
-
                                   )}
                                 </ImageUploading>
 
-                                {/* <div className='mt-4 flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-2 pt-5 pb-6'>
+                                 <div className='mt-4 flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-2 pt-5 pb-6'>
                                   <div className='space-y-1 text-center'>
                                     <svg
                                       className='mx-auto h-12 w-12 text-gray-400'

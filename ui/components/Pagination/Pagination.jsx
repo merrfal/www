@@ -15,6 +15,7 @@ export default function Pagination({ nPages, currentPage, setCurrentPage }) {
         if (currentPage !== 1)
             setCurrentPage(currentPage - 1)
     }
+    
     return (
         nPages >= 2 && (<div class="flex justify-center m-10">
             <nav aria-label="Page navigation example">
@@ -47,5 +48,4 @@ export default function Pagination({ nPages, currentPage, setCurrentPage }) {
         </div>
         )
     )
-
 }

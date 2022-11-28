@@ -5,12 +5,13 @@ import { Normal } from '../../layouts';
 import { useRouter } from 'next/router';
 import { Product as Item, Loading, Empty } from '../../../ui/components';
 import { ProductSave, ProductUnsave } from '../../../controllers/front';
+import { Product as Meta } from '../../../data/metas'; 
 
 export default function Product() {
   const dispatch = useDispatch();
 
   const slug = useRouter().query.slug || '';
-  console.log("slug",useRouter().query)
+
   const user = useSelector((state) => state.user);
   const page = useSelector((state) => state.page);
   const [mainImage, setMainImage] = useState("")
@@ -65,6 +66,7 @@ export default function Product() {
 
   return (
     <Normal>
+      <Meta />
       <section style={{ padding: '1em' }}>
         {page.Loaded === false ? (<Loading />) : (
           <div>
