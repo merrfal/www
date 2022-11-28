@@ -5,23 +5,19 @@ import { ProductCreate, CategoryList } from '../../../controllers/front';
 import { useEffect, useState } from 'react';
 import { Loading } from '../../components';
 import ImageUploading from "react-images-uploading";
-import { storage } from '../../../config/Firebase';
-import { v4 } from 'uuid'
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { Notifier } from '../../../utils';
 
 export default function ProductPost() {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.page);
   const user = useSelector((state) => state.user);
   const categories = useSelector((state) => state.categories);
-  const [images, setImages] = useState([]);
-  const [downloadURL, setDownloadURL] = useState("");
-  const [loading, setIsLoading] = useState(false);
+
   const maxNumber = 69;
+
+  const [images, setImages] = useState([]);
+  const [loading, setIsLoading] = useState(false);
+
   const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
 

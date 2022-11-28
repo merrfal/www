@@ -5,13 +5,24 @@ import { Normal } from '../../layouts';
 import { useRouter } from 'next/router';
 import { Loading } from '../../components';
 import { SetField } from '../../../data/redux/PageSlice';
+import ImageUploading from "react-images-uploading";
+import { useState } from 'react';
+import { deleteObject, ref } from 'firebase/storage';
+import { storage } from '../../../config/Firebase';
 
 export default function ProductEdit() {
   const dispatch = useDispatch();
   const slug = useRouter().query.slug || '';
-
   const page = useSelector((state) => state.page);
   const categories = useSelector((state) => state.categories);
+
+  const maxNumber = 69;
+
+  const [images, setImages] = useState([]);
+
+  const onChange = (imageList, addUpdateIndex) => {
+    setImages(imageList);
+  };
 
   useEffect(() => {
     if (categories.Loaded === false) CategoryList(dispatch);
@@ -21,6 +32,22 @@ export default function ProductEdit() {
     if (page.Loaded === false) ProductView(dispatch, slug)
   }, [page, slug]);
 
+  useEffect(() => {
+    if (page?.Page?.Gallery) setImages(page?.Page?.Gallery)
+  }, [page]);
+
+  const deleteFromFirebase = async (image) => {
+    const name = image.split('/products%2F').pop().split('?alt')[0];
+    const desertRef = ref(storage, `products/${name}`);
+    await deleteObject(desertRef)
+
+  }
+  console.log("imagesFront", images)
+
+
+  const product = page?.Page
+
+  console.log("name", product)
 
   return (
     <Normal>
@@ -43,6 +70,7 @@ export default function ProductEdit() {
                                 Titulli i Produktit
                               </label>
                               <input
+                                value={page?.Page.Name}
                                 onChange={(e) =>
                                   dispatch(
                                     SetField({
@@ -51,7 +79,6 @@ export default function ProductEdit() {
                                     })
                                   )
                                 }
-                                value={page.Page.Name}
                                 type='text'
                                 name='email-address'
                                 id='email-address'
@@ -155,12 +182,12 @@ export default function ProductEdit() {
                                   }
                                   value={page.Page.City}
                                   id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
-                                  <option value="prishtinë">Prishtinë</option>
-                                  <option value="mitrovicë">Mitrovicë</option>
-                                  <option value="gjilan">Gjilan</option>
-                                  <option value="prizren">Prizren</option>
-                                  <option value="pejë">Pejë</option>
-                                  <option value="gjakovë">Gjakovë</option>
+                                  <option value="Prishtinë">Prishtinë</option>
+                                  <option value="Mitrovicë">Mitrovicë</option>
+                                  <option value="Gjilan">Gjilan</option>
+                                  <option value="Prizren">Prizren</option>
+                                  <option value="Pejë">Pejë</option>
+                                  <option value="Gjakovë">Gjakovë</option>
 
                                 </select>
                               </div>
@@ -172,15 +199,15 @@ export default function ProductEdit() {
                                   Kodi Postar
                                 </label>
                                 <input
-                                onChange={(e) =>
-                                  dispatch(
-                                    SetField({
-                                      Field: 'Zip',
-                                      Value: e.target.value,
-                                    })
-                                  )
-                                }
-                                value={page.Page.Zip}
+                                  onChange={(e) =>
+                                    dispatch(
+                                      SetField({
+                                        Field: 'Zip',
+                                        Value: e.target.value,
+                                      })
+                                    )
+                                  }
+                                  value={page.Page.Zip}
                                   type='text'
                                   name='postal-code'
                                   id='postal-code'
@@ -191,7 +218,17 @@ export default function ProductEdit() {
 
                               <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                                 <label for="country" class="block text-sm font-medium text-gray-700">Kategoria</label>
-                                <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                <select
+                                  onChange={(e) =>
+                                    dispatch(
+                                      SetField({
+                                        Field: 'Category',
+                                        Value: e.target.value,
+                                      })
+                                    )
+                                  }
+                                  value={page.Page.Category}
+                                  id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                   {
                                     categories.Loaded === true &&
                                     categories.Categories.map((category, index) => {
@@ -203,49 +240,151 @@ export default function ProductEdit() {
                                 </select>
                               </div>
                             </div>
+
+
                             <div>
                               <label className='block text-sm font-medium text-gray-700'>
                                 Fotot e Produktit
                               </label>
-                              <div className='mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6'>
-                                <div className='space-y-1 text-center'>
-                                  <svg
-                                    className='mx-auto h-12 w-12 text-gray-400'
-                                    stroke='currentColor'
-                                    fill='none'
-                                    viewBox='0 0 48 48'
-                                    aria-hidden='true'>
-                                    <path
-                                      d='M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02'
-                                      stroke-width='2'
-                                      stroke-linecap='round'
-                                      stroke-linejoin='round'
-                                    />
-                                  </svg>
-                                  <div className='flex text-sm text-gray-600'>
-                                    <label
-                                      for='file-upload'
-                                      className='relative cursor-pointer rounded-md bg-white font-medium text-[#377DFF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#377DFF] focus-within:ring-offset-2 hover:text-[#377DFF]'>
-                                      <span className='text-[#377DFF]'>Ngarko një Fotografi</span>
-                                      <input
-                                        id='file-upload'
-                                        name='file-upload'
-                                        type='file'
-                                        className='sr-only'
+
+                              <div class="flex flex-wrap justify-center m-10">
+                                <ImageUploading
+                                  multiple
+                                  value={images}
+                                  onChange={onChange}
+                                  maxNumber={maxNumber}
+                                  dataURLKey="data_url"
+
+                                >
+                                  {({
+                                    imageList,
+                                    onImageUpload,
+                                    onImageRemoveAll,
+                                    onImageUpdate,
+                                    onImageRemove,
+                                    isDragging,
+                                    dragProps
+                                  }) => (
+                                    <div className='flex flex-wrap justify-center m-10 '>
+                                      {images.map((image, index) => (
+
+                                        <div key={index} class="w-6/12 sm:w-4/12 px-4">
+                                          <div class="flex mt-5">
+
+                                            <img src={image.data_url ? image.data_url : image} alt="" width="250" class="shadow-lg rounded max-w-full h-auto align-middle border-none" />
+                                            <div>
+                                              <button
+                                                style={{ position: 'relative', background: 'white', bottom: '5px', right: '8px' }}
+                                                class='h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4'
+                                                onClick={(e) => {
+                                                  onImageRemove(index)
+                                                  { image ? deleteFromFirebase(image) : null }
+
+                                                  e.preventDefault()
+                                                }}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                              </button>
+                                            </div>
+                                          </div>
+
+
+                                        </div>
+
+                                      ))}
+                                      <div
+                                        style={isDragging ? { color: "red" } : null}
+                                        onClick={onImageUpload}
+                                        {...dragProps}
+                                        className='mt-4 flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-2 pt-5 pb-6'>
+                                        <div className='space-y-1 text-center'>
+                                          <svg
+                                            className='mx-auto h-12 w-12 text-gray-400'
+                                            stroke='currentColor'
+                                            fill='none'
+                                            viewBox='0 0 48 48'
+                                            aria-hidden='true'>
+                                            <path
+                                              d='M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02'
+                                              stroke-width='2'
+                                              stroke-linecap='round'
+                                              stroke-linejoin='round'
+                                            />
+                                          </svg>
+                                          <div className='flex text-sm text-gray-600' >
+                                            <label
+                                              // for='file-upload'
+
+                                              className='relative cursor-pointer rounded-md bg-white font-medium text-[#377DFF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#377DFF] focus-within:ring-offset-2 hover:text-[#377DFF]'>
+                                              <span className='text-[#377DFF]'>Ngarko një Fotografi</span>
+
+                                            </label>
+                                            <p className='pl-1'>ose tërhiqe një këtu.</p>
+                                          </div>
+                                          <p className='text-xs text-gray-500'>
+                                            PNG, JPG, që nuj tejkalonë madhësin e 3MB
+                                          </p>
+
+                                        </div>
+                                      </div>
+
+
+                                    </div>
+
+                                  )}
+                                </ImageUploading>
+
+                                {/* <div className='mt-4 flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-2 pt-5 pb-6'>
+                                  <div className='space-y-1 text-center'>
+                                    <svg
+                                      className='mx-auto h-12 w-12 text-gray-400'
+                                      stroke='currentColor'
+                                      fill='none'
+                                      viewBox='0 0 48 48'
+                                      aria-hidden='true'>
+                                      <path
+                                        d='M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02'
+                                        stroke-width='2'
+                                        stroke-linecap='round'
+                                        stroke-linejoin='round'
                                       />
-                                    </label>
-                                    <p className='pl-1'>ose tërhiqe një këtu.</p>
+                                    </svg>
+
+
+                                    <div className='flex text-sm text-gray-600'>
+                                      <label
+                                        for='file-upload'
+                                        className='relative cursor-pointer rounded-md bg-white font-medium text-[#377DFF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#377DFF] focus-within:ring-offset-2 hover:text-[#377DFF]'>
+                                        <span className='text-[#377DFF]'>Ngarko një Fotografi</span>
+                                        <input
+                                          id='file-upload'
+                                          name='file-upload'
+                                          type='file'
+                                          className='sr-only'
+                                        />
+                                      </label>
+                                      <p className='pl-1'>ose tërhiqe një këtu.</p>
+                                    </div>
+                                    <p className='text-xs text-gray-500'>
+                                      PNG, JPG, që nuj tejkalonë madhësin e 3MB
+                                    </p>
                                   </div>
-                                  <p className='text-xs text-gray-500'>
-                                    PNG, JPG, që nuj tejkalonë madhësin e 3MB
-                                  </p>
-                                </div>
+                                </div> */}
                               </div>
                             </div>
                           </div>
+
+
+
+
+
                           <div className='text-right mb-2 mr-2'>
                             <button
-                              onClick={() => ProductUpdate(dispatch, page.Page)}
+                              onClick={(e) => {
+                                ProductUpdate(dispatch, product, images)
+                                e.preventDefault()
+                              }}
                               type='submit'
                               className='inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none focus:ring-2 focus:ring-[#377DFF] focus:ring-offset-2'>
                               Redakto
