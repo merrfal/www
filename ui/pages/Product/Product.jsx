@@ -5,7 +5,7 @@ import { Normal } from '../../layouts';
 import { useRouter } from 'next/router';
 import { Product as Item, Loading, Empty } from '../../../ui/components';
 import { ProductSave, ProductUnsave } from '../../../controllers/front';
-import { Product as Meta } from '../../../data/metas'; 
+import { Product as Meta } from '../../../data/metas';
 
 export default function Product() {
   const dispatch = useDispatch();
@@ -78,21 +78,24 @@ export default function Product() {
                       <div className='hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none'>
 
                         <div
-                          className='grid grid-cols-4 gap-6 '
+                          className='grid grid-cols-4 gap-6'
                           aria-orientation='horizontal'
                           role='tablist'>
                           {
                             page.Page.Gallery &&
                             page.Page.Gallery.map((image) => (
                               <button
-                                
+
                                 id='tabs-2-tab-1'
-                                className='relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50'
+                                className={mainImage === image ?
+                                  'relative h-24 bg-white ring-2 ring-blue-500 ring-inset'
+                                  :'relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-100 focus:outline-none focus:ring   focus:ring-inse focus:ring-offset-4 focus:ring-opacity-50'}
                                 aria-controls='tabs-2-panel-1'
                                 onClick={() => { setMainImage(image) }}
+                               
                                 role='tab'
                                 type='button'>
-                                <span className='sr-only'>Angled view </span>
+                                <span className='sr-only'>Angled view </span> 
                                 <span className='absolute inset-0 rounded-md overflow-hidden'>
                                   <img
                                     src={image}

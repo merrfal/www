@@ -10,6 +10,8 @@ export default async function ProductUpdate(req, res) {
       "Gallery": body.Gallery,
       "Category": body.Category,
       "Views": body.Views,
+      "UserShow": body.UserShow,
+      "Status": body.Status,
       "Zip": body.Zip,
       "Address": body.Address,
       "City": body.City,

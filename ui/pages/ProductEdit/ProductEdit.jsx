@@ -8,8 +8,6 @@ import { useRouter } from 'next/router';
 import { Loading } from '../../components';
 import { SetField } from '../../../data/redux/PageSlice';
 import { useState } from 'react';
-import { deleteObject, ref } from 'firebase/storage';
-import { storage } from '../../../config/Firebase';
 import { ProductEdit as Meta } from '../../../data/metas';
 
 export default function ProductEdit() {
@@ -21,9 +19,12 @@ export default function ProductEdit() {
   const maxNumber = 69;
 
   const [images, setImages] = useState([]);
+  const [deletedImages, setDeletedImages] = useState([]);
   const [loading, setIsLoading] = useState(false);
 
   const onChange = (imageList, addUpdateIndex) => setImages(imageList);
+
+  console.log("imagesdel", deletedImages)
 
   useEffect(() => {
     if (categories.Loaded === false) CategoryList(dispatch);
@@ -36,12 +37,6 @@ export default function ProductEdit() {
   useEffect(() => {
     if (page?.Page?.Gallery) setImages(page?.Page?.Gallery)
   }, [page]);
-
-  const deleteFromFirebase = async (image) => {
-    const name = image.split('/products%2F').pop().split('?alt')[0];
-    const desertRef = ref(storage, `products/${name}`);
-    await deleteObject(desertRef)
-  }
 
   const product = page?.Page
 
@@ -58,7 +53,7 @@ export default function ProductEdit() {
                 <form action='#' method='POST'>
                   <div className='sm:overflow-hidden sm:rounded-md'>
                     <div className='space-y-6 bg-white p-2'>
-                      <h3 className="text-3xl font-bold leading-6 text-gray-900 mb-10">Redakto Produktin</h3>
+                      <h3 class="text-3xl font-bold leading-6 text-gray-900 mb-10">Redakto Produktin</h3>
                       <hr />
                       {loading === true ? <Loading /> :
 
@@ -185,7 +180,7 @@ export default function ProductEdit() {
                                   )
                                 }
                                 value={page.Page.City}
-                                id="city" name="city" autocomplete="city-name" className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                id="city" name="city" autocomplete="city-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                 <option value="Prishtinë">Prishtinë</option>
                                 <option value="Mitrovicë">Mitrovicë</option>
                                 <option value="Gjilan">Gjilan</option>
@@ -196,8 +191,8 @@ export default function ProductEdit() {
                               </select>
                             </div>
 
-                            <div className="col-span-6 sm:col-span-3 lg:col-span-3">
-                              <label for="category" className="block text-sm font-medium text-gray-700">Kategoria</label>
+                            <div class="col-span-6 sm:col-span-3 lg:col-span-3">
+                              <label for="category" class="block text-sm font-medium text-gray-700">Kategoria</label>
                               <select
                                 onChange={(e) =>
                                   dispatch(
@@ -208,7 +203,7 @@ export default function ProductEdit() {
                                   )
                                 }
                                 value={page.Page.Category}
-                                id="category" name="category" autocomplete="category-name" className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                id="category" name="category" autocomplete="category-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                 {
                                   categories.Loaded === true &&
                                   categories.Categories.map((category, index) => {
@@ -227,18 +222,18 @@ export default function ProductEdit() {
                                 A deshironi te i publikoni te dhenat e juaja?
                               </label>
                               <select
-                                defaultValue={"Përcakto statusin"}
-                                value={page.Prepage.UserShow}
+
+                                value={page.Page.UserShow}
                                 onChange={(e) => {
                                   dispatch(
-                                    SetPrepageField({
+                                    SetField({
                                       Field: 'UserShow',
                                       Value: e.target.value,
                                     })
                                   )
                                 }
                                 }
-                                id="user-show" name="user-show" autocomplete="user-show-name" className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                id="user-show" name="user-show" autocomplete="user-show-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                 <option disabled value="Përcakto statusin">Zgjedh statusin</option>
                                 <option value="Anonime">Anonime</option>
                                 <option value="Publike">Publike</option>
@@ -251,32 +246,25 @@ export default function ProductEdit() {
                                 Statusi i postimit
                               </label>
                               <select
-                                defaultValue={"Përcakto statusin e fotos"}
-                                value={page.Prepage.Status}
+
+                                value={page.Page.Status}
                                 onChange={(e) => {
                                   dispatch(
-                                    SetPrepageField({
+                                    SetField({
                                       Field: 'Status',
                                       Value: e.target.value,
                                     })
                                   )
                                 }
                                 }
-                                id="user-show" name="user-show" autocomplete="user-show-name" className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
-                                <option disabled value="Përcakto statusin e fotos">Përcakto statusin e fotos</option>
-                                <option value="e publikuar">E publikuar</option>
+                                id="user-show" name="user-show" autocomplete="user-show-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                <option disabled value="Përcakto statusin e postimit">Përcakto statusin e postimit</option>
+                                <option value="published">E publikuar</option>
                                 <option value="e marr">E marr</option>
                                 <option value="e rezervuar">E rezervuar</option>
                               </select>
                             </div>
-
-
                           </div>
-
-
-
-
-
                           <div>
                             <label className='block text-sm font-medium text-gray-700'>
                               Fotot e Produktit
@@ -334,21 +322,20 @@ export default function ProductEdit() {
                                       </p>
                                     </div>
                                   </div>
-                                  <div className="flex flex-wrap justify-center mt-10 mb-10">
+                                  <div class="flex flex-wrap justify-center mt-10 mb-10">
                                     {images.map((image, index) => (
 
-                                      <div key={index} className="w-6/12 sm:w-4/12 px-4">
-                                        <div className="flex mt-5">
+                                      <div key={index} class="w-6/12 sm:w-4/12 px-4">
+                                        <div class="flex mt-5">
 
-                                          <img src={image.data_url ? image.data_url : image} alt="" width="250" className="shadow-lg rounded max-w-full h-auto align-middle border-none" />
+                                          <img src={image.data_url ? image.data_url : image} alt="" width="250" class="shadow-lg rounded max-w-full h-auto align-middle border-none" />
                                           <div>
                                             <button
                                               style={{ position: 'relative', background: 'white', bottom: '5px', right: '8px' }}
-                                              className='h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4'
+                                              class='h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4'
                                               onClick={(e) => {
                                                 onImageRemove(index)
-                                                { image ? deleteFromFirebase(image) : null }
-
+                                                { !image.data_url ? setDeletedImages((prev) => [...prev, image]) : '' }
                                                 e.preventDefault()
                                               }}>
                                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
@@ -375,7 +362,7 @@ export default function ProductEdit() {
                     <div className='text-right mb-2 mr-2'>
                       <button
                         onClick={(e) => {
-                          ProductUpdate(dispatch, product, images)
+                          ProductUpdate(dispatch, product, images, deletedImages, setIsLoading)
                           e.preventDefault()
                         }}
                         type='submit'

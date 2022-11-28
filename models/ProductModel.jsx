@@ -60,14 +60,14 @@ const ProductSchema = new Schema({
         type: String,
         default: 'published',
         enum: [
-            'e publikuar', 
-            'e marr', 
-            'e refuzuar', 
-            'e rezervuar', 
+            'published',
+            'e marr',
+            'e rezervuar',
+            'rejected',
             'unpublished'
         ],
     }
 });
 
 const Product = models.Product || model('Product', ProductSchema);
-export default  Product;
+export default Product;
