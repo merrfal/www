@@ -244,7 +244,6 @@ export default function ProductEdit() {
                                 <option value="Publike">Publike</option>
                               </select>
                             </div>
-
                             <div className='col-span-6 sm:col-span-3 lg:col-span-3'>
                               <label
                                 for='user-show'
