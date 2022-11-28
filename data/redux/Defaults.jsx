@@ -64,6 +64,7 @@ const FilterDefaultState = {
   Term: "",
   Loading: true,
   Visibility: false,
+  CityTerm: "",
 };
 
 const UserLandingPagesDefaultState = {
