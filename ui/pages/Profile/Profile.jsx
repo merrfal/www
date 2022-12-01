@@ -19,7 +19,6 @@ export default function Profile() {
 
   const onChange = (imageList, addUpdateIndex) => setImage(imageList[0]);
 
-  console.log("image", image)
 
   const profile = useSelector((state) => state.profile);
   const user = useSelector((state) => state.user);
@@ -99,7 +98,6 @@ export default function Profile() {
               </div>
             </div>
             {isEdit && (
-
               <div
                 style={loading ? { opacity: '.75', pointerEvents: 'none' } : {}}
                 className='relative z-10'
@@ -468,28 +466,36 @@ export default function Profile() {
             )
             }
             <main
-              className='max-w-2xl mx-auto py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8'
-              aria-labelledby='order-history-heading'>
-              <div className='max-w-xl'>
+              className='max-w-2xl mx-auto py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8'>
+              {
+                profile.Products.length !== 0 &&
+                <div className='max-w-xl'>
                 <h1
                   id='order-history-heading'
                   className='text-3xl font-extrabold tracking-tight text-gray-900'>
                   Produktet e dhuruara
                 </h1>
                 <p className='mt-2 text-sm text-gray-500'>
-                  Ketu listohen produktet e {profile.Name} {profile.Surname}'t.
+                  {
+                    profile.Id === user.Id ? 
+                    `Produket e dhuruara nga ju, duke përfshirë dhe ato anonimisht të postuara.` :
+                    `Produket e dhuruara nga përdoruesi, duke mos përfshirë ato anonimisht të postuara.`
+                  }
                 </p>
               </div>
+              }
               <div
                 className={
                   profile.Products.length === 0
-                    ? 'w-full'
+                    ? 'w-full -mt-10'
                     : 'mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4'
                 }>
                 {profile.Products.length === 0 ? (
                   <Empty
                     heading='Nuk u gjet asnjë produkt'
-                    message='Ju nuk keni shtuar asnjë produkt, ose produktet janë shtuar anonimisht.'
+                    message={
+                      profile.Id === user.Id ? 'Ju nuk keni shtuar asnjë produkt, ose produktet janë shtuar anonimisht.' : 'Përdoruesi nuk dhuruar asnjë produkt, ose ka dhuruar anonimisht.' 
+                    }
                   />
                 ) : (
                   profile.Products.map((product, index) => (

@@ -9,12 +9,15 @@ export default async function ProductsFilters(req, res) {
     if (term === '' && cityTerm !== '') {
       products = await Product.find({ City: cityTerm }).sort({createdAt: -1});
     }
+
     else if (term !== '' && cityTerm === '') {
       products = await Product.find({ Category: term }).sort({createdAt: -1});
     }
+
     else if (term !== '' && cityTerm !== '') {
       products = await Product.find({ Category: term, City: cityTerm }).sort({createdAt: -1});
     }
+    
     else {
       products = await Product.find({}).sort({createdAt: -1});
     }

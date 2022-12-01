@@ -14,12 +14,14 @@ export default function Product() {
 
   const user = useSelector((state) => state.user);
   const page = useSelector((state) => state.page);
-  const [mainImage, setMainImage] = useState("")
+
+  const [mainImage, setMainImage] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (page.Loaded === false && slug !== '') ProductView(dispatch, slug);
+    if (slug !== '') ProductView(slug, setLoading, dispatch);
     if (page?.Page?.Gallery[0]) setMainImage(page?.Page?.Gallery[0])
-  }, [page, slug]);
+  }, [slug]);
 
   const [inSaves, setIsSaves] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -68,7 +70,7 @@ export default function Product() {
     <Normal>
       <Meta />
       <section style={{ padding: '1em' }}>
-        {page.Loaded === false ? (<Loading />) : (
+        {page.Loaded === false || loading ? (<Loading />) : (
           <div>
             <div className='bg-white'>
               <main className='max-w-7xl mx-auto sm:pt-16 sm:px-6 lg:px-8'>
@@ -85,7 +87,6 @@ export default function Product() {
                             page.Page.Gallery &&
                             page.Page.Gallery.map((image) => (
                               <button
-
                                 id='tabs-2-tab-1'
                                 className={mainImage === image ?
                                   'relative h-24 bg-white ring-2 ring-blue-500 ring-inset'
@@ -99,7 +100,6 @@ export default function Product() {
                                 <span className='absolute inset-0 rounded-md overflow-hidden'>
                                   <img
                                     src={image}
-                                    // src='https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg'
                                     alt=''
                                     className='w-full h-full object-center object-cover'
                                   />
@@ -269,7 +269,7 @@ export default function Product() {
                                     <p className='mt-2 text-sm text-gray-500'>
                                       Pas takimit me personat adekuat e merni
                                       produktin që keni nevoj dhe i falenderoni
-                                      ata për atë që të mundësuan.{' '}
+                                      ata për atë që të mundësuan.
                                     </p>
                                   </div>
                                 </div>

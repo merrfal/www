@@ -80,10 +80,10 @@ export default function Search() {
         {
           search.Loading ? 
           <div className='py-14 px-6 text-center text-sm sm:px-14 w-full flex align-center items-center'>
-            {/* <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
             <div style={container}>
               <lottie-player {...lottie} />
-            </div> */}
+            </div>
           </div>
          : search.Results.length === 0 ? 
          <div className='py-14 px-6 text-center text-sm sm:px-14'>

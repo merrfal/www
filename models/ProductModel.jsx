@@ -62,9 +62,6 @@ const ProductSchema = new Schema({
         enum: [
             'published',
             'e marr',
-            'e rezervuar',
-            'rejected',
-            'unpublished'
         ],
     }
 });

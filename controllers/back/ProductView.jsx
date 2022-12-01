@@ -5,7 +5,6 @@ export default async function ProductView(req, res) {
     const productPre = await Product.find({ Slug: req.query.slug });
 
     let Views = parseInt(productPre[0].Views);
-
     
     Views = Views + 1;
 

@@ -50,16 +50,18 @@ export default function Product(props) {
     }
   };
 
+  const address = `${Address}, ${Zip}, ${City}`
+
   return (
     <Link href={`/produktet/${Slug}`} key={props.index}>
-      <div style={isSaving ? {pointerEvents: 'none', opacity: '.75'} : {}} className='group relative shadow-lg rounded-lg'>
+      <div style={isSaving ? {pointerEvents: 'none', opacity: '.75'} : {}} className='group relative'>
         <div className='hover:cursor-pointer min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 transition-all lg:aspect-none lg:h-80'>
           <img
             src={Gallery.length === 0 ? '/assets/product-no.png' : Gallery[0]}
             className='h-full w-full object-cover object-center lg:h-full lg:w-full'
           />
         </div>
-        <div className='flex items-center py-4 px-4'>
+        <div className='flex items-center py-4'>
           <div className='flex-auto'>
             <div className='flex mb-1 hover:cursor-pointer'>
               <svg
@@ -82,7 +84,7 @@ export default function Product(props) {
               </svg>
 
               <p className='text-slate-700 text-[12px] ml-1'>
-                {Address}, {Zip}, {City}
+                {address.length > 38 ? address.substring(0, 37) + '...' : address}
               </p>
             </div>
             <div className='font-medium hover:cursor-pointer'>

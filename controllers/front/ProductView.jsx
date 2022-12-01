@@ -1,7 +1,8 @@
 import { ConfigBuilder, Notifier } from '../../utils';
 import { SetPage } from '../../data/redux/PageSlice';
 
-const PageView = async (dispatch, slug) => {
+const PageView = async (slug, setLoading, dispatch) => {
+  setLoading(true);
   const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductView/${slug}`;
   const config = ConfigBuilder('G', 'JSON', {}, false);
 
@@ -11,6 +12,7 @@ const PageView = async (dispatch, slug) => {
 
     if (res.status === true) {
       dispatch(SetPage(res.data))
+      setLoading(false);
     }
 
     else {

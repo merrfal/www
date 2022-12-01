@@ -3,6 +3,7 @@ import { Product } from '../../models';
 export default async function ProductUpdate(req, res) {
   try {
     const body = req.body;
+
     const data = {
       "Name": body.Name,
       "Phone": body.Phone,
@@ -17,11 +18,9 @@ export default async function ProductUpdate(req, res) {
       "City": body.City,
       "Country": body.Country,
     };
-    const id = req.query.id;
-    console.log("quety", id)
-    const product = await Product.findByIdAndUpdate(id, { $set: data }, { new: true });
 
-    console.log("product", product)
+    const id = req.query.id;
+    const product = await Product.findByIdAndUpdate(id, { $set: data }, { new: true });
 
     if (product) {
       res.status(200).send({

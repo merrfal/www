@@ -21,7 +21,7 @@ export default async function ProductSaves(req, res) {
       res.status(200).send(
         {
           status: true,
-          message: 'Landing page was updated successfully.',
+          message: 'Produktet tuaja të ruajtura u morën me sukses.',
           data: products,
           code: 200,
         }
@@ -31,18 +31,17 @@ export default async function ProductSaves(req, res) {
       res.status(404).send(
         {
           status: true,
-          message: 'Landing page was not updated.',
+          message: 'Produktet tuaja të ruajtura nuk u morën me sukses.',
           data: null,
           code: 404,
         }
       );
     }
   } catch (err) {
-    console.log(err)
     res.status(500).send(
       {
         status: false,
-        message: 'Gabim i brendshëm i serverit gjatë favorizimit të produktit.',
+        message: 'Produktet tuaja të ruajtura nuk u morën me sukses për shkak të një gabimi të serverit.',
         sysError: err,
         data: null,
         code: 500,
