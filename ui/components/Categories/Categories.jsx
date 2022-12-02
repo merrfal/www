@@ -27,7 +27,7 @@ export default function Categories() {
             </a>
           </div>
 
-          <div class='mt-4 flow-root'>
+          <div class='mt-4 flow-root mt-6 '>
             <div class='-my-2'>
               <div class='box-content py-2 relative h-80 overflow-x-auto xl:overflow-visible'>
                 <div  class={categories.Loaded ? categories.Categories.length === 0 ? 'w-full' : 'absolute min-w-screen-xl px-4 flex space-x-8 sm:px-6 lg:px-8 xl:relative xl:px-0 xl:space-x-0 xl:grid xl:grid-cols-5 xl:gap-x-8' : 'w-full'}>
@@ -41,11 +41,11 @@ export default function Categories() {
               </div>
             </div>
           </div>
-          <div class='mt-6 px-4 sm:hidden'>
+          <div class='mt-6 px-4 sm:mb-10 flex justify-end'>
             <a
               href='#'
               class='block text-sm font-semibold text-indigo-600 hover:text-indigo-500'>
-              Browse all categories<span aria-hidden='true'> &rarr;</span>
+              Shfleto të gjitha Kategoritë <span aria-hidden='true'> &rarr;</span>
             </a>
           </div>
         </div>

@@ -8,16 +8,20 @@ import { Normal } from '../../layouts';
 import { Loading, Empty, Product } from '../../components';
 import { useRouter } from 'next/router';
 import { SetProfileField } from '../../../data/redux/ProfileSlice';
-import { Profile as Meta } from '../../../data/metas'; 
+import { Profile as Meta } from '../../../data/metas';
 
 export default function Profile() {
   const dispatch = useDispatch();
   const username = useRouter().query.username || '';
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState([]);
   const [loading, setIsLoading] = useState(false);
   const maxNumber = 69;
 
-  const onChange = (imageList, addUpdateIndex) => setImage(imageList[0]);
+
+  const onChange = (imageList, addUpdateIndex) => {
+    console.log("imagelist", imageList)
+    setImage(imageList)
+  }
 
   console.log("image", image)
 
@@ -31,6 +35,9 @@ export default function Profile() {
   }, [profile, username]);
 
 
+  let imageUser = image ? image[0] : null
+
+  console.log("image111", imageUser)
   return (
     <Normal>
       <Meta />
@@ -110,6 +117,7 @@ export default function Profile() {
                 <div className='fixed inset-0 z-10 overflow-y-auto'>
                   <div className='flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0'>
                     <div className='relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg'>
+
                       <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
                         <div className='sm:flex sm:items-start'>
                           <div className='mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'>
@@ -128,7 +136,7 @@ export default function Profile() {
                                                 </label>
 
                                                 <ImageUploading
-                                                  // multiple
+                                                  multiple
                                                   value={image}
                                                   onChange={onChange}
                                                   maxNumber={maxNumber}
@@ -136,14 +144,16 @@ export default function Profile() {
                                                   acceptType={["jpg", "png"]}
                                                 >
                                                   {({
+
+
                                                     onImageUpdate,
                                                     onImageRemove,
                                                   }) => (
 
 
-                                                    <div className='mt-1 flex items-center'>
+                                                    <div key={0} className='mt-1 flex items-center'>
                                                       <span>
-                                                        <img className='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image) ? (image ? image.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
+                                                        <img className='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image.length !== 0) ? (image.length !== 0 ? image[0]?.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
                                                       </span>
 
                                                       <button
@@ -161,25 +171,15 @@ export default function Profile() {
                                                         className='h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4'
 
                                                         onClick={(e) => {
-                                                          image && profile.Avatar ?
-                                                            (
-                                                              () => {
-                                                                setImage(null);
-                                                                dispatch(
-                                                                  SetProfileField({
-                                                                    Field: 'Avatar',
-                                                                    Value: null,
-                                                                  })
-                                                                )
-                                                              }
-                                                            ) :
-                                                            (image ? setImage(null) :
-                                                              dispatch(
-                                                                SetProfileField({
-                                                                  Field: 'Avatar',
-                                                                  Value: null,
-                                                                })
-                                                              ))
+
+                                                          (image.length !== 0 ? onImageRemove(0) :
+                                                            dispatch(
+                                                              SetProfileField({
+                                                                Field: 'Avatar',
+                                                                Value: null,
+                                                              })
+                                                            ))
+
                                                           e.preventDefault()
                                                         }
                                                         }
@@ -429,6 +429,7 @@ export default function Profile() {
                                                   className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm'
                                                 />
                                               </div>
+
                                             </div>
                                           </div>
                                         </div>
@@ -441,10 +442,11 @@ export default function Profile() {
                           </div>
                         </div>
                       </div>
+
                       <div className='bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6'>
                         <button
                           onClick={() => {
-                            UserUpdate(dispatch, profile, image, setIsEdit, setIsLoading, setImage)
+                            UserUpdate(dispatch, profile, imageUser, setIsEdit, setIsLoading, setImage)
                           }
                           }
                           type='button'

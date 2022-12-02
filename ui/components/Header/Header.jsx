@@ -14,27 +14,29 @@ export default function Header() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+
   let clickOutside = (handler) => {
     let domNode = useRef();
-
     useEffect(() => {
       let maybeHandler = (event) => !domNode.current.contains(event.target) && handler();
       document.addEventListener("mousedown", maybeHandler);
       return () => document.removeEventListener("mousedown", maybeHandler);
     });
-
     return domNode;
   };
 
-  let domNode = clickOutside(() => setIsProfileOpen(false));
+  let domNode = clickOutside(() => {
+    setIsMobileMenuOpen(false)
+  });
 
   return (
     <header className='relative bg-white'>
       <nav aria-label='Top' className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='border-b border-gray-200'>
+        <div ref={domNode} className='border-b border-gray-200'>
           <div className='h-16 flex items-center justify-between'>
             <div className='flex-1 flex items-center lg:hidden'>
               <button
+
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 type='button'
                 className='-ml-2 bg-white p-2 rounded-md text-gray-400'>
@@ -54,6 +56,8 @@ export default function Header() {
                   />
                 </svg>
               </button>
+
+
 
               <div
                 onClick={() => dispatch(OpenSearch())}
@@ -188,6 +192,8 @@ export default function Header() {
                 </svg>
               </div>
 
+
+
               {user.Auth && (
                 <Link href='/postimet/shto'>
                   <a className='hidden ml-4 p-1 text-gray-400 hover:text-gray-500 lg:block'>
@@ -300,9 +306,40 @@ export default function Header() {
                 </div>
               )}
             </div>
+
+          </div >
+          {isMobileMenuOpen && <div id="mega-menu-full" class="justify-between items-center w-full">
+            <ul class="flex flex-col mt-4 text-sm font-medium lg:hidden">
+
+              <li onClick={(e) => {
+                e.preventDefault()
+                window.location.href = "/"
+              }}>
+                <a class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-10 hover:bg-gray-50 " aria-current="page">Ballina</a>
+              </li>
+
+
+              <li onClick={(e) => {
+                e.preventDefault()
+                window.location.href = "/produktet"
+              }}>
+                <a class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-10 hover:bg-gray-50 " aria-current="page">Produktet</a>
+              </li>
+
+
+              <li onClick={(e) => {
+                e.preventDefault()
+                window.location.href = "/na-kontaktoni"
+              }}>
+                <a class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-10 hover:bg-gray-50 " aria-current="page">Na Kontaktoni</a>
+              </li>
+
+            </ul>
           </div>
+          }
         </div>
       </nav>
+
     </header>
   );
 }
