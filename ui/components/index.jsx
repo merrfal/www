@@ -13,6 +13,10 @@ import Hero from './Hero';
 import Loading from './Loading';
 import None from './None';
 import Pagination from './Pagination'
+import Input from './Input';
+import Button from './Button';
+import Textarea from './Textarea';
+import MenuLink from './MenuLink';
 
 export {
     Header,
@@ -29,5 +33,9 @@ export {
     Hero,
     Loading,
     None,
-    Pagination
+    Pagination,
+    Input,
+    Button,
+    Textarea,
+    MenuLink
 }

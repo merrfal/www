@@ -1,0 +1,1 @@
+const Outside = (e, t, m) => document.addEventListener('click', (e) => !e.target.closest(t) && m, false);

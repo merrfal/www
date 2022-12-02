@@ -10,6 +10,7 @@ import Products from './Products';
 import Profile from './Profile';
 import UserProducts from './UserProducts';
 import UserSaves from './UserSaves';
+import Contact from './Contact';
 
 export {
   Terms,
@@ -23,7 +24,8 @@ export {
   ProductPost,
   Profile,
   UserProducts,
-  UserSaves
+  UserSaves,
+  Contact
 }
 
 // a po i sheh qito meta tags?
