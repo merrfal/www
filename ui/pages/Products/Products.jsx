@@ -90,9 +90,9 @@ export default function Products() {
                   stroke='currentColor'
                   aria-hidden='true'>
                   <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
                     d='M6 18L18 6M6 6l12 12'
                   />
                 </svg>
@@ -118,9 +118,9 @@ export default function Products() {
                         fill='currentColor'
                         aria-hidden='true'>
                         <path
-                          fill-rule='evenodd'
+                          fillRule='evenodd'
                           d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                          clip-rule='evenodd'
+                          clipRule='evenodd'
                         />
                       </svg>
                     </span>
@@ -137,7 +137,7 @@ export default function Products() {
                         className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
                       />
                       <label
-                        for='filter-mobile-category-0'
+                        htmlFor='filter-mobile-category-0'
                         className='ml-3 text-sm text-gray-500'>
                         Të gjitha kategoritë
                       </label>
@@ -164,7 +164,7 @@ export default function Products() {
                         className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
                       />
                       <label
-                        for='filter-mobile-category-1'
+                        htmlFor='filter-mobile-category-1'
                         className='ml-3 text-sm text-gray-500'>
                         {category.Name}
                       </label>
@@ -192,9 +192,9 @@ export default function Products() {
                         fill='currentColor'
                         aria-hidden='true'>
                         <path
-                          fill-rule='evenodd'
+                          fillRule='evenodd'
                           d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                          clip-rule='evenodd'
+                          clipRule='evenodd'
                         />
                       </svg>
                     </span>
@@ -211,7 +211,7 @@ export default function Products() {
                         className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
                       />
                       <label
-                        for='filter-mobile-sizes-0'
+                        htmlFor='filter-mobile-sizes-0'
                         className='ml-3 text-sm text-gray-500'>
                         Prishtinë
                       </label>
@@ -226,7 +226,7 @@ export default function Products() {
                         className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
                       />
                       <label
-                        for='filter-mobile-sizes-1'
+                        htmlFor='filter-mobile-sizes-1'
                         className='ml-3 text-sm text-gray-500'>
                         Mitrovicë
                       </label>
@@ -241,7 +241,7 @@ export default function Products() {
                         className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
                       />
                       <label
-                        for='filter-mobile-sizes-2'
+                        htmlFor='filter-mobile-sizes-2'
                         className='ml-3 text-sm text-gray-500'>
                         Gjilan
                       </label>
@@ -256,7 +256,7 @@ export default function Products() {
                         className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
                       />
                       <label
-                        for='filter-mobile-sizes-2'
+                        htmlFor='filter-mobile-sizes-2'
                         className='ml-3 text-sm text-gray-500'>
                        Prizren
                       </label>
@@ -271,7 +271,7 @@ export default function Products() {
                         className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
                       />
                       <label
-                        for='filter-mobile-sizes-2'
+                        htmlFor='filter-mobile-sizes-2'
                         className='ml-3 text-sm text-gray-500'>
                         Pejë
                       </label>
@@ -286,7 +286,7 @@ export default function Products() {
                         className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
                       />
                       <label
-                        for='filter-mobile-sizes-2'
+                        htmlFor='filter-mobile-sizes-2'
                         className='ml-3 text-sm text-gray-500'>
                         Gjakovë
                       </label>
@@ -301,7 +301,7 @@ export default function Products() {
                         className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
                       />
                       <label
-                        for='filter-mobile-sizes-2'
+                        htmlFor='filter-mobile-sizes-2'
                         className='ml-3 text-sm text-gray-500'>
                         Gjilan
                       </label>
@@ -347,9 +347,9 @@ export default function Products() {
                       fill='currentColor'
                       aria-hidden='true'>
                       <path
-                        fill-rule='evenodd'
+                        fillRule='evenodd'
                         d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                        clip-rule='evenodd'
+                        clipRule='evenodd'
                       />
                     </svg>
                   </button>
@@ -426,9 +426,9 @@ export default function Products() {
                           fill='currentColor'
                           aria-hidden='true'>
                           <path
-                            fill-rule='evenodd'
+                            fillRule='evenodd'
                             d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                            clip-rule='evenodd'
+                            clipRule='evenodd'
                           />
                         </svg>
                       </button>
@@ -450,7 +450,7 @@ export default function Products() {
                                 className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 focus-visible'
                               />
                               <label
-                                for='filter-category-0'
+                                htmlFor='filter-category-0'
                                 className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
                                 Të gjitha kategoritë
                               </label>
@@ -479,7 +479,7 @@ export default function Products() {
                                       className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                     />
                                     <label
-                                      for='filter-category-2'
+                                      htmlFor='filter-category-2'
                                       className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
                                       {category.Name}
                                     </label>
@@ -505,9 +505,9 @@ export default function Products() {
                           fill='currentColor'
                           aria-hidden='true'>
                           <path
-                            fill-rule='evenodd'
+                            fillRule='evenodd'
                             d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                            clip-rule='evenodd'
+                            clipRule='evenodd'
                           />
                         </svg>
                       </button>
@@ -529,7 +529,7 @@ export default function Products() {
                                 }}
                               />
                               <label
-                                for='filter-sizes-0'
+                                htmlFor='filter-sizes-0'
                                 className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
                                 Prishtinë
                               </label>
@@ -549,7 +549,7 @@ export default function Products() {
                                 }}
                               />
                               <label
-                                for='filter-sizes-1'
+                                htmlFor='filter-sizes-1'
                                 className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
                                 Mitrovicë
                               </label>
@@ -569,7 +569,7 @@ export default function Products() {
                                 }}
                               />
                               <label
-                                for='filter-sizes-2'
+                                htmlFor='filter-sizes-2'
                                 className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
                                 Gjilan
                               </label>
@@ -589,7 +589,7 @@ export default function Products() {
                                 }}
                               />
                               <label
-                                for='filter-sizes-2'
+                                htmlFor='filter-sizes-2'
                                 className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
                                 Prizren
                               </label>
@@ -609,7 +609,7 @@ export default function Products() {
                                 }}
                               />
                               <label
-                                for='filter-sizes-2'
+                                htmlFor='filter-sizes-2'
                                 className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
                                 Pejë
                               </label>
@@ -629,7 +629,7 @@ export default function Products() {
                                 }}
                               />
                               <label
-                                for='filter-sizes-2'
+                                htmlFor='filter-sizes-2'
                                 className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
                                 Gjakovë
                               </label>
@@ -677,8 +677,8 @@ export default function Products() {
                             fill='none'
                             viewBox='0 0 8 8'>
                             <path
-                              stroke-linecap='round'
-                              stroke-width='1.5'
+                              strokeLinecap='round'
+                              strokeWidth='1.5'
                               d='M1 1l6 6m0-6L1 7'
                             />
                           </svg>
@@ -710,8 +710,8 @@ export default function Products() {
                             fill='none'
                             viewBox='0 0 8 8'>
                             <path
-                              stroke-linecap='round'
-                              stroke-width='1.5'
+                              strokeLinecap='round'
+                              strokeWidth='1.5'
                               d='M1 1l6 6m0-6L1 7'
                             />
                           </svg>

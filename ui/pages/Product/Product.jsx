@@ -139,17 +139,17 @@ export default function Product() {
                             xmlns='http://www.w3.org/2000/svg'
                             fill='none'
                             viewBox='0 0 24 24'
-                            stroke-width='1.5'
+                            strokeWidth='1.5'
                             stroke='currentColor'
                             className='w-5 h-5 mt-[2px]'>
                             <path
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
                               d='M15 10.5a3 3 0 11-6 0 3 3 0 016 0z'
                             />
                             <path
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
                               d='M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z'
                             />
                           </svg>
@@ -193,9 +193,9 @@ export default function Product() {
                               viewBox='0 0 24 24'
                               stroke={inSaves ? '#377DFF' : 'currentColor'}>
                               <path
-                                stroke-linecap='round'
-                                stroke-linejoin='round'
-                                stroke-width='2'
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                strokeWidth='2'
                                 d='M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z'
                               />
                             </svg>

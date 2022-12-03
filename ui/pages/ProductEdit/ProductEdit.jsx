@@ -53,14 +53,14 @@ export default function ProductEdit() {
                 <form action='#' method='POST'>
                   <div className='sm:overflow-hidden sm:rounded-md'>
                     <div className='space-y-6 bg-white p-2'>
-                      <h3 class="text-3xl font-bold leading-6 text-gray-900 mb-10">Redakto Produktin</h3>
+                      <h3 className="text-3xl font-bold leading-6 text-gray-900 mb-10">Redakto Produktin</h3>
                       <hr />
                       {loading === true ? <Loading /> :
 
                         <>
                           <div className='col-span-6 sm:col-span-4'>
                             <label
-                              for='titulli'
+                              htmlFor='titulli'
                               className='block text-sm font-medium text-gray-700'>
                               Titulli i Produktit
                             </label>
@@ -83,7 +83,7 @@ export default function ProductEdit() {
                           </div>
                           <div>
                             <label
-                              for='about'
+                              htmlFor='about'
                               className='block text-sm font-medium text-gray-700'>
                               Përshkrimi i Produktit
                             </label>
@@ -109,7 +109,7 @@ export default function ProductEdit() {
 
                           <div className='col-span-6'>
                             <label
-                              for='street-address'
+                              htmlFor='street-address'
                               className='block text-sm font-medium text-gray-700'>
                               Adresa e marrjes
                             </label>
@@ -137,7 +137,7 @@ export default function ProductEdit() {
                           <div className='grid grid-cols-6 gap-6'>
                             <div className='col-span-6 sm:col-span-3'>
                               <label
-                                for='nr-telefonit'
+                                htmlFor='nr-telefonit'
                                 className='block text-sm font-medium text-gray-700'>
                                 Numri i telefonit
                               </label>
@@ -166,7 +166,7 @@ export default function ProductEdit() {
 
                             <div className='col-span-6 sm:col-span-3 lg:col-span-3'>
                               <label
-                                for='city'
+                                htmlFor='city'
                                 className='block text-sm font-medium text-gray-700'>
                                 Qyteti
                               </label>
@@ -180,7 +180,7 @@ export default function ProductEdit() {
                                   )
                                 }
                                 value={page.Page.City}
-                                id="city" name="city" autocomplete="city-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                id="city" name="city" autocomplete="city-name" className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                 <option value="Prishtinë">Prishtinë</option>
                                 <option value="Mitrovicë">Mitrovicë</option>
                                 <option value="Gjilan">Gjilan</option>
@@ -191,8 +191,8 @@ export default function ProductEdit() {
                               </select>
                             </div>
 
-                            <div class="col-span-6 sm:col-span-3 lg:col-span-3">
-                              <label for="category" class="block text-sm font-medium text-gray-700">Kategoria</label>
+                            <div className="col-span-6 sm:col-span-3 lg:col-span-3">
+                              <label htmlFor="category" className="block text-sm font-medium text-gray-700">Kategoria</label>
                               <select
                                 onChange={(e) =>
                                   dispatch(
@@ -203,7 +203,7 @@ export default function ProductEdit() {
                                   )
                                 }
                                 value={page.Page.Category}
-                                id="category" name="category" autocomplete="category-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                id="category" name="category" autocomplete="category-name" className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                 {
                                   categories.Loaded === true &&
                                   categories.Categories.map((category, index) => {
@@ -217,7 +217,7 @@ export default function ProductEdit() {
 
                             <div className='col-span-6 sm:col-span-3 lg:col-span-3'>
                               <label
-                                for='user-show'
+                                htmlFor='user-show'
                                 className='block text-sm font-medium text-gray-700'>
                                 A deshironi te i publikoni te dhenat e juaja?
                               </label>
@@ -233,7 +233,7 @@ export default function ProductEdit() {
                                   )
                                 }
                                 }
-                                id="user-show" name="user-show" autocomplete="user-show-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                id="user-show" name="user-show" autocomplete="user-show-name" className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                 <option disabled value="Përcakto statusin">Zgjedh statusin</option>
                                 <option value="Anonime">Anonime</option>
                                 <option value="Publike">Publike</option>
@@ -241,7 +241,7 @@ export default function ProductEdit() {
                             </div>
                             <div className='col-span-6 sm:col-span-3 lg:col-span-3'>
                               <label
-                                for='user-show'
+                                htmlFor='user-show'
                                 className='block text-sm font-medium text-gray-700'>
                                 Statusi i postimit
                               </label>
@@ -257,7 +257,7 @@ export default function ProductEdit() {
                                   )
                                 }
                                 }
-                                id="user-show" name="user-show" autocomplete="user-show-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                id="user-show" name="user-show" autocomplete="user-show-name" className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                 <option disabled value="Përcakto statusin e postimit">Përcakto statusin e postimit</option>
                                 <option value="published">E publikuar</option>
                                 <option value="e marr">E marr</option>
@@ -302,14 +302,14 @@ export default function ProductEdit() {
                                         aria-hidden='true'>
                                         <path
                                           d='M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02'
-                                          stroke-width='2'
-                                          stroke-linecap='round'
-                                          stroke-linejoin='round'
+                                          strokeWidth='2'
+                                          strokeLinecap='round'
+                                          strokeLinejoin='round'
                                         />
                                       </svg>
                                       <div className='flex text-sm text-gray-600' >
                                         <label
-                                          // for='file-upload'
+                                          // htmlFor='file-upload'
 
                                           className='relative cursor-pointer rounded-md bg-white font-medium text-[#377DFF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#377DFF] focus-within:ring-offset-2 hover:text-[#377DFF]'>
                                           <span className='text-[#377DFF]'>Ngarko një Fotografi</span>
@@ -322,17 +322,17 @@ export default function ProductEdit() {
                                       </p>
                                     </div>
                                   </div>
-                                  <div class="flex flex-wrap justify-center mt-10 mb-10">
+                                  <div className="flex flex-wrap justify-center mt-10 mb-10">
                                     {images.map((image, index) => (
 
-                                      <div key={index} class="w-6/12 sm:w-4/12 px-4">
-                                        <div class="flex mt-5">
+                                      <div key={index} className="w-6/12 sm:w-4/12 px-4">
+                                        <div className="flex mt-5">
 
-                                          <img src={image.data_url ? image.data_url : image} alt="" width="250" class="shadow-lg rounded max-w-full h-auto align-middle border-none" />
+                                          <img src={image.data_url ? image.data_url : image} alt="" width="250" className="shadow-lg rounded max-w-full h-auto align-middle border-none" />
                                           <div>
                                             <button
                                               style={{ position: 'relative', background: 'white', bottom: '5px', right: '8px' }}
-                                              class='h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4'
+                                              className='h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4'
                                               onClick={(e) => {
                                                 onImageRemove(index)
                                                 { !image.data_url ? setDeletedImages((prev) => [...prev, image]) : '' }

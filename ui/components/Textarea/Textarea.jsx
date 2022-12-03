@@ -4,7 +4,7 @@ export default function Textarea(props) {
   if(size === "large"){
     return (
       <div className='sm:col-span-2'>
-        <label for={label} className='block text-sm font-medium text-gray-700'>
+        <label htmlFor={label} className='block text-sm font-medium text-gray-700'>
             {label}
           </label>
         <div className='mt-1'>

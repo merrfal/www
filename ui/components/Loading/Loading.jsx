@@ -18,7 +18,6 @@ export default function Loading(){
   
     return (
       <main style={container}>
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
         <lottie-player {...lottie} />
       </main>
     );

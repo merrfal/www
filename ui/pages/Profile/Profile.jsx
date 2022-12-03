@@ -73,12 +73,12 @@ export default function Profile() {
                             xmlns='http://www.w3.org/2000/svg'
                             fill='none'
                             viewBox='0 0 24 24'
-                            stroke-width='1.5'
+                            strokeWidth='1.5'
                             stroke='currentColor'
                             className='-ml-1 mr-2 h-5 w-5 text-gray-400'>
                             <path
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
                               d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10'
                             />
                           </svg>
@@ -201,7 +201,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
-                                                  htmlFor='Emri'
+                                                  htmlhtmlFor='Emri'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Emri
                                                 </label>
@@ -226,7 +226,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
-                                                  htmlFor='Mbiemri'
+                                                  htmlhtmlFor='Mbiemri'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Mbiemri
                                                 </label>
@@ -251,7 +251,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
-                                                  htmlFor='email-address'
+                                                  htmlhtmlFor='email-address'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Adresa Elektronike
                                                 </label>
@@ -277,7 +277,7 @@ export default function Profile() {
                                               </div>
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
-                                                  htmlFor='email-address'
+                                                  htmlhtmlFor='email-address'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Përshkrimi
                                                 </label>
@@ -302,7 +302,7 @@ export default function Profile() {
 
                                               <div className='col-span-6'>
                                                 <label
-                                                  htmlFor='street-address'
+                                                  htmlhtmlFor='street-address'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Adresa
                                                 </label>
@@ -326,7 +326,7 @@ export default function Profile() {
 
                                               <div className='col-span-6'>
                                                 <label
-                                                  htmlFor='street-address'
+                                                  htmlhtmlFor='street-address'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Numri Telefonit
                                                 </label>
@@ -350,7 +350,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-6 lg:col-span-2'>
                                                 <label
-                                                  htmlFor='shteti'
+                                                  htmlhtmlFor='shteti'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Shteti
                                                 </label>
@@ -369,7 +369,7 @@ export default function Profile() {
                                               <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
                                                 <label
                                                   value={profile.City}
-                                                  htmlFor='qyteti'
+                                                  htmlhtmlFor='qyteti'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Qyteti
                                                 </label>
@@ -408,7 +408,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
                                                 <label
-                                                  htmlFor='zip'
+                                                  htmlhtmlFor='zip'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Kodi Postar
                                                 </label>

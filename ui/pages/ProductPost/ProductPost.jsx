@@ -42,14 +42,14 @@ export default function ProductPost() {
                 <form action='#' method='POST'>
                   <div className='sm:overflow-hidden sm:rounded-md'>
                     <div className='space-y-6 bg-white p-2'>
-                      <h3 class="text-3xl font-bold leading-6 text-gray-900 mb-10">Shto një produkt falas</h3>
+                      <h3 className="text-3xl font-bold leading-6 text-gray-900 mb-10">Shto një produkt falas</h3>
                       <hr />
                       {
                         loading === true ? <Loading /> :
                           <>
                             <div className='col-span-6 sm:col-span-4'>
                               <label
-                                for='titulli'
+                                htmlFor='titulli'
                                 className='block text-sm font-medium text-gray-700'>
                                 Titulli i Produktit
                               </label>
@@ -73,7 +73,7 @@ export default function ProductPost() {
                             </div>
                             <div>
                               <label
-                                for='about'
+                                htmlFor='about'
                                 className='block text-sm font-medium text-gray-700'>
                                 Përshkrimi i Produktit
                               </label>
@@ -99,7 +99,7 @@ export default function ProductPost() {
 
                             <div className='col-span-6'>
                               <label
-                                for='street-address'
+                                htmlFor='street-address'
                                 className='block text-sm font-medium text-gray-700'>
                                 Adresa e marrjes
                               </label>
@@ -124,7 +124,7 @@ export default function ProductPost() {
                             <div className='grid grid-cols-6 gap-6'>
                               <div className='col-span-6 sm:col-span-3'>
                                 <label
-                                  for='nr-telefonit'
+                                  htmlFor='nr-telefonit'
                                   className='block text-sm font-medium text-gray-700'>
                                   Numri i telefonit
                                 </label>
@@ -149,7 +149,7 @@ export default function ProductPost() {
 
                               <div className='col-span-6 sm:col-span-3 lg:col-span-3'>
                                 <label
-                                  for='user-show'
+                                  htmlFor='user-show'
                                   className='block text-sm font-medium text-gray-700'>
                                   A deshironi te i publikoni te dhenat e juaja?
                                 </label>
@@ -165,7 +165,7 @@ export default function ProductPost() {
                                     )
                                   }
                                   }
-                                  id="user-show" name="user-show" autocomplete="user-show-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                  id="user-show" name="user-show" autocomplete="user-show-name" className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                   <option disabled value="Përcakto statusin">Zgjedh statusin</option>
                                   <option value="Anonime">Anonime</option>
                                   <option value="Publike">Publike</option>
@@ -174,7 +174,7 @@ export default function ProductPost() {
 
                               <div className='col-span-6 sm:col-span-3 lg:col-span-3'>
                                 <label
-                                  for='city'
+                                  htmlFor='city'
                                   className='block text-sm font-medium text-gray-700'>
                                   Qyteti
                                 </label>
@@ -190,7 +190,7 @@ export default function ProductPost() {
                                     )
                                   }
                                   }
-                                  id="city" name="city" autocomplete="city-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                  id="city" name="city" autocomplete="city-name" className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                   <option disabled value="Përcakto qytetin">Zgjedh qytetin</option>
                                   <option value="Prishtinë">Prishtinë</option>
                                   <option value="Mitrovicë">Mitrovicë</option>
@@ -202,8 +202,8 @@ export default function ProductPost() {
                                 </select>
                               </div>
 
-                              <div class="col-span-6 sm:col-span-3 lg:col-span-3">
-                                <label for="category" class="block text-sm font-medium text-gray-700">Kategoria</label>
+                              <div className="col-span-6 sm:col-span-3 lg:col-span-3">
+                                <label htmlFor="category" className="block text-sm font-medium text-gray-700">Kategoria</label>
                                 <select
                                   onChange={(e) =>
                                     dispatch(
@@ -215,7 +215,7 @@ export default function ProductPost() {
                                   }
                                   defaultValue={"Përcakto kategorin"}
                                   value={page.Prepage.Category}
-                                  id="category" name="category" autocomplete="category-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
+                                  id="category" name="category" autocomplete="category-name" className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm">
                                   <option disabled value="Përcakto kategorin">Zgjedh kategorinë</option>
                                   {
                                     categories.Categories.map((category, index) => {
@@ -263,9 +263,9 @@ export default function ProductPost() {
                                           aria-hidden='true'>
                                           <path
                                             d='M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02'
-                                            stroke-width='2'
-                                            stroke-linecap='round'
-                                            stroke-linejoin='round'
+                                            strokeWidth='2'
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
                                           />
                                         </svg>
                                         <div className='flex text-sm text-gray-600' >
@@ -283,7 +283,7 @@ export default function ProductPost() {
                                       </div>
                                     </div>
 
-                                    <div class="flex flex-wrap justify-center mt-10 mb-10">
+                                    <div className="flex flex-wrap justify-center mt-10 mb-10">
                                       {imageList.map((image, index) => (
 
                                         <div key={index} className="w-6/12 sm:w-4/12 px-4">
