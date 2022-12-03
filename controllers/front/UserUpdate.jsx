@@ -4,7 +4,7 @@ import { v4 } from 'uuid'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 const UserUpdate = async (dispatch, profile, image, setIsEdit, setIsLoading, setImage) => {
-  // setIsLoading(true)
+  setIsLoading(true)
   let user = structuredClone(profile)
   const url = `${process.env.NEXT_PUBLIC_API_URL}/users/UserUpdate/${profile.Id}`;
   const config = ConfigBuilder('P', 'JSON', profile, true, false, false);
@@ -35,7 +35,7 @@ const UserUpdate = async (dispatch, profile, image, setIsEdit, setIsLoading, set
 
             if (res.status === true) {
               // setIsEdit(false)
-
+              window.location.reload();
               Notifier(
                 {
                   dispatch: dispatch,
@@ -65,7 +65,7 @@ const UserUpdate = async (dispatch, profile, image, setIsEdit, setIsLoading, set
           finally {
             setImage(null)
             setIsEdit(false)
-
+            setIsLoading(false)
           }
 
         });
@@ -77,7 +77,7 @@ const UserUpdate = async (dispatch, profile, image, setIsEdit, setIsLoading, set
     try {
       const req = await fetch(url, config);
       const res = await req.json();
-
+      window.location.reload();
       if (res.status === true) {
         Notifier(
           {
@@ -105,7 +105,9 @@ const UserUpdate = async (dispatch, profile, image, setIsEdit, setIsLoading, set
       );
     }
     finally {
+      setImage(null)
       setIsEdit(false)
+      setIsLoading(false)
     }
   };
 }

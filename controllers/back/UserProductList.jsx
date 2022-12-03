@@ -2,7 +2,7 @@ import { Product } from '../../models';
 
 export default async function UserProductList(req, res) {
   try {
-    const products = await Product.find({ User: req.query.id });
+    const products = await Product.find({ User: req.query.id }).sort({createdAt: -1});
 
     if (products) {
       res.status(200).send(

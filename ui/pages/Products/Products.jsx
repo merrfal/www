@@ -68,11 +68,13 @@ export default function Products() {
   let domNodeCategory = clickOutside(() => setIsCategoryOpen(false));
   let domNodeCity = clickOutside(() => setIsCityOpen(false));
 
+  
+
   return (
     <Normal>
       <Meta />
       <div className='bg-white'>
-        <div className='fixed inset-0 flex z-40 sm:hidden'>
+        <div className='fixed inset-0 flex z-40 sm:hidden '>
           <div
             className='fixed inset-0 bg-black bg-opacity-25' />
           <div className='ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto'>
@@ -645,7 +647,7 @@ export default function Products() {
           </div>
 
           <div className='bg-gray-100'>
-            <div className='max-w-7xl mx-auto py-3 px-4 sm:flex sm:items-center sm:px-6 lg:px-8'>
+            <div className='max-w-7xl mx-auto py-3 px-4 flex flex items-center px-6 lg:px-8'>
               <h3 className='text-xs font-semibold uppercase tracking-wide text-gray-500'>
               Filtrat
                 <span className='sr-only'>, aktive</span>
@@ -653,9 +655,9 @@ export default function Products() {
 
               <div
                 aria-hidden='true'
-                className='hidden w-px h-5 bg-gray-300 sm:block sm:ml-4'></div>
+                className=' w-px h-5 bg-gray-300 block ml-4'></div>
 
-              <div className='mt-2 sm:mt-0 sm:ml-4'>
+              <div className='mt-2 mt-0 ml-4'>
                 {
                   filter.Term ?
                     <div className='-m-1 flex flex-wrap items-center'>
@@ -688,7 +690,7 @@ export default function Products() {
                     null
                 }
               </div>
-              <div className='mt-2 sm:mt-0 sm:ml-4'>
+              <div className='mt-2 mt-0 ml-4'>
                 {
                   filter.CityTerm ?
                     <div className='-m-1 flex flex-wrap items-center'>
