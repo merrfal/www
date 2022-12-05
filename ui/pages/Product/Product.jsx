@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { Product as Item, Loading, Empty } from '../../../ui/components';
 import { ProductSave, ProductUnsave } from '../../../controllers/front';
 import { Product as Meta } from '../../../data/metas';
+import Link from 'next/link';
 
 export default function Product() {
   const dispatch = useDispatch();
@@ -90,13 +91,13 @@ export default function Product() {
                                 id='tabs-2-tab-1'
                                 className={mainImage === image ?
                                   'relative h-24 bg-white ring-2 ring-blue-500 ring-inset'
-                                  :'relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-100 focus:outline-none focus:ring   focus:ring-inse focus:ring-offset-4 focus:ring-opacity-50'}
+                                  : 'relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-100 focus:outline-none focus:ring   focus:ring-inse focus:ring-offset-4 focus:ring-opacity-50'}
                                 aria-controls='tabs-2-panel-1'
                                 onClick={() => { setMainImage(image) }}
-                               
+
                                 role='tab'
                                 type='button'>
-                                <span className='sr-only'>Angled view </span> 
+                                <span className='sr-only'>Angled view </span>
                                 <span className='absolute inset-0 rounded-md overflow-hidden'>
                                   <img
                                     src={image}
@@ -172,6 +173,36 @@ export default function Product() {
                         </div>
                       </div>
 
+                      {console.log(page)}
+
+                      <Link href={"/profili/" + page.Page.User.Username}>
+                        <a
+                          class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                          href="/konto"
+                        >
+                          <div class="flex items-center justify-center w-9 h-9 bg-gray-300 rounded-full mr-3">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.75"
+                              stroke="currentColor"
+                              class="h-4 w-4 text-gray-500 rounded-full"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                              ></path>
+                            </svg>
+                          </div>
+                          <div>
+                            <p>{page.Page.User.FullName}</p>
+                            <span className="text-[12px]">@{page.Page.User.Username}</span>
+                          </div>
+                        </a>
+                      </Link>
+
                       <form className='mt-6'>
                         <div className='mt-10 flex sm:flex-col1'>
                           <button
@@ -235,7 +266,7 @@ export default function Product() {
                                       Gjej Produktin
                                     </h3>
                                     <p className='mt-2 text-sm text-gray-500'>
-                                      Kërkoni dhe gjeni produktin që keni nevoj
+                                      Kërkoni dhe gjeni produktin që keni nevojë
                                       për të më së afërti në lokacionin tuaj në
                                       shumë kategori të ndryshme.
                                     </p>
@@ -307,8 +338,9 @@ export default function Product() {
               </main>
             </div>
           </div>
-        )}
-      </section>
-    </Normal>
+        )
+        }
+      </section >
+    </Normal >
   );
 }
