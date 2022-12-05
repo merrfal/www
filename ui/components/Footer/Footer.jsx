@@ -178,7 +178,7 @@ export default function Footer() {
                 Regjistrohu për lajmet e reja
               </h3>
               <p class='mt-6 text-sm text-gray-500'>
-                Merrni njoftime të ndryshme rreth produkteve ose për platformën tonë ose platforma tjera të ngjajshme.
+                Merrni njoftime të ndryshme rreth produkteve ose për platformën tonë ose platforma tjera të ngjashme.
               </p>
               <form class='mt-4 flex sm:max-w-md' style={loading ? {pointerEvents: 'none', opacity: '.75'} : {}}>
                 <label for='email-address' class='sr-only'>

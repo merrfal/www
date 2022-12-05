@@ -232,7 +232,7 @@ export default function Product() {
                                       Gjej Produktin
                                     </h3>
                                     <p className='mt-2 text-sm text-gray-500'>
-                                      Kërkoni dhe gjeni produktin që keni nevoj
+                                      Kërkoni dhe gjeni produktin që keni nevojë
                                       për të më së afërti në lokacionin tuaj në
                                       shumë kategori të ndryshme.
                                     </p>
@@ -249,7 +249,7 @@ export default function Product() {
                                     </h3>
                                     <p className='mt-2 text-sm text-gray-500'>
                                       Pasi ta konfirmoni produktin me thirrje në
-                                      telefon me pronarin shkoni e merni
+                                      telefon me pronarin shkoni e merrni
                                       produktin te personi adekuat.
                                     </p>
                                   </div>
@@ -261,11 +261,11 @@ export default function Product() {
                                       className='h-24 w-auto'
                                     />
                                     <h3 className='mt-6 text-sm font-medium text-gray-900'>
-                                      Mereni Produktin
+                                      Merreni Produktin
                                     </h3>
                                     <p className='mt-2 text-sm text-gray-500'>
-                                      Pas takimit me personat adekuat e merni
-                                      produktin që keni nevoj dhe i falenderoni
+                                      Pas takimit me personat adekuat e merrni
+                                      produktin që keni nevojë dhe i falenderoni
                                       ata për atë që të mundësuan.{' '}
                                     </p>
                                   </div>

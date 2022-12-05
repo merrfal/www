@@ -5,7 +5,7 @@ import { Product, Empty, Loading, Pagination } from '../../components';
 import { ProductsList, CategoryList, ProductsFilters } from '../../../controllers/front';
 import { SetFilterTerm, SetCityFilterTerm } from '../../../data/redux/FilterSlice';
 import { useRouter } from 'next/router';
-import { Products as Meta } from '../../../data/metas'; 
+import { Products as Meta } from '../../../data/metas';
 
 export default function Products() {
   let category = useRouter().query.kategoria;
@@ -15,13 +15,15 @@ export default function Products() {
   const categories = useSelector((state) => state.categories);
   const filter = useSelector((state) => state.filter);
 
-
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isCityOpen, setIsCityOpen] = useState(false);
-  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isMobileCategoryOpen, setIsMobileCategoryOpen] = useState(false);
+  const [isMobileCityOpen, setIsMobileCityOpen] = useState(false);
+  // const [isSortOpen, setIsSortOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(8);
-  const [menuMobileOpen, setMenuMobileOpen] = useState(false);
+  const [isFilterMobileMenuOpen, setIsFilterMobileMenuOpen] = useState(false);
+  console.log("filtermobile", isFilterMobileMenuOpen)
 
   const indexOfLastRecord = currentPage * recordsPerPage
   const indexOFirstRecord = indexOfLastRecord - recordsPerPage
@@ -30,18 +32,15 @@ export default function Products() {
 
   const nPages = Math.ceil(filter?.Results?.length / recordsPerPage)
 
-
   useEffect(() => {
     if (filter.Loading === true) {
       ProductsFilters(filter.Term, filter.CityTerm, dispatch);
     }
   }, [filter])
 
-
   useEffect(() => {
     if (category) dispatch(SetFilterTerm(category))
   }, [category])
-
 
   useEffect(() => {
     if (pages.Loaded === false) ProductsList(dispatch);
@@ -51,268 +50,337 @@ export default function Products() {
     if (categories.Loaded === false) CategoryList(dispatch);
   }, [categories]);
 
-
-
   let clickOutside = (handler) => {
     let domNode = useRef();
 
     useEffect(() => {
-      let maybeHandler = (event) => !domNode.current.contains(event.target) && handler();
+      let maybeHandler = (event) => !domNode.current?.contains(event.target) && handler();
       document.addEventListener("mousedown", maybeHandler);
       return () => document.removeEventListener("mousedown", maybeHandler);
     });
-
     return domNode;
   };
 
   let domNodeCategory = clickOutside(() => setIsCategoryOpen(false));
   let domNodeCity = clickOutside(() => setIsCityOpen(false));
+  let domNodeMobile = clickOutside(() => setIsFilterMobileMenuOpen(false));
 
   return (
     <Normal>
       <Meta />
       <div className='bg-white'>
-        <div className='fixed inset-0 flex z-40 sm:hidden'>
-          <div
-            className='fixed inset-0 bg-black bg-opacity-25' />
-          <div className='ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto'>
-            <div className='px-4 flex items-center justify-between'>
-              <h2 className='text-lg font-medium text-gray-900'>Filtrat</h2>
-              <button
-                type='button'
-                className='-mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400'>
-                <span className='sr-only'>Mbyll menunë</span>
-                <svg
-                  className='h-6 w-6'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                  aria-hidden='true'>
-                  <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M6 18L18 6M6 6l12 12'
-                  />
-                </svg>
-              </button>
+
+        {isFilterMobileMenuOpen &&
+          <>
+            <div className='fixed inset-0 flex z-40 sm:hidden' >
+              <div
+                className='fixed inset-0 bg-black bg-opacity-25' />
+
+              <div ref={domNodeMobile} className='ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto'>
+                <div className='px-4 flex items-center justify-between'>
+                  <h2 className='text-lg font-medium text-gray-900'>Filtrat</h2>
+                  <button
+                    type='button'
+                    className='-mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400'
+                    onClick={() => setIsFilterMobileMenuOpen(false)}
+                  >
+
+                    <span className='sr-only'>Mbyll menunë</span>
+                    <svg
+                      className='h-6 w-6'
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                      aria-hidden='true'>
+                      <path
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                        stroke-width='2'
+                        d='M6 18L18 6M6 6l12 12'
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <form className='mt-4'>
+                  <div className='border-t border-gray-200 px-4 py-6'>
+                    <h3 className='-mx-2 -my-3 flow-root'>
+                      <button
+                        onClick={() => setIsMobileCategoryOpen(!isMobileCategoryOpen)}
+                        type='button'
+                        className='px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400'
+                        aria-controls='filter-section-0'
+                        aria-expanded='false'>
+                        <span className='font-medium text-gray-900'>
+                          Kategoritë
+                        </span>
+                        <span className='ml-6 flex items-center'>
+                          {isMobileCategoryOpen ?
+                            <svg
+                              className='rotate-0 h-5 w-5 transform'
+                              xmlns='http://www.w3.org/2000/svg'
+                              viewBox='0 0 20 20'
+                              fill='currentColor'
+                              aria-hidden='true'>
+                              <path
+                                fill-rule='evenodd'
+                                d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                                clip-rule='evenodd'
+                              />
+                            </svg>
+                            :
+                            <svg
+                              className='rotate-[270deg] h-5 w-5 transform'
+                              xmlns='http://www.w3.org/2000/svg'
+                              viewBox='0 0 20 20'
+                              fill='currentColor'
+                              aria-hidden='true'>
+                              <path
+                                fill-rule='evenodd'
+                                d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                                clip-rule='evenodd'
+                              />
+                            </svg>
+                          }
+                        </span>
+                      </button>
+                    </h3>
+                    {isMobileCategoryOpen &&
+                      <div className='pt-6' id='filter-section-0'>
+                        <div className='space-y-6'>
+                          <div className='flex items-center'>
+                            <input
+                              id='filter-mobile-category-0'
+                              name='category[]'
+                              value='new-arrivals'
+                              type='radio'
+                              checked={filter.Term === '' ? true : false}
+                              className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                            />
+                            <label
+                              for='filter-mobile-category-0'
+                              className='ml-3 text-sm text-gray-500'>
+                              Të gjitha kategoritë
+                            </label>
+                          </div>
+
+                          {categories.isLoaded === true &&
+                            categories.Categories.map((category, index) => {
+                              return (
+                                <div className='flex items-center'>
+                                  <input
+                                    key={index}
+                                    id='filter-mobile-category-1'
+                                    name='category[]'
+                                    value='tees'
+                                    onClick={(e) => {
+
+                                      dispatch(SetFilterTerm(category.Name))
+                                      setCurrentPage(1)
+
+                                      // e.preventDefault()
+
+                                    }}
+                                    type='radio'
+                                    className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                  />
+                                  <label
+                                    for='filter-mobile-category-1'
+                                    className='ml-3 text-sm text-gray-500'>
+                                    {category.Name}
+                                  </label>
+                                </div>
+                              );
+                            })}
+
+                        </div>
+                      </div>
+                    }
+                  </div>
+
+                  <div className='border-t border-gray-200 px-4 py-6'>
+                    <h3 className='-mx-2 -my-3 flow-root'>
+                      <button
+                        onClick={() => setIsMobileCityOpen(!isMobileCityOpen)}
+                        type='button'
+                        className='px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400'
+                        aria-controls='filter-section-2'
+                        aria-expanded='false'>
+                        <span className='font-medium text-gray-900'>Qytetet</span>
+                        <span className='ml-6 flex items-center'>
+                          {isMobileCityOpen ?
+                            <svg
+                              className='rotate-0 h-5 w-5 transform'
+                              xmlns='http://www.w3.org/2000/svg'
+                              viewBox='0 0 20 20'
+                              fill='currentColor'
+                              aria-hidden='true'>
+                              <path
+                                fill-rule='evenodd'
+                                d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                                clip-rule='evenodd'
+                              />
+                            </svg>
+                            :
+                            <svg
+                              className='rotate-[270deg] h-5 w-5 transform'
+                              xmlns='http://www.w3.org/2000/svg'
+                              viewBox='0 0 20 20'
+                              fill='currentColor'
+                              aria-hidden='true'>
+                              <path
+                                fill-rule='evenodd'
+                                d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                                clip-rule='evenodd'
+                              />
+                            </svg>
+                          }
+                        </span>
+                      </button>
+                    </h3>
+                    {isMobileCityOpen && (
+                      <div className='pt-6' id='filter-section-2'>
+                        <div className='space-y-6'>
+                          <div className='flex items-center'>
+                            <input
+                              id='filter-mobile-sizes-0'
+                              name='sizes[]'
+                              value='s'
+                              type='radio'
+                              checked={filter.CityTerm === "Prishtinë" ? true : false}
+                              className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                              onClick={(e) => {
+                                dispatch(SetCityFilterTerm("Prishtinë"))
+                                setCurrentPage(1)
+                                // e.preventDefault()
+                              }}
+                            />
+                            <label
+                              for='filter-mobile-sizes-0'
+                              className='ml-3 text-sm text-gray-500'>
+                              Prishtinë
+                            </label>
+                          </div>
+
+                          <div className='flex items-center'>
+                            <input
+                              id='filter-mobile-sizes-1'
+                              name='sizes[]'
+                              value='m'
+                              type='radio'
+                              checked={filter.CityTerm === "Mitrovicë" ? true : false}
+                              className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                              onClick={(e) => {
+                                dispatch(SetCityFilterTerm("Mitrovicë"))
+                                setCurrentPage(1)
+                                // e.preventDefault()
+                              }}
+                            />
+                            <label
+                              for='filter-mobile-sizes-1'
+                              className='ml-3 text-sm text-gray-500'>
+                              Mitrovicë
+                            </label>
+                          </div>
+
+                          <div className='flex items-center'>
+                            <input
+                              id='filter-mobile-sizes-2'
+                              name='sizes[]'
+                              value='l'
+                              type='radio'
+                              checked={filter.CityTerm === "Gjilan" ? true : false}
+                              className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                              onClick={(e) => {
+                                dispatch(SetCityFilterTerm("Gjilan"))
+                                setCurrentPage(1)
+                                // e.preventDefault()
+                              }}
+                            />
+                            <label
+                              for='filter-mobile-sizes-2'
+                              className='ml-3 text-sm text-gray-500'>
+                              Gjilan
+                            </label>
+                          </div>
+
+                          <div className='flex items-center'>
+                            <input
+                              id='filter-mobile-sizes-2'
+                              name='sizes[]'
+                              value='l'
+                              type='radio'
+                              checked={filter.CityTerm === "Prizren" ? true : false}
+                              className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                              onClick={(e) => {
+                                dispatch(SetCityFilterTerm("Prizren"))
+                                setCurrentPage(1)
+                                // e.preventDefault()
+                              }}
+                            />
+                            <label
+                              for='filter-mobile-sizes-2'
+                              className='ml-3 text-sm text-gray-500'>
+                              Prizren
+                            </label>
+                          </div>
+
+                          <div className='flex items-center'>
+                            <input
+                              id='filter-mobile-sizes-2'
+                              name='sizes[]'
+                              value='l'
+                              type='radio'
+                              checked={filter.CityTerm === "Pejë" ? true : false}
+                              className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                              onClick={(e) => {
+                                dispatch(SetCityFilterTerm("Pejë"))
+                                setCurrentPage(1)
+                                // e.preventDefault()
+                              }}
+                            />
+                            <label
+                              for='filter-mobile-sizes-2'
+                              className='ml-3 text-sm text-gray-500'>
+                              Pejë
+                            </label>
+                          </div>
+
+                          <div className='flex items-center'>
+                            <input
+                              id='filter-mobile-sizes-2'
+                              name='sizes[]'
+                              value='l'
+                              type='radio'
+                              checked={filter.CityTerm === "Gjakovë" ? true : false}
+                              className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                              onClick={(e) => {
+                                dispatch(SetCityFilterTerm("Gjakovë"))
+                                setCurrentPage(1)
+                                // e.preventDefault()
+                              }}
+                            />
+                            <label
+                              for='filter-mobile-sizes-2'
+                              className='ml-3 text-sm text-gray-500'>
+                              Gjakovë
+                            </label>
+                          </div>
+
+
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </form>
+              </div>
+              {/* </> */}
+              {/* } */}
+
             </div>
-
-            <form className='mt-4'>
-              <div className='border-t border-gray-200 px-4 py-6'>
-                <h3 className='-mx-2 -my-3 flow-root'>
-                  <button
-                    type='button'
-                    className='px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400'
-                    aria-controls='filter-section-0'
-                    aria-expanded='false'>
-                    <span className='font-medium text-gray-900'>
-                      Kategoritë
-                    </span>
-                    <span className='ml-6 flex items-center'>
-                      <svg
-                        className='rotate-0 h-5 w-5 transform'
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 20 20'
-                        fill='currentColor'
-                        aria-hidden='true'>
-                        <path
-                          fill-rule='evenodd'
-                          d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                          clip-rule='evenodd'
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                </h3>
-                <div className='pt-6' id='filter-section-0'>
-                  <div className='space-y-6'>
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-category-0'
-                        name='category[]'
-                        value='new-arrivals'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-category-0'
-                        className='ml-3 text-sm text-gray-500'>
-                        Të gjitha kategoritë
-                      </label>
-                    </div>
-
-                    {categories.isLoaded === true &&
-                              categories.Categories.map((category, index) => {
-                                return (
-                                  <div className='flex items-center'>
-                      <input
-                      key={index}
-                        id='filter-mobile-category-1'
-                        name='category[]'
-                        value='tees'
-                        onClick={(e) => {
-                                       
-                          dispatch(SetFilterTerm(category.Name))
-                          setCurrentPage(1)
-                          
-                          e.preventDefault()
-
-                        }}
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-category-1'
-                        className='ml-3 text-sm text-gray-500'>
-                        {category.Name}
-                      </label>
-                    </div>
-                                );
-                              })}
-                    
-                  </div>
-                </div>
-              </div>
-
-              <div className='border-t border-gray-200 px-4 py-6'>
-                <h3 className='-mx-2 -my-3 flow-root'>
-                  <button
-                    type='button'
-                    className='px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400'
-                    aria-controls='filter-section-2'
-                    aria-expanded='false'>
-                    <span className='font-medium text-gray-900'>Qytetet</span>
-                    <span className='ml-6 flex items-center'>
-                      <svg
-                        className='rotate-0 h-5 w-5 transform'
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 20 20'
-                        fill='currentColor'
-                        aria-hidden='true'>
-                        <path
-                          fill-rule='evenodd'
-                          d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                          clip-rule='evenodd'
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                </h3>
-                <div className='pt-6' id='filter-section-2'>
-                  <div className='space-y-6'>
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-0'
-                        name='sizes[]'
-                        value='s'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-sizes-0'
-                        className='ml-3 text-sm text-gray-500'>
-                        Prishtinë
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-1'
-                        name='sizes[]'
-                        value='m'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-sizes-1'
-                        className='ml-3 text-sm text-gray-500'>
-                        Mitrovicë
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-2'
-                        name='sizes[]'
-                        value='l'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-sizes-2'
-                        className='ml-3 text-sm text-gray-500'>
-                        Gjilan
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-2'
-                        name='sizes[]'
-                        value='l'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-sizes-2'
-                        className='ml-3 text-sm text-gray-500'>
-                       Prizren
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-2'
-                        name='sizes[]'
-                        value='l'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-sizes-2'
-                        className='ml-3 text-sm text-gray-500'>
-                        Pejë
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-2'
-                        name='sizes[]'
-                        value='l'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-sizes-2'
-                        className='ml-3 text-sm text-gray-500'>
-                        Gjakovë
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-2'
-                        name='sizes[]'
-                        value='l'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        for='filter-mobile-sizes-2'
-                        className='ml-3 text-sm text-gray-500'>
-                        Gjilan
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-
+          </>
+        }
         <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
           <h1 className='text-3xl font-extrabold tracking-tight text-gray-900'>
             Të gjitha Produktet
@@ -322,6 +390,7 @@ export default function Products() {
             dhurues publik dhe anonim.
           </p>
         </div>
+
 
         <section aria-labelledby='filter-heading'>
           <h2 id='filter-heading' className='sr-only'>
@@ -403,11 +472,18 @@ export default function Products() {
                 )} */}
               </div>
 
+
               <button
                 type='button'
-                className='inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden'>
+                className='inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden'
+                onClick={(e) => {
+                  setIsFilterMobileMenuOpen(!isFilterMobileMenuOpen)
+
+                }}
+              >
                 Filtrat
               </button>
+
 
               <div className='hidden sm:block'>
                 <div className='flow-root'>
@@ -442,6 +518,8 @@ export default function Products() {
                                 name='category[]'
                                 value='new-arrivals'
                                 type='radio'
+                                checked={filter.Term === '' ? true : false}
+
                                 onClick={(e) => {
                                   dispatch(SetFilterTerm(''))
                                   setCurrentPage(1)
@@ -467,6 +545,7 @@ export default function Products() {
                                       name='category[]'
                                       value='objects'
                                       // value={search.Term}
+                                      // checked={filter.Term === category.Name  ? true : false}
                                       onClick={(e) => {
 
                                         dispatch(SetFilterTerm(category.Name))
@@ -492,12 +571,14 @@ export default function Products() {
                     </div>
 
                     <div ref={domNodeCity} className='px-4 relative inline-block text-left'>
+
                       <button
                         onClick={() => setIsCityOpen(!isCityOpen)}
                         type='button'
                         className='group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900'
                         aria-expanded='false'>
                         <span>Qytetet</span>
+
                         <svg
                           className='flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500'
                           xmlns='http://www.w3.org/2000/svg'
@@ -515,11 +596,13 @@ export default function Products() {
                       {isCityOpen && (
                         <div className='origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none'>
                           <form className='space-y-4'>
+
                             <div className='flex items-center'>
                               <input
                                 id='filter-sizes-0'
                                 name='sizes[]'
-                                value='s'
+                                value="Prishtinë"
+                                checked={filter.CityTerm === "Prishtinë" ? true : false}
                                 type='radio'
                                 className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                 onClick={(e) => {
@@ -540,6 +623,7 @@ export default function Products() {
                                 id='filter-sizes-1'
                                 name='sizes[]'
                                 value='m'
+                                checked={filter.CityTerm === "Mitrovicë" ? true : false}
                                 type='radio'
                                 className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                 onClick={(e) => {
@@ -560,6 +644,7 @@ export default function Products() {
                                 id='filter-sizes-2'
                                 name='sizes[]'
                                 value='l'
+                                checked={filter.CityTerm === "Gjilan" ? true : false}
                                 type='radio'
                                 className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                 onClick={(e) => {
@@ -581,6 +666,7 @@ export default function Products() {
                                 name='sizes[]'
                                 value='l'
                                 type='radio'
+                                checked={filter.CityTerm === "Prizren" ? true : false}
                                 className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                 onClick={(e) => {
                                   dispatch(SetCityFilterTerm('Prizren'))
@@ -601,6 +687,7 @@ export default function Products() {
                                 name='sizes[]'
                                 value='l'
                                 type='radio'
+                                checked={filter.CityTerm === "Pejë" ? true : false}
                                 className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                 onClick={(e) => {
                                   dispatch(SetCityFilterTerm('Pejë'))
@@ -621,6 +708,7 @@ export default function Products() {
                                 name='sizes[]'
                                 value='l'
                                 type='radio'
+                                checked={filter.CityTerm === "Gjakovë" ? true : false}
                                 className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                 onClick={(e) => {
                                   dispatch(SetCityFilterTerm('Gjakovë'))
@@ -647,7 +735,7 @@ export default function Products() {
           <div className='bg-gray-100'>
             <div className='max-w-7xl mx-auto py-3 px-4 sm:flex sm:items-center sm:px-6 lg:px-8'>
               <h3 className='text-xs font-semibold uppercase tracking-wide text-gray-500'>
-              Filtrat
+                Filtrat
                 <span className='sr-only'>, aktive</span>
               </h3>
 
@@ -665,7 +753,7 @@ export default function Products() {
                           onClick={(e) => {
                             // location.href = '/produktet';
                             dispatch(SetFilterTerm(''))
-                            e.preventDefault()
+                            // e.preventDefault()
 
                           }}
                           type='button'
@@ -698,7 +786,7 @@ export default function Products() {
                           onClick={(e) => {
                             // location.href = '/produktet';
                             dispatch(SetCityFilterTerm(''))
-                            e.preventDefault()
+                            // e.preventDefault()
 
                           }}
                           type='button'
@@ -739,7 +827,7 @@ export default function Products() {
         <Pagination
           nPages={nPages}
           currentPage={currentPage}
-          setCurrentPage={setCurrentPage} 
+          setCurrentPage={setCurrentPage}
         />
       </div>
 
