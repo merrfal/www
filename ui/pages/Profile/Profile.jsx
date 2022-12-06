@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import ImageUploading from "react-images-uploading";
 
 import { useEffect, useState } from 'react';
@@ -12,34 +11,32 @@ import { Profile as Meta } from '../../../data/metas';
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const username = useRouter().query.username || '';
-  const [image, setImage] = useState([]);
-  const [loading, setIsLoading] = useState(false);
-  const maxNumber = 69;
-
-
-  const onChange = (imageList, addUpdateIndex) => {
-    console.log("imagelist", imageList)
-    setImage(imageList)
-  }
-
-
   const profile = useSelector((state) => state.profile);
   const user = useSelector((state) => state.user);
 
+  const [image, setImage] = useState([]);
+  const [loading, setIsLoading] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
+  const username = useRouter().query.username || '';
+  const onChange = (imageList, addUpdateIndex) => setImage(imageList);
+  let imageUser = image ? image[0] : null
+
   useEffect(() => {
-    if (profile.Loaded === false) UserView(dispatch, username);
+    if (profile.Loaded === false) {
+      UserView(dispatch, username)
+    };
   }, [profile, username]);
 
 
-  let imageUser = image ? image[0] : null
-
-  console.log("image111", imageUser)
   return (
     <Normal>
-      <Meta />
+      <Meta
+        name={!profile.Loaded ? 'Po ngarkohet...' : profile.Name + ' ' + profile.Surname}
+        bio={!profile.Loaded ? 'Po ngarkohet...' : profile.Bio}
+        avatar={!profile.Loaded ? '/assets/cover-no.png' : profile.Avatar}
+      />
+
       <section style={{ padding: '1em' }}>
         {profile.Loaded === false ? (
           <Loading />
@@ -137,7 +134,7 @@ export default function Profile() {
                                                   multiple
                                                   value={image}
                                                   onChange={onChange}
-                                                  maxNumber={maxNumber}
+                                                  maxNumber={69}
                                                   dataURLKey="data_url"
                                                   acceptType={["jpg", "png"]}
                                                 >
@@ -201,7 +198,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
-                                                  htmlhtmlFor='Emri'
+                                                  htmlFor='Emri'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Emri
                                                 </label>
@@ -226,7 +223,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
-                                                  htmlhtmlFor='Mbiemri'
+                                                  htmlFor='Mbiemri'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Mbiemri
                                                 </label>
@@ -251,7 +248,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
-                                                  htmlhtmlFor='email-address'
+                                                  htmlFor='email-address'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Adresa Elektronike
                                                 </label>
@@ -277,7 +274,7 @@ export default function Profile() {
                                               </div>
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
-                                                  htmlhtmlFor='email-address'
+                                                  htmlFor='email-address'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Përshkrimi
                                                 </label>
@@ -302,7 +299,7 @@ export default function Profile() {
 
                                               <div className='col-span-6'>
                                                 <label
-                                                  htmlhtmlFor='street-address'
+                                                  htmlFor='street-address'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Adresa
                                                 </label>
@@ -326,7 +323,7 @@ export default function Profile() {
 
                                               <div className='col-span-6'>
                                                 <label
-                                                  htmlhtmlFor='street-address'
+                                                  htmlFor='street-address'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Numri Telefonit
                                                 </label>
@@ -350,7 +347,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-6 lg:col-span-2'>
                                                 <label
-                                                  htmlhtmlFor='shteti'
+                                                  htmlFor='shteti'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Shteti
                                                 </label>
@@ -369,7 +366,7 @@ export default function Profile() {
                                               <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
                                                 <label
                                                   value={profile.City}
-                                                  htmlhtmlFor='qyteti'
+                                                  htmlFor='qyteti'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Qyteti
                                                 </label>
@@ -408,7 +405,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
                                                 <label
-                                                  htmlhtmlFor='zip'
+                                                  htmlFor='zip'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Kodi Postar
                                                 </label>
@@ -468,7 +465,7 @@ export default function Profile() {
             )
             }
             <main
-              className='max-w-2xl mx-auto py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8'>
+              className='max-w-2xl mx-auto mt-8 py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8'>
               {
                 profile.Products.length !== 0 &&
                 <div className='max-w-xl'>
@@ -490,7 +487,7 @@ export default function Profile() {
                 className={
                   profile.Products.length === 0
                     ? 'w-full -mt-10'
-                    : 'mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4'
+                    : 'mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4'
                 }>
                 {profile.Products.length === 0 ? (
                   <Empty

@@ -6,6 +6,7 @@ import { Loading, None, Pagination } from '../../components'
 import { OpenConfirmation } from '../../../data/redux/ConfirmationSlice'
 import { UserProducts as Meta } from '../../../data/metas';
 import { useState } from 'react';
+import { Permissonless } from '..';
 
 export default function UserProducts() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default function UserProducts() {
     if (pagesLoaded === false && userIsAuth) UserProductList(dispatch, user.Id);
   }, [userLandingPages, user]);
 
+  if(user.Auth === false) return <Permissonless />
   return (
     <Normal>
       <Meta />
@@ -38,7 +40,7 @@ export default function UserProducts() {
         <h1 className='text-3xl font-extrabold tracking-tight text-gray-900'>
           Produktet e Mia
         </h1>
-        <p className='mt-4 max-w-xl text-sm text-gray-700'>
+        <p className='mt-4 -mb-16 max-w-xl text-sm text-gray-700'>
           Këtu janë të listuara të gjitha produktet që ju keni ngarkuar për
           ti dhuruar në shoqëri, prej këtu mundet ti menagjoni ato dhe të shtoni të tjera.
         </p>

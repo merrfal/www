@@ -10,37 +10,14 @@ const ProductDelete = async (dispatch, productId, userId, redirect = null) => {
     const res = await req.json();
 
     if (res.status === true) { 
-      Notifier(
-        {
-          dispatch: dispatch,
-          Title: res.message,
-          Type: 'success',
-        }
-      );
-
+      Notifier(dispatch, res.message, 'success');
       UserProductList(dispatch, userId);
-
-      if(redirect !== null) {
-        window.location.href = redirect;
-      }
+      if(redirect !== null) window.location.href = redirect;
     }
-    else {
-        Notifier(
-          {
-            dispatch: dispatch,
-            Title: res.message,
-            Type: 'error',
-          }
-        );
-    }
+    
+    else Notifier(dispatch, res.message, 'error');
   } catch (error) {
-    Notifier(
-      {
-        dispatch: dispatch,
-        Title: '',
-        Type: 'error',
-      }
-    );
+    Notifier(dispatch, '', 'error');
   }
 };
 

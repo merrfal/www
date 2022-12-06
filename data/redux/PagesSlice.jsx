@@ -4,7 +4,7 @@ import { PagesDefaultState } from './Defaults';
 import {
   SetPages as CallSetPages,
   UnsetPages as CallUnsetPages ,
-} from './controllers';
+} from '../../controllers/redux';
 
 export const PagesSlice = createSlice({
   name: 'Pages',

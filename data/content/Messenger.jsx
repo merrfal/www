@@ -1,0 +1,11 @@
+let _ = {};
+
+_.USER_LOGIN_SUCCESS = '';
+_.USER_LOGIN_SUCCESS = '';
+_.USER_LOGIN_SUCCESS = '';
+_.USER_LOGIN_SUCCESS = '';
+_.USER_LOGIN_SUCCESS = '';
+_.USER_LOGIN_SUCCESS = '';
+_.USER_LOGIN_SUCCESS = '';
+
+export default _;

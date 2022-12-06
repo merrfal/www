@@ -1,33 +1,13 @@
 import { Product } from '../../models';
+import { Response } from '../../utils';
 
 export default async function ProductDelete(req, res) {
   try {
     const product = await Product.findByIdAndDelete(req.query.id);
 
-    if (product) {
-      res.status(200).send({
-        status: true,
-        message: 'Produkti u fshi me sukses.',
-        data: null,
-        code: 200,
-      });
-    } 
-    
-    else {
-      res.status(404).send({
-        status: false,
-        message: 'Produkti nuk u fshi nga platforma.',
-        data: null,
-        code: 404,
-      });
-    }
+    if (product) Response(res, 200, true, 'Produkti u fshi me sukses.', product) 
+    else Response(res, 404, false, 'Produkti nuk u fshi nga platforma.', null) 
   } catch (error) {
-    res.status(500).send({
-      status: false,
-      message: 'Gabim i brendshëm i serverit gjatë fshirjes së produktit nga platforma.',
-      sysError: error,
-      data: null,
-      code: 500,
-    });
+    Response(res, 500, false, 'Gabim i brendshëm i serverit gjatë fshirjes së produktit nga platforma.', null) 
   }
 }

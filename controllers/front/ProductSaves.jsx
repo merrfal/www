@@ -10,23 +10,9 @@ const ProductSaves = async (userId, dispatch) => {
     const res = await req.json();
 
     if (res.status === true) dispatch(SetFavorites(res.data));
-    else {
-      Notifier(
-        {
-          dispatch: dispatch,
-          Title: res.message,
-          Type: 'error',
-        }
-      );
-    }
+    else Notifier(dispatch, res.message, 'error');
   } catch (error) {
-    Notifier(
-      {
-        dispatch: dispatch,
-        Title: res.message,
-        Type: 'error',
-      }
-    );
+    Notifier(dispatch, '', 'error');
   }
 };
 

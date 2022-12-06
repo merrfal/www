@@ -10,23 +10,9 @@ const CategoryList = async (dispatch) => {
     const res = await req.json();
 
     if (res.status === true) dispatch(SetCategories(res.data))
-    else {
-      Notifier(
-        {
-          dispatch: dispatch,
-          Title: res.message,
-          Type: 'error',
-        }
-      );
-    }
+    else Notifier(dispatch, res.message, 'error');
   } catch (error) {
-    Notifier(
-      {
-        dispatch: dispatch,
-        Title: 'Internal server error while fetching the categories.',
-        Type: 'error',
-      }
-    );
+    Notifier(dispatch, 'Internal server error while fetching the categories.', 'error')
   }
 };
 

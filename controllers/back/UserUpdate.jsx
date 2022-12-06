@@ -1,55 +1,36 @@
-import { User } from '../../models';
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 
-// TODO: check if the user uses the same email as another user and also the username.
+import { User } from "../../models";
+import { Response } from '../../utils';
 
 export default async function UserUpdate(req, res) {
   try {
     const body = req.body;
     const id = req.query.id;
 
-    console.log("body", body)
-    if (body.NewPassword) {
-      const salt = await bcrypt.genSalt(10);
-      const password = await bcrypt.hash(req.body.NewPassword, salt);
-      body.Password = password;
-    }
+    if (body.Email) {
+      const user = await User.findOne({ Email: body.Email });
 
-    body.FullName = `${req.body.Name || ''} ${req.body.Surname || ''}`;
+      if (user) Response(res, 400, false, "Ky email ekziston në databazë.", null);
 
-    const user = await User.findByIdAndUpdate(
-      id,
-      {
-        $set: body,
-      },
-      {
-        new: true,
+      else {
+        if (body.NewPassword) {
+          const salt = await bcrypt.genSalt(10);
+          const password = await bcrypt.hash(req.body.NewPassword, salt);
+          body.Password = password;
+        }
+
+        body.FullName = `${req.body.Name || ""} ${req.body.Surname || ""}`;
+
+        const user = await User.findByIdAndUpdate(id, { $set: body }, { new: true });
+
+        const { Password, ...userWithoutPassword } = user.toObject();
+
+        if (user) Response(res, 200, true, "Përdoruesi u përditësua me sukses.", userWithoutPassword);
+        else Response(res, 404, false, "Përdoruesi nuk u gjet në bazën e të dhënave.", null);
       }
-    );
-
-    const { Password, ...userWithoutPassword } = user.toObject();
-
-    if (user) {
-      res.status(200).send({
-        status: true,
-        message: 'Përdoruesi u përditësua me sukses.',
-        data: userWithoutPassword,
-        code: 200,
-      });
-    } else {
-      res.status(404).send({
-        status: false,
-        message: 'Përdoruesi nuk u gjet në bazën e të dhënave.',
-        data: null,
-        code: 404,
-      });
     }
   } catch (error) {
-    res.status(500).send({
-      status: false,
-      message: 'Ndodhi një gabim gjatë përpjekjes për të përditësuar përdoruesin.',
-      data: null,
-      code: 500,
-    });
+    Response(res, 500, false, "Ndodhi një gabim gjatë përpjekjes për të përditësuar përdoruesin.", null);
   }
 }

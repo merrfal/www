@@ -6,6 +6,7 @@ import { Category, Loading, Empty } from "..";
 export default function Categories() {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
+
   useEffect(() => {
     if (categories.Loaded === false) {
       CategoryList(dispatch);
@@ -19,13 +20,13 @@ export default function Categories() {
           <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
             Shfletoni Kategoritë
           </h2>
-          <a
+          {/* <a
             href="/produktet"
             className="hidden text-sm font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block"
           >
             Shfleto të gjitha Kategoritë
             <span aria-hidden="true"> &rarr;</span>
-          </a>
+          </a> */}
         </div>
 
         <div className="mt-4 flow-root">
@@ -56,14 +57,14 @@ export default function Categories() {
             </div>
           </div>
         </div>
-        <div className="mt-6 px-4 sm:mb-10 flex justify-end">
+        {/* <div className="mt-6 px-4 sm:mb-10 flex justify-end">
           <a
             href="#"
             className="block text-sm font-semibold text-indigo-600 hover:text-indigo-500"
           >
             Shfleto të gjitha Kategoritë <span aria-hidden="true"> &rarr;</span>
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );

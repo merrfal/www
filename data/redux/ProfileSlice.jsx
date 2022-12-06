@@ -5,7 +5,7 @@ import {
   SetProfile as CallSetProfile,
   UnsetProfile as CallUnsetProfile,
   SetProfileField as CallSetProfileField,
-} from './controllers';
+} from '../../controllers/redux';
 
 export const ProfileSlice = createSlice({
   name: 'Profile',

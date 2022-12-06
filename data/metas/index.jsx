@@ -11,6 +11,7 @@ import Profile from './Profile';
 import UserProducts from './UserProducts';
 import UserSaves from './UserSaves';
 import Contact from './Contact';
+import Permissonless from './Permissonless';
 
 export {
   Terms,
@@ -25,7 +26,8 @@ export {
   Profile,
   UserProducts,
   UserSaves,
-  Contact
+  Contact,
+  Permissonless,
 }
 
 // a po i sheh qito meta tags?

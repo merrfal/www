@@ -6,7 +6,8 @@ import {
   OpenSearch as CallOpenSearch,
   SetSearchTerm as CallSetSearchTerm,
   SetSearch as CallSetSearch,
-} from './controllers';
+} from '../../controllers/redux';
+
 
 export const SearchSlice = createSlice({
   name: 'Search',

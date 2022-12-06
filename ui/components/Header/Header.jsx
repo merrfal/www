@@ -1,10 +1,10 @@
 import Link from "next/link";
 
+import { useRef, useEffect, useState } from "react";
 import { AuthWithGoogle } from "../../../controllers/front";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutUser } from "../../../data/redux/UserSlice";
 import { OpenSearch } from "../../../data/redux/SearchSlice";
-import { useState } from "react";
 import { MenuLink } from "../";
 
 import {
@@ -22,43 +22,39 @@ export default function Header() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-
   let clickOutside = (handler) => {
     let domNode = useRef();
     useEffect(() => {
-      let maybeHandler = (event) => !domNode.current.contains(event.target) && handler();
+      let maybeHandler = (event) =>
+        !domNode.current.contains(event.target) && handler();
       document.addEventListener("mousedown", maybeHandler);
       return () => document.removeEventListener("mousedown", maybeHandler);
     });
+
     return domNode;
   };
 
   let domNode = clickOutside(() => {
-    setIsMobileMenuOpen(false)
+    setIsMobileMenuOpen(false);
   });
 
   return (
-    <header className='relative bg-white'>
-      <nav aria-label='Top' className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div ref={domNode} className='border-b border-gray-200'>
-          <div className='h-16 flex items-center justify-between'>
-            <div className='flex-1 flex items-center lg:hidden'>
+    <header className="relative bg-white">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div ref={domNode} className="border-b border-gray-200">
+          <div className="h-16 flex items-center justify-between">
+            <div className="flex-1 flex items-center lg:hidden">
               <button
-
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="-ml-2 bg-white p-2 rounded-md text-gray-400"
               >
-                <span className="sr-only">Hap menunë</span>
                 <MenuIcon />
               </button>
-
-
 
               <div
                 onClick={() => dispatch(OpenSearch())}
                 className="hover:cursor-pointer ml-2 p-2 text-gray-400 hover:text-gray-500"
               >
-                <span className="sr-only">Kërko</span>
                 <SearchIcon />
               </div>
             </div>
@@ -111,16 +107,12 @@ export default function Header() {
                 onClick={() => dispatch(OpenSearch())}
                 className="hover:cursor-pointer hidden ml-6 p-2 text-gray-400 hover:text-gray-500 lg:block"
               >
-                <span className="sr-only">Kërko</span>
                 <SearchIcon />
               </div>
-
-
 
               {user.Auth && (
                 <Link href="/postimet/shto">
                   <a className="hidden ml-4 p-1 text-gray-400 hover:text-gray-500 lg:block">
-                    <span className="sr-only">Shto</span>
                     <AddIcon />
                   </a>
                 </Link>
@@ -135,9 +127,10 @@ export default function Header() {
                   >
                     <img
                       className="w-6 h-6 rounded-full"
-                      src={ user.Avatar === null
-                        ? "/assets/avatar-no.png"
-                        : user.Avatar
+                      src={
+                        user.Avatar === null
+                          ? "/assets/avatar-no.png"
+                          : user.Avatar
                       }
                     />
                   </button>
@@ -145,7 +138,10 @@ export default function Header() {
                   {isProfileOpen && (
                     <div className="absolute right-0 z-10 mt-2 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="py-1" role="none">
-                        <MenuLink name="Profili Im" link={`/profili/${user.Username}`}/>
+                        <MenuLink
+                          name="Profili Im"
+                          link={`/profili/${user.Username}`}
+                        />
                         <MenuLink name="Të Preferuarat" link={`/preferuarat`} />
                         <MenuLink name="Produktet e Mia" link={`/postimet`} />
                         <MenuLink name="Produktet e Mia" link={`/postimet`} />
@@ -171,45 +167,39 @@ export default function Header() {
                   onClick={() => AuthWithGoogle(dispatch)}
                   className="p-2 text-gray-400 hover:text-gray-500 lg:ml-4 hover:cursor-pointer"
                 >
-                  <span className="sr-only">Llogaria</span>
                   <AccountIcon />
                 </div>
               )}
             </div>
-
-          </div >
-          {isMobileMenuOpen && <div id="mega-menu-full" className="justify-between items-center w-full">
-            <ul className="flex flex-col mt-4 text-sm font-medium lg:hidden">
-
-              <li onClick={(e) => {
-                e.preventDefault()
-                window.location.href = "/"
-              }}>
-                <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-10 hover:bg-gray-50 " aria-current="page">Ballina</a>
-              </li>
-
-
-              <li onClick={(e) => {
-                e.preventDefault()
-                window.location.href = "/produktet"
-              }}>
-                <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-10 hover:bg-gray-50 " aria-current="page">Produktet</a>
-              </li>
-
-
-              <li onClick={(e) => {
-                e.preventDefault()
-                window.location.href = "/na-kontaktoni"
-              }}>
-                <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-10 hover:bg-gray-50 " aria-current="page">Na Kontaktoni</a>
-              </li>
-
-            </ul>
           </div>
-          }
+          {isMobileMenuOpen && (
+            <div
+              id="mega-menu-full"
+              className="justify-between items-center w-full"
+            >
+              <ul className="flex flex-col mt-4 text-sm font-medium lg:hidden hover:cursor-pointer">
+                <Link href="/">
+                  <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-10 hover:bg-gray-50 hover:cursor-pointer">
+                    Ballina
+                  </a>
+                </Link>
+
+                <Link href="/produktet">
+                  <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-10 hover:bg-gray-50 hover:cursor-pointer">
+                    Produktet
+                  </a>
+                </Link>
+
+                <Link href="/na-kontaktoni">
+                  <a className="hover:cursor-pointer block py-2 pr-4 pl-3 text-gray-700 border-gray-10 hover:bg-gray-50 ">
+                    Na Kontaktoni
+                  </a>
+                </Link>
+              </ul>
+            </div>
+          )}
         </div>
       </nav>
-
     </header>
   );
 }

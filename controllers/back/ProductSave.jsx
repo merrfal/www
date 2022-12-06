@@ -1,62 +1,23 @@
-import { Product, User } from '../../models';
+import { User } from "../../models";
+import { Response } from "../../utils";
 
 export default async function ProductSave(req, res) {
   try {
     const userId = req.query.userId;
     const productId = req.query.productId;
 
-    const user = await User.findById(userId)
-
+    const user = await User.findById(userId);
     let savedList = user.Favorites;
 
-    if (savedList.includes(productId)) {
-      res.status(401).send(
-        {
-          status: true,
-          message: 'Përdoruesi tashmë e ka këtë produkt në listën e të preferuarave.' ,
-          data: null,
-          code: 200,
-        }
-      );
-    }
-    
-    else  savedList.push(productId);
+    if (savedList.includes(productId)) Response(res, 401, false, "Përdoruesi tashmë e ka këtë produkt në listën e të preferuarave.", null);
 
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { Favorites: savedList },
-      { new: true }
-    );
+    else savedList.push(productId);
 
-    if (updatedUser) {
-      res.status(200).send(
-        {
-          status: true,
-          message: 'Produkti u ruajt në listën e preferuar të përdoruesit.',
-          data: updatedUser,
-          code: 200,
-        }
-      );
-    } 
-    else {
-      res.status(404).send(
-        {
-          status: true,
-          message: 'Produkti nuk u ruajt në listën e preferuar të përdoruesit.',
-          data: null,
-          code: 404,
-        }
-      );
-    }
+    const updatedUser = await User.findByIdAndUpdate(userId, { Favorites: savedList }, { new: true });
+
+    if (updatedUser) Response(res, 200, true, "Produkti u ruajt në listën e preferuar të përdoruesit.", updatedUser);
+    else Response(res, 404, false, "Produkti nuk u ruajt në listën e preferuar të përdoruesit.", null);
   } catch (err) {
-    res.status(500).send(
-      {
-        status: false,
-        message: 'Gabim i brendshëm i serverit ndërsa preferoni këtë produkt specifik, kontaktoni ekipin nëse ky problem shfaqet përsëri.',
-        sysError: err,
-        data: null,
-        code: 500,
-      }
-    );
+    Response(res, 500, false, "Gabim i brendshëm i serverit ndërsa preferoni këtë produkt specifik, kontaktoni ekipin nëse ky problem shfaqet përsëri.", null);
   }
 }

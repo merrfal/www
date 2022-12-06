@@ -4,7 +4,6 @@ import PagesSlice from "./PagesSlice";
 import NotificationSlice from "./NotificationSlice";
 import ConfirmationSlice from "./ConfirmationSlice";
 import ProfileSlice from "./ProfileSlice";
-import ErrorSlice from "./ErrorSlice";
 import UserLandingPagesSlice from "./UserLandingPagesSlice";
 import CategoriesSlice from "./CategoriesSlice";
 import FavoritesSlice from "./FavoritesSlice";
@@ -18,7 +17,6 @@ export {
     NotificationSlice,
     ConfirmationSlice,
     ProfileSlice,
-    ErrorSlice,
     UserLandingPagesSlice,
     CategoriesSlice,
     FavoritesSlice,

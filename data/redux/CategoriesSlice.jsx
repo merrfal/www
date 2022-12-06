@@ -4,7 +4,7 @@ import { CategoriesDefaultState } from './Defaults';
 import {
   SetCategories as CallSetCategories,
   UnsetCategories as CallUnsetCategories,
-} from './controllers';
+} from '../../controllers/redux';
 
 export const CategoriesSlice = createSlice({
   name: 'categories',

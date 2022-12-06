@@ -4,7 +4,7 @@ import { FavoritesDefaultState } from './Defaults';
 import {
   SetFavorites as CallSetFavorites,
   UnsetFavorites as CallUnsetFavorites ,
-} from './controllers';
+} from '../../controllers/redux';
 
 export const FavoritesSlice = createSlice({
   name: 'Favorites',

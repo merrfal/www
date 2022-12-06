@@ -11,13 +11,7 @@ const ContactCreate = async (fields, setLoading, setFields, dispatch) => {
     const res = await req.json();
 
     if (res.status === true) {
-      Notifier(
-        {
-          dispatch: dispatch,
-          Title: res.message,
-          Type: 'success',
-        }
-      );
+      Notifier(dispatch, res.message, 'success');
 
       setFields(
         {
@@ -28,24 +22,12 @@ const ContactCreate = async (fields, setLoading, setFields, dispatch) => {
         }
       );
     }
-    else {
-      Notifier(
-        {
-          dispatch: dispatch,
-          Title: res.message,
-          Type: 'error',
-        }
-      );
-    }
-  } catch (error) {
-     Notifier(
-      {
-        dispatch: dispatch,
-        Title: "Something wen't wrong while creating this page.",
-        Type: 'error',
-      }
-    );
-  }finally{
+    else Notifier(dispatch, res.message, 'error');
+  } 
+  catch (error) {
+    Notifier(dispatch, "Something wen't wrong while creating this page.", 'error');
+  } 
+  finally {
     setTimeout(() => setLoading(false), 1000)
   }
 };

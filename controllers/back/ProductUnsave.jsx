@@ -1,4 +1,5 @@
-import { Product, User } from '../../models';
+import { User } from '../../models';
+import { Response } from '../../utils';
 
 export default async function ProductUnsave(req, res) {
   try {
@@ -9,58 +10,16 @@ export default async function ProductUnsave(req, res) {
     let userSaves = user.Favorites;
     let userSavesUpdated = [];
 
-    if (!userSaves.includes(productId)) {
-      res.status(401).send(
-        {
-          status: true,
-          message: 'Përdoruesi nuk e ka favorizuar këtë produkt në mënyrë që ta anulojë atë.',
-          data: null,
-          code: 401,
-        }
-      );
-    }
-
+    if (!userSaves.includes(productId)) Response(res, 404, true, "Përdoruesi nuk e ka favorizuar këtë produkt në mënyrë që ta anulojë atë.", null);
 
     else {
       userSavesUpdated = userSaves.filter((fav) => fav !== productId);
-
-      const updatedUser = await User.findByIdAndUpdate(
-        userId,
-        { Favorites: userSavesUpdated },
-        { new: true }
-      );
+      const updatedUser = await User.findByIdAndUpdate(userId, { Favorites: userSavesUpdated }, { new: true });
   
-      if (updatedUser) {
-        res.status(200).send(
-          {
-            status: true,
-            message: 'Produkti u fshi nga lista e preferuar e përdoruesit.',
-            data: updatedUser,
-            code: 200,
-          }
-        );
-      } 
-      
-      else {
-        res.status(404).send(
-          {
-            status: true,
-            message: 'Produkti nuk u fshi nga lista e preferuar e përdoruesit.',
-            data: null,
-            code: 404,
-          }
-        );
-      }
+      if (updatedUser) Response(res, 200, false, "Produkti u fshi nga lista e preferuar e përdoruesit.", updatedUser);
+      else Response(res, 404, false, "Produkti nuk u fshi nga lista e preferuar e përdoruesit.", null);
     }
   } catch (err) {
-    res.status(500).send(
-      {
-        status: false,
-        message: 'Gabim i brendshëm i serverit përderisa tentuam ta fshim produktin specifik nga lista e preferuar e përdoruesit.',
-        sysError: err,
-        data: null,
-        code: 500,
-      }
-    );
+    Response(res, 500, false, "Gabim i brendshëm i serverit përderisa tentuam ta fshim produktin specifik nga lista e preferuar e përdoruesit.", null);
   }
 }

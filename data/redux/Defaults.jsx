@@ -61,10 +61,25 @@ const SearchDefaultState = {
 
 const FilterDefaultState = {
   Results: null,
-  Term: "",
   Loading: true,
   Visibility: false,
-  CityTerm: "",
+  Cities: [
+    'Prizren',
+    'Gjakovë',
+    'Pejë',
+    'Prishtinë',
+    'Ferizaj',
+    'Gjilan',
+    'Mitrovicë',
+  ],
+  Categories: [
+    'Punë',
+    'Elektronika',
+    'Veshje',
+    'Sport',
+    'Shtëpi',
+  ],
+  Sort: 'popular',
 };
 
 const UserLandingPagesDefaultState = {

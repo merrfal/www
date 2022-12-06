@@ -1,5 +1,3 @@
 export default function HeartIcon() {
-    return (
-        <p></p>
-    )
+  return <p></p>;
 }

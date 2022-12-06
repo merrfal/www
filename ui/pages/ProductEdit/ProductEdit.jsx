@@ -9,6 +9,7 @@ import { Loading } from '../../components';
 import { SetField } from '../../../data/redux/PageSlice';
 import { useState } from 'react';
 import { ProductEdit as Meta } from '../../../data/metas';
+import { Permissonless } from '..';
 
 export default function ProductEdit() {
   const dispatch = useDispatch();
@@ -24,8 +25,6 @@ export default function ProductEdit() {
 
   const onChange = (imageList, addUpdateIndex) => setImages(imageList);
 
-  console.log("imagesdel", deletedImages)
-
   useEffect(() => {
     if (categories.Loaded === false) CategoryList(dispatch);
   }, [categories]);
@@ -40,9 +39,12 @@ export default function ProductEdit() {
 
   const product = page?.Page
 
+  if(user.Auth === false) return <Permissonless />
   return (
     <Normal>
-      <Meta />
+      <Meta
+        title={page.Loaded === false || loading ? 'Po ngarkohet...' : page.Page.Name}
+      />
 
       {page.Loaded === false || categories.Loaded === false ? <Loading /> : (
 

@@ -2,28 +2,28 @@ import {
   LogoutUser,
   SetUserNotAuthenticated,
   SetUser,
-} from './UserSliceControllers';
+} from "./UserSliceControllers";
 
 import {
   SetProfile,
   UnsetProfile,
   SetProfileField,
-} from './ProfileSliceControllers';
+} from "./ProfileSliceControllers";
 
-import {
-  SetCategories,
-  UnsetCategories,
-} from './CategoriesSliceControllers';
+import { 
+  SetCategories, 
+  UnsetCategories
+} from "./CategoriesSliceControllers";
 
 import {
   OpenConfirmation,
   CloseConfirmation,
-} from './ConfirmationSliceControllers';
+} from "./ConfirmationSliceControllers";
 
 import {
   ShowNotification,
   HideNotification,
-} from './NotificationSliceControllers';
+} from "./NotificationSliceControllers";
 
 import {
   SetPage,
@@ -31,19 +31,36 @@ import {
   SetField,
   SetPrepageField,
   UnsetPrepage,
-} from './PageSliceControllers';
+} from "./PageSliceControllers";
 
-import { OpenSearch, CloseSearch, SetSearchTerm, SetSearch} from './SearchSliceControllers';
-import {SetFilterTerm, SetFilter, SetCityFilterTerm} from './FilterSliceControllers';
-import { SetPages, UnsetPages } from './PagesSliceControllers';
-import { SetFavorites, UnsetFavorites } from './FavoritesSliceControllers';
+import {
+  OpenSearch,
+  CloseSearch,
+  SetSearchTerm,
+  SetSearch,
+} from "./SearchSliceControllers";
+
+import {
+  SetCategory,
+  SetFilter,
+  SetCity,
+  SetSort,
+} from "./FilterSliceControllers";
+
+import { 
+  SetPages, 
+  UnsetPages
+} from "./PagesSliceControllers";
+
+import { 
+  SetFavorites, 
+  UnsetFavorites
+} from "./FavoritesSliceControllers";
 
 import {
   SetUserLandingPages,
   UnsetUserLandingPages,
-} from './UserLandingPagesSliceControllers';
-
-import { SetError, UnsetError } from './ErrorSliceControllers';
+} from "./UserLandingPagesSliceControllers";
 
 export {
   LogoutUser,
@@ -60,8 +77,6 @@ export {
   SetProfile,
   UnsetProfile,
   SetField,
-  SetError,
-  UnsetError,
   SetUserLandingPages,
   UnsetUserLandingPages,
   SetProfileField,
@@ -71,11 +86,12 @@ export {
   UnsetCategories,
   SetFavorites,
   UnsetFavorites,
-  OpenSearch, 
-  CloseSearch, 
+  OpenSearch,
+  CloseSearch,
   SetSearchTerm,
   SetSearch,
   SetFilter,
-  SetFilterTerm,
-  SetCityFilterTerm
+  SetCategory,
+  SetCity,
+  SetSort,
 };
