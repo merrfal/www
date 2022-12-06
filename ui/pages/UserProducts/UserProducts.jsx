@@ -42,7 +42,7 @@ export default function UserProducts() {
         </h1>
         <p className='mt-4 -mb-16 max-w-xl text-sm text-gray-700'>
           Këtu janë të listuara të gjitha produktet që ju keni ngarkuar për
-          ti dhuruar në shoqëri, prej këtu mundet ti menagjoni ato dhe të shtoni të tjera.
+          t'i dhuruar në shoqëri, prej këtu mund t'i menaxhoni ato dhe të shtoni të tjera.
         </p>
       </div>
       <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>

@@ -78,6 +78,7 @@ export default function Products() {
     <Normal>
       <Meta />
 
+
       <div className="bg-white">
         {menuMobileOpen && (
           <div className="fixed inset-0 flex z-40 sm:hidden ">

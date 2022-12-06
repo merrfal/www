@@ -22,10 +22,11 @@ export default function Hero() {
                     Dhuro se nuk pakësohet.
                   </span>
                 </h1>
-                <p className='mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl'>
                   Merr Fal është projekt vullnetarë për shqipëfolësit me qëllim
-                  mbështetje të njëri tjetrit me anë të dhurimit të gjërave të
-                  ndryshme që nuk përodrim ose thjesht qe duam ti ndajm me të
+                <p class='mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl'>
+                  Merr Fal është projekt vullnetar për shqipfolësit me qëllim
+                  mbështetjeje të njëri tjetrit me anë të dhurimit të gjërave të
+                  ndryshme që nuk përodrim ose thjesht që duam t'i ndajmë me të
                   tjerët.
                 </p>
                 <div className='mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center'>
