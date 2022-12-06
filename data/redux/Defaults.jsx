@@ -55,7 +55,7 @@ const PageDefaultState = {
 const SearchDefaultState = {
   Results: null,
   Term: "",
-  Loading: true,
+  Loading: false,
   Visibility: false,
 };
 
