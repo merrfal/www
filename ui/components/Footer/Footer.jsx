@@ -13,6 +13,10 @@ export default function Footer() {
 
   const currentYear = new Date().getFullYear();
 
+
+
+
+
   return (
     <footer aria-labelledby="footer-heading" className="bg-white mb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
@@ -80,13 +84,13 @@ export default function Footer() {
                     <li className="text-sm">
                       <Link href={`/rreth-nesh`}>
                         <a className="text-gray-500 hover:text-gray-600">
-                          Rreth Nesh
+                          {/* Rreth Nesh */}
                         </a>
                       </Link>
                     </li>
 
                     <li className="text-sm">
-                      <Link href={`/kontribo`}>
+                      <Link href={`/postimet/shto`}>
                         <a className="text-gray-500 hover:text-gray-600">
                           Kontribo
                         </a>
@@ -204,6 +208,7 @@ export default function Footer() {
                 </label>
                 <input
                   id="email-address"
+
                   type="text"
                   required
                   placeholder="emaili@juaj.com"
@@ -211,12 +216,15 @@ export default function Footer() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
+
                 <div className="ml-4 flex-shrink-0">
                   <button
                     onClick={(e) => {
                       e.preventDefault();
                       NewsletterCreate(email, setEmail, setLoading, dispatch);
+
                     }}
+
                     type="submit"
                     className="w-full bg-[#377DFF] border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >

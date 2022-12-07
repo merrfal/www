@@ -9,7 +9,7 @@ export default function Profile({ meta, content }) {
           {content.title}
         </h1>
         <p className="mt-4 max-w-xl text-sm text-gray-700">
-          Faqja e redaktuar së fundi më {content.date}.
+          {/* Faqja e redaktuar së fundi më {content.date}. */}
         </p>
         <div className="mt-16 w-full text-m text-gray-700 mb-20">
           {content.content.map((item) => {

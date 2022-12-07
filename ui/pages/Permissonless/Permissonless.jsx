@@ -26,7 +26,7 @@ export default function Permissonless() {
               </h1>
               <p className="mt-5 text-base text-gray-500">
                 Për ta parë këtë pjesë të platformës ju duhet që të identifikoni
-                llogarinë tuaj që përdroni..
+                llogarinë tuaj që përdorni..
               </p>
               <div className="mt-6">
                 <Link href="/">

@@ -26,9 +26,8 @@ export default function Contact() {
           Na Kontaktoni
         </h1>
         <p className="mt-4 max-w-xl text-sm text-gray-700">
-          Për të gjitha brengat, problemet apo rekomandimet qe keni mund ta
-          kontaktoni ekipin tonë, e ata më shumë se të kënaquar do të jenë që të
-          ju përgjigjën.
+          Për të gjitha brengat, problemet apo rekomandimet qe keni mund të
+          kontaktoni ekipin tonë, do të jemi më shumë se të kënaqur për t'u përgjigjur.
         </p>
         <div className="bg-white">
           <div className="mt-12">
