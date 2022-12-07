@@ -145,7 +145,6 @@ export default function Header() {
                         />
                         <MenuLink name="Të Preferuarat" link={`/preferuarat`} />
                         <MenuLink name="Produktet e Mia" link={`/postimet`} />
-                        <MenuLink name="Produktet e Mia" link={`/postimet`} />
 
                         <button
                           type="submit"

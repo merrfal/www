@@ -1,9 +1,9 @@
 const Terms = {
-    title: 'Kushtet e Shërbimit',
-    content: [
-        {
-            h1: 'Kushtet e dyqanit online',
-            p: `Duke rënë dakord me këto Kushte të Shërbimit, ju përfaqësoni se jeni të 
+  title: "Kushtet e Shërbimit",
+  content: [
+    {
+      h1: "Kushtet e dyqanit online",
+      p: `Duke rënë dakord me këto Kushte të Shërbimit, ju përfaqësoni se jeni të 
             paktën mosha madhore në shtetin ose krahinën tuaj të banimit, ose se jeni 
             mosha madhore në shtetin ose krahinën tuaj të banimit dhe na keni dhënë 
             pëlqimin tuaj për Lejoni cilindo nga vartësit tuaj të mitur që të përdorin këtë
@@ -15,11 +15,11 @@ const Terms = {
             Ju nuk duhet të transmetoni asnjë krimb ose virus ose ndonjë kod të një 
             natyre shkatërruese.
             Një shkelje ose shkelje e ndonjë prej Kushteve do të rezultojë në një 
-            ndërprerje të menjëhershme të Shërbimeve tuaja.`
-        },
-        {
-            h1: 'Kushtet e përgjithshme',
-            p: `Ne rezervojmë të drejtën për të refuzuar shërbimin ndaj kujtdo për çfarëdo 
+            ndërprerje të menjëhershme të Shërbimeve tuaja.`,
+    },
+    {
+      h1: "Kushtet e përgjithshme",
+      p: `Ne rezervojmë të drejtën për të refuzuar shërbimin ndaj kujtdo për çfarëdo 
             arsye në çdo kohë.
             Ju e kuptoni se përmbajtja juaj (duke mos përfshirë informacionin e kartës 
             së kreditit), mund të transferohet e pakriptuar dhe të përfshijë (a) 
@@ -32,11 +32,11 @@ const Terms = {
             Shërbimin ose ndonjë kontakt në faqen e internetit përmes të cilit ofrohet 
             shërbimi, pa lejen e shprehur me shkrim nga ne .
             Titujt e përdorur në këtë marrëveshje janë përfshirë vetëm për lehtësi dhe 
-            nuk do të kufizojnë ose ndikojnë ndryshe në këto Kushte.`
-        },
-        {
-            h1: 'Saktësia, plotësia dhe kohësia e informacionit',
-            p: `Ne nuk jemi përgjegjës nëse informacioni i vënë në dispozicion në këtë faqe 
+            nuk do të kufizojnë ose ndikojnë ndryshe në këto Kushte.`,
+    },
+    {
+      h1: "Saktësia, plotësia dhe kohësia e informacionit",
+      p: `Ne nuk jemi përgjegjës nëse informacioni i vënë në dispozicion në këtë faqe 
             nuk është i saktë, i plotë ose aktual. Materiali në këtë faqe ofrohet vetëm për
             informacion të përgjithshëm dhe nuk duhet të mbështetet ose përdoret si 
             bazë e vetme për marrjen e vendimeve pa u konsultuar me burime 
@@ -47,19 +47,19 @@ const Terms = {
             referencën tuaj. Ne rezervojmë të drejtën të modifikojmë përmbajtjen e 
             kësaj faqeje në çdo kohë, por nuk kemi asnjë detyrim të përditësojmë asnjë 
             informacion në faqen tonë. Ju pranoni se është përgjegjësia juaj të 
-            monitoroni ndryshimet në faqen tonë.`
-        },
-        {
-            h1: 'Modifikimet në shërbim dhe çmime',
-            p: `Çmimet për produktet tona mund të ndryshojnë pa paralajmërim.
+            monitoroni ndryshimet në faqen tonë.`,
+    },
+    {
+      h1: "Modifikimet në shërbim dhe çmime",
+      p: `Çmimet për produktet tona mund të ndryshojnë pa paralajmërim.
             Ne rezervojmë të drejtën në çdo kohë për të modifikuar ose ndërprerë 
             Shërbimin (ose ndonjë pjesë ose përmbajtje të tij) pa njoftim në çdo kohë.
             Ne nuk do të jemi përgjegjës ndaj jush ose ndaj ndonjë pale të tretë për çdo 
-            modifikim, ndryshim çmimi, pezullim ose ndërprerje të Shërbimit.`
-        },
-        {
-            h1: 'Produktet ose shërbimet',
-            p: `Disa produkte ose shërbime mund të jenë të disponueshme ekskluzivisht në 
+            modifikim, ndryshim çmimi, pezullim ose ndërprerje të Shërbimit.`,
+    },
+    {
+      h1: "Produktet ose shërbimet",
+      p: `Disa produkte ose shërbime mund të jenë të disponueshme ekskluzivisht në 
             internet përmes faqes së internetit. Këto produkte ose shërbime mund të 
             kenë sasi të kufizuara dhe mund të kthehen ose shkëmbehen vetëm sipas 
             politikës sonë të kthimit. Për të parë politikën tonë të kthimit, ju lutemi 
@@ -78,11 +78,11 @@ const Terms = {
             është e ndaluar.
             Ne nuk garantojmë që cilësia e ndonjë produkti, shërbimi, informacioni ose 
             materiali tjetër të blerë ose marrë nga ju do të përmbushë pritshmëritë 
-            tuaja, ose se çdo gabim në Shërbim do të korrigjohet.`
-        },
-        {
-            h1: 'Saktësia e informacionit të faturimit dhe të llogarisë',
-            p: `Ne rezervojmë të drejtën të refuzojmë çdo porosi që ju bëni me ne. Ne 
+            tuaja, ose se çdo gabim në Shërbim do të korrigjohet.`,
+    },
+    {
+      h1: "Saktësia e informacionit të faturimit dhe të llogarisë",
+      p: `Ne rezervojmë të drejtën të refuzojmë çdo porosi që ju bëni me ne. Ne 
             mund, sipas gjykimit tonë, të kufizojmë ose anulojmë sasitë e blera për 
             person, për familje ose për porosi. Këto kufizime mund të përfshijnë porositë
             e bëra nga ose nën të njëjtën llogari klienti, të njëjtën kartë krediti dhe/ose 
@@ -98,11 +98,11 @@ const Terms = {
             përfshirë adresën tuaj të emailit dhe numrat e kartës së kreditit dhe datat e 
             skadimit, në mënyrë që ne të mund të përfundojmë transaksionet tuaja dhe 
             t'ju kontaktojmë sipas nevojës.
-            Për më shumë detaje, ju lutemi rishikoni politikën tonë të kthimit.`
-        },
-        {
-            h1: 'Mjetet opsionale',
-            p: `Ne mund t'ju ofrojmë akses në mjetet e palëve të treta, mbi të cilat ne as 
+            Për më shumë detaje, ju lutemi rishikoni politikën tonë të kthimit.`,
+    },
+    {
+      h1: "Mjetet opsionale",
+      p: `Ne mund t'ju ofrojmë akses në mjetet e palëve të treta, mbi të cilat ne as 
             nuk i monitorojmë, as nuk kemi asnjë kontroll apo të dhëna.
             Ju e pranoni dhe pranoni që ne ofrojmë akses në mjete të tilla " siç janë" dhe
             "siç të disponueshme" pa asnjë garanci, përfaqësim ose kusht të çfarëdo lloji
@@ -115,11 +115,11 @@ const Terms = {
             Ne gjithashtu, në të ardhmen, mund të ofrojmë Shërbime dhe/ose veçori të 
             reja përmes faqes së internetit (duke përfshirë lëshimin e mjeteve dhe 
             burimeve të reja). Këto veçori dhe/ose Shërbime të reja do t'i nënshtrohen 
-            gjithashtu këtyre Kushteve të Shërbimit.`
-        },
-        {
-            h1: 'Lidhjet me palët e treta',
-            p: `Lidhjet e palëve të treta në këtë sajt mund t'ju drejtojnë në faqet e internetit 
+            gjithashtu këtyre Kushteve të Shërbimit.`,
+    },
+    {
+      h1: "Lidhjet me palët e treta",
+      p: `Lidhjet e palëve të treta në këtë sajt mund t'ju drejtojnë në faqet e internetit 
             të palëve të treta që nuk janë të lidhura me ne. Ne nuk jemi përgjegjës për 
             shqyrtimin ose vlerësimin e përmbajtjes ose saktësisë dhe nuk garantojmë 
             dhe nuk do të kemi asnjë përgjegjësi ose përgjegjësi për ndonjë material ose
@@ -132,11 +132,11 @@ const Terms = {
             sigurohuni që t'i kuptoni ato përpara se të angazhoheni në ndonjë 
             transaksion. Ankesat, pretendimet, shqetësimet ose pyetjet në lidhje me 
             produktet e palëve të treta duhet t'i drejtohen palës së tretë.
-            `
-        },
-        {
-            h1: 'Gabimet, pasaktësitë dhe humbjet',
-            p: `Herë pas here mund të ketë informacione në faqen tonë ose në Shërbim që 
+            `,
+    },
+    {
+      h1: "Gabimet, pasaktësitë dhe humbjet",
+      p: `Herë pas here mund të ketë informacione në faqen tonë ose në Shërbim që 
             përmbajnë gabime tipografike, pasaktësi ose lëshime që mund të lidhen me 
             përshkrimet e produkteve, çmimet, promovimet, ofertat, tarifat e transportit 
             të produktit, kohën e tranzitit dhe disponueshmërinë. Ne rezervojmë të 
@@ -152,11 +152,11 @@ const Terms = {
             Shërbim ose në ndonjë faqe interneti të lidhur, nuk duhet të merret për të 
             treguar se të gjitha informacionet në Shërbim ose në çdo faqe interneti të 
             lidhur janë modifikuar ose përditësuar.
-            `
-        },
-        {
-            h1: 'Përdorim të ndaluar',
-            p: `Përveç ndalimeve të tjera të përcaktuara në Kushtet e Shërbimit, ju ndalohet
+            `,
+    },
+    {
+      h1: "Përdorim të ndaluar",
+      p: `Përveç ndalimeve të tjera të përcaktuara në Kushtet e Shërbimit, ju ndalohet
             të përdorni faqen ose përmbajtjen e saj:
             (a) për çdo qëllim të paligjshëm; (b) për të kërkuar të tjerët për të kryer ose 
             marrë pjesë në ndonjë veprim të paligjshëm; (c) për të shkelur çdo 
@@ -178,11 +178,11 @@ const Terms = {
             të lidhur, faqeve të tjera të internetit ose të internetit. Ne rezervojmë të 
             drejtën të ndërpresim përdorimin tuaj të Shërbimit ose çdo faqe interneti të 
             lidhur për shkeljen e ndonjë prej përdorimeve të ndaluara.
-            `
-        },
-        {
-            h1: 'Heqja e garancive, kufizimi i përgjegjësisë',
-            p: `Ne nuk garantojmë, përfaqësojmë ose garantojmë që përdorimi juaj i 
+            `,
+    },
+    {
+      h1: "Heqja e garancive, kufizimi i përgjegjësisë",
+      p: `Ne nuk garantojmë, përfaqësojmë ose garantojmë që përdorimi juaj i 
             shërbimit tonë do të jetë i pandërprerë, në kohë, i sigurt ose pa gabime.
             Ne nuk garantojmë që rezultatet që mund të merren nga përdorimi i 
             shërbimit do të jenë të sakta ose të besueshme.
@@ -219,12 +219,12 @@ const Terms = {
             ose juridiksione të tilla, përgjegjësia jonë do të kufizohet në masën 
             maksimale të lejuar me ligj.
             
-            `
-        },
+            `,
+    },
 
-        {
-            h1: 'Heqja e garancive, kufizimi i përgjegjësisë',
-            p: `Ne nuk garantojmë, përfaqësojmë ose garantojmë që përdorimi juaj i 
+    {
+      h1: "Heqja e garancive, kufizimi i përgjegjësisë",
+      p: `Ne nuk garantojmë, përfaqësojmë ose garantojmë që përdorimi juaj i 
             shërbimit tonë do të jetë i pandërprerë, në kohë, i sigurt ose pa gabime.
             Ne nuk garantojmë që rezultatet që mund të merren nga përdorimi i 
             shërbimit do të jenë të sakta ose të besueshme.
@@ -261,11 +261,11 @@ const Terms = {
             ose juridiksione të tilla, përgjegjësia jonë do të kufizohet në masën 
             maksimale të lejuar me ligj.
             
-            `
-        },
-        {
-            h1: 'Përfundimi',
-            p: `Detyrimet dhe detyrimet e palëve të shkaktuara para datës së përfundimit 
+            `,
+    },
+    {
+      h1: "Përfundimi",
+      p: `Detyrimet dhe detyrimet e palëve të shkaktuara para datës së përfundimit 
             do të mbijetojnë pas përfundimit të kësaj marrëveshjeje për të gjitha 
             qëllimet.
             Këto Kushte të Shërbimit janë në fuqi përveç rastit dhe derisa të ndërpriten 
@@ -278,18 +278,18 @@ const Terms = {
             pa paralajmërim dhe ju do të mbeteni përgjegjës për të gjitha shumat e 
             paguara deri dhe duke përfshirë datën e përfundimit; dhe/ose në përputhje 
             me rrethanat mund t'ju refuzojë aksesin në Shërbimet tona (ose ndonjë pjesë
-            `
-        },
-        {
-            h1: 'Ligji qeverisë',
-            p: `Këto Kushte të Shërbimit dhe çdo marrëveshje e veçantë me të cilën ne ju 
+            `,
+    },
+    {
+      h1: "Ligji qeverisë",
+      p: `Këto Kushte të Shërbimit dhe çdo marrëveshje e veçantë me të cilën ne ju 
             ofrojmë Shërbime do të qeverisen dhe interpretohen në përputhje me ligjet e
             Kosovës.
-            `
-        },
-        {
-            h1: 'Ndryshimet në kushtet e shërbimit',
-            p: `Mund të rishikoni versionin më aktual të Kushteve të Shërbimit në çdo kohë 
+            `,
+    },
+    {
+      h1: "Ndryshimet në kushtet e shërbimit",
+      p: `Mund të rishikoni versionin më aktual të Kushteve të Shërbimit në çdo kohë 
             në këtë faqe.
             Ne rezervojmë të drejtën, sipas gjykimit tonë, për të përditësuar, ndryshuar 
             ose zëvendësuar ndonjë pjesë të këtyre Kushteve të Shërbimit duke postuar 
@@ -298,15 +298,16 @@ const Terms = {
             Përdorimi i vazhdueshëm ose qasja në faqen tonë të internetit ose Shërbimi 
             pas postimit të çdo ndryshimi në këto Kushte të Shërbimit përbën pranimin 
             e këtyre ndryshimeve.
-            `
-        },
-        {
-            h1: 'Informacion Kontakt',
-            p: `Pyetjet në lidhje me Kushtet e Shërbimit duhet të na dërgohen në 
-            merrfal@gmail.com.
-            `
-        },
-    ]
+            `,
+    },
+    {
+      h1: "Informacion Kontakt",
+      p: `Pyetjet në lidhje me Kushtet e Shërbimit duhet të na dërgohen në 
+            siguria@merrfal.com.
+            `,
+    },
+  ],
+  date: "17 dhjetor 2022 në orën 8:00",
 };
 
 export default Terms;

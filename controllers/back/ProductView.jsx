@@ -18,24 +18,23 @@ export default async function ProductView(req, res) {
     const others = await Product.find({ Category: product.Category }).limit(4);
     const user = await User.findById(product.User);
 
-    const newUser =
-      product.UserShow === false
-        ? {
-            Id: null,
-            Name: "Listim",
-            Surname: "Anonim",
-            Avatar: false,
-          }
-        : {
-            Id: user._id,
-            FullName: user.FullName,
-            Username: user.Username,
-            Avatar: user.Avatar,
-          };
+    const newUser = product.UserShow
+      ? {
+          Id: user._id,
+          FullName: user.FullName,
+          Username: user.Username,
+          Avatar: user.Avatar,
+        }
+      : {
+          Id: null,
+          FullName: "Listim Anonim",
+          Username: "listim-anonim",
+          Avatar: null,
+        };
 
     const data = { ...product._doc, Recommendations: others, User: newUser };
 
-    if (product) Response(res, 404, false, "Produkti u mor me sukses.", data);
+    if (product) Response(res, 404, true, "Produkti u mor me sukses.", data);
     else
       Response(
         res,

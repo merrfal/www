@@ -68,7 +68,8 @@ const Privacy = {
             Numri i telefonit
             Të dhënat e përdorimit`
         }
-    ]
+    ],
+    date: '17 dhjetor 2022 në orën 8:00'
 };
 
 export default Privacy;

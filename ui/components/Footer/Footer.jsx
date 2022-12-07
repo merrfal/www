@@ -104,7 +104,7 @@ export default function Footer() {
                     <li className="text-sm">
                       <Link href={`/politika-e-privatesise`}>
                         <a className="text-gray-500 hover:text-gray-600">
-                          Politika e privatësisë
+                          Politika e Privatësisë
                         </a>
                       </Link>
                     </li>

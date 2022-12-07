@@ -54,11 +54,6 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  Info: {
-    type: Object,
-    required: false,
-    default: {},
-  },
   Website: {
     type: String,
     required: false,

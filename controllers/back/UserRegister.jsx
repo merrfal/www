@@ -17,9 +17,11 @@ export default async function UserRegister(req, res) {
     body.Password = hashedPassword;
     body.FullName = `${req.body.Name || ''} ${req.body.Surname || ''}`;
     
-    let Username = body.Username;
+    let Username = `${req.body.Name || ''}${req.body.Surname || ''}`;
 
-    if(body.Username === undefined || body.Username === null || body.Username === '')  Username = `${req.body.Name || ''}${req.body.Surname || ''}${Math.random().toString(36).substring(2, 6)}`;
+    const usernameExists = await User.findOne({ Username: body.Username });
+
+    if(usernameExists || Username.length === 0) Username = `${req.body.Name || ''}${req.body.Surname || ''}${Math.random().toString(36).substring(2, 6)}`;
 
     body.Username = Username.toLocaleLowerCase();
 

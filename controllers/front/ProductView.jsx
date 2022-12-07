@@ -1,7 +1,7 @@
 import { ConfigBuilder, Notifier } from '../../utils';
 import { SetPage } from '../../data/redux/PageSlice';
 
-const PageView = async (slug, setLoading, dispatch) => {
+const PageView = async (dispatch, setLoading, slug, mode) => {
   setLoading(true);
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductView/${slug}`;

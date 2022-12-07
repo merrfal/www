@@ -8,6 +8,7 @@ const UserProductList = async (dispatch, id) => {
   try {
     const req = await fetch(url, config);
     const res = await req.json();
+    console.log('res', res)
     
     if (res.status === true) dispatch(SetUserLandingPages(res.data))
     else Notifier(dispatch, res.message, 'error')

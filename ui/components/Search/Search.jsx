@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { useRef } from "react";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ProductsSearch } from "../../../controllers/front/";
 
@@ -39,15 +38,13 @@ export default function Search() {
   }, []);
 
   useEffect(() => {
-    // if (search?.Term !== "") {
+    if (search.Loading === false) {
       ProductsSearch(search?.Term, dispatch);
-    // }
+    }
   }, [search]);
 
   useEffect(() => {
-    if (search?.Visibility) {
-      inputRef.current.focus();
-    }
+    if (search?.Visibility) inputRef.current.focus();
   });
 
   const lottie = {
@@ -91,7 +88,7 @@ export default function Search() {
             </svg>
             <input
               type="text"
-              style={{ verticalAlign: 'baseline' }}
+              style={{ verticalAlign: "baseline" }}
               ref={inputRef}
               value={search?.Term}
               onChange={(e) => dispatch(SetSearchTerm(e.target.value))}
@@ -141,8 +138,8 @@ export default function Search() {
                 <Link href={`/produktet/${product.Slug}`}>
                   <li
                     onClick={() => {
-                      dispatch(SetSearchTerm(""))
-                      dispatch(CloseSearch())
+                      dispatch(SetSearchTerm(""));
+                      dispatch(CloseSearch());
                       // dispatch(SetSearchTerm(e.target.value))
                     }}
                     key={index}

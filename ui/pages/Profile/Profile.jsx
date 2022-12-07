@@ -45,7 +45,7 @@ export default function Profile() {
             <div className='max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8'>
               <div>
                 <img
-                  className='h-32 rounded w-full object-cover lg:h-64'
+                  className='h-32 rounded-xl w-full object-cover lg:h-64'
                   src={profile.Cover === null ? '/assets/cover-no.png' : profile.Cover}
                   alt={profile.Name}
                 />
