@@ -17,12 +17,21 @@ const UserUpdate = async (
   const url = `${process.env.NEXT_PUBLIC_API_URL}/users/UserUpdate/${profile.Id}`;
   const config = ConfigBuilder("P", "JSON", profile, true, false, false);
 
-  if (image !== null) {
-    const storageRef = ref(storage, `/users/${v4() + image.file.name}`);
+  console.log("imageeeeeeeeeeeeee", image)
+  if (image) {
+    const storageRef = ref(storage, `/users/${v4() + image?.file?.name}`);
     const uploadTask = uploadBytesResumable(storageRef, image?.file);
 
     uploadTask.on(
       "state_changed",
+      (snapshot) => {
+        let progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        // console.log("Upload is " + progress + "% done");
+      },
+      (error) => {
+        console.log(error);
+      },
       async () => {
         await getDownloadURL(uploadTask.snapshot.ref).then(
           async (downloadURL) => {
@@ -36,12 +45,12 @@ const UserUpdate = async (
                 window.location.reload();
                 Notifier(dispatch, res.message, 'success');
               }
-              
+
               else Notifier(dispatch, res.message, 'error');
-            } 
+            }
             catch (error) {
               Notifier(dispatch, '', 'error')
-            } 
+            }
             finally {
               setImage(null);
               setIsEdit(false);
@@ -51,7 +60,7 @@ const UserUpdate = async (
         );
       }
     );
-  } 
+  }
   else {
     try {
       const req = await fetch(url, config);
@@ -63,10 +72,10 @@ const UserUpdate = async (
       }
 
       else Notifier(dispatch, res.message, "error");
-    } 
+    }
     catch (error) {
       Notifier(dispatch, "", "error");
-    } 
+    }
     finally {
       setImage(null);
       setIsEdit(false);
