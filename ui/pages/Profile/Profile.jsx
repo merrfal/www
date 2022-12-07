@@ -20,7 +20,7 @@ export default function Profile() {
 
   const username = useRouter().query.username || '';
   const onChange = (imageList, addUpdateIndex) => setImage(imageList);
-  // let imageUser = image ? image[0] : []
+  let imageUser = image ? image[0] : null
 
   useEffect(() => {
     if (profile.Loaded === false) {
@@ -443,7 +443,7 @@ export default function Profile() {
                       <div className='bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6'>
                         <button
                           onClick={() => {
-                            UserUpdate(dispatch, profile, image, setIsEdit, setIsLoading, setImage)
+                            UserUpdate(dispatch, profile, imageUser, setIsEdit, setIsLoading, setImage)
                           }
                           }
                           type='button'

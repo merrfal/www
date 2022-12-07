@@ -26,10 +26,19 @@ const PageUpdate = async (dispatch, product, images, deletedImages, setIsLoading
         const storageRef = ref(storage, `/products/${id + images[i]?.file.name}`);
         const uploadTask = uploadBytesResumable(storageRef, images[i]?.file);
 
-        uploadTask.on("state_changed", async () => {
+        uploadTask.on("state_changed",
+          (snapshot) => {
+            let progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+          },
+          (error) => {
+            console.log(error);
+          },
+          async () => {
             await getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
               array = [...array, downloadURL]
-              
+
               if (i === images.length - 1) {
                 page.Gallery = array
                 const config_with_images = ConfigBuilder('PUT', 'JSON', page, true, false, false);
@@ -44,21 +53,21 @@ const PageUpdate = async (dispatch, product, images, deletedImages, setIsLoading
                   }
 
                   else Notifier(dispatch, res.message, 'error')
-                } 
-                catch (error) { Notifier(dispatch, '', 'error')}
+                }
+                catch (error) { Notifier(dispatch, '', 'error') }
                 finally { setIsLoading(false) }
               }
             });
           }
         );
       }
-      
+
       else {
         array = [...array, images[i]]
         if (i === images.length - 1) {
           page.Gallery = array
           const config = ConfigBuilder('PUT', 'JSON', page, true, false, false);
-          
+
           try {
             const req = await fetch(url, config);
             const res = await req.json();
@@ -69,7 +78,7 @@ const PageUpdate = async (dispatch, product, images, deletedImages, setIsLoading
             }
 
             else Notifier(dispatch, res.message, 'error')
-          } 
+          }
           catch (error) { Notifier(dispatch, '', 'error') }
           finally { setIsLoading(false) }
         }
@@ -87,10 +96,10 @@ const PageUpdate = async (dispatch, product, images, deletedImages, setIsLoading
       if (res.status === true) {
         window.location.reload();
         Notifier(dispatch, res.message, 'success')
-      } 
+      }
 
       else Notifier(dispatch, res.message, 'error')
-    } 
+    }
     catch (error) { Notifier(dispatch, '', 'error') }
     finally { setIsLoading(false) }
   };

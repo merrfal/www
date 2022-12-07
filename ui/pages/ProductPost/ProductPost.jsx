@@ -19,7 +19,7 @@ export default function ProductPost() {
   const [images, setImages] = useState([]);
   const [loading, setIsLoading] = useState(false);
 
-  const onChange = (imageList, addUpdateIndex) => setImages(imageList);
+  const onChange = (imageList, addUpdateIndex) => setImages(imageList.slice(0,5));
 
   useEffect(() => {
     dispatch(SetPrepageField({ Field: "User", Value: user.Id }));
@@ -314,6 +314,7 @@ export default function ProductPost() {
                                     ))}
                                   </div>
 
+                                  {images.length > 4 ? null :
                                   <div
                                     style={isDragging ? { color: "red" } : null}
                                     onClick={onImageUpload}
@@ -351,6 +352,7 @@ export default function ProductPost() {
                                       </p>
                                     </div>
                                   </div>
+                                  }
                                 </div>
                               )}
                             </ImageUploading>
@@ -362,15 +364,22 @@ export default function ProductPost() {
                       <button
                         className={
                           page.Prepage?.Name &&
+                            page.Prepage.Phone &&
+                            page.Prepage?.City &&
+                            page.Prepage?.Category &&
+                            page.Prepage.Address &&
+                            page.Prepage?.UserShow &&
+                            images.length !== 0
+                            ? "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none"
+                            : "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none cursor-not-allowed opacity-[.75]"
+                        }
+                        disabled={page.Prepage?.Name &&
                           page.Prepage.Phone &&
                           page.Prepage?.City &&
                           page.Prepage?.Category &&
                           page.Prepage.Address &&
                           page.Prepage?.UserShow &&
-                          images.length !== 0
-                            ? "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none"
-                            : "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none cursor-not-allowed opacity-[.75]"
-                        }
+                          images.length !== 0 ? false : true}
                         onClick={(e) => {
                           e.preventDefault();
                           ProductCreate(

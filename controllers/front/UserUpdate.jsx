@@ -18,8 +18,8 @@ const UserUpdate = async (
   const config = ConfigBuilder("P", "JSON", profile, true, false, false);
 
   console.log("imageeeeeeeeeeeeee", image)
-  if (image) {
-    const storageRef = ref(storage, `/users/${v4() + image?.file?.name}`);
+  if (image !== null) {
+    const storageRef = ref(storage, `/users/${v4() + image.file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, image?.file);
 
     uploadTask.on(

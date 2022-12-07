@@ -6,10 +6,14 @@ const ContactCreate = async (fields, setLoading, setFields, dispatch) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/contact/ContactCreate`;
   const config = ConfigBuilder('P', 'JSON', fields, true, false, false);
 
+  // const reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+
   try {
     const req = await fetch(url, config);
     const res = await req.json();
 
+    // if(!reg.test())
+    // console.log("files", fields)
     if (res.status === true) {
       Notifier(dispatch, res.message, 'success');
 
@@ -23,10 +27,10 @@ const ContactCreate = async (fields, setLoading, setFields, dispatch) => {
       );
     }
     else Notifier(dispatch, res.message, 'error');
-  } 
+  }
   catch (error) {
     Notifier(dispatch, "Something wen't wrong while creating this page.", 'error');
-  } 
+  }
   finally {
     setTimeout(() => setLoading(false), 1000)
   }

@@ -329,60 +329,7 @@ export default function ProductEdit() {
                             <label className="block text-sm font-medium text-gray-700">
                               Fotot e Produktit
                             </label>
-                            <div className="flex flex-wrap mb-10">
-                              {images.map((image, index) => (
-                                <div key={index} className="w-6/12 sm:w-4/12">
-                                  <div className="flex mt-5">
-                                    <img
-                                      src={
-                                        image.data_url ? image.data_url : image
-                                      }
-                                      alt="Imazhi i ngarkuar"
-                                      width="250"
-                                      className="shadow-lg rounded max-w-full h-auto align-middle border-none"
-                                    />
-                                    <div>
-                                      <button
-                                        style={{
-                                          position: "relative",
-                                          background: "white",
-                                          bottom: "5px",
-                                          right: "8px",
-                                        }}
-                                        className="h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4"
-                                        onClick={(e) => {
-                                          onImageRemove(index);
-                                          {
-                                            !image.data_url
-                                              ? setDeletedImages((prev) => [
-                                                  ...prev,
-                                                  image,
-                                                ])
-                                              : "";
-                                          }
-                                          e.preventDefault();
-                                        }}
-                                      >
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          fill="none"
-                                          viewBox="0 0 24 24"
-                                          strokeWidth={1.5}
-                                          stroke="currentColor"
-                                          className="w-4 h-4"
-                                        >
-                                          <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M6 18L18 6M6 6l12 12"
-                                          />
-                                        </svg>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
+
                             <ImageUploading
                               multiple
                               value={images}
@@ -392,10 +339,65 @@ export default function ProductEdit() {
                             >
                               {({
                                 onImageUpload,
+                                onImageRemove,
                                 isDragging,
                                 dragProps,
                               }) => (
                                 <div>
+                                  <div className="flex flex-wrap mb-10">
+                                    {images.map((image, index) => (
+                                      <div key={index} className="w-6/12 sm:w-4/12">
+                                        <div className="flex mt-5">
+                                          <img
+                                            src={
+                                              image.data_url ? image.data_url : image
+                                            }
+                                            alt="Imazhi i ngarkuar"
+                                            width="250"
+                                            className="shadow-lg rounded max-w-full h-auto align-middle border-none"
+                                          />
+                                          <div>
+                                            <button
+                                              style={{
+                                                position: "relative",
+                                                background: "white",
+                                                bottom: "5px",
+                                                right: "8px",
+                                              }}
+                                              className="h-15 w-15 rounded-full ring-4 ring-white sm:h-4 sm:w-4"
+                                              onClick={(e) => {
+                                                onImageRemove(index);
+                                                {
+                                                  !image.data_url
+                                                    ? setDeletedImages((prev) => [
+                                                      ...prev,
+                                                      image,
+                                                    ])
+                                                    : "";
+                                                }
+                                                e.preventDefault();
+                                              }}
+                                            >
+                                              <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={1.5}
+                                                stroke="currentColor"
+                                                className="w-4 h-4"
+                                              >
+                                                <path
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
+                                                  d="M6 18L18 6M6 6l12 12"
+                                                />
+                                              </svg>
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
                                   <div
                                     style={isDragging ? { color: "red" } : null}
                                     onClick={onImageUpload}
