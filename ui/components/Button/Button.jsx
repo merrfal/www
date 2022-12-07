@@ -1,7 +1,7 @@
 
 
 export default function Input(props) {
-    const { label, value, values, setValues, placeholder, type, size } = props;
+    const { label, value, values, setValues, placeholder, type, size, method } = props;
   
     if(size === "large"){
       return (
