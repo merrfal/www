@@ -20,7 +20,7 @@ export default function Profile() {
 
   const username = useRouter().query.username || '';
   const onChange = (imageList, addUpdateIndex) => setImage(imageList);
-  let imageUser = image ? image[0] : null
+  // let imageUser = image ? image[0] : []
 
   useEffect(() => {
     if (profile.Loaded === false) {
@@ -28,6 +28,8 @@ export default function Profile() {
     };
   }, [profile, username]);
 
+  // console.log("iamge", imageUser)
+  console.log("iamge", image)
 
   return (
     <Normal>
@@ -148,7 +150,7 @@ export default function Profile() {
 
                                                     <div key={0} className='mt-1 flex items-center'>
                                                       <span>
-                                                        <img className='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image.length !== 0) ? (image.length !== 0 ? image[0]?.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
+                                                        <img className='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image?.length !== 0) ? (image?.length !== 0 ? image[0]?.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
                                                       </span>
 
                                                       <button
@@ -441,7 +443,7 @@ export default function Profile() {
                       <div className='bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6'>
                         <button
                           onClick={() => {
-                            UserUpdate(dispatch, profile, imageUser, setIsEdit, setIsLoading, setImage)
+                            UserUpdate(dispatch, profile, image, setIsEdit, setIsLoading, setImage)
                           }
                           }
                           type='button'
