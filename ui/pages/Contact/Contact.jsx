@@ -115,7 +115,9 @@ export default function Contact() {
                         : "w-auto bg-[#387CFF] inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:bg-[#387CFF95] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#387CFF] cursor-not-allowed opacity-[.75]"
                     }
                     disabled={fields.Email !== '' && fields.Message !== '' && fields.Name !== '' && fields.Surname !== '' ? false : true}
-                    onClick={() => ContactCreate(fields, setLoading, setFields, dispatch)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      ContactCreate(fields, setLoading, setFields, dispatch)}}
                   >
                     Dërgo Mesazhin
                   </button>

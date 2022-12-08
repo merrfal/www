@@ -1,4 +1,4 @@
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Response } from '../../utils';
 
 const ContactCreate = async (fields, setLoading, setFields, dispatch) => {
   setLoading(true);
@@ -6,14 +6,14 @@ const ContactCreate = async (fields, setLoading, setFields, dispatch) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/contact/ContactCreate`;
   const config = ConfigBuilder('P', 'JSON', fields, true, false, false);
 
-  // const reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-
+  // const regEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,3}$/i;
+  // console.log('success',fields.Email)
   try {
     const req = await fetch(url, config);
     const res = await req.json();
+   
+    // if (regEx.test('ssd')) Notifier(dispatch, "Ju lutem jepni një email valide", 'error')
 
-    // if(!reg.test())
-    // console.log("files", fields)
     if (res.status === true) {
       Notifier(dispatch, res.message, 'success');
 
