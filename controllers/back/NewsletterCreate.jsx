@@ -5,8 +5,12 @@ export default async function NewsletterCreate(req, res) {
   try {
     const exists = await Newsletter.find({ Email: req.query.email });
 
+
+    const regEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,3}$/i;
     if (exists.length > 0) Response(res, 333, false, 'Ju tashmë jeni abonuar në buletinin tonë.', null)
-    
+
+    if (!regEx.test(req.query.email) && req.query.email !== "") Response(res, 333, false, 'Ju lutem shkruani një email valide.', null)
+
     else {
       const _new = new Newsletter({ Email: req.query.email });
       const newsletter = await _new.save();

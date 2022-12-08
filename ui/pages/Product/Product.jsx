@@ -24,6 +24,11 @@ export default function Product() {
     if (page?.Page?.Gallery[0]) setMainImage(page?.Page?.Gallery[0]);
   }, [slug]);
 
+  useEffect(() => {
+    if (page.loading === false) ProductView(dispatch, setLoading, slug, 'viewProduct');
+    if (page?.Page?.Gallery[0]) setMainImage(page?.Page?.Gallery[0]);
+  }, [page]);
+
   const [inSaves, setIsSaves] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -57,6 +62,9 @@ export default function Product() {
     }
   };
 
+  console.log("image", page?.Page?.Gallery[0])
+  console.log("image22", mainImage)
+
   return (
     <Normal>
       <Meta
@@ -80,10 +88,11 @@ export default function Product() {
                             page.Page.Gallery.map((image) => (
                               <button
                                 id="tabs-2-tab-1"
+
                                 className={
                                   mainImage === image
                                     ? "relative h-24 bg-white ring-2 ring-blue-500 ring-inset"
-                                    : "relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-100 focus:outline-none focus:ring   focus:ring-inse focus:ring-offset-4 focus:ring-opacity-50"
+                                    : "relative h-24 bg-black rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-100 focus:outline-none focus:ring   focus:ring-inse focus:ring-offset-4 focus:ring-opacity-50"
                                 }
                                 aria-controls="tabs-2-panel-1"
                                 onClick={() => {
