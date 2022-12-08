@@ -1,9 +1,9 @@
 import { ConfigBuilder, Notifier } from '../../utils';
 import { SetFilter } from '../../data/redux/FilterSlice';
 
-const ProductsFilters = async (Cities, Categories, Sort, dispatch) => {
+const ProductsFilters = async (Cities, Categories, dispatch) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductsFilters`;
-  const config = ConfigBuilder('P', 'JSON', {Cities, Categories, Sort}, true, false, false);
+  const config = ConfigBuilder('P', 'JSON', {Cities, Categories}, true, false, false);
 
   try {
     const req = await fetch(url, config);

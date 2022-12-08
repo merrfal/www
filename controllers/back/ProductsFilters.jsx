@@ -5,29 +5,19 @@ export default async function ProductsFilters(req, res) {
   try {
     const { Cities, Categories } = req.body;
 
-    let products = [];
-    let promises = [];
+    const products = await Promise.all([
+      ...Cities.map(async (City) => Product.find({ City })),
+      ...Categories.map(async (Category) => Product.find({ Category }))
+    ]);
 
-    if (Cities.length > 0) {
-      Cities.map(async (city) => {
-        const results = await Product.find({ City: city });
-        return promises.push(results);
-      });
-    }
+    const allProducts = products.slice();
+    const collectedProducts = [];
 
-    if (Categories.length > 0) {
-      Categories.map(async (category) => {
-        const results = await Product.find({ Category: category });
-        return promises.push(results);
-      });
-    }
+    for(let i = 0; i < allProducts.length; i++) collectedProducts.push(...allProducts[i]);
 
-    const results = await Promise.all(promises);
-    results.map((result) => products.push(result));
-
-    if (products.length > 0) Response( res, 200, true, "Të gjitha produktet u morën me sukses.", products);
+    if (products.length > 0) Response(res, 200, true, "Të gjitha produktet u morën me sukses.", collectedProducts);
     else Response(res, 404, false, "Asnjë produkt nuk u gjet në platformë.", null);
   } catch (error) {
-    Response( res, 500, false, "Gabim i brendshëm i serverit gjatë gjetjes së produkteve.", null);
+    Response(res, 500, false, "Gabim i brendshëm i serverit gjatë gjetjes së produkteve.", null);
   }
 }
