@@ -1,11 +1,11 @@
 import { FirebaseAuth } from '../../config/Firebase';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithRedirect } from 'firebase/auth';
 import { Notifier } from '../../utils';
 import { UserLogin, UserRegister } from '.';
 
 const UserGoogle = async (dispatch, informations) => {
   var Provider = new GoogleAuthProvider();
-  const data = await signInWithPopup(FirebaseAuth, Provider);
+  const data = await signInWithRedirect(FirebaseAuth, Provider);
 
   try {
     if (data) {
