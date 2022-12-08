@@ -2,14 +2,10 @@ const SetCity = (state, action) => {
   let cities = state.Cities;
   let city = action.payload;
 
-  if (cities.includes(city)) {
-    cities = cities.filter((item) => item !== city);
-  } 
-  
-  else {
-    cities.push(city);
-  }
+  if (cities.includes(city)) cities = cities.filter((item) => item !== city);
+  else cities.push(city);
 
+  state.Cities = cities;
   state.Loading = true;
   state.Results = null;
 };
@@ -18,16 +14,10 @@ const SetCategory = (state, action) => {
   let categories = state.Categories;
   let category = action.payload;
 
-  if (categories.includes(category)) {
-    categories = categories.filter((item) => item !== category);
-  } 
-  
-  else {
-    categories.push(category);
-  }
+  if (categories.includes(category)) categories = categories.filter((item) => item !== category);
+  else categories.push(category);
 
   state.Categories = categories;
-
   state.Loading = true;
   state.Results = null;
 };

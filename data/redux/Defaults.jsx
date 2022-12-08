@@ -60,7 +60,7 @@ const SearchDefaultState = {
 };
 
 const FilterDefaultState = {
-  Results: null,
+  Results: [],
   Loading: true,
   Visibility: false,
   Cities: [

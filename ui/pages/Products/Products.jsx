@@ -42,8 +42,7 @@ export default function Products() {
   const nPages = Math.ceil(filter?.Results?.length / recordsPerPage);
 
   useEffect(() => {
-    if (filter.Loading === true)
-      ProductsFilters(filter.Cities, filter.Categories, filter.Sort, dispatch);
+    if (filter.Loading === true) ProductsFilters(filter.Cities, filter.Categories, dispatch);
   }, [filter]);
 
   useEffect(() => {
@@ -190,10 +189,7 @@ export default function Products() {
 
           <div className="relative z-10 bg-white border-b border-gray-200 pb-4">
             <div className="max-w-7xl mx-auto px-4 flex items-center justify-between sm:px-6 lg:px-8">
-              <div
-                ref={domNodeSort}
-                className="relative inline-block text-left"
-              >
+              <div ref={domNodeSort} className="relative inline-block text-left">
                 <div>
                   <button
                     onClick={() => setIsSortOpen(!isSortOpen)}
@@ -214,7 +210,6 @@ export default function Products() {
                             ? { color: "rgb(24 24 27)" }
                             : {}
                         }
-                        z
                         onClick={() => dispatch(SetSort("popular"))}
                         className={`text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700`}
                       >
@@ -377,7 +372,6 @@ export default function Products() {
             <div className="max-w-7xl mx-auto py-3 flex items-center px-6 lg:px-8 align-center">
               <h3 className="text-xs font-semibold uppercase tracking-wide text-gray-500">
                 Filtrat
-                <span className="sr-only">, aktive</span>
               </h3>
 
               <div className="w-px h-5 bg-gray-300 block ml-4" />
@@ -385,10 +379,7 @@ export default function Products() {
               <div className="ml-4 flex overflow-x-auto">
                 {filter.Categories.map((category, index) => {
                   return (
-                    <div
-                      key={index}
-                      className="flex flex-wrap items-center mr-1"
-                    >
+                    <div key={index} className="flex flex-wrap items-center mr-1">
                       <span className="inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900">
                         <span>{category}</span>
                         <button
@@ -399,9 +390,6 @@ export default function Products() {
                             setCurrentPage(1);
                           }}
                         >
-                          <span className="sr-only">
-                            Hiq filtrin për objektet
-                          </span>
                           <SmCloseIcon />
                         </button>
                       </span>
@@ -450,17 +438,17 @@ export default function Products() {
               : "mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
           }
         >
-          {pages.Loaded === false ? (
+          {pages.Loading === true || filter.Loading === true ? (
             <Loading />
-          ) : pages.Pages.length === 0 ? (
+          ) : pages.Pages.length === 0 || filter.Results.length === 0 || currentRecords.length === 0 ? (
             <Empty
               heading="Nuk u gjet asnjë produkt"
               message="Nuk u gjet asnjë produkt në platformë me këto filtrime.."
             />
           ) : (
-            currentRecords?.map((page, index) => (
-              <Product product={page} key={index} />
-            ))
+            currentRecords?.map((page, index) => {
+              if(page !== undefined) return <Product product={page} key={index} />;
+            })
           )}
         </div>
 
