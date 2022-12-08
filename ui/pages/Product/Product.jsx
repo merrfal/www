@@ -239,8 +239,10 @@ export default function Product() {
                         <div className="mt-10 flex sm:flex-col1">
                           <button
                             type="submit"
-                            onClick={() =>
+                            onClick={(e) => {
+                              e.preventDefault()
                               window.open("tel:" + page.Page.Phone, "_self")
+                            }
                             }
                             className="max-w-xs flex-1 bg-[#387CFF] border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-[#387CFF95] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-[#387CFF] sm:w-full"
                           >
