@@ -281,8 +281,8 @@ export default function ProductEdit() {
                                 <option disabled value="Përcakto statusin">
                                   Zgjedh statusin
                                 </option>
-                                <option value={page.Page.UserShow === false ? false : true}>Anonime</option>
-                                <option value={page.Page.UserShow === true ? true : false}>Publike</option>
+                                <option value={page.Page.UserShow === false ? false : true}>Jo(mos e shfaq profilin tim tek produkti)</option>
+                                <option value={page.Page.UserShow === true ? true : false}>Po(shfaq profilin tim tek produkti)</option>
                               </select>
                             </div>
                             <div className="col-span-6 sm:col-span-3 lg:col-span-3">

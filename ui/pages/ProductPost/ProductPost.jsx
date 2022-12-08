@@ -157,7 +157,7 @@ export default function ProductPost() {
                                 value={page.Prepage.Phone}
                                 type="tel"
                                 id="nr-telefonit"
-                                placeholder="+383 XX-XXX-XXX"
+                                placeholder="+383 - XX-XXX-XXX"
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm"
                               />
                             </div>
@@ -186,8 +186,8 @@ export default function ProductPost() {
                                 <option disabled value="Përcakto statusin">
                                   Zgjedh statusin
                                 </option>
-                                <option value="Anonime">Anonime</option>
-                                <option value="Publike">Publike</option>
+                                <option value="Anonime">Jo(mos e shfaq profilin tim tek produkti)</option>
+                                <option value="Publike">Po(shfaq profilin tim tek produkti)</option>
                               </select>
                             </div>
 
