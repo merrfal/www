@@ -4,6 +4,7 @@ import { Normal } from '../../layouts';
 import { Loading, Empty, Product, Pagination } from '../../components'
 import { ProductSaves } from '../../../controllers/front';
 import { UserSaves as Meta } from '../../../data/metas'; 
+import { Permissonless } from '..';
 
 export default function UserSaves() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export default function UserSaves() {
     if (state) ProductSaves(user.Id, dispatch)
   }, [user]);
 
+  if(user.Auth === false) return <Permissonless />
   return (
     <Normal>
       <Meta />

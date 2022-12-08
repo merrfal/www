@@ -50,20 +50,19 @@ const ProductSchema = new Schema({
         default: 'Kosovo'
     },
     UserShow: {
-        type: String,
-        default: ''
-    },
-    createdAt: {
-        type: Date
+        type: String
     },
     Status: {
         type: String,
         default: 'published',
         enum: [
             'published',
-            'e marr',
+            'unpublished',
         ],
     }
+},
+{
+    timestamps: true,
 });
 
 const Product = models.Product || model('Product', ProductSchema);

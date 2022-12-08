@@ -4,7 +4,7 @@ import { ConfirmationDefaultState } from './Defaults';
 import {
   OpenConfirmation as CallOpenConfirmation,
   CloseConfirmation as CallCloseConfirmation,
-} from './controllers';
+} from '../../controllers/redux';
 
 export const ConfirmationSlice = createSlice({
   name: 'confirmation',

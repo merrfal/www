@@ -10,6 +10,7 @@ import Loader from './Loader';
 import Contact from './Contact';
 import UserSaves from './UserSaves';
 import Page from './Page';
+import Permissonless from './Permissonless';
 
 export {
   Home,
@@ -23,5 +24,6 @@ export {
   Loader,
   Contact,
   Page,
-  UserSaves
+  UserSaves,
+  Permissonless,
 };

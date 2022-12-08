@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import ImageUploading from "react-images-uploading";
 
 import { useEffect, useState } from 'react';
@@ -12,34 +11,36 @@ import { Profile as Meta } from '../../../data/metas';
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const username = useRouter().query.username || '';
-  const [image, setImage] = useState([]);
-  const [loading, setIsLoading] = useState(false);
-  const maxNumber = 69;
-
-
-  const onChange = (imageList, addUpdateIndex) => {
-    console.log("imagelist", imageList)
-    setImage(imageList)
-  }
-
-
   const profile = useSelector((state) => state.profile);
   const user = useSelector((state) => state.user);
 
+  const [image, setImage] = useState([]);
+  const [loading, setIsLoading] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
+  const username = useRouter().query.username || '';
+  const onChange = (imageList, addUpdateIndex) => setImage(imageList);
+  let imageUser = image ? image[0] : null
+
   useEffect(() => {
-    if (profile.Loaded === false) UserView(dispatch, username);
+    if (profile.Loaded === false) {
+      UserView(dispatch, username)
+    };
   }, [profile, username]);
 
 
-  let imageUser = image ? image[0] : null
+  useEffect(() => {
+    if (username !== "") UserView(dispatch, username)
+  }, [username]);
 
-  console.log("image111", imageUser)
   return (
     <Normal>
-      <Meta />
+      <Meta
+        name={!profile.Loaded ? 'Po ngarkohet...' : profile.Name + ' ' + profile.Surname}
+        bio={!profile.Loaded ? 'Po ngarkohet...' : profile.Bio}
+        avatar={!profile.Loaded ? '/assets/cover-no.png' : profile.Avatar}
+      />
+
       <section style={{ padding: '1em' }}>
         {profile.Loaded === false ? (
           <Loading />
@@ -48,7 +49,7 @@ export default function Profile() {
             <div className='max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8'>
               <div>
                 <img
-                  className='h-32 rounded w-full object-cover lg:h-64'
+                  className='h-32 rounded-xl w-full object-cover lg:h-64'
                   src={profile.Cover === null ? '/assets/cover-no.png' : profile.Cover}
                   alt={profile.Name}
                 />
@@ -137,7 +138,7 @@ export default function Profile() {
                                                   multiple
                                                   value={image}
                                                   onChange={onChange}
-                                                  maxNumber={maxNumber}
+                                                  maxNumber={69}
                                                   dataURLKey="data_url"
                                                   acceptType={["jpg", "png"]}
                                                 >
@@ -151,7 +152,7 @@ export default function Profile() {
 
                                                     <div key={0} className='mt-1 flex items-center'>
                                                       <span>
-                                                        <img className='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image.length !== 0) ? (image.length !== 0 ? image[0]?.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
+                                                        <img className='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image?.length !== 0) ? (image?.length !== 0 ? imageUser?.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
                                                       </span>
 
                                                       <button
@@ -201,7 +202,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
-                                                  htmlhtmlFor='Emri'
+                                                  htmlFor='Emri'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Emri
                                                 </label>
@@ -226,7 +227,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
-                                                  htmlhtmlFor='Mbiemri'
+                                                  htmlFor='Mbiemri'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Mbiemri
                                                 </label>
@@ -251,7 +252,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
-                                                  htmlhtmlFor='email-address'
+                                                  htmlFor='email-address'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Adresa Elektronike
                                                 </label>
@@ -277,7 +278,7 @@ export default function Profile() {
                                               </div>
                                               <div className='col-span-6 sm:col-span-3'>
                                                 <label
-                                                  htmlhtmlFor='email-address'
+                                                  htmlFor='email-address'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Përshkrimi
                                                 </label>
@@ -302,7 +303,7 @@ export default function Profile() {
 
                                               <div className='col-span-6'>
                                                 <label
-                                                  htmlhtmlFor='street-address'
+                                                  htmlFor='street-address'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Adresa
                                                 </label>
@@ -326,7 +327,7 @@ export default function Profile() {
 
                                               <div className='col-span-6'>
                                                 <label
-                                                  htmlhtmlFor='street-address'
+                                                  htmlFor='street-address'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Numri Telefonit
                                                 </label>
@@ -350,7 +351,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-6 lg:col-span-2'>
                                                 <label
-                                                  htmlhtmlFor='shteti'
+                                                  htmlFor='shteti'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Shteti
                                                 </label>
@@ -369,7 +370,7 @@ export default function Profile() {
                                               <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
                                                 <label
                                                   value={profile.City}
-                                                  htmlhtmlFor='qyteti'
+                                                  htmlFor='qyteti'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Qyteti
                                                 </label>
@@ -408,7 +409,7 @@ export default function Profile() {
 
                                               <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
                                                 <label
-                                                  htmlhtmlFor='zip'
+                                                  htmlFor='zip'
                                                   className='block text-sm font-medium text-gray-700'>
                                                   Kodi Postar
                                                 </label>
@@ -468,35 +469,35 @@ export default function Profile() {
             )
             }
             <main
-              className='max-w-2xl mx-auto py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8'>
+              className='max-w-2xl mx-auto mt-8 py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8'>
               {
                 profile.Products.length !== 0 &&
                 <div className='max-w-xl'>
-                <h1
-                  id='order-history-heading'
-                  className='text-3xl font-extrabold tracking-tight text-gray-900'>
-                  Produktet e dhuruara
-                </h1>
-                <p className='mt-2 text-sm text-gray-500'>
-                  {
-                    profile.Id === user.Id ? 
-                    `Produket e dhuruara nga ju, duke përfshirë dhe ato anonimisht të postuara.` :
-                    `Produket e dhuruara nga përdoruesi, duke mos përfshirë ato anonimisht të postuara.`
-                  }
-                </p>
-              </div>
+                  <h1
+                    id='order-history-heading'
+                    className='text-3xl font-extrabold tracking-tight text-gray-900'>
+                    Produktet e dhuruara
+                  </h1>
+                  <p className='mt-2 text-sm text-gray-500'>
+                    {
+                      profile.Id === user.Id ?
+                        `Produket e dhuruara nga ju, duke përfshirë dhe ato anonimisht të postuara.` :
+                        `Produket e dhuruara nga përdoruesi, duke mos përfshirë ato anonimisht të postuara.`
+                    }
+                  </p>
+                </div>
               }
               <div
                 className={
                   profile.Products.length === 0
                     ? 'w-full -mt-10'
-                    : 'mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4'
+                    : 'mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4'
                 }>
                 {profile.Products.length === 0 ? (
                   <Empty
                     heading='Nuk u gjet asnjë produkt'
                     message={
-                      profile.Id === user.Id ? 'Ju nuk keni shtuar asnjë produkt, ose produktet janë shtuar anonimisht.' : 'Përdoruesi nuk dhuruar asnjë produkt, ose ka dhuruar anonimisht.' 
+                      profile.Id === user.Id ? 'Ju nuk keni shtuar asnjë produkt, ose produktet janë shtuar anonimisht.' : 'Përdoruesi nuk dhuruar asnjë produkt, ose ka dhuruar anonimisht.'
                     }
                   />
                 ) : (

@@ -7,7 +7,7 @@ import {
   SetField as CallSetField,
   UnsetPrepage as CallUnsetPrepage,
   SetPrepageField as CallSetPrepageField,
-} from './controllers';
+} from '../../controllers/redux';
 
 export const PageSlice = createSlice({
   name: 'Page',

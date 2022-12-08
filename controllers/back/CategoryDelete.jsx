@@ -1,38 +1,13 @@
 import { Category } from '../../models';
+import { Response } from '../../utils';
 
 export default async function CategoryDelete(req, res) {
   try {
     const category = await Category.findByIdAndDelete(req.query.id);
 
-    if (category) {
-      res.status(200).send(
-        {
-          status: true,
-          message: 'Kjo kategori u fshi me sukses.',
-          data: null,
-          code: 200,
-        }
-      );
-    } 
-    else {
-      res.status(404).send(
-        {
-          status: false,
-          message: 'Kjo kategori nuk u fshi.',
-          data: null,
-          code: 404,
-        }
-      );
-    }
+    if (category) Response(res, 200, true, 'Kjo kategori u fshi me sukses.', null)
+    else Response(res, 404, false, 'Kjo kategori nuk u fshi.', null)
   } catch (error) {
-    res.status(500).send(
-      {
-        status: false,
-        message: 'Gabim i brendshëm i serverit gjatë fshirjes së kësaj kategorie.',
-        sysError: error,
-        data: null,
-        code: 500,
-      }
-    );
+    Response(res, 500, false, 'Gabim i brendshëm i serverit gjatë fshirjes së kësaj kategorie.', null)
   }
 }

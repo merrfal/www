@@ -1,6 +1,8 @@
-import { User } from '../../models';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+
+import { User } from '../../models';
+import { Response } from '../../utils';
 
 export default async function UserRegister(req, res) {
   const JWTACCESSKEY = process.env.JWT_SECRET;
@@ -15,9 +17,11 @@ export default async function UserRegister(req, res) {
     body.Password = hashedPassword;
     body.FullName = `${req.body.Name || ''} ${req.body.Surname || ''}`;
     
-    let Username = body.Username;
+    let Username = `${req.body.Name || ''}${req.body.Surname || ''}`;
 
-    if(body.Username === undefined || body.Username === null || body.Username === '')  Username = `${req.body.Name || ''}${req.body.Surname || ''}${Math.random().toString(36).substring(2, 6)}`;
+    const usernameExists = await User.findOne({ Username: body.Username });
+
+    if(usernameExists || Username.length === 0) Username = `${req.body.Name || ''}${req.body.Surname || ''}${Math.random().toString(36).substring(2, 6)}`;
 
     body.Username = Username.toLocaleLowerCase();
 
@@ -26,34 +30,11 @@ export default async function UserRegister(req, res) {
 
     if (user) {
       const Token = jwt.sign({}, JWTACCESSKEY, { expiresIn: '72h' });
-      
-      res.status(200).send(
-        {
-          status: true,
-          data: {...user._doc, Token},
-          message: 'Përdoruesi u regjistrua me sukses.',
-          code: 200,
-        }
-      );
-    } else {
-      res.status(404).send(
-        {
-          status: false,
-          message: 'Ndodhi një gabim gjatë regjistrimit të përdoruesit.',
-          data: null,
-          code: 404,
-        }
-      );
+      Response(res, 200, true, "Përdoruesi u regjistrua me sukses.", {...user._doc, Token});
     }
+    
+    else Response(res, 404, false, "Ndodhi një gabim gjatë regjistrimit të përdoruesit.", null);
   } catch (error) {
-    res.status(500).send(
-      {
-        status: false,
-        message: 'Gabim i brendshëm i serverit gjatë regjistrimit të përdoruesit.',
-        sysError: error,
-        data: null,
-        code: 500,
-      }
-    );
+    Response(res, 500, false, "Gabim i brendshëm i serverit gjatë regjistrimit të përdoruesit.", null);
   }
 }

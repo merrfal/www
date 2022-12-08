@@ -17,23 +17,9 @@ const ProductSave = async (productId, userId, newFavorites, setIsSaving, dispatc
       ProductSaves(userId, dispatch);
     }
     
-    else {
-      Notifier(
-        {
-          dispatch: dispatch,
-          Title: res.message,
-          Type: 'error',
-        }
-      );
-    }
+    else Notifier(dispatch, res.message, 'error');
   } catch (error) {
-    Notifier(
-      {
-        dispatch: dispatch,
-        Title: 'Problem',
-        Type: 'error',
-      }
-    );
+    Notifier(dispatch, '', 'error');
   }
   finally{
     setIsSaving(false);

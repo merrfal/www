@@ -1,56 +1,33 @@
-import { Product } from '../../models';
+import { Product } from "../../models";
+import { Response } from "../../utils";
 
 export default async function ProductsFilters(req, res) {
   try {
-    const term = req.body.term;
-    const cityTerm = req.body.cityTerm;
+    const { Cities, Categories } = req.body;
 
-    let products =  []
-    if (term === '' && cityTerm !== '') {
-      products = await Product.find({ City: cityTerm }).sort({createdAt: -1});
+    let products = [];
+    let promises = [];
+
+    if (Cities.length > 0) {
+      Cities.map(async (city) => {
+        const results = await Product.find({ City: city });
+        return promises.push(results);
+      });
     }
 
-    else if (term !== '' && cityTerm === '') {
-      products = await Product.find({ Category: term }).sort({createdAt: -1});
+    if (Categories.length > 0) {
+      Categories.map(async (category) => {
+        const results = await Product.find({ Category: category });
+        return promises.push(results);
+      });
     }
 
-    else if (term !== '' && cityTerm !== '') {
-      products = await Product.find({ Category: term, City: cityTerm }).sort({createdAt: -1});
-    }
-    
-    else {
-      products = await Product.find({}).sort({createdAt: -1});
-    }
+    const results = await Promise.all(promises);
+    results.map((result) => products.push(result));
 
-
-    if (products) {
-      res.status(200).send(
-        {
-          status: true,
-          message: 'Të gjitha produktet u morën me sukses.',
-          data: products,
-          code: 200,
-        }
-      );
-    } else {
-      res.status(404).send(
-        {
-          status: false,
-          message: 'Asnjë produkt nuk u gjet në platformë.',
-          data: null,
-          code: 404,
-        }
-      );
-    }
+    if (products.length > 0) Response( res, 200, true, "Të gjitha produktet u morën me sukses.", products);
+    else Response(res, 404, false, "Asnjë produkt nuk u gjet në platformë.", null);
   } catch (error) {
-    res.status(500).send(
-      {
-        status: false,
-        message: 'Gabim i brendshëm i serverit gjatë gjetjes së produkteve.',
-        sysError: error,
-        data: null,
-        code: 404,
-      }
-    );
+    Response( res, 500, false, "Gabim i brendshëm i serverit gjatë gjetjes së produkteve.", null);
   }
 }

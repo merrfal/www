@@ -17,6 +17,7 @@ import Input from './Input';
 import Button from './Button';
 import Textarea from './Textarea';
 import MenuLink from './MenuLink';
+import Link from './Link';
 
 export {
     Header,
@@ -37,5 +38,6 @@ export {
     Input,
     Button,
     Textarea,
-    MenuLink
+    MenuLink,
+    Link
 }

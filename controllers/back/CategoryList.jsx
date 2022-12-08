@@ -1,37 +1,13 @@
 import { Category } from '../../models';
+import { Response } from '../../utils';
 
 export default async function CategoryList(req, res) {
   try {
     const categories = await Category.find({});
 
-    if (categories) {
-      res.status(200).send(
-        {
-          status: true,
-          message: 'Të gjitha kategoritë janë marrë me status.',
-          data: categories,
-          code: 200,
-        }
-      );
-    } else {
-      res.status(404).send(
-        {
-          status: false,
-          message: 'Nuk u gjet asnjë kategori.',
-          data: null,
-          code: 404,
-        }
-      );
-    }
+    if (categories) Response(res, 200, true, 'Të gjitha kategoritë janë marrë me status.', categories)
+    else Response(res, 404, false, 'Nuk u gjet asnjë kategori.', null)
   } catch (error) {
-    res.status(500).send(
-      {
-        status: false,
-        message: 'Gabim i brendshëm i serverit gjatë ngarkimit të kategorive.',
-        sysError: error,
-        data: null,
-        code: 404,
-      }
-    );
+    Response(res, 404, false, 'Gabim i brendshëm i serverit gjatë ngarkimit të kategorive.', null)
   }
 }

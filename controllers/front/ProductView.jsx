@@ -1,8 +1,9 @@
 import { ConfigBuilder, Notifier } from '../../utils';
 import { SetPage } from '../../data/redux/PageSlice';
 
-const PageView = async (slug, setLoading, dispatch) => {
+const PageView = async (dispatch, setLoading, slug, mode) => {
   setLoading(true);
+
   const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductView/${slug}`;
   const config = ConfigBuilder('G', 'JSON', {}, false);
 
@@ -15,25 +16,9 @@ const PageView = async (slug, setLoading, dispatch) => {
       setLoading(false);
     }
 
-    else {
-        Notifier(
-          {
-            dispatch: dispatch,
-            Title: res.message,
-            Type: 'error',
-          }
-        );
-    }
+    else Notifier(dispatch, res.message, 'error')
   } 
-  catch (error) {
-    Notifier(
-      {
-        dispatch: dispatch,
-        Title: '',
-        Type: 'error',
-      }
-    );
-  }
+  catch (error) { Notifier(dispatch, '', 'error') }
 };
 
 export default PageView;

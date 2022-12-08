@@ -1,33 +1,23 @@
-import { Product } from '../../models';
+import { Product, User } from '../../models';
+import { Response } from '../../utils';
 
 export default async function ProductDelete(req, res) {
   try {
     const product = await Product.findByIdAndDelete(req.query.id);
 
     if (product) {
-      res.status(200).send({
-        status: true,
-        message: 'Produkti u fshi me sukses.',
-        data: null,
-        code: 200,
+      const users = await User.find({})
+      
+      users.forEach(async (user) => {
+        if (user.Favorites.includes(product._id)) {
+          user.Favorites.splice(user.Wishlist.indexOf(product._id), 1)
+          await user.save()
+        }
       });
-    } 
-    
-    else {
-      res.status(404).send({
-        status: false,
-        message: 'Produkti nuk u fshi nga platforma.',
-        data: null,
-        code: 404,
-      });
+
+      Response(res, 200, true, 'Produkti u fshi me sukses.', product) 
     }
   } catch (error) {
-    res.status(500).send({
-      status: false,
-      message: 'Gabim i brendshëm i serverit gjatë fshirjes së produktit nga platforma.',
-      sysError: error,
-      data: null,
-      code: 500,
-    });
+    Response(res, 500, false, 'Gabim i brendshëm i serverit gjatë fshirjes së produktit nga platforma.', null) 
   }
 }

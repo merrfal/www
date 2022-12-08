@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ProductsSearch } from "../../../controllers/front/";
 
@@ -12,7 +12,8 @@ import {
 
 export default function Search() {
   const dispatch = useDispatch();
-  const search = useSelector((state) => state.search);
+  const search = useSelector((state) => state?.search);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     document.addEventListener(
@@ -21,13 +22,13 @@ export default function Search() {
         var name = event.key;
 
         if (name === "/") {
-          if (search.Visibility === false) {
+          if (search?.Visibility === false) {
             dispatch(OpenSearch());
           }
         }
 
         if (name === "Escape") {
-          if (search.Visibility === true) {
+          if (search?.Visibility === true) {
             dispatch(CloseSearch());
           }
         }
@@ -37,10 +38,14 @@ export default function Search() {
   }, []);
 
   useEffect(() => {
-    if (search.Term !== "") {
-      ProductsSearch(search.Term, dispatch);
+    if (search.Loading === false && search?.Visibility ) {
+      ProductsSearch(search?.Term, dispatch);
     }
   }, [search]);
+
+  useEffect(() => {
+    if (search?.Visibility) inputRef.current.focus();
+  });
 
   const lottie = {
     src: "https://lottie.host/c47c3f04-5fb5-45e5-b0ab-c7f2990effe4/tDIHWvQxqp.json",
@@ -59,7 +64,7 @@ export default function Search() {
     alignItems: "center",
   };
 
-  if (search.Visibility)
+  if (search?.Visibility)
     return (
       <div className="fixed inset-0 z-20 p-4 sm:p-6 md:p-20 overflow-hidden">
         <div
@@ -83,20 +88,22 @@ export default function Search() {
             </svg>
             <input
               type="text"
-              value={search.Term}
+              style={{ verticalAlign: "baseline" }}
+              ref={inputRef}
+              value={search?.Term}
               onChange={(e) => dispatch(SetSearchTerm(e.target.value))}
               className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-sm text-gray-800 placeholder-gray-400 focus:ring-0"
               placeholder="Kërko produkte..."
             />
           </div>
 
-          {search.Loading ? (
+          {search?.Loading ? (
             <div className="py-14 px-6 text-center text-sm sm:px-14 w-full flex align-center items-center">
               <div style={container}>
                 <lottie-player {...lottie} />
               </div>
             </div>
-          ) : search.Results.length === 0 ? (
+          ) : search?.Results?.length === 0 ? (
             <div className="py-14 px-6 text-center text-sm sm:px-14">
               <svg
                 className="mx-auto h-6 w-6 text-gray-400"
@@ -127,10 +134,14 @@ export default function Search() {
               id="options"
               role="listbox"
             >
-              {search.Results.map((product, index) => (
+              {search?.Results?.map((product, index) => (
                 <Link href={`/produktet/${product.Slug}`}>
                   <li
-                    onClick={() => dispatch(CloseSearch())}
+                    onClick={() => {
+                      dispatch(SetSearchTerm(""));
+                      dispatch(CloseSearch());
+                      // dispatch(SetSearchTerm(e.target.value))
+                    }}
                     key={index}
                     className="group flex cursor-default select-none rounded-xl p-3 hover:opacity-75 hover:cursor-pointer"
                   >

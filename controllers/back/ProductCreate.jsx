@@ -1,41 +1,23 @@
 import { Product } from '../../models';
+import { Response } from '../../utils';
 
 export default async function connection(req, res) {
   try {
+   
     let path = req.body.Name;
+    const exits = await Product.find({ Name: path }).count()
+    if (exits) {
+      path = path + exits
+    }
     path = path.toLowerCase().replace(/ /g, '-');
+
+
     const _new = new Product({ ...req.body, Slug: path, createdAt: new Date() });
     const product = await _new.save();
 
-    if (product) {
-      res.status(200).send(
-        {
-          status: true,
-          message: 'Produkti u publikua me sukses.',
-          data: product,
-          code: 200,
-        }
-      );
-
-    } else {
-      res.status(404).send(
-        {
-          status: false,
-          message: 'Produkti nuk u krijua për shkak të disa gabimeve.',
-          data: null,
-          code: 404,
-        }
-      );
-    }
+    if (product) Response(res, 200, true, 'Produkti u publikua me sukses.', product) 
+    else Response(res, 404, false, 'Produkti nuk u krijua për shkak të disa gabimeve.', null)
   } catch (error) {
-    res.status(500).send(
-      {
-        status: false,
-        message: 'Gabim i brendshëm i serverit gjatë publikimit të produktit.',
-        sysError: error,
-        data: null,
-        code: 500,
-      }
-    );
+    Response(res, 500, false, 'Gabim i brendshëm i serverit gjatë publikimit të produktit.', null);
   }
 }

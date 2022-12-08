@@ -6,6 +6,7 @@ import { Loading, None, Pagination } from '../../components'
 import { OpenConfirmation } from '../../../data/redux/ConfirmationSlice'
 import { UserProducts as Meta } from '../../../data/metas';
 import { useState } from 'react';
+import { Permissonless } from '..';
 
 export default function UserProducts() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default function UserProducts() {
     if (pagesLoaded === false && userIsAuth) UserProductList(dispatch, user.Id);
   }, [userLandingPages, user]);
 
+  if(user.Auth === false) return <Permissonless />
   return (
     <Normal>
       <Meta />
@@ -38,17 +40,17 @@ export default function UserProducts() {
         <h1 className='text-3xl font-extrabold tracking-tight text-gray-900'>
           Produktet e Mia
         </h1>
-        <p className='mt-4 max-w-xl text-sm text-gray-700'>
+        <p className='mt-4 -mb-16 max-w-xl text-sm text-gray-700'>
           Këtu janë të listuara të gjitha produktet që ju keni ngarkuar për
-          ti dhuruar në shoqëri, prej këtu mundet ti menagjoni ato dhe të shtoni të tjera.
+          t'i dhuruar në shoqëri, prej këtu mund t'i menaxhoni ato dhe të shtoni të tjera.
         </p>
       </div>
       <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
         <section className='container'>
           {userLandingPages.Loaded === false ? <Loading /> :
-            currentRecords.length === 0 ? <None /> :
+            currentRecords.length === 0 ? <div className="mt-16"><None /></div> :
             currentRecords.map((page, index) => (
-                <div key={index} className='lg:flex lg:items-center mb-4 lg:justify-between appearance-none min-w-0 w-full bg-white border border-gray-100 rounded-lg p-6 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#387CFF] focus:ring-1 focus:ring-[#387CFF]'>
+                <div key={index} className='mt-12 lg:flex lg:items-center mb-4 lg:justify-between appearance-none min-w-0 w-full bg-white border border-gray-100 rounded-lg p-6 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#387CFF] focus:ring-1 focus:ring-[#387CFF]'>
                   <div className='min-w-0 flex-1'>
                     <h2 className='text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-4'>
                       {page.Name}
@@ -71,9 +73,6 @@ export default function UserProducts() {
                         {
                           {
                             published: 'Publikuar',
-                            sold: 'E Dhënë',
-                            'in-review': 'Në Shqyrtim',
-                            rejected: 'Refuzuar',
                             unpublished: 'Jo Publikuar',
                           }[page.Status]
                         }
@@ -97,7 +96,7 @@ export default function UserProducts() {
                             d='M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z'
                           />
                         </svg>
-                        {page.Address}, {page.City}
+                        {page.Address}, {page.City}, {page.Zip}
                       </div>
                       <div className='mt-2 flex items-center text-sm text-gray-500'>
                         <svg

@@ -4,7 +4,7 @@ import { NotificationDefaultState } from './Defaults';
 import {
   ShowNotification as CallShowNotification,
   HideNotification as CallHideNotification,
-} from './controllers';
+} from '../../controllers/redux';
 
 export const NotificationSlice = createSlice({
   name: 'notification',

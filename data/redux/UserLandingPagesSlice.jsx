@@ -4,7 +4,7 @@ import { UserLandingPagesDefaultState } from './Defaults';
 import {
   SetUserLandingPages as CallSetUserLandingPages,
   UnsetUserLandingPages as CallUnsetUserLandingPages ,
-} from './controllers';
+} from '../../controllers/redux';
 
 export const UserLandingPagesSlice = createSlice({
   name: 'UserLandingPages',

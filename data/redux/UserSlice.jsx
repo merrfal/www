@@ -6,7 +6,7 @@ import {
   SetUserNotAuthenticated as CallSetUserNotAuthenticated,
   SetUser as CallSetUser,
   SetFavorites as CallSetFavorites,
-} from './controllers';
+} from '../../controllers/redux';
 
 export const UserSlice = createSlice({
   name: 'User',

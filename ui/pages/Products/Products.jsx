@@ -1,11 +1,18 @@
-import { useEffect, useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Normal } from '../../layouts';
-import { Product, Empty, Loading, Pagination } from '../../components';
-import { ProductsList, CategoryList, ProductsFilters } from '../../../controllers/front';
-import { SetFilterTerm, SetCityFilterTerm } from '../../../data/redux/FilterSlice';
-import { useRouter } from 'next/router';
-import { Products as Meta } from '../../../data/metas'; 
+import { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Normal } from "../../layouts";
+import { Product, Empty, Loading, Pagination } from "../../components";
+import { useRouter } from "next/router";
+import { Products as Meta } from "../../../data/metas";
+import { OpenIcon, CloseIcon, SmCloseIcon } from "../../icons";
+import { Cities } from "../../../data/content";
+import { SetCity, SetCategory, SetSort } from "../../../data/redux/FilterSlice";
+
+import {
+  ProductsList,
+  CategoryList,
+  ProductsFilters,
+} from "../../../controllers/front";
 
 export default function Products() {
   let category = useRouter().query.kategoria;
@@ -15,33 +22,33 @@ export default function Products() {
   const categories = useSelector((state) => state.categories);
   const filter = useSelector((state) => state.filter);
 
-
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isCityOpen, setIsCityOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(8);
+
   const [menuMobileOpen, setMenuMobileOpen] = useState(false);
 
-  const indexOfLastRecord = currentPage * recordsPerPage
-  const indexOFirstRecord = indexOfLastRecord - recordsPerPage
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(16);
 
-  const currentRecords = filter?.Results?.slice(indexOFirstRecord, indexOfLastRecord)
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOFirstRecord = indexOfLastRecord - recordsPerPage;
 
-  const nPages = Math.ceil(filter?.Results?.length / recordsPerPage)
+  const currentRecords = filter?.Results?.slice(
+    indexOFirstRecord,
+    indexOfLastRecord
+  );
 
-
-  useEffect(() => {
-    if (filter.Loading === true) {
-      ProductsFilters(filter.Term, filter.CityTerm, dispatch);
-    }
-  }, [filter])
-
+  const nPages = Math.ceil(filter?.Results?.length / recordsPerPage);
 
   useEffect(() => {
-    if (category) dispatch(SetFilterTerm(category))
-  }, [category])
+    if (filter.Loading === true)
+      ProductsFilters(filter.Cities, filter.Categories, filter.Sort, dispatch);
+  }, [filter]);
 
+  useEffect(() => {
+    if (category) dispatch(SetCategory(category));
+  }, [category]);
 
   useEffect(() => {
     if (pages.Loaded === false) ProductsList(dispatch);
@@ -51,13 +58,11 @@ export default function Products() {
     if (categories.Loaded === false) CategoryList(dispatch);
   }, [categories]);
 
-
-
   let clickOutside = (handler) => {
     let domNode = useRef();
 
     useEffect(() => {
-      let maybeHandler = (event) => !domNode.current.contains(event.target) && handler();
+      let maybeHandler = (event) => !domNode.current?.contains(event.target) && handler();
       document.addEventListener("mousedown", maybeHandler);
       return () => document.removeEventListener("mousedown", maybeHandler);
     });
@@ -67,422 +72,245 @@ export default function Products() {
 
   let domNodeCategory = clickOutside(() => setIsCategoryOpen(false));
   let domNodeCity = clickOutside(() => setIsCityOpen(false));
-
-  
+  let domNodeSort = clickOutside(() => setIsSortOpen(false));
 
   return (
     <Normal>
       <Meta />
-      <div className='bg-white'>
-        <div className='fixed inset-0 flex z-40 sm:hidden '>
-          <div
-            className='fixed inset-0 bg-black bg-opacity-25' />
-          <div className='ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto'>
-            <div className='px-4 flex items-center justify-between'>
-              <h2 className='text-lg font-medium text-gray-900'>Filtrat</h2>
-              <button
-                type='button'
-                className='-mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400'>
-                <span className='sr-only'>Mbyll menunë</span>
-                <svg
-                  className='h-6 w-6'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                  aria-hidden='true'>
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M6 18L18 6M6 6l12 12'
-                  />
-                </svg>
-              </button>
+
+
+      <div className="bg-white">
+        {menuMobileOpen && (
+          <div className="fixed inset-0 flex z-40 sm:hidden ">
+            <div onClick={() => setMenuMobileOpen(false)} className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto">
+              <div className="px-4 flex items-center justify-between">
+                <h2 className="text-lg font-medium text-gray-900">Filtrat</h2>
+                <button className="-mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400">
+                  <CloseIcon />
+                </button>
+              </div>
+
+              <form className="mt-4">
+                <div className="border-t border-gray-200 px-4 py-6">
+                  <h3 className="-mx-2 -my-3 flow-root">
+                    <button className="px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400">
+                      <span className="font-medium text-gray-900">
+                        Kategoritë
+                      </span>
+                    </button>
+                  </h3>
+                  <div className="pt-6" id="filter-section-0">
+                    <div className="space-y-6">
+                      {categories.Loaded === true &&
+                        categories.Categories.map((category, index) => {
+                          return (
+                            <div className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
+                              <input
+                                key={index}
+                                id={index}
+                                value={category.Name}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  dispatch(SetCategory(category.Name));
+                                  setCurrentPage(1);
+                                }}
+                                type="checkbox"
+                                checked={filter.Categories.includes(
+                                  category.Name
+                                )}
+                                className="hover:cursor-pointer h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                              />
+                              <label
+                                htmlFor={index}
+                                className="hover:cursor-pointer ml-3 text-sm text-gray-500"
+                              >
+                                {category.Name}
+                              </label>
+                            </div>
+                          );
+                        })}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t border-gray-200 px-4 py-6">
+                  <h3 className="-mx-2 -my-3 flow-root">
+                    <button className="px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400">
+                      <span className="font-medium text-gray-900">Qytetet</span>
+                    </button>
+                  </h3>
+                  <div className="pt-6" id="filter-section-2">
+                    <div className="space-y-6">
+                      {Cities.map((city, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all"
+                          >
+                            <input
+                              id={city}
+                              value={city}
+                              type="checkbox"
+                              checked={filter.Cities.includes(city)}
+                              className="hover:cursor-pointer h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                            />
+                            <label
+                              htmlFor={city}
+                              className="hover:cursor-pointer ml-3 text-sm text-gray-500"
+                            >
+                              {city}
+                            </label>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
-
-            <form className='mt-4'>
-              <div className='border-t border-gray-200 px-4 py-6'>
-                <h3 className='-mx-2 -my-3 flow-root'>
-                  <button
-                    type='button'
-                    className='px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400'
-                    aria-controls='filter-section-0'
-                    aria-expanded='false'>
-                    <span className='font-medium text-gray-900'>
-                      Kategoritë
-                    </span>
-                    <span className='ml-6 flex items-center'>
-                      <svg
-                        className='rotate-0 h-5 w-5 transform'
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 20 20'
-                        fill='currentColor'
-                        aria-hidden='true'>
-                        <path
-                          fillRule='evenodd'
-                          d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                          clipRule='evenodd'
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                </h3>
-                <div className='pt-6' id='filter-section-0'>
-                  <div className='space-y-6'>
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-category-0'
-                        name='category[]'
-                        value='new-arrivals'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        htmlFor='filter-mobile-category-0'
-                        className='ml-3 text-sm text-gray-500'>
-                        Të gjitha kategoritë
-                      </label>
-                    </div>
-
-                    {categories.isLoaded === true &&
-                              categories.Categories.map((category, index) => {
-                                return (
-                                  <div className='flex items-center'>
-                      <input
-                      key={index}
-                        id='filter-mobile-category-1'
-                        name='category[]'
-                        value='tees'
-                        onClick={(e) => {
-                                       
-                          dispatch(SetFilterTerm(category.Name))
-                          setCurrentPage(1)
-                          
-                          e.preventDefault()
-
-                        }}
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        htmlFor='filter-mobile-category-1'
-                        className='ml-3 text-sm text-gray-500'>
-                        {category.Name}
-                      </label>
-                    </div>
-                                );
-                              })}
-                    
-                  </div>
-                </div>
-              </div>
-
-              <div className='border-t border-gray-200 px-4 py-6'>
-                <h3 className='-mx-2 -my-3 flow-root'>
-                  <button
-                    type='button'
-                    className='px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400'
-                    aria-controls='filter-section-2'
-                    aria-expanded='false'>
-                    <span className='font-medium text-gray-900'>Qytetet</span>
-                    <span className='ml-6 flex items-center'>
-                      <svg
-                        className='rotate-0 h-5 w-5 transform'
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 20 20'
-                        fill='currentColor'
-                        aria-hidden='true'>
-                        <path
-                          fillRule='evenodd'
-                          d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                          clipRule='evenodd'
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                </h3>
-                <div className='pt-6' id='filter-section-2'>
-                  <div className='space-y-6'>
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-0'
-                        name='sizes[]'
-                        value='s'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        htmlFor='filter-mobile-sizes-0'
-                        className='ml-3 text-sm text-gray-500'>
-                        Prishtinë
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-1'
-                        name='sizes[]'
-                        value='m'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        htmlFor='filter-mobile-sizes-1'
-                        className='ml-3 text-sm text-gray-500'>
-                        Mitrovicë
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-2'
-                        name='sizes[]'
-                        value='l'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        htmlFor='filter-mobile-sizes-2'
-                        className='ml-3 text-sm text-gray-500'>
-                        Gjilan
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-2'
-                        name='sizes[]'
-                        value='l'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        htmlFor='filter-mobile-sizes-2'
-                        className='ml-3 text-sm text-gray-500'>
-                       Prizren
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-2'
-                        name='sizes[]'
-                        value='l'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        htmlFor='filter-mobile-sizes-2'
-                        className='ml-3 text-sm text-gray-500'>
-                        Pejë
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-2'
-                        name='sizes[]'
-                        value='l'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        htmlFor='filter-mobile-sizes-2'
-                        className='ml-3 text-sm text-gray-500'>
-                        Gjakovë
-                      </label>
-                    </div>
-
-                    <div className='flex items-center'>
-                      <input
-                        id='filter-mobile-sizes-2'
-                        name='sizes[]'
-                        value='l'
-                        type='checkbox'
-                        className='h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500'
-                      />
-                      <label
-                        htmlFor='filter-mobile-sizes-2'
-                        className='ml-3 text-sm text-gray-500'>
-                        Gjilan
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
           </div>
-        </div>
+        )}
 
-        <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
-          <h1 className='text-3xl font-extrabold tracking-tight text-gray-900'>
+        <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
             Të gjitha Produktet
           </h1>
-          <p className='mt-4 max-w-xl text-sm text-gray-700'>
-            Këtu mund t'i gjeni të gjitha produktet e listuara në platformë nga
-            dhurues publik dhe anonim.
+          <p className="mt-4 max-w-xl text-sm text-gray-700">
+            Shfletoni të gjitha kategoritë, qytetet si dhe statuset e produkteve
+            të dhuruara nga dhuruesit publik dhe anonim, dhe zgjedhni atë që ju
+            keni nevojë.
           </p>
         </div>
 
-        <section aria-labelledby='filter-heading'>
-          <h2 id='filter-heading' className='sr-only'>
+        <section>
+          <h2 id="filter-heading" className="sr-only">
             Filtrimi
           </h2>
 
-          <div className='relative z-10 bg-white border-b border-gray-200 pb-4'>
-            <div className='max-w-7xl mx-auto px-4 flex items-center justify-between sm:px-6 lg:px-8'>
-              <div className='relative inline-block text-left'>
-                {/* <div>
+          <div className="relative z-10 bg-white border-b border-gray-200 pb-4">
+            <div className="max-w-7xl mx-auto px-4 flex items-center justify-between sm:px-6 lg:px-8">
+              <div
+                ref={domNodeSort}
+                className="relative inline-block text-left"
+              >
+                <div>
                   <button
                     onClick={() => setIsSortOpen(!isSortOpen)}
-                    type='button'
-                    className='group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900'
-                    id='menu-button'
-                    aria-expanded='false'
-                    aria-haspopup='true'>
+                    className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                    id="menu-button"
+                  >
                     Sortimi
-                    <svg
-                      className='flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500'
-                      xmlns='http://www.w3.org/2000/svg'
-                      viewBox='0 0 20 20'
-                      fill='currentColor'
-                      aria-hidden='true'>
-                      <path
-                        fillRule='evenodd'
-                        d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                        clipRule='evenodd'
-                      />
-                    </svg>
+                    <OpenIcon />
                   </button>
-                </div> */}
+                </div>
 
-                {/* {isSortOpen && (
-                  <div
-                    className='origin-top-left absolute left-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'
-                    role='menu'
-                    aria-orientation='vertical'
-                    aria-labelledby='menu-button'
-                    tabindex='-1'>
-                    <div className='py-1' role='none'>
-                      <a
-                        href='#'
-                        className='font-medium text-gray-900 block px-4 py-2 text-sm'
-                        role='menuitem'
-                        tabindex='-1'
-                        id='menu-item-0'>
+                {isSortOpen && (
+                  <div className="origin-top-left absolute left-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div>
+                      <p
+                        style={
+                          filter.Sort === "popular"
+                            ? { color: "rgb(24 24 27)" }
+                            : {}
+                        }
+                        z
+                        onClick={() => dispatch(SetSort("popular"))}
+                        className={`text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700`}
+                      >
                         Më popullorja
-                      </a>
+                      </p>
 
-                      <a
-                        href='#'
-                        className='font-medium text-gray-900 block px-4 py-2 text-sm'
-                        role='menuitem'
-                        tabindex='-1'
-                        id='menu-item-0'>
+                      <p
+                        style={
+                          filter.Sort === "unpopular"
+                            ? { color: "rgb(24 24 27)" }
+                            : {}
+                        }
+                        onClick={() => dispatch(SetSort("unpopular"))}
+                        className={`text-gray-500 block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700`}
+                      >
                         Më jo popullorja
-                      </a>
+                      </p>
 
-                      <a
-                        href='#'
-                        className='text-gray-500 block px-4 py-2 text-sm'
-                        role='menuitem'
-                        tabindex='-1'
-                        id='menu-item-1'>
+                      <p
+                        style={
+                          filter.Sort === "newest"
+                            ? { color: "rgb(24 24 27)" }
+                            : {}
+                        }
+                        onClick={() => dispatch(SetSort("newest"))}
+                        className={`text-gray-500 block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700`}
+                      >
                         Më të rejat
-                      </a>
+                      </p>
 
-                      <a
-                        href='#'
-                        className='text-gray-500 block px-4 py-2 text-sm'
-                        role='menuitem'
-                        tabindex='-1'
-                        id='menu-item-2'>
+                      <p
+                        style={
+                          filter.Sort === "oldest"
+                            ? { color: "rgb(24 24 27)" }
+                            : {}
+                        }
+                        onClick={() => dispatch(SetSort("oldest"))}
+                        className={`text-gray-500 block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700`}
+                      >
                         Më te vjetrat
-                      </a>
+                      </p>
                     </div>
                   </div>
-                )} */}
+                )}
               </div>
 
               <button
-                type='button'
-                className='inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden'>
+                onClick={() => setMenuMobileOpen(!menuMobileOpen)}
+                className="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden"
+              >
                 Filtrat
               </button>
 
-              <div className='hidden sm:block'>
-                <div className='flow-root'>
-                  <div className='-mx-4 flex items-center divide-x divide-gray-200'>
-                    <div ref={domNodeCategory} className='px-4 relative inline-block text-left'>
+              <div className="hidden sm:block">
+                <div className="flow-root">
+                  <div className="-mx-4 flex items-center divide-x divide-gray-200">
+                    <div
+                      ref={domNodeCategory}
+                      className="px-4 relative inline-block text-left"
+                    >
                       <button
                         onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-                        type='button'
-                        className='group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900'
-                        aria-expanded='false'>
+                        className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                      >
                         <span>Kategoritë</span>
-                        <svg
-                          className='flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500'
-                          xmlns='http://www.w3.org/2000/svg'
-                          viewBox='0 0 20 20'
-                          fill='currentColor'
-                          aria-hidden='true'>
-                          <path
-                            fillRule='evenodd'
-                            d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                            clipRule='evenodd'
-                          />
-                        </svg>
+                        <OpenIcon />
                       </button>
 
                       {isCategoryOpen && (
-                        <div className='origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none'>
-                          <form className='space-y-4'>
-                            <div className='flex items-center'>
-                              <input
-                                id='filter-category-0'
-                                name='category[]'
-                                value='new-arrivals'
-                                type='radio'
-                                onClick={(e) => {
-                                  dispatch(SetFilterTerm(''))
-                                  setCurrentPage(1)
-                                  // e.preventDefault()
-                                }}
-                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 focus-visible'
-                              />
-                              <label
-                                htmlFor='filter-category-0'
-                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                                Të gjitha kategoritë
-                              </label>
-                            </div>
-
-                            {categories.isLoaded === true &&
+                        <div className="origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <form className="space-y-4">
+                            {categories.Loaded === true &&
                               categories.Categories.map((category, index) => {
                                 return (
                                   <div
                                     key={index}
-                                    className='flex items-center'>
+                                    className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all"
+                                  >
                                     <input
-                                      id='filter-category-2'
-                                      name='category[]'
-                                      value='objects'
-                                      // value={search.Term}
+                                      id={index}
+                                      value={category.Name}
+                                      type="radio"
+                                      checked={filter.Categories.includes(
+                                        category.Name
+                                      )}
+                                      className="hover:cursor-pointer h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                       onClick={(e) => {
-
-                                        dispatch(SetFilterTerm(category.Name))
-                                        setCurrentPage(1)
-
-                                        // e.preventDefault()
-
+                                        e.preventDefault();
+                                        dispatch(SetCategory(category.Name));
+                                        setCurrentPage(1);
                                       }}
-                                      type='radio'
-                                      className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                     />
                                     <label
-                                      htmlFor='filter-category-2'
-                                      className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
+                                      htmlFor={index}
+                                      className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"
+                                    >
                                       {category.Name}
                                     </label>
                                   </div>
@@ -493,149 +321,48 @@ export default function Products() {
                       )}
                     </div>
 
-                    <div ref={domNodeCity} className='px-4 relative inline-block text-left'>
+                    <div
+                      ref={domNodeCity}
+                      className="px-4 relative inline-block text-left"
+                    >
                       <button
                         onClick={() => setIsCityOpen(!isCityOpen)}
-                        type='button'
-                        className='group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900'
-                        aria-expanded='false'>
+                        className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                      >
                         <span>Qytetet</span>
-                        <svg
-                          className='flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500'
-                          xmlns='http://www.w3.org/2000/svg'
-                          viewBox='0 0 20 20'
-                          fill='currentColor'
-                          aria-hidden='true'>
-                          <path
-                            fillRule='evenodd'
-                            d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                            clipRule='evenodd'
-                          />
-                        </svg>
+                        <OpenIcon />
                       </button>
 
                       {isCityOpen && (
-                        <div className='origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none'>
-                          <form className='space-y-4'>
-                            <div className='flex items-center'>
-                              <input
-                                id='filter-sizes-0'
-                                name='sizes[]'
-                                value='s'
-                                type='radio'
-                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                onClick={(e) => {
-                                  dispatch(SetCityFilterTerm('Prishtinë'))
-                                  setCurrentPage(1)
-                                  // e.preventDefault()
-                                }}
-                              />
-                              <label
-                                htmlFor='filter-sizes-0'
-                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                                Prishtinë
-                              </label>
-                            </div>
-
-                            <div className='flex items-center'>
-                              <input
-                                id='filter-sizes-1'
-                                name='sizes[]'
-                                value='m'
-                                type='radio'
-                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                onClick={(e) => {
-                                  dispatch(SetCityFilterTerm('Mitrovicë'))
-                                  setCurrentPage(1)
-                                  // e.preventDefault()
-                                }}
-                              />
-                              <label
-                                htmlFor='filter-sizes-1'
-                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                                Mitrovicë
-                              </label>
-                            </div>
-
-                            <div className='flex items-center'>
-                              <input
-                                id='filter-sizes-2'
-                                name='sizes[]'
-                                value='l'
-                                type='radio'
-                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                onClick={(e) => {
-                                  dispatch(SetCityFilterTerm('Gjilan'))
-                                  setCurrentPage(1)
-                                  // e.preventDefault()
-                                }}
-                              />
-                              <label
-                                htmlFor='filter-sizes-2'
-                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                                Gjilan
-                              </label>
-                            </div>
-
-                            <div className='flex items-center'>
-                              <input
-                                id='filter-sizes-2'
-                                name='sizes[]'
-                                value='l'
-                                type='radio'
-                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                onClick={(e) => {
-                                  dispatch(SetCityFilterTerm('Prizren'))
-                                  setCurrentPage(1)
-                                  // e.preventDefault()
-                                }}
-                              />
-                              <label
-                                htmlFor='filter-sizes-2'
-                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                                Prizren
-                              </label>
-                            </div>
-
-                            <div className='flex items-center'>
-                              <input
-                                id='filter-sizes-2'
-                                name='sizes[]'
-                                value='l'
-                                type='radio'
-                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                onClick={(e) => {
-                                  dispatch(SetCityFilterTerm('Pejë'))
-                                  setCurrentPage(1)
-                                  // e.preventDefault()
-                                }}
-                              />
-                              <label
-                                htmlFor='filter-sizes-2'
-                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                                Pejë
-                              </label>
-                            </div>
-
-                            <div className='flex items-center'>
-                              <input
-                                id='filter-sizes-2'
-                                name='sizes[]'
-                                value='l'
-                                type='radio'
-                                className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                onClick={(e) => {
-                                  dispatch(SetCityFilterTerm('Gjakovë'))
-                                  setCurrentPage(1)
-                                  // e.preventDefault()
-                                }}
-                              />
-                              <label
-                                htmlFor='filter-sizes-2'
-                                className='ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                                Gjakovë
-                              </label>
-                            </div>
+                        <div className="origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <form className="space-y-4">
+                            {Cities.map((city, index) => {
+                              return (
+                                <div
+                                  key={index}
+                                  className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all"
+                                >
+                                  <input
+                                    id={city}
+                                    value={city}
+                                    type="radio"
+                                    checked={filter.Cities.includes(city)}
+                                    className="hover:cursor-pointer h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      dispatch(SetCity(city));
+                                      setCurrentPage(1);
+                                    }}
+                                  />
+                                  <label
+                                    htmlFor={city}
+                                    className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"
+                                  >
+                                    {city}
+                                  </label>
+                                </div>
+                              );
+                            })}
                           </form>
                         </div>
                       )}
@@ -646,105 +373,103 @@ export default function Products() {
             </div>
           </div>
 
-          <div className='bg-gray-100'>
-            <div className='max-w-7xl mx-auto py-3 px-4 flex flex items-center px-6 lg:px-8'>
-              <h3 className='text-xs font-semibold uppercase tracking-wide text-gray-500'>
-              Filtrat
-                <span className='sr-only'>, aktive</span>
+          <div className="bg-gray-100">
+            <div className="max-w-7xl mx-auto py-3 flex items-center px-6 lg:px-8 align-center">
+              <h3 className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                Filtrat
+                <span className="sr-only">, aktive</span>
               </h3>
 
-              <div
-                aria-hidden='true'
-                className=' w-px h-5 bg-gray-300 block ml-4'></div>
+              <div className="w-px h-5 bg-gray-300 block ml-4" />
 
-              <div className='mt-2 mt-0 ml-4'>
-                {
-                  filter.Term ?
-                    <div className='-m-1 flex flex-wrap items-center'>
-                      <span className='m-1 inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900'>
-                        <span>{filter.Term}</span>
+              <div className="ml-4 flex overflow-x-auto">
+                {filter.Categories.map((category, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="flex flex-wrap items-center mr-1"
+                    >
+                      <span className="inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900">
+                        <span>{category}</span>
                         <button
+                          className="flex-shrink-0 ml-1 h-4 w-4 p-1 rounded-full inline-flex text-gray-400 hover:bg-gray-200 hover:text-gray-500"
                           onClick={(e) => {
-                            // location.href = '/produktet';
-                            dispatch(SetFilterTerm(''))
-                            e.preventDefault()
-
+                            e.preventDefault();
+                            dispatch(SetCategory(category));
+                            setCurrentPage(1);
                           }}
-                          type='button'
-                          className='flex-shrink-0 ml-1 h-4 w-4 p-1 rounded-full inline-flex text-gray-400 hover:bg-gray-200 hover:text-gray-500'>
-                          <span className='sr-only'>Remove filter for Objects</span>
-                          <svg
-                            className='h-2 w-2'
-                            stroke='currentColor'
-                            fill='none'
-                            viewBox='0 0 8 8'>
-                            <path
-                              strokeLinecap='round'
-                              strokeWidth='1.5'
-                              d='M1 1l6 6m0-6L1 7'
-                            />
-                          </svg>
+                        >
+                          <span className="sr-only">
+                            Hiq filtrin për objektet
+                          </span>
+                          <SmCloseIcon />
                         </button>
                       </span>
-                    </div> :
-                    null
-                }
-              </div>
-              <div className='mt-2 mt-0 ml-4'>
-                {
-                  filter.CityTerm ?
-                    <div className='-m-1 flex flex-wrap items-center'>
-                      <span className='m-1 inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900'>
-                        <span>{filter.CityTerm}</span>
-                        <button
-                          onClick={(e) => {
-                            // location.href = '/produktet';
-                            dispatch(SetCityFilterTerm(''))
-                            e.preventDefault()
+                    </div>
+                  );
+                })}
 
+                {filter.Cities.map((city, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="flex flex-wrap items-center mr-1"
+                    >
+                      <span className="inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900">
+                        <span>{city}</span>
+                        <button
+                          className="flex-shrink-0 ml-1 h-4 w-4 p-1 rounded-full inline-flex text-gray-400 hover:bg-gray-200 hover:text-gray-500"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            dispatch(SetCity(city));
+                            setCurrentPage(1);
                           }}
-                          type='button'
-                          className='flex-shrink-0 ml-1 h-4 w-4 p-1 rounded-full inline-flex text-gray-400 hover:bg-gray-200 hover:text-gray-500'>
-                          <span className='sr-only'>Remove filter for Objects</span>
-                          <svg
-                            className='h-2 w-2'
-                            stroke='currentColor'
-                            fill='none'
-                            viewBox='0 0 8 8'>
-                            <path
-                              strokeLinecap='round'
-                              strokeWidth='1.5'
-                              d='M1 1l6 6m0-6L1 7'
-                            />
-                          </svg>
+                        >
+                          <span className="sr-only">
+                            Hiq filtrin për objektet
+                          </span>
+                          <SmCloseIcon />
                         </button>
                       </span>
-                    </div> :
-                    null
-                }
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
         </section>
       </div>
 
-      <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
-        <div className={pages.Loaded === false ? 'w-full' : pages.Pages.length === 0 ? 'w-full' : 'mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'}>
-          {
-            pages.Loaded === false ?
-              <Loading /> :
-              pages.Pages.length === 0 ? <Empty heading="Nuk u gjet asnjë produkt" message="Nuk u gjet asnjë produkt në platformë me këto filtrime.." /> :
-                currentRecords?.map((page, index) => <Product product={page} key={index} />)
+      <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div
+          className={
+            pages.Loaded === false
+              ? "w-full"
+              : pages.Pages.length === 0
+              ? "w-full"
+              : "mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
           }
+        >
+          {pages.Loaded === false ? (
+            <Loading />
+          ) : pages.Pages.length === 0 ? (
+            <Empty
+              heading="Nuk u gjet asnjë produkt"
+              message="Nuk u gjet asnjë produkt në platformë me këto filtrime.."
+            />
+          ) : (
+            currentRecords?.map((page, index) => (
+              <Product product={page} key={index} />
+            ))
+          )}
         </div>
 
         <Pagination
           nPages={nPages}
           currentPage={currentPage}
-          setCurrentPage={setCurrentPage} 
+          setCurrentPage={setCurrentPage}
         />
       </div>
-
     </Normal>
   );
 }

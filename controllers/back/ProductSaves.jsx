@@ -1,4 +1,5 @@
 import { Product, User } from '../../models';
+import { Response } from '../../utils';
 
 export default async function ProductSaves(req, res) {
   try {
@@ -17,35 +18,9 @@ export default async function ProductSaves(req, res) {
       }
     }
 
-    if (products) {
-      res.status(200).send(
-        {
-          status: true,
-          message: 'Produktet tuaja të ruajtura u morën me sukses.',
-          data: products,
-          code: 200,
-        }
-      );
-    } 
-    else {
-      res.status(404).send(
-        {
-          status: true,
-          message: 'Produktet tuaja të ruajtura nuk u morën me sukses.',
-          data: null,
-          code: 404,
-        }
-      );
-    }
+    if (products) Response(res, 200, true, "Produktet tuaja të ruajtura u morën me sukses.", products);
+    else Response(res, 404, false, "Produktet tuaja të ruajtura nuk u morën me sukses.", null);
   } catch (err) {
-    res.status(500).send(
-      {
-        status: false,
-        message: 'Produktet tuaja të ruajtura nuk u morën me sukses për shkak të një gabimi të serverit.',
-        sysError: err,
-        data: null,
-        code: 500,
-      }
-    );
+    Response(res, 500, false, "Produktet tuaja të ruajtura nuk u morën me sukses për shkak të një gabimi të serverit.", null);
   }
 }

@@ -8,25 +8,12 @@ const UserProductList = async (dispatch, id) => {
   try {
     const req = await fetch(url, config);
     const res = await req.json();
+    console.log('res', res)
     
     if (res.status === true) dispatch(SetUserLandingPages(res.data))
-    else {
-      Notifier(
-        {
-          dispatch: dispatch,
-          Title: res.message,
-          Type: 'error',
-        }
-      );
-    }
+    else Notifier(dispatch, res.message, 'error')
   } catch (error) {
-    Notifier(
-      {
-        dispatch: dispatch,
-        Title: 'Internal server error while fetching the landing pages.',
-        Type: 'error',
-      }
-    );
+    Notifier(dispatch, '', 'error')
   }
 };
 

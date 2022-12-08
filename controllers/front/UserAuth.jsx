@@ -12,25 +12,11 @@ const UserAuth = async (dispatch, id) => {
 
     if (res.status === true) dispatch(SetUser(res.data)); 
     else {
-        Notifier(
-          {
-            dispatch: dispatch,
-            Title: `Something wen't wrong trying to authenticate you!`,
-            Type: 'error',
-          }
-        );
-
+      Notifier(dispatch, '', 'error')
       dispatch(LogoutUser());
     }
   } catch (error) {
-    Notifier(
-      {
-        dispatch: dispatch,
-        Title: `Something wen't wrong trying to authenticate you!`,
-        Type: 'error',
-      }
-    );
-
+    Notifier(dispatch, '', 'error')
     dispatch(LogoutUser());
   }
 };

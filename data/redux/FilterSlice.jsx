@@ -2,20 +2,22 @@ import { createSlice } from '@reduxjs/toolkit';
 import { FilterDefaultState } from './Defaults';
 
 import {
-  SetFilterTerm as CallSetFilterTerm,
+  SetCategory as CallSetCategory,
   SetFilter as CallSetFilter,
-  SetCityFilterTerm as CallSetCityFilterTerm
-} from './controllers';
+  SetCity as CallSetCity,
+  SetSort as CallSetSort,
+} from '../../controllers/redux';
 
 export const FilterSlice = createSlice({
   name: 'filter',
   initialState: FilterDefaultState,
   reducers: {
-    SetFilterTerm: (state, action) => CallSetFilterTerm(state, action),
+    SetCity: (state, action) => CallSetCity(state, action),
     SetFilter: (state, action) => CallSetFilter(state, action),
-    SetCityFilterTerm: (state, action) => CallSetCityFilterTerm(state, action),
+    SetCategory: (state, action) => CallSetCategory(state, action),
+    SetSort: (state, action) => CallSetSort(state, action),
   },
 });
 
-export const { SetFilterTerm, SetFilter, SetCityFilterTerm } = FilterSlice.actions;
+export const { SetCategory, SetFilter, SetCity, SetSort } = FilterSlice.actions;
 export default FilterSlice.reducer;

@@ -1,50 +1,24 @@
 import { Newsletter } from '../../models';
+import { Response } from '../../utils';
 
 export default async function NewsletterCreate(req, res) {
   try {
     const exists = await Newsletter.find({ Email: req.query.email });
 
-    if (exists.length > 0) {
-      res.status(200).send({
-        status: true,
-        message: 'Ju tashmë jeni abonuar në buletinin tonë.',
-        data: null,
-        code: 200,
-      });
 
-      return;
-    } 
-    
+    const regEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,3}$/i;
+    if (exists.length > 0) Response(res, 333, false, 'Ju tashmë jeni abonuar në buletinin tonë.', null)
+
+    if (!regEx.test(req.query.email) && req.query.email !== "") Response(res, 333, false, 'Ju lutem shkruani një email valide.', null)
+
     else {
       const _new = new Newsletter({ Email: req.query.email });
       const newsletter = await _new.save();
 
-      if (newsletter) {
-        res.status(200).send({
-          status: true,
-          message: 'Adresa elektronike juaj u shtua në listën e abonimeve.',
-          data: newsletter,
-          code: 200,
-        });
-      } 
-      
-      else {
-        res.status(404).send({
-          status: false,
-          message:
-            'Email-i juaj nuk u shtua në listën e abonimeve, për shkak të një gabimi.',
-          data: null,
-          code: 404,
-        });
-      }
+      if (newsletter) Response(res, 200, true, 'Adresa elektronike juaj u shtua në listën e abonimeve.', newsletter)
+      else Response(res, 404, false, 'Email-i juaj nuk u shtua në listën e abonimeve, për shkak të një gabimi.', null)
     }
   } catch (error) {
-    res.status(500).send({
-      status: false,
-      message: 'Gabim i brendshëm i serverit gjatë përpjekjes për tju shtuar në listën e abonimeve.',
-      sysError: error,
-      data: null,
-      code: 500,
-    });
+    Response(res, 500, false, 'Gabim i brendshëm i serverit gjatë përpjekjes për tju shtuar në listën e abonimeve.', null)
   }
 }

@@ -15,23 +15,11 @@ const UserGoogle = async (dispatch, informations) => {
 
       if (creationTime === lastSignInTime) UserRegister(user, dispatch, informations);
       else UserLogin(user.uid, dispatch);
-    } else {
-      Notifier(
-        {
-          dispatch: dispatch,
-          Title: `Something wen't wrong trying to authenticate you!`,
-          Type: 'error',
-        }
-      );
-    }
+    } 
+    
+    else Notifier(dispatch, '', 'error')
   } catch (error) {
-    Notifier(
-      {
-        dispatch: dispatch,
-        Title: `Something wen't wrong trying to authenticate you!`,
-        Type: 'error',
-      }
-    );
+    Notifier(dispatch, '', 'error')
   }
 };
 

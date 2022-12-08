@@ -1,19 +1,9 @@
-import {
-  ShowNotification,
-  HideNotification,
-} from '../data/redux/NotificationSlice';
+import { ShowNotification, HideNotification } from '../data/redux/NotificationSlice';
 
-const Notifier = (props) => {
-  props.dispatch(
-    ShowNotification({
-      Title: props.Title || '',
-      Message: props.Message || '',
-      Type: props.Type || 'success',
-      Visibility: true,
-    })
-  );
-
-  setTimeout(() => props.dispatch(HideNotification()), 5000);
+const Notifier = (dispatch, message, type) => {
+  const config = { Title: message, Type: type, Visibility: true}
+  dispatch(ShowNotification(config));
+  setTimeout(() => dispatch(HideNotification()), 5000);
 };
 
 export default Notifier;
