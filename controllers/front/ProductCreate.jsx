@@ -57,25 +57,10 @@ const ProductCreate = async (page, dispatch, images, setIsLoading) => {
       );
     }
   }
+  // else {
+  //   Notifier(dispatch, "Something wen't wrong while creating this page.", 'error');
+  // }
 
-  else {
-    try {
-      const req = await fetch(url, config);
-      const res = await req.json();
-
-      if (res.status === true) {
-        Notifier(dispatch, res.message, 'success');
-        dispatch(UnsetPrepage());
-        window.location.href = "/produktet/" + res.data.Slug;
-      }
-
-      else Notifier(dispatch, res.message, 'error');
-    } catch (error) {
-      Notifier(dispatch, "Something wen't wrong while creating this page.", 'error');
-    } finally {
-      setIsLoading(false);
-    }
-  }
 };
 
 export default ProductCreate;

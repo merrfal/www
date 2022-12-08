@@ -50,8 +50,7 @@ const ProductSchema = new Schema({
         default: 'Kosovo'
     },
     UserShow: {
-        type: Boolean,
-        default: true
+        type: String
     },
     Status: {
         type: String,

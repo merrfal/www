@@ -3,9 +3,15 @@ import { Response } from '../../utils';
 
 export default async function connection(req, res) {
   try {
+   
     let path = req.body.Name;
+    const exits = await Product.find({ Name: path }).count()
+    if (exits) {
+      path = path + exits
+    }
     path = path.toLowerCase().replace(/ /g, '-');
-    
+
+
     const _new = new Product({ ...req.body, Slug: path, createdAt: new Date() });
     const product = await _new.save();
 
