@@ -176,23 +176,23 @@ export default function Header() {
           {isMobileMenuOpen && (
             <div
               id="mega-menu-full"
-              className="justify-between items-center w-full"
+              className="justify-between items-center w-full absolute right-0 z-40  bg-white "
             >
               <ul className="flex flex-col mt-4 text-sm font-medium lg:hidden hover:cursor-pointer">
                 <Link href="/">
-                  <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-10 hover:bg-gray-50 hover:cursor-pointer">
+                  <a className="block py-2 pr-4 pl-5 text-gray-700 border-b border-gray-10 hover:bg-gray-50 hover:cursor-pointer">
                     Ballina
                   </a>
                 </Link>
 
                 <Link href="/produktet">
-                  <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-10 hover:bg-gray-50 hover:cursor-pointer">
+                  <a className="block py-2 pr-4 pl-5 text-gray-700 border-b border-gray-10 hover:bg-gray-50 hover:cursor-pointer">
                     Produktet
                   </a>
                 </Link>
 
                 <Link href="/na-kontaktoni">
-                  <a className="hover:cursor-pointer block py-2 pr-4 pl-3 text-gray-700 border-gray-10 hover:bg-gray-50 ">
+                  <a className="hover:cursor-pointer block py-2 pr-4 pl-5 text-gray-700 border-gray-10 hover:bg-gray-50 ">
                     Na Kontaktoni
                   </a>
                 </Link>
