@@ -8,9 +8,12 @@ import { useEffect, useState } from "react";
 import { Loading } from "../../components";
 import { ProductPost as Meta } from "../../../data/metas";
 import { Permissonless } from "..";
+// import 'react-phone-number-input/style.css'
+// import PhoneInput from 'react-phone-number-input'
 
 export default function ProductPost() {
   const dispatch = useDispatch();
+  // const [value, setValue] = useState()
 
   const page = useSelector((state) => state.page);
   const user = useSelector((state) => state.user);
@@ -19,7 +22,7 @@ export default function ProductPost() {
   const [images, setImages] = useState([]);
   const [loading, setIsLoading] = useState(false);
 
-  const onChange = (imageList, addUpdateIndex) => setImages(imageList);
+  const onChange = (imageList, addUpdateIndex) => setImages(imageList.slice(0, 5));
 
   useEffect(() => {
     dispatch(SetPrepageField({ Field: "User", Value: user.Id }));
@@ -29,6 +32,7 @@ export default function ProductPost() {
     if (categories.Loaded === false) CategoryList(dispatch);
   }, [categories]);
 
+  
   if (user.Auth === false) return <Permissonless />;
   return (
     <Normal>
@@ -132,19 +136,28 @@ export default function ProductPost() {
                               >
                                 Numri i telefonit
                               </label>
+                              {/* <PhoneInput
+                                defaultCountry="XK"
+                                placeholder="+383 XX-XXX-XXX"
+                                value={value}
+                                onChange={setValue}
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm"/> */}
                               <input
-                                onChange={(e) =>
+                                onChange={(e) => {
+                                  
                                   dispatch(
                                     SetPrepageField({
                                       Field: "Phone",
-                                      Value: e.target.value,
+                                      Value: e.target.value
                                     })
                                   )
                                 }
+                                }
+                                maxlength="9"
                                 value={page.Prepage.Phone}
-                                type="text"
+                                type="tel"
                                 id="nr-telefonit"
-                                placeholder="04X-XXX-XXX"
+                                placeholder="+383 XX-XXX-XXX"
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm"
                               />
                             </div>
@@ -270,7 +283,7 @@ export default function ProductPost() {
                                     {imageList.map((image, index) => (
                                       <div
                                         key={index}
-                                        className="w-6/12 sm:w-4/12"
+                                        className="w-6/12 sm:w-4/12 p-4"
                                       >
                                         <div className="flex mt-5">
                                           <img
@@ -314,43 +327,45 @@ export default function ProductPost() {
                                     ))}
                                   </div>
 
-                                  <div
-                                    style={isDragging ? { color: "red" } : null}
-                                    onClick={onImageUpload}
-                                    {...dragProps}
-                                    className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6"
-                                  >
-                                    <div className="space-y-1 text-center">
-                                      <svg
-                                        className="mx-auto h-12 w-12 text-gray-400"
-                                        stroke="currentColor"
-                                        fill="none"
-                                        viewBox="0 0 48 48"
-                                        aria-hidden="true"
-                                      >
-                                        <path
-                                          d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                          strokeWidth="2"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                      </svg>
-                                      <div className="flex text-sm text-gray-600">
-                                        <label className="relative cursor-pointer rounded-md bg-white font-medium text-[#377DFF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#377DFF] focus-within:ring-offset-2 hover:text-[#377DFF]">
-                                          <span className="text-[#377DFF]">
-                                            Ngarko një Fotografi
-                                          </span>
-                                        </label>
-                                        <p className="pl-1">
-                                          ose tërhiqe një këtu.
+                                  {images.length > 4 ? null :
+                                    <div
+                                      style={isDragging ? { color: "red" } : null}
+                                      onClick={onImageUpload}
+                                      {...dragProps}
+                                      className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6"
+                                    >
+                                      <div className="space-y-1 text-center">
+                                        <svg
+                                          className="mx-auto h-12 w-12 text-gray-400"
+                                          stroke="currentColor"
+                                          fill="none"
+                                          viewBox="0 0 48 48"
+                                          aria-hidden="true"
+                                        >
+                                          <path
+                                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                          />
+                                        </svg>
+                                        <div className="flex text-sm text-gray-600">
+                                          <label className="relative cursor-pointer rounded-md bg-white font-medium text-[#377DFF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#377DFF] focus-within:ring-offset-2 hover:text-[#377DFF]">
+                                            <span className="text-[#377DFF]">
+                                              Ngarko një Fotografi
+                                            </span>
+                                          </label>
+                                          <p className="pl-1">
+                                            ose tërhiqe një këtu.
+                                          </p>
+                                        </div>
+                                        <p className="text-xs text-gray-500">
+                                          PNG, JPG, që nuk tejkalon madhësinë e
+                                          3MB
                                         </p>
                                       </div>
-                                      <p className="text-xs text-gray-500">
-                                        PNG, JPG, që nuk tejkalon madhësinë e
-                                        3MB
-                                      </p>
                                     </div>
-                                  </div>
+                                  }
                                 </div>
                               )}
                             </ImageUploading>
@@ -362,15 +377,22 @@ export default function ProductPost() {
                       <button
                         className={
                           page.Prepage?.Name &&
+                            page.Prepage.Phone &&
+                            page.Prepage?.City &&
+                            page.Prepage?.Category &&
+                            page.Prepage.Address &&
+                            page.Prepage?.UserShow &&
+                            images.length !== 0
+                            ? "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none"
+                            : "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none cursor-not-allowed opacity-[.75]"
+                        }
+                        disabled={page.Prepage?.Name &&
                           page.Prepage.Phone &&
                           page.Prepage?.City &&
                           page.Prepage?.Category &&
                           page.Prepage.Address &&
                           page.Prepage?.UserShow &&
-                          images.length !== 0
-                            ? "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none"
-                            : "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none cursor-not-allowed opacity-[.75]"
-                        }
+                          images.length !== 0 ? false : true}
                         onClick={(e) => {
                           e.preventDefault();
                           ProductCreate(

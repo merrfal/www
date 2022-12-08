@@ -38,7 +38,7 @@ export default function Search() {
   }, []);
 
   useEffect(() => {
-    if (search.Loading === false) {
+    if (search.Loading === false && search?.Visibility ) {
       ProductsSearch(search?.Term, dispatch);
     }
   }, [search]);

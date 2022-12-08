@@ -3,7 +3,7 @@ import Head from 'next/head';
 const Permissonless = () => {
   return (
     <Head>
-      <title>Sjeni Identifikuar - Merr Fal</title>
+      <title>Nuk jeni identifikuar - Merr Fal</title>
       <meta name="robots" content="noindex" />
     </Head>
   );

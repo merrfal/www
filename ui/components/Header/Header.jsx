@@ -37,6 +37,7 @@ export default function Header() {
 
   let domNode = clickOutside(() => {
     setIsMobileMenuOpen(false);
+    setIsProfileOpen(false);
   });
 
   return (
@@ -44,7 +45,7 @@ export default function Header() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={domNode} className="border-b border-gray-200">
           <div className="h-16 flex items-center justify-between">
-            <div className="flex-1 flex items-center lg:hidden">
+            <div className="flex-1 flex items-center lg:hidden ">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="-ml-2 bg-white p-2 rounded-md text-gray-400"
@@ -113,7 +114,7 @@ export default function Header() {
 
               {user.Auth && (
                 <Link href="/postimet/shto">
-                  <a className="hidden ml-4 p-1 text-gray-400 hover:text-gray-500 lg:block">
+                  <a className="ml-4 p-1 text-gray-400 hover:text-gray-500 lg:block">
                     <AddIcon />
                   </a>
                 </Link>
@@ -124,7 +125,7 @@ export default function Header() {
                   <button
                     type="button"
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
-                    className="ml-3 p-2 inline-flex w-full justify-center bg-white text-sm font-medium text-gray-700"
+                    className=" ml-0 sm:ml-3 p-2 inline-flex w-full justify-center bg-white text-sm font-medium text-gray-700"
                   >
                     <img
                       className="w-6 h-6 rounded-full"
