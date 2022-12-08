@@ -33,9 +33,6 @@ export default function Profile() {
     if (username !== "") UserView(dispatch, username)
   }, [username]);
 
-  // console.log("iamge", imageUser)
-  console.log("iamge", image)
-
   return (
     <Normal>
       <Meta
@@ -155,7 +152,7 @@ export default function Profile() {
 
                                                     <div key={0} className='mt-1 flex items-center'>
                                                       <span>
-                                                        <img className='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image?.length !== 0) ? (image?.length !== 0 ? image[0]?.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
+                                                        <img className='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image?.length !== 0) ? (image?.length !== 0 ? imageUser?.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
                                                       </span>
 
                                                       <button
