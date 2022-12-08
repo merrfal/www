@@ -177,9 +177,9 @@ export default function Products() {
             Të gjitha Produktet
           </h1>
           <p className="mt-4 max-w-xl text-sm text-gray-700">
-            Shfletoni të gjitha kategoritë dhe qytetet dhe statuset e produkteve
-            të dhuruara nga dhuruesit publik dhe anonim, dhe zgjidhni atë që ju
-            keni nevoj për ta marrë.
+            Shfletoni të gjitha kategoritë, qytetet si dhe statuset e produkteve
+            të dhuruara nga dhuruesit publik dhe anonim, dhe zgjedhni atë që ju
+            keni nevojë.
           </p>
         </div>
 
@@ -382,7 +382,7 @@ export default function Products() {
 
               <div className="w-px h-5 bg-gray-300 block ml-4" />
 
-              <div className="ml-4 flex items-center justify-center align-center">
+              <div className="ml-4 flex overflow-x-auto">
                 {filter.Categories.map((category, index) => {
                   return (
                     <div
