@@ -1,9 +1,11 @@
-import Link from "next/link";
-
+import { AuthWithGoogle } from "../../../controllers/front";
 import { Normal } from "../../layouts";
 import { Permissonless as Meta } from "../../../data/metas";
+import { useDispatch } from "react-redux";
 
 export default function Permissonless() {
+  const dispatch = useDispatch();
+
   return (
     <Normal>
       <Meta />
@@ -29,11 +31,11 @@ export default function Permissonless() {
                 llogarinë tuaj që përdorni..
               </p>
               <div className="mt-6">
-                <Link href="/">
-                  <p className="text-base font-medium text-indigo-600 hover:text-indigo-500">
+                <div onClick={() => AuthWithGoogle(dispatch)}>
+                  <p className="hover:cursor-pointer text-base font-medium text-indigo-600 hover:text-indigo-500">
                     Kyçu në llogari<span> &larr;</span>
                   </p>
-                </Link>
+                </div>
               </div>
             </div>
           </div>

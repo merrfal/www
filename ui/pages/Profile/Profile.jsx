@@ -14,6 +14,8 @@ export default function Profile() {
   const profile = useSelector((state) => state.profile);
   const user = useSelector((state) => state.user);
 
+  // TODO: Fix url is not chaning well on profile slug update
+
   const [image, setImage] = useState([]);
   const [loading, setIsLoading] = useState(false);
   const [isEdit, setIsEdit] = useState(false);

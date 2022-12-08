@@ -14,7 +14,6 @@ import {
   AddIcon,
   AccountIcon,
 } from "../../icons";
-// import { useEffect } from "react";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -63,21 +62,6 @@ export default function Header() {
 
             <div className="hidden lg:flex-1 lg:block lg:self-stretch">
               <div className="h-full flex space-x-8">
-                <div className="flex">
-                  <Link href="/">
-                    <div className="relative flex">
-                      <button className="text-gray-700 hover:text-gray-800 relative z-10 flex items-center justify-center transition-colors ease-out duration-200 text-sm font-medium">
-                        Ballina
-                        <span className="absolute bottom-0 inset-x-0 h-0.5 transition-colors ease-out duration-200 sm:mt-5 sm:transform sm:translate-y-px" />
-                      </button>
-                    </div>
-                  </Link>
-
-                  <div className="absolute z-10 top-full inset-x-0">
-                    <div className="absolute inset-0 top-1/2 bg-white shadow" />
-                  </div>
-                </div>
-
                 <Link href="/produktet">
                   <a
                     href="/produktet"
@@ -179,12 +163,6 @@ export default function Header() {
               className="justify-between items-center w-full"
             >
               <ul className="flex flex-col mt-4 text-sm font-medium lg:hidden hover:cursor-pointer">
-                <Link href="/">
-                  <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-10 hover:bg-gray-50 hover:cursor-pointer">
-                    Ballina
-                  </a>
-                </Link>
-
                 <Link href="/produktet">
                   <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-10 hover:bg-gray-50 hover:cursor-pointer">
                     Produktet

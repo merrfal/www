@@ -20,10 +20,7 @@ export default function Categories() {
           <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
             Shfletoni Kategoritë
           </h2>
-          {/* <a
-            href="/produktet"
-            className="hidden text-sm font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block"
-          >
+          {/* <a href="/produktet" className="hidden text-sm font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block">
             Shfleto të gjitha Kategoritë
             <span aria-hidden="true"> &rarr;</span>
           </a> */}
@@ -32,15 +29,7 @@ export default function Categories() {
         <div className="mt-4 flow-root">
           <div className="-my-2">
             <div className="box-content py-2 relative h-80 overflow-x-auto xl:overflow-visible">
-              <div
-                className={
-                  categories.Loaded
-                    ? categories.Categories.length === 0
-                      ? "w-full"
-                      : "absolute min-w-screen-xl px-4 flex space-x-8 sm:px-6 lg:px-8 xl:relative xl:px-0 xl:space-x-0 xl:grid xl:grid-cols-5 xl:gap-x-8"
-                    : "w-full"
-                }
-              >
+              <div className={categories.Loaded ? categories.Categories.length === 0 ? "w-full" : "absolute min-w-screen-xl px-4 flex space-x-8 sm:px-6 lg:px-8 xl:relative xl:px-0 xl:space-x-0 xl:grid xl:grid-cols-5 xl:gap-x-8" : "w-full" }>
                 {categories.Loaded === false ? (
                   <Loading />
                 ) : categories.Categories.length === 0 ? (
@@ -49,22 +38,12 @@ export default function Categories() {
                     message="Nuk u gjet asnjë kategori e shtuar ne platformë."
                   />
                 ) : (
-                  categories.Categories.map((category, index) => (
-                    <Category category={category} key={index} />
-                  ))
+                  categories.Categories.map((category, index) => <Category category={category} key={index} />)
                 )}
               </div>
             </div>
           </div>
         </div>
-        {/* <div className="mt-6 px-4 sm:mb-10 flex justify-end">
-          <a
-            href="#"
-            className="block text-sm font-semibold text-indigo-600 hover:text-indigo-500"
-          >
-            Shfleto të gjitha Kategoritë <span aria-hidden="true"> &rarr;</span>
-          </a>
-        </div> */}
       </div>
     </div>
   );

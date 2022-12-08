@@ -8,7 +8,7 @@ export default function Category(props) {
     <div onClick={() => {
       Link()
     }
-    } key={props.index} href={`/produktet?kategoria="${Name}"`} className='hover:cursor-pointer relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto'>
+    } key={props.index} href={`/produktet?kategoria="${Name}"`} className='hover:cursor-pointer relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-80 transition-all xl:w-auto'>
       <span className='absolute inset-0'>
         <img src={Icon === '' ? '/assets/category-no.png' : Icon} alt={Name} className='w-full h-full object-center object-cover' />
       </span>

@@ -52,15 +52,9 @@ export default function Product(props) {
 
   return (
     <Link href={`/produktet/${Slug}`} key={props.index}>
-      <div
-        style={isSaving ? { pointerEvents: "none", opacity: ".75" } : {}}
-        className="group relative lg:bg-red"
-      >
-        <div className="hover:cursor-pointer min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 transition-all lg:aspect-none lg:h-80">
-          <img
-            src={Gallery.length === 0 ? "/assets/product-no.png" : Gallery[0]}
-            className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-          />
+      <div style={isSaving ? { pointerEvents: "none", opacity: ".75" } : {}} className="group relative lg:bg-red">
+        <div className="hover:cursor-pointer min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-80 transition-all lg:aspect-none lg:h-80">
+          <img src={Gallery.length === 0 ? "/assets/product-no.png" : Gallery[0]} className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
         </div>
         <div className="flex items-center py-4">
           <div className="flex-auto">

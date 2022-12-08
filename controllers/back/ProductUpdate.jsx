@@ -23,7 +23,7 @@ export default async function ProductUpdate(req, res) {
     const id = req.query.id;
     const product = await Product.findByIdAndUpdate(id, { $set: data }, { new: true });
 
-    if (product) Response(res, 404, false, "Produkti u përditësua me sukses, këto ndryshime do të ndikojnë menjëherë në platformë.", product);
+    if (product) Response(res, 200, true, "Produkti u përditësua me sukses, këto ndryshime do të ndikojnë menjëherë në platformë.", product);
     else Response(res, 404, false, "Produkti nuk u përditësua për shkak të disa gabimeve.", null);
   } catch (err) {
     Response(res, 500, false, "Gabim i brendshëm i serverit gjatë përditësimit të produktit.", null);
