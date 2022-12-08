@@ -17,8 +17,8 @@ const UserUpdate = async (
   const url = `${process.env.NEXT_PUBLIC_API_URL}/users/UserUpdate/${profile.Id}`;
   const config = ConfigBuilder("P", "JSON", profile, true, false, false);
 
-  console.log("imageeeeeeeeeeeeee", image)
-  if (image !== null) {
+
+  if (image) {
     const storageRef = ref(storage, `/users/${v4() + image.file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, image?.file);
 
@@ -27,7 +27,7 @@ const UserUpdate = async (
       (snapshot) => {
         let progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        // console.log("Upload is " + progress + "% done");
+
       },
       (error) => {
         console.log(error);
