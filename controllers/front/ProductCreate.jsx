@@ -18,14 +18,22 @@ const ProductCreate = async (page, dispatch, images, setIsLoading) => {
       const storageRef = ref(storage, `/products/${id + images[i]?.file.name}`);
       const uploadTask = uploadBytesResumable(storageRef, images[i]?.file);
 
-      uploadTask.on( "state_changed", async () => {
+      uploadTask.on("state_changed",
+        (snapshot) => {
+          let progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          // console.log("Upload is " + progress + "% done");
+        },
+        (error) => {
+          console.log(error);
+        }, async () => {
           await getDownloadURL(uploadTask.snapshot.ref).then(
             async (downloadURL) => {
               array = [...array, downloadURL];
               if (i === images.length - 1) {
                 product.Gallery = array;
-                const config_with_images = ConfigBuilder( "P", "JSON", product, true, false, false);
-                
+                const config_with_images = ConfigBuilder("P", "JSON", product, true, false, false);
+
                 try {
                   const req = await fetch(url, config_with_images);
                   const res = await req.json();
@@ -34,8 +42,8 @@ const ProductCreate = async (page, dispatch, images, setIsLoading) => {
                     Notifier(dispatch, res.message, 'success');
                     dispatch(UnsetPrepage());
                     window.location.href = "/produktet/" + res.data.Slug;
-                  } 
-                  
+                  }
+
                   else Notifier(dispatch, res.message, 'error');
                 } catch (error) {
                   Notifier(dispatch, "Something wen't wrong while creating this page.", 'error');
@@ -51,22 +59,22 @@ const ProductCreate = async (page, dispatch, images, setIsLoading) => {
   }
 
   else {
-      try {
-        const req = await fetch(url, config);
-        const res = await req.json();
+    try {
+      const req = await fetch(url, config);
+      const res = await req.json();
 
-        if (res.status === true) {
-          Notifier(dispatch, res.message, 'success');
-          dispatch(UnsetPrepage());
-          window.location.href = "/produktet/" + res.data.Slug;
-        } 
-        
-        else Notifier(dispatch, res.message, 'error');
-      } catch (error) {
-        Notifier(dispatch, "Something wen't wrong while creating this page.", 'error');
-      } finally {
-        setIsLoading(false);
+      if (res.status === true) {
+        Notifier(dispatch, res.message, 'success');
+        dispatch(UnsetPrepage());
+        window.location.href = "/produktet/" + res.data.Slug;
       }
+
+      else Notifier(dispatch, res.message, 'error');
+    } catch (error) {
+      Notifier(dispatch, "Something wen't wrong while creating this page.", 'error');
+    } finally {
+      setIsLoading(false);
+    }
   }
 };
 

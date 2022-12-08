@@ -29,6 +29,13 @@ export default function Profile() {
   }, [profile, username]);
 
 
+  useEffect(() => {
+    if (username !== "") UserView(dispatch, username)
+  }, [username]);
+
+  // console.log("iamge", imageUser)
+  console.log("iamge", image)
+
   return (
     <Normal>
       <Meta
@@ -148,7 +155,7 @@ export default function Profile() {
 
                                                     <div key={0} className='mt-1 flex items-center'>
                                                       <span>
-                                                        <img className='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image.length !== 0) ? (image.length !== 0 ? image[0]?.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
+                                                        <img className='h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24' src={(profile?.Avatar || image?.length !== 0) ? (image?.length !== 0 ? image[0]?.data_url : profile.Avatar) : '/assets/avatar-no.png'} alt="" width="100" />
                                                       </span>
 
                                                       <button
@@ -469,19 +476,19 @@ export default function Profile() {
               {
                 profile.Products.length !== 0 &&
                 <div className='max-w-xl'>
-                <h1
-                  id='order-history-heading'
-                  className='text-3xl font-extrabold tracking-tight text-gray-900'>
-                  Produktet e dhuruara
-                </h1>
-                <p className='mt-2 text-sm text-gray-500'>
-                  {
-                    profile.Id === user.Id ? 
-                    `Produket e dhuruara nga ju, duke përfshirë dhe ato anonimisht të postuara.` :
-                    `Produket e dhuruara nga përdoruesi, duke mos përfshirë ato anonimisht të postuara.`
-                  }
-                </p>
-              </div>
+                  <h1
+                    id='order-history-heading'
+                    className='text-3xl font-extrabold tracking-tight text-gray-900'>
+                    Produktet e dhuruara
+                  </h1>
+                  <p className='mt-2 text-sm text-gray-500'>
+                    {
+                      profile.Id === user.Id ?
+                        `Produket e dhuruara nga ju, duke përfshirë dhe ato anonimisht të postuara.` :
+                        `Produket e dhuruara nga përdoruesi, duke mos përfshirë ato anonimisht të postuara.`
+                    }
+                  </p>
+                </div>
               }
               <div
                 className={
@@ -493,7 +500,7 @@ export default function Profile() {
                   <Empty
                     heading='Nuk u gjet asnjë produkt'
                     message={
-                      profile.Id === user.Id ? 'Ju nuk keni shtuar asnjë produkt, ose produktet janë shtuar anonimisht.' : 'Përdoruesi nuk dhuruar asnjë produkt, ose ka dhuruar anonimisht.' 
+                      profile.Id === user.Id ? 'Ju nuk keni shtuar asnjë produkt, ose produktet janë shtuar anonimisht.' : 'Përdoruesi nuk dhuruar asnjë produkt, ose ka dhuruar anonimisht.'
                     }
                   />
                 ) : (
