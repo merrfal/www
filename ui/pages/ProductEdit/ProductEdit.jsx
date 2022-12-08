@@ -214,12 +214,37 @@ export default function ProductEdit() {
                                 id="city"
                                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm"
                               >
-                                <option value="Prishtinë">Prishtinë</option>
+                              <option value="Prishtinë">Prishtinë</option>
                                 <option value="Mitrovicë">Mitrovicë</option>
+                                <option value="Ferizaj">Ferizaj</option>
                                 <option value="Gjilan">Gjilan</option>
                                 <option value="Prizren">Prizren</option>
                                 <option value="Pejë">Pejë</option>
                                 <option value="Gjakovë">Gjakovë</option>
+                                <option value="Artanë">Artanë</option>
+                                <option value="Besianë">Besianë</option>
+                                <option value="Burim">Burim</option>
+                                <option value="Dardanë">Dardanë</option>
+                                <option value="Deçan">Deçan</option>
+                                <option value="Dragash">Dragash</option>
+                                <option value="Drenas">Drenas</option>
+                                <option value="Fushë Kosovë">Fushë Kosovë</option>
+                                <option value="Kastriot">Kastriot</option>
+                                <option value="Kaçanik">Kaçanik</option>
+                                <option value="Klinë">Klinë</option>
+                                <option value="Leposaviq">Leposaviq</option>
+                                <option value="Lipjan">Lipjan</option>
+                                <option value="Malishevë">Malishevë</option>  
+                                <option value="Rahovec">Rahovec</option>  
+                                <option value="Skenderaj">Skenderaj</option>  
+                                <option value="Shtërpcë">Shtërpcë</option>  
+                                <option value="Shtime">Shtime</option>  
+                                <option value="Therandë">Therandë</option>  
+                                <option value="Viti">Viti</option>  
+                                <option value="Vushtrri">Vushtrri</option>  
+                                <option value="Zubin Potok">Zubin Potok</option>  
+                                <option value="Zveçan">Zveçan</option>
+
                               </select>
                             </div>
 
