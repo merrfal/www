@@ -8,9 +8,12 @@ import { useEffect, useState } from "react";
 import { Loading } from "../../components";
 import { ProductPost as Meta } from "../../../data/metas";
 import { Permissonless } from "..";
+// import 'react-phone-number-input/style.css'
+// import PhoneInput from 'react-phone-number-input'
 
 export default function ProductPost() {
   const dispatch = useDispatch();
+  // const [value, setValue] = useState()
 
   const page = useSelector((state) => state.page);
   const user = useSelector((state) => state.user);
@@ -133,6 +136,12 @@ export default function ProductPost() {
                               >
                                 Numri i telefonit
                               </label>
+                              {/* <PhoneInput
+                                defaultCountry="XK"
+                                placeholder="+383 XX-XXX-XXX"
+                                value={value}
+                                onChange={setValue}
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm"/> */}
                               <input
                                 onChange={(e) => {
                                   
@@ -148,7 +157,7 @@ export default function ProductPost() {
                                 value={page.Prepage.Phone}
                                 type="tel"
                                 id="nr-telefonit"
-                                placeholder="04X-XXX-XXX"
+                                placeholder="+383 XX-XXX-XXX"
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm"
                               />
                             </div>
