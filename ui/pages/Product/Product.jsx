@@ -80,11 +80,10 @@ export default function Product() {
                             page.Page.Gallery.map((image) => (
                               <button
                                 id="tabs-2-tab-1"
-                                className={
-                                  mainImage === image
-                                    ? "relative h-24 bg-white ring-2 ring-blue-500 ring-inset"
-                                    : "relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-100 focus:outline-none focus:ring   focus:ring-inse focus:ring-offset-4 focus:ring-opacity-50"
-                                }
+
+                                className={mainImage === image ?
+                                  'relative h-24 bg-white ring-4 ring-blue-400 rounded '
+                                  :'relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-100 focus:outline-none focus:ring   focus:ring-inse focus:ring-offset-4 focus:ring-opacity-50'}
                                 aria-controls="tabs-2-panel-1"
                                 onClick={() => {
                                   setMainImage(image);
