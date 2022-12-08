@@ -185,7 +185,7 @@ export default function Product() {
 
                         {page.Page.User.Id === null ? (
                           <div
-                            className="hover:cursor-not-allowed transition-all mt-3 w-[35%] text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                            className="hover:cursor-not-allowed transition-all mt-3 w-[100%] text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                             href="/konto"
                           >
                             <div className="flex items-center justify-center w-9 h-9 bg-gray-300 rounded-full mr-3">
