@@ -50,7 +50,7 @@ export default function Contact() {
                       type='text'
                       id='first-name'
                       value={fields.Name}
-                      placeholder="Emri"
+                      placeholder="John"
                       onChange={(e) => setFields({ ...fields, Name: e.target.value })}
                       className='py-3 px-4 block w-full shadow-sm focus:ring-[#387CFF] focus:border-[#387CFF] border-gray-300 rounded-md'
                     />
@@ -64,7 +64,7 @@ export default function Contact() {
                   </label>
                   <div className='mt-1'>
                     <input
-                      placeholder="Mbiemri"
+                      placeholder="Doe"
                       type='text'
                       value={fields.Surname}
                       onChange={(e) => setFields({ ...fields, Surname: e.target.value })}
@@ -81,7 +81,7 @@ export default function Contact() {
                   </label>
                   <div className='mt-1'>
                     <input
-                      placeholder="Adresa Elektronike"
+                      placeholder="test@gmail.com"
                       id='email'
                       value={fields.Email}
                       onChange={(e) => setFields({ ...fields, Email: e.target.value })}
@@ -98,7 +98,7 @@ export default function Contact() {
                   </label>
                   <div className='mt-1'>
                     <textarea
-                      placeholder="Message"
+                      placeholder="Kam probleme me ..."
                       id='message'
                       value={fields.Message}
                       rows='4'

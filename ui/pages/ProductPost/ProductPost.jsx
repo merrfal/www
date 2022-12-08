@@ -270,7 +270,7 @@ export default function ProductPost() {
                                     {imageList.map((image, index) => (
                                       <div
                                         key={index}
-                                        className="w-6/12 sm:w-4/12"
+                                        className="w-6/12 sm:w-4/12 p-4"
                                       >
                                         <div className="flex mt-5">
                                           <img

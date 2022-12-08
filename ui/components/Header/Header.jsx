@@ -37,6 +37,7 @@ export default function Header() {
 
   let domNode = clickOutside(() => {
     setIsMobileMenuOpen(false);
+    setIsProfileOpen(false);
   });
 
   return (
