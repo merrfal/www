@@ -1,11 +1,11 @@
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Url } from '../../utils';
 import { ProductSaves } from './';
 import { SetFavorites } from '../../data/redux/UserSlice';
 
 const ProductSave = async (productId, userId, newFavorites, setIsSaving, dispatch) => {
   setIsSaving(true);
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductSave/${productId}/${userId}`;
+  const url = `${Url}/api/products/ProductSave/${productId}/${userId}`;
   const config = ConfigBuilder('G', 'JSON', {}, false, false, false);
 
   try {

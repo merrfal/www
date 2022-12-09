@@ -1,8 +1,8 @@
 import { SetUser } from '../../data/redux/UserSlice';
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Url } from '../../utils';
 
 const UserRegister = async (user, dispatch, informations) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/users/UserRegister`;
+  const url = `${Url}/api/users/UserRegister`;
 
   const Name = user.displayName.split(' ')[0] || '';
   const Surname = user.displayName.split(' ')[1] || '';

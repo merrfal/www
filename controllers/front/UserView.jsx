@@ -1,8 +1,8 @@
-import { ConfigBuilder, Notifier } from "../../utils";
+import { ConfigBuilder, Notifier, Url } from "../../utils";
 import { SetProfile } from "../../data/redux/ProfileSlice";
 
 const UserView = async (dispatch, username) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/users/UserView/${username}`;
+  const url = `${Url}/api/users/UserView/${username}`;
   const config = ConfigBuilder("G", "JSON", {}, false);
 
   try {

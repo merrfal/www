@@ -1,9 +1,9 @@
 import { SetUser } from '../../data/redux/UserSlice';
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Url } from '../../utils';
 import { LogoutUser } from '../../data/redux/UserSlice';
 
 const UserAuth = async (dispatch, id) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/users/UserAuth/${id}`;
+  const url = `${Url}/api/users/UserAuth/${id}`;
   const config = ConfigBuilder('G', 'JSON', {}, false, false, false);
 
   try {

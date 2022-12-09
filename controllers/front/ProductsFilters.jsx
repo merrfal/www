@@ -1,8 +1,8 @@
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Url } from '../../utils';
 import { SetFilter } from '../../data/redux/FilterSlice';
 
 const ProductsFilters = async (Cities, Categories, dispatch) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductsFilters`;
+  const url = `${Url}/api/products/ProductsFilters`;
   const config = ConfigBuilder('P', 'JSON', {Cities, Categories}, true, false, false);
 
   try {

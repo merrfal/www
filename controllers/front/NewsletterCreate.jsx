@@ -1,9 +1,9 @@
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Url } from '../../utils';
 
 const NewsletterCreate = async (email, setEmail, setLoading, dispatch) => {
   setLoading(true);
   
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/newsletter/NewsletterCreate/${email}`;
+  const url = `${Url}/api/newsletter/NewsletterCreate/${email}`;
   const config = ConfigBuilder('G', 'JSON', {}, false, false, false);
 
   try {

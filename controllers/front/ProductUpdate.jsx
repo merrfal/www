@@ -1,4 +1,4 @@
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Url } from '../../utils';
 import { storage } from '../../config/Firebase';
 import { v4 } from 'uuid'
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
@@ -6,7 +6,7 @@ import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebas
 const PageUpdate = async (dispatch, product, images, deletedImages, setIsLoading) => {
   setIsLoading(true);
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductUpdate/${product._id}`;
+  const url = `${Url}/api/products/ProductUpdate/${product._id}`;
   let page = structuredClone(product)
   let array = [];
 

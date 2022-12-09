@@ -1,4 +1,4 @@
-import { ConfigBuilder, Notifier } from "../../utils";
+import { ConfigBuilder, Notifier, Url } from "../../utils";
 import { storage } from "../../config/Firebase";
 import { v4 } from "uuid";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -14,7 +14,7 @@ const UserUpdate = async (
   setIsLoading(true);
   let user = structuredClone(profile);
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/users/UserUpdate/${profile.Id}`;
+  const url = `${Url}/api/users/UserUpdate/${profile.Id}`;
   const config = ConfigBuilder("P", "JSON", profile, true, false, false);
 
 

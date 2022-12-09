@@ -1,8 +1,8 @@
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Url } from '../../utils';
 import { SetPages } from '../../data/redux/PagesSlice';
 
 const PagesList = async (dispatch) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductsList`;
+  const url = `${Url}/api/products/ProductsList`;
   const config = ConfigBuilder('G', 'JSON', {}, false, true, false);
 
   try {

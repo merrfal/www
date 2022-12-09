@@ -1,4 +1,4 @@
-import { ConfigBuilder, Notifier } from "../../utils";
+import { ConfigBuilder, Notifier, Url } from "../../utils";
 import { UnsetPrepage } from "../../data/redux/PageSlice";
 import { storage } from "../../config/Firebase";
 import { v4 } from "uuid";
@@ -9,7 +9,7 @@ const ProductCreate = async (page, dispatch, images, setIsLoading) => {
 
   let product = structuredClone(page);
   let array = [];
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductCreate`;
+  const url = `${Url}/api/products/ProductCreate`;
   const config = ConfigBuilder("P", "JSON", page, true, false, false);
 
   if (images.length !== 0) {

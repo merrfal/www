@@ -1,8 +1,8 @@
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Url } from '../../utils';
 import { SetCategories } from '../../data/redux/CategoriesSlice';
 
 const CategoryList = async (dispatch) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/categories/CategoryList`;
+  const url = `${Url}/api/categories/CategoryList`;
   const config = ConfigBuilder('G', 'JSON', {}, false, false, false);
 
   try {

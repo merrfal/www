@@ -1,8 +1,8 @@
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Url } from '../../utils';
 import { SetUserLandingPages } from '../../data/redux/UserLandingPagesSlice';
 
 const UserProductList = async (dispatch, id) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/users/UserProductList/${id}`;
+  const url = `${Url}/api/users/UserProductList/${id}`;
   const config = ConfigBuilder('G', 'JSON', {}, false, false, false);
 
   try {

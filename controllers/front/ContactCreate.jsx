@@ -1,9 +1,9 @@
-import { ConfigBuilder, Notifier, Response } from '../../utils';
+import { ConfigBuilder, Notifier, Response, Url } from '../../utils';
 
 const ContactCreate = async (fields, setLoading, setFields, dispatch) => {
   setLoading(true);
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/contact/ContactCreate`;
+  const url = `${Url}/api/contact/ContactCreate`;
   const config = ConfigBuilder('P', 'JSON', fields, true, false, false);
 
   // const regEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,3}$/i;

@@ -1,8 +1,9 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { createWrapper } from 'next-redux-wrapper';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { createWrapper } from "next-redux-wrapper";
+import { Prod } from "../utils";
 
-import { 
-  UserSlice, 
+import {
+  UserSlice,
   PageSlice,
   NotificationSlice,
   ConfirmationSlice,
@@ -12,8 +13,8 @@ import {
   CategoriesSlice,
   FavoritesSlice,
   SearchSlice,
-  FilterSlice
-} from '../data/redux';
+  FilterSlice,
+} from "../data/redux";
 
 const combinedReducer = combineReducers({
   user: UserSlice,
@@ -26,9 +27,9 @@ const combinedReducer = combineReducers({
   categories: CategoriesSlice,
   favorites: FavoritesSlice,
   search: SearchSlice,
-  filter: FilterSlice
+  filter: FilterSlice,
 });
 
 const masterReducer = (state, action) => combinedReducer(state, action);
-export const makeStore = () => configureStore({reducer: masterReducer});
-export const Redux = createWrapper(makeStore, { debug: process.env.NEXT_PUBLIC_IS_DEBUG === true ? true : false });
+export const makeStore = () => configureStore({ reducer: masterReducer });
+export const Redux = createWrapper(makeStore, { debug: Prod });

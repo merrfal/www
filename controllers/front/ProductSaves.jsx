@@ -1,8 +1,8 @@
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Url } from '../../utils';
 import { SetFavorites } from '../../data/redux/FavoritesSlice';
 
 const ProductSaves = async (userId, dispatch) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductSaves/${userId}`;
+  const url = `${Url}/api/products/ProductSaves/${userId}`;
   const config = ConfigBuilder('G', 'JSON', {}, false, false, false);
 
   try {

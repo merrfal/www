@@ -1,8 +1,8 @@
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Url } from '../../utils';
 import { UserProductList } from '.';
 
 const ProductDelete = async (dispatch, productId, userId, redirect = null) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/products/ProductDelete/${productId}`;
+  const url = `${Url}/api/products/ProductDelete/${productId}`;
   const config = ConfigBuilder('G', 'JSON', {}, false, false, false);
 
   try {

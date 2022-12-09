@@ -1,9 +1,9 @@
-import { ConfigBuilder, Notifier } from '../../utils';
+import { ConfigBuilder, Notifier, Url } from '../../utils';
 
 const UserDelete = async (dispatch, id) => {
   setLoading(true);
   
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/users/UserDelete/${id}`;
+  const url = `${Url}/api/users/UserDelete/${id}`;
   const config = ConfigBuilder('D', 'JSON', {}, false, false, false);
 
   try {
