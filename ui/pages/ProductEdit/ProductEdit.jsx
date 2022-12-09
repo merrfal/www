@@ -15,6 +15,7 @@ import {
   ProductUpdate,
   CategoryList,
 } from "../../../controllers/front";
+import { CloseIcon, ImageIcon } from "../../icons";
 
 export default function ProductEdit() {
   const dispatch = useDispatch();
@@ -27,7 +28,8 @@ export default function ProductEdit() {
   const [deletedImages, setDeletedImages] = useState([]);
   const [loading, setIsLoading] = useState(false);
 
-  const onChange = (imageList, addUpdateIndex) => setImages(imageList.slice(0, 5));
+  const onChange = (imageList, addUpdateIndex) =>
+    setImages(imageList.slice(0, 5));
 
   useEffect(() => {
     if (categories.Loaded === false) CategoryList(dispatch);
@@ -214,7 +216,7 @@ export default function ProductEdit() {
                                 id="city"
                                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm"
                               >
-                              <option value="Prishtinë">Prishtinë</option>
+                                <option value="Prishtinë">Prishtinë</option>
                                 <option value="Mitrovicë">Mitrovicë</option>
                                 <option value="Ferizaj">Ferizaj</option>
                                 <option value="Gjilan">Gjilan</option>
@@ -228,23 +230,24 @@ export default function ProductEdit() {
                                 <option value="Deçan">Deçan</option>
                                 <option value="Dragash">Dragash</option>
                                 <option value="Drenas">Drenas</option>
-                                <option value="Fushë Kosovë">Fushë Kosovë</option>
+                                <option value="Fushë Kosovë">
+                                  Fushë Kosovë
+                                </option>
                                 <option value="Kastriot">Kastriot</option>
                                 <option value="Kaçanik">Kaçanik</option>
                                 <option value="Klinë">Klinë</option>
                                 <option value="Leposaviq">Leposaviq</option>
                                 <option value="Lipjan">Lipjan</option>
-                                <option value="Malishevë">Malishevë</option>  
-                                <option value="Rahovec">Rahovec</option>  
-                                <option value="Skenderaj">Skenderaj</option>  
-                                <option value="Shtërpcë">Shtërpcë</option>  
-                                <option value="Shtime">Shtime</option>  
-                                <option value="Therandë">Therandë</option>  
-                                <option value="Viti">Viti</option>  
-                                <option value="Vushtrri">Vushtrri</option>  
-                                <option value="Zubin Potok">Zubin Potok</option>  
+                                <option value="Malishevë">Malishevë</option>
+                                <option value="Rahovec">Rahovec</option>
+                                <option value="Skenderaj">Skenderaj</option>
+                                <option value="Shtërpcë">Shtërpcë</option>
+                                <option value="Shtime">Shtime</option>
+                                <option value="Therandë">Therandë</option>
+                                <option value="Viti">Viti</option>
+                                <option value="Vushtrri">Vushtrri</option>
+                                <option value="Zubin Potok">Zubin Potok</option>
                                 <option value="Zveçan">Zveçan</option>
-
                               </select>
                             </div>
 
@@ -293,21 +296,31 @@ export default function ProductEdit() {
                                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm"
                                 value={page.Page.UserShow}
                                 onChange={(e) => {
-
                                   dispatch(
                                     SetField({
                                       Field: "UserShow",
                                       Value: e.target.value,
                                     })
                                   );
-
                                 }}
                               >
                                 <option disabled value="Përcakto statusin">
                                   Zgjedh statusin
                                 </option>
-                                <option value={page.Page.UserShow === false ? false : true}>Jo(mos e shfaq profilin tim tek produkti)</option>
-                                <option value={page.Page.UserShow === true ? true : false}>Po(shfaq profilin tim tek produkti)</option>
+                                <option
+                                  value={
+                                    page.Page.UserShow === false ? false : true
+                                  }
+                                >
+                                  Jo(mos e shfaq profilin tim tek produkti)
+                                </option>
+                                <option
+                                  value={
+                                    page.Page.UserShow === true ? true : false
+                                  }
+                                >
+                                  Po(shfaq profilin tim tek produkti)
+                                </option>
                               </select>
                             </div>
                             <div className="col-span-6 sm:col-span-3 lg:col-span-3">
@@ -364,11 +377,16 @@ export default function ProductEdit() {
                                 <div>
                                   <div className="flex flex-wrap mb-10">
                                     {images.map((image, index) => (
-                                      <div key={index} className="w-6/12 sm:w-4/12 p-4">
+                                      <div
+                                        key={index}
+                                        className="w-6/12 sm:w-4/12 p-4"
+                                      >
                                         <div className="flex mt-5">
                                           <img
                                             src={
-                                              image.data_url ? image.data_url : image
+                                              image.data_url
+                                                ? image.data_url
+                                                : image
                                             }
                                             alt="Imazhi i ngarkuar"
                                             width="250"
@@ -387,57 +405,35 @@ export default function ProductEdit() {
                                                 onImageRemove(index);
                                                 {
                                                   !image.data_url
-                                                    ? setDeletedImages((prev) => [
-                                                      ...prev,
-                                                      image,
-                                                    ])
+                                                    ? setDeletedImages(
+                                                        (prev) => [
+                                                          ...prev,
+                                                          image,
+                                                        ]
+                                                      )
                                                     : "";
                                                 }
                                                 e.preventDefault();
                                               }}
                                             >
-                                              <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="w-4 h-4"
-                                              >
-                                                <path
-                                                  strokeLinecap="round"
-                                                  strokeLinejoin="round"
-                                                  d="M6 18L18 6M6 6l12 12"
-                                                />
-                                              </svg>
+                                              <CloseIcon />
                                             </button>
                                           </div>
                                         </div>
                                       </div>
                                     ))}
                                   </div>
-                                  {images.length > 4 ? null :
+                                  {images.length > 4 ? null : (
                                     <div
-                                      style={isDragging ? { color: "red" } : null}
+                                      style={
+                                        isDragging ? { color: "red" } : null
+                                      }
                                       onClick={onImageUpload}
                                       {...dragProps}
                                       className="mt-4 flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6"
                                     >
                                       <div className="space-y-1 text-center">
-                                        <svg
-                                          className="mx-auto h-12 w-12 text-gray-400"
-                                          stroke="currentColor"
-                                          fill="none"
-                                          viewBox="0 0 48 48"
-                                          aria-hidden="true"
-                                        >
-                                          <path
-                                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                          />
-                                        </svg>
+                                        <ImageIcon />
                                         <div className="flex text-sm text-gray-600">
                                           <label className="relative cursor-pointer rounded-md bg-white font-medium text-[#377DFF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#377DFF] focus-within:ring-offset-2 hover:text-[#377DFF]">
                                             <span className="text-[#377DFF]">
@@ -454,7 +450,7 @@ export default function ProductEdit() {
                                         </p>
                                       </div>
                                     </div>
-                                  }
+                                  )}
                                 </div>
                               )}
                             </ImageUploading>

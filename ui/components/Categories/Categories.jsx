@@ -20,10 +20,10 @@ export default function Categories() {
           <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
             Shfletoni Kategoritë
           </h2>
-          {/* <a href="/produktet" className="hidden text-sm font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block">
+          <a href="/kategorite" className="hidden text-sm font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block">
             Shfleto të gjitha Kategoritë
-            <span aria-hidden="true"> &rarr;</span>
-          </a> */}
+            <span> &rarr;</span>
+          </a>
         </div>
 
         <div className="mt-4 flow-root">

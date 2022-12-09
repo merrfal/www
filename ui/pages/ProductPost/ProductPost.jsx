@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Loading } from "../../components";
 import { ProductPost as Meta } from "../../../data/metas";
 import { Permissonless } from "..";
+import { CloseIcon } from "../../icons";
 // import 'react-phone-number-input/style.css'
 // import PhoneInput from 'react-phone-number-input'
 
@@ -22,7 +23,8 @@ export default function ProductPost() {
   const [images, setImages] = useState([]);
   const [loading, setIsLoading] = useState(false);
 
-  const onChange = (imageList, addUpdateIndex) => setImages(imageList.slice(0, 5));
+  const onChange = (imageList, addUpdateIndex) =>
+    setImages(imageList.slice(0, 5));
 
   useEffect(() => {
     dispatch(SetPrepageField({ Field: "User", Value: user.Id }));
@@ -32,7 +34,6 @@ export default function ProductPost() {
     if (categories.Loaded === false) CategoryList(dispatch);
   }, [categories]);
 
-  
   if (user.Auth === false) return <Permissonless />;
   return (
     <Normal>
@@ -144,15 +145,13 @@ export default function ProductPost() {
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm"/> */}
                               <input
                                 onChange={(e) => {
-                                  
                                   dispatch(
                                     SetPrepageField({
                                       Field: "Phone",
-                                      Value: e.target.value
+                                      Value: e.target.value,
                                     })
-                                  )
-                                }
-                                }
+                                  );
+                                }}
                                 maxlength="9"
                                 value={page.Prepage.Phone}
                                 type="tel"
@@ -186,8 +185,12 @@ export default function ProductPost() {
                                 <option disabled value="Përcakto statusin">
                                   Zgjedh statusin
                                 </option>
-                                <option value="Anonime">Jo(mos e shfaq profilin tim tek produkti)</option>
-                                <option value="Publike">Po(shfaq profilin tim tek produkti)</option>
+                                <option value="Anonime">
+                                  Jo(mos e shfaq profilin tim tek produkti)
+                                </option>
+                                <option value="Publike">
+                                  Po(shfaq profilin tim tek produkti)
+                                </option>
                               </select>
                             </div>
 
@@ -229,23 +232,24 @@ export default function ProductPost() {
                                 <option value="Deçan">Deçan</option>
                                 <option value="Dragash">Dragash</option>
                                 <option value="Drenas">Drenas</option>
-                                <option value="Fushë Kosovë">Fushë Kosovë</option>
+                                <option value="Fushë Kosovë">
+                                  Fushë Kosovë
+                                </option>
                                 <option value="Kastriot">Kastriot</option>
                                 <option value="Kaçanik">Kaçanik</option>
                                 <option value="Klinë">Klinë</option>
                                 <option value="Leposaviq">Leposaviq</option>
                                 <option value="Lipjan">Lipjan</option>
-                                <option value="Malishevë">Malishevë</option>  
-                                <option value="Rahovec">Rahovec</option>  
-                                <option value="Skenderaj">Skenderaj</option>  
-                                <option value="Shtërpcë">Shtërpcë</option>  
-                                <option value="Shtime">Shtime</option>  
-                                <option value="Therandë">Therandë</option>  
-                                <option value="Viti">Viti</option>  
-                                <option value="Vushtrri">Vushtrri</option>  
-                                <option value="Zubin Potok">Zubin Potok</option>  
+                                <option value="Malishevë">Malishevë</option>
+                                <option value="Rahovec">Rahovec</option>
+                                <option value="Skenderaj">Skenderaj</option>
+                                <option value="Shtërpcë">Shtërpcë</option>
+                                <option value="Shtime">Shtime</option>
+                                <option value="Therandë">Therandë</option>
+                                <option value="Viti">Viti</option>
+                                <option value="Vushtrri">Vushtrri</option>
+                                <option value="Zubin Potok">Zubin Potok</option>
                                 <option value="Zveçan">Zveçan</option>
-
                               </select>
                             </div>
 
@@ -331,20 +335,7 @@ export default function ProductPost() {
                                                 e.preventDefault();
                                               }}
                                             >
-                                              <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="w-4 h-4"
-                                              >
-                                                <path
-                                                  strokeLinecap="round"
-                                                  strokeLinejoin="round"
-                                                  d="M6 18L18 6M6 6l12 12"
-                                                />
-                                              </svg>
+                                              <CloseIcon />
                                             </button>
                                           </div>
                                         </div>
@@ -352,9 +343,11 @@ export default function ProductPost() {
                                     ))}
                                   </div>
 
-                                  {images.length > 4 ? null :
+                                  {images.length > 4 ? null : (
                                     <div
-                                      style={isDragging ? { color: "red" } : null}
+                                      style={
+                                        isDragging ? { color: "red" } : null
+                                      }
                                       onClick={onImageUpload}
                                       {...dragProps}
                                       className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6"
@@ -365,7 +358,6 @@ export default function ProductPost() {
                                           stroke="currentColor"
                                           fill="none"
                                           viewBox="0 0 48 48"
-                                          aria-hidden="true"
                                         >
                                           <path
                                             d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
@@ -390,7 +382,7 @@ export default function ProductPost() {
                                         </p>
                                       </div>
                                     </div>
-                                  }
+                                  )}
                                 </div>
                               )}
                             </ImageUploading>
@@ -402,22 +394,26 @@ export default function ProductPost() {
                       <button
                         className={
                           page.Prepage?.Name &&
-                            page.Prepage.Phone &&
-                            page.Prepage?.City &&
-                            page.Prepage?.Category &&
-                            page.Prepage.Address &&
-                            page.Prepage?.UserShow &&
-                            images.length !== 0
-                            ? "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none"
-                            : "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none cursor-not-allowed opacity-[.75]"
-                        }
-                        disabled={page.Prepage?.Name &&
                           page.Prepage.Phone &&
                           page.Prepage?.City &&
                           page.Prepage?.Category &&
                           page.Prepage.Address &&
                           page.Prepage?.UserShow &&
-                          images.length !== 0 ? false : true}
+                          images.length !== 0
+                            ? "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none"
+                            : "inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none cursor-not-allowed opacity-[.75]"
+                        }
+                        disabled={
+                          page.Prepage?.Name &&
+                          page.Prepage.Phone &&
+                          page.Prepage?.City &&
+                          page.Prepage?.Category &&
+                          page.Prepage.Address &&
+                          page.Prepage?.UserShow &&
+                          images.length !== 0
+                            ? false
+                            : true
+                        }
                         onClick={(e) => {
                           e.preventDefault();
                           ProductCreate(

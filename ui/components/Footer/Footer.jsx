@@ -18,7 +18,7 @@ export default function Footer() {
 
 
   return (
-    <footer aria-labelledby="footer-heading" className="bg-white mb-8">
+    <footer className="bg-white mb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <div className="border-t border-gray-200 pt-20 pb-10 border-b border-gray-40">
           <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-6 md:gap-y-16 md:auto-rows-min">
@@ -203,12 +203,11 @@ export default function Footer() {
                 className="mt-4 flex sm:max-w-md"
                 style={loading ? { pointerEvents: "none", opacity: ".75" } : {}}
               >
-                <label htmlFor="email-address" className="sr-only">
+                <label htmlFor="email-address">
                   Adresa elektronike
                 </label>
                 <input
                   id="email-address"
-
                   type="text"
                   required
                   placeholder="emaili@juaj.com"

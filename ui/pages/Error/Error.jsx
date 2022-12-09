@@ -18,7 +18,7 @@ export default function Error() {
               <p className="mt-5 text-base text-gray-500">Na falni por faqja që ju po kërkoni nuk u gjend ose është fshirë.</p>
               <div className="mt-6">
                 <Link href="/">
-                  <a href="/" className="text-base font-medium text-indigo-600 hover:text-indigo-500">Kthehu në Ballinë<span aria-hidden="true"> &rarr;</span></a>
+                  <a href="/" className="text-base font-medium text-indigo-600 hover:text-indigo-500">Kthehu në Ballinë<span> &rarr;</span></a>
                 </Link>
               </div>
             </div>

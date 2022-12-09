@@ -42,7 +42,8 @@ export default function Products() {
   const nPages = Math.ceil(filter?.Results?.length / recordsPerPage);
 
   useEffect(() => {
-    if (filter.Loading === true) ProductsFilters(filter.Cities, filter.Categories, dispatch);
+    if (filter.Loading === true)
+      ProductsFilters(filter.Cities, filter.Categories, dispatch);
   }, [filter]);
 
   useEffect(() => {
@@ -61,7 +62,8 @@ export default function Products() {
     let domNode = useRef();
 
     useEffect(() => {
-      let maybeHandler = (event) => !domNode.current?.contains(event.target) && handler();
+      let maybeHandler = (event) =>
+        !domNode.current?.contains(event.target) && handler();
       document.addEventListener("mousedown", maybeHandler);
       return () => document.removeEventListener("mousedown", maybeHandler);
     });
@@ -77,11 +79,13 @@ export default function Products() {
     <Normal>
       <Meta />
 
-
       <div className="bg-white">
         {menuMobileOpen && (
           <div className="fixed inset-0 flex z-40 sm:hidden ">
-            <div onClick={() => setMenuMobileOpen(false)} className="fixed inset-0 bg-black bg-opacity-25" />
+            <div
+              onClick={() => setMenuMobileOpen(false)}
+              className="fixed inset-0 bg-black bg-opacity-25"
+            />
             <div className="ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto">
               <div className="px-4 flex items-center justify-between">
                 <h2 className="text-lg font-medium text-gray-900">Filtrat</h2>
@@ -183,13 +187,12 @@ export default function Products() {
         </div>
 
         <section>
-          <h2 id="filter-heading" className="sr-only">
-            Filtrimi
-          </h2>
-
           <div className="relative z-10 bg-white border-b border-gray-200 pb-4">
             <div className="max-w-7xl mx-auto px-4 flex items-center justify-between sm:px-6 lg:px-8">
-              <div ref={domNodeSort} className="relative inline-block text-left">
+              <div
+                ref={domNodeSort}
+                className="relative inline-block text-left"
+              >
                 <div>
                   <button
                     onClick={() => setIsSortOpen(!isSortOpen)}
@@ -379,7 +382,10 @@ export default function Products() {
               <div className="ml-4 flex overflow-x-auto">
                 {filter.Categories.map((category, index) => {
                   return (
-                    <div key={index} className="flex flex-wrap items-center mr-1">
+                    <div
+                      key={index}
+                      className="flex flex-wrap items-center mr-1"
+                    >
                       <span className="inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900">
                         <span>{category}</span>
                         <button
@@ -413,9 +419,6 @@ export default function Products() {
                             setCurrentPage(1);
                           }}
                         >
-                          <span className="sr-only">
-                            Hiq filtrin për objektet
-                          </span>
                           <SmCloseIcon />
                         </button>
                       </span>
@@ -440,14 +443,17 @@ export default function Products() {
         >
           {pages.Loading === true || filter.Loading === true ? (
             <Loading />
-          ) : pages.Pages.length === 0 || filter.Results.length === 0 || currentRecords.length === 0 ? (
+          ) : pages.Pages.length === 0 ||
+            filter.Results.length === 0 ||
+            currentRecords.length === 0 ? (
             <Empty
               heading="Nuk u gjet asnjë produkt"
               message="Nuk u gjet asnjë produkt në platformë me këto filtrime.."
             />
           ) : (
             currentRecords?.map((page, index) => {
-              if(page !== undefined) return <Product product={page} key={index} />;
+              if (page !== undefined)
+                return <Product product={page} key={index} />;
             })
           )}
         </div>

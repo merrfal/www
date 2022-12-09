@@ -53,9 +53,9 @@ const PageDefaultState = {
 };
 
 const SearchDefaultState = {
-  Results: null,
+  Results: [],
   Term: "",
-  Loading: false,
+  Loading: true,
   Visibility: false,
 };
 

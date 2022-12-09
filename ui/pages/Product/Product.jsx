@@ -7,6 +7,7 @@ import { Product as Item, Loading, Empty } from "../../../ui/components";
 import { ProductSave, ProductUnsave } from "../../../controllers/front";
 import { Product as Meta } from "../../../data/metas";
 import Link from "next/link";
+import { BigHeartIcon, BigLocationIcon } from "../../icons";
 
 export default function Product() {
   const dispatch = useDispatch();
@@ -20,12 +21,13 @@ export default function Product() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (slug !== "") ProductView(dispatch, setLoading, slug, 'viewProduct');
+    if (slug !== "") ProductView(dispatch, setLoading, slug, "viewProduct");
     if (page?.Page?.Gallery[0]) setMainImage(page?.Page?.Gallery[0]);
   }, [slug]);
 
   useEffect(() => {
-    if (page.loading === false) ProductView(dispatch, setLoading, slug, 'viewProduct');
+    if (page.loading === false)
+      ProductView(dispatch, setLoading, slug, "viewProduct");
     if (page?.Page?.Gallery[0]) setMainImage(page?.Page?.Gallery[0]);
   }, [page]);
 
@@ -81,14 +83,22 @@ export default function Product() {
                     <div className="flex flex-col-reverse">
                       <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
                         <div className="grid grid-cols-4 gap-6">
-                          {page.Page.Gallery && page.Page.Gallery.map((image) => (
+                          {page.Page.Gallery &&
+                            page.Page.Gallery.map((image) => (
                               <button
                                 id="tabs-2-tab-1"
-                                className={ mainImage === image ? "relative h-24 bg-white ring-2 ring-blue-500 ring-inset" : "relative h-24 bg-black rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-100 focus:outline-none focus:ring   focus:ring-inse focus:ring-offset-4 focus:ring-opacity-50"}
+                                className={
+                                  mainImage === image
+                                    ? "relative h-24 bg-white ring-2 ring-blue-500 ring-inset"
+                                    : "relative h-24 bg-black rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-100 focus:outline-none focus:ring   focus:ring-inse focus:ring-offset-4 focus:ring-opacity-50"
+                                }
                                 onClick={() => setMainImage(image)}
                               >
                                 <span className="absolute inset-0 rounded-md overflow-hidden">
-                                  <img src={image} className="w-full h-full object-center object-cover" />
+                                  <img
+                                    src={image}
+                                    className="w-full h-full object-center object-cover"
+                                  />
                                 </span>
 
                                 <span className="ring-transparent absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none" />
@@ -112,28 +122,8 @@ export default function Product() {
 
                     <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
                       <div className="mt-3">
-                        <h2 className="sr-only">Product information</h2>
                         <div className="flex mb-2">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-5 h-5 mt-[2px]"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                            />
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                            />
-                          </svg>
-
+                          <BigLocationIcon />
                           <p className="text-m text-gray-900 ml-2">
                             {page.Page.Address}, {page.Page.Zip},{" "}
                             {page.Page.City}
@@ -146,8 +136,6 @@ export default function Product() {
                       </h1>
 
                       <div className="mt-6">
-                        <h3 className="sr-only">Përshkrim</h3>
-
                         <div className="text-base mb-8 text-gray-700 space-y-6">
                           <p>{page.Page.Description}</p>
                         </div>
@@ -220,13 +208,11 @@ export default function Product() {
                       <form className="mt-6">
                         <div className="mt-10 flex sm:flex-col1">
                           <button
-                            type="submit"
-                            onClick={(e) => {
-                              e.preventDefault()
-                              window.open("tel:" + page.Page.Phone, "_self")
-                            }
-                            }
                             className="max-w-xs flex-1 bg-[#387CFF] border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-[#387CFF95] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-[#387CFF] sm:w-full"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              window.open("tel:" + page.Page.Phone, "_self");
+                            }}
                           >
                             Thirr në {page.Page.Phone}
                           </button>
@@ -241,34 +227,14 @@ export default function Product() {
                             }
                             className="ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
                           >
-                            <svg
-                              className="h-6 w-6 flex-shrink-0"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill={inSaves ? "#377DFF" : "none"}
-                              viewBox="0 0 24 24"
-                              stroke={inSaves ? "#377DFF" : "currentColor"}
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                              />
-                            </svg>
-                            <span className="sr-only">
-                              Shto te të preferuarat
-                            </span>
+                            <BigHeartIcon />
                           </button>
                         </div>
                       </form>
 
                       <section
-                        aria-labelledby="details-heading"
                         className="mt-12"
                       >
-                        <h2 id="details-heading" className="sr-only">
-                          Detaje shtese
-                        </h2>
 
                         <div className="border-t divide-y divide-gray-200">
                           <div>
@@ -276,8 +242,6 @@ export default function Product() {
                               <button
                                 type="button"
                                 className="group relative w-full py-6 flex justify-between items-center text-left"
-                                aria-controls="disclosure-1"
-                                aria-expanded="false"
                               >
                                 <span className="text-gray-900 text-sm font-medium">
                                   Procesi deri te Produkti
@@ -347,7 +311,6 @@ export default function Product() {
                   </div>
 
                   <section
-                    aria-labelledby="related-heading"
                     className="mt-10 border-t border-gray-200 py-16 px-4 sm:px-0"
                   >
                     <h2

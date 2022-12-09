@@ -1,7 +1,7 @@
-export default function MenuIcon() {
+export default function InfoIcon() {
   return (
     <svg
-      className="h-6 w-6"
+      className="mx-auto h-6 w-6 text-gray-400"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -11,7 +11,7 @@ export default function MenuIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
-        d="M4 6h16M4 12h16M4 18h16"
+        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
       />
     </svg>
   );
