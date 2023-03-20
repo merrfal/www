@@ -6,7 +6,7 @@ export default function ErrorIcon() {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="h-6 w-6 text-red-400"
+      className="h-5 w-5 text-red-400"
     >
       <path
         strokeLinecap="round"

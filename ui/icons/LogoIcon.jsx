@@ -1,7 +1,7 @@
 export default function LogoIcon() {
   return (
     <svg
-      className="h-6 w-auto"
+      className="h-5 w-auto"
       viewBox="0 0 382 67"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

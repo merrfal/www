@@ -28,6 +28,14 @@ import PenIcon from "./PenIcon";
 import BigHeartIcon from "./BigHeartIcon";
 import BigLocationIcon from "./BigLocationIcon";
 import ImageIcon from "./ImageIcon";
+import StepOneIcon from "./StepOneIcon";
+import StepTwoIcon from "./StepTwoIcon";
+import StepThreeIcon from "./StepThreeIcon";
+import InstagramIcon from "./InstagramIcon";
+import FacebookIcon from "./FacebookIcon";
+import TwitterIcon from "./TwitterIcon";
+import PhoneIcon from "./PhoneIcon";
+
 export {
   AccountIcon,
   HeartIcon,
@@ -36,6 +44,7 @@ export {
   MenuIcon,
   SearchIcon,
   IconIcon,
+  PhoneIcon,
   OpenIcon,
   CloseIcon,
   SmCloseIcon,
@@ -59,4 +68,10 @@ export {
   BigHeartIcon,
   BigLocationIcon,
   ImageIcon,
+  StepOneIcon,
+  StepTwoIcon,
+  StepThreeIcon,
+  InstagramIcon,
+  FacebookIcon,
+  TwitterIcon,
 };

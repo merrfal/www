@@ -1,53 +1,47 @@
-import ImageUploading from "react-images-uploading";
+// import ImageUploading from "react-images-uploading";
 
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { UserView, UserUpdate } from "../../../controllers/front";
 import { Normal } from "../../layouts";
 import { Loading, Empty, Product } from "../../components";
 import { useRouter } from "next/router";
-import { SetProfileField } from "../../../data/redux/ProfileSlice";
-import { Profile as Meta } from "../../../data/metas";
 import { CloseIcon, EditIcon, PenIcon } from "../../icons";
+import { Global } from "../../../configs/Head";
+import { ViewFront } from "../../../controllers/User";
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const profile = useSelector((state) => state.profile);
-  const user = useSelector((state) => state.user);
+  const router = useRouter();
 
-  // TODO: Fix url is not chaning well on profile slug update
+  const account = useSelector((state) => state.Account);
 
-  const [image, setImage] = useState([]);
   const [loading, setIsLoading] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-
-  const username = useRouter().query.username || "";
-  const onChange = (imageList, addUpdateIndex) => setImage(imageList);
-  let imageUser = image ? image[0] : null;
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-    if (profile.Loaded === false) {
-      UserView(dispatch, username);
+    if (user === null) {
+      const { username } = router.query;
+      console.log(username)
+      if (username) ViewFront(username, setUser, dispatch);
     }
-  }, [profile, username]);
-
-  useEffect(() => {
-    if (username !== "") UserView(dispatch, username);
-  }, [username]);
+  }, [router]);
 
   return (
     <Normal>
-      <Meta
+      {/* <Meta
         name={
           !profile.Loaded
             ? "Po ngarkohet..."
             : profile.Name + " " + profile.Surname
         }
         bio={!profile.Loaded ? "Po ngarkohet..." : profile.Bio}
-        avatar={!profile.Loaded ? "/assets/cover-no.png" : profile.Avatar}
-      />
+        avatar={!profile.Loaded ? "/cover-no.png" : profile.Avatar}
+      /> */}
 
-      <section style={{ padding: "1em" }}>
+      <Global name="name surname" description="user bio" />
+
+      {/* <section style={{ padding: "1em" }}>
         {profile.Loaded === false ? (
           <Loading />
         ) : (
@@ -56,11 +50,7 @@ export default function Profile() {
               <div>
                 <img
                   className="h-32 rounded-xl w-full object-cover lg:h-64"
-                  src={
-                    profile.Cover === null
-                      ? "/assets/cover-no.png"
-                      : profile.Cover
-                  }
+                  src={profile.Cover === null ? "/cover-no.png" : profile.Cover}
                   alt={profile.Name}
                 />
               </div>
@@ -71,7 +61,7 @@ export default function Profile() {
                       className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32"
                       src={
                         profile.Avatar === null
-                          ? "/assets/avatar-no.png"
+                          ? "/avatar-no.png"
                           : profile.Avatar
                       }
                       alt={profile.Name}
@@ -157,7 +147,7 @@ export default function Profile() {
                                                                 0
                                                                 ? imageUser?.data_url
                                                                 : profile.Avatar
-                                                              : "/assets/avatar-no.png"
+                                                              : "/avatar-no.png"
                                                           }
                                                           alt=""
                                                           width="100"
@@ -536,7 +526,7 @@ export default function Profile() {
             </main>
           </div>
         )}
-      </section>
+      </section> */}
     </Normal>
   );
 }

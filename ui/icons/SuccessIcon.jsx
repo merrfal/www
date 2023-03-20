@@ -1,7 +1,7 @@
 export default function SuccessIcon() {
   return (
     <svg
-      className="h-6 w-6 text-green-400"
+      className="h-5 w-5 text-green-400"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
