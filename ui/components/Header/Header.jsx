@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { InfoSide, Search, User } from "./";
 
 export default function Header() {

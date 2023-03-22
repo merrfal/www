@@ -17,60 +17,28 @@ export const RouteMethod = (target, payload, res) => {
 
 const RouteUsers = (action, payload, res) => {
   switch (action) {
-    case "CREATE":
-      Users.RegisterBack(payload, res);
-      break;
-
-    case "LOGIN":
-      Users.LoginBack(payload, res);
-      break;
-
-    case "VIEW":
-      Users.ViewBack(payload, res);
-      break;
-
-    case "UPDATE":
-      Users.UpdateBack(payload, res);
-      break;
-
-    case "DELETE":
-      Users.DeleteBack(payload, res);
-      break;
-
-    case "PRODUCTS":
-      Users.Products(payload, res);
-      break;
+    case "CREATE": Users.Register(payload, res); break;
+    case "LOGIN": Users.Login(payload, res); break;
+    case "VIEW": Users.View(payload, res); break;
+    case "UPDATE": Users.Update(payload, res); break;
+    case "DELETE": Users.Delete(payload, res); break;
+    case "PRODUCTS": Users.Products(payload, res); break;
   }
 };
 
 const RouteProducts = (action, payload, res) => {
   switch (action) {
-    case "CREATE":
-      Products.CreateBack(payload, res);
-      break;
-
-    case "VIEW":
-      Products.ViewBack(payload, res);
-      break;
-
-    case "SIMILAR":
-      Products.SimilarBack(payload, res);
-      break;
-
-    case "LATEST":
-      Products.LatestBack(payload, res);
-      break;
-
-    case "DELETE":
-      Products.DeleteBack(payload, res);
-      break;
+    case "CREATE": Products.Create(payload, res); break;
+    case "VIEW": Products.View(payload, res); break;
+    case "SIMILAR": Products.Similar(payload, res); break;
+    case "LATEST": Products.Latest(payload, res); break;
+    case "DELETE": Products.Delete(payload, res); break;
+    case "CATEGORY": Products.Category(payload, res); break;
   }
 };
 
 const RouteCategories = (action, payload, res) => {
   switch (action) {
-    case "LIST":
-      Categories.List(payload, res);
-      break;
+    case "LIST": Categories.List(payload, res); break;
   }
 };

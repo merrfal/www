@@ -7,7 +7,7 @@ export default function Info({ productData }) {
         {name}
       </h1>
 
-      <div className="text-base mb-8 text-gray-700 space-y-6">
+      <div className="text-[15.5px] mt-3 mb-8 text-gray-700 space-y-6">
         <p>{description}</p>
       </div>
     </>

@@ -1,4 +1,4 @@
-import { LoginFront, RegisterFront } from "../controllers/User";
+import { Login, Register } from "../api/User";
 import { GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo } from "firebase/auth";
 import { Notification } from "../utils/Response";
 import { LogoutAccount } from "../controllers/Slices";
@@ -17,8 +17,8 @@ export default function useGoogle({dispatch}) {
         const user = data.user;
         const { isNewUser } = getAdditionalUserInfo(data);
 
-        if (isNewUser) RegisterFront(user, dispatch);
-        else LoginFront(user.uid, dispatch);
+        if (isNewUser) Register(user, dispatch);
+        else Login(user.uid, dispatch);
       } 
       
       else {

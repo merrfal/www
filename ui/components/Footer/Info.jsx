@@ -12,12 +12,12 @@ export default function Info() {
         </a>
       </Link>
 
-      <p className="text-[15px] text-gray-500 pt-7 w-[65%]">
+      <p className="text-[15px] text-gray-500 pt-5 mb-2 w-[65%]">
         Një platformë që mundëson të dhuroni gjëra për njerëzit që kanë nevoja
         për ato produkte, përdorimi është falas si produktet që dhurohen.
       </p>
 
-      <div className="flex mt-5 space-x-4 items-center">
+      <div className="flex mt-8 space-x-4 items-center">
         {SocialMediaLinks.map((link, index) => (
           <a href={link.path} key={index}>
             {link.component}

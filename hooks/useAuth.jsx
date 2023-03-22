@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { LogoutAccount } from "../controllers/Slices";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { LoginFront } from "../controllers/User";
+import { Login } from "../api/User";
 
 function useAuth(account) {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function useAuth(account) {
 
       if (user && !account.Auth) {
         setAllow(false);
-        LoginFront(user.uid, dispatch);
+        Login(user.uid, dispatch);
       }
     }
   }, [user, loading]);

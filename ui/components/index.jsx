@@ -17,6 +17,8 @@ import Button from "./Button";
 import Textarea from "./Textarea";
 import MenuLink from "./MenuLink";
 import Link from "./Link";
+import End from "./End";
+import Edit from "./Edit";
 
 export {
   Header,
@@ -38,4 +40,6 @@ export {
   Textarea,
   MenuLink,
   Link,
+  End,
+  Edit,
 };

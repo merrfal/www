@@ -35,6 +35,7 @@ import InstagramIcon from "./InstagramIcon";
 import FacebookIcon from "./FacebookIcon";
 import TwitterIcon from "./TwitterIcon";
 import PhoneIcon from "./PhoneIcon";
+import WebsiteIcon from "./WebsiteIcon";
 
 export {
   AccountIcon,
@@ -74,4 +75,5 @@ export {
   InstagramIcon,
   FacebookIcon,
   TwitterIcon,
+  WebsiteIcon,
 };

@@ -1,14 +1,14 @@
 import { Normal } from "../../layouts";
-import { Category } from "../../components";
+import { Category, End } from "../../components";
 import { Categories as AllCategories } from "../../../data";
 import { Header } from ".";
 
 export default function Categories() {
   return (
     <Normal>
-      <div className="py-3 sm:py-8 xl:max-w-7xl xl:mx-auto xl:px-8">
-        <Header />
+      <Header />
 
+      <div className="py-3 sm:py8 xl:max-w-7xl xl:mx-auto xl:px-8">
         <div className="mt-4 flow-root">
           <div className="-my-2">
             <div className="box-content py-2 relative overflow-x-auto xl:overflow-visible">
@@ -17,7 +17,7 @@ export default function Categories() {
                   <Category category={c} key={c._id} />
                 ))}
               </div>
-              <p className="py-12 mt-8 text-center">ju keni aritur ne fund</p>
+             <End />
             </div>
           </div>
         </div>

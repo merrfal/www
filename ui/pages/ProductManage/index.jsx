@@ -1,4 +1,4 @@
-import ProductPost from "./ProductPost";
+import ProductPost from "./ProductManage";
 import Address from "./Address";
 import Buttons from "./Buttons";
 import Categories from "./Categories";

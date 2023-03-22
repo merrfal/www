@@ -5,7 +5,7 @@ export default function Iconer() {
   const { Type } = useSelector((state) => state.Notification);
 
   return (
-    <div className="flex-shrink-0 mt-[.25em]">
+    <div className="flex-shrink-0 mt-[.2em]">
       {
         {
           success: <SuccessIcon />,

@@ -1,9 +1,8 @@
 import MetaTags from "next/head";
 import { IS_PROD } from "./Constants";
 
-export const Global = (params) => {
-  const { title, description, image, index } = params;
-
+export const Global = ({ title, description, image, index }) => {
+  console.log({title})
   return (
     <MetaTags>
       {index && IS_PROD && <meta name="robots" content="noindex" />}

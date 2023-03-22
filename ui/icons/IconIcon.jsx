@@ -1,9 +1,7 @@
 export default function IconIcon() {
   return (
     <svg
-      className="h-8 w-auto"
-      width="95"
-      height="65"
+      className="h-7 w-auto"
       viewBox="0 0 95 65"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

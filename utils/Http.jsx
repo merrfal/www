@@ -1,5 +1,5 @@
-import { API_WRONG_CONFIGS, FAILED_TO_PARSE_JSON } from "../configs/Messages";
 import { Response } from "./Response";
+import { API_WRONG_CONFIGS } from "../configs/Messages";
 
 export const ValidateVariables = (target, payload, res) => {
   const access = Validator(target, payload);
@@ -31,30 +31,6 @@ const Validator = (target, payload) => {
   if (typeof param_two === "object") pass = true;
 
   return pass;
-};
-
-export const ValidateJSON = (payload, res) => {
-  if (Object.keys(payload).length === 0) return payload;
-
-  else {
-    try {
-      const backload = JSON.parse(payload);
-      return backload;
-    } 
-    
-    catch (error) {
-      const payload = {
-        res,
-        code: 400,
-        success: false,
-        data: null,
-        message: FAILED_TO_PARSE_JSON,
-        error: JSON.stringify(error),
-      };
-
-      Response(payload);
-    }
-  }
 };
 
 export const Request = (target, payload) => {

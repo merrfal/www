@@ -4,7 +4,7 @@ import { Header } from "./";
 
 export default function Categories() {
   return (
-    <div className="py-16 sm:py-24 xl:max-w-7xl xl:mx-auto xl:px-8">
+    <div className="py-16 sm:py-24 mb-12 xl:max-w-7xl xl:mx-auto xl:px-8">
       <Header />
 
       <div className="mt-4 flow-root">

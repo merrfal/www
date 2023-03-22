@@ -3,16 +3,19 @@ import { ShowNotification, HideNotification } from "../controllers/Slices";
 
 export const Response = (props) => {
   const { res, code, success, data, message, error = null } = props;
-  
-  res.status(code).send({
+
+  const obj = {
     success,
     message,
     data,
     code,
-    error: JSON.stringify(error),
     timestamp: new Date().toISOString(),
-  });
-}
+  };
+
+  error && (obj.error = JSON.stringify(error));
+
+  res.status(code).send(obj);
+};
 
 export const Notification = (props) => {
   const { dispatch, message, type } = props;

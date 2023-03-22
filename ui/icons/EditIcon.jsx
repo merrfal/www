@@ -1,4 +1,4 @@
-export default function EditIcon() {
+export default function EditIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +6,7 @@ export default function EditIcon() {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+      className={props.class ? props.class : "-ml-1 mr-2 h-5 w-5 text-gray-400"}
     >
       <path
         strokeLinecap="round"

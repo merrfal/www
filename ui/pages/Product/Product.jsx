@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { ViewFront, SimilarFront } from "../../../controllers/Product";
+import { View, Similar as Recommendations } from "../../../api/Product";
 import { Normal } from "../../layouts";
 import { useRouter } from "next/router";
 import { Loading } from "../../../ui/components";
@@ -27,17 +27,19 @@ export default function Product() {
 
   useEffect(() => {
     if (router && product === null) {
-      const { slug = "" } = router.query;
-      if (slug !== "") ViewFront(slug, setProduct, dispatch);
+      const { slug  } = router.query;
+      if (slug !== "" && slug !== undefined) View(slug, setProduct, dispatch);
     }
   }, [router]);
 
   useEffect(() => {
     if (product !== null && prodcuts === null) {
       const { category = "" } = product.productData;
-      SimilarFront(category, setProducts, dispatch);
+      Recommendations(category, setProducts, dispatch);
     }
   }, [product]);
+
+  console.log({product})
 
   return (
     <Normal>

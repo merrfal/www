@@ -3,7 +3,7 @@ import { Normal } from "../../layouts";
 import { Product, Empty, Loading } from "../../components";
 import { OpenIcon, CloseIcon, SmCloseIcon } from "../../icons";
 import { KosovoCities } from "../../../data";
-import { ProductsFront } from "../../../controllers/Category";
+import { Products } from "../../../api/Category";
 import { Categories } from "../../../data"
 import { Global } from "../../../configs/Head";
 

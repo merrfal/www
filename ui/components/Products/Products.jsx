@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { LatestFront } from "../../../controllers/Product";
+import { Latest } from "../../../api/Product";
 import { Product } from "..";
 import { Header, Skeleton } from "./";
 
@@ -9,7 +9,7 @@ export default function Products() {
   const [products, setProducts] = useState(null);
 
   useEffect(() => {
-    if (products === null) LatestFront(setProducts, dispatch);
+    if (products === null) Latest(setProducts, dispatch);
   }, [products]);
 
   return (

@@ -44,7 +44,6 @@ export const LogoutAccount = (state) => {
 };
 
 export const SetAccount = (state, action) => {
-  console.log({payload: action.payload})
   state.User = action.payload;
   state.Auth = true;
   state.Loading = false; 
