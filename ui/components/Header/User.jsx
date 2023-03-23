@@ -1,20 +1,43 @@
 import Link from "next/link";
 
+import { getDownloadURL, ref } from "firebase/storage";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Storage } from "../../../configs/Firebase";
 import { useAuth, useGoogle as UseGoogle } from "../../../hooks";
 import { AddIcon } from "../../icons";
 import { Dropdown } from "./";
 
 const Auth = ({ account }) => {
   const [menu, setOpen] = useState();
-  const [avatar, setAvatar] = useState("");
+  const [avatar, setAvatar] = useState(null);
+
+  useEffect(() => {
+    let avtr = account?.User?.userData?.avatar;
+
+    if (avtr !== undefined) {
+      if(avtr.isFirebase){
+        const file = `users/${avtr}`;
+        const unextracted = ref(Storage, file);
+
+        getDownloadURL(unextracted)
+          .then((url) => setThumbnail(url))
+          .catch(() => setThumbnail("avatar-no.png"));
+        }
+
+      else setAvatar(avtr.url);
+    }
+
+    else setAvatar("avatar-no.png");
+  }, [account]);
+
+  console.log({avatar})
 
   let clickOutside = (handler) => {
     let domNode = useRef();
 
     useEffect(() => {
-      let maybeHandler = (event) => !domNode.current.contains(event.target) && handler();
+      let maybeHandler = (event) =>  !domNode.current.contains(event.target) && handler();
       document.addEventListener("mousedown", maybeHandler);
 
       return () => document.removeEventListener("mousedown", maybeHandler);
@@ -39,12 +62,9 @@ const Auth = ({ account }) => {
         className=" ml-0 sm:ml-3 p-2 inline-flex w-full justify-center bg-white text-sm font-medium text-gray-700"
       >
         <img
-          className="w-6 h-6 rounded-full"
-          src={
-            account.User.userData.avatar === null
-              ? "/avatar-no.png"
-              : account.User.userData.avatar
-          }
+          src={avatar || "avatar-no.png"}
+          onError={() => setAvatar("avatar-no.png")}
+          className={`w-6 h-6 rounded-full ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
         />
       </button>
 

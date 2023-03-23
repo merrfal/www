@@ -43,7 +43,7 @@ export default function Manage({ mode = "create" }) {
       address: "",
       phone: "",
       city: "prishtine",
-      category: "636f3f82911a24f351b57841",
+      category: "636f3ece911a24f351b57837",
       gallery: [],
       postedAnonymously: true,
     },
@@ -76,8 +76,7 @@ export default function Manage({ mode = "create" }) {
   useEffect(() => {
     if (mode !== "create" && !product.hasOwnProperty("productData")) {
       const { slug } = router.query;
-      if (slug !== "" && slug !== undefined)
-        View(slug, setProduct, dispatch, setLoading);
+      if (slug !== "" && slug !== undefined) View(slug, setProduct, dispatch, setLoading);
     }
   }, [router]);
 

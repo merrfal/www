@@ -5,20 +5,7 @@ import { Response } from "../utils/Response";
 
 export const Register = async (payload, res) => {
   try {
-    const body = payload;
-
-    // let Username = `${body.Name || ""}${body.Surname || ""}`;
-
-    // const usernameExists = await User.findOne({ Username: body.Username });
-
-    // if (usernameExists || Username.length === 0)
-    //   Username = `${req.body.Name || ""}${req.body.Surname || ""}${Math.random()
-    //     .toString(36)
-    //     .substring(2, 6)}`;
-
-    // body.Username = Username.toLocaleLowerCase();
-
-    const savedUser = new User({ ...body });
+    const savedUser = new User({ ...payload });
     const user = await savedUser.save();
 
     const response = {
@@ -26,19 +13,20 @@ export const Register = async (payload, res) => {
       code: user ? 200 : 400,
       success: user ? true : false,
       data: user ? { ...user._doc } : null,
-      message: user
-        ? "Përdoruesi u regjistrua me sukses."
-        : "Ndodhi një gabim gjatë regjistrimit të përdoruesit.",
+      message: user ? Messages.USER_REGISTER_SUCCESS : Messages.USER_REGISTER_ERROR,
     };
 
     Response(response);
-  } catch (error) {
+  } 
+  
+  catch (error) {
+    console.log({error})
     const response = {
       res,
       code: 500,
       success: false,
       data: null,
-      message: "Ndodhi një gabim gjatë regjistrimit të përdoruesit.",
+      message: Messages.USER_REGISTER_ERROR,
       error,
     };
 
@@ -90,7 +78,9 @@ export const Login = async ({ uid }, res) => {
     };
 
     Response(response);
-  } catch (error) {
+  } 
+  
+  catch (error) {
     const response = {
       res,
       code: 500,
@@ -188,7 +178,11 @@ export const Update = async (payload, res) => {
 
 export const View = async ({ username }, res) => {
   try {
-    const user = await User.findOne({ "userData.username": username });
+    const user = await User.findOneAndUpdate(
+      { "userData.username": username },
+      { $inc: { "userActivities.views": 1 } },
+      { new: true }
+    );
 
     const response = {
       res,
@@ -200,7 +194,9 @@ export const View = async ({ username }, res) => {
     };
 
     Response(response);
-  } catch (error) {
+  } 
+  
+  catch (error) {
     const response = {
       res,
       code: 500,

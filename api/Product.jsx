@@ -33,6 +33,7 @@ export const Create = async (page, router, setLoading, dispatch) => {
   } 
   
   catch (error) {
+    console.log(error)
     const alert = {
       dispatch,
       message: Messages.PRODUCTS_LATEST_ERROR,
@@ -104,7 +105,6 @@ export const List = async (dispatch) => {
 };
 
 export const Search = async (filters, products, setProducts, dispatch) => {
-  console.log({filters})
   try {
     const req = await Request("PRODUCTS/SEARCH", {...filters, limit: "8" });
     const res = await req.json();

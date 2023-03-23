@@ -9,11 +9,12 @@ export default function Image({ productData: { gallery } }) {
     let thumb = gallery[0].id;
 
     if (thumb !== undefined) {
-      console.log(thumb);
       const file = `products/${thumb}`;
       const unextracted = ref(Storage, file);
 
-      getDownloadURL(unextracted).then((url) => setThumbnail(url)).catch(() => setThumbnail("product-no.png"));
+      getDownloadURL(unextracted)
+        .then((url) => setThumbnail(url))
+        .catch(() => setThumbnail("product-no.png"));
     }
   }, [gallery]);
 

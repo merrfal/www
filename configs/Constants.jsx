@@ -8,3 +8,6 @@ export const API_KEY = process.env.NEXT_PUBLIC_API_KEY
 export const MONGO_URI = process.env.MONGO_URI;
 export const IS_PROD = process.env.NEXT_PUBLIC_IS_PROD;
 export const NOTIFICATION_TIME = process.env.NEXT_PUBLIC_NOTIFICATION_TIMEOUT = 5000;
+export const NO_AVATAR = "/avatar-no.png";
+export const NO_COVER = "/cover-no.png";
+export const NO_THUMBNAIL = "/thumbnail-no.png";

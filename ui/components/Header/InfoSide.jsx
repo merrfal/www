@@ -26,6 +26,12 @@ export default function InfoSide() {
             </a>
           </Link>
         ))}
+
+      <Link href={`/kategorite/`}>
+        <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">
+          {`Të gjitha \u2192`}
+        </a>
+      </Link>
     </div>
   );
 }

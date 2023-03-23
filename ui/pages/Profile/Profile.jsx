@@ -7,6 +7,7 @@ import { Global } from "../../../configs/Head";
 import { View } from "../../../api/User";
 import { Edit } from "../../components";
 import { Products, Cover, Info } from "./";
+import { ProfilePage } from "../../../configs/Metas";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -16,6 +17,8 @@ export default function Profile() {
 
   const [isEdit, setIsEdit] = useState(false);
   const [user, setUser] = useState(null);
+  const [avatar, setAvatar] = useState(null);
+  const [cover, setCover] = useState(null);
 
   useEffect(() => {
     if (user === null) {
@@ -26,34 +29,46 @@ export default function Profile() {
     }
   }, [router]);
 
+  const meta = ProfilePage(user);
+
   return (
     <Normal>
-      <Global name="name surname" description="user bio" />
-        {user === null && <Loading />}
+      <Global name={meta?.title} description={meta?.description} />
 
-        {user !== null && (
-          <>
-            <Cover userData={user?.userData} />
+      {user === null && <Loading />}
 
-            <Info
-              id={user?._id}
-              userData={user?.userData}
+      {user !== null && (
+        <>
+          <Cover 
+            user={user} 
+            cover={cover} 
+            setCover={setCover} 
+            />
+
+          <Info
+            user={user}
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
+            avatar={avatar}
+            setAvatar={setAvatar}
+          />
+
+          {isEdit && (
+            <Edit
+              user={user}
+              setUser={setUser}
               isEdit={isEdit}
               setIsEdit={setIsEdit}
             />
+          )}
 
-            {isEdit && (
-              <Edit
-                user={user}
-                setUser={setUser}
-                isEdit={isEdit}
-                setIsEdit={setIsEdit}
-              />
-            )}
-
-            <Products account={account} dispatch={dispatch} user={user} />
-          </>
-        )}
+          <Products 
+            account={account} 
+            dispatch={dispatch} 
+            user={user} 
+          />
+        </>
+      )}
     </Normal>
   );
 }

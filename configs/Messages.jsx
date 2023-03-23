@@ -45,3 +45,7 @@ export const PRODUCTS_SEARCH_SUCCESS = "Produktet u gjetën me sukses nga bazë 
 export const PRODUCTS_SEARCH_ERROR = "Ndodhi një gabim gjatë marrjes së listës së produkteve nga baza e të dhënave me filtrimet që kërkoni. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.";
 export const PRODUCT_VIEW_SUCCESS = "Produkti u lexua me sukses nga baza e të dhënave.";
 export const PRODUCT_VIEW_ERROR = "Ndodhi një gabim gjatë leximit të produktit nga baza e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.";
+export const USER_REGISTER_SUCCESS = "Ju u regjistruat me sukses. Ju mund të hyni tani.";
+export const USER_REGISTER_ERROR = "Ndodhi një gabim gjatë regjistrimit të juaj. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.";
+export const USER_VIEW_SUCCES = "Përdoruesi u mor me sukses nga baza e të dhënave.";
+export const USER_VIEW_ERROR = "Ndodhi një gabim gjatë marrjes së përdoruesit nga baza e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.";

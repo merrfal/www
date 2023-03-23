@@ -9,9 +9,9 @@ const UserModel = new Schema(
       email: { type: String, required: true, unique: true },
       phone: { type: String, default: "" },
       uid: { type: String, required: true, unique: true },
-      avatar: {type: Object, default: ""},
+      avatar: {type: Object, default: {url: "", isFirebase: false, id: null}},
       bio: { type: String, default: "" },
-      cover: { type: String, default: "" },
+      cover: { type: Object, default: {url: "", isFirebase: false, id: null}},
       website: { type: String, default: "" },
     },
     userAdditionalData: {

@@ -1,6 +1,6 @@
 import * as Messages from "../configs/Messages";
 
-import { Product, User } from "../configs/Models";
+import { Product, User, Category as CategoryModel } from "../configs/Models";
 import { Response } from "../utils/Response";
 
 export const Create = async (payload, res) => {
@@ -8,7 +8,15 @@ export const Create = async (payload, res) => {
     const initalProduct = new Product(payload);
     const product = await initalProduct.save();
 
-    console.log({a: product._doc.productData.gallery})
+    await User.findByIdAndUpdate(payload.productData.user, {
+      $inc: { 'userActivities.productCount': 1 },
+      $addToSet: { 'userActivities.products': product._id }
+    });
+
+    await CategoryModel.findByIdAndUpdate(payload.productData.category, {
+      $inc: { 'additionalData.productCount': 1 },
+      $addToSet: { 'additionalData.products': product._id }
+    });
 
     const response = {
       res,

@@ -2,8 +2,8 @@ import * as Messages from "../configs/Messages";
 
 import { LogoutAccount, SetAccount } from "../controllers/Slices";
 import { Notification } from "../utils/Response";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { Request } from "../utils/Http";
+import { UserObject } from "../utils/DataBuilder";
 
 export const Login = async (uid, dispatch) => {
   try {
@@ -38,11 +38,11 @@ export const Login = async (uid, dispatch) => {
 export const Register = async (initalUser, dispatch) => {
   try {
     const user = UserObject(initalUser);
-
+    console.log({user})
     const req = await Request("USERS/CREATE", { userData: user });
     const res = await req.json();
 
-    if (res.success === true) SetAccount(res.data);
+    if (res.success === true) dispatch(SetAccount(res.data));
     else {
       const alert = {
         dispatch,
@@ -53,11 +53,10 @@ export const Register = async (initalUser, dispatch) => {
       Notification(alert);
     }
   } 
-  
   catch (error) {
     const alert = {
-      dispatch, 
-      message: "Ndodhi një gabim gjatë përpjekjes për të regjistruar përdoruesin.",
+      dispatch,
+      message: Messages.USER_AUTH_ERROR,
       type: "error",
     };
 
@@ -66,17 +65,17 @@ export const Register = async (initalUser, dispatch) => {
 };
 
 export const Update = async (
-  userClone, 
-  setUser, 
-  setIsLoading, 
+  userClone,
+  setUser,
+  setIsLoading,
   setIsEdit,
-  setUserClone, 
+  setUserClone,
   dispatch
 ) => {
   try {
     setIsLoading(true);
 
-    const req = await Request("USER/PRODUCTS", {...userClone});
+    const req = await Request("USER/PRODUCTS", { ...userClone });
     const res = await req.json();
 
     if (res.success === true) {
@@ -93,9 +92,7 @@ export const Update = async (
       setUser(data);
       setUserClone(data);
       setIsEdit(false);
-    }
-
-    else {
+    } else {
       const alert = {
         dispatch,
         message: res.message,
@@ -104,9 +101,7 @@ export const Update = async (
 
       Notification(alert);
     }
-  } 
-  
-  catch (error) {
+  } catch (error) {
     const alert = {
       dispatch,
       message: Messages.PRODUCTS_LATEST_ERROR,
@@ -114,9 +109,7 @@ export const Update = async (
     };
 
     Notification(alert);
-  }
-
-  finally {
+  } finally {
     setIsLoading(false);
   }
 
@@ -208,7 +201,7 @@ export const View = async (username, setUser, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: "Ndodhi një gabim gjatë përpjekjes për të gjetur përdoruesin.",
+      message: Messages.USER_VIEW_ERROR,
       type: "error",
     };
 
@@ -218,21 +211,20 @@ export const View = async (username, setUser, dispatch) => {
 
 export const Products = async (filters, products, setProducts, dispatch) => {
   try {
-    const req = await Request("USER/PRODUCTS", {...filters});
+    const req = await Request("USER/PRODUCTS", { ...filters });
     const res = await req.json();
-    console.log({res})
 
     if (res.success === true) {
       const { data } = res;
 
-      const next = { 
-        products: [...products.products, ...data.products], 
-        hasMore: data.hasMore
-      }
+      const next = {
+        products: [...products.products, ...data.products],
+        hasMore: data.hasMore,
+      };
 
       setProducts(next);
-    }
-
+    } 
+    
     else {
       const alert = {
         dispatch,
@@ -247,7 +239,7 @@ export const Products = async (filters, products, setProducts, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.PRODUCTS_LATEST_ERROR,
+      message: Messages.PRODUCTS_LIST_USER_ERROR,
       type: "error",
     };
 
