@@ -1,4 +1,4 @@
-import { InfoSide, Search, User } from "./";
+import { InfoSide, User } from "./";
 
 export default function Header() {
   return (
@@ -8,7 +8,6 @@ export default function Header() {
           <div className="h-16 flex items-center justify-between">
             <InfoSide />
             <div className="flex-1 flex items-center justify-end">
-              <Search />
               <User />
             </div>
           </div>

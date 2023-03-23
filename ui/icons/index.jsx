@@ -36,6 +36,9 @@ import FacebookIcon from "./FacebookIcon";
 import TwitterIcon from "./TwitterIcon";
 import PhoneIcon from "./PhoneIcon";
 import WebsiteIcon from "./WebsiteIcon";
+import PhotoIcon from "./PhotoIcon";
+import VerifiedBadge from "./VerifiedBadge";
+import SkeletonIcon from "./SkeletonIcon";
 
 export {
   AccountIcon,
@@ -53,9 +56,12 @@ export {
   SmLocationIcon,
   InfoIcon,
   ErrorIcon,
+  VerifiedBadge,
   SuccessIcon,
+  SkeletonIcon,
   WarningIcon,
   EditIcon,
+  PhotoIcon,
   TrashIcon,
   ViewIcon,
   RocketIcon,

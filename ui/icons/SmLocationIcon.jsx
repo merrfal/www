@@ -6,7 +6,7 @@ export default function SmLocationIcon() {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="w-4 h-4 mr-1"
+      className="w-4 h-4 mr-1 mt-[-2px]"
     >
       <path
         strokeLinecap="round"

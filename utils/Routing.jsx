@@ -34,6 +34,7 @@ const RouteProducts = (action, payload, res) => {
     case "LATEST": Products.Latest(payload, res); break;
     case "DELETE": Products.Delete(payload, res); break;
     case "CATEGORY": Products.Category(payload, res); break;
+    case "SEARCH": Products.Search(payload, res); break;
   }
 };
 

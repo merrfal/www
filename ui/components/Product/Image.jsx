@@ -1,35 +1,30 @@
 import { getDownloadURL, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
-import {  Storage } from "../../../configs/Firebase";
-import { ImageValidation } from "../../../utils/Validations";
+import { Storage } from "../../../configs/Firebase";
 
-export default function Image({ productData: { thumbnail } }) {
-  const [thumb, setThumb] = useState(null);
+export default function Image({ productData: { gallery } }) {
+  const [thumbnail, setThumbnail] = useState(null);
 
   useEffect(() => {
-    if (thumbnail !== null && thumbnail !== undefined) {
-      const condition = ImageValidation(thumbnail);
+    let thumb = gallery[0].id;
 
-      if (condition) {
-        const file = `products/${thumbnail}`;
-        const unextracted = ref(Storage, file);
+    if (thumb !== undefined) {
+      console.log(thumb);
+      const file = `products/${thumb}`;
+      const unextracted = ref(Storage, file);
 
-        getDownloadURL(unextracted).then((url) => setThumb(url));
-      } 
-      
-      else setThumb(thumbnail);
+      getDownloadURL(unextracted).then((url) => setThumbnail(url)).catch(() => setThumbnail("product-no.png"));
     }
-
-    else setThumb("/product-no.png");
-  }, [thumbnail]);
+  }, [gallery]);
 
   return (
     <div className="hover:cursor-pointer min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-80 transition-all lg:aspect-none lg:h-80">
       <img
-        src={thumb || "/product-no.png"}
+        onError={() => setThumbnail("product-no.png")}
+        src={thumbnail}
         className={`h-full duration-700 ease-in-out group-hover:opacity-75 w-full object-cover object-center lg:h-full lg:w-full
             ${
-              thumb === null
+              thumbnail === null
                 ? "scale-110 blur-2xl grayscale"
                 : "scale-100 blur-0 grayscale-0"
             }

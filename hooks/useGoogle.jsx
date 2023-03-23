@@ -46,7 +46,7 @@ export default function useGoogle({dispatch}) {
   };
 
   return (
-    <div onClick={() => Auth()} className="p-2 text-gray-400 hover:text-gray-500 lg:ml-4 hover:cursor-pointer">
+    <div onClick={() => Auth()} className="p-2 ml-3 text-gray-400 hover:text-gray-500 lg:ml-4 hover:cursor-pointer">
       <AccountIcon />
     </div>
   );

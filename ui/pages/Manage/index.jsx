@@ -1,4 +1,4 @@
-import ProductPost from "./ProductManage";
+import Manage from "./Manage";
 import Address from "./Address";
 import Buttons from "./Buttons";
 import Categories from "./Categories";
@@ -9,9 +9,9 @@ import Images from "./Images";
 import Mode from "./Mode";
 import Phone from "./Phone";
 import Title from "./Title";
+import Info from "./Info";
 
 export {
-  ProductPost,
   Address,
   Buttons,
   Categories,
@@ -22,6 +22,7 @@ export {
   Mode,
   Phone,
   Title,
+  Info,
 };
 
-export default ProductPost;
+export default Manage;

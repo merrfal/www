@@ -6,8 +6,6 @@ import { Request } from "../utils/Http";
 
 export const Create = async (page, router, setLoading, dispatch) => {
   try {
-    setLoading(true);
-
     const req = await Request("PRODUCTS/CREATE", {productData: {...page}});
     const res = await req.json();
 
@@ -35,7 +33,6 @@ export const Create = async (page, router, setLoading, dispatch) => {
   } 
   
   catch (error) {
-    console.log({error})
     const alert = {
       dispatch,
       message: Messages.PRODUCTS_LATEST_ERROR,
@@ -48,73 +45,6 @@ export const Create = async (page, router, setLoading, dispatch) => {
   finally {
     setLoading(false);
   }
-
-  // setIsLoading(true);
-
-  // let product = structuredClone(page);
-  // let array = [];
-  // const url = `${Url}/api/products/ProductCreate`;
-  // const config = Request("P", "JSON", page, true, false, false);
-
-  // if (images.length !== 0) {
-  //   let id = v4();
-  //   for (let i = 0; i < images.length; i++) {
-  //     const storageRef = ref(storage, `/products/${id + images[i]?.file.name}`);
-  //     const uploadTask = uploadBytesResumable(storageRef, images[i]?.file);
-
-  //     uploadTask.on(
-  //       "state_changed",
-  //       (snapshot) => {
-  //         let progress =
-  //           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //         // console.log("Upload is " + progress + "% done");
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       },
-  //       async () => {
-  //         await getDownloadURL(uploadTask.snapshot.ref).then(
-  //           async (downloadURL) => {
-  //             array = [...array, downloadURL];
-  //             if (i === images.length - 1) {
-  //               product.Gallery = array;
-  //               const config_with_images = Request(
-  //                 "P",
-  //                 "JSON",
-  //                 product,
-  //                 true,
-  //                 false,
-  //                 false
-  //               );
-
-  //               try {
-  //                 const req = await fetch(url, config_with_images);
-  //                 const res = await req.json();
-
-  //                 if (res.success === true) {
-  //                   Notification(dispatch, res.message, "success");
-  //                   dispatch(UnsetPrepage());
-  //                   window.location.href = "/produktet/" + res.data.Slug;
-  //                 } else Notification(dispatch, res.message, "error");
-  //               } catch (error) {
-  //                 Notification(
-  //                   dispatch,
-  //                   "Something wen't wrong while creating this page.",
-  //                   "error"
-  //                 );
-  //               } finally {
-  //                 setIsLoading(false);
-  //               }
-  //             }
-  //           }
-  //         );
-  //       }
-  //     );
-  //   }
-  // }
-  // // else {
-  // //   Notification(dispatch, "Something wen't wrong while creating this page.", 'error');
-  // // }
 };
 
 export const Delete = async (dispatch, productId, userId, redirect = null) => {
@@ -173,18 +103,44 @@ export const List = async (dispatch) => {
   }
 };
 
-export const Search = async (term, dispatch) => {
-  const url = `${Url}/api/products/ProductsSearch`;
-  const config = Request("P", "JSON", { term }, true, false, false);
-
+export const Search = async (filters, products, setProducts, dispatch) => {
+  console.log({filters})
   try {
-    const req = await fetch(url, config);
+    const req = await Request("PRODUCTS/SEARCH", {...filters, limit: "8" });
     const res = await req.json();
 
-    if (res.success === true) dispatch(SetSearch(res.data));
-    else Notification(dispatch, res.message, "error");
-  } catch (error) {
-    Notification(dispatch, "", "error");
+    if (res.success === true) {
+      const { data } = res;
+      console.log({data})
+
+      const next = { 
+        products: [...products.products, ...data.products], 
+        hasMore: data.hasMore
+      }
+
+      setProducts(next);
+    }
+
+    else {
+      const alert = {
+        dispatch,
+        message: res.message,
+        type: "error",
+      };
+
+      Notification(alert);
+    }
+  } 
+  
+  catch (error) {
+    console.log({error})
+    const alert = {
+      dispatch,
+      message: Messages.PRODUCTS_LATEST_ERROR,
+      type: "error",
+    };
+
+    Notification(alert);
   }
 };
 
@@ -309,12 +265,17 @@ export const Update = async (
   }
 };
 
-export const View = async (slug, setProduct, dispatch) => {
+export const View = async (slug, setProduct, dispatch, setLoading = null) => {
   try {
+    if (setLoading) setLoading(true);
     const req = await Request("PRODUCTS/VIEW", { slug });
     const res = await req.json();
 
-    if (res.success === true) setProduct(res.data);
+    if (res.success === true) {
+      setProduct(setLoading !== null ? res.data.productData : res.data);
+      if (setLoading !== null) setLoading(false);
+    }
+
     else {
       const alert = {
         dispatch,
@@ -395,7 +356,7 @@ export const Latest = async (setProducts, dispatch) => {
 
 export const Category = async (filters, products, setProducts, dispatch) => {
   try {
-    const req = await Request("PRODUCTS/CATEGORY", {...filters, limit: "9" });
+    const req = await Request("PRODUCTS/CATEGORY", {...filters, limit: "8" });
     const res = await req.json();
 
     if (res.success === true) {

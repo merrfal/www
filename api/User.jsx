@@ -220,6 +220,7 @@ export const Products = async (filters, products, setProducts, dispatch) => {
   try {
     const req = await Request("USER/PRODUCTS", {...filters});
     const res = await req.json();
+    console.log({res})
 
     if (res.success === true) {
       const { data } = res;

@@ -1,17 +1,41 @@
-import { useDispatch } from "react-redux";
-import { OpenSearch } from "../../../controllers/Slices";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { SearchIcon } from "../../icons";
 
 export default function Search() {
-  const dispatch = useDispatch();
-  const open = () => dispatch(OpenSearch());
+  const router = useRouter();
+  const [term, setTerm] = useState("");
+
+  useState(() => {
+    let path = typeof window !== "undefined" && window.location;
+    path = path?.pathname?.split("/")[2];
+    const base = path?.pathname?.split("/")[1];
+
+    if (path !== undefined && path !== "" && term === "" && base === "kerko")
+      setTerm(path);
+  }, [router]);
 
   return (
-    <div
-      onClick={open}
-      className="hover:cursor-pointer text-gray-400 hover:text-gray-500"
-    >
-      <SearchIcon />
+    <div class="relative w-auto">
+      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <SearchIcon />
+      </div>
+
+      <input
+        value={term}
+        onChange={(e) => setTerm(e.target.value)}
+        maxLength={32}
+        required
+        type="text"
+        class="border w-auto border-gray-200 text-gray-900 text-[14px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-1.5 "
+        placeholder="Kërko produkte..."
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            router.push(`/kerko/${term}`);
+          }
+        }}
+      />
     </div>
   );
 }

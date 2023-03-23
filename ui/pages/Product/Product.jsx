@@ -3,8 +3,9 @@ import { useDispatch } from "react-redux";
 import { View, Similar as Recommendations } from "../../../api/Product";
 import { Normal } from "../../layouts";
 import { useRouter } from "next/router";
-import { Loading } from "../../../ui/components";
 import { Global } from "../../../configs/Head";
+import { getDownloadURL, ref } from "firebase/storage";
+import { Storage } from "../../../configs/Firebase";
 
 import {
   Info,
@@ -16,6 +17,8 @@ import {
   Gallery,
   Skeleton,
   Thumbnail,
+  Category,
+  Views,
 } from "./";
 
 export default function Product() {
@@ -24,59 +27,93 @@ export default function Product() {
 
   const [product, setProduct] = useState(null);
   const [prodcuts, setProducts] = useState(null);
+  const [gallery, setGallery] = useState([]);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    if (router && product === null) {
-      const { slug  } = router.query;
-      if (slug !== "" && slug !== undefined) View(slug, setProduct, dispatch);
+    if (router) {
+      const { slug } = router.query;
+      if (slug !== "" && slug !== undefined) {
+        View(slug, setProduct, dispatch);
+      }
     }
   }, [router]);
 
   useEffect(() => {
-    if (product !== null && prodcuts === null) {
+    if (product !== null) {
       const { category = "" } = product.productData;
       Recommendations(category, setProducts, dispatch);
     }
-  }, [product]);
+  }, [product, router]);
 
-  console.log({product})
+  useEffect(() => {
+    if (product !== null) {
+      let thumb = product.productData.gallery;
+  
+      Promise.all(thumb.map((image) => {
+        const file = `products/${image.id}`;
+        const unextracted = ref(Storage, file);
+  
+        return getDownloadURL(unextracted);
+      })).then((urls) => setGallery(urls));
+    }
+  }, [product]);
 
   return (
     <Normal>
-      {/* <Global
-        title={page.Loaded ? page.Page.Name : "Po ngarkohet..."}
-        description={page.Loaded ? page.Page.Description : "Po ngarkohet..."}
-        thumbnail={page.Loaded ? page.Page.Thumbnail : "/product-no.png"}
-      /> */}
-      <section style={{ padding: "1em" }}>
-        {product === null && <Loading />}
-        {product !== null && (
-          <div>
-            <div className="bg-white">
-              <main className="max-w-7xl mx-auto sm:pt-16 sm:px-6 lg:px-8">
-                <div className="max-w-2xl mx-auto lg:max-w-none">
-                  <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
-                    <div className="flex flex-col-reverse">
-                      <Gallery productData={product.productData} />
-                      <Thumbnail productData={product.productData} />
-                    </div>
+      <Global
+        title={
+          product === null ? "Po ngarkohet..." : product?.productData?.name
+        }
+        description={
+          product === null
+            ? "Po ngarkohet..."
+            : product?.productData?.description
+        }
+        thumbnail={
+          product === null
+            ? "/no-product.png"
+            : product?.productData?.gallery[0].url
+        }
+      />
 
-                    <div className="mt-10 ml-3 px-4 sm:px-0 sm:mt-16 lg:mt-0">
-                      <Location productData={product.productData} />
-                      <Info productData={product.productData} />
-                      <Poster productData={product.productData} />
-                      <Phone productData={product.productData} />
-                      <Steps />
-                    </div>
+      {product === null && <Skeleton />}
+      {product !== null && (
+        <div className="bg-white">
+          <main className="max-w-7xl mx-auto sm:pt-16 sm:px-6 lg:px-8">
+            <div className="max-w-2xl mx-auto lg:max-w-none">
+              <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
+                <div className="flex flex-col-reverse">
+                  <Gallery
+                    gallery={gallery}
+                    index={index}
+                    setIndex={setIndex}
+                  />
+
+                  <Thumbnail gallery={gallery} index={index} />
+                </div>
+
+                <div className="mt-10 ml-3 px-4 sm:px-0 sm:mt-16 lg:mt-0">
+                  <div className="flex items-center mb-8">
+                    <Category category={product.productData.category} />
+                    <div className="h-5 border-r border-gray-200 mx-4" />
+                    <Location productData={product.productData} />
+                    <div className="h-5 border-r border-gray-200 mx-4" />
+                    <Views product={product} />
                   </div>
 
-                  <Similar products={prodcuts} />
+                  <Info productData={product.productData} />
+                  <Poster productData={product.productData} />
+                  <Phone productData={product.productData} />
+                  <Steps />
                 </div>
-              </main>
+              </div>
+
+              <Similar products={prodcuts} />
             </div>
-          </div>
-        )}
-      </section>
+          </main>
+        </div>
+      )}
     </Normal>
   );
 }

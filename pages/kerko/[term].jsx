@@ -1,7 +1,3 @@
-import React from 'react'
-
-export default function search() {
-  return (
-    <div>[term]</div>
-  )
-}
+import { Search } from "../../ui/pages";
+const Route = () => <Search />;
+export default Route;

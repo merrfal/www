@@ -8,6 +8,8 @@ import Steps from "./Steps";
 import Skeleton from "./Skeleton";
 import Thumbnail from "./Thumbnail";
 import Gallery from "./Gallery";
+import Category from "./Category";
+import Views from "./Views";
 
 export {
   Info,
@@ -19,6 +21,8 @@ export {
   Skeleton,
   Thumbnail,
   Gallery,
+  Category,
+  Views,
 };
 
 export default Product;

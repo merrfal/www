@@ -1,11 +1,20 @@
 import { DescriptionValidation } from "../../../utils/Forms";
 
-export default function Description({ product: { description }, onInput }) {
+export default function Description({
+  product: {
+    productData: { description },
+  },
+  onInput,
+  validation: v,
+}) {
   const validation = DescriptionValidation(description);
 
   return (
     <div>
-      <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+      <label
+        htmlFor="description"
+        className="block text-sm font-medium text-gray-700"
+      >
         Përshkrimi i produktit
       </label>
       <div className="mt-1">
@@ -19,7 +28,11 @@ export default function Description({ product: { description }, onInput }) {
         />
       </div>
 
-      {validation.error && <p className="text-xs mt-1 ml-[1px] text-red-500">{validation.message}</p>}
+      {v.description && validation.error && (
+        <p className="text-xs mt-1 ml-[1px] text-red-500">
+          {validation.message}
+        </p>
+      )}
     </div>
   );
 }

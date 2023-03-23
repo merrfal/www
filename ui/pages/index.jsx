@@ -2,8 +2,7 @@ import Home from './Home';
 import Profile from './Profile';
 import Products from './Products';
 import Product from './Product';
-import ProductEdit from './ProductEdit';
-import ProductPost from './ProductPost';
+import Manage from './Manage';
 import Error from './Error';
 import Page from './Page';
 import Permissonless from './Permissonless';
@@ -14,10 +13,9 @@ import Search from './Search';
 export {
   Home,
   Product,
-  ProductEdit,
+  Manage,
   Products,
   Profile,
-  ProductPost,
   Error,
   Page,
   Category,

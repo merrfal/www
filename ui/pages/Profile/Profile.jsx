@@ -29,7 +29,6 @@ export default function Profile() {
   return (
     <Normal>
       <Global name="name surname" description="user bio" />
-      <section style={{ padding: "1em" }}>
         {user === null && <Loading />}
 
         {user !== null && (
@@ -55,7 +54,6 @@ export default function Profile() {
             <Products account={account} dispatch={dispatch} user={user} />
           </>
         )}
-      </section>
     </Normal>
   );
 }

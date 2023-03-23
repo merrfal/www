@@ -8,7 +8,7 @@ const Categories = [
     favorite: true,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57842",
     name: "Aksesorë",
     slug: "aksesore",
     description: "Kjo kategori përfshin aksesore si kapele, shalla, këpucë, kufje dhe çanta, si dhe orë dhe biçikleta. Shfrytëzuesit mund të shikojnë ose postojnë sende të reja, të përdorura ose të rregulluara.",
@@ -16,7 +16,7 @@ const Categories = [
     favorite: false,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57843",
     name: "Këpucë",
     slug: "kepuce",
     description: "Kjo kategori përfshin të gjitha llojet e këpucëve për meshkuj, femra dhe fëmijë. Kjo përfshin këpucë të përdorura dhe të reja, këpucë sportive, sandale, këpucë pune dhe shumë të tjera. Shfrytëzuesit mund të shikojnë ose postojnë sende të reja, të përdorura ose të rregulluara.",
@@ -24,7 +24,7 @@ const Categories = [
     favorite: false,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57844",
     name: "Mobilje",
     slug: "mobilje",
     description: "Kjo kategori përfshin të gjitha llojet e mobiljeve për shtëpi, zyrë dhe ambientet e punës. Kjo përfshin tavolina, karrige, divane, shkëmbinj, dollapa, krevate dhe shumë të tjera. Shfrytëzuesit mund të shikojnë ose postojnë sende të reja, të përdorura ose të rregulluara.",
@@ -32,7 +32,7 @@ const Categories = [
     favorite: false,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57845",
     name: "Elektronikë",
     slug: "elektronike",
     description: "Kjo kategori përfshin të gjitha pajisjet elektronike nga celularët, laptopët, telekomanda, kamera dhe shumë të tjera. Shfrytëzuesit mund të shikojnë ose postojnë sende të reja, të përdorura ose të rregulluara.",
@@ -40,15 +40,15 @@ const Categories = [
     favorite: true,
   },
   {
-    _id: "636f3f82911a24f351b57841",
-    name: "Mjete shtëpiake",
-    slug: "mjete-shtepiake",
+    _id: "636f3f82911a24f351b57846",
+    name: "Shtëpiake",
+    slug: "shtepiake",
     description: "Kjo kategori përfshin të gjitha mjete shtëpiake si aspiratorë, enë, thika, tenxhere, tava dhe shumë të tjera. Shfrytëzuesit mund të shikojnë ose postojnë sende të reja, të përdorura ose të rregulluara.",
     icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
     favorite: true,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57847",
     name: "Kuzhinë",
     slug: "kuzhine",
     description: "Kjo kategori përfshin të gjitha pajisjet dhe sendet për kuzhinën dhe restorantet si pjatë, gota, filxhanë, enë gatimi dhe shumë të tjera. Shfrytëzuesit mund të shikojnë ose postojnë sende të reja, të përdorura ose të rregulluara.",
@@ -56,7 +56,7 @@ const Categories = [
     favorite: false,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57848",
     name: "Sport",
     slug: "sport",
     description: "Kjo kategori përfshin gjithçka lidhet me sportin dhe aktivitetet jashtë shtëpisë. Mund të gjeni pajisje sportive, rroba sportive, këpucë sportive, bicikleta dhe shumë të tjera.",
@@ -64,7 +64,7 @@ const Categories = [
     favorite: false,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57849",
     name: "Literaturë",
     slug: "literature",
     description: "Në këtë kategori mund të gjeni libra dhe literatura të ndryshme për të gjitha moshat dhe shijet. Librat mund të jenë fiksion ose jo-fiksion, nga autorë të ndryshëm dhe në shumë gjuhë të ndryshme.",
@@ -72,7 +72,7 @@ const Categories = [
     favorite: true,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b578410",
     name: "Lojëra",
     slug: "lojera",
     description: "Kjo kategori përfshin lojëra dhe lodra të ndryshme për të gjitha moshat. Mund të gjeni lodra edukative për fëmijë, video lojra për të rriturit, dhe shumë të tjera.",
@@ -80,15 +80,15 @@ const Categories = [
     favorite: false,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57811",
     name: "Kopsht",
     slug: "kopsht",
     description: "Në këtë kategori mund të gjeni gjithçka që kërkohet për të mbajtur një kopsht të bukur dhe për të kujdesur për veten. Kjo përfshin bimë, mbjellje, dhe produkte të kujdesit personal si kozmetikë dhe produktet e kujdesit të lëkurës.",
     icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
-    favorite: false,
+    favorite: true,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57812",
     name: "Automjete",
     slug: "automjete",
     description: "Kjo kategori përfshin automjete dhe motorë të ndryshëm, si automjete të përdorura, motorë dhe skuterë, dhe pjesë këmbimi për automjete.",
@@ -96,15 +96,15 @@ const Categories = [
     favorite: false,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57813",
     name: "Fëmijë",
     slug: "femije",
     description: "Kategoria Fëmijë dhe Infantil përfshin një gamë të gjerë produktet për fëmijë dhe të vegjël, duke filluar nga veshjet, lojërat dhe lodrat, librave për fëmijë, kopshtin, artikujt për ushqim, dhe më shumë. ",
     icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
-    favorite: false,
+    favorite: true,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57814",
     name: "Fitnes",
     slug: "fitnes",
     description: "Kategoria Fitnes dhe Shëndet ofron një gamë të gjerë produktet për aktivitete fizike dhe mirëqenie personale. Kategoria përfshin produkte si aparate fitnesi, aksesore për ushtrime fizike, suplemente ushqimore, produkte për kujdesin e trupit, kozmetikë dhe produkte të tjera të nevojshme për të mbajtur trupin në formë dhe në gjendje të mirë shëndetësore. Me këto produkte, klientët mund të përmirësojnë shëndetin dhe formën e tyre fizike në mënyrë të shëndetshme dhe efektive.",
@@ -112,7 +112,7 @@ const Categories = [
     favorite: false,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57815",
     name: "Turizëm",
     slug: "turizem",
     description: "Kategoria Fitnes dhe Shëndet ofron një gamë të gjerë produktet për aktivitete fizike dhe mirëqenie personale. Kategoria përfshin produkte si aparate fitnesi, aksesore për ushtrime fizike, suplemente ushqimore, produkte për kujdesin e trupit, kozmetikë dhe produkte të tjera të nevojshme për të mbajtur trupin në formë dhe në gjendje të mirë shëndetësore. Me këto produkte, klientët mund të përmirësojnë shëndetin dhe formën e tyre fizike në mënyrë të shëndetshme dhe efektive.",
@@ -120,7 +120,7 @@ const Categories = [
     favorite: false,
   },
   {
-    _id: "636f3f82911a24f351b57841",
+    _id: "636f3f82911a24f351b57816",
     name: "Të tjera",
     slug: "te-tjera",
     description: "Kjo është një kategori e përgjithshme e cila mund të përfshijë artikuj ose shërbime nga fusha të ndryshme si moda, teknologji, ushqim, etj. Kjo kategori është e përshtatshme për artikujt që nuk klasifikohen në kategori të tjera specifike, si dhe për shërbime ose produkte të reja që nuk janë pjesë e asnjë kategorie ekzistuese.",

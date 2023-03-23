@@ -25,9 +25,9 @@ export default function Category() {
   });
 
   useEffect(() => {
-    if (category === null) {
-      const { slug } = router.query;
+    const { slug } = router.query;
 
+    if (category?.slug !== slug) {
       if (slug !== undefined && slug !== "") {
         const selectedCategory = Categories.find((c) => c.slug === slug);
         setCategory(selectedCategory);
@@ -35,10 +35,11 @@ export default function Category() {
     }
 
     if (first) {
-      const { slug } = router.query;
-      if (slug !== undefined && slug !== "") {
-        setFirst(false);
-        next();
+      if(category?.slug === slug) {
+        if (slug !== undefined && slug !== "") {
+          setFirst(false);
+          next();
+        }
       }
     }
   }, [router]);

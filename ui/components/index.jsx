@@ -3,7 +3,6 @@ import Footer from "./Footer";
 import Notification from "./Notification";
 import Confirmation from "./Confirmation";
 import Product from "./Product";
-import Search from "./Search";
 import Empty from "./Empty";
 import Cta from "./Cta";
 import Products from "./Products";
@@ -26,7 +25,6 @@ export {
   Notification,
   Confirmation,
   Product,
-  Search,
   Empty,
   Cta,
   Products,

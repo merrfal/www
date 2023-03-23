@@ -1,5 +1,5 @@
 import { Normal } from "../../layouts";
-import { Animation, Info, Options } from "./";
+import { Animation, Info, Operations } from "./";
 
 export default function Permissonless() {
   return (
@@ -10,7 +10,7 @@ export default function Permissonless() {
             <div className="text-center mt-[-100px]">
               <Animation />
               <Info />
-              <Options />
+              <Operations />
             </div>
           </div>
         </div>

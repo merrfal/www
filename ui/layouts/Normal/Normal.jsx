@@ -1,10 +1,4 @@
-import {
-  Header,
-  Footer,
-  Confirmation,
-  Search,
-  Notification,
-} from "../../components";
+import { Header, Footer, Confirmation, Notification } from "../../components";
 
 export default function Normal(props) {
   return (
@@ -12,7 +6,6 @@ export default function Normal(props) {
       <Header />
       <Confirmation />
       <Notification />
-      <Search />
       <section>{props.children}</section>
       <Footer />
     </main>

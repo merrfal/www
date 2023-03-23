@@ -41,3 +41,7 @@ export const USER_PRODUCTS_LIST = "Ju nuk keni dhuruar asnjë produkt akoma.";
 export const USERS_PRODUCTS_LIST = "Përdoruesi nuk dhuruar asnjë produkt, ose ka dhuruar anonimisht.";
 export const PRODUCTS_LIST_USER_SUCCESS = "Produktet e përdoruesit janë marre nga baza e të dhënave.";
 export const PRODUCTS_LIST_USER_ERROR = "Ndodhi një gabim gjatë marrjes së listës së produkteve të përdoruesit nga baza e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.";
+export const PRODUCTS_SEARCH_SUCCESS = "Produktet u gjetën me sukses nga bazë të filtrimeve të dhënë.";
+export const PRODUCTS_SEARCH_ERROR = "Ndodhi një gabim gjatë marrjes së listës së produkteve nga baza e të dhënave me filtrimet që kërkoni. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.";
+export const PRODUCT_VIEW_SUCCESS = "Produkti u lexua me sukses nga baza e të dhënave.";
+export const PRODUCT_VIEW_ERROR = "Ndodhi një gabim gjatë leximit të produktit nga baza e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.";

@@ -9,7 +9,7 @@ const UserModel = new Schema(
       email: { type: String, required: true, unique: true },
       phone: { type: String, default: "" },
       uid: { type: String, required: true, unique: true },
-      avatar: { type: String, default: "" },
+      avatar: {type: Object, default: ""},
       bio: { type: String, default: "" },
       cover: { type: String, default: "" },
       website: { type: String, default: "" },
@@ -41,8 +41,7 @@ const ProductSchema = new Schema(
     productData: {
       name: { type: String, required: true },
       description: { type: String, required: true },
-      thumbnail: { type: String, required: true, default: null },
-      gallery: { type: Array, default: [] },
+      gallery: {  type: Array, required: false },
       slug: { type: String, required: true, unique: true },
       category: { type: String, required: true },
       user: { type: String, required: true },

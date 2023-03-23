@@ -1,13 +1,14 @@
 import * as Messages from "../configs/Messages";
 
 import { Product, User } from "../configs/Models";
-import { v4 } from "uuid";
 import { Response } from "../utils/Response";
 
 export const Create = async (payload, res) => {
   try {
-    const initalProduct = new Product({ ...payload, slug: "qweqwewqe-" + v4() });
+    const initalProduct = new Product(payload);
     const product = await initalProduct.save();
+
+    console.log({a: product._doc.productData.gallery})
 
     const response = {
       res,
@@ -62,16 +63,22 @@ export const Delete = async (payload, res) => {
 };
 
 export const Category  = async (payload, res) => {
-  let { offset, limit, categories, cities = [], sort } = payload;
+  let { offset, limit, cities, statusses, sort } = payload;
 
   offset = parseInt(offset);
   limit = parseInt(limit);
 
   const filter = () =>{
-    if(categories.length === 0 && cities.length === 0) return {}
-    if(categories.length === 0 && cities.length !== 0 ) return { 'productData.city': { $in: cities }}
-    if(categories.length !== 0 && cities.length === 0 ) return { 'productData.category': { $in: categories }}
-    if(categories.length !== 0 && cities.length !== 0 ) return { 'productData.category': { $in: categories }, 'productData.city': { $in: cities }}
+    const filters = {}
+    const calength = cities.length
+    const salength = statusses.length
+
+    if(calength === 0 && salength === 0) return {}
+    if(calength === 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statusses }}
+    if(calength !== 0 && salength === 0 ) return { 'productData.city': { $in: cities }}
+    if(calength !== 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statusses }, 'productData.city': { $in: cities }}
+
+    return filters
   }
 
   try {
@@ -109,12 +116,51 @@ export const Search  = async (payload, res) => {
   offset = parseInt(offset);
   limit = parseInt(limit);
 
-  const filter = () =>{
-    if(categories.length === 0 && cities.length === 0) return {}
-    if(categories.length === 0 && cities.length !== 0 ) return { 'productData.city': { $in: cities }}
-    if(categories.length !== 0 && cities.length === 0 ) return { 'productData.category': { $in: categories }}
-    if(categories.length !== 0 && cities.length !== 0 ) return { 'productData.category': { $in: categories }, 'productData.city': { $in: cities }}
-  }
+  // const filter = () =>{
+  //   const filters = {}
+  //   const calength = categories.length;
+  //   const cilength = cities.length;
+
+  //   if(calength === 0 && cilength === 0) return filters;
+  //   if(calength === 0 && cilength !== 0 ) filters['productData.city'] = { $in: cities }
+  //   if(calength !== 0 && cilength === 0 ) filters['productData.category'] = { $in: categories }
+  //   if(calength !== 0 && cilength !== 0 ) filters['productData.category'] = { $in: categories }, filters['productData.city'] = { $in: cities }
+
+  //   if(term === "") return filters;
+  //   if(term !== "") return { 
+  //     ...filters, 
+  //     $or: [
+  //       { 'productData.name': { $regex: term, $options: 'i' } }, 
+  //       { 'productData.description': { $regex: term, $options: 'i' } }
+  //     ] 
+  //   }
+  // }
+
+  const filter = () => {
+    const filters = {};
+    const orFilters = [];
+  
+    if (categories.length !== 0) {
+      orFilters.push({ 'productData.category': { $in: categories } });
+    }
+  
+    if (cities.length !== 0) {
+      orFilters.push({ 'productData.city': { $in: cities } });
+    }
+  
+    if (term !== "") {
+      orFilters.push(
+        { 'productData.name': { $regex: term, $options: 'i' } },
+        { 'productData.description': { $regex: term, $options: 'i' } }
+      );
+    }
+  
+    if (orFilters.length > 0) {
+      filters.$or = orFilters;
+    }
+  
+    return filters;
+  };
 
   try {
     let products = await Product.find(filter()).sort(sort).skip(offset).limit(limit);
@@ -124,8 +170,8 @@ export const Search  = async (payload, res) => {
       res,
       code: products ? 200 : 404,
       success: products ? true : false,
-      data: products ? {products, hasMore: countProducts <= offset} : [],
-      message: products ? Messages.PRODUCTS_CATEGORY_SUCCESS : Messages.PRODUCTS_CATEGORY_ERROR,
+      data: products ? {products, hasMore: countProducts > offset + limit} : [],
+      message: products ? Messages.PRODUCTS_SEARCH_SUCCESS : Messages.PRODUCTS_SEARCH_ERROR,
     };
 
     Response(response);
@@ -137,7 +183,7 @@ export const Search  = async (payload, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.PRODUCTS_CATEGORY_ERROR,
+      message: Messages.PRODUCTS_SEARCH_ERROR,
       error,
     };
 

@@ -1,31 +1,25 @@
-// export const ProductFormValidation = (target) => {
-//   const { name, value } = target;
-//   const { type } = target.dataset;
+export const ProductFormValidation = (target) => {
+  const validation = {
+    title: NameValidation(target.title),
+    // category: CategoryValidation(target.category),
+    // price: PriceValidation(target.price),
+    // description: DescriptionValidation(target.description),
+    // images: ImagesValidation(target.images),
+  };
 
-//   const validation = {
-//     name: NameValidation(value),
-//     description: DescriptionValidation(value),
-//     email: EmailValidation(value),
-//     phone: PhoneValidation(value),
-//     address: AddressValidation(value),
-//     slug: SlugBuilderAndValidation(value),
-//     username: UsernameBuilderAndValidation(value),
-//   };
-
-//   return validation[type];
-// };
+  return validation;
+};
 
 export const NameValidation = (value) => {
   let validation = { error: false };
-  if (value === undefined) return validation;
 
-  const minLength = 3;
-  const maxLength = 120;
+  const minLength = 12;
+  const maxLength = 80;
   const regex = /^[a-zA-Z0-9]+(?:[ ]?[a-zA-Z0-9]+)*$/;
 
   if (!regex.test(value)) {
     validation.error = true;
-    validation.message = `Emri duhet të përmbajë vetëm shkronja, numra dhe një hapësirë të vetme midis fjalëve`;
+    validation.message = `Titulli duhet të përmbajë vetëm shkronja, numra dhe një hapësirë të vetme midis fjalëve`;
   }
 
   if (value.length < minLength) {
@@ -43,10 +37,9 @@ export const NameValidation = (value) => {
 
 export const DescriptionValidation = (value) => {
   let validation = { error: false };
-  if (value === undefined) return validation;
 
   const minLength = 32;
-  const maxLength = 500;
+  const maxLength = 320;
   const regex = /^[a-zA-Z0-9- ,.]{32,500}$/;
 
   if (!regex.test(value)) {
@@ -69,9 +62,8 @@ export const DescriptionValidation = (value) => {
 
 export const PhoneValidation = (value) => {
   let validation = { error: false };
-  if (value === undefined) return validation;
 
-  const regex = /^((\+)?(383)?([1-9]{1}|[2]{1}[0-9]{1}|[3]{1}[0-9]{1}|[4]{1}[0-9]{1}|[5]{1}[0-9]{1}|[6]{1}[0-9]{1}|[7]{1}[0-9]{1})[0-9]{6,7})$/;
+  const regex = /^((\+)?(383)?([1-9]{1}|[2]{1}[0-9]{1}|[3]{1}[0-9]{1}|[4]{1}[0-9]{1}|[5]{1}[0-9]{1}|[6]{1}[0-9]{1}|[7]{1}[0-9]{1})[0-9]{10,15})$/;
 
   if (!regex.test(value)) {
     validation.error = true;
@@ -83,7 +75,6 @@ export const PhoneValidation = (value) => {
 
 export const AddressValidation = (value) => {
   let validation = { error: false };
-  if (value === undefined) return validation;
 
   const minLength = 10;
   const maxLength = 80;
@@ -109,18 +100,17 @@ export const AddressValidation = (value) => {
 
 export const UserNameValidation = (value) => {
   let validation = { error: false };
-  if (value === undefined) return validation;
 
   const minLength = 3;
   const maxLength = 20;
   const regex = /^[a-zA-Z0-9]+(?:[ ]?[a-zA-Z0-9]+)*$/;
 
-  if(value.length < minLength) {
+  if (value.length < minLength) {
     validation.error = true;
     validation.message = `Emri duhet të jetë së paku ${minLength} karaktere`;
   }
 
-  if(value.length > maxLength) {
+  if (value.length > maxLength) {
     validation.error = true;
     validation.message = `Emri nuk mund të jetë më shumë se ${maxLength} karaktere`;
   }
@@ -131,22 +121,21 @@ export const UserNameValidation = (value) => {
   }
 
   return validation;
-}
+};
 
 export const UserSurnameValidation = (value) => {
   let validation = { error: false };
-  if (value === undefined) return validation;
 
   const minLength = 3;
   const maxLength = 20;
   const regex = /^[a-zA-Z0-9]+(?:[ ]?[a-zA-Z0-9]+)*$/;
 
-  if(value.length < minLength) {
+  if (value.length < minLength) {
     validation.error = true;
     validation.message = `Mbiemri duhet të jetë së paku ${minLength} karaktere`;
   }
 
-  if(value.length > maxLength) {
+  if (value.length > maxLength) {
     validation.error = true;
     validation.message = `Mbiemri nuk mund të jetë më shumë se ${maxLength} karaktere`;
   }
@@ -157,11 +146,10 @@ export const UserSurnameValidation = (value) => {
   }
 
   return validation;
-}
+};
 
 export const UserBioValidation = (value) => {
   let validation = { error: false };
-  if (value === undefined) return validation;
 
   const minLength = 32;
   const maxLength = 500;
@@ -198,10 +186,8 @@ export const UsernameBuilderAndValidation = (value) => {
   return regex.test(username);
 };
 
-
 export const UsernameValidation = (value) => {
   const validation = { error: false };
-  if (value === undefined) return validation;
 
   const minLength = 3;
   const maxLength = 20;
@@ -219,8 +205,52 @@ export const UsernameValidation = (value) => {
 
   if (!regex.test(value)) {
     validation.error = true;
-    validation.message = `Emri unik duhet të përmbajë vetëm shkronja dhe numra pa hapësira dhe pa karaktere speciale.`;
+    validation.message = `Emri unik duhet të përmbajë vetëm shkronja dhe numra pa hapësira dhe pa karaktere speciale`;
   }
 
   return validation;
-}
+};
+
+export const CityValidation = (value) => {
+  const validation = { error: false };
+
+  if (value === "") {
+    validation.error = true;
+    validation.message = `Ju lutem zgjidhni qytetin ku produkti dhurohet`;
+  }
+
+  return validation;
+};
+
+export const CategoryValidation = (value) => {
+  const validation = { error: false };
+
+  if (value === "") {
+    validation.error = true;
+    validation.message = `Produkti duhet te ketë një kategori përkatëse`;
+  }
+
+  return validation;
+};
+
+export const ModeValidation = (value) => {
+  const validation = { error: false };
+
+  if (value !== false && value !== true) {
+    validation.error = true;
+    validation.message = `Zgjidheni një opsion për mënyrën e dhurimit të produktit`;
+  }
+
+  return validation;
+};
+
+export const ImagesValidation = (value) => {
+  const validation = { error: false };
+
+  if (value.length < 1) {
+    validation.error = true;
+    validation.message = `Së paku një foto duhet të ngarkohet për ta shfaqur produktin`;
+  }
+
+  return validation;
+};

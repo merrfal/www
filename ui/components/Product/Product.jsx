@@ -4,7 +4,7 @@ import { Image, Info } from "./";
 export default function Product({ product: {productData} }) {
 
   return (
-    <Link href={`/produkti/${productData.slug}`} key={productData.slug}>
+    <Link href={`/${productData.slug}`} key={productData.slug}>
       <a className="group relative">
         <Image productData={productData} />
         <Info productData={productData} />
