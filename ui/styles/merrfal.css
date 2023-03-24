@@ -20,3 +20,51 @@ textarea {
   -moz-appearance: textfield;
   appearance: none;
 }
+
+.categories-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-input-holder {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 43px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .categories-container {
+    flex-direction: row;
+  }
+  
+  .mobile-categories {
+    display: none;
+  }
+  
+  .desktop-categories {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .categories-container {
+    flex-direction: column;
+  }
+  
+  .mobile-categories {
+    position: relative;
+    z-index: 999999;
+    display: flex;
+  }
+  
+  .desktop-categories {
+    display: none;
+  }
+}
