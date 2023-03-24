@@ -10,6 +10,7 @@ import Thumbnail from "./Thumbnail";
 import Gallery from "./Gallery";
 import Category from "./Category";
 import Views from "./Views";
+import SimilarSkeleton from "./SimilarSkeleton";
 
 export {
   Info,
@@ -23,6 +24,7 @@ export {
   Gallery,
   Category,
   Views,
+  SimilarSkeleton,
 };
 
 export default Product;

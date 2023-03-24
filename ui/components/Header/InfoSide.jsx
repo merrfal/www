@@ -17,15 +17,13 @@ export default function InfoSide() {
 
       <div className="h-5 border-r border-gray-200 mx-4" />
 
-      {Categories.filter((category) => category.favorite)
-        .slice(0, 8)
-        .map((link) => (
-          <Link href={`/kategorite/${link.slug}`}>
-            <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">
-              {link.name}
-            </a>
-          </Link>
-        ))}
+      {Categories.filter((category) => category.favorite).slice(0, 8).map((link) => (
+        <Link href={`/kategorite/${link.slug}`}>
+          <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">
+            {link.name}
+          </a>
+        </Link>
+      ))}
 
       <Link href={`/kategorite/`}>
         <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">

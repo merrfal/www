@@ -41,7 +41,7 @@ const Categories = [
   },
   {
     _id: "641c4af5b24ea4453a054364",
-    name: "Mjete shtëpiake",
+    name: "Mjete Shtëpiake",
     slug: "mjete-shtepiake",
     description: "Kjo kategori përfshin të gjitha mjetet shtëpiake si aspiratorë, enë, thika, tenxhere, tava dhe shumë të tjera. Shfrytëzuesit mund të shikojnë ose postojnë sende të reja, të përdorura ose të rregulluara.",
     icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",

@@ -17,8 +17,7 @@ export const UserObject = (user) => {
     avatar: {
       url: avatar,
       isFirebase: false,
-      id: null
     },
-    username: username.replace(/[^a-zA-Z0-9]/g, "").toLowerCase(),
+    username,
   };
 };

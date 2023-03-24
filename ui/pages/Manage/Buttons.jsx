@@ -1,9 +1,12 @@
+import * as Messages from "../../../configs/Messages";
+
 import { uploadBytesResumable, ref, getDownloadURL } from "firebase/storage";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { v4 } from "uuid";
 import { Create } from "../../../api/Product";
 import { Storage } from "../../../configs/Firebase";
+import { Notification } from "../../../utils/Response";
 
 import {
   AddressValidation,
@@ -11,6 +14,7 @@ import {
   ImagesValidation,
   NameValidation,
   PhoneValidation,
+  SlugBuilder,
 } from "../../../utils/Forms";
 
 export default function Buttons(props) {
@@ -78,10 +82,18 @@ export default function Buttons(props) {
           isMain: index === 0,
           filename: image.file.name,
         };
-        console.log({ img });
+        
         gallery.push(img);
-      } catch (error) {
-        console.error(error);
+      } 
+      
+      catch (error) {
+        const alert = {
+          type: "error",
+          message: Messages.COULDNT_UPLOAD_TO_FIREBASE,
+          dispatch,
+        }
+
+        Notification(alert);
       }
     });
 
@@ -90,7 +102,7 @@ export default function Buttons(props) {
     const initalProduct = {
       ...product.productData,
       user: account.User._id,
-      slug: Math.random().toString(36).substring(2, 15),
+      slug: SlugBuilder(product.productData.name),
       gallery,
     };
 

@@ -111,7 +111,6 @@ export const Search = async (filters, products, setProducts, dispatch) => {
 
     if (res.success === true) {
       const { data } = res;
-      console.log({data})
 
       const next = { 
         products: [...products.products, ...data.products], 
@@ -133,7 +132,6 @@ export const Search = async (filters, products, setProducts, dispatch) => {
   } 
   
   catch (error) {
-    console.log({error})
     const alert = {
       dispatch,
       message: Messages.PRODUCTS_LATEST_ERROR,
@@ -382,7 +380,6 @@ export const Category = async (filters, products, setProducts, dispatch) => {
   } 
   
   catch (error) {
-    console.log({error})
     const alert = {
       dispatch,
       message: Messages.PRODUCTS_LATEST_ERROR,

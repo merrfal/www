@@ -20,7 +20,7 @@ export default function Info(props) {
             {user?.userData?.name} {user?.userData?.surname}
             {user?.userAdditionalData?.isUserVerified && <VerifiedBadge />}
           </h1>
-          <p>@{user?.userData?.username}</p>
+          <p className="text-gray-600">@{user?.userData?.username}</p>
         </div>
       </div>
     </div>

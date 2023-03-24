@@ -38,7 +38,7 @@ export const Login = async (uid, dispatch) => {
 export const Register = async (initalUser, dispatch) => {
   try {
     const user = UserObject(initalUser);
-    console.log({user})
+
     const req = await Request("USERS/CREATE", { userData: user });
     const res = await req.json();
 

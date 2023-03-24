@@ -63,7 +63,8 @@ export const DescriptionValidation = (value) => {
 export const PhoneValidation = (value) => {
   let validation = { error: false };
 
-  const regex = /^((\+)?(383)?([1-9]{1}|[2]{1}[0-9]{1}|[3]{1}[0-9]{1}|[4]{1}[0-9]{1}|[5]{1}[0-9]{1}|[6]{1}[0-9]{1}|[7]{1}[0-9]{1})[0-9]{10,15})$/;
+  const regex =
+    /^((\+)?(383)?([1-9]{1}|[2]{1}[0-9]{1}|[3]{1}[0-9]{1}|[4]{1}[0-9]{1}|[5]{1}[0-9]{1}|[6]{1}[0-9]{1}|[7]{1}[0-9]{1})[0-9]{10,15})$/;
 
   if (!regex.test(value)) {
     validation.error = true;
@@ -173,16 +174,23 @@ export const UserBioValidation = (value) => {
   return validation;
 };
 
-export const SlugBuilderAndValidation = (value) => {
-  const regex = /^[a-zA-Z0-9-]+(?:-[a-zA-Z0-9]+)*$/;
-  const slug = value.trim().replace(/\s+/g, "-");
-  if (regex.test(slug)) return slug;
-  else return false;
+export const SlugBuilder = (value) => {
+  return (
+    value
+      .replace(/\s+/g, "-")
+      .replace(/[^\w-]+/g, "")
+      .toLowerCase() +
+    "-" +
+    Math.floor(Math.random() * (300 - 100 + 1)) +
+    100
+  );
 };
 
 export const UsernameBuilderAndValidation = (value) => {
   const regex = /^[a-zA-Z0-9]+$/;
-  const username = value.trim().replace(/[^a-zA-Z0-9]+/g, () => Math.floor(Math.random() * 10));
+  const username = value
+    .trim()
+    .replace(/[^a-zA-Z0-9]+/g, () => Math.floor(Math.random() * 10));
   return regex.test(username);
 };
 

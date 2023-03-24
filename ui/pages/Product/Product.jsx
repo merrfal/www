@@ -78,6 +78,7 @@ export default function Product() {
       />
 
       {product === null && <Skeleton />}
+
       {product !== null && (
         <div className="bg-white">
           <main className="max-w-7xl mx-auto sm:pt-16 sm:px-6 lg:px-8">
@@ -90,7 +91,10 @@ export default function Product() {
                     setIndex={setIndex}
                   />
 
-                  <Thumbnail gallery={gallery} index={index} />
+                  <Thumbnail 
+                    gallery={gallery} 
+                    index={index}
+                  />
                 </div>
 
                 <div className="mt-10 ml-3 px-4 sm:px-0 sm:mt-16 lg:mt-0">
@@ -101,7 +105,6 @@ export default function Product() {
                     <div className="h-5 border-r border-gray-200 mx-4" />
                     <Views product={product} />
                   </div>
-
                   <Info productData={product.productData} />
                   <Poster productData={product.productData} />
                   <Phone productData={product.productData} />

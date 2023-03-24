@@ -1,12 +1,12 @@
 import { SmLocationIcon } from "../../icons";
 
 export default function Info({ productData }) {
-  const { name, address, zipCode, city } = productData;
+  const { name, address, city } = productData;
 
   return (
     <div className="flex items-center py-4">
       <div className="flex-auto">
-        <FullLocation location={`${address}, ${zipCode}, ${city}`} />
+        <FullLocation location={`${address}, ${city}`} />
         <FullName name={name} />
       </div>
     </div>

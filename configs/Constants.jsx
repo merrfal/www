@@ -11,3 +11,4 @@ export const NOTIFICATION_TIME = process.env.NEXT_PUBLIC_NOTIFICATION_TIMEOUT = 
 export const NO_AVATAR = "/avatar-no.png";
 export const NO_COVER = "/cover-no.png";
 export const NO_THUMBNAIL = "/thumbnail-no.png";
+export const ANON_AVATAR = "/avatar-no.png";

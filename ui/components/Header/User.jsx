@@ -31,8 +31,6 @@ const Auth = ({ account }) => {
     else setAvatar("avatar-no.png");
   }, [account]);
 
-  console.log({avatar})
-
   let clickOutside = (handler) => {
     let domNode = useRef();
 

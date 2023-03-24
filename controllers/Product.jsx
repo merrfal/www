@@ -323,7 +323,7 @@ export const Similar = async ({ category }, res) => {
     const products = await Product
       .find({ "productData.category": category })
       .sort({ createdAt: -1 })
-      .limit(4);
+      .limit(5);
 
     const response = {
       res,

@@ -12,7 +12,7 @@ export default function Buttons() {
           </a>
         </Link>
 
-        <Link href="/produktet">
+        <Link href="/kerko">
           <a>
             <button className="flex items-center justify-center px-4 py-3 border border-white text-base font-medium rounded-md shadow-sm text-white bg-opacity-60 hover:bg-opacity-70 sm:px-8 hover:cursor:pointer hover:bg-[#ffffff05] transition-all">
               Shfleto
