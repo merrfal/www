@@ -66,7 +66,7 @@ const Auth = ({ account }) => {
         <img
           src={avatar || "avatar-no.png"}
           onError={() => setAvatar("avatar-no.png")}
-          className={`w-7 rounded-full ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
+          className={`w-9 lg:w-8 rounded-full ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
         />
       </button>
       {menu && <Dropdown username={account.User.userData.username} />}
