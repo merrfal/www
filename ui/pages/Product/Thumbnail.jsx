@@ -5,7 +5,8 @@ export default function Thumbnail({ gallery, index }) {
         <img
           src={gallery[index]}
           alt="Product Thumbnail"
-          className="w-full h-[50vh] object-center object-cover sm:rounded-lg"
+          className="w-full h-auto object-center object-cover rounded-lg"
+          style={{ maxHeight: "50vh" }}
         />
       </div>
     </div>
