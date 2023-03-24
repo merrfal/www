@@ -1,5 +1,5 @@
 const name = "Dhuro se nuk pakësohet";
-const description = "Një platformë që mundëson të dhuroni gjëra për njerëzit që kanë nevoja për ato produkte, përdorimi është falas si produktet që dhurohen.";
+const description = "Bëhu pjesë e komunitetit kontribues. Dhuro pak! Përfito shumë.";
 
 const Global = ({ title, description }) => {
   const meta = {
