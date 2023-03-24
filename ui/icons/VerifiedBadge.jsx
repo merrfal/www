@@ -1,11 +1,11 @@
-export default function VerifiedBadge() {
+export default function VerifiedBadge(props) {
   return (
     <svg
       width="22"
       height="22"
       viewBox="0 0 22 22"
       fill="none"
-      className="ml-2"
+      className={props.className}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

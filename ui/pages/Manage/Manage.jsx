@@ -45,7 +45,7 @@ export default function Manage({ mode = "create" }) {
       city: "prishtine",
       category: "636f3ece911a24f351b57837",
       gallery: [],
-      postedAnonymously: true,
+      postedAnonymously: false,
     },
   });
 

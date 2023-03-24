@@ -4,7 +4,7 @@ const Categories = [
     name: "Veshje",
     slug: "veshje",
     description: "Në këtë kategori do të gjeni një koleksion të gjërë të produkteve të veshjes për meshkuj dhe femra, për të gjitha moshat. Kjo kategori ofron një gamë të ndryshme të veshjeve, duke përfshirë nga rroba të përditshme, deri tek rroba për raste të veçanta. Do të gjeni bluza të thjeshta, pantallona, fustane, xhaketa dhe produkte të tjera të nevojshme për të përshtatur stilin tuaj personal.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/veshje.webp",
     favorite: true,
   },
   {
@@ -12,7 +12,7 @@ const Categories = [
     name: "Aksesorë",
     slug: "aksesore",
     description: "Aksesorët janë ndër elementët kryesorë të pamjes personale, andaj kjo kategori ofron një shumëllojshmëri të produkteve të nevojshme për të plotësuar stilin e veshjes suaj. Kategoria përfshin produkte si kapele, xhaketa, shalla, çanta, syze dielli, orë dhe produkte të tjera të cilat mund të shtojnë një ndikim të veçantë në pamjen tuaj.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/aksesore.webp",
     favorite: false,
   },
   {
@@ -20,7 +20,7 @@ const Categories = [
     name: "Këpucë",
     slug: "kepuce",
     description:  "Kjo kategori përfshin opsione të këpucëve të gjitha moshat dhe për qëllime të ndryshme. Kategoria Këpucë përfshin modele këpucësh si ato sportive, elegante, me take të lartë ose të ulët, sandale, këpucë për aktivitete jashtë shtëpisë, etj.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/kepuce.webp",
     favorite: false,
   },
   {
@@ -28,7 +28,7 @@ const Categories = [
     name: "Mobilje",
     slug: "mobilje",
     description: "Kjo kategori përfshin të gjitha llojet e mobiljeve për shtëpi, zyrë dhe ambientet e punës. Kjo përfshin tavolina, karrige, divane, shkëmbinj, dollapa, krevate dhe shumë të tjera. Shfrytëzuesit mund të shikojnë ose postojnë sende të reja, të përdorura ose të rregulluara.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/mobilje.webp",
     favorite: false,
   },
   {
@@ -36,7 +36,7 @@ const Categories = [
     name: "Elektronikë",
     slug: "elektronike",
     description: "Kjo kategori përfshin të gjitha pajisjet elektronike nga celularët, laptopët, telekomanda, kamera dhe shumë të tjera. Shfrytëzuesit mund të shikojnë ose postojnë sende të reja, të përdorura ose të rregulluara.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/elektronike.webp",
     favorite: true,
   },
   {
@@ -44,7 +44,7 @@ const Categories = [
     name: "Mjete Shtëpiake",
     slug: "mjete-shtepiake",
     description: "Kjo kategori përfshin të gjitha mjetet shtëpiake si aspiratorë, enë, thika, tenxhere, tava dhe shumë të tjera. Shfrytëzuesit mund të shikojnë ose postojnë sende të reja, të përdorura ose të rregulluara.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/mjete-shtepiake.webp",
     favorite: true,
   },
   {
@@ -52,7 +52,7 @@ const Categories = [
     name: "Kuzhinë",
     slug: "kuzhine",
     description: "Kjo kategori përfshin të gjitha pajisjet dhe sendet për kuzhinën dhe restorantet si pjatë, gota, filxhanë, enë gatimi dhe shumë të tjera. Shfrytëzuesit mund të shikojnë ose postojnë sende të reja, të përdorura ose të rregulluara.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/kuzhine.webp",
     favorite: false,
   },
   {
@@ -60,7 +60,7 @@ const Categories = [
     name: "Sport",
     slug: "sport",
     description: "Kjo kategori përfshin gjithçka lidhet me sportin dhe aktivitetet jashtë shtëpisë. Mund të gjeni pajisje sportive, rroba sportive, këpucë sportive, biçikleta dhe shumë të tjera.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/sport.webp",
     favorite: false,
   },
   {
@@ -68,7 +68,7 @@ const Categories = [
     name: "Literaturë",
     slug: "literature",
     description: "Në këtë kategori mund të gjeni libra dhe literatura të ndryshme për të gjitha moshat dhe shijet. Librat mund të jenë fiksion ose jo-fiksion, nga autorë të ndryshëm dhe në shumë gjuhë të ndryshme.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/literature.webp",
     favorite: true,
   },
   {
@@ -76,7 +76,7 @@ const Categories = [
     name: "Lojëra",
     slug: "lojera",
     description: "Kjo kategori përfshin lojëra dhe lodra të ndryshme për të gjitha moshat. Mund të gjeni lodra edukative për fëmijë, video lojra për të rriturit dhe shumë të tjera.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/lojera.webp",
     favorite: false,
   },
   {
@@ -84,7 +84,7 @@ const Categories = [
     name: "Kopsht",
     slug: "kopsht",
     description: "Në këtë kategori mund të gjeni gjithçka që kërkohet për të mbajtur një kopsht të bukur dhe për të kujdesur për veten. Kjo përfshin bimë, mbjellje, dhe produkte të kujdesit personal si kozmetikë dhe produktet e kujdesit të lëkurës.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/kopsht.webp",
     favorite: false,
   },
   {
@@ -92,7 +92,7 @@ const Categories = [
     name: "Automjete",
     slug: "automjete",
     description: "Kjo kategori përfshin automjete dhe motorë të ndryshëm, si automjete të përdorura, motorë dhe skuterë, si dhe pjesë këmbimi për automjete.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/automjete.webp",
     favorite: false,
   },
   {
@@ -100,7 +100,7 @@ const Categories = [
     name: "Fëmijë",
     slug: "femije",
     description: "Kategoria Fëmijë përfshin një gamë të gjerë produktet për fëmijë dhe të vegjël, duke filluar nga veshjet, lojërat dhe lodrat, librave për fëmijë, kopshtin, artikujt për ushqim dhe më shumë. ",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/femije.webp",
     favorite: true,
   },
   {
@@ -108,7 +108,7 @@ const Categories = [
     name: "Fitnes",
     slug: "fitnes",
     description: "Kategoria Fitnes ofron një gamë të gjerë produktet për aktivitete fizike dhe mirëqenie personale. Kategoria përfshin produkte si aparate fitnesi, aksesorë për ushtrime fizike, suplemente ushqimore, produkte për kujdesin e trupit, kozmetikë dhe produkte të tjera të nevojshme për të mbajtur trupin në formë dhe në gjendje të mirë shëndetësore. Me këto produkte, klientët mund të përmirësojnë shëndetin dhe formën e tyre fizike në mënyrë të shëndetshme dhe efektive.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/fitnes.webp",
     favorite: false,
   },
   {
@@ -116,7 +116,7 @@ const Categories = [
     name: "Turizëm",
     slug: "turizem",
     description: "Kjo kategori ofron produkte dhe pajisje të ndryshme të nevojshme për udhëtimet turistike dhe për shfrytëzimin e akomodimeve të ndryshme. Kategoria përfshin produkte si valixhe dhe çanta për udhëtime, pajisje për kamping dhe piknik, pajisje teknologjike për udhëtim si kamera dhe dronë, karte dhe udhëzime turistike, dhe produkte të tjera të nevojshme për të bërë një udhëtim të përshtatshëm dhe të këndshëm për klientët.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/turizem.webp",
     favorite: false,
   },
   {
@@ -124,7 +124,7 @@ const Categories = [
     name: "Të tjera",
     slug: "te-tjera",
     description: "Kjo është një kategori e përgjithshme e cila mund të përfshijë artikuj ose shërbime nga fusha të ndryshme si moda, teknologji, ushqim, etj. Kjo kategori është e përshtatshme për artikujt që nuk klasifikohen në kategori të tjera specifike, si dhe për shërbime ose produkte të reja që nuk janë pjesë e asnjë kategorie ekzistuese.",
-    icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
+    icon: "/categories/te-tjera.webp",
     favorite: false,
   },
 ];

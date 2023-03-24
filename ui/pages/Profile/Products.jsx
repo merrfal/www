@@ -2,7 +2,7 @@ import * as Messages from "../../../configs/Messages";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { useEffect, useState } from "react";
-import { Empty, Product } from "../../components";
+import { Empty, End, Product } from "../../components";
 import { Skeleton } from "./";
 import { Products as UserProducts } from "../../../api/User";
 
@@ -27,6 +27,8 @@ export default function Products({ user, dispatch, account }) {
       next();
     }
   }, [user])
+
+  console.log({ products })
 
   return (
     <main className="max-w-2xl mx-auto mt-8 py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -57,6 +59,8 @@ export default function Products({ user, dispatch, account }) {
           <Product product={p} />
         ))}
       </InfiniteScroll>
+
+      {!products.hasMore && products.products.length !== 0 && <End />}
     </main>
   );
 }

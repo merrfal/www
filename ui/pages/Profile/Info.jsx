@@ -16,7 +16,7 @@ export default function Info(props) {
         />
 
         <div className="hidden sm:block md:hidden mt-6 min-w-0 flex-1">
-          <h1 className="text-2xl font-bold text-gray-900 truncate">
+          <h1 className="text-2xl font-bold text-gray-900 truncate flex items-center">
             {user?.userData?.name} {user?.userData?.surname}
             {user?.userAdditionalData?.isUserVerified && <VerifiedBadge />}
           </h1>

@@ -26,7 +26,7 @@ export default function Images({
         maxNumber={4}
         maxFileSize={10000000}
         dataURLKey="data_url"
-        acceptType={["jpg", "png", "jpeg"]}
+        acceptType={["jpg", "png", "jpeg", "webp"]}
       >
         {({
           imageList,

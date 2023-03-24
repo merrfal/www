@@ -294,6 +294,7 @@ export const View = async ({ slug }, res) => {
       "userData.surname": 1,
       "userData.username": 1,
       "userData.avatar": 1,
+      "userAdditionalData.isUserVerified": 1
     });
 
     const response = {

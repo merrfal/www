@@ -96,6 +96,7 @@ export const Login = async ({ uid }, res) => {
 export const Products = async (payload, res) => {
   let { offset, limit, user, auth } = payload;
 
+  console.log({ offset, limit, user, auth })
   offset = parseInt(offset);
   limit = parseInt(limit);
 

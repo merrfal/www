@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { KosovoCities } from "../../../data";
 import { OpenIcon } from "../../icons";
 
-export default function Cities({filters, setFilters}) {
+export default function Cities({ filters, setFilters }) {
   const [isCityOpen, setIsCityOpen] = useState(false);
 
   let clickOutside = (handler) => {
@@ -18,11 +18,14 @@ export default function Cities({filters, setFilters}) {
   };
 
   let ref = clickOutside(() => setIsCityOpen(false));
-  const open = () => setIsCityOpen(!isCityOpen)
+  const open = () => setIsCityOpen(!isCityOpen);
 
   return (
     <div ref={ref} className="px-4 relative inline-block text-left">
-      <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+      <button
+        onClick={open}
+        className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+      >
         <span>Qytetet</span>
         <OpenIcon />
       </button>
@@ -30,7 +33,7 @@ export default function Cities({filters, setFilters}) {
       {isCityOpen && (
         <div className="origin-top-right absolute max-h-[280px] overflow-auto right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
           <form className="space-y-4">
-            {KosovoCities.map((city) => {
+          {KosovoCities.map((city) => {
               return (
                 <div key={city.value} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
                   <input
@@ -39,7 +42,7 @@ export default function Cities({filters, setFilters}) {
                     type="radio"
                     checked={filters.cities.includes(city.value)}
                     className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
-                    onClick={(e) => setFilters({...filters, cities: [...filters.cities, e.target.value]})}
+                    onClick={() => setFilters({...filters, cities: [...filters.cities, city.value]})}
                   />
                   <label htmlFor={city.value} className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                     {city.name}
