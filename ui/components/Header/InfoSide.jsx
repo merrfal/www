@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Categories } from "../../../data";
-import { LogoIcon, OpenIcon } from "../../icons";
+import { LogoIcon, OpenIcon, SearchIcon } from "../../icons";
 import { Search } from "./";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -12,22 +12,26 @@ export default function InfoSide() {
 
   return (
     <div className="h-full w-auto flex space-x-6 items-center align-center">
-    
+
       <Link href="/">
         <a className="flex mr-2">
           <LogoIcon />
         </a>
       </Link>
 
+
       <Search />
 
-      <div className="h-5 border-r border-gray-200 mx-4" />
 
-      <div className="categories-container">
-        <Desktop router={router} current={router.query.category} />
-        <Mobile router={router} current={router.query.category} />
-      </div>
-      
+      <div className="h-5 border-r border-gray-200 mx-4" />
+      {
+        //   <div className="categories-container">
+        //   <Desktop router={router} current={router.query.category} />
+        //   <Mobile router={router} current={router.query.category} />
+        // </div>
+        //qetu mi hek produktet duhet me bo diqka me z-index a naj sen me dal aj perpara
+      }
+
     </div>
   );
 }
@@ -59,7 +63,7 @@ const Desktop = () => {
 };
 
 const Mobile = () => {
- 
+
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
 
   let clickOutside = (handler) => {
@@ -80,30 +84,30 @@ const Mobile = () => {
 
   return (
     <div className="mobile-categories">
-    <div ref={ref} className="px-4 relative inline-block text-left">
-      <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-        <span>Kategoritë</span>
-        <OpenIcon />
-      </button>
+      <div ref={ref} className="px-4 relative inline-block text-left">
+        <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+          <span>Kategoritë</span>
+          <OpenIcon />
+        </button>
 
-      {isCategoryOpen && (
-        <div className="origin-top-right max-h-[280px] overflow-scroll absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <form className="space-y-4">
-            {Categories.map((category) => {
-              return (
-                <div key={category.slug} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
-                  <Link href={`/kategorite/${category.slug}`}>
-                    <a className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap" onClick={() => setIsCategoryOpen(!isCategoryOpen)}>
-                      {category.name}
-                    </a>
-                  </Link>
-                </div>
-              );
-            })}
-          </form>
-        </div>
-      )}
-    </div>
+        {isCategoryOpen && (
+          <div className="origin-top-right max-h-[280px] overflow-scroll absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <form className="space-y-4">
+              {Categories.map((category) => {
+                return (
+                  <div key={category.slug} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
+                    <Link href={`/kategorite/${category.slug}`}>
+                      <a className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap" onClick={() => setIsCategoryOpen(!isCategoryOpen)}>
+                        {category.name}
+                      </a>
+                    </Link>
+                  </div>
+                );
+              })}
+            </form>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
