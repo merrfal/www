@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Category } from "..";
 import { Categories as AllCategories } from "../../../data";
 import { Header } from "./";
@@ -20,6 +21,14 @@ export default function Categories() {
           </div>
         </div>
       </div>
+      <div className="w-[100%] px-4 sm:px-6 flex mt-2 items-end justify-items-end lg:px-8 xl:px-0">
+        <Link href="/kategorite">
+          <a className=" sm:hidden w-full text-sm text-end font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block">
+            Shfleto të gjitha Kategoritë &rarr;
+          </a>
+        </Link>
+      </div>
+
     </div>
   );
 }
