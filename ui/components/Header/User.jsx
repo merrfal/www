@@ -8,7 +8,7 @@ import { useAuth, useGoogle as UseGoogle } from "../../../hooks";
 import { AddIcon, SearchIcon } from "../../icons";
 import { Dropdown } from "./";
 
-const Auth = ({ account}) => {
+const Auth = ({ account }) => {
   const [menu, setOpen] = useState();
   const [avatar, setAvatar] = useState(null);
 
@@ -69,8 +69,6 @@ const Auth = ({ account}) => {
           className={`w-7 rounded-full ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
         />
       </button>
-
-
       {menu && <Dropdown username={account.User.userData.username} />}
     </div>
   );

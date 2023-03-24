@@ -11,7 +11,7 @@ export default function InfoSide() {
   const router = useRouter();
 
   return (
-    <div className="h-full w-auto flex space-x-6 items-center align-center">
+    <div className="h-full w-full flex space-x-6 items-center align-center place-content-between">
 
       <Link href="/">
         <a className="flex mr-2">
@@ -23,12 +23,12 @@ export default function InfoSide() {
       <Search />
 
 
-      <div className="h-5 border-r border-gray-200 mx-4" />
+      <div className="h-5 border-r border-gray-200 mx-4 hidden lg:block" />
       {
-        //   <div className="categories-container">
-        //   <Desktop router={router} current={router.query.category} />
-        //   <Mobile router={router} current={router.query.category} />
-        // </div>
+          <div className="categories-container">
+          <Desktop router={router} current={router.query.category} />
+          <Mobile router={router} current={router.query.category} />
+        </div>
         //qetu mi hek produktet duhet me bo diqka me z-index a naj sen me dal aj perpara
       }
 
