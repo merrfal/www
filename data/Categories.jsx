@@ -19,7 +19,7 @@ const Categories = [
     _id: "641c4a5db24ea4453a054361",
     name: "Këpucë",
     slug: "kepuce",
-    description:  "Kjo kategori përfshin opsione të këpucëve të gjitha moshat dhe për qëllime të ndryshme. Kategoria Këpucë përfshin modele këpucësh si ato sportive, elegante, me take të lartë ose të ulët, sandale, këpucë për aktivitete jashtë shtëpisë, etj.",
+    description: "Kjo kategori përfshin opsione të këpucëve të gjitha moshat dhe për qëllime të ndryshme. Kategoria Këpucë përfshin modele këpucësh si ato sportive, elegante, me take të lartë ose të ulët, sandale, këpucë për aktivitete jashtë shtëpisë, etj.",
     icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
     favorite: false,
   },
@@ -101,7 +101,7 @@ const Categories = [
     slug: "femije",
     description: "Kategoria Fëmijë përfshin një gamë të gjerë produktet për fëmijë dhe të vegjël, duke filluar nga veshjet, lojërat dhe lodrat, librave për fëmijë, kopshtin, artikujt për ushqim dhe më shumë. ",
     icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
-    favorite: true,
+    favorite: false,
   },
   {
     _id: "641c6203b24ea4453a05436c",
@@ -125,7 +125,7 @@ const Categories = [
     slug: "te-tjera",
     description: "Kjo është një kategori e përgjithshme e cila mund të përfshijë artikuj ose shërbime nga fusha të ndryshme si moda, teknologji, ushqim, etj. Kjo kategori është e përshtatshme për artikujt që nuk klasifikohen në kategori të tjera specifike, si dhe për shërbime ose produkte të reja që nuk janë pjesë e asnjë kategorie ekzistuese.",
     icon: "https://i.pinimg.com/originals/7e/fa/64/7efa64c3934b7d3e71037c8f6ad19dc7.jpg",
-    favorite: false,
+    favorite: true,
   },
 ];
 
