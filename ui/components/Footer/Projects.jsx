@@ -8,7 +8,7 @@ export default function Projects() {
       </h3>
       <ul className="mt-6 space-y-6">
         {ProjectsList.map((project) => (
-          <li className="text-sm">
+          <li className="text-sm"  style={{lineHeight: 1}}>
             <a
               href={project.path}
               target="_blank"
