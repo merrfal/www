@@ -11,7 +11,7 @@ export default function InfoSide() {
   const router = useRouter();
 
   return (
-    <div className="h-full w-full flex space-x-6 items-center align-center place-content-between">
+    <div className="h-full w-full flex space-x-6 items-center align-center place-content-between lg:place-content-start ">
 
       <Link href="/">
         <a className="flex mr-2">
