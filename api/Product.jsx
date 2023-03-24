@@ -1,7 +1,6 @@
 import * as Messages from "../configs/Messages";
 
 import { Notification } from "../utils/Response";
-import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 import { Request } from "../utils/Http";
 
 export const Create = async (page, router, setLoading, dispatch) => {
@@ -33,7 +32,6 @@ export const Create = async (page, router, setLoading, dispatch) => {
   } 
   
   catch (error) {
-    console.log(error)
     const alert = {
       dispatch,
       message: Messages.PRODUCTS_LATEST_ERROR,
@@ -142,124 +140,48 @@ export const Search = async (filters, products, setProducts, dispatch) => {
   }
 };
 
-export const Update = async (
-  dispatch,
-  product,
-  images,
-  deletedImages,
-  setIsLoading
-) => {
-  setIsLoading(true);
+export const Update = async ( product, router, setLoading, dispatch) => {
+  try{
+    setLoading(true);
 
-  const url = `${Url}/api/products/ProductUpdate/${product._id}`;
-  let page = structuredClone(product);
-  let array = [];
+    const req = await Request("PRODUCTS/UPDATE", { ...product });
+    const res = await req.json();
 
-  if (deletedImages !== 0) {
-    for (let i = 0; i < deletedImages.length; i++) {
-      const name = deletedImages[i]
-        .split("/products%2F")
-        .pop()
-        .split("?alt")[0];
-      const desertRef = ref(storage, `products/${name}`);
-      await deleteObject(desertRef);
+    if (res.success === true) {
+      router.push(`/${res.data.productData.slug}`)
+  
+      const alert = {
+        dispatch,
+        message: res.message,
+        type: "success",
+      };
+  
+      Notification(alert);
+    }
+
+    else {
+      const alert = {
+        dispatch,
+        message: res.message,
+        type: "error",
+      };
+
+      Notification(alert);
     }
   }
 
-  if (images.length !== 0) {
-    let id = v4();
+  catch (error) {
+    const alert = {
+      dispatch,
+      message: Messages.PRODUCTS_LATEST_ERROR,
+      type: "error",
+    };
 
-    for (let i = 0; i < images.length; i++) {
-      if (images[i].data_url) {
-        const storageRef = ref(
-          storage,
-          `/products/${id + images[i]?.file.name}`
-        );
-        const uploadTask = uploadBytesResumable(storageRef, images[i]?.file);
+    Notification(alert);
+  }
 
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            let progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log("Upload is " + progress + "% done");
-          },
-          (error) => {
-            console.log(error);
-          },
-          async () => {
-            await getDownloadURL(uploadTask.snapshot.ref).then(
-              async (downloadURL) => {
-                array = [...array, downloadURL];
-
-                if (i === images.length - 1) {
-                  page.Gallery = array;
-                  const config_with_images = Request(
-                    "PUT",
-                    "JSON",
-                    page,
-                    true,
-                    false,
-                    false
-                  );
-
-                  try {
-                    const req = await fetch(url, config_with_images);
-                    const res = await req.json();
-
-                    if (res.success === true) {
-                      window.location.reload();
-                      Notification(dispatch, res.message, "success");
-                    } else Notification(dispatch, res.message, "error");
-                  } catch (error) {
-                    Notification(dispatch, "", "error");
-                  } finally {
-                    setIsLoading(false);
-                  }
-                }
-              }
-            );
-          }
-        );
-      } else {
-        array = [...array, images[i]];
-        if (i === images.length - 1) {
-          page.Gallery = array;
-          const config = Request("PUT", "JSON", page, true, false, false);
-
-          try {
-            const req = await fetch(url, config);
-            const res = await req.json();
-
-            if (res.success === true) {
-              window.location.reload();
-              Notification(dispatch, res.message, "success");
-            } else Notification(dispatch, res.message, "error");
-          } catch (error) {
-            Notification(dispatch, "", "error");
-          } finally {
-            setIsLoading(false);
-          }
-        }
-      }
-    }
-  } else {
-    page.Gallery = [];
-    const config = Request("PUT", "JSON", page, true, false, false);
-
-    try {
-      const req = await fetch(url, config);
-      const res = await req.json();
-
-      if (res.success === true) {
-        window.location.reload();
-        Notification(dispatch, res.message, "success");
-      } else Notification(dispatch, res.message, "error");
-    } catch (error) {
-      Notification(dispatch, "", "error");
-    } finally {
-      setIsLoading(false);
-    }
+  finally {
+    setLoading(false);
   }
 };
 
@@ -270,7 +192,7 @@ export const View = async (slug, setProduct, dispatch, setLoading = null) => {
     const res = await req.json();
 
     if (res.success === true) {
-      setProduct(setLoading !== null ? res.data.productData : res.data);
+      setProduct(res.data);
       if (setLoading !== null) setLoading(false);
     }
 

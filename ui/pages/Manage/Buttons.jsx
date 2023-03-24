@@ -4,7 +4,7 @@ import { uploadBytesResumable, ref, getDownloadURL } from "firebase/storage";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { v4 } from "uuid";
-import { Create } from "../../../api/Product";
+import { Create, Update } from "../../../api/Product";
 import { Storage } from "../../../configs/Firebase";
 import { Notification } from "../../../utils/Response";
 
@@ -18,7 +18,7 @@ import {
 } from "../../../utils/Forms";
 
 export default function Buttons(props) {
-  const { product, setLoading, account, setValidation } = props;
+  const { product, setLoading, account, setValidation, mode } = props;
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -109,11 +109,25 @@ export default function Buttons(props) {
     Create(initalProduct, router, setLoading, dispatch);
   };
 
+  const handleUpdate = async () => {
+    if (!onValidation()) {
+      typeof window !== "undefined" &&
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+
+      return;
+    }
+
+    Update({...product.productData}, router, setLoading, dispatch);
+  }
+
   return (
     <div className="text-right mb-2 mr-2">
       <button
         className="inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none"
-        onClick={handlePublish}
+        onClick={mode === "create" ? handlePublish : handleUpdate}
       >
         Publiko Produktin
       </button>

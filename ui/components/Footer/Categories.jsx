@@ -12,7 +12,7 @@ export default function Categories() {
           if (index < 4) {
             return (
               <li className="text-sm">
-                <Link href={`/kategoria/${category.slug}`}>
+                <Link href={`/kategorite/${category.slug}`}>
                   <a className="text-gray-500 hover:text-gray-600">
                     {category.name}
                   </a>

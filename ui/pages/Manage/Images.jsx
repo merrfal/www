@@ -10,13 +10,17 @@ export default function Images({
   },
   onUpload,
   validation: v,
+  mode,
 }) {
   const validation = ImagesValidation(gallery);
 
+  const onMode = mode === "create" ? {} : { pointerEvents: "none", opacity: ".65" };
+
   return (
-    <div>
+    <div style={onMode}>
       <label className="block text-sm font-medium text-gray-700">
-        Fotot e Produktit
+        Fotot e Produktit{" "}
+        {mode === "edit" && "(nuk lejohet ndryshimi per momentin)"}
       </label>
 
       <ReactImageUploading
@@ -49,33 +53,69 @@ export default function Images({
               >
                 <div className="text-center flex items-center flex-row space-x-4">
                   {gallery.length !== 0 &&
-                    imageList.map((image, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center relative border border-gray-200 rounded-md"
-                      >
-                        <img
-                          src={image.data_url}
-                          className="w-[265px] h-[40vh] object-cover max-w-full align-middle rounded-md"
-                        />
-                        <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
-                          <p className="text-gray-700 text-[13px]">
-                            {image?.file?.name?.length > 20 ? image?.file?.name?.slice(0, 20) + "..." : image?.file?.name}
-                          </p>
-                        </div>
-                        <div
-                          className="absolute flex right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onImageRemove(index);
-                          }}
-                        >
-                          <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
-                            <CloseIcon className="h-4 w-4" />
-                          </button>
-                        </div>
-                      </div>
-                    ))}
+                    imageList.map((image, index) => {
+                      if (mode === "create")
+                        return (
+                          <div
+                            key={index}
+                            className="flex items-center relative border border-gray-200 rounded-md"
+                          >
+                            <img
+                              src={image.data_url}
+                              className="w-[265px] h-[40vh] object-cover max-w-full align-middle rounded-md"
+                            />
+                            <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
+                              <p className="text-gray-700 text-[13px]">
+                                {image?.file?.name?.length > 20
+                                  ? image?.file?.name?.slice(0, 20) + "..."
+                                  : image?.file?.name}
+                              </p>
+                            </div>
+                            <div
+                              className="absolute flex right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onImageRemove(index);
+                              }}
+                            >
+                              <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+                                <CloseIcon className="h-4 w-4" />
+                              </button>
+                            </div>
+                          </div>
+                        );
+
+                      if (mode === "edit")
+                        return (
+                          <div
+                            key={index}
+                            className="flex items-center relative border border-gray-200 rounded-md"
+                          >
+                            <img
+                              src={image.url}
+                              className="w-[265px] h-[40vh] object-cover max-w-full align-middle rounded-md"
+                            />
+                            <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
+                              <p className="text-gray-700 text-[13px]">
+                                {image?.filename?.length > 20
+                                  ? image?.filename?.slice(0, 20) + "..."
+                                  : image?.filename}
+                              </p>
+                            </div>
+                            <div
+                              className="absolute flex right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onImageRemove(index);
+                              }}
+                            >
+                              <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+                                <CloseIcon className="h-4 w-4" />
+                              </button>
+                            </div>
+                          </div>
+                        );
+                    })}
 
                   {gallery.length === 0 && (
                     <div className="flex flex-col">

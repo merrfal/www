@@ -230,54 +230,33 @@ export const Latest = async (payload, res) => {
 
 export const Update = async (payload, res) => {
   try {
-    const body = req.body;
-
-    const data = {
-      Name: body.Name,
-      Phone: body.Phone,
-      Description: body.Description,
-      Gallery: body.Gallery,
-      Category: body.Category,
-      Views: body.Views,
-      UserShow: body.UserShow,
-      Status: body.Status,
-      Zip: body.Zip,
-      Address: body.Address,
-      City: body.City,
-      Country: body.Country,
-    };
-
-    const id = req.query.id;
-    const product = await Product.findByIdAndUpdate(
-      id,
-      { $set: data },
-      { new: true }
+    const product = await Product.findOneAndUpdate(
+      {'productData.slug': payload.slug}, 
+      { $set: { productData: payload } },
     );
 
-    if (product)
-      Response(
-        res,
-        200,
-        true,
-        "Produkti u përditësua me sukses, këto ndryshime do të ndikojnë menjëherë në platformë.",
-        product
-      );
-    else
-      Response(
-        res,
-        404,
-        false,
-        "Produkti nuk u përditësua për shkak të disa gabimeve.",
-        null
-      );
-  } catch (err) {
-    Response(
+    const response = {
       res,
-      500,
-      false,
-      "Gabim i brendshëm i serverit gjatë përditësimit të produktit.",
-      null
-    );
+      code: product ? 200 : 404,
+      success: product ? true : false,
+      data: product ? product : null,
+      message: product ? Messages.PRODUCT_UPDATE_SUCCESS : Messages.PRODUCT_UPDATE_ERROR,
+    }
+    
+    Response(response);
+  } 
+  
+  catch (err) {
+    const response ={
+      res,
+      code: 500,
+      success: false,
+      data: null,
+      message: Messages.PRODUCT_UPDATE_ERROR,
+      error: err,
+    }
+
+    Response(response);
   }
 };
 
@@ -306,7 +285,9 @@ export const View = async ({ slug }, res) => {
     };
 
     Response(response);
-  } catch (error) {
+  } 
+  
+  catch (error) {
     const response = {
       res,
       code: 500,

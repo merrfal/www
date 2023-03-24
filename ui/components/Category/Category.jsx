@@ -4,7 +4,7 @@ export default function Category({ category, index }) {
   const { name, icon, slug } = category;
 
   return (
-    <Link href={`/kategoria/${slug}`} key={index}>
+    <Link href={`/kategorite/${slug}`} key={index}>
       <a className="hover:cursor-pointer relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-80 transition-all xl:w-auto">
         <span className="absolute inset-0">
           <img

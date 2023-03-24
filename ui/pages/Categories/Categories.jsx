@@ -3,14 +3,18 @@ import { Category, End } from "../../components";
 import { Categories as AllCategories } from "../../../data";
 import { Header, Filters } from "./";
 import { useState } from "react";
+import { Global } from "../../../configs/Head";
+import { CategoriesMeta } from "../../../configs/Metas";
 
 export default function Categories() {
   const [ordering, setOrdering] = useState("asc");
+  const meta = CategoriesMeta();
 
   return (
     <Normal>
       <Header />
       <Filters ordering={ordering} setOrdering={setOrdering} />
+      <Global title={meta.title} description={meta.description}  />
 
       <div className="py-3 sm:py8 xl:max-w-7xl xl:mx-auto xl:px-8">
         <div className="mt-4 flow-root">

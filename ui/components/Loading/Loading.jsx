@@ -3,15 +3,15 @@ export default function Loading(){
       src: "https://lottie.host/c47c3f04-5fb5-45e5-b0ab-c7f2990effe4/tDIHWvQxqp.json",
       background: "transparent",
       speed: "1",
-      style: {width: '32px', height: '32px'},
+      style: {width: '62px', height: '62px'},
       loop: true,
       autoplay: true
     }
   
     const container = {
       width: '100%',
+      height: '80vh',
       display: 'flex',
-      height: '0',
       justifyContent: 'center',
       alignItems: 'center'
     }
