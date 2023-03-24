@@ -4,7 +4,7 @@ export default function Category({ category, index, kategori }) {
   const { name, icon, slug } = category;
 
   return (
-    <Link href={`/kategoria/${slug}`} key={index}>
+    <Link href={`/kategorite/${slug}`} key={index}>
 
       <a className={kategori ? "hover:cursor-pointer relative h-[260px] sm:h-[400px] mb-6 rounded-lg rounded-xl rounded p-6 flex flex-col mx-2 transition-all" :
         "hover:cursor-pointer relative h-[350px] sm:h-[400px] mb-6 rounded-lg rounded p-6 flex flex-col mx-2 transition-all"
