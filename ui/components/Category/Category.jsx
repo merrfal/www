@@ -5,7 +5,7 @@ export default function Category({ category, index }) {
 
   return (
     <Link href={`/kategoria/${slug}`} key={index}>
-    <a className="hover:cursor-pointer relative w-full mb-6 rounded-lg p-6 flex flex-col  transition-all">
+    <a className="hover:cursor-pointer relative w-full mb-6 rounded-lg rounded p-6 flex flex-col mx-2 transition-all">
       <span className="absolute inset-0">
         <img
           src={icon === "" ? "/category-no.png" : icon}
@@ -21,7 +21,7 @@ export default function Category({ category, index }) {
         />
       </span>
       <span className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"></span>
-      <span className="relative mt-auto text-center text-xl font-bold text-white">
+      <span className="relative mt-auto text-center text-xl font-bold text-white w-[200px]">
         {name}
       </span>
     </a>
