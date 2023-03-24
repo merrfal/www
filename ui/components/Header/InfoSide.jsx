@@ -7,8 +7,10 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 
-export default function InfoSide() {
+export default function InfoSide({openSearch}) {
   const router = useRouter();
+
+
 
   return (
     <div className="h-full w-full flex space-x-6 items-center align-center place-content-between lg:place-content-start ">
@@ -83,7 +85,7 @@ const Mobile = () => {
 
 
   return (
-    <div className="mobile-categories">
+    <div className="mobile-categories z-0">
       <div ref={ref} className="px-4 relative inline-block text-left">
         <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
           <span>Kategoritë</span>

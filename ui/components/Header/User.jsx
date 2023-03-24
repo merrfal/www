@@ -32,6 +32,8 @@ const Auth = ({ account }) => {
   }, [account]);
 
 
+
+
   let clickOutside = (handler) => {
     let domNode = useRef();
 
@@ -53,7 +55,7 @@ const Auth = ({ account }) => {
 
 
       <Link href="/shto">
-        <a className="ml-4 p-1 text-gray-400 hover:text-gray-500 lg:block">
+        <a className="p-1 text-gray-400 hover:text-gray-500 lg:block">
           <AddIcon />
         </a>
       </Link>
@@ -66,9 +68,11 @@ const Auth = ({ account }) => {
         <img
           src={avatar || "avatar-no.png"}
           onError={() => setAvatar("avatar-no.png")}
-          className={`w-9 lg:w-8 rounded-full ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
+          className={`w-9 md:w-8 rounded-full ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
         />
       </button>
+      
+
       {menu && <Dropdown username={account.User.userData.username} />}
     </div>
   );
