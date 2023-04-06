@@ -1,7 +1,7 @@
-import { Normal } from '../../layouts';
-import { Animation, Link, Info } from './';
+import { Normal } from "../../layouts";
+import { Animation, Link, Info } from "./";
 
-export default function Error({code}) {
+export default function Error({ code }) {
   return (
     <Normal>
       <div className="min-h-full pt-24 pb-32 flex flex-col bg-white">

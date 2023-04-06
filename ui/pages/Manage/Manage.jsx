@@ -1,6 +1,5 @@
 import { Normal } from "../../layouts";
 import { useEffect, useState } from "react";
-import { Global } from "../../../configs/Head";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { View } from "../../../api/Product";
@@ -45,7 +44,7 @@ export default function Manage({ mode = "create" }) {
       city: "prishtine",
       category: "636f3ece911a24f351b57837",
       gallery: [],
-      postedAnonymously: true,
+      postedAnonymously: false,
     },
   });
 
@@ -74,25 +73,26 @@ export default function Manage({ mode = "create" }) {
   const onLoad = !loading ? {} : { pointerEvents: "none", opacity: ".65" };
 
   useEffect(() => {
-    if (mode !== "create" && !product.hasOwnProperty("productData")) {
+    if (mode === "edit" && setLoading) {
       const { slug } = router.query;
-      if (slug !== "" && slug !== undefined) View(slug, setProduct, dispatch, setLoading);
+      
+      if (slug !== "" && slug !== undefined) View(
+        slug, 
+        setProduct, 
+        dispatch, 
+        setLoading,
+      );
     }
   }, [router]);
 
   return (
     <Normal>
-      <Global
-        title="Dhuro një produkt"
-        description="Dhuroni një produkt për personat që kanë nevoj për atë produkt, mos harroni se dhënja nuk ju bën të varfër."
-      />
-
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16">
           <div className="mt-5 md:col-span-2 md:mt-0">
             <div className="sm:overflow-hidden sm:rounded-md">
               <div style={onLoad} className="space-y-6 p-2">
-                <Header />
+                <Header product={product} mode={mode} />
                 
                 <Title
                   product={product}
@@ -142,10 +142,12 @@ export default function Manage({ mode = "create" }) {
                   product={product}
                   onUpload={onUpload}
                   validation={validation}
+                  mode={mode}
                 />
               </div>
 
               <Buttons
+                mode={mode}
                 product={product}
                 onInput={onInput}
                 setLoading={setLoading}

@@ -68,3 +68,7 @@ textarea {
     display: none;
   }
 }
+
+::-webkit-scrollbar {
+  width: 0;
+}

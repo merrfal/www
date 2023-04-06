@@ -1,19 +1,7 @@
-export const ProductFormValidation = (target) => {
-  const validation = {
-    title: NameValidation(target.title),
-    // category: CategoryValidation(target.category),
-    // price: PriceValidation(target.price),
-    // description: DescriptionValidation(target.description),
-    // images: ImagesValidation(target.images),
-  };
-
-  return validation;
-};
-
 export const NameValidation = (value) => {
   let validation = { error: false };
 
-  const minLength = 12;
+  const minLength = 4;
   const maxLength = 80;
   const regex = /^[a-zA-Z0-9]+(?:[ ]?[a-zA-Z0-9]+)*$/;
 
@@ -38,7 +26,7 @@ export const NameValidation = (value) => {
 export const DescriptionValidation = (value) => {
   let validation = { error: false };
 
-  const minLength = 32;
+  const minLength = 28;
   const maxLength = 320;
   const regex = /^[a-zA-Z0-9- ,.]{32,500}$/;
 

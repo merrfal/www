@@ -4,7 +4,7 @@ export default function Steps() {
   return (
     <section className="mt-12">
       <div className="border-t divide-y divide-gray-200">
-        <div>
+        <div className="mt-4">
           <h3>
             <button className="group relative w-full py-6 flex justify-between items-center text-left">
               <span className="text-gray-900 text-sm font-medium">

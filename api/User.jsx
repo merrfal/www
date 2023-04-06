@@ -21,9 +21,7 @@ export const Login = async (uid, dispatch) => {
       dispatch(LogoutAccount());
       Notification(alert);
     }
-  } 
-  
-  catch (error) {
+  } catch (error) {
     const alert = {
       dispatch,
       message: Messages.USER_AUTH_ERROR,
@@ -52,8 +50,7 @@ export const Register = async (initalUser, dispatch) => {
 
       Notification(alert);
     }
-  } 
-  catch (error) {
+  } catch (error) {
     const alert = {
       dispatch,
       message: Messages.USER_AUTH_ERROR,
@@ -70,15 +67,20 @@ export const Update = async (
   setIsLoading,
   setIsEdit,
   setUserClone,
-  dispatch
+  dispatch,
 ) => {
   try {
     setIsLoading(true);
 
-    const req = await Request("USER/PRODUCTS", { ...userClone });
+    const req = await Request("USERS/UPDATE", {
+      userData: userClone.userData,
+      userAdditionalData: userClone.userAdditionalData,
+    });
+
     const res = await req.json();
 
     if (res.success === true) {
+      console.log({ res });
       const { data } = res;
 
       const alert = {
@@ -92,7 +94,9 @@ export const Update = async (
       setUser(data);
       setUserClone(data);
       setIsEdit(false);
-    } else {
+    } 
+    
+    else {
       const alert = {
         dispatch,
         message: res.message,
@@ -104,81 +108,16 @@ export const Update = async (
   } catch (error) {
     const alert = {
       dispatch,
-      message: Messages.PRODUCTS_LATEST_ERROR,
+      message: Messages.USER_UPDATE_ERROR,
       type: "error",
     };
 
     Notification(alert);
-  } finally {
+  } 
+  
+  finally {
     setIsLoading(false);
   }
-
-  // setIsLoading(true);
-  // let user = structuredClone(profile);
-
-  // const url = `${Url}/api/users/UserUpdate/${profile.Id}`;
-  // const config = Request("P", "JSON", profile, true, false, false);
-
-  // if (image) {
-  //   const storageRef = ref(Storage, `/users/${v4() + image.file.name}`);
-  //   const uploadTask = uploadBytesResumable(storageRef, image?.file);
-
-  //   uploadTask.on(
-  //     "state_changed",
-  //     (snapshot) => {
-  //       let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     },
-  //     async () => {
-  //       await getDownloadURL(uploadTask.snapshot.ref).then(
-  //         async (downloadURL) => {
-  //           user.Avatar = downloadURL;
-  //           const config_with_avatar = Request(
-  //             "P",
-  //             "JSON",
-  //             user,
-  //             true,
-  //             false,
-  //             false
-  //           );
-  //           try {
-  //             const req = await fetch(url, config_with_avatar);
-  //             const res = await req.json();
-
-  //             if (res.success === true) {
-  //               window.location.reload();
-  //               Notification(dispatch, res.message, "success");
-  //             } else Notification(dispatch, res.message, "error");
-  //           } catch (error) {
-  //             Notification(dispatch, "", "error");
-  //           } finally {
-  //             setImage(null);
-  //             setIsEdit(false);
-  //             setIsLoading(false);
-  //           }
-  //         }
-  //       );
-  //     }
-  //   );
-  // } else {
-  //   try {
-  //     const req = await fetch(url, config);
-  //     const res = await req.json();
-
-  //     if (res.success === true) {
-  //       Notification(dispatch, res.message, "success");
-  //       window.location.reload();
-  //     } else Notification(dispatch, res.message, "error");
-  //   } catch (error) {
-  //     Notification(dispatch, "", "error");
-  //   } finally {
-  //     setImage(null);
-  //     setIsEdit(false);
-  //     setIsLoading(false);
-  //   }
-  // }
 };
 
 export const View = async (username, setUser, dispatch) => {
@@ -196,9 +135,7 @@ export const View = async (username, setUser, dispatch) => {
 
       Notification(alert);
     }
-  } 
-  
-  catch (error) {
+  } catch (error) {
     const alert = {
       dispatch,
       message: Messages.USER_VIEW_ERROR,
@@ -211,7 +148,7 @@ export const View = async (username, setUser, dispatch) => {
 
 export const Products = async (filters, products, setProducts, dispatch) => {
   try {
-    const req = await Request("USER/PRODUCTS", { ...filters });
+    const req = await Request("USERS/PRODUCTS", { ...filters });
     const res = await req.json();
 
     if (res.success === true) {
@@ -223,9 +160,7 @@ export const Products = async (filters, products, setProducts, dispatch) => {
       };
 
       setProducts(next);
-    } 
-    
-    else {
+    } else {
       const alert = {
         dispatch,
         message: res.message,
@@ -234,9 +169,7 @@ export const Products = async (filters, products, setProducts, dispatch) => {
 
       Notification(alert);
     }
-  } 
-  
-  catch (error) {
+  } catch (error) {
     const alert = {
       dispatch,
       message: Messages.PRODUCTS_LIST_USER_ERROR,

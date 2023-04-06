@@ -33,7 +33,7 @@ export default function Profile() {
 
   return (
     <Normal>
-      <Global name={meta?.title} description={meta?.description} />
+      <Global title={meta?.title} description={meta?.description} />
 
       {user === null && <Loading />}
 

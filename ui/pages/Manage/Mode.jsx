@@ -20,10 +20,8 @@ export default function Mode({
         className="p-3 mt-1 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm"
         onChange={(e) => onInput("postedAnonymously", e)}
       >
-        <option value={true}>Po (shfaq profilin tim tek produkti)</option>
-        <option value={false}>
-          Jo (mos e shfaq profilin tim tek produkti)
-        </option>
+        <option value={false}>Po (shfaq profilin tim tek produkti)</option>
+        <option value={true}>Jo (mos e shfaq profilin tim tek produkti)</option>
       </select>
 
       {v.mode && validation.error && (

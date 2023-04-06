@@ -1,6 +1,6 @@
 import { UserBioValidation } from "../../../utils/Forms";
 
-export default function Description({ user, setUser }) {
+export default function Description({ user, onInput, validations }) {
   const validation = UserBioValidation(user.userData.bio);
   
   return (
@@ -16,15 +16,10 @@ export default function Description({ user, setUser }) {
         placeholder="Përshkrimi juaj"
         rows="5"
         value={user.userData.bio}
-        onChange={(e) =>
-          setUser({
-            ...user,
-            userData: { ...user.userData, bio: e.target.value },
-          })
-        }
+        onChange={(e) => onInput("bio", e)}
       />
 
-      {validation.error && (
+      {validations.bio && validation.error && (
         <p className="text-xs mt-1 ml-[1px] text-red-500">
           {validation.message}
         </p>

@@ -96,6 +96,7 @@ export const Login = async ({ uid }, res) => {
 export const Products = async (payload, res) => {
   let { offset, limit, user, auth } = payload;
 
+  console.log({ offset, limit, user, auth })
   offset = parseInt(offset);
   limit = parseInt(limit);
 
@@ -135,43 +136,38 @@ export const Products = async (payload, res) => {
 
 export const Update = async (payload, res) => {
   try {
-    const body = req.body;
-    const id = req.query.id;
-
-    body.FullName = `${req.body.Name || ""} ${req.body.Surname || ""}`;
-
-    const user = await User.findByIdAndUpdate(
-      id,
-      { $set: body },
-      { new: true }
+    const user = await Product.findOneAndUpdate(
+      {'userData.slug': payload.userData.slug}, 
+      { $set: 
+        { 
+          userData: payload?.userData,
+          userAdditionalData: payload?.userAdditionalData,
+        }
+      },
     );
 
-    const { Password, ...userWithoutPassword } = user.toObject();
-
-    if (user)
-      Response(
-        res,
-        200,
-        true,
-        "Përdoruesi u përditësua me sukses.",
-        userWithoutPassword
-      );
-    else
-      Response(
-        res,
-        404,
-        false,
-        "Përdoruesi nuk u gjet në bazën e të dhënave.",
-        null
-      );
-  } catch (error) {
-    Response(
+    const response = {
       res,
-      500,
-      false,
-      "Ndodhi një gabim gjatë përpjekjes për të përditësuar përdoruesin.",
-      null
-    );
+      code: user ? 200 : 404,
+      success: user ? true : false,
+      data: user ? user : null,
+      message: user ? Messages.USER_UPDATE_SUCCESS : Messages.USER_UPDATE_ERROR,
+    }
+    
+    Response(response);
+  } 
+  
+  catch (err) {
+    const response ={
+      res,
+      code: 500,
+      success: false,
+      data: null,
+      message: Messages.USER_UPDATE_ERROR,
+      error: err,
+    }
+
+    Response(response);
   }
 };
 

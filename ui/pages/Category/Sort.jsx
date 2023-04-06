@@ -23,7 +23,7 @@ export default function Sort({filters, setFilters}) {
     <div ref={ref} className="relative inline-block text-left">
       <div>
         <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-          Sortimi
+          Renditja
           <OpenIcon />
         </button>
       </div>
