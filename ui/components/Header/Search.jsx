@@ -16,7 +16,7 @@ export default function Search() {
   }, [router]);
 
   return (
-    <div class="relative w-auto">
+    <div class="relative w-auto hidden md:block">
       <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
         <SearchIcon />
       </div>

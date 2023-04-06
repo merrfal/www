@@ -11,8 +11,8 @@ export default function Categories() {
         {AllCategories.map((category, index) => {
           if (index < 4) {
             return (
-              <li className="text-sm">
-                <Link href={`/kategoria/${category.slug}`}>
+              <li className="text-sm" style={{lineHeight: 1}}>
+                <Link href={`/kategorite/${category.slug}`}>
                   <a className="text-gray-500 hover:text-gray-600">
                     {category.name}
                   </a>

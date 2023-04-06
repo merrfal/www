@@ -10,7 +10,7 @@ export default function Links() {
 
       <ul className="mt-6 space-y-6">
         {HelpfulLinks.map((link) => (
-          <li className="text-sm">
+          <li className="text-sm" style={{lineHeight: 1}}>
             <Link href={link.href}>
               <a className="text-gray-500 hover:text-gray-600">{link.name}</a>
             </Link>

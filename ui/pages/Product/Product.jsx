@@ -49,11 +49,11 @@ export default function Product() {
   useEffect(() => {
     if (product !== null) {
       let thumb = product.productData.gallery;
-  
+
       Promise.all(thumb.map((image) => {
         const file = `products/${image.id}`;
         const unextracted = ref(Storage, file);
-  
+
         return getDownloadURL(unextracted);
       })).then((urls) => setGallery(urls));
     }
@@ -115,6 +115,7 @@ export default function Product() {
               <Similar products={prodcuts} />
             </div>
           </main>
+
         </div>
       )}
     </Normal>

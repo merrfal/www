@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Storage } from "../../../configs/Firebase";
 import { useAuth, useGoogle as UseGoogle } from "../../../hooks";
-import { AddIcon } from "../../icons";
+import { AddIcon, SearchIcon } from "../../icons";
 import { Dropdown } from "./";
 
 const Auth = ({ account }) => {
@@ -16,14 +16,14 @@ const Auth = ({ account }) => {
     let avtr = account?.User?.userData?.avatar;
 
     if (avtr !== undefined) {
-      if(avtr.isFirebase){
+      if (avtr.isFirebase) {
         const file = `users/${avtr}`;
         const unextracted = ref(Storage, file);
 
         getDownloadURL(unextracted)
           .then((url) => setThumbnail(url))
           .catch(() => setThumbnail("avatar-no.png"));
-        }
+      }
 
       else setAvatar(avtr.url);
     }
@@ -35,7 +35,7 @@ const Auth = ({ account }) => {
     let domNode = useRef();
 
     useEffect(() => {
-      let maybeHandler = (event) =>  !domNode.current.contains(event.target) && handler();
+      let maybeHandler = (event) => !domNode.current.contains(event.target) && handler();
       document.addEventListener("mousedown", maybeHandler);
 
       return () => document.removeEventListener("mousedown", maybeHandler);
@@ -48,8 +48,11 @@ const Auth = ({ account }) => {
 
   return (
     <div className="relative accoount-menu flex items-center" ref={domNode}>
+
+
+
       <Link href="/shto">
-        <a className="ml-4 p-1 text-gray-400 hover:text-gray-500 lg:block">
+        <a className="p-1 text-gray-400 hover:text-gray-500 lg:block">
           <AddIcon />
         </a>
       </Link>
@@ -57,14 +60,15 @@ const Auth = ({ account }) => {
       <button
         type="button"
         onClick={() => setOpen(!menu)}
-        className=" ml-0 sm:ml-3 p-2 inline-flex w-full justify-center bg-white text-sm font-medium text-gray-700"
+        className=" ml-0 sm:ml-3 inline-flex w-full justify-center bg-white text-sm font-medium text-gray-700"
       >
         <img
           src={avatar || "avatar-no.png"}
           onError={() => setAvatar("avatar-no.png")}
-          className={`w-6 h-6 rounded-full ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
+          className={`w-9 md:w-8 rounded-full ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
         />
       </button>
+      
 
       {menu && <Dropdown username={account.User.userData.username} />}
     </div>
