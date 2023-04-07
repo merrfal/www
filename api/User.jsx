@@ -160,7 +160,9 @@ export const Products = async (filters, products, setProducts, dispatch) => {
       };
 
       setProducts(next);
-    } else {
+    } 
+    
+    else {
       const alert = {
         dispatch,
         message: res.message,
@@ -169,7 +171,9 @@ export const Products = async (filters, products, setProducts, dispatch) => {
 
       Notification(alert);
     }
-  } catch (error) {
+  } 
+  
+  catch (error) {
     const alert = {
       dispatch,
       message: Messages.PRODUCTS_LIST_USER_ERROR,

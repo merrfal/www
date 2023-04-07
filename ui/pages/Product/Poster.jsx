@@ -19,11 +19,15 @@ export default function Poster({ productData }) {
 
           const url = getDownloadURL(unextracted);
           setAvatar(url);
-        } else {
+        } 
+        
+        else {
           if (avtr.url === "") setAvatar(NO_AVATAR);
           else setAvatar(avtr.url);
         }
-      } else setAvatar(NO_AVATAR);
+      } 
+      
+      else setAvatar(NO_AVATAR);
     }
   }, [productData]);
 
@@ -31,7 +35,10 @@ export default function Poster({ productData }) {
   
   return (
     <div style={canUseLink()} >
-      <span className="text-gray-900 text-[14.5px] font-medium flex justify-start items-start">Dhënësi:</span>
+      <span className="text-gray-900 text-[14.5px] font-medium flex justify-start items-start">
+      Dhënësi:
+      </span>
+      
       <Link href={productData?.postedAnonymously ? '/' : `/profili/${user?.userData?.username}`}>
         <a className="transition-all w-auto mt-1.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-lg">
           <div className="flex items-center justify-center w-10 h-10 bg-gray-300 rounded-full mr-3">

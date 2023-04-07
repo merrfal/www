@@ -96,7 +96,6 @@ export const Login = async ({ uid }, res) => {
 export const Products = async (payload, res) => {
   let { offset, limit, user, auth } = payload;
 
-  console.log({ offset, limit, user, auth })
   offset = parseInt(offset);
   limit = parseInt(limit);
 
@@ -113,7 +112,7 @@ export const Products = async (payload, res) => {
       res,
       code: products ? 200 : 404,
       success: products ? true : false,
-      data: products ? { products, hasMore: countProducts <= offset } : [],
+      data: products ? { products, hasMore: countProducts > (offset + limit) } : [],
       message: products ? Messages.PRODUCTS_LIST_USER_SUCCESS : Messages.PRODUCTS_LIST_USER_ERROR,
     };
 

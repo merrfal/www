@@ -196,15 +196,7 @@ export const View = async (slug, setProduct, dispatch, setLoading = null) => {
       if (setLoading !== null) setLoading(false);
     }
 
-    else {
-      const alert = {
-        dispatch,
-        message: res.message,
-        type: "error",
-      };
-
-      Notification(alert);
-    }
+    else setProduct(false);
   } 
   
   catch (error) {

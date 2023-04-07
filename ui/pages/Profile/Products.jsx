@@ -13,7 +13,7 @@ export default function Products({ user, dispatch, account }) {
   const next = () => {
     const filters = {
       offset: products.products.length.toString(),
-      limit: 9,
+      limit: 4,
       user: user._id,
       auth: account.Auth ? account.User._id : null,
     }
@@ -26,9 +26,7 @@ export default function Products({ user, dispatch, account }) {
       setFirst(false);
       next();
     }
-  }, [user])
-
-  console.log({ products })
+  }, [user, account])
 
   return (
     <main className="max-w-2xl mx-auto mt-8 py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -55,9 +53,7 @@ export default function Products({ user, dispatch, account }) {
         loader={<Skeleton />}
         className="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4"
       >
-        {products.products.map((p) => (
-          <Product product={p} />
-        ))}
+        {products.products.map((p) => <Product product={p} />)}
       </InfiniteScroll>
 
       {!products.hasMore && products.products.length !== 0 && <End />}

@@ -43,7 +43,7 @@ export default function Profile() {
             user={user} 
             cover={cover} 
             setCover={setCover} 
-            />
+          />
 
           <Info
             user={user}

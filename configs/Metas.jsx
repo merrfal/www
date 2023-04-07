@@ -34,3 +34,18 @@ export const ManageMeta = (mode, product) => {
 
   return meta;
 };
+
+
+export const TermsMeta = () => {
+  meta.title = "Kushtet e Sherbimit";
+  meta.description = "Ketu mund te shfletoni kushtet e sherbimit te platformes dhe te kuptoni se si mund te perdorni platformen dhe si mund te beni dhurime."
+
+  return meta;
+}
+
+export const PrivacyMeta = () => {
+  meta.title = "Privatësia";
+  meta.description = "Ketu mund te shfletoni politiken e privatësisë te platformes dhe te kuptoni se si mund te perdorni platformen dhe si mund te beni dhurime."
+
+  return meta;
+}

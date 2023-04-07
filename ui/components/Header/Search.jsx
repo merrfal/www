@@ -11,13 +11,12 @@ export default function Search() {
     path = path?.pathname?.split("/")[2];
     const base = path?.pathname?.split("/")[1];
 
-    if (path !== undefined && path !== "" && term === "" && base === "kerko")
-      setTerm(path);
+    if (path !== undefined && path !== "" && term === "" && base === "kerko") setTerm(path);
   }, [router]);
 
   return (
-    <div class="relative w-auto hidden md:block">
-      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+    <div className="w-auto relative hidden md:block">
+      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
         <SearchIcon />
       </div>
 
@@ -27,7 +26,7 @@ export default function Search() {
         maxLength={32}
         required
         type="text"
-        class="border w-auto border-gray-200 text-gray-900 text-[14px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-1.5 "
+        className="border w-[230px] border-gray-200 text-gray-900 text-[14px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-1.5 "
         placeholder="Kërko produkte..."
         onKeyPress={(e) => {
           if (e.key === "Enter") {

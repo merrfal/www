@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { Global } from "../../../configs/Head";
 import { getDownloadURL, ref } from "firebase/storage";
 import { Storage } from "../../../configs/Firebase";
+import { Error } from "..";
 
 import {
   Info,
@@ -33,6 +34,7 @@ export default function Product() {
   useEffect(() => {
     if (router) {
       const { slug } = router.query;
+
       if (slug !== "" && slug !== undefined) {
         View(slug, setProduct, dispatch);
       }
@@ -40,14 +42,14 @@ export default function Product() {
   }, [router]);
 
   useEffect(() => {
-    if (product !== null) {
+    if (product !== null && product !== false) {
       const { category = "" } = product.productData;
       Recommendations(category, setProducts, dispatch);
     }
   }, [product, router]);
 
   useEffect(() => {
-    if (product !== null) {
+    if (product !== null && product !== false) {
       let thumb = product.productData.gallery;
 
       Promise.all(thumb.map((image) => {
@@ -55,26 +57,20 @@ export default function Product() {
         const unextracted = ref(Storage, file);
 
         return getDownloadURL(unextracted);
-      })).then((urls) => setGallery(urls));
+      }))
+      
+      .then((urls) => setGallery(urls));
     }
   }, [product]);
+
+  if (product === false) return <Error code={404} />
 
   return (
     <Normal>
       <Global
-        title={
-          product === null ? "Po ngarkohet..." : product?.productData?.name
-        }
-        description={
-          product === null
-            ? "Po ngarkohet..."
-            : product?.productData?.description
-        }
-        thumbnail={
-          product === null
-            ? "/no-product.png"
-            : product?.productData?.gallery[0].url
-        }
+        title={product?.productData?.name}
+        description={product?.productData?.description }
+        thumbnail={product?.productData?.gallery[0].url}
       />
 
       {product === null && <Skeleton />}
@@ -91,10 +87,7 @@ export default function Product() {
                     setIndex={setIndex}
                   />
 
-                  <Thumbnail 
-                    gallery={gallery} 
-                    index={index}
-                  />
+                  <Thumbnail gallery={gallery}  index={index} />
                 </div>
 
                 <div className="mt-10 ml-3 px-4 sm:px-0 sm:mt-16 lg:mt-0">
@@ -105,6 +98,7 @@ export default function Product() {
                     <div className="h-5 border-r border-gray-200 mx-4" />
                     <Views product={product} />
                   </div>
+                  
                   <Info productData={product.productData} />
                   <Poster productData={product.productData} />
                   <Phone productData={product.productData} />
