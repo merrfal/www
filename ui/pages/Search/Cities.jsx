@@ -33,9 +33,9 @@ export default function Cities({ filters, setFilters }) {
       {isCityOpen && (
         <div className="origin-top-right absolute max-h-[280px] overflow-auto right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
           <form className="space-y-4">
-          {KosovoCities.map((city) => {
+          {KosovoCities.map((city, index) => {
               return (
-                <div key={city.value} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
+                <div key={index} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
                   <input
                     id={city.value}
                     value={city.value}

@@ -35,16 +35,27 @@ export default function Cities({ filters, setFilters }) {
             <div className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
               <input
                 id="dhuruar"
-                value={false}
+                value={true}
                 type="radio"
-                checked={filters.statuses.includes(false)}
+                checked={filters.statuses.includes(true)}
                 className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
-                onClick={(e) =>
-                  setFilters({
-                    ...filters,
-                    statuses: [...filters.statuses, true],
-                  })
-                }
+                onClick={() => {
+                    if (filters.statuses.includes(true)) {
+                      let newStatuses = filters.statuses.filter((status) => status !== true);
+
+                      setFilters({
+                        ...filters,
+                        statuses: newStatuses,
+                      });
+                    }
+
+                    else {
+                      setFilters({
+                        ...filters,
+                        statuses: [...filters.statuses, true],
+                      });
+                    }
+                }}
               />
               <label
                 htmlFor="dhuruar"
@@ -57,15 +68,27 @@ export default function Cities({ filters, setFilters }) {
             <div className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
               <input
                 id="jo-dhuruar"
-                value={true}
+                value={false}
                 type="radio"
-                checked={filters.statuses.includes(true)}
+                checked={filters.statuses.includes(false)}
                 className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
-                onClick={(e) =>
-                  setFilters({
-                    ...filters,
-                    statuses: [...filters.statuses, false],
-                  })
+                onClick={() => {
+                    if (filters.statuses.includes(false)) {
+                      let newStatuses = filters.statuses.filter((status) => status !== false);
+
+                      setFilters({
+                        ...filters,
+                        statuses: newStatuses,
+                      });
+                    }
+
+                    else {
+                      setFilters({
+                        ...filters,
+                        statuses: [...filters.statuses, false],
+                      });
+                    }
+                  }
                 }
               />
               <label

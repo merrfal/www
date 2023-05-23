@@ -80,7 +80,6 @@ export const Update = async (
     const res = await req.json();
 
     if (res.success === true) {
-      console.log({ res });
       const { data } = res;
 
       const alert = {
@@ -126,16 +125,10 @@ export const View = async (username, setUser, dispatch) => {
     const res = await req.json();
 
     if (res.success === true) setUser(res.data);
-    else {
-      const alert = {
-        dispatch,
-        message: res.message,
-        type: "error",
-      };
-
-      Notification(alert);
-    }
-  } catch (error) {
+    else setUser(false);
+  } 
+  
+  catch (error) {
     const alert = {
       dispatch,
       message: Messages.USER_VIEW_ERROR,

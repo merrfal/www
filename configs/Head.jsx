@@ -14,7 +14,6 @@ export const Global = ({ title, description, image, index }) => {
       <title>{title ? `${title} - Merrfal` : 'Merrfal'}</title>
       <meta property="og:title" content={`${title} - Merrfal`} />
       <meta property="og:description" content={description} />
-      <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" />
 
       <meta property="og:image" content={image ? image : '/merrfal-hero.png'} />
     </MetaTags>

@@ -2,7 +2,7 @@ import { Normal } from "../../layouts";
 import { Category, End } from "../../components";
 import { Categories as AllCategories } from "../../../data";
 import { Header, Filters } from "./";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Global } from "../../../configs/Head";
 import { CategoriesMeta } from "../../../configs/Metas";
 
@@ -27,8 +27,10 @@ export default function Categories() {
                     else return b.name.localeCompare(a.name);
                   })
                 
-                  .map((category) => (
-                    <Category key={category.id} category={category} />
+                  .map((category, index) => (
+                    <Fragment key={index}>
+                      <Category category={category} />
+                    </Fragment>
                   ))
                 }
               </div>

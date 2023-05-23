@@ -19,6 +19,9 @@ import Link from "./Link";
 import End from "./End";
 import Edit from "./Edit";
 
+import HeaderSkeleton from "./Skeletons/HeaderSkeleton";
+import ManageSkeleton from "./Skeletons/ManageSekeleton";
+
 export {
   Header,
   Footer,
@@ -40,4 +43,6 @@ export {
   Link,
   End,
   Edit,
+  HeaderSkeleton,
+  ManageSkeleton,
 };

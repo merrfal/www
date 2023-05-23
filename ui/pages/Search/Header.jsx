@@ -4,6 +4,7 @@ export default function Header({ name, description }) {
       <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
         {name}
       </h1>
+      
       <p className="mt-4 max-w-xl text-sm text-gray-700">{description}</p>
     </div>
   );

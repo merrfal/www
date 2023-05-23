@@ -1,4 +1,4 @@
-import { Sort, Categories, Statuses } from "./";
+import { Sort, Cities, Statuses } from "./";
 
 export default function Filters({filters, setFilters}) {
   return (
@@ -10,7 +10,7 @@ export default function Filters({filters, setFilters}) {
           <div className="hidden sm:block">
             <div className="flow-root">
               <div className="-mx-4 flex items-center divide-x divide-gray-200">
-                <Categories filters={filters} setFilters={setFilters} />
+                <Cities filters={filters} setFilters={setFilters} />
                 <Statuses filters={filters} setFilters={setFilters} />
               </div>
             </div>

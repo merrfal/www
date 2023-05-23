@@ -40,7 +40,7 @@ export default function Header() {
                 e.preventDefault();
                 setOpenSearch(!openSearch)
               }}
-             >
+            >
               <SearchIcon />
             </button>
           </div>

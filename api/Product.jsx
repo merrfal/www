@@ -46,59 +46,40 @@ export const Create = async (page, router, setLoading, dispatch) => {
   }
 };
 
-export const Delete = async (dispatch, productId, userId, redirect = null) => {
-  const url = `${Url}/api/products/ProductDelete/${productId}`;
-  const config = Request("G", "JSON", {}, false, false, false);
-
+export const Delete = async (product, dispatch) => {
   try {
-    const req = await fetch(url, config);
+    const req = await Request("PRODUCTS/DELETE", {product});
     const res = await req.json();
 
     if (res.success === true) {
-      Notification(dispatch, res.message, "success");
-      UserProductList(dispatch, userId);
+      const alert = {
+        dispatch,
+        message: res.message,
+        type: "success",
+      };
 
-      if (redirect !== null) window.location.href = redirect;
-    } else Notification(dispatch, res.message, "error");
-  } catch (error) {
-    Notification(dispatch, "", "error");
-  }
-};
+      Notification(alert);
+    }
 
-export const Filters = async (Cities, Categories, dispatch) => {
-  const url = `${Url}/api/products/ProductsFilters`;
-  const config = Request(
-    "P",
-    "JSON",
-    { Cities, Categories },
-    true,
-    false,
-    false
-  );
+    else {
+      const alert = {
+        dispatch,
+        message: res.message,
+        type: "error",
+      };
 
-  try {
-    const req = await fetch(url, config);
-    const res = await req.json();
+      Notification(alert);
+    }
+  } 
+  
+  catch (error) {
+    const alert = {
+      dispatch,
+      message: Messages.PRODUCT_DELETE_ERROR,
+      type: "error",
+    };
 
-    if (res.success === true) dispatch(SetFilter(res.data));
-    else Notification(dispatch, res.message, "error");
-  } catch (error) {
-    Notification(dispatch, "", "error");
-  }
-};
-
-export const List = async (dispatch) => {
-  const url = `${Url}/api/products/ProductsList`;
-  const config = Request("G", "JSON", {}, false, true, false);
-
-  try {
-    const req = await fetch(url, config);
-    const res = await req.json();
-
-    if (res.success === true) dispatch(SetPages(res.data));
-    else Notification(dispatch, res.message, "error");
-  } catch (error) {
-    Notification(dispatch, "", "error");
+    Notification(alert);
   }
 };
 

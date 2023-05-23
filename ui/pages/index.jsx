@@ -1,6 +1,5 @@
 import Home from './Home';
 import Profile from './Profile';
-import Products from './Products';
 import Product from './Product';
 import Manage from './Manage';
 import Error from './Error';
@@ -14,7 +13,6 @@ export {
   Home,
   Product,
   Manage,
-  Products,
   Profile,
   Error,
   Page,

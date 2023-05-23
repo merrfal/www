@@ -1,12 +1,12 @@
-export default function TrashIcon() {
+export default function TrashIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      stroeWidth="1.5"
+      strokeWidth="1.5"
       stroke="currentColor"
-      className="h-4"
+      className={props.class ? props.class : "h-5 w-5 text-gray-400"}
     >
       <path
         strokeLinecap="round"

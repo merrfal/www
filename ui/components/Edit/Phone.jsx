@@ -16,7 +16,7 @@ export default function Phone({ user, onInput, validations }) {
         type="text"
         value={user.userData.phone}
         id="phone"
-        maxlength="15"
+        maxLength="15"
         placeholder="Numri Telefonit"
         className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
         onChange={(e) => {

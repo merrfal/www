@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Storage } from "../../../configs/Firebase";
 import { useAuth, useGoogle as UseGoogle } from "../../../hooks";
-import { AddIcon, SearchIcon } from "../../icons";
+import { AddIcon } from "../../icons";
 import { Dropdown } from "./";
 
 const Auth = ({ account }) => {
@@ -48,9 +48,6 @@ const Auth = ({ account }) => {
 
   return (
     <div className="relative accoount-menu flex items-center" ref={domNode}>
-
-
-
       <Link href="/shto">
         <a className="p-1 text-gray-400 hover:text-gray-500 lg:block">
           <AddIcon />

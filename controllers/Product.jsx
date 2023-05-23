@@ -45,33 +45,52 @@ export const Create = async (payload, res) => {
 
 export const Delete = async (payload, res) => {
   try {
-    const product = await Product.findByIdAndDelete(req.query.id);
+    let { product } = payload;
 
-    if (product) {
-      const users = await User.find({});
+    const { productData } = await Product.findById(product).select({ 
+        'productData.user': 1, 
+        'productData.category': 1 
+    });
 
-      users.forEach(async (user) => {
-        if (user.Favorites.includes(product._id)) {
-          user.Favorites.splice(user.Wishlist.indexOf(product._id), 1);
-          await user.save();
-        }
-      });
+    await User.findByIdAndUpdate(productData.user, {
+      $inc: { 'userActivities.productCount': -1 },
+      $pull: { 'userActivities.products': product._id }
+    })
 
-      Response(res, 200, true, "Produkti u fshi me sukses.", product);
-    }
-  } catch (error) {
-    Response(
+    await Category.findByIdAndUpdate(productData.category, {
+      $inc: { 'additionalData.productCount': -1 },
+      $pull: { 'additionalData.products': product._id }
+    })
+
+    const deletedProduct = await Product.findByIdAndDelete(product);
+
+    const response = {
       res,
-      500,
-      false,
-      "Gabim i brendshëm i serverit gjatë fshirjes së produktit nga platforma.",
-      null
-    );
+      code: deletedProduct ? 200 : 400,
+      success: deletedProduct ? true : false,
+      data: deletedProduct ? { ...deletedProduct._doc } : null,
+      message: deletedProduct ? Messages.PRODUCT_DELETE_SUCCESS : Messages.PRODUCT_DELETE_ERROR,
+    }
+
+    Response(response);
+  } 
+  
+  catch (error) {
+    const response = {
+      res,
+      code: 500,
+      success: false,
+      data: null,
+      message: Messages.PRODUCT_DELETE_ERROR,
+      error,
+    }
+
+    Response(response);
   }
 };
 
 export const Category  = async (payload, res) => {
-  let { offset, limit, cities, statusses, sort } = payload;
+  let { offset, limit, cities, statuses, sort } = payload;
 
   offset = parseInt(offset);
   limit = parseInt(limit);
@@ -79,12 +98,12 @@ export const Category  = async (payload, res) => {
   const filter = () =>{
     const filters = {}
     const calength = cities.length
-    const salength = statusses.length
+    const salength = statuses.length
 
     if(calength === 0 && salength === 0) return {}
-    if(calength === 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statusses }}
+    if(calength === 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statuses }}
     if(calength !== 0 && salength === 0 ) return { 'productData.city': { $in: cities }}
-    if(calength !== 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statusses }, 'productData.city': { $in: cities }}
+    if(calength !== 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statuses }, 'productData.city': { $in: cities }}
 
     return filters
   }

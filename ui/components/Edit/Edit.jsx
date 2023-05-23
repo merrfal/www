@@ -92,8 +92,6 @@ export default function Edit({ user, setUser, setIsEdit }) {
 
   let ref = clickOutside(() => setIsEdit(false));
 
-  console.log({setIsLoading}, 'parent')
-
   return (
     <div style={load} className="relative z-10">
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />

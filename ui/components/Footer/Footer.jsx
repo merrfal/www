@@ -13,7 +13,6 @@ export default function Footer() {
               <Links className="mb-8 sm:mb-0" />
               <Projects />
             </div>
-
           </div>
         </div>
         <Copyright />

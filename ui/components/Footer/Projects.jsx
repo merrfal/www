@@ -7,8 +7,8 @@ export default function Projects() {
         Projekte tjera
       </h3>
       <ul className="mt-6 space-y-6">
-        {ProjectsList.map((project) => (
-          <li className="text-sm"  style={{lineHeight: 1}}>
+        {ProjectsList.map((project, index) => (
+          <li className="text-sm" key={index}  style={{lineHeight: 1}}>
             <a
               href={project.path}
               target="_blank"

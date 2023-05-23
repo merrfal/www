@@ -1,7 +1,7 @@
 import * as Messages from "../../../configs/Messages";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Empty, End, Product } from "../../components";
 import { Skeleton } from "./";
 import { Products as UserProducts } from "../../../api/User";
@@ -26,7 +26,13 @@ export default function Products({ user, dispatch, account }) {
       setFirst(false);
       next();
     }
+
+    if (!first && user !== null && !account.Loading){
+      setProducts({ products: [], hasMore: true });
+      setTimeout(() => next(), 1000);
+    }
   }, [user, account])
+
 
   return (
     <main className="max-w-2xl mx-auto mt-8 py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -34,15 +40,16 @@ export default function Products({ user, dispatch, account }) {
         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
           Produktet e dhuruara
         </h1>
+        
         <p className="mt-2 text-sm text-gray-500">
           {user._id === account?.User?._id ? Messages.USER_PRODUCTS : Messages.USERS_PRODUCTS}
         </p>
       </div>
 
       {products.products.length === 0 && !products.hasMore && (
-        <Empty
-          heading="Nuk u gjet asnjë produkt"
-          message={user._id === account?.User?._id ? Messages.USER_PRODUCTS_LIST : Messages.USERS_PRODUCTS_LIST}
+        <Empty 
+          heading={Messages.PRODUCTS_EMPTY_TITLE} 
+          message={user._id === account?.User?._id ? Messages.USER_PRODUCTS_LIST : Messages.USERS_PRODUCTS_LIST} 
         />
       )}
 
@@ -53,7 +60,11 @@ export default function Products({ user, dispatch, account }) {
         loader={<Skeleton />}
         className="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4"
       >
-        {products.products.map((p) => <Product product={p} />)}
+        {products.products.map(
+          (product, index) => <Fragment key={index}>
+            <Product product={product} />
+          </Fragment>
+        )}
       </InfiniteScroll>
 
       {!products.hasMore && products.products.length !== 0 && <End />}

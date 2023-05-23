@@ -1,13 +1,21 @@
 import Link from "next/link";
-import { Image, Info } from "./";
+import { ManageBox, Image, Info } from "./";
 
-export default function Product({ product: {productData} }) {
+export default function Product({ product: { productData } }) {
   return (
-    <Link href={`/${productData.slug}`} key={productData.slug}>
-      <a className="group relative">
-        <Image productData={productData} />
-        <Info productData={productData} />
-      </a>
-    </Link>
+    <div className="group relative">
+      <ManageBox 
+        user={productData?.user} 
+        slug={productData.slug} 
+        name={productData.name}
+      />
+
+      <Link href={`/${productData.slug}`}>
+        <a>
+          <Image productData={productData} />
+          <Info productData={productData} />
+        </a>
+      </Link>
+    </div>
   );
 }

@@ -6,11 +6,11 @@ export default function Steps() {
       <div className="border-t divide-y divide-gray-200">
         <div className="mt-4">
           <h3>
-            <button className="group relative w-full py-6 flex justify-between items-center text-left">
+            <div className="group relative w-full py-6 flex justify-between items-center text-left">
               <span className="text-gray-900 text-sm font-medium">
                 Procesi deri tek marrja
               </span>
-            </button>
+            </div>
           </h3>
           <div className="pb-6 prose prose-sm" id="disclosure-1">
             <div className="max-w-2xl mx-auto">

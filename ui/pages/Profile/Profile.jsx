@@ -8,6 +8,7 @@ import { View } from "../../../api/User";
 import { Edit } from "../../components";
 import { Products, Cover, Info } from "./";
 import { ProfilePage } from "../../../configs/Metas";
+import { Error } from "..";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -21,15 +22,16 @@ export default function Profile() {
   const [cover, setCover] = useState(null);
 
   useEffect(() => {
-    if (user === null) {
-      const { username } = router.query;
-      if (username !== "" && username !== undefined) {
-        View(username, setUser, dispatch);
-      }
+    const { username } = router.query;
+    
+    if (username !== "" && username !== undefined) {
+      View(username, setUser, dispatch);
     }
   }, [router]);
 
   const meta = ProfilePage(user);
+
+  if (user === false) return <Error code={404} />
 
   return (
     <Normal>

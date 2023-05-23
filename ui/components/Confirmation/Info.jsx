@@ -1,7 +1,8 @@
+import { useSelector } from "react-redux";
 import { AlertIcon } from "../../icons";
 
 export default function Info() {
-  const { Title, Message } = useSelector((state) => state.confirmation);
+  const { Title, Message } = useSelector((state) => state.Confirmation);
 
   return (
     <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">

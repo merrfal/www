@@ -10,6 +10,8 @@ import Mode from "./Mode";
 import Phone from "./Phone";
 import Title from "./Title";
 import Info from "./Info";
+import Url from "./Url";
+import Given from "./Given";
 
 export {
   Address,
@@ -23,6 +25,8 @@ export {
   Phone,
   Title,
   Info,
+  Given,
+  Url
 };
 
 export default Manage;
