@@ -1,14 +1,16 @@
 import { ProjectsList } from "../../../data";
+import { Translation } from "../../../utils/Translations";
 
 export default function Projects() {
   return (
     <div>
       <h3 className="text-sm font-medium text-gray-900 select-none">
-        Projekte tjera
+        {Translation("other-projects")}
       </h3>
+
       <ul className="mt-6 space-y-6">
         {ProjectsList.map((project, index) => (
-          <li className="text-sm" key={index}  style={{lineHeight: 1}}>
+          <li className="text-sm" key={index} style={{lineHeight: 1}}>
             <a
               href={project.path}
               target="_blank"

@@ -9,8 +9,8 @@ export default function DeleteComponent({name}) {
 
   const on = () => {
     dispatch(OpenConfirmation({
-      Title: `${Translation()} "${name}"?`,
-      Message: "A jeni të sigurt që dëshironi ta fshini këtë produkt? Ky veprim nuk mund të kthet prapa.",
+      Title: `${Translation("product-deletion-confirmation-title")} "${name}"?`,
+      Message: Translation("product-deletion-confirmation-message"),
       OnConfirm: Delete("idhere", dispatch),
     }))
   }

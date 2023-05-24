@@ -82,9 +82,7 @@ export default function Category() {
       <Filters filters={filters} setFilters={setFilters} />
 
       <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-
-        {
-          products.products.length === 0 &&  !products.hasMore && 
+        {products.products.length === 0 && !products.hasMore && 
           <Empty 
             heading={PRODUCTS_EMPTY_TITLE} 
             message={PRODUCTS_EMPTY_DESCRIPTION} 

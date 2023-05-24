@@ -7,22 +7,20 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRef } from "react";
+import { Translation } from "../../../utils/Translations";
 
 export default function InfoSide() {
   const router = useRouter();
 
   return (
     <div className="h-full w-full flex space-x-6 items-center align-center place-content-between lg:place-content-start ">
-
       <Link href="/">
         <a className="flex mr-2">
           <LogoIcon />
         </a>
       </Link>
 
-
       <Search />
-
 
       <div className="h-5 border-r border-gray-200 mx-4 hidden lg:block" />
       {
@@ -32,13 +30,11 @@ export default function InfoSide() {
         </div>
         //qetu mi hek produktet duhet me bo diqka me z-index a naj sen me dal aj perpara
       }
-
     </div>
   );
 }
 
 const Desktop = () => {
-
   return (
     <div className="desktop-categories">
       <div className="h-full w-auto flex space-x-6 items-center align-center">
@@ -55,7 +51,7 @@ const Desktop = () => {
 
         <Link href={`/kategorite/`}>
           <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">
-            {`Të gjitha \u2192`}
+            {`${Translation("all")} \u2192`}
           </a>
         </Link>
       </div>
@@ -87,7 +83,7 @@ const Mobile = () => {
     <div className="mobile-categories z-0">
       <div ref={ref} className="px-4 relative inline-block text-left">
         <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-          <span>Kategoritë</span>
+          <span>{Translation("categories")}</span>
           <OpenIcon />
         </button>
 

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SearchIcon } from "../../icons";
+import { Translation } from "../../../utils/Translations";
 
 export default function Search() {
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function Search() {
         required
         type="text"
         className="border w-[230px] border-gray-200 text-gray-900 text-[14px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-1.5 "
-        placeholder="Kërko produkte..."
+        placeholder={Translation("search-products")}
         onKeyPress={(e) => {
           if (e.key === "Enter") {
             e.preventDefault();

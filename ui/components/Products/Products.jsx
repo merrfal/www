@@ -20,9 +20,11 @@ export default function Products() {
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 sm:space-x-2 lg:grid-cols-3 xl:grid-cols-4 pb-4 xl:gap-x-8 ">
           {products === null && <Skeleton />}
 
-          {products !== null && products.map((product, index) => <Fragment key={index}>
-            <Product product={product} />
-          </Fragment>)}
+          {products !== null && products.map((product, index) => 
+            <Fragment key={index}>
+              <Product product={product} />
+            </Fragment>
+          )}
         </div>
       </div>
     </div>

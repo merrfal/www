@@ -12,7 +12,6 @@ import Hero from "./Hero";
 import Loading from "./Loading";
 import None from "./None";
 import Input from "./Input";
-import Button from "./Button";
 import Textarea from "./Textarea";
 import MenuLink from "./MenuLink";
 import Link from "./Link";
@@ -37,7 +36,6 @@ export {
   Loading,
   None,
   Input,
-  Button,
   Textarea,
   MenuLink,
   Link,

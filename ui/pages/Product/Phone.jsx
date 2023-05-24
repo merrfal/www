@@ -1,3 +1,4 @@
+import { Translation } from "../../../utils/Translations";
 import { PhoneIcon } from "../../icons";
 
 export default function Phone({ productData }) {
@@ -10,7 +11,7 @@ export default function Phone({ productData }) {
           style={{width: '60%'}}
         >
           <PhoneIcon />
-          Thirr në {productData?.phone?.includes("+") ? productData?.phone : `+${productData?.phone}`}
+          {Translation("call-to")} {productData?.phone?.includes("+") ? productData?.phone : `+${productData?.phone}`}
         </button>
       </div>
     </form>

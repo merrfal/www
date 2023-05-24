@@ -4,6 +4,7 @@ import { getDownloadURL, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { ANON_AVATAR, NO_AVATAR } from "../../../configs/Constants";
 import { VerifiedBadge } from "../../icons";
+import { Translation } from "../../../utils/Translations";
 
 export default function Poster({ productData }) {
   const { user } = productData;
@@ -37,13 +38,13 @@ export default function Poster({ productData }) {
   return (
     <div style={canUseLink()} >
       <span className="text-gray-900 text-[14.5px] font-medium flex justify-start items-start">
-        Dhënësi:
+        {Translation("donor")}
       </span>
       
       <Link href={productData?.postedAnonymously ? '/' : `/profili/${user?.userData?.username}`}>
         <a className="transition-all w-auto mt-1.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-lg">
           <img
-            alt="User Profile Picture"
+            alt={user?.name}
             className="w-10 h-10 rounded-full mr-3"
             src={productData?.postedAnonymously ? ANON_AVATAR : avatar}
             onError={() => productData?.postedAnonymously ? null : setAvatar(NO_AVATAR)}
@@ -55,6 +56,7 @@ export default function Poster({ productData }) {
                 {`${user?.userData?.name} ${user?.userData?.surname}`}
                 {user?.userAdditionalData?.isUserVerified && <VerifiedBadge className="h-4 w-4 ml-1" />}
               </p>
+
               <span className="text-[13px] font-normal text-gray-500">
                 @{user?.userData?.username}
               </span>
@@ -63,7 +65,9 @@ export default function Poster({ productData }) {
 
           {productData.postedAnonymously && (
             <div>
-              <p className="text-[15px]">Dhurues Anonim</p>
+              <p className="text-[15px]">
+                {Translation("anonymous-donor")}  
+              </p>
             </div>
           )}
         </a>
