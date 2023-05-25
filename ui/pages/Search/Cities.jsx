@@ -26,7 +26,9 @@ export default function Cities({ filters, setFilters }) {
         onClick={open}
         className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
       >
-        <span>Qytetet</span>
+          <span>
+            {Translation("cities")}
+          </span>
         <OpenIcon />
       </button>
 
@@ -44,6 +46,7 @@ export default function Cities({ filters, setFilters }) {
                     className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
                     onClick={() => setFilters({...filters, cities: [...filters.cities, city.value]})}
                   />
+                  
                   <label htmlFor={city.value} className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                     {city.name}
                   </label>

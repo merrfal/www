@@ -1,4 +1,5 @@
 import { NameValidation } from "../../../utils/Forms";
+import { Translation } from "../../../utils/Translations";
 
 export default function Title({
   product: {
@@ -15,7 +16,7 @@ export default function Title({
         htmlFor="title"
         className="block text-sm font-medium text-gray-700"
       >
-        Emri i produktit
+        {Translation("name-of-product")}
       </label>
 
       <input
@@ -23,7 +24,7 @@ export default function Title({
         value={name}
         type="text"
         id="title"
-        placeholder="Jakne për fëmijë"
+        placeholder={Translation("name-of-product-placeholder")}
         className="p-3 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm"
       />
 

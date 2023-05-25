@@ -56,10 +56,7 @@ export default function Images({
                     imageList.map((image, index) => {
                       if (mode === "create")
                         return (
-                          <div
-                            key={index}
-                            className="flex items-center relative border border-gray-200 rounded-md"
-                          >
+                          <div className="flex items-center relative border border-gray-200 rounded-md" key={index}>
                             <img
                               src={image.data_url}
                               className="w-[265px] h-[40vh] object-cover max-w-full align-middle rounded-md"

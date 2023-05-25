@@ -140,7 +140,6 @@ export default function Manage({ mode = "create" }) {
                   {mode === "edit" && (
                     <>
                       <Given product={product} onInput={onInput} />
-
                       <Url product={product} />
                     </>
                   )}

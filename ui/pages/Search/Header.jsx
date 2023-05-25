@@ -5,7 +5,9 @@ export default function Header({ name, description }) {
         {name}
       </h1>
       
-      <p className="mt-4 max-w-xl text-sm text-gray-700">{description}</p>
+      <p className="mt-4 max-w-xl text-sm text-gray-700">
+        {description}
+      </p>
     </div>
   );
 }

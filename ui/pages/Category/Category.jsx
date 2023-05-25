@@ -71,8 +71,7 @@ export default function Category() {
 
       {category === null && <HeaderSkeleton />}
 
-      {
-        category !== null && category !== false && 
+      {category !== null && category !== false && 
         <Header 
           name={category?.name} 
           description={category?.description} 

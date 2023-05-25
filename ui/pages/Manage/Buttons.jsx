@@ -7,6 +7,7 @@ import { v4 } from "uuid";
 import { Create, Update } from "../../../api/Product";
 import { Storage } from "../../../configs/Firebase";
 import { Notification } from "../../../utils/Response";
+import { Translation } from "../../../utils/Translations";
 
 import {
   AddressValidation,
@@ -129,7 +130,7 @@ export default function Buttons(props) {
         className="inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none"
         onClick={mode === "create" ? handlePublish : handleUpdate}
       >
-        Publiko Produktin
+        {Translation("post-product")}
       </button>
     </div>
   );

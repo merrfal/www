@@ -50,6 +50,5 @@ export const SEARCH_TITLE_ALL = "Të Gjitha Produktet";
 export const SEARCH_TITLE_TERM = "Ju keni kërkuar për: ";
 export const SEARCH_TITLE_DESCRIPTION ="Kërko produktet e dhuruara nga përdoruesit e tjerë neë bazë të kategorisë, emrit, qytetit apo edhe përshkrimit të produktit që keni nevojë për.";
 export const META_SEARCH = "Shfletoni Produktet";
-export const PRODUCTS_EMPTY_TITLE = "Asnjë produkt nuk u gjet!";
 export const PRODUCTS_EMPTY_DESCRIPTION = "Nga filtrimet apo në këtë sektor nuk gjetem asnjë produkt që të përputhet me kërkesën tuaj."
 export const PRODUCTS_RECOMONDATION_DESCRIPTION_EMPTY = "Nuk u gjend asnjë produkt i ngjajshëm në këtë katgori.";

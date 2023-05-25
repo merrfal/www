@@ -1,5 +1,6 @@
 import { KosovoCities } from "../../../data";
 import { CityValidation } from "../../../utils/Forms";
+import { Translation } from "../../../utils/Translations";
 
 export default function Cities({
   product: {
@@ -13,10 +14,11 @@ export default function Cities({
   return (
     <div className="col-span-6 sm:col-span-3 lg:col-span-3">
       <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-        Qyteti
+        {Translation("city")}
       </label>
+
       <select
-        defaultValue={"Përcakto qytetin"}
+        defaultValue={Translation("city-placeholder")}
         value={city}
         onChange={(e) => onInput("city", e)}
         id="city"

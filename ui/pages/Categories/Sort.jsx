@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { OpenIcon } from "../../icons";
+import { Translation } from "../../../utils/Translations";
 
 export default function Sort({ ordering, setOrdering }) {
   const [isSortOpen, setIsSortOpen] = useState(false);
@@ -26,7 +27,7 @@ export default function Sort({ ordering, setOrdering }) {
           onClick={open}
           className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
         >
-          Renditja
+            {Translation("sorting")}
           <OpenIcon />
         </button>
       </div>
@@ -42,7 +43,7 @@ export default function Sort({ ordering, setOrdering }) {
                 setIsSortOpen(false);
               }}
             >
-              Renditi nga A deri në Z
+              {Translation("sort-from-a-to-z")}
             </p>
 
             <p
@@ -53,7 +54,7 @@ export default function Sort({ ordering, setOrdering }) {
                 setIsSortOpen(false);
               }}
             >
-              Renditi nga Z deri në A
+              {Translation("sort-from-z-to-a")}
             </p>
           </div>
         </div>

@@ -61,6 +61,7 @@ export default function Search() {
   return (
     <Normal>
       <Global title={META_SEARCH} description={SEARCH_TITLE_DESCRIPTION} />
+      
       { allMode === null && <HeaderSkeleton /> }
 
       { allMode == true && <Header 

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Categories as AllCategories } from "../../../data";
 import { OpenIcon } from "../../icons";
+import { Translation } from "../../../utils/Translations";
 
 export default function Categories({filters, setFilters}) {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
@@ -24,7 +25,9 @@ export default function Categories({filters, setFilters}) {
   return (
     <div ref={ref} className="px-4 relative inline-block text-left">
       <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-        <span>Kategoritë</span>
+          <span>
+            {Translation("categories")}
+          </span>
         <OpenIcon />
       </button>
 
@@ -42,6 +45,7 @@ export default function Categories({filters, setFilters}) {
                     className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
                     onClick={() => setFilters({...filters, categories: [...filters.categories, category._id]})}
                   />
+                  
                   <label htmlFor={category._id} className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                     {category.name}
                   </label>

@@ -7,17 +7,17 @@ export const NameValidation = (value) => {
 
   if (!regex.test(value)) {
     validation.error = true;
-    validation.message = `Titulli duhet të përmbajë vetëm shkronja, numra dhe një hapësirë të vetme midis fjalëve`;
+    validation.message = Translation("product-name-regex-validations");
   }
 
   if (value.length < minLength) {
     validation.error = true;
-    validation.message = `Titulli duhet të jetë të paktën ${minLength} karaktere i gjatë`;
+    validation.message = `${Translation("name-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
   }
 
   if (value.length > maxLength) {
     validation.error = true;
-    validation.message = `Titulli duhet të jetë më pak se ${maxLength} karaktere`;
+    validation.message = `${Translation("name-can-have-less-than")} ${maxLength} ${Translation("characters")}`;
   }
 
   return validation;
@@ -32,17 +32,17 @@ export const DescriptionValidation = (value) => {
 
   if (!regex.test(value)) {
     validation.error = true;
-    validation.message = `Përshkrimi duhet të përmbajë vetëm shkronja, numra, hapësira, viza, presje dhe pikë`;
+    validation.message = Translation("product-description-regex-validations");
   }
 
   if (value.length < minLength) {
     validation.error = true;
-    validation.message = `Përshkrimi duhet të jetë të paktën ${minLength} karaktere i gjatë`;
+    validation.message = `${Translation("description-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
   }
 
   if (value.length > maxLength) {
     validation.error = true;
-    validation.message = `Përshkrimi duhet të jetë më pak se ${maxLength} karaktere`;
+    validation.message = `${Translation("description-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
   }
 
   return validation;
@@ -51,12 +51,11 @@ export const DescriptionValidation = (value) => {
 export const PhoneValidation = (value) => {
   let validation = { error: false };
 
-  const regex =
-    /^((\+)?(383)?([1-9]{1}|[2]{1}[0-9]{1}|[3]{1}[0-9]{1}|[4]{1}[0-9]{1}|[5]{1}[0-9]{1}|[6]{1}[0-9]{1}|[7]{1}[0-9]{1})[0-9]{10,15})$/;
+  const regex = /^((\+)?(383)?([1-9]{1}|[2]{1}[0-9]{1}|[3]{1}[0-9]{1}|[4]{1}[0-9]{1}|[5]{1}[0-9]{1}|[6]{1}[0-9]{1}|[7]{1}[0-9]{1})[0-9]{10,15})$/;
 
   if (!regex.test(value)) {
     validation.error = true;
-    validation.message = `Numri i telefonit është i pavlefshëm`;
+    validation.message = Translation("phone-number-is-not-valid");
   }
 
   return validation;
@@ -71,17 +70,17 @@ export const AddressValidation = (value) => {
 
   if (!regex.test(value)) {
     validation.error = true;
-    validation.message = `Adresa mund të përmbajë vetëm shkronja, numra, hapsira dhe karakteret ', -, .'`;
+    validation.message = Translation("address-regex-validations");
   }
 
   if (value.length < minLength) {
     validation.error = true;
-    validation.message = `Adresa duhet të jetë së paku ${minLength} karaktere`;
+    validation.message = `${Translation("address-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
   }
 
   if (value.length > maxLength) {
     validation.error = true;
-    validation.message = `Adresa nuk mund të jetë më shumë se ${maxLength} karaktere`;
+    validation.message = `${Translation("address-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
   }
 
   return validation;
@@ -96,17 +95,17 @@ export const UserNameValidation = (value) => {
 
   if (value.length < minLength) {
     validation.error = true;
-    validation.message = `Emri duhet të jetë së paku ${minLength} karaktere`;
+    validation.message = `${Translation("first-name-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
   }
 
   if (value.length > maxLength) {
     validation.error = true;
-    validation.message = `Emri nuk mund të jetë më shumë se ${maxLength} karaktere`;
+    validation.message = `${Translation("first-name-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
   }
 
   if (!regex.test(value)) {
     validation.error = true;
-    validation.message = `Emri duhet të përmbajë vetëm shkronja, numra dhe një hapësirë të vetme midis fjalëve`;
+    validation.message = Translation("name-regex-validation");
   }
 
   return validation;
@@ -121,17 +120,17 @@ export const UserSurnameValidation = (value) => {
 
   if (value.length < minLength) {
     validation.error = true;
-    validation.message = `Mbiemri duhet të jetë së paku ${minLength} karaktere`;
+    validation.message = `${Translation("surname-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
   }
 
   if (value.length > maxLength) {
     validation.error = true;
-    validation.message = `Mbiemri nuk mund të jetë më shumë se ${maxLength} karaktere`;
+    validation.message = `${Translation("surname-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
   }
 
   if (!regex.test(value)) {
     validation.error = true;
-    validation.message = `Mbiemri duhet të përmbajë vetëm shkronja, numra dhe një hapësirë të vetme midis fjalëve`;
+    validation.message = Translation("surname-regex-validation");
   }
 
   return validation;
@@ -146,17 +145,17 @@ export const UserBioValidation = (value) => {
 
   if (!regex.test(value)) {
     validation.error = true;
-    validation.message = `Përshkrimi duhet të përmbajë vetëm shkronja, numra, hapësira, viza, presje dhe pikë`;
+    validation.message = Translation("bio-regex-validations");
   }
 
   if (value.length < minLength) {
     validation.error = true;
-    validation.message = `Përshkrimi duhet të jetë të paktën ${minLength} karaktere i gjatë`;
+    validation.message = `${Translation("bio-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
   }
 
   if (value.length > maxLength) {
     validation.error = true;
-    validation.message = `Përshkrimi duhet të jetë më pak se ${maxLength} karaktere`;
+    validation.message = `${Translation("bio-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
   }
 
   return validation;
@@ -191,17 +190,17 @@ export const UsernameValidation = (value) => {
 
   if (value.length < minLength) {
     validation.error = true;
-    validation.message = `Emri unik duhet të jetë së paku ${minLength} karaktere`;
+    validation.message = `${Translation("username-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
   }
 
   if (value.length > maxLength) {
     validation.error = true;
-    validation.message = `Emri unik nuk mund të jetë më shumë se ${maxLength} karaktere`;
+    validation.message = `${Translation("username-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
   }
 
   if (!regex.test(value)) {
     validation.error = true;
-    validation.message = `Emri unik duhet të përmbajë vetëm shkronja dhe numra pa hapësira dhe pa karaktere speciale`;
+    validation.message = Translation("username-regex-validation");
   }
 
   return validation;
@@ -212,7 +211,7 @@ export const CityValidation = (value) => {
 
   if (value === "") {
     validation.error = true;
-    validation.message = `Ju lutem zgjidhni qytetin ku produkti dhurohet`;
+    validation.message = Trnaslation("select-one-city");
   }
 
   return validation;
@@ -223,7 +222,7 @@ export const CategoryValidation = (value) => {
 
   if (value === "") {
     validation.error = true;
-    validation.message = `Produkti duhet te ketë një kategori përkatëse`;
+    validation.message = Translation("select-one-category");
   }
 
   return validation;
@@ -234,7 +233,7 @@ export const ModeValidation = (value) => {
 
   if (value !== false && value !== true) {
     validation.error = true;
-    validation.message = `Zgjidheni një opsion për mënyrën e dhurimit të produktit`;
+    validation.message = Trnaslation("select-the-chosen-giving-mode");;
   }
 
   return validation;
@@ -245,7 +244,7 @@ export const ImagesValidation = (value) => {
 
   if (value.length < 1) {
     validation.error = true;
-    validation.message = `Së paku një foto duhet të ngarkohet për ta shfaqur produktin`;
+    validation.message = Translation("at-least-one-image-needs-to-be-uploaded");
   }
 
   return validation;

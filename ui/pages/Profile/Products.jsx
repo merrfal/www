@@ -1,10 +1,10 @@
-import * as Messages from "../../../configs/Messages";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { Fragment, useEffect, useState } from "react";
 import { Empty, End, Product } from "../../components";
 import { Skeleton } from "./";
 import { Products as UserProducts } from "../../../api/User";
+import { Translation } from "../../../utils/Translations";
 
 export default function Products({ user, dispatch, account }) {
   const [products, setProducts] = useState({ products: [], hasMore: true });
@@ -38,18 +38,18 @@ export default function Products({ user, dispatch, account }) {
     <main className="max-w-2xl mx-auto mt-8 py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="max-w-xl">
         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-          Produktet e dhuruara
+          {Translation("given-products")}
         </h1>
         
         <p className="mt-2 text-sm text-gray-500">
-          {user._id === account?.User?._id ? Messages.USER_PRODUCTS : Messages.USERS_PRODUCTS}
+          {user._id === account?.User?._id ? Translation("user-posted-products-authed") : Translation("user-posted-products-not-authed")}
         </p>
       </div>
 
       {products.products.length === 0 && !products.hasMore && (
         <Empty 
-          heading={Messages.PRODUCTS_EMPTY_TITLE} 
-          message={user._id === account?.User?._id ? Messages.USER_PRODUCTS_LIST : Messages.USERS_PRODUCTS_LIST} 
+          heading={Translation("no-products-found")} 
+          message={user._id === account?.User?._id ? Translation("user-product-list") : Translation("users-product-list")} 
         />
       )}
 

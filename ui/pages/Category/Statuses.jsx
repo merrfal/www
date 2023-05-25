@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { OpenIcon } from "../../icons";
+import { Translation } from "../../../utils/Translations";
 
 export default function Cities({ filters, setFilters }) {
   const [isStatusOpen, setIsStatusOpen] = useState(false);
@@ -25,7 +26,9 @@ export default function Cities({ filters, setFilters }) {
         onClick={open}
         className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
       >
-        <span>Statusi</span>
+          <span>
+            {Translation("status")}
+          </span>
         <OpenIcon />
       </button>
 
@@ -34,7 +37,7 @@ export default function Cities({ filters, setFilters }) {
           <form className="space-y-4">
             <div className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
               <input
-                id="dhuruar"
+                id="given"
                 value={true}
                 type="radio"
                 checked={filters.statuses.includes(true)}
@@ -58,10 +61,10 @@ export default function Cities({ filters, setFilters }) {
                 }}
               />
               <label
-                htmlFor="dhuruar"
+                htmlFor="given"
                 className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"
               >
-                Dhuruar
+                {Translation("given")}
               </label>
             </div>
 
@@ -95,7 +98,7 @@ export default function Cities({ filters, setFilters }) {
                 htmlFor="jo-dhuruar"
                 className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"
               >
-                Jo dhuruar
+                {Translation("not-given")}
               </label>
             </div>
           </form>

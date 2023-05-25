@@ -1,5 +1,6 @@
 import { Categories as AllCategories } from "../../../data";
 import { CategoryValidation } from "../../../utils/Forms";
+import { Translation } from "../../../utils/Translations";
 
 export default function Categories({
   product: {
@@ -12,13 +13,14 @@ export default function Categories({
 
   return (
     <div className="col-span-6 sm:col-span-3 lg:col-span-3">
-      <label htmlFor="c" className="block text-sm font-medium text-gray-700">
-        Kategoria
+      <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+        {Translation("category")}
       </label>
+
       <select
         onChange={(e) => onInput("category", e)}
         value={category}
-        id="c"
+        id="category"
         className="p-3 mt-1 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm"
       >
         {AllCategories.map((category) => (

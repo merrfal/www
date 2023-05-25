@@ -1,4 +1,5 @@
 import { PhoneValidation } from "../../../utils/Forms";
+import { Translation } from "../../../utils/Translations";
 
 export default function Phone({
   product: {
@@ -15,7 +16,7 @@ export default function Phone({
         htmlFor="phone"
         className="block text-sm font-medium text-gray-700"
       >
-        Numri i telefonit
+        {Translation("phone-number")}
       </label>
 
       <input 
@@ -23,7 +24,7 @@ export default function Phone({
         value={phone}
         type="text"
         id="phone"
-        placeholder="+383 - XX-XXX-XXX"
+        placeholder={Translation("phone-number-placeholder")}
         className="p-3 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm"
         onChange={(e) => {
           if (e.target.value.match(/^[0-9+]*$/)) {
