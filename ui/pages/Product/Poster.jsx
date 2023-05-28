@@ -54,6 +54,7 @@ export default function Poster({ productData }) {
             <div className="w-full">
               <p className="text-[15.5px] flex items-center">
                 {`${user?.userData?.name} ${user?.userData?.surname}`}
+                
                 {user?.userAdditionalData?.isUserVerified && <VerifiedBadge className="h-4 w-4 ml-1" />}
               </p>
 

@@ -11,6 +11,7 @@ export default function Phone({ productData }) {
           style={{width: '60%'}}
         >
           <PhoneIcon />
+          
           {Translation("call-to")} {productData?.phone?.includes("+") ? productData?.phone : `+${productData?.phone}`}
         </button>
       </div>

@@ -2,6 +2,7 @@ import * as Messages from "../configs/Messages";
 
 import { Notification } from "../utils/Response";
 import { Request } from "../utils/Http";
+import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
 
 export const Create = async (page, router, setLoading, dispatch) => {
   try {
@@ -23,7 +24,7 @@ export const Create = async (page, router, setLoading, dispatch) => {
     else {
       const alert = {
         dispatch,
-        message: res.message,
+        message: CreateMessage("product", false),
         type: "error",
       };
 
@@ -46,9 +47,9 @@ export const Create = async (page, router, setLoading, dispatch) => {
   }
 };
 
-export const Delete = async (product, dispatch) => {
+export const Delete = async (slug, onDelete, dispatch) => {
   try {
-    const req = await Request("PRODUCTS/DELETE", {product});
+    const req = await Request("PRODUCTS/DELETE", {slug});
     const res = await req.json();
 
     if (res.success === true) {
@@ -58,6 +59,8 @@ export const Delete = async (product, dispatch) => {
         type: "success",
       };
 
+      onDelete();
+      
       Notification(alert);
     }
 
@@ -75,7 +78,7 @@ export const Delete = async (product, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.PRODUCT_DELETE_ERROR,
+      message: DeleteMesage("product", false),
       type: "error",
     };
 

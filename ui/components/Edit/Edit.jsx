@@ -6,7 +6,6 @@ import {
   Buttons,
   City,
   Country,
-  Description,
   Email,
   Name,
   Cover,
@@ -23,11 +22,11 @@ export default function Edit({ user, setUser, setIsEdit }) {
       userData: {
         name: user.userData.name,
         surname: user.userData.surname,
+        email: user.userData.email,
         address: user.userData.address,
         username: user.userData.username,
         cover: user.userData.cover,
         avatar: user.userData.avatar,
-        bio: user.userData.bio,
         phone: user.userData.phone,
       },
       userAdditionalData: {
@@ -45,7 +44,6 @@ export default function Edit({ user, setUser, setIsEdit }) {
     country: false,
     cover: false,
     avatar: false,
-    bio: false,
     phone: false,
   });
 
@@ -139,12 +137,6 @@ export default function Edit({ user, setUser, setIsEdit }) {
                         validations={validations}
                       />
 
-                      <Description
-                        user={userClone}
-                        onInput={onInput}
-                        validations={validations}
-                      />
-
                       <Address
                         user={userClone}
                         onInput={onInput}
@@ -172,6 +164,7 @@ export default function Edit({ user, setUser, setIsEdit }) {
                   </div>
                 </div>
               </div>
+              
               <Buttons
                 userClone={userClone}
                 setUserClone={setUserClone}

@@ -13,14 +13,17 @@ export default function Steps() {
               </span>
             </div>
           </h3>
+
           <div className="pb-6 prose prose-sm" id="disclosure-1">
             <div className="max-w-2xl mx-auto">
               <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-3 sm:gap-x-3 lg:grid-cols-3 lg:gap-x-3">
                 <div>
                   <StepOneIcon />
+
                   <h3 className="mt-6 text-sm font-medium text-gray-900">
                     {Translation("contact-the-giver")}
                   </h3>
+
                   <p className="mt-2 text-sm text-gray-500">
                     {Translation("contact-the-giver-description")}
                   </p>
@@ -28,9 +31,11 @@ export default function Steps() {
 
                 <div>
                   <StepTwoIcon />
+
                   <h3 className="mt-6 text-sm font-medium text-gray-900">
                     {Translation("go-to-the-take-place")}
                   </h3>
+
                   <p className="mt-2 text-sm text-gray-500">
                     {Translation("go-to-the-take-place-description")}
                   </p>
@@ -38,9 +43,11 @@ export default function Steps() {
 
                 <div>
                   <StepThreeIcon />
+                  
                   <h3 className="mt-6 text-sm font-medium text-gray-900">
                     Mereni Produktin
                   </h3>
+
                   <p className="mt-2 text-sm text-gray-500">
                     Pastaj takohuni me dhënësin për ta marrë produktin dhe ta
                     shfrytëzoni.

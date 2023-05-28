@@ -1,21 +1,23 @@
 import * as Messages from "../configs/Messages";
 
 import { Product, User, Category as CategoryModel } from "../configs/Models";
+import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
 import { Response } from "../utils/Response";
 
 export const Create = async (payload, res) => {
   try {
     const initalProduct = new Product(payload);
     const product = await initalProduct.save();
+    const id = product._id.toString();
 
     await User.findByIdAndUpdate(payload.productData.user, {
       $inc: { 'userActivities.productCount': 1 },
-      $addToSet: { 'userActivities.products': product._id }
+      $addToSet: { 'userActivities.products': id }
     });
 
     await CategoryModel.findByIdAndUpdate(payload.productData.category, {
       $inc: { 'additionalData.productCount': 1 },
-      $addToSet: { 'additionalData.products': product._id }
+      $addToSet: { 'additionalData.products': id }
     });
 
     const response = {
@@ -23,7 +25,7 @@ export const Create = async (payload, res) => {
       code: product ? 200 : 400,
       success: product ? true : false,
       data: product ? { ...product._doc } : null,
-      message: product ? Messages.PRODUCT_CREATE_SUCCESS : Messages.PRODUCT_CREATE_ERROR,
+      message: CreateMessage("product", product ? true : false),
     };
 
     Response(response);
@@ -35,7 +37,7 @@ export const Create = async (payload, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.PRODUCT_CREATE_ERROR,
+      message: CreateMessage("product", false),
       error,
     };
 
@@ -45,31 +47,33 @@ export const Create = async (payload, res) => {
 
 export const Delete = async (payload, res) => {
   try {
-    let { product } = payload;
+    let { slug } = payload;
 
-    const { productData } = await Product.findById(product).select({ 
+    const productData = await Product.findOne({'productData.slug': slug}).select({ 
         'productData.user': 1, 
-        'productData.category': 1 
+        'productData.category': 1,
     });
 
-    await User.findByIdAndUpdate(productData.user, {
+    let productId = productData._id.toString()
+
+    await User.findByIdAndUpdate(productData.productData.user, {
       $inc: { 'userActivities.productCount': -1 },
-      $pull: { 'userActivities.products': product._id }
+      $pull: { 'userActivities.products': productId }
     })
 
-    await Category.findByIdAndUpdate(productData.category, {
+    await CategoryModel.findByIdAndUpdate(productData.productData.category, {
       $inc: { 'additionalData.productCount': -1 },
-      $pull: { 'additionalData.products': product._id }
+      $pull: { 'additionalData.products': productId }
     })
 
-    const deletedProduct = await Product.findByIdAndDelete(product);
+    const deletedProduct = await Product.findByIdAndDelete(productId);
 
     const response = {
       res,
       code: deletedProduct ? 200 : 400,
       success: deletedProduct ? true : false,
       data: deletedProduct ? { ...deletedProduct._doc } : null,
-      message: deletedProduct ? Messages.PRODUCT_DELETE_SUCCESS : Messages.PRODUCT_DELETE_ERROR,
+      message: DeleteMesage("product", deletedProduct ? true : false)
     }
 
     Response(response);
@@ -81,7 +85,7 @@ export const Delete = async (payload, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.PRODUCT_DELETE_ERROR,
+      message: DeleteMesage("product", false),
       error,
     }
 

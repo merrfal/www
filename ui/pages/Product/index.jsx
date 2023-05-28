@@ -5,7 +5,6 @@ import Phone from "./Phone";
 import Poster from "./Poster";
 import Similar from "./Similar";
 import Steps from "./Steps";
-import Skeleton from "./Skeleton";
 import Thumbnail from "./Thumbnail";
 import Gallery from "./Gallery";
 import Category from "./Category";
@@ -19,7 +18,6 @@ export {
   Poster,
   Similar,
   Steps,
-  Skeleton,
   Thumbnail,
   Gallery,
   Category,

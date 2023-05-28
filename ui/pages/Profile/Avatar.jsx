@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { VerifiedBadge } from "../../icons";
 import { EditButton, Website } from "./";
-
 import { NO_AVATAR } from "../../../configs/Constants";
 
 export default function Avatar(props) {
@@ -48,11 +47,11 @@ export default function Avatar(props) {
             {user?.userData?.name} {user?.userData?.surname}
             {user?.userAdditionalData?.isUserVerified && <VerifiedBadge className="ml-1" />}
           </h1>
+          
           <p className="text-gray-500">@{user?.userData?.username}</p>
         </div>
 
         <EditButton isEdit={isEdit} setIsEdit={setIsEdit} id={user?._id} />
-        {user?.userData?.website && <Website userData={userData} />}
       </div>
     </div>
   );

@@ -8,7 +8,6 @@ export default function Header({ mode }) {
     <>
       <Global title={meta?.title} description={meta?.description} />
       <h1 className="text-4xl mb-4 font-extrabold tracking-tight text-gray-900">{meta?.title}</h1>
-      <p className="mt-4 max-w-xl text-sm text-gray-700">{meta?.description}</p>
     </>
   );
 }

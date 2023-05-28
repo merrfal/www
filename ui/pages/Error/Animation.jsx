@@ -5,7 +5,7 @@ export default function Animation() {
         src="https://assets7.lottiefiles.com/packages/lf20_f2vwipdy.json"
         background="transparent"
         speed="1"
-        style={{ width: "320px" }}
+        style={{ height: "259px" }}
         loop
         autoplay
       />

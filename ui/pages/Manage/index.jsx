@@ -1,4 +1,5 @@
-import Manage from "./Manage";
+import ProductPost from "./ProductPost";
+import ProductEdit from "./ProductEdit";
 import Address from "./Address";
 import Buttons from "./Buttons";
 import Categories from "./Categories";
@@ -26,7 +27,7 @@ export {
   Title,
   Info,
   Given,
-  Url
+  Url,
+  ProductPost,
+  ProductEdit
 };
-
-export default Manage;

@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { View } from "../../../api/Product";
-import { ManageSkeleton } from "../../components";
+import { Loading } from "../../components";
+import { DisabledDefaultState, ProductDefaultState, ProductDefaultValidation } from "../../../configs/Defaults";
+import { onInput as Input } from "../../../utils/ProductManipulation"
 
 import {
   Header,
@@ -20,64 +22,27 @@ import {
   Given,
 } from ".";
 
-export default function Manage({ mode = "create" }) {
+export default function EditProduct() {
   const account = useSelector((state) => state.Account);
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const [loading, setLoading] = useState(mode === "create" ? false : true);
-  const [allowedEdit, setAllowedEdit] = useState(mode === "create" ? true : false);
+  const [loading, setLoading] = useState(true);
+  const [validation, setValidation] = useState(ProductDefaultValidation);
+  const [product, setProduct] = useState(ProductDefaultState);
 
-  const [validation, setValidation] = useState({
-    name: false,
-    description: false,
-    address: false,
-    phone: false,
-    city: false,
-    category: false,
-    gallery: false,
-    postedAnonymously: false,
-  });
-
-  const [product, setProduct] = useState({
-    productData: {
-      name: "",
-      description: "",
-      address: "",
-      phone: "",
-      city: "prishtine",
-      category: "636f3ece911a24f351b57837",
-      gallery: [],
-      postedAnonymously: false,
-    },
-  });
-
-  const onUpload = (imageList) =>
-    setProduct({
-      productData: {
-        ...product.productData,
-        gallery: imageList,
-      },
-    });
-
-  const onInput = (key, e, event = true) => {
-    setProduct({
-      productData: {
-        ...product.productData,
-        [key]: event ? e.target.value : e,
-      },
-    });
-
-    setValidation({
-      ...validation,
-      [key]: true,
-    });
-  };
-
-  const onLoad = !loading ? {} : { pointerEvents: "none", opacity: ".65" };
+  const onInput = (key, e, event = true) => Input(
+    product, 
+    setProduct, 
+    validation, 
+    setValidation, 
+    key, 
+    e, 
+    event
+  );
 
   useEffect(() => {
-    if (mode === "edit" && setLoading && !account.Loading) {
+    if (loading && !account.Loading) {
       const { slug } = router.query;
 
       if (slug !== "" && slug !== undefined) {
@@ -91,7 +56,6 @@ export default function Manage({ mode = "create" }) {
     const item = product?.productData;
 
     if (
-      mode === "edit" &&
       item?.hasOwnProperty("user") &&
       !account.Loading
     ) {
@@ -106,17 +70,18 @@ export default function Manage({ mode = "create" }) {
     }
   }, [product, account]);
 
+  const onLoad = !loading ? {} : DisabledDefaultState;
 
   return (
     <Normal>
-      {loading && !allowedEdit && <ManageSkeleton />}
+      {loading && <Loading />}
 
-      {!loading && allowedEdit && <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      {!loading && <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16">
           <div className="mt-5 md:col-span-2 md:mt-0">
             <div className="sm:overflow-hidden sm:rounded-md">
               <div style={onLoad} className="space-y-6 p-2">
-                <Header product={product} mode={mode} />
+                <Header product={product} mode="edit" />
 
                 <Title
                   product={product}
@@ -137,12 +102,8 @@ export default function Manage({ mode = "create" }) {
                 />
 
                 <div className="grid grid-cols-6 gap-6">
-                  {mode === "edit" && (
-                    <>
-                      <Given product={product} onInput={onInput} />
-                      <Url product={product} />
-                    </>
-                  )}
+                  <Given product={product} onInput={onInput} />
+                  <Url product={product} />
 
                   <Phone
                     product={product}
@@ -171,14 +132,14 @@ export default function Manage({ mode = "create" }) {
 
                 <Images
                   product={product}
-                  onUpload={onUpload}
+                  setProduct={setProduct}
                   validation={validation}
-                  mode={mode}
+                  mode="edit"
                 />
               </div>
 
               <Buttons
-                mode={mode}
+                mode="edit"
                 product={product}
                 onInput={onInput}
                 setLoading={setLoading}

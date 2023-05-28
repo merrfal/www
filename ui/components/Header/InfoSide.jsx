@@ -9,6 +9,8 @@ import { useRouter } from "next/router";
 import { useRef } from "react";
 import { Translation } from "../../../utils/Translations";
 
+const categories = structuredClone(Categories);
+
 export default function InfoSide() {
   const router = useRouter();
 
@@ -38,8 +40,7 @@ const Desktop = () => {
   return (
     <div className="desktop-categories">
       <div className="h-full w-auto flex space-x-6 items-center align-center">
-
-        {Categories.filter((category) => category.favorite)
+        {categories?.filter((category) => category.favorite)
           .slice(0, 8)
           .map((link, index) => (
             <Link key={index} href={`/kategorite/${link.slug}`}>
@@ -60,7 +61,6 @@ const Desktop = () => {
 };
 
 const Mobile = () => {
-
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
 
   let clickOutside = (handler) => {
@@ -90,7 +90,7 @@ const Mobile = () => {
         {isCategoryOpen && (
           <div className="origin-top-right max-h-[280px] overflow-scroll absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
             <form className="space-y-4">
-              {Categories.map((category, index) => {
+              {categories?.map((category, index) => {
                 return (
                   <div key={index} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
                     <Link href={`/kategorite/${category.slug}`}>

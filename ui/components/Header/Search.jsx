@@ -27,7 +27,7 @@ export default function Search() {
         maxLength={32}
         required
         type="text"
-        className="border w-[230px] border-gray-200 text-gray-900 text-[14px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-1.5 "
+        className="border w-[260px] border-gray-200 text-gray-900 text-[14px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-1.5 "
         placeholder={Translation("search-products")}
         onKeyPress={(e) => {
           if (e.key === "Enter") {

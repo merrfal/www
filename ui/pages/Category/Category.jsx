@@ -7,10 +7,9 @@ import { Global } from "../../../configs/Head";
 import { useRouter } from "next/router";
 import { Header, Filters, Skeleton } from "./";
 import { Category as Products } from "../../../api/Product";
-import { Empty, Product } from "../../components";
+import { Empty, Loading, Product } from "../../components";
 import { useDispatch } from "react-redux";
 import { Error } from "..";
-import { HeaderSkeleton } from "../../components";
 
 export default function Category() {
   const router = useRouter();
@@ -32,7 +31,6 @@ export default function Category() {
     if (category?.slug !== slug) {
       if (slug !== undefined && slug !== "") {
         const selectedCategory = Categories.find((c) => c.slug === slug);
-      
         if(!selectedCategory) setCategory(false);
         
         else {
@@ -69,8 +67,6 @@ export default function Category() {
     <Normal>
       <Global title={category?.name} description={category?.description} />
 
-      {category === null && <HeaderSkeleton />}
-
       {category !== null && category !== false && 
         <Header 
           name={category?.name} 
@@ -78,30 +74,37 @@ export default function Category() {
         />
       }
 
-      <Filters filters={filters} setFilters={setFilters} />
+      {category === null && <Loading />}
 
-      <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        {products.products.length === 0 && !products.hasMore && 
-          <Empty 
-            heading={PRODUCTS_EMPTY_TITLE} 
-            message={PRODUCTS_EMPTY_DESCRIPTION} 
-          />
-        }
+      {
+        category !== null && category !== false &&
+        <>
+          <Filters filters={filters} setFilters={setFilters} />
 
-        <InfiniteScroll
-          dataLength={products.products.length}
-          next={next}
-          hasMore={products.hasMore}
-          loader={<Skeleton />}
-          className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
-        >
-          {products.products.map(
-            (product, index) => <Fragment key={index}>
-              <Product product={product} />
-            </Fragment>
-          )}
-        </InfiniteScroll>
-      </div>
+          <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            {products.products.length === 0 && !products.hasMore && 
+              <Empty 
+                heading={PRODUCTS_EMPTY_TITLE} 
+                message={PRODUCTS_EMPTY_DESCRIPTION} 
+              />
+            }
+
+            <InfiniteScroll
+              dataLength={products.products.length}
+              next={next}
+              hasMore={products.hasMore}
+              loader={<Skeleton />}
+              className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
+            >
+              {products.products.map(
+                (product, index) => <Fragment key={index}>
+                  <Product product={product} />
+                </Fragment>
+              )}
+            </InfiniteScroll>
+          </div>
+        </>
+      }
     </Normal>
   );
 }

@@ -4,6 +4,7 @@ import * as Messages from "./Messages";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
+import { Translation } from "../utils/Translations";
 
 let Firebase;
 let Storage;
@@ -26,7 +27,7 @@ try {
 
 catch (err) {
   if (!/already exists/.test(err.message)) {
-    console.error(Messages.FB_INIT_ERROR, err.stack);
+    console.error(Translation("firebase-init-error"), err.stack);
   }
 }
 

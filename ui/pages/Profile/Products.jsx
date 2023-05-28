@@ -10,12 +10,27 @@ export default function Products({ user, dispatch, account }) {
   const [products, setProducts] = useState({ products: [], hasMore: true });
   const [first, setFirst] = useState(true);
 
-  const next = () => {
-    const filters = {
-      offset: products.products.length.toString(),
-      limit: 4,
-      user: user._id,
-      auth: account.Auth ? account.User._id : null,
+  const next = (reset = false) => {
+    let filters;
+
+    if(reset === false){
+      filters = {
+        offset: products.products.length.toString(),
+        limit: 4,
+        user: user._id,
+        auth: account.Auth ? account.User._id : null,
+      }
+    }
+
+    else {
+      setProducts({ products: [], hasMore: false });
+
+      filters = {
+        offset: "0",
+        limit: 4,
+        user: user._id,
+        auth: account.Auth ? account.User._id : null,
+      }
     }
 
     UserProducts(filters, products, setProducts, dispatch);
@@ -33,6 +48,7 @@ export default function Products({ user, dispatch, account }) {
     }
   }, [user, account])
 
+  const onDelete = () => next(true);
 
   return (
     <main className="max-w-2xl mx-auto mt-8 py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -62,7 +78,11 @@ export default function Products({ user, dispatch, account }) {
       >
         {products.products.map(
           (product, index) => <Fragment key={index}>
-            <Product product={product} />
+            <Product 
+              product={product} 
+              allowManage={true} 
+              onDelete={onDelete}  
+            />
           </Fragment>
         )}
       </InfiniteScroll>

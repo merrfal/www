@@ -1,12 +1,13 @@
 import { Translation } from "../../../utils/Translations";
+import { Wildcard } from "../../components";
 
 export default function Url({product: { productData: { slug } }}) {
   const currentFullUrl = typeof window !== "undefined" ? window.location.origin : "";
 
   return (
-    <div className="col-span-6 sm:col-span-3 lg:col-span-3 pointer-events-none opacity-[.65]">
+    <div className="col-span-6 sm:col-span-3 lg:col-span-3 pointer-events-none opacity-50">
       <label htmlFor="link" className="block text-sm font-medium text-gray-700">
-        {Translation("product-link")}
+        {Translation("product-link")}<Wildcard />
       </label>
 
       <input

@@ -21,7 +21,9 @@ export const Login = async (uid, dispatch) => {
       dispatch(LogoutAccount());
       Notification(alert);
     }
-  } catch (error) {
+  } 
+  
+  catch (error) {
     const alert = {
       dispatch,
       message: Messages.USER_AUTH_ERROR,

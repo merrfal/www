@@ -1,3 +1,5 @@
+import { Translation } from "./Translations";
+
 export const NameValidation = (value) => {
   let validation = { error: false };
 
@@ -65,7 +67,7 @@ export const AddressValidation = (value) => {
   let validation = { error: false };
 
   const minLength = 10;
-  const maxLength = 80;
+  const maxLength = 40;
   const regex = /^[a-zA-Z0-9\s,'-]*$/;
 
   if (!regex.test(value)) {
@@ -136,31 +138,6 @@ export const UserSurnameValidation = (value) => {
   return validation;
 };
 
-export const UserBioValidation = (value) => {
-  let validation = { error: false };
-
-  const minLength = 32;
-  const maxLength = 500;
-  const regex = /^[a-zA-Z0-9- ,.]{32,500}$/;
-
-  if (!regex.test(value)) {
-    validation.error = true;
-    validation.message = Translation("bio-regex-validations");
-  }
-
-  if (value.length < minLength) {
-    validation.error = true;
-    validation.message = `${Translation("bio-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
-  }
-
-  if (value.length > maxLength) {
-    validation.error = true;
-    validation.message = `${Translation("bio-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
-  }
-
-  return validation;
-};
-
 export const SlugBuilder = (value) => {
   return (
     value
@@ -211,7 +188,7 @@ export const CityValidation = (value) => {
 
   if (value === "") {
     validation.error = true;
-    validation.message = Trnaslation("select-one-city");
+    validation.message = Translation("select-one-city");
   }
 
   return validation;
@@ -233,7 +210,7 @@ export const ModeValidation = (value) => {
 
   if (value !== false && value !== true) {
     validation.error = true;
-    validation.message = Trnaslation("select-the-chosen-giving-mode");;
+    validation.message = Translation("select-the-chosen-giving-mode");;
   }
 
   return validation;

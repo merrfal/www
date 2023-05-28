@@ -21,6 +21,7 @@ import {
   Category,
   Views,
 } from "./";
+import { Loading } from "../../components";
 
 export default function Product() {
   const dispatch = useDispatch();
@@ -73,7 +74,7 @@ export default function Product() {
         thumbnail={product?.productData?.gallery[0].url}
       />
 
-      {product === null && <Skeleton />}
+      {product === null && <Loading />}
 
       {product !== null && (
         <div className="bg-white">
@@ -93,8 +94,10 @@ export default function Product() {
                 <div className="mt-10 ml-3 px-4 sm:px-0 sm:mt-16 lg:mt-0">
                   <div className="flex items-center mb-8">
                     <Category category={product.productData.category} />
+
                     <div className="h-5 border-r border-gray-200 mx-4" />
                     <Location productData={product.productData} />
+                    
                     <div className="h-5 border-r border-gray-200 mx-4" />
                     <Views product={product} />
                   </div>

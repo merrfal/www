@@ -70,7 +70,7 @@ export default function Cities({ filters, setFilters }) {
 
             <div className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
               <input
-                id="jo-dhuruar"
+                id="not-given"
                 value={false}
                 type="radio"
                 checked={filters.statuses.includes(false)}
@@ -95,7 +95,7 @@ export default function Cities({ filters, setFilters }) {
                 }
               />
               <label
-                htmlFor="jo-dhuruar"
+                htmlFor="not-given"
                 className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"
               >
                 {Translation("not-given")}

@@ -126,10 +126,7 @@ export default function Buttons(props) {
 
   return (
     <div className="text-right mb-2 mr-2">
-      <button
-        className="inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none"
-        onClick={mode === "create" ? handlePublish : handleUpdate}
-      >
+      <button onClick={mode === "create" ? handlePublish : handleUpdate} className="inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none">
         {Translation("post-product")}
       </button>
     </div>

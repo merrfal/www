@@ -15,9 +15,11 @@ export default function Content({ mode }) {
               {item?.subtitle}
             </h3>
             
-            <p className="mt-4 w-full text-m text-gray-600 mb-20">
-              {item?.text}
-            </p>
+            {item?.texts.map((text, index) => 
+              <p key={index} className="mt-4 w-full text-m text-gray-600 mb-20">
+                {text}
+              </p>
+            )}
           </div>
       ))}
     </div>

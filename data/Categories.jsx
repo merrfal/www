@@ -1,4 +1,4 @@
-const Categories = [
+export const Categories = [
   {
     _id: "636f3ece911a24f351b57837",
     name: "Veshje",
@@ -128,5 +128,3 @@ const Categories = [
     favorite: false,
   },
 ];
-
-export default Categories;

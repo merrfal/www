@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { CloseConfirmation, OpenConfirmation } from "../../../controllers/Slices";
+import { CloseConfirmation } from "../../../controllers/Slices";
 
 export default function Operations() {
   const confirmation = useSelector((state) => state.Confirmation);
@@ -7,7 +7,7 @@ export default function Operations() {
 
   const onConfirm = () => {
     confirmation.Action();
-    dispatch(OpenConfirmation());
+    dispatch(CloseConfirmation());
   };
 
   const onCancel = () => dispatch(CloseConfirmation())

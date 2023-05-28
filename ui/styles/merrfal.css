@@ -1,18 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
-    text-decoration: none;
-    font-family: 'DM Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+  font-family: "DM Sans", sans-serif;
 }
 
 body {
-    width: 100%;
-    height: 100%;
-    overflow: scroll;
+  width: 100%;
+  height: 100%;
 }
 
 textarea {
@@ -43,11 +42,11 @@ textarea {
   .categories-container {
     flex-direction: row;
   }
-  
+
   .mobile-categories {
     display: none;
   }
-  
+
   .desktop-categories {
     display: flex;
   }
@@ -57,13 +56,13 @@ textarea {
   .categories-container {
     flex-direction: column;
   }
-  
+
   .mobile-categories {
     position: relative;
     z-index: 999999;
     display: flex;
   }
-  
+
   .desktop-categories {
     display: none;
   }

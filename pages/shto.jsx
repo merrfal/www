@@ -1,3 +1,3 @@
-import { Manage } from '../ui/pages';
-const Route = () => <Manage />;
+import { ProductPost } from '../ui/pages';
+const Route = () => <ProductPost />;
 export default Route;

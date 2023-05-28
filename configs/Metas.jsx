@@ -34,7 +34,7 @@ export const ManageMeta = (mode, product) => {
 export const TermsMeta = () => {
   meta.title = Translation("terms-of-service");
   meta.description = "Ketu mund te shfletoni kushtet e sherbimit te platformes dhe te kuptoni se si mund te perdorni platformen dhe si mund te beni dhurime."
-
+  
   return meta;
 }
 

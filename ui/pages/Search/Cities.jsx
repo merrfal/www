@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { KosovoCities } from "../../../data";
 import { OpenIcon } from "../../icons";
+import { Translation } from "../../../utils/Translations";
 
 export default function Cities({ filters, setFilters }) {
   const [isCityOpen, setIsCityOpen] = useState(false);
@@ -39,7 +40,7 @@ export default function Cities({ filters, setFilters }) {
               return (
                 <div key={index} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
                   <input
-                    id={city.value}
+                    id="city"
                     value={city.value}
                     type="radio"
                     checked={filters.cities.includes(city.value)}
@@ -47,7 +48,7 @@ export default function Cities({ filters, setFilters }) {
                     onClick={() => setFilters({...filters, cities: [...filters.cities, city.value]})}
                   />
                   
-                  <label htmlFor={city.value} className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                  <label htmlFor="city" className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                     {city.name}
                   </label>
                 </div>

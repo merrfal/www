@@ -1,0 +1,1 @@
+//TODO: Implement photo deletion when product get's deleted

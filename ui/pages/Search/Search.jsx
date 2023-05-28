@@ -6,7 +6,7 @@ import { Global } from "../../../configs/Head";
 import { useRouter } from "next/router";
 import { Header, Filters, Skeleton } from ".";
 import { Search as Searching } from "../../../api/Product";
-import { Empty, End, HeaderSkeleton, Product } from "../../components";
+import { Empty, End,  Product } from "../../components";
 import { useDispatch } from "react-redux";
 
 import { 
@@ -62,8 +62,6 @@ export default function Search() {
     <Normal>
       <Global title={META_SEARCH} description={SEARCH_TITLE_DESCRIPTION} />
       
-      { allMode === null && <HeaderSkeleton /> }
-
       { allMode == true && <Header 
         name={SEARCH_TITLE_ALL} 
         description={SEARCH_TITLE_DESCRIPTION} /> 
@@ -100,7 +98,7 @@ export default function Search() {
 
         </InfiniteScroll>
 
-        { products.hasMore === false && products.products.length !== 0 && <End /> }
+        { !products.hasMore && products.products.length !== 0 && <End /> }
       </div>
     </Normal>
   );

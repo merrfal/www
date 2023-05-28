@@ -1,6 +1,3 @@
-export const FB_INIT_ERROR = "Gabim në inicilizimin e Firebase! Ju lutemi kontrolloni kredencialet tuaja të Firebase dhe sigurohuni që keni lejet e nevojshme për të hyrë në projektin Firebase.";
-export const API_STATUS = "API-ja jonë po vazhdon të operoj në mënyrë të rregullt dhe pa probleme."
-export const API_WRONG_CONFIGS = "Thirrja në API dështoi pasi nuk u ndoqi strukturimin e kërkuar."
 export const CATEGORIES_LIST_SUCCESS = "Lista e kategorive u mor me sukses nga baza e të dhënave.";
 export const CATEGORIES_LIST_ERROR = "Ndodhi një gabim gjatë marrjes së kategorive nga baza e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.";
 export const CATEGORY_LIST_SUCCESS = "Kategoria u mor me sukses nga baza e të dhënave.";
