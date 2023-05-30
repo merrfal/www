@@ -4,7 +4,7 @@ import { Notification } from "../utils/Response";
 import { Request } from "../utils/Http";
 import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
 
-export const Create = async (page, router, setLoading, dispatch) => {
+export const Create = async (page, router, setIsHold, dispatch) => {
   try {
     const req = await Request("PRODUCTS/CREATE", {productData: {...page}});
     const res = await req.json();
@@ -43,12 +43,14 @@ export const Create = async (page, router, setLoading, dispatch) => {
   }
 
   finally {
-    setLoading(false);
+    setIsHold(false);
   }
 };
 
-export const Delete = async (slug, onDelete, dispatch) => {
+export const Delete = async (slug, setIsHold, onDeleteSuccess, dispatch) => {
   try {
+    setIsHold(true);
+
     const req = await Request("PRODUCTS/DELETE", {slug});
     const res = await req.json();
 
@@ -59,9 +61,9 @@ export const Delete = async (slug, onDelete, dispatch) => {
         type: "success",
       };
 
-      onDelete();
-      
       Notification(alert);
+
+      onDeleteSuccess();
     }
 
     else {
@@ -83,6 +85,8 @@ export const Delete = async (slug, onDelete, dispatch) => {
     };
 
     Notification(alert);
+
+    setIsHold(false);
   }
 };
 
@@ -191,6 +195,33 @@ export const View = async (slug, setProduct, dispatch, setLoading = null) => {
     };
 
     Notification(alert);
+  }
+};
+
+export const ViewWithPermissions = async (slug, dispatch) => {
+  try {
+    const req = await Request("PRODUCTS/VIEW", { slug });
+    const res = await req.json();
+
+    return {
+      success: res.success,
+      data: res.data || null,
+    }
+  } 
+  
+  catch (error) {
+    const alert = {
+      dispatch,
+      message: Messages.PRODUCTS_LATEST_ERROR,
+      type: "error",
+    };
+
+    Notification(alert);
+
+    return {
+      success: false,
+      data: null
+    }
   }
 };
 

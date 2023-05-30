@@ -24,7 +24,7 @@ export default function Categories({filters, setFilters}) {
 
   return (
     <div ref={ref} className="px-4 relative inline-block text-left">
-      <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+      <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900 transition-all">
           <span>
             {Translation("categories")}
           </span>

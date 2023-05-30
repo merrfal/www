@@ -48,8 +48,6 @@ export default function Products({ user, dispatch, account }) {
     }
   }, [user, account])
 
-  const onDelete = () => next(true);
-
   return (
     <main className="max-w-2xl mx-auto mt-8 py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="max-w-xl">
@@ -78,11 +76,7 @@ export default function Products({ user, dispatch, account }) {
       >
         {products.products.map(
           (product, index) => <Fragment key={index}>
-            <Product 
-              product={product} 
-              allowManage={true} 
-              onDelete={onDelete}  
-            />
+            <Product product={product}/>
           </Fragment>
         )}
       </InfiniteScroll>

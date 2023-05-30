@@ -12,7 +12,7 @@ export default function Dropdown({ username }) {
       <div className="py-1" role="none">
         <MenuLink name={Translation("my-profile")} link={`/profili/${username}`} />
 
-        <button onClick={out} className="text-gray-700 block w-full px-4 py-2 text-left text-sm">
+        <button onClick={out} className="text-gray-700 block w-full px-4 py-2 text-left text-sm transition-all">
           {Translation("logout")}
         </button>
       </div>

@@ -24,7 +24,7 @@ export default function Cities({ filters, setFilters }) {
     <div ref={ref} className="px-4 relative inline-block text-left">
       <button
         onClick={open}
-        className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+        className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900 transition-all"
       >
           <span>
             {Translation("status")}

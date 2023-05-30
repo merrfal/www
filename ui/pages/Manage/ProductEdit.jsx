@@ -2,10 +2,12 @@ import { Normal } from "../../layouts";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { View } from "../../../api/Product";
+import { Delete, ViewWithPermissions } from "../../../api/Product";
 import { Loading } from "../../components";
 import { DisabledDefaultState, ProductDefaultState, ProductDefaultValidation } from "../../../configs/Defaults";
 import { onInput as Input } from "../../../utils/ProductManipulation"
+import { OpenConfirmation } from "../../../controllers/Slices";
+import { Translation } from "../../../utils/Translations";
 
 import {
   Header,
@@ -30,6 +32,7 @@ export default function EditProduct() {
   const [loading, setLoading] = useState(true);
   const [validation, setValidation] = useState(ProductDefaultValidation);
   const [product, setProduct] = useState(ProductDefaultState);
+  const [isHold, setIsHold] = useState(false);
 
   const onInput = (key, e, event = true) => Input(
     product, 
@@ -41,36 +44,56 @@ export default function EditProduct() {
     event
   );
 
-  useEffect(() => {
-    if (loading && !account.Loading) {
-      const { slug } = router.query;
+  const onDeleteSuccess = () => {
+    const username = account?.User?.userData?.username;
+    if(username !== undefined) router.push(`/profili/${username}`);
+    else router.push("/");
 
-      if (slug !== "" && slug !== undefined) {
-        if (!account.Auth) setTimeout(() => router.push(`/${slug}`), 1000);
-        else View(slug, setProduct, dispatch, setLoading);
+    setIsHold(false);
+  }
+
+  const on = (name, slug) => {    
+    dispatch(OpenConfirmation({
+      Title: `${Translation("product-deletion-confirmation-title")} "${name}"?`,
+      Message: Translation("product-deletion-confirmation-message"),
+      Action: () => Delete(slug, setIsHold, onDeleteSuccess, dispatch),
+    }))
+  }
+
+  useEffect(() => {
+    const { slug } = router.query;
+
+    if(!account.Loading && slug !== undefined){
+      if(account.Auth) {
+        const userId = account?.User?._id;
+
+        ViewWithPermissions(slug, dispatch).then((data) => {
+          if(data.success){
+            const isAllowedToEdit = userId === data?.data?.productData?.user._id;
+
+            if(isAllowedToEdit){
+              setProduct(data?.data);
+              setLoading(false);
+
+              if(router?.query?.fshije === "po") {
+                setTimeout(() => on(
+                  data?.data?.productData?.name,
+                  slug
+                ), 100)
+              }
+            }
+
+            else router.push(`/${slug}`)
+          }
+        })
+
       }
+
+      else router.push(`/${slug}`)
     }
-  }, [router, account]);
+  }, [account, router]);
 
-  useEffect(() => {
-    const item = product?.productData;
-
-    if (
-      item?.hasOwnProperty("user") &&
-      !account.Loading
-    ) {
-      const { slug } = router.query;
-
-      if (account.Auth) {
-        if (item?.user === account?.User?._id) setAllowedEdit(true);
-        else setTimeout(() => router.push(`/${slug}`), 1000);
-      } 
-      
-      else setTimeout(() => router.push(`/${slug}`), 1000);
-    }
-  }, [product, account]);
-
-  const onLoad = !loading ? {} : DisabledDefaultState;
+  const onLoad = !isHold ? {} : DisabledDefaultState;
 
   return (
     <Normal>
@@ -140,11 +163,12 @@ export default function EditProduct() {
 
               <Buttons
                 mode="edit"
+                onUpdate={on}
                 product={product}
                 onInput={onInput}
-                setLoading={setLoading}
                 account={account}
                 setValidation={setValidation}
+                setIsHold={setIsHold}
               />
             </div>
           </div>

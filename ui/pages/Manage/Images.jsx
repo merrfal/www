@@ -27,7 +27,7 @@ export default function Images({
     <div style={onMode}>
       <label className="block text-sm font-medium text-gray-700">
         {Translation("photos-of-the-product")}<Wildcard />{" "}
-        {mode === "edit" && (`${Translation("change-is-not-allowd-for-the-moment")}`)}
+        {mode === "edit" && `(${Translation("change-is-not-allowd-for-the-moment")})`}
       </label>
 
       <ReactImageUploading
@@ -69,7 +69,7 @@ export default function Images({
                             </div>
 
                             <div onClick={(event) => onRemove(event, onImageRemove, index)} className="absolute flex right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-                              <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+                              <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
                                 <CloseIcon className="h-4 w-4" />
                               </button>
                             </div>
@@ -88,7 +88,7 @@ export default function Images({
                             </div>
 
                             <div className="absolute flex right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4" onClick={(event) => onRemove(event, onImageRemove, index)}>
-                              <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+                              <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
                                 <CloseIcon className="h-4 w-4" />
                               </button>
                             </div>

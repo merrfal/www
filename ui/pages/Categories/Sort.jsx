@@ -25,7 +25,7 @@ export default function Sort({ ordering, setOrdering }) {
       <div>
         <button
           onClick={open}
-          className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+          className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900 transition-all"
         >
             {Translation("sorting")}
           <OpenIcon />

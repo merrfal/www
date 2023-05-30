@@ -12,7 +12,7 @@ export default function Surname({ user, onInput, validations }) {
       </label>
 
       <input
-        placeholder="surname"
+        placeholder={Translation("surname-placeholder")}
         value={user?.userData?.surname}
         type="text"
         id="surname"

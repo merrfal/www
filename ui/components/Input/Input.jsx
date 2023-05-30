@@ -9,7 +9,6 @@ export default function Input(props) {
         </label>
         <div className='mt-1'>
           <input
-          
             type={type}
             id={label}
             placeholder={placeholder}

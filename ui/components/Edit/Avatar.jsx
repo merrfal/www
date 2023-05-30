@@ -22,7 +22,7 @@ export default function Avatar({ user, setUser, validations }) {
             />
 
             <div className="absolute bottom-[-1em] right-[30%] flex flex-col justify-stretch sm:flex-row sm:space-y-0 sm:space-x-4">
-              <button className="inline-flex justify-center p-2 border border-gray-300 shadow-sm text-sm font-medium rounded-[100%] text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+              <button className="inline-flex justify-center p-2 border border-gray-300 shadow-sm text-sm font-medium rounded-[100%] text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
                 <EditIcon className="h-4 w-4 text-gray-400" />
               </button>
             </div>

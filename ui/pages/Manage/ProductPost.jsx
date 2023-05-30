@@ -24,8 +24,7 @@ export default function ProductPost() {
   const [loading, setLoading] = useState(true);
   const [validation, setValidation] = useState(ProductDefaultValidation);
   const [product, setProduct] = useState(ProductDefaultState);
-
-  const onLoad = !loading ? {} : DisabledDefaultState;
+  const [isHold, setIsHold] = useState(false);
 
   const onInput = (key, e, event = true) => Input(
     product, 
@@ -38,19 +37,23 @@ export default function ProductPost() {
   );
 
   useEffect(() => {
-    if(account.Auth){
-      const { userAdditionalData } = account?.User;
-      const { userData } = account?.User;
-      const { phone } = userData;
-      const { city, address } = userAdditionalData;
-
-      if(phone !== "") onInput("phone", phone, false);
-      if(city !== "") onInput("city", city, false);
-      if(address !== "") onInput("address", address, false);
+    if(!account.Loading){
+      if(account.Auth){ 
+          const { userAdditionalData } = account?.User;
+          const { userData } = account?.User;
+          const { phone } = userData;
+          const { city, address } = userAdditionalData;
+    
+          if(phone !== "") onInput("phone", phone, false);
+          if(city !== "") onInput("city", city, false);
+          if(address !== "") onInput("address", address, false);
+      }
 
       setLoading(false);
     }
   }, [account]);
+
+  const onLoad = !isHold ? {} : DisabledDefaultState;
 
   return (
     <Normal>
@@ -119,9 +122,9 @@ export default function ProductPost() {
                 mode="create"
                 product={product}
                 onInput={onInput}
-                setLoading={setLoading}
                 account={account}
                 setValidation={setValidation}
+                setIsHold={setIsHold}
               />
             </div>
           </div>

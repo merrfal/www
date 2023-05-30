@@ -2,6 +2,7 @@ import { InfoSide, Search, User } from "./";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { SearchIcon } from "../../icons";
+import { Translation } from "../../../utils/Translations";
 
 export default function Header() {
   const router = useRouter();
@@ -35,7 +36,7 @@ export default function Header() {
               <User />
             </div>
 
-            <button className="inset-y-0 left-0 flex items-center pl-3 md:hidden" 
+            <button className="inset-y-0 left-0 flex items-center pl-3 md:hidden transition-all" 
               onClick={(e) => {
                 e.preventDefault();
                 setOpenSearch(!openSearch)
@@ -58,7 +59,7 @@ export default function Header() {
                 required
                 type="text"
                 className="border w-[95vw] border-gray-200 text-gray-900 text-[14px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-1.5 "
-                placeholder="Kërko produkte..."
+                placeholder={Translation("search-products")}
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();

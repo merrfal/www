@@ -57,7 +57,7 @@ const Auth = ({ account }) => {
       <button
         type="button"
         onClick={() => setOpen(!menu)}
-        className=" ml-0 sm:ml-3 inline-flex w-full justify-center bg-white text-sm font-medium text-gray-700"
+        className=" ml-0 sm:ml-3 inline-flex w-full justify-center bg-white text-sm font-medium text-gray-700 transition-all"
       >
         <img
           src={avatar || "avatar-no.png"}
@@ -72,9 +72,9 @@ const Auth = ({ account }) => {
   );
 };
 
-const NotAuth = () => {
+const NotAuth = ({account}) => {
   const dispatch = useDispatch();
-  return <UseGoogle dispatch={dispatch} />;
+  return <UseGoogle account={account} dispatch={dispatch} />;
 };
 
 export default function User() {
@@ -84,7 +84,7 @@ export default function User() {
   return (
     <>
       {account.Auth && <Auth account={account} />}
-      {!account.Auth && <NotAuth />}
+      {!account.Auth && <NotAuth account={account} />}
     </>
   );
 }
