@@ -20,7 +20,7 @@ export default function Address({product, onInput, validation: v}) {
         className="p-3 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm"
       />
 
-      {v.address && validation.error && <RequiredLabel message={validation.message} />}
+      {v?.address && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { getDownloadURL, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
-import { ANON_AVATAR, NO_AVATAR } from "../../../configs/Constants";
+import { NO_AVATAR } from "../../../configs/Constants";
 import { VerifiedBadge } from "../../icons";
 import { Translation } from "../../../utils/Translations";
 
@@ -46,7 +46,7 @@ export default function Poster({ productData }) {
           <img
             alt={user?.name}
             className="w-10 h-10 rounded-full mr-3"
-            src={productData?.postedAnonymously ? ANON_AVATAR : avatar}
+            src={productData?.postedAnonymously ? NO_AVATAR : avatar}
             onError={() => productData?.postedAnonymously ? null : setAvatar(NO_AVATAR)}
           />
           

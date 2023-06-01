@@ -2,10 +2,43 @@ import * as Messages from "../configs/Messages";
 
 import { User, Product } from "../configs/Models";
 import { Response } from "../utils/Response";
+import { ConnectionLocation } from "../utils/Connection";
+import { allowedCountries } from "../utils/Locations";
+import { Countries } from "../data/Locations";
 
 export const Register = async (payload, res) => {
   try {
-    const savedUser = new User({ ...payload });
+    let locationRes = await ConnectionLocation();
+    let isLocal = false;
+  
+    if(locationRes.success === true){
+      const geoData = locationRes?.data;
+      if(allowedCountries.includes(geoData?.country)) isLocal = geoData;
+    }
+
+    const data = { 
+      userData: {...payload?.userData},
+      userAdditionalData: {
+        country: 'GLOBAL',
+        city: '',
+      }
+    };
+
+    if(isLocal) {
+      const foundCountry = Countries.find((country) => country.iso_code === isLocal.country);
+
+      if (foundCountry) {
+        data.userAdditionalData.country = foundCountry.iso_code;
+
+        foundCountry.cities.forEach((city) => {
+          if (city.value.toLocaleLowerCase() === isLocal.city.toLocaleLowerCase()) {
+            data.userAdditionalData.city = city.name.toLocaleLowerCase();
+          }
+        });
+      }
+    }
+
+    const savedUser = new User(data);
     const user = await savedUser.save();
 
     const response = {
@@ -20,6 +53,8 @@ export const Register = async (payload, res) => {
   } 
   
   catch (error) {
+    console.log(error);
+
     const response = {
       res,
       code: 500,
@@ -105,7 +140,7 @@ export const Products = async (payload, res) => {
   }
 
   try {
-    let products = await Product.find(filter()).sort({createdAt: 1}).skip(offset).limit(limit);
+    let products = await Product.find(filter()).sort({createdAt: -1}).skip(offset).limit(limit);
     let countProducts = await Product.find(filter()).countDocuments();
 
     const response = {

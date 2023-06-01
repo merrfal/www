@@ -8,17 +8,16 @@ const UserModel = new Schema(
       username: { type: String, required: true, unique: true },
       email: { type: String, required: true, unique: true },
       uid: { type: String, required: true, unique: true },
-      avatar: {type: Object, default: {url: "", isFirebase: false, id: null}},
-      cover: { type: Object, default: {url: "", isFirebase: false, id: null}},
+      phone: { type: String, default: '' },
+      avatar: { type: String, default: '/placeholders/no-avatar.png'},
+      cover: { type: String, default: '/placeholders/no-cover.png'},
     },
     userAdditionalData: {
-      isUserSuspended: { type: Boolean, default: false },
       isUserVerified: { type: Boolean, default: false },
       role: { type: String, default: "user" },
-      address: { type: String, default: "" },
-      city: { type: String, default: "" },
-      country: { type: String, default: "" },
-      phone: { type: String, default: "" },
+      address: { type: String, default: '' },
+      city: { type: String, default: '' },
+      country: { type: String, default: '' },
     },
     userActivities: {
       products: { type: Array, default: [] },
@@ -27,7 +26,8 @@ const UserModel = new Schema(
   },
   {
     timestamps: true,
-  }
+    versionKey: false,
+  },
 );
 
 const ProductSchema = new Schema(
@@ -43,7 +43,6 @@ const ProductSchema = new Schema(
       address: { type: String, default: '' },
       city: { type: String, default: '' },
       country: { type: String, default: '' },
-      isPublished: { type: Boolean, default: false },
       isGiven: { type: Boolean, default: false },
       postedAnonymously: { type: Boolean, default: false},
     },
@@ -53,7 +52,8 @@ const ProductSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+    versionKey: false,
+  },
 );
 
 const CategorySchema = new Schema(
@@ -70,7 +70,8 @@ const CategorySchema = new Schema(
   },
   {
     timestamps: true,
-  }
+    versionKey: false,
+  },
 );
 
 let Product;

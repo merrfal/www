@@ -2,7 +2,7 @@ import { UsernameValidation } from "../../../utils/Forms";
 import { Translation } from "../../../utils/Translations";
 import { Wildcard, RequiredLabel } from "../";
 
-export default function Usernmae({ user, validations}) {
+export default function Usernmae({ user, validations, onInput}) {
   const validation = UsernameValidation(user?.userData?.username);
 
   return (
@@ -16,10 +16,11 @@ export default function Usernmae({ user, validations}) {
         id="username"
         className="mt-1 block p-3 w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
         placeholder={Translation("username-placeholder")}
-        value={user.userData.username}
+        value={user?.userData?.username}
+        onChange={(e) => onInput("username", e, true, "userData")}
       />
 
-      {validations.username && validation.error && <RequiredLabel message={validation?.message} />}
+      {validations?.username && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
 }

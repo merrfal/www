@@ -1,5 +1,4 @@
 import { Response } from "./Response";
-import { API_WRONG_CONFIGS } from "../configs/Messages";
 import { Translation } from "./Translations";
 
 export const ValidateVariables = (target, payload, res) => {

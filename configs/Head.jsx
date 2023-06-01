@@ -1,6 +1,6 @@
 import MetaTags from "next/head";
 
-import { IS_PROD } from "./Constants";
+import { IS_PROD } from "./Envs";
 import { Translation } from "../utils/Translations";
 
 export const Global = ({ title, description, image, index }) => {

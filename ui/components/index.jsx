@@ -20,6 +20,7 @@ import Edit from "./Edit";
 import Wildcard from "./Wildcard";
 import RequiredLabel from "./RequiredLabel";
 import Tooltip from "./Tooltip";
+import Alert from "./Alert";
 
 export {
   Header,
@@ -44,4 +45,5 @@ export {
   Wildcard,
   RequiredLabel,
   Tooltip,
+  Alert
 };

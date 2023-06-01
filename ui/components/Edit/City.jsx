@@ -3,7 +3,7 @@ import { Wildcard } from "../";
 import { Countries } from "../../../data/Locations";
 
 export default function City({ user, onInput }) {
-  const disableCity = user?.userAdditionalData?.country === "" || user?.userAdditionalData?.country === undefined || user?.userAdditionalData?.country === null;
+  const disableCity = user?.userAdditionalData?.country === "GLOBAL" || user?.userAdditionalData?.country === undefined || user?.userAdditionalData?.country === null;
   
   return (
     <div className={disableCity ? "col-span-6 sm:col-span-3 lg:col-span-3 opacity-50 pointer-events-none" : "col-span-6 sm:col-span-3 lg:col-span-3"}>

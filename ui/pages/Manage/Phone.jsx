@@ -21,7 +21,7 @@ export default function Phone({product, onInput, validation: v}) {
         onChange={(e) => e.target.value.match(/^[0-9+]*$/) && onInput("phone", e)}
       />
 
-      {v.phone && validation.error && <RequiredLabel message={validation.message} />}
+      {v?.phone && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
 }

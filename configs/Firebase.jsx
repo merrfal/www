@@ -1,5 +1,4 @@
-import * as Constants from "./Constants";
-import * as Messages from "./Messages";
+import * as Envs from "./Envs";
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
@@ -11,12 +10,12 @@ let Storage;
 let Auth;
 
 const Config = {
-  apiKey: Constants.FB_API_KEY,
-  authDomain: Constants.FB_AUTH_DOMAIN,
-  projectId: Constants.FB_PROJECT_ID,
-  storageBucket: Constants.FB_STORAGE_BUCKET,
-  messagingSenderId: Constants.FB_MESSAGING_SENDER_ID,
-  appId: Constants.FB_APP_ID,
+  apiKey: Envs.FB_API_KEY,
+  authDomain: Envs.FB_AUTH_DOMAIN,
+  projectId: Envs.FB_PROJECT_ID,
+  storageBucket: Envs.FB_STORAGE_BUCKET,
+  messagingSenderId: Envs.FB_MESSAGING_SENDER_ID,
+  appId: Envs.FB_APP_ID,
 };
 
 try {

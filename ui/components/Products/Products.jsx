@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Latest } from "../../../api/Product";
-import { Product } from "..";
+import { None, Product } from "..";
 import { Header, Skeleton } from "./";
 
 export default function Products() {
@@ -26,6 +26,8 @@ export default function Products() {
             </Fragment>
           )}
         </div>
+        
+        {products?.length === 0 && <None />}
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
 import * as Messages from "../configs/Messages";
 
 import { Product, User, Category as CategoryModel } from "../configs/Models";
+import { ConnectionLocation } from "../utils/Connection";
 import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
+import { allowedCountries } from "../utils/Locations";
 import { Response } from "../utils/Response";
 
 export const Create = async (payload, res) => {
@@ -94,6 +96,14 @@ export const Delete = async (payload, res) => {
 };
 
 export const Category  = async (payload, res) => {
+  let locationRes = await ConnectionLocation();
+  let isLocal = false;
+
+  if(locationRes.success === true){
+    const country = locationRes?.data?.country;
+    if(allowedCountries.includes(country)) isLocal = country;
+  }
+
   let { offset, limit, cities, statuses, sort } = payload;
 
   offset = parseInt(offset);
@@ -108,6 +118,8 @@ export const Category  = async (payload, res) => {
     if(calength === 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statuses }}
     if(calength !== 0 && salength === 0 ) return { 'productData.city': { $in: cities }}
     if(calength !== 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statuses }, 'productData.city': { $in: cities }}
+
+    if(isLocal !== false) filters['productData.country'] = isLocal;
 
     return filters
   }
@@ -142,6 +154,14 @@ export const Category  = async (payload, res) => {
 }
 
 export const Search  = async (payload, res) => {
+  let locationRes = await ConnectionLocation();
+  let isLocal = false;
+
+  if(locationRes.success === true){
+    const country = locationRes?.data?.country;
+    if(allowedCountries.includes(country)) isLocal = country;
+  }
+
   let { offset, limit, categories, cities, sort, term } = payload;
 
   offset = parseInt(offset);
@@ -189,6 +209,8 @@ export const Search  = async (payload, res) => {
     if (orFilters.length > 0) {
       filters.$or = orFilters;
     }
+
+    if(isLocal !== false) filters['productData.country'] = isLocal;
   
     return filters;
   };
@@ -223,8 +245,24 @@ export const Search  = async (payload, res) => {
 }
 
 export const Latest = async (payload, res) => {
+  let locationRes = await ConnectionLocation();
+  let productsFindObject = { 'productData.isGiven': false };
+
+  if(locationRes.success === true){
+    const country = locationRes?.data?.country;
+
+    if(allowedCountries.includes(country)){
+      productsFindObject = { 
+        'productData.isGiven': false,
+        'productData.country': country
+      };
+    }
+  }
+
   try {
-    const products = await Product.find({}).sort({ createdAt: -1 }).limit(16);
+    const products = await Product
+      .find(productsFindObject)
+      .sort({ createdAt: -1}).limit(16);
 
     const payload = {
       res,
@@ -324,9 +362,25 @@ export const View = async ({ slug }, res) => {
 };
 
 export const Similar = async ({ category }, res) => {
+  let locationRes = await ConnectionLocation();
+  let productsFindObject = { 'productData.category': category, 'productData.isGiven': false };
+
+  if(locationRes.success === true){
+    const country = locationRes?.data?.country;
+
+    if(allowedCountries.includes(country)){
+      productsFindObject = { 
+        'productData.category': category, 
+        'productData.isGiven': false,
+        'productData.country': country
+      };
+    }
+  }
+  
+
   try {
     const products = await Product
-      .find({ "productData.category": category })
+      .find(productsFindObject)
       .sort({ createdAt: -1 })
       .limit(5);
 

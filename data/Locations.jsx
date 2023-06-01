@@ -136,4 +136,9 @@ export const Countries = [
     iso_code: "MK",
     cities: MacedoniaCities,
   },
+  {
+    name: "Other Countries",
+    iso_code: "GLOBAL",
+    cities: []
+  },
 ];

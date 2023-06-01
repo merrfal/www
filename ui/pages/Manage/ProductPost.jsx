@@ -1,9 +1,11 @@
 import { Normal } from "../../layouts";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Loading } from "../../components";
+import { Alert, Loading } from "../../components";
 import { DisabledDefaultState, ProductDefaultState, ProductDefaultValidation } from "../../../configs/Defaults";
 import { onInput as Input } from "../../../utils/ProductManipulation"
+import { InfoIconAlert } from "../../icons";
+import { Translation } from "../../../utils/Translations";
 
 import {
   Header,
@@ -17,6 +19,8 @@ import {
   Buttons,
   Title,
 } from ".";
+import { allowedCountries } from "../../../utils/Locations";
+import Permissonless from "../Permissonless";
 
 export default function ProductPost() {
   const account = useSelector((state) => state.Account);
@@ -55,16 +59,28 @@ export default function ProductPost() {
 
   const onLoad = !isHold ? {} : DisabledDefaultState;
 
+  if (!loading && !account.Loading && !account.Auth) return <Permissonless />
+
   return (
     <Normal>
-      {loading && <Loading />}
+      {loading || account.Loading && <Loading />}
 
-      {!loading && <div className="mx-auto max-w-7xl px-4 sm:px-6">
+
+      {!loading && !account.Loading && account.Auth && <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16">
           <div className="mt-5 md:col-span-2 md:mt-0">
-            <div className="sm:overflow-hidden sm:rounded-md">
-              <div style={onLoad} className="space-y-6 p-2">
+            <div style={onLoad} className="sm:overflow-hidden sm:rounded-md">
+              <div className="space-y-6 p-2">
                 <Header product={product} mode="create" />
+
+                {
+                  !allowedCountries.includes(account?.User?.userAdditionalData?.country) && account.Auth &&
+                    <Alert
+                      title={Translation("outside-operating-country")}
+                      message={Translation("outside-operating-country-description")}
+                      icon={<InfoIconAlert color="#1D4ED850" />}
+                    />
+                }
 
                 <Title
                   product={product}

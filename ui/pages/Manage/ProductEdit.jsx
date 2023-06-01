@@ -23,6 +23,7 @@ import {
   Url,
   Given,
 } from ".";
+import Permissonless from "../Permissonless";
 
 export default function EditProduct() {
   const account = useSelector((state) => state.Account);
@@ -70,8 +71,9 @@ export default function EditProduct() {
         ViewWithPermissions(slug, dispatch).then((data) => {
           if(data.success){
             const isAllowedToEdit = userId === data?.data?.productData?.user._id;
+            const isAdmin = account?.User?.userAdditionalData?.role === "admin";
 
-            if(isAllowedToEdit){
+            if(isAllowedToEdit || isAdmin){
               setProduct(data?.data);
               setLoading(false);
 
@@ -88,12 +90,12 @@ export default function EditProduct() {
         })
 
       }
-
-      else router.push(`/${slug}`)
     }
   }, [account, router]);
 
   const onLoad = !isHold ? {} : DisabledDefaultState;
+
+  if(!account.Auth && !account.Loading) return <Permissonless />
 
   return (
     <Normal>
@@ -102,8 +104,8 @@ export default function EditProduct() {
       {!loading && <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16">
           <div className="mt-5 md:col-span-2 md:mt-0">
-            <div className="sm:overflow-hidden sm:rounded-md">
-              <div style={onLoad} className="space-y-6 p-2">
+            <div style={onLoad} className="sm:overflow-hidden sm:rounded-md">
+              <div className="space-y-6 p-2">
                 <Header product={product} mode="edit" />
 
                 <Title

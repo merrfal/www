@@ -40,6 +40,7 @@ import PhotoIcon from "./PhotoIcon";
 import VerifiedBadge from "./VerifiedBadge";
 import SkeletonIcon from "./SkeletonIcon";
 import QuestionIcon from "./QuestionIcon";
+import InfoIconAlert from "./InfoIconAlert";
 
 export {
   AccountIcon,
@@ -84,4 +85,5 @@ export {
   TwitterIcon,
   WebsiteIcon,
   QuestionIcon,
+  InfoIconAlert,
 };

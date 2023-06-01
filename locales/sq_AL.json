@@ -149,5 +149,10 @@
   "select-country": "Zgjidh Shtetin",
   "any-product-added": "Asnjë produkt i shtuar",
   "help-others-while-adding-a-product": "Ndihmoni të tjerët duke shtuar dhe dhënë diçka për ata që janë në nevojë.",
-  "add_the_first_product": "Shto produktin e parë"
+  "add_the_first_product": "Shto produktin e parë",
+  "outside-operating-country": "Shteti i zgjedhur nuk është i disponueshëm për momentin!",
+  "outside-operating-country-description": "Shteti që keni zgjedhur nuk është prej shteteve në të cilat ne operojmë. Por ju përsëri mundeni të postoni produkte për dhurim me adresa në shtetet si Kosova, Shqipëria dhe Maqedonia Veriore.",
+  "no-permissions-title": "Skeni akses!",
+  "no-permissions-description": "Për ta parë këtë pjesë të platformës dhe vazhduar ju duhet që të identifikoheni me llogarinë tuaj.",
+  "login-in-platform": "Kyçu në llogari"
 }
