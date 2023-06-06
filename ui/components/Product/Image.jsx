@@ -1,12 +1,14 @@
 import { getDownloadURL, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { Storage } from "../../../configs/Firebase";
+import { NO_THUMBNAIL } from "../../../configs/Constants";
+import { Category, GivenStatus } from ".";
 
-export default function Image({ productData: { gallery } }) {
+export default function Image({ productData, showCategory, allowManage }) {
   const [thumbnail, setThumbnail] = useState(null);
 
   useEffect(() => {
-    let thumb = gallery[0].id;
+    let thumb = productData.gallery[0].id;
 
     if (thumb !== undefined) {
       const file = `products/${thumb}`;
@@ -16,12 +18,18 @@ export default function Image({ productData: { gallery } }) {
         .then((url) => setThumbnail(url))
         .catch(() => setThumbnail("product-no.png"));
     }
-  }, [gallery]);
+  }, [productData.gallery]);
 
   return (
-    <div className="hover:cursor-pointer min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-80 transition-all lg:aspect-none lg:h-80">
+    <div className="relative min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-[.999999999999] transition-all lg:aspect-none lg:h-80 hover:cursor-pointer">
+      <div className={allowManage ? "absolute top-2 z-[1] left-2 flex flex-col items-start" : "absolute top-2 left-2 z-[1] flex justify-center items-center"}>
+        { showCategory && <Category category={productData.category} /> }
+        { showCategory && <div className={allowManage ? "h-0 w-[0px] bg-[#f8f8f850] my-0.5" : "h-2.5 w-[1px] bg-[#f8f8f850] mr-1"} /> }
+        <GivenStatus isGiven={productData.isGiven} />
+      </div>
+
       <img
-        onError={() => setThumbnail("product-no.png")}
+        onError={() => setThumbnail(NO_THUMBNAIL)}
         src={thumbnail}
         className={`h-full duration-700 ease-in-out group-hover:opacity-75 w-full object-cover object-center lg:h-full lg:w-full
             ${

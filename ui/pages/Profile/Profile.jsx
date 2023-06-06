@@ -61,6 +61,8 @@ export default function Profile() {
               setUser={setUser}
               isEdit={isEdit}
               setIsEdit={setIsEdit}
+              account={account}
+              dispatch={dispatch}
             />
           )}
 

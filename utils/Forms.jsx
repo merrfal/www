@@ -194,6 +194,17 @@ export const CityValidation = (value) => {
   return validation;
 };
 
+export const CountryValidation = (value) => {
+  const validation = { error: false };
+
+  if (value === "") {
+    validation.error = true;
+    validation.message = Translation("select-one-country");
+  }
+
+  return validation;
+};
+
 export const CategoryValidation = (value) => {
   const validation = { error: false };
 
@@ -205,12 +216,23 @@ export const CategoryValidation = (value) => {
   return validation;
 };
 
+export const EmailValidation = (value) => {
+  const validation = { error: false };
+
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!regex.test(value)) {
+    validation.error = true;
+    validation.message = Translation("email-is-not-valid");
+  }
+}
+
 export const ModeValidation = (value) => {
   const validation = { error: false };
 
-  if (value !== false && value !== true) {
+  if (value === "") {
     validation.error = true;
-    validation.message = Translation("select-the-chosen-giving-mode");;
+    validation.message = Translation("select-the-chosen-giving-mode");
   }
 
   return validation;

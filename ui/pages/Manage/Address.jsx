@@ -6,7 +6,7 @@ export default function Address({product, onInput, validation: v}) {
   const validation = AddressValidation(product?.productData?.address);
 
   return (
-    <div className="col-span-6">
+    <div className="col-span-6 sm:col-span-3 lg:col-span-3">
       <label htmlFor="address" className="block text-sm font-medium text-gray-700">
         {Translation("take-address")}<Wildcard />
       </label>

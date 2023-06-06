@@ -2,7 +2,8 @@ import Home from './Home';
 import Profile from './Profile';
 import Product from './Product';
 import Error from './Error';
-import Page from './Page';
+import Terms from './Terms';
+import Privacy from './Privacy';
 import Permissonless from './Permissonless';
 import Category from './Category';
 import Categories from './Categories';
@@ -15,11 +16,12 @@ export {
   Product,
   Profile,
   Error,
-  Page,
   Category,
   Categories,
   Permissonless,
   Search,
   ProductPost,
-  ProductEdit
+  ProductEdit,
+  Terms,
+  Privacy,
 };

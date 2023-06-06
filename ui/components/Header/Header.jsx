@@ -32,11 +32,13 @@ export default function Header() {
         <div className="border-b border-gray-200">
           <div className="h-16 flex items-center justify-around">
             <InfoSide openSearch={openSearch} />
+
             <div className="flex">
               <User />
             </div>
 
-            <button className="inset-y-0 left-0 flex items-center pl-3 md:hidden transition-all" 
+            <button 
+              className="inset-y-0 left-0 flex items-center pl-3 md:hidden transition-all" 
               onClick={(e) => {
                 e.preventDefault();
                 setOpenSearch(!openSearch)

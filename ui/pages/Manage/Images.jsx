@@ -52,7 +52,7 @@ export default function Images({
                 {...dragProps}
                 style={isDragging ? { borderColor: "#377DFF" } : null}
                 onClick={product?.productData?.gallery && product?.productData?.gallery.length !== 0 ? null : onImageUpload}
-                className={product?.productData?.gallery && product?.productData?.gallery.length === 0 ? "mt-1 w-full flex justify-center rounded-md border-2 border-dashed border-gray-200 pt-10 pb-14" : "mt-1 w-full flex justify-center rounded-md border-2 border-dashed border-gray-200 p-8"}
+                className={product?.productData?.gallery && product?.productData?.gallery.length === 0 ? "mt-1 w-full flex justify-center rounded-md border-2 border-dashed border-gray-200 pt-10 pb-14 cursor-pointer" : "mt-1 w-full flex justify-center rounded-md border-2 border-dashed border-gray-200 p-8 cursor-pointer"}
               >
                 <div className="text-center flex items-center flex-row space-x-4">
                   {product?.productData?.gallery.length !== 0 &&
@@ -60,7 +60,7 @@ export default function Images({
                       if (mode === "create")
                         return (
                           <div className="flex items-center relative border border-gray-200 rounded-md" key={index}>
-                            <img src={image.data_url} className="w-[265px] h-[40vh] object-cover max-w-full align-middle rounded-md"/>
+                            <img src={image.data_url} className="w-[265px] lg:h-[40vh] h-[20vh] object-cover max-w-full align-middle rounded-md"/>
 
                             <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
                               <p className="text-gray-700 text-[13px]">
@@ -79,7 +79,7 @@ export default function Images({
                       if (mode === "edit")
                         return (
                           <div key={index} className="flex items-center relative border border-gray-200 rounded-md">
-                            <img src={image.url} className="w-[265px] h-[40vh] object-cover max-w-full align-middle rounded-md"/>
+                            <img src={image.url} className="w-[265px] lg:h-[40vh] h-[20vh] object-cover max-w-full align-middle rounded-md"/>
                             
                             <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
                               <p className="text-gray-700 text-[13px]">
@@ -99,7 +99,7 @@ export default function Images({
                   {product?.productData?.gallery.length === 0 && <EmptyGallery />}
 
                   {product?.productData?.gallery.length !== 0 && product?.productData?.gallery.length < 4 && (
-                    <div onClick={onImageUpload} className="flex items-center justify-center border border-gray-200  w-[265px] h-[40vh] object-cover max-w-full align-middle rounded-md right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+                    <div onClick={onImageUpload} className="flex items-center justify-center border border-gray-200  w-[265px] lg:h-[40vh] h-[20vh] object-cover max-w-full align-middle rounded-md right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
                       <div className="flex flex-col justify-center items-center">
                         <PhotoIcon />
                         <Info half={true} />

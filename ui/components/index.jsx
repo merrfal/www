@@ -21,6 +21,7 @@ import Wildcard from "./Wildcard";
 import RequiredLabel from "./RequiredLabel";
 import Tooltip from "./Tooltip";
 import Alert from "./Alert";
+import RealTimeValidation from "./RealTimeValidation";
 
 export {
   Header,
@@ -45,5 +46,6 @@ export {
   Wildcard,
   RequiredLabel,
   Tooltip,
-  Alert
+  Alert,
+  RealTimeValidation,
 };

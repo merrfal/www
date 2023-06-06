@@ -6,6 +6,8 @@ import { DisabledDefaultState, ProductDefaultState, ProductDefaultValidation } f
 import { onInput as Input } from "../../../utils/ProductManipulation"
 import { InfoIconAlert } from "../../icons";
 import { Translation } from "../../../utils/Translations";
+import { allowedCountries } from "../../../utils/Locations";
+import { Permissonless } from "..";
 
 import {
   Header,
@@ -18,9 +20,8 @@ import {
   Images,
   Buttons,
   Title,
+  Country
 } from ".";
-import { allowedCountries } from "../../../utils/Locations";
-import Permissonless from "../Permissonless";
 
 export default function ProductPost() {
   const account = useSelector((state) => state.Account);
@@ -43,14 +44,20 @@ export default function ProductPost() {
   useEffect(() => {
     if(!account.Loading){
       if(account.Auth){ 
-          const { userAdditionalData } = account?.User;
-          const { userData } = account?.User;
+          const { userAdditionalData, userData } = account?.User;
           const { phone } = userData;
-          const { city, address } = userAdditionalData;
+          const { city, address, country } = userAdditionalData;
     
-          if(phone !== "") onInput("phone", phone, false);
-          if(city !== "") onInput("city", city, false);
-          if(address !== "") onInput("address", address, false);
+          setProduct({
+            ...product,
+            productData: {
+              ...product.productData,
+              phone: phone !== "" ? phone : "",
+              city: city !== "" ? city : "",
+              address: address !== "" ? address : "",
+              country: country !== "" ? country : "",
+            }
+          })
       }
 
       setLoading(false);
@@ -94,14 +101,8 @@ export default function ProductPost() {
                   validation={validation}
                 />
 
-                <Address
-                  product={product}
-                  onInput={onInput}
-                  validation={validation}
-                />
-
-                <div className="grid grid-cols-6 gap-6">
-                  <Phone
+                <div className="grid lg:grid-cols-9 xl:grid-cols-9 2x:grid-cols-9 md:grid-cols-2 sm:grid-cols-2 gap-3">
+                  <Categories
                     product={product}
                     onInput={onInput}
                     validation={validation}
@@ -113,13 +114,25 @@ export default function ProductPost() {
                     validation={validation}
                   />
 
+                  <Phone
+                    product={product}
+                    onInput={onInput}
+                    validation={validation}
+                  />
+
+                  <Country
+                    product={product}
+                    onInput={onInput}
+                    validation={validation}
+                  />
+
                   <Cities
                     product={product}
                     onInput={onInput}
                     validation={validation}
                   />
 
-                  <Categories
+                  <Address
                     product={product}
                     onInput={onInput}
                     validation={validation}

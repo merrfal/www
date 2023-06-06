@@ -23,6 +23,7 @@ export const ProductDefaultValidation = {
   description: false,
   address: false,
   phone: false,
+  country: false,
   city: false,
   category: false,
   gallery: false,
@@ -35,10 +36,11 @@ export const ProductDefaultState = {
     description: "",
     address: "",
     phone: "",
-    city: "prishtine",
-    category: "636f3ece911a24f351b57837",
-    gallery: [],
-    postedAnonymously: false,
+    country: "",
+    city: "",
+    category: "",
+    postedAnonymously: "",
+    gallery: []
   },
 };
 

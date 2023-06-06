@@ -1,9 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
 import { Translation } from "../../../utils/Translations";
-import { USER_AUTH_ERROR } from "../../../configs/Messages";
 import { Auth as AuthInstance } from "../../../configs/Firebase";
 import { LogoutAccount } from "../../../controllers/Slices";
 import { Notification } from "../../../utils/Response";
+import { useDispatch, useSelector } from "react-redux";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { USER_AUTH_ERROR } from "../../../configs/Messages";
 
 export default function Operations() {
   const account = useSelector((state) => state.Account);
@@ -50,7 +51,7 @@ export default function Operations() {
 
   return (
     <div className="mt-6">
-      <div onClick={() => Auth()}>
+      <div onClick={Auth}>
         <p className="hover:cursor-pointer text-base font-medium text-indigo-600 hover:text-indigo-500">
           {Translation("login-in-platform")} &larr;
         </p>

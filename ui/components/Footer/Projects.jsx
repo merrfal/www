@@ -14,7 +14,7 @@ export default function Projects() {
             <a
               href={project.path}
               target="_blank"
-              className="text-gray-500 hover:text-gray-600"
+              className="text-gray-500 hover:text-[#377DFF] transition-all"
             >
               {project.name} {project.icon && `\u2192` }
             </a>

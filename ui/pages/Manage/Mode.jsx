@@ -16,12 +16,20 @@ export default function Mode({product, onInput, validation: v}){
         value={product?.productData?.postedAnonymously}
         className="p-3 mt-1 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm"
         onChange={(e) => onInput("postedAnonymously", e)}
+        style={product?.productData?.postedAnonymously === "" ? {color: "#777"} : {}}
       >
+        { 
+          product?.productData?.postedAnonymously === "" &&  
+          <option value="" disabled>
+            {Translation("select-the-placeholder")}
+          </option>
+        }
+        
         <option value={false}>{Translation("post-anonymously")}</option>
         <option value={true}>{Translation("post-not-anonymously")}</option>
       </select>
 
-      {v.mode && validation.error && <RequiredLabel message={validation.message} />}
+      {v?.postedAnonymously && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
 }

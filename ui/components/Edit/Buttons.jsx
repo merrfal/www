@@ -8,11 +8,14 @@ import {
   UserNameValidation,
   UserSurnameValidation,
 } from "../../../utils/Forms";
+import { useRouter } from "next/router";
 
 export default function Buttons(props) {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const {
+    user,
     setIsEdit,
     setIsLoading,
     setUser,
@@ -59,11 +62,13 @@ export default function Buttons(props) {
     }
 
     Update(
+      user,
       userClone, 
       setUser, 
       setIsLoading, 
       setIsEdit, 
       setUserClone, 
+      router,
       dispatch
     );
   };

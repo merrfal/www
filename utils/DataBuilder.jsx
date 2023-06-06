@@ -1,7 +1,6 @@
 import { NO_AVATAR } from "../configs/Constants";
 
 export const UserObject = (user) => {
-  console.log(use)
   const name = user.displayName.split(" ")[0] || "";
   const surname = user.displayName.split(" ")[1] || "";
   const email = user.email || "";

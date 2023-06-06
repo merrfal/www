@@ -53,8 +53,6 @@ export const Register = async (payload, res) => {
   } 
   
   catch (error) {
-    console.log(error);
-
     const response = {
       res,
       code: 500,
@@ -170,14 +168,15 @@ export const Products = async (payload, res) => {
 
 export const Update = async (payload, res) => {
   try {
-    const user = await Product.findOneAndUpdate(
-      {'userData.slug': payload.userData.slug}, 
+    const user = await User.findOneAndUpdate(
+      {'userData.username': payload.old_username}, 
       { $set: 
         { 
           userData: payload?.userData,
           userAdditionalData: payload?.userAdditionalData,
         }
       },
+      { new: true }
     );
 
     const response = {
@@ -238,3 +237,34 @@ export const View = async ({ username }, res) => {
     Response(response);
   }
 };
+
+export const CheckIfExist = async ({field, value}, res) => {
+  try {
+    const checkDuplicate = await User.findOne({[field]: value});
+
+    const response = {
+      res,
+      code: 200,
+      success: true,
+      data: checkDuplicate ? true : false,
+      message: checkDuplicate ? "Përdoruesi u gjet me sukses." : "Përdoruesi nuk u gjet.",
+      error: null,
+    };
+
+    Response(response);
+  }
+
+  catch(error){
+    const response = {
+      res,
+      code: 500,
+      success: false,
+      exists: false,
+      data: null,
+      message: "Ndodhi një gabim gjatë përpjekjes për të gjetur nje duplikate.",
+      error: error,
+    };
+
+    Response(response);
+  }
+}

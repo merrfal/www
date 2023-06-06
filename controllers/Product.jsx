@@ -376,7 +376,6 @@ export const Similar = async ({ category }, res) => {
       };
     }
   }
-  
 
   try {
     const products = await Product

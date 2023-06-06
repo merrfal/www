@@ -9,7 +9,7 @@ export default function Header() {
       </h2>
 
       <Link href="/kategorite">
-        <a className="hidden text-sm font-semibold text-[#377DFF] hover:text-[#377DFF70] sm:block">
+        <a className="text-sm font-semibold text-[#377DFF] hover:text-[#3073ee] transition-all">
           {Translation("explore-all-categories")} &rarr;
         </a>
       </Link>

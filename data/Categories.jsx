@@ -101,7 +101,7 @@ export const Categories = [
     slug: "femije",
     description: "Kategoria Fëmijë përfshin një gamë të gjerë produktet për fëmijë dhe të vegjël, duke filluar nga veshjet, lojërat dhe lodrat, librave për fëmijë, kopshtin, artikujt për ushqim dhe më shumë. ",
     icon: "/categories/femije.webp",
-    favorite: false,
+    favorite: true,
   },
   {
     _id: "641c6203b24ea4453a05436c",

@@ -5,9 +5,9 @@ export default function Link() {
   return (
     <div className="mt-6">
       <Href href="/">
-        <a className="text-base font-medium text-indigo-600 hover:text-indigo-500">
+        <span className="text-base font-medium text-indigo-600 hover:text-indigo-500">
           {Translation("go-to-homepage")} &rarr;
-        </a>
+        </span>
       </Href>
     </div>
   );

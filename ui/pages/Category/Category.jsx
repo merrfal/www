@@ -10,6 +10,7 @@ import { Category as Products } from "../../../api/Product";
 import { Empty, Loading, Product } from "../../components";
 import { useDispatch } from "react-redux";
 import { Error } from "..";
+import { Translation } from "../../../utils/Translations";
 
 export default function Category() {
   const router = useRouter();
@@ -84,8 +85,8 @@ export default function Category() {
           <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
             {products.products.length === 0 && !products.hasMore && 
               <Empty 
-                heading={PRODUCTS_EMPTY_TITLE} 
-                message={PRODUCTS_EMPTY_DESCRIPTION} 
+                heading={Translation("no-products-found")} 
+                message={Translation("category-products-description-empty")}
               />
             }
 
@@ -98,7 +99,7 @@ export default function Category() {
             >
               {products.products.map(
                 (product, index) => <Fragment key={index}>
-                  <Product product={product} />
+                  <Product showCategory={false} product={product} />
                 </Fragment>
               )}
             </InfiniteScroll>

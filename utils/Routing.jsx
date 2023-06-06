@@ -23,6 +23,7 @@ const RouteUsers = (action, payload, res) => {
     case "UPDATE": Users.Update(payload, res); break;
     case "DELETE": Users.Delete(payload, res); break;
     case "PRODUCTS": Users.Products(payload, res); break;
+    case "EXISTS": Users.CheckIfExist(payload, res); break;
   }
 };
 

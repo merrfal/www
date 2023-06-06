@@ -7,7 +7,7 @@ export default function NoneIcon() {
       stroke="currentColor"
     >
       <path
-        vector-effect="non-scaling-stroke"
+        vectorEffect="non-scaling-stroke"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"

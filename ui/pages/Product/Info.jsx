@@ -10,7 +10,7 @@ export default function Info({ productData }) {
       </h1>
 
       <div className="text-[15.5px] mt-3 mb-8 text-gray-700 space-y-6">
-        <p>{CapitalizeText(description)}</p>
+        <p>{description}</p>
       </div>
     </>
   );

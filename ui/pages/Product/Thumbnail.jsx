@@ -1,6 +1,10 @@
+import { IsGiven } from "./";
+
 export default function Thumbnail({ gallery, index }) {
   return (
-    <div className="w-full aspect-w-1 aspect-h-1">
+    <div className="w-full aspect-w-1 aspect-h-1 relative">
+      <IsGiven />
+
       <img
         src={gallery[index]}
         alt="Product Thumbnail"

@@ -39,6 +39,7 @@ export default function Buttons(props) {
       phone: true,
       city: true,
       category: true,
+      country: true,
       gallery: true,
       postedAnonymously: true,
     });

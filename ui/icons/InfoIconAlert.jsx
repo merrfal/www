@@ -1,7 +1,7 @@
 export default function InfoIconAlert({ color }) {
   return (
     <svg
-      class={`fill-current h-6 w-6 text-${color} mr-4`}
+      className={`fill-current h-6 w-6 text-${color} mr-4`}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 20 20"
     >

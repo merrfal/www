@@ -7,28 +7,33 @@ import { Storage } from "../../../configs/Firebase";
 import { useAuth, useGoogle as UseGoogle } from "../../../hooks";
 import { AddIcon } from "../../icons";
 import { Dropdown } from "./";
+import { NO_AVATAR } from "../../../configs/Constants";
+import { isStorageReadable } from "../../../utils/Firebase";
 
 const Auth = ({ account }) => {
   const [menu, setOpen] = useState();
   const [avatar, setAvatar] = useState(null);
 
   useEffect(() => {
-    let avtr = account?.User?.userData?.avatar;
+    if (account.Auth) {
+      let avtr = account?.User?.userData?.avatar;
 
-    if (avtr !== undefined) {
-      if (avtr.isFirebase) {
-        const file = `users/${avtr}`;
-        const unextracted = ref(Storage, file);
+      if(avtr === NO_AVATAR) setAvatar(NO_AVATAR);
 
-        getDownloadURL(unextracted)
-          .then((url) => setThumbnail(url))
-          .catch(() => setThumbnail("avatar-no.png"));
+      else {
+        let isFirebaseReadable = isStorageReadable(avtr);
+
+        if(isFirebaseReadable) {
+          const file = `users/${avtr}`;
+          const unextracted = ref(Storage, file);
+
+          const url = getDownloadURL(unextracted);
+          setAvatar(url || NO_AVATAR);
+        }
+
+        else setAvatar(avtr);
       }
-
-      else setAvatar(avtr.url);
     }
-
-    else setAvatar("avatar-no.png");
   }, [account]);
 
   let clickOutside = (handler) => {
@@ -49,7 +54,7 @@ const Auth = ({ account }) => {
   return (
     <div className="relative accoount-menu flex items-center" ref={domNode}>
       <Link href="/shto">
-        <a className="p-1 text-gray-400 hover:text-gray-500 lg:block">
+        <a className="p-1 mr-1 text-gray-400 hover:text-gray-500 lg:block hover:opacity-[.85] transition-all">
           <AddIcon />
         </a>
       </Link>
@@ -57,11 +62,11 @@ const Auth = ({ account }) => {
       <button
         type="button"
         onClick={() => setOpen(!menu)}
-        className=" ml-0 sm:ml-3 inline-flex w-full justify-center bg-white text-sm font-medium text-gray-700 transition-all"
+        className="ml-0 inline-flex w-full justify-center bg-white text-sm font-medium text-gray-700 hover:opacity-[.85] transition-all"
       >
         <img
-          src={avatar || "avatar-no.png"}
-          onError={() => setAvatar("avatar-no.png")}
+          src={avatar || NO_AVATAR}
+          onError={() => setAvatar(NO_AVATAR)}
           className={`w-9 md:w-8 rounded-full ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
         />
       </button>

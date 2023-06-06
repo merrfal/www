@@ -8,11 +8,10 @@ import { Header, Filters, Skeleton } from ".";
 import { Search as Searching } from "../../../api/Product";
 import { Empty, End,  Product } from "../../components";
 import { useDispatch } from "react-redux";
+import { Translation } from "../../../utils/Translations";
 
 import { 
   META_SEARCH, 
-  PRODUCTS_EMPTY_DESCRIPTION, 
-  PRODUCTS_EMPTY_TITLE, 
   SEARCH_TITLE_ALL, 
   SEARCH_TITLE_DESCRIPTION, 
   SEARCH_TITLE_TERM 
@@ -77,8 +76,8 @@ export default function Search() {
       <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
         {products.products.length === 0 && !products.hasMore && (
           <Empty 
-            heading={PRODUCTS_EMPTY_TITLE} 
-            message={PRODUCTS_EMPTY_DESCRIPTION} 
+            heading={Translation("no-products-found")} 
+            message={Translation("no-products-search-found-description")} 
           />
         )}
 
@@ -90,9 +89,10 @@ export default function Search() {
           className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
         >
           {products.products.map(
-            (product, index) => <Fragment key={index}>
-              <Product product={product} />
-            </Fragment>
+            (product, index) => 
+              <Fragment key={index}>
+                <Product product={product} />
+              </Fragment>
             )
           }
 

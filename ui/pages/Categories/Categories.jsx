@@ -25,14 +25,20 @@ export default function Categories() {
           <div className="-my-2">
             <div className="box-content py-2 relative overflow-visible">
               <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-                {AllCategories.sort((a, b) => {
-                  if (ordering === "asc") return a.name.localeCompare(b.name);
-                  else return b.name.localeCompare(a.name);
-                }).map((category, index) => (
-                  <Fragment key={index}>
-                    <Category category={category} />
-                  </Fragment>
-                ))}
+                {
+                  AllCategories.sort((a, b) => 
+                    {
+                      if (ordering === "asc") return a.name.localeCompare(b.name);
+                      else return b.name.localeCompare(a.name);
+                    }
+                  )
+
+                  .map((category, index) => (
+                    <Fragment key={index}>
+                      <Category category={category} />
+                    </Fragment>
+                  ))
+                }
               </div>
 
               <End />

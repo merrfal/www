@@ -1,3 +1,3 @@
-import { Page } from '../ui/pages';
-const Route = () => <Page mode="terms" />;
+import { Terms } from '../ui/pages';
+const Route = () => <Terms />;
 export default Route;

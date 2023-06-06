@@ -17,7 +17,15 @@ export default function Categories({product, onInput, validation: v}) {
         value={product?.productData?.category}
         id="category"
         className="p-3 mt-1 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm"
+        style={product?.productData?.category === "" ? {color: "#777"} : {}}
       >
+        { 
+          product?.productData?.category === "" &&  
+          <option value="" disabled>
+            {Translation("select-the-placeholder")}
+          </option>
+        }
+
         {AllCategories.map((category, index) => (
           <option value={category?._id} key={index}>
             {category?.name}

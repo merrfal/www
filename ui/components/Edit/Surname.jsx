@@ -6,7 +6,7 @@ export default function Surname({ user, onInput, validations }) {
   const validation = UserSurnameValidation(user?.userData?.surname);
 
   return (
-    <div className="col-span-6 sm:col-span-3">
+    <div className="col-span-12 lg:col-span-3 flex flex-col justify-start items-start">
       <label htmlFor="surname" className="block text-sm font-medium text-gray-700">
         {Translation("surname")}<Wildcard />
       </label>
@@ -20,7 +20,7 @@ export default function Surname({ user, onInput, validations }) {
         onChange={(e) => onInput("surname", e)}
       />
 
-      {validations.surname && validation.error && <RequiredLabel message={validation?.message} />}
+      {validations?.surname && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
 }

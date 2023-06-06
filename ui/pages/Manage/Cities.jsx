@@ -1,4 +1,4 @@
-import { KosovoCities } from "../../../data";
+import { Countries } from "../../../data";
 import { CityValidation } from "../../../utils/Forms";
 import { Translation } from "../../../utils/Translations";
 import { RequiredLabel, Wildcard } from "../../components";
@@ -18,11 +18,20 @@ export default function Cities({product, onInput, validation: v}) {
         onChange={(e) => onInput("city", e)}
         id="city"
         className="p-3 mt-1 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm"
+        style={product?.productData?.city === "" ? {color: "#777"} : {}}
       >
-        {KosovoCities.map((city, index) => (
-          <option value={city.value} key={index}>
-            {city?.name}
+        { 
+          product?.productData?.city === "" &&  
+          <option value="" disabled>
+            {Translation("select-the-placeholder")}
           </option>
+        }
+
+        {Countries.find((country) => country["iso_code"] === product?.productData?.country)
+          ?.cities?.map((city, index) => (
+            <option key={index} value={city?.value}>
+              {city?.name}
+            </option>
         ))}
       </select>
 

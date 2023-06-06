@@ -22,8 +22,7 @@ export default function None() {
             type="button"
             className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#387DFF] hover:bg-[#387DFF95] focus:outline-none transition-all"
           >
-            <PlusIcon />
-            {Translation("add_the_first_product")}
+            <PlusIcon /> {Translation("add_the_first_product")}
           </button>
         </Link>
       </div>

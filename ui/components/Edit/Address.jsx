@@ -6,7 +6,7 @@ export default function Address({ user, onInput, validations}) {
   const validation = AddressValidation(user?.userAdditionalData?.address);
 
   return (
-    <div className="col-span-6">
+    <div className="col-span-12 lg:col-span-3 flex flex-col justify-start items-start">
       <label htmlFor="address" className="block text-sm font-medium text-gray-700">
         {Translation("address")}<Wildcard />
       </label>
@@ -20,7 +20,7 @@ export default function Address({ user, onInput, validations}) {
         onChange={(e) => onInput("address", e, true, "userAdditionalData")}
       />
 
-      {validations.address && validation.error && <RequiredLabel message={validation?.message} />}
+      {validations?.address && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
 }

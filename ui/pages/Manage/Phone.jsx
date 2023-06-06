@@ -6,7 +6,7 @@ export default function Phone({product, onInput, validation: v}) {
   const validation = PhoneValidation(product?.productData?.phone);
 
   return (
-    <div className="col-span-6 sm:col-span-3">
+    <div className="col-span-6 sm:col-span-3 lg:col-span-3">
       <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
         {Translation("phone-number")}<Wildcard />
       </label>

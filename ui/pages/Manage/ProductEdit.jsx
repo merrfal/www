@@ -8,6 +8,7 @@ import { DisabledDefaultState, ProductDefaultState, ProductDefaultValidation } f
 import { onInput as Input } from "../../../utils/ProductManipulation"
 import { OpenConfirmation } from "../../../controllers/Slices";
 import { Translation } from "../../../utils/Translations";
+import { Permissonless } from "..";
 
 import {
   Header,
@@ -21,9 +22,9 @@ import {
   Buttons,
   Title,
   Url,
+  Country,
   Given,
 } from ".";
-import Permissonless from "../Permissonless";
 
 export default function EditProduct() {
   const account = useSelector((state) => state.Account);
@@ -113,24 +114,17 @@ export default function EditProduct() {
                   onInput={onInput}
                   validation={validation}
                 />
-
+                
                 <Description
                   product={product}
                   onInput={onInput}
                   validation={validation}
                 />
 
-                <Address
-                  product={product}
-                  onInput={onInput}
-                  validation={validation}
-                />
-
                 <div className="grid grid-cols-6 gap-6">
-                  <Given product={product} onInput={onInput} />
                   <Url product={product} />
 
-                  <Phone
+                  <Categories
                     product={product}
                     onInput={onInput}
                     validation={validation}
@@ -142,13 +136,31 @@ export default function EditProduct() {
                     validation={validation}
                   />
 
+                  <Given 
+                    product={product} 
+                    onInput={onInput} 
+                  />
+
+                  <Phone
+                    product={product}
+                    onInput={onInput}
+                    validation={validation}
+                  />
+
+                  <Country
+                    product={product}
+                    onInput={onInput}
+                    validation={validation}
+                    setValidations={setValidation}
+                  />
+
                   <Cities
                     product={product}
                     onInput={onInput}
                     validation={validation}
                   />
 
-                  <Categories
+                  <Address
                     product={product}
                     onInput={onInput}
                     validation={validation}

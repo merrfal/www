@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { NO_AVATAR, NO_COVER } from "./Constants";
 
 const UserModel = new Schema(
   {
@@ -9,8 +10,8 @@ const UserModel = new Schema(
       email: { type: String, required: true, unique: true },
       uid: { type: String, required: true, unique: true },
       phone: { type: String, default: '' },
-      avatar: { type: String, default: '/placeholders/no-avatar.png'},
-      cover: { type: String, default: '/placeholders/no-cover.png'},
+      avatar: { type: String, default: NO_AVATAR},
+      cover: { type: String, default: NO_COVER},
     },
     userAdditionalData: {
       isUserVerified: { type: Boolean, default: false },

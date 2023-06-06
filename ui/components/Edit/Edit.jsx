@@ -14,7 +14,7 @@ import {
   Username,
 } from "./";
 
-export default function Edit({ user, setUser, setIsEdit }) {
+export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
   const [loading, setIsLoading] = useState(false);
 
   const [userClone, setUserClone] = useState(
@@ -38,28 +38,39 @@ export default function Edit({ user, setUser, setIsEdit }) {
   );
 
   const [validations, setValidations] = useState({
-    address: false,
-    avatar: false,
-    city: false,
-    country: false,
     cover: false,
     avatar: false,
+    name: false,
+    surname: false,
+    username: false,
     phone: false,
+    country: false,
+    city: false,
+    address: false,
   });
 
   const onInput = (key, e, event = true, target = "userData") => {
     if(target === "userData") {
-      setUserClone({
-        ...userClone,
-        userData: {
-          ...userClone.userData,
-          [key]: event ? e.target.value : e,
-        },
-      });
+        setUserClone({
+          ...userClone,
+          userData: {
+            ...userClone.userData,
+            [key]: event ? e.target.value : e,
+          },
+        });
     }
 
     else {
-      setUserClone({
+        if(key === "country") setUserClone({
+          ...userClone,
+          userAdditionalData: {
+            ...userClone.userAdditionalData,
+            [key]: event ? e.target.value : e,
+            city: "",
+          },
+        });
+      
+      else setUserClone({
         ...userClone,
         userAdditionalData: {
           ...userClone.userAdditionalData,
@@ -68,7 +79,13 @@ export default function Edit({ user, setUser, setIsEdit }) {
       });
     }
 
-    setValidations({
+    if(key === "contry") setValidations({
+      ...validations,
+      [key]: true,
+      city: false,
+    });
+
+    else setValidations({
       ...validations,
       [key]: true,
     });
@@ -133,14 +150,11 @@ export default function Edit({ user, setUser, setIsEdit }) {
 
                       <Username
                         user={userClone}
+                        account={account}
                         onInput={onInput}
                         validations={validations}
-                      />
-
-                      <Address
-                        user={userClone}
-                        onInput={onInput}
-                        validations={validations}
+                        setValidations={setValidations}
+                        dispatch={dispatch}
                       />
 
                       <Phone
@@ -160,12 +174,19 @@ export default function Edit({ user, setUser, setIsEdit }) {
                         onInput={onInput}
                         validations={validations}
                       />
+
+                      <Address
+                        user={userClone}
+                        onInput={onInput}
+                        validations={validations}
+                      />
                     </div>
                   </div>
                 </div>
               </div>
               
               <Buttons
+                user={user}
                 userClone={userClone}
                 setUserClone={setUserClone}
                 setUser={setUser}

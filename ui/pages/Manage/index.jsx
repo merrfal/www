@@ -13,6 +13,7 @@ import Title from "./Title";
 import Info from "./Info";
 import Url from "./Url";
 import Given from "./Given";
+import Country from "./Country";
 
 export {
   Address,
@@ -29,5 +30,6 @@ export {
   Given,
   Url,
   ProductPost,
-  ProductEdit
+  ProductEdit,
+  Country,
 };
