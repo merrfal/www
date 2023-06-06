@@ -1,10 +1,10 @@
-import { v4 } from "uuid";
+import { NO_AVATAR } from "../configs/Constants";
 
 export const UserObject = (user) => {
   const name = user.displayName.split(" ")[0] || "";
   const surname = user.displayName.split(" ")[1] || "";
   const email = user.email || "";
-  const avatar = user.photoURL || "";
+  const avatar = user.photoURL || NO_AVATAR;
 
   let username = name + surname + Math.floor(Math.random() * (300 - 100 + 1)) + 100;
   username = username.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
@@ -14,10 +14,8 @@ export const UserObject = (user) => {
     name,
     surname,
     email,
-    avatar: {
-      url: avatar,
-      isFirebase: false,
-    },
+    avatar,
     username,
+    phone: user?.phoneNumber === undefined ? "" : user.phoneNumber,
   };
 };

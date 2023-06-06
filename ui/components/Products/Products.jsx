@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Latest } from "../../../api/Product";
-import { Product } from "..";
+import { None, Product } from "..";
 import { Header, Skeleton } from "./";
 
 export default function Products() {
@@ -19,8 +19,15 @@ export default function Products() {
 
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 sm:space-x-2 lg:grid-cols-3 xl:grid-cols-4 pb-4 xl:gap-x-8 ">
           {products === null && <Skeleton />}
-          {products !== null && products.map((p) => <Product product={p} />)}
+
+          {products !== null && products.map((product, index) => 
+            <Fragment key={index}>
+              <Product product={product} />
+            </Fragment>
+          )}
         </div>
+        
+        {products?.length === 0 && <None />}
       </div>
     </div>
   );

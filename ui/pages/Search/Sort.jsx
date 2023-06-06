@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { OpenIcon } from "../../icons";
+import { Translation } from "../../../utils/Translations";
 
 export default function Sort({filters, setFilters}) {
   const [isSortOpen, setIsSortOpen] = useState(false);
@@ -22,8 +23,8 @@ export default function Sort({filters, setFilters}) {
   return (
     <div ref={ref} className="relative inline-block text-left">
       <div>
-        <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-          Renditja
+        <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900 transition-all">
+            {Translation("sorting")}
           <OpenIcon />
         </button>
       </div>
@@ -36,7 +37,7 @@ export default function Sort({filters, setFilters}) {
               onClick={() => setFilters({...filters, sort: {createdAt: 1}})}
               className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
             >
-              Më të rejat
+              {Translation("most-popular")}
             </p>
 
             <p
@@ -44,7 +45,7 @@ export default function Sort({filters, setFilters}) {
               onClick={() => setFilters({...filters, sort: {createdAt: -1}})}
               className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
             >
-              Më të vjetërat
+              {Translation("most-unpopular")}
             </p>
 
             <p
@@ -52,7 +53,7 @@ export default function Sort({filters, setFilters}) {
               onClick={() => setFilters({...filters, sort: {views: 1}})}
               className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
             >
-              Më popullorja
+              {Translation("newest")}
             </p>
 
             <p
@@ -60,7 +61,7 @@ export default function Sort({filters, setFilters}) {
               onClick={() => setFilters({...filters, sort: {views: -1}})}
               className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
             >
-              Më jo popullorja
+              {Translation("oldest")}
             </p>
           </div>
         </div>

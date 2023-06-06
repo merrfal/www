@@ -7,8 +7,10 @@ import { AccountIcon } from "../ui/icons";
 
 import { USER_AUTH_ERROR } from "../configs/Messages";
 
-export default function useGoogle({dispatch}) {
+export default function useGoogle({dispatch, account}) {
   const Auth = async () => {
+    if(account.Loading) return;
+    
     try {
       var Provider = new GoogleAuthProvider();
       const data = await signInWithPopup(AuthInstance, Provider);
@@ -46,7 +48,7 @@ export default function useGoogle({dispatch}) {
   };
 
   return (
-    <div onClick={() => Auth()} className="p-2 ml-3 text-gray-400 hover:text-gray-500 lg:ml-4 hover:cursor-pointer">
+    <div onClick={() => Auth()} className="p-2 ml-3 text-gray-400 hover:text-gray-500 lg:ml-4 hover:cursor-pointer hover:opacity-[.85] transition-all">
       <AccountIcon />
     </div>
   );

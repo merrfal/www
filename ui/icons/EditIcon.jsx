@@ -6,7 +6,7 @@ export default function EditIcon(props) {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className={props.class ? props.class : "-ml-1 mr-2 h-5 w-5 text-gray-400"}
+      className={props.className ? props.className : "-ml-1 mr-2 h-5 w-5 text-gray-400"}
     >
       <path
         strokeLinecap="round"

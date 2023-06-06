@@ -1,5 +1,5 @@
 import { Response } from "./Response";
-import { API_WRONG_CONFIGS } from "../configs/Messages";
+import { Translation } from "./Translations";
 
 export const ValidateVariables = (target, payload, res) => {
   const access = Validator(target, payload);
@@ -10,7 +10,7 @@ export const ValidateVariables = (target, payload, res) => {
       code: 400,
       success: false,
       data: null,
-      message: API_WRONG_CONFIGS,
+      message: Translation("api-wrong-reqload"),
     };
 
     Response(response);

@@ -7,6 +7,7 @@ import { v4 } from "uuid";
 import { Create, Update } from "../../../api/Product";
 import { Storage } from "../../../configs/Firebase";
 import { Notification } from "../../../utils/Response";
+import { Translation } from "../../../utils/Translations";
 
 import {
   AddressValidation,
@@ -18,7 +19,14 @@ import {
 } from "../../../utils/Forms";
 
 export default function Buttons(props) {
-  const { product, setLoading, account, setValidation, mode } = props;
+  const { 
+    product, 
+    account, 
+    setValidation, 
+    mode, 
+    onUpdate, 
+    setIsHold 
+  } = props;
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -31,6 +39,7 @@ export default function Buttons(props) {
       phone: true,
       city: true,
       category: true,
+      country: true,
       gallery: true,
       postedAnonymously: true,
     });
@@ -63,7 +72,7 @@ export default function Buttons(props) {
       return;
     }
 
-    setLoading(true);
+    setIsHold(true);
 
     const gallery = [];
 
@@ -106,7 +115,7 @@ export default function Buttons(props) {
       gallery,
     };
 
-    Create(initalProduct, router, setLoading, dispatch);
+    Create(initalProduct, router, setIsHold, dispatch);
   };
 
   const handleUpdate = async () => {
@@ -120,17 +129,36 @@ export default function Buttons(props) {
       return;
     }
 
-    Update({...product.productData}, router, setLoading, dispatch);
+    Update({...product.productData}, router, setIsHold, dispatch);
   }
+
+  const handleDelete = () => onUpdate(
+    product?.productData?.name, 
+    product?.productData?.slug
+  )
 
   return (
     <div className="text-right mb-2 mr-2">
-      <button
-        className="inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#377DFF] focus:outline-none"
-        onClick={mode === "create" ? handlePublish : handleUpdate}
-      >
-        Publiko Produktin
-      </button>
+      {
+        mode === "edit" && 
+          <button onClick={handleDelete} className="inline-flex mt-8 justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium shadow-sm focus:outline-none mr-4 text-[#dc2828] bg-[#dc282824] hover:bg-[#dc282835] transition-all">
+            {Translation("delete-product")}
+          </button>
+      }
+
+      {
+        mode === "edit" &&
+          <button onClick={handleUpdate} className="inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#3073ee] focus:outline-none transition-all">
+            {Translation("update-product")}
+          </button>
+      }
+
+      {
+        mode === "create" &&
+          <button onClick={handlePublish} className="inline-flex mt-8 justify-center rounded-md border border-transparent bg-[#377DFF] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#3073ee] focus:outline-none transition-all">
+            {Translation("post-product")}
+          </button>
+      }
     </div>
   );
 }

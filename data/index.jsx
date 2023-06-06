@@ -1,6 +1,20 @@
-import Categories from "./Categories";
+import { Categories } from "./Categories";
 
-import { KosovoCities } from "./Cities";
+import {
+  Countries,
+  KosovoCities,
+  AlbaniaCities,
+  MacedoniaCities,
+} from "./Locations";
+
 import { ProjectsList, HelpfulLinks } from "./FooterLinks";
 
-export { Categories, KosovoCities, ProjectsList, HelpfulLinks };
+export {
+  Categories,
+  KosovoCities,
+  ProjectsList,
+  HelpfulLinks,
+  Countries,
+  AlbaniaCities,
+  MacedoniaCities,
+};

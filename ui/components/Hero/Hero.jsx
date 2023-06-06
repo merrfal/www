@@ -8,6 +8,7 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
           <Image />
+          
           <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
             <Info />
             <Buttons />

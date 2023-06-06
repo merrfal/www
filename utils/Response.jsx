@@ -1,4 +1,4 @@
-import { NOTIFICATION_TIME } from "../configs/Constants";
+import { NOTIFICATION_TIME } from "../configs/Envs";
 import { ShowNotification, HideNotification } from "../controllers/Slices";
 
 export const Response = (props) => {

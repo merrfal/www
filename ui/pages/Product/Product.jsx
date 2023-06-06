@@ -6,16 +6,16 @@ import { useRouter } from "next/router";
 import { Global } from "../../../configs/Head";
 import { getDownloadURL, ref } from "firebase/storage";
 import { Storage } from "../../../configs/Firebase";
+import { Error } from "..";
+import { Loading } from "../../components";
 
 import {
   Info,
-  Location,
   Phone,
   Poster,
   Similar,
   Steps,
   Gallery,
-  Skeleton,
   Thumbnail,
   Category,
   Views,
@@ -26,13 +26,14 @@ export default function Product() {
   const router = useRouter();
 
   const [product, setProduct] = useState(null);
-  const [prodcuts, setProducts] = useState(null);
+  const [products, setProducts] = useState(null);
   const [gallery, setGallery] = useState([]);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     if (router) {
       const { slug } = router.query;
+
       if (slug !== "" && slug !== undefined) {
         View(slug, setProduct, dispatch);
       }
@@ -40,14 +41,14 @@ export default function Product() {
   }, [router]);
 
   useEffect(() => {
-    if (product !== null) {
+    if (product !== null && product !== false && products === null) {
       const { category = "" } = product.productData;
       Recommendations(category, setProducts, dispatch);
     }
   }, [product, router]);
 
   useEffect(() => {
-    if (product !== null) {
+    if (product !== null && product !== false) {
       let thumb = product.productData.gallery;
 
       Promise.all(thumb.map((image) => {
@@ -55,29 +56,23 @@ export default function Product() {
         const unextracted = ref(Storage, file);
 
         return getDownloadURL(unextracted);
-      })).then((urls) => setGallery(urls));
+      }))
+      
+      .then((urls) => setGallery(urls));
     }
   }, [product]);
+
+  if (product === false) return <Error code={404} />
 
   return (
     <Normal>
       <Global
-        title={
-          product === null ? "Po ngarkohet..." : product?.productData?.name
-        }
-        description={
-          product === null
-            ? "Po ngarkohet..."
-            : product?.productData?.description
-        }
-        thumbnail={
-          product === null
-            ? "/no-product.png"
-            : product?.productData?.gallery[0].url
-        }
+        title={product?.productData?.name}
+        description={product?.productData?.description }
+        thumbnail={product?.productData?.gallery[0].url}
       />
 
-      {product === null && <Skeleton />}
+      {product === null && <Loading />}
 
       {product !== null && (
         <div className="bg-white">
@@ -91,20 +86,16 @@ export default function Product() {
                     setIndex={setIndex}
                   />
 
-                  <Thumbnail 
-                    gallery={gallery} 
-                    index={index}
-                  />
+                  <Thumbnail gallery={gallery}  index={index} />
                 </div>
 
                 <div className="mt-10 ml-3 px-4 sm:px-0 sm:mt-16 lg:mt-0">
                   <div className="flex items-center mb-8">
                     <Category category={product.productData.category} />
                     <div className="h-5 border-r border-gray-200 mx-4" />
-                    <Location productData={product.productData} />
-                    <div className="h-5 border-r border-gray-200 mx-4" />
                     <Views product={product} />
                   </div>
+                  
                   <Info productData={product.productData} />
                   <Poster productData={product.productData} />
                   <Phone productData={product.productData} />
@@ -112,7 +103,7 @@ export default function Product() {
                 </div>
               </div>
 
-              <Similar products={prodcuts} />
+              <Similar products={products} productId={product?._id} />
             </div>
           </main>
 

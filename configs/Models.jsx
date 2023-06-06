@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { NO_AVATAR, NO_COVER } from "./Constants";
 
 const UserModel = new Schema(
   {
@@ -7,33 +8,27 @@ const UserModel = new Schema(
       surname: { type: String, required: true },
       username: { type: String, required: true, unique: true },
       email: { type: String, required: true, unique: true },
-      phone: { type: String, default: "" },
       uid: { type: String, required: true, unique: true },
-      avatar: {type: Object, default: {url: "", isFirebase: false, id: null}},
-      bio: { type: String, default: "" },
-      cover: { type: Object, default: {url: "", isFirebase: false, id: null}},
-      website: { type: String, default: "" },
+      phone: { type: String, default: '' },
+      avatar: { type: String, default: NO_AVATAR},
+      cover: { type: String, default: NO_COVER},
     },
     userAdditionalData: {
-      authProvider: { type: String, default: "Google" },
-      isEmailVerified: { type: Boolean, default: false },
-      isUserActive: { type: Boolean, default: true },
-      isUserSuspended: { type: Boolean, default: false },
       isUserVerified: { type: Boolean, default: false },
       role: { type: String, default: "user" },
-      address: { type: String, default: "" },
-      city: { type: String, default: "" },
-      country: { type: String, default: "" },
+      address: { type: String, default: '' },
+      city: { type: String, default: '' },
+      country: { type: String, default: '' },
     },
     userActivities: {
       products: { type: Array, default: [] },
       productCount: { type: Number, required: true, default: 0 },
-      views: { type: Number, required: true, default: 0 },
     },
   },
   {
     timestamps: true,
-  }
+    versionKey: false,
+  },
 );
 
 const ProductSchema = new Schema(
@@ -49,7 +44,6 @@ const ProductSchema = new Schema(
       address: { type: String, default: '' },
       city: { type: String, default: '' },
       country: { type: String, default: '' },
-      isPublished: { type: Boolean, default: false },
       isGiven: { type: Boolean, default: false },
       postedAnonymously: { type: Boolean, default: false},
     },
@@ -59,7 +53,8 @@ const ProductSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+    versionKey: false,
+  },
 );
 
 const CategorySchema = new Schema(
@@ -76,7 +71,8 @@ const CategorySchema = new Schema(
   },
   {
     timestamps: true,
-  }
+    versionKey: false,
+  },
 );
 
 let Product;

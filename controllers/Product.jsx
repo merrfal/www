@@ -1,21 +1,25 @@
 import * as Messages from "../configs/Messages";
 
 import { Product, User, Category as CategoryModel } from "../configs/Models";
+import { ConnectionLocation } from "../utils/Connection";
+import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
+import { allowedCountries } from "../utils/Locations";
 import { Response } from "../utils/Response";
 
 export const Create = async (payload, res) => {
   try {
     const initalProduct = new Product(payload);
     const product = await initalProduct.save();
+    const id = product._id.toString();
 
     await User.findByIdAndUpdate(payload.productData.user, {
       $inc: { 'userActivities.productCount': 1 },
-      $addToSet: { 'userActivities.products': product._id }
+      $addToSet: { 'userActivities.products': id }
     });
 
     await CategoryModel.findByIdAndUpdate(payload.productData.category, {
       $inc: { 'additionalData.productCount': 1 },
-      $addToSet: { 'additionalData.products': product._id }
+      $addToSet: { 'additionalData.products': id }
     });
 
     const response = {
@@ -23,7 +27,7 @@ export const Create = async (payload, res) => {
       code: product ? 200 : 400,
       success: product ? true : false,
       data: product ? { ...product._doc } : null,
-      message: product ? Messages.PRODUCT_CREATE_SUCCESS : Messages.PRODUCT_CREATE_ERROR,
+      message: CreateMessage("product", product ? true : false),
     };
 
     Response(response);
@@ -35,7 +39,7 @@ export const Create = async (payload, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.PRODUCT_CREATE_ERROR,
+      message: CreateMessage("product", false),
       error,
     };
 
@@ -45,33 +49,62 @@ export const Create = async (payload, res) => {
 
 export const Delete = async (payload, res) => {
   try {
-    const product = await Product.findByIdAndDelete(req.query.id);
+    let { slug } = payload;
 
-    if (product) {
-      const users = await User.find({});
+    const productData = await Product.findOne({'productData.slug': slug}).select({ 
+        'productData.user': 1, 
+        'productData.category': 1,
+    });
 
-      users.forEach(async (user) => {
-        if (user.Favorites.includes(product._id)) {
-          user.Favorites.splice(user.Wishlist.indexOf(product._id), 1);
-          await user.save();
-        }
-      });
+    let productId = productData._id.toString()
 
-      Response(res, 200, true, "Produkti u fshi me sukses.", product);
-    }
-  } catch (error) {
-    Response(
+    await User.findByIdAndUpdate(productData.productData.user, {
+      $inc: { 'userActivities.productCount': -1 },
+      $pull: { 'userActivities.products': productId }
+    })
+
+    await CategoryModel.findByIdAndUpdate(productData.productData.category, {
+      $inc: { 'additionalData.productCount': -1 },
+      $pull: { 'additionalData.products': productId }
+    })
+
+    const deletedProduct = await Product.findByIdAndDelete(productId);
+
+    const response = {
       res,
-      500,
-      false,
-      "Gabim i brendshëm i serverit gjatë fshirjes së produktit nga platforma.",
-      null
-    );
+      code: deletedProduct ? 200 : 400,
+      success: deletedProduct ? true : false,
+      data: deletedProduct ? { ...deletedProduct._doc } : null,
+      message: DeleteMesage("product", deletedProduct ? true : false)
+    }
+
+    Response(response);
+  } 
+  
+  catch (error) {
+    const response = {
+      res,
+      code: 500,
+      success: false,
+      data: null,
+      message: DeleteMesage("product", false),
+      error,
+    }
+
+    Response(response);
   }
 };
 
 export const Category  = async (payload, res) => {
-  let { offset, limit, cities, statusses, sort } = payload;
+  let locationRes = await ConnectionLocation();
+  let isLocal = false;
+
+  if(locationRes.success === true){
+    const country = locationRes?.data?.country;
+    if(allowedCountries.includes(country)) isLocal = country;
+  }
+
+  let { offset, limit, cities, statuses, sort } = payload;
 
   offset = parseInt(offset);
   limit = parseInt(limit);
@@ -79,12 +112,14 @@ export const Category  = async (payload, res) => {
   const filter = () =>{
     const filters = {}
     const calength = cities.length
-    const salength = statusses.length
+    const salength = statuses.length
 
     if(calength === 0 && salength === 0) return {}
-    if(calength === 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statusses }}
+    if(calength === 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statuses }}
     if(calength !== 0 && salength === 0 ) return { 'productData.city': { $in: cities }}
-    if(calength !== 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statusses }, 'productData.city': { $in: cities }}
+    if(calength !== 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statuses }, 'productData.city': { $in: cities }}
+
+    if(isLocal !== false) filters['productData.country'] = isLocal;
 
     return filters
   }
@@ -119,6 +154,14 @@ export const Category  = async (payload, res) => {
 }
 
 export const Search  = async (payload, res) => {
+  let locationRes = await ConnectionLocation();
+  let isLocal = false;
+
+  if(locationRes.success === true){
+    const country = locationRes?.data?.country;
+    if(allowedCountries.includes(country)) isLocal = country;
+  }
+
   let { offset, limit, categories, cities, sort, term } = payload;
 
   offset = parseInt(offset);
@@ -166,6 +209,8 @@ export const Search  = async (payload, res) => {
     if (orFilters.length > 0) {
       filters.$or = orFilters;
     }
+
+    if(isLocal !== false) filters['productData.country'] = isLocal;
   
     return filters;
   };
@@ -200,8 +245,24 @@ export const Search  = async (payload, res) => {
 }
 
 export const Latest = async (payload, res) => {
+  let locationRes = await ConnectionLocation();
+  let productsFindObject = { 'productData.isGiven': false };
+
+  if(locationRes.success === true){
+    const country = locationRes?.data?.country;
+
+    if(allowedCountries.includes(country)){
+      productsFindObject = { 
+        'productData.isGiven': false,
+        'productData.country': country
+      };
+    }
+  }
+
   try {
-    const products = await Product.find({}).sort({ createdAt: -1 }).limit(16);
+    const products = await Product
+      .find(productsFindObject)
+      .sort({ createdAt: -1}).limit(16);
 
     const payload = {
       res,
@@ -301,9 +362,24 @@ export const View = async ({ slug }, res) => {
 };
 
 export const Similar = async ({ category }, res) => {
+  let locationRes = await ConnectionLocation();
+  let productsFindObject = { 'productData.category': category, 'productData.isGiven': false };
+
+  if(locationRes.success === true){
+    const country = locationRes?.data?.country;
+
+    if(allowedCountries.includes(country)){
+      productsFindObject = { 
+        'productData.category': category, 
+        'productData.isGiven': false,
+        'productData.country': country
+      };
+    }
+  }
+
   try {
     const products = await Product
-      .find({ "productData.category": category })
+      .find(productsFindObject)
       .sort({ createdAt: -1 })
       .limit(5);
 

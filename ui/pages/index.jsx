@@ -1,25 +1,27 @@
 import Home from './Home';
 import Profile from './Profile';
-import Products from './Products';
 import Product from './Product';
-import Manage from './Manage';
 import Error from './Error';
-import Page from './Page';
+import Terms from './Terms';
+import Privacy from './Privacy';
 import Permissonless from './Permissonless';
 import Category from './Category';
 import Categories from './Categories';
 import Search from './Search';
+import ProductPost from './Manage/ProductPost';
+import ProductEdit from './Manage/ProductEdit'
 
 export {
   Home,
   Product,
-  Manage,
-  Products,
   Profile,
   Error,
-  Page,
   Category,
   Categories,
   Permissonless,
   Search,
+  ProductPost,
+  ProductEdit,
+  Terms,
+  Privacy,
 };

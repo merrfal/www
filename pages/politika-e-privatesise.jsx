@@ -1,3 +1,3 @@
-import { Page } from '../ui/pages';
-const Route = () => <Page mode="privacy" />;
+import { Privacy } from '../ui/pages';
+const Route = () => <Privacy />;
 export default Route;

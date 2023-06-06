@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { OpenIcon } from "../../icons";
+import { Translation } from "../../../utils/Translations";
 
 export default function Cities({ filters, setFilters }) {
   const [isStatusOpen, setIsStatusOpen] = useState(false);
@@ -23,9 +24,11 @@ export default function Cities({ filters, setFilters }) {
     <div ref={ref} className="px-4 relative inline-block text-left">
       <button
         onClick={open}
-        className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+        className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900 transition-all"
       >
-        <span>Statusi</span>
+          <span>
+            {Translation("status")}
+          </span>
         <OpenIcon />
       </button>
 
@@ -34,45 +37,68 @@ export default function Cities({ filters, setFilters }) {
           <form className="space-y-4">
             <div className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
               <input
-                id="dhuruar"
-                value={false}
+                id="given"
+                value={true}
                 type="radio"
-                checked={filters.statuses.includes(false)}
+                checked={filters.statuses.includes(true)}
                 className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
-                onClick={(e) =>
-                  setFilters({
-                    ...filters,
-                    statuses: [...filters.statuses, true],
-                  })
-                }
+                onClick={() => {
+                    if (filters.statuses.includes(true)) {
+                      let newStatuses = filters.statuses.filter((status) => status !== true);
+
+                      setFilters({
+                        ...filters,
+                        statuses: newStatuses,
+                      });
+                    }
+
+                    else {
+                      setFilters({
+                        ...filters,
+                        statuses: [...filters.statuses, true],
+                      });
+                    }
+                }}
               />
               <label
-                htmlFor="dhuruar"
+                htmlFor="given"
                 className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"
               >
-                Dhuruar
+                {Translation("given")}
               </label>
             </div>
 
             <div className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
               <input
-                id="jo-dhuruar"
-                value={true}
+                id="not-given"
+                value={false}
                 type="radio"
-                checked={filters.statuses.includes(true)}
+                checked={filters.statuses.includes(false)}
                 className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
-                onClick={(e) =>
-                  setFilters({
-                    ...filters,
-                    statuses: [...filters.statuses, false],
-                  })
+                onClick={() => {
+                    if (filters.statuses.includes(false)) {
+                      let newStatuses = filters.statuses.filter((status) => status !== false);
+
+                      setFilters({
+                        ...filters,
+                        statuses: newStatuses,
+                      });
+                    }
+
+                    else {
+                      setFilters({
+                        ...filters,
+                        statuses: [...filters.statuses, false],
+                      });
+                    }
+                  }
                 }
               />
               <label
-                htmlFor="jo-dhuruar"
+                htmlFor="not-given"
                 className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"
               >
-                Jo dhuruar
+                {Translation("not-given")}
               </label>
             </div>
           </form>

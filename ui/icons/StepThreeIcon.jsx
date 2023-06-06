@@ -68,7 +68,7 @@ export default function StepThreeIcon() {
           <path
             d="M80 26.5H32C29.5147 26.5 27.5 28.5147 27.5 31V63C27.5 65.4853 29.5147 67.5 32 67.5H80C82.4853 67.5 84.5 65.4853 84.5 63V31C84.5 28.5147 82.4853 26.5 80 26.5Z"
             stroke="#121826"
-            stroke-opacity="0.08"
+            strokeOpacity="0.08"
           />
         </g>
         <path
@@ -102,9 +102,9 @@ export default function StepThreeIcon() {
           width="83"
           height="83"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -123,9 +123,9 @@ export default function StepThreeIcon() {
           width="99"
           height="99"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -144,9 +144,9 @@ export default function StepThreeIcon() {
           width="67"
           height="67"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -165,9 +165,9 @@ export default function StepThreeIcon() {
           width="51"
           height="51"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -186,9 +186,9 @@ export default function StepThreeIcon() {
           width="35"
           height="35"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -207,9 +207,9 @@ export default function StepThreeIcon() {
           width="79.0661"
           height="40"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -228,9 +228,9 @@ export default function StepThreeIcon() {
           width="68"
           height="52"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -280,8 +280,8 @@ export default function StepThreeIcon() {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(56 48) rotate(90) scale(69 72.9204)"
         >
-          <stop offset="0.231884" stop-color="#C4C4C4" />
-          <stop offset="0.724638" stop-color="#C4C4C4" stop-opacity="0" />
+          <stop offset="0.231884" stopColor="#C4C4C4" />
+          <stop offset="0.724638" stopColor="#C4C4C4" stopOpacity="0" />
         </radialGradient>
       </defs>
     </svg>

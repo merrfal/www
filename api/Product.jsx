@@ -2,8 +2,9 @@ import * as Messages from "../configs/Messages";
 
 import { Notification } from "../utils/Response";
 import { Request } from "../utils/Http";
+import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
 
-export const Create = async (page, router, setLoading, dispatch) => {
+export const Create = async (page, router, setIsHold, dispatch) => {
   try {
     const req = await Request("PRODUCTS/CREATE", {productData: {...page}});
     const res = await req.json();
@@ -23,7 +24,7 @@ export const Create = async (page, router, setLoading, dispatch) => {
     else {
       const alert = {
         dispatch,
-        message: res.message,
+        message: CreateMessage("product", false),
         type: "error",
       };
 
@@ -42,63 +43,50 @@ export const Create = async (page, router, setLoading, dispatch) => {
   }
 
   finally {
-    setLoading(false);
+    setIsHold(false);
   }
 };
 
-export const Delete = async (dispatch, productId, userId, redirect = null) => {
-  const url = `${Url}/api/products/ProductDelete/${productId}`;
-  const config = Request("G", "JSON", {}, false, false, false);
-
+export const Delete = async (slug, setIsHold, onDeleteSuccess, dispatch) => {
   try {
-    const req = await fetch(url, config);
+    setIsHold(true);
+
+    const req = await Request("PRODUCTS/DELETE", {slug});
     const res = await req.json();
 
     if (res.success === true) {
-      Notification(dispatch, res.message, "success");
-      UserProductList(dispatch, userId);
+      const alert = {
+        dispatch,
+        message: res.message,
+        type: "success",
+      };
 
-      if (redirect !== null) window.location.href = redirect;
-    } else Notification(dispatch, res.message, "error");
-  } catch (error) {
-    Notification(dispatch, "", "error");
-  }
-};
+      Notification(alert);
 
-export const Filters = async (Cities, Categories, dispatch) => {
-  const url = `${Url}/api/products/ProductsFilters`;
-  const config = Request(
-    "P",
-    "JSON",
-    { Cities, Categories },
-    true,
-    false,
-    false
-  );
+      onDeleteSuccess();
+    }
 
-  try {
-    const req = await fetch(url, config);
-    const res = await req.json();
+    else {
+      const alert = {
+        dispatch,
+        message: res.message,
+        type: "error",
+      };
 
-    if (res.success === true) dispatch(SetFilter(res.data));
-    else Notification(dispatch, res.message, "error");
-  } catch (error) {
-    Notification(dispatch, "", "error");
-  }
-};
+      Notification(alert);
+    }
+  } 
+  
+  catch (error) {
+    const alert = {
+      dispatch,
+      message: DeleteMesage("product", false),
+      type: "error",
+    };
 
-export const List = async (dispatch) => {
-  const url = `${Url}/api/products/ProductsList`;
-  const config = Request("G", "JSON", {}, false, true, false);
+    Notification(alert);
 
-  try {
-    const req = await fetch(url, config);
-    const res = await req.json();
-
-    if (res.success === true) dispatch(SetPages(res.data));
-    else Notification(dispatch, res.message, "error");
-  } catch (error) {
-    Notification(dispatch, "", "error");
+    setIsHold(false);
   }
 };
 
@@ -196,14 +184,28 @@ export const View = async (slug, setProduct, dispatch, setLoading = null) => {
       if (setLoading !== null) setLoading(false);
     }
 
-    else {
-      const alert = {
-        dispatch,
-        message: res.message,
-        type: "error",
-      };
+    else setProduct(false);
+  } 
+  
+  catch (error) {
+    const alert = {
+      dispatch,
+      message: Messages.PRODUCTS_LATEST_ERROR,
+      type: "error",
+    };
 
-      Notification(alert);
+    Notification(alert);
+  }
+};
+
+export const ViewWithPermissions = async (slug, dispatch) => {
+  try {
+    const req = await Request("PRODUCTS/VIEW", { slug });
+    const res = await req.json();
+
+    return {
+      success: res.success,
+      data: res.data || null,
     }
   } 
   
@@ -215,6 +217,11 @@ export const View = async (slug, setProduct, dispatch, setLoading = null) => {
     };
 
     Notification(alert);
+
+    return {
+      success: false,
+      data: null
+    }
   }
 };
 

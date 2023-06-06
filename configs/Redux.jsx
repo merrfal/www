@@ -1,7 +1,7 @@
 import { Account, Notification, Confirmation} from '../controllers/Slices';
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import { IS_PROD } from './Constants';
+import { IS_PROD } from './Envs';
 
 // let debug, devTools = IS_PROD === "true";
 let debug, devTools = true;

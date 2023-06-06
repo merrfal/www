@@ -8,3 +8,10 @@ export default async function handler(req, res) {
   ValidateVariables(TARGET, PAYLOAD, res);
   RouteMethod(TARGET, PAYLOAD, res);
 }
+
+// TODO: not the right way to disable API resolved without... error
+export const config = {
+  api:{
+      externalResolver: true,
+  },
+}

@@ -1,0 +1,1 @@
+export const DisablePropagations = (event) => event.stopPropagation();

@@ -73,7 +73,7 @@ export default function StepTwoIcon() {
           <path
             d="M116 3.5H116.5V4V92V92.5H116H92H91.5V92V4V3.5H92H116Z"
             stroke="#121826"
-            stroke-opacity="0.08"
+            strokeOpacity="0.08"
           />
         </g>
         <g filter="url(#filter8_dd_56_36)">
@@ -81,7 +81,7 @@ export default function StepTwoIcon() {
           <path
             d="M-4 3.5H-4.5V4V92V92.5H-4H20H20.5V92V4V3.5H20H-4Z"
             stroke="#121826"
-            stroke-opacity="0.08"
+            strokeOpacity="0.08"
           />
         </g>
         <g opacity="0.3" filter="url(#filter9_f_56_36)">
@@ -108,7 +108,7 @@ export default function StepTwoIcon() {
           <path
             d="M56 62.5C65.1127 62.5 72.5 55.1127 72.5 46C72.5 36.8873 65.1127 29.5 56 29.5C46.8873 29.5 39.5 36.8873 39.5 46C39.5 55.1127 46.8873 62.5 56 62.5Z"
             stroke="#121826"
-            stroke-opacity="0.08"
+            strokeOpacity="0.08"
           />
         </g>
         <path
@@ -129,9 +129,9 @@ export default function StepTwoIcon() {
           width="19"
           height="19"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -150,9 +150,9 @@ export default function StepTwoIcon() {
           width="35"
           height="35"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -171,9 +171,9 @@ export default function StepTwoIcon() {
           width="51"
           height="48.7338"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -192,9 +192,9 @@ export default function StepTwoIcon() {
           width="67"
           height="65.3564"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -213,9 +213,9 @@ export default function StepTwoIcon() {
           width="83"
           height="81.7083"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -234,9 +234,9 @@ export default function StepTwoIcon() {
           width="99"
           height="97.9351"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -255,9 +255,9 @@ export default function StepTwoIcon() {
           width="115"
           height="115"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -276,9 +276,9 @@ export default function StepTwoIcon() {
           width="36"
           height="100"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -327,9 +327,9 @@ export default function StepTwoIcon() {
           width="36"
           height="100"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -378,9 +378,9 @@ export default function StepTwoIcon() {
           width="3"
           height="38.5"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -399,9 +399,9 @@ export default function StepTwoIcon() {
           width="3"
           height="38.5"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -420,9 +420,9 @@ export default function StepTwoIcon() {
           width="44"
           height="44"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -472,8 +472,8 @@ export default function StepTwoIcon() {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(56 48) rotate(90) scale(69 72.9204)"
         >
-          <stop offset="0.231884" stop-color="#C4C4C4" />
-          <stop offset="0.724638" stop-color="#C4C4C4" stop-opacity="0" />
+          <stop offset="0.231884" stopColor="#C4C4C4" />
+          <stop offset="0.724638" stopColor="#C4C4C4" stopOpacity="0" />
         </radialGradient>
       </defs>
     </svg>

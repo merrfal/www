@@ -1,6 +1,6 @@
 export default function Loading(){
     const lottie = {
-      src: "https://lottie.host/c47c3f04-5fb5-45e5-b0ab-c7f2990effe4/tDIHWvQxqp.json",
+      src: "/json/LottieLoading.json",
       background: "transparent",
       speed: "1",
       style: {width: '62px', height: '62px'},

@@ -10,6 +10,7 @@ export default function Textarea(props) {
         >
           {label}
         </label>
+        
         <div className="mt-1">
           <textarea
             type={type}

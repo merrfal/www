@@ -1,34 +1,35 @@
 import { ModeValidation } from "../../../utils/Forms";
+import { Translation } from "../../../utils/Translations";
+import { RequiredLabel, Wildcard } from "../../components";
 
-export default function Mode({
-  product: {
-    productData: { postedAnonymously },
-  },
-  onInput,
-  validation: v,
-}) {
-  const validation = ModeValidation(postedAnonymously);
+export default function Mode({product, onInput, validation: v}){
+  const validation = ModeValidation(product?.productData?.postedAnonymously);
 
   return (
     <div className="col-span-6 sm:col-span-3 lg:col-span-3">
       <label htmlFor="mode" className="block text-sm font-medium text-gray-700">
-        A dëshironi ta postoni produktin si anonim?
+        {Translation("post-anonymously-quesiton")}<Wildcard />
       </label>
+
       <select
         id="mode"
-        value={postedAnonymously}
+        value={product?.productData?.postedAnonymously}
         className="p-3 mt-1 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm"
         onChange={(e) => onInput("postedAnonymously", e)}
+        style={product?.productData?.postedAnonymously === "" ? {color: "#777"} : {}}
       >
-        <option value={false}>Po (shfaq profilin tim tek produkti)</option>
-        <option value={true}>Jo (mos e shfaq profilin tim tek produkti)</option>
+        { 
+          product?.productData?.postedAnonymously === "" &&  
+          <option value="" disabled>
+            {Translation("select-the-placeholder")}
+          </option>
+        }
+        
+        <option value={false}>{Translation("post-anonymously")}</option>
+        <option value={true}>{Translation("post-not-anonymously")}</option>
       </select>
 
-      {v.mode && validation.error && (
-        <p className="text-xs mt-1 ml-[1px] text-red-500">
-          {validation.message}
-        </p>
-      )}
+      {v?.postedAnonymously && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
 }

@@ -1,4 +1,5 @@
-import Manage from "./Manage";
+import ProductPost from "./ProductPost";
+import ProductEdit from "./ProductEdit";
 import Address from "./Address";
 import Buttons from "./Buttons";
 import Categories from "./Categories";
@@ -10,6 +11,9 @@ import Mode from "./Mode";
 import Phone from "./Phone";
 import Title from "./Title";
 import Info from "./Info";
+import Url from "./Url";
+import Given from "./Given";
+import Country from "./Country";
 
 export {
   Address,
@@ -23,6 +27,9 @@ export {
   Phone,
   Title,
   Info,
+  Given,
+  Url,
+  ProductPost,
+  ProductEdit,
+  Country,
 };
-
-export default Manage;

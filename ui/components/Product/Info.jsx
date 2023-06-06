@@ -1,4 +1,5 @@
 import { SmLocationIcon } from "../../icons";
+import { CapitalizeText } from "../../../utils/TextFormatting";
 
 export default function Info({ productData }) {
   const { name, address, city } = productData;
@@ -18,14 +19,14 @@ const FullLocation = ({ location }) => (
     <SmLocationIcon />
 
     <p className="text-slate-700 text-[12px] mt-[-0.5px]">
-      {location.length > 38 ? location.substring(0, 37) + "..." : location}
+      {CapitalizeText(location.length > 38 ? location.substring(0, 37) + "..." : location)}
     </p>
   </div>
 );
 
 const FullName = ({ name }) => (
   <div className="font-medium text-lg hover:cursor-pointer ml-[2px]">
-    {name.length > 28 ? name.substring(0, 27) + "..." : name}
+    {CapitalizeText(name.length > 28 ? name.substring(0, 27) + "..." : name)}
   </div>
 );
 

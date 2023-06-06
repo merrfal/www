@@ -2,10 +2,43 @@ import * as Messages from "../configs/Messages";
 
 import { User, Product } from "../configs/Models";
 import { Response } from "../utils/Response";
+import { ConnectionLocation } from "../utils/Connection";
+import { allowedCountries } from "../utils/Locations";
+import { Countries } from "../data/Locations";
 
 export const Register = async (payload, res) => {
   try {
-    const savedUser = new User({ ...payload });
+    let locationRes = await ConnectionLocation();
+    let isLocal = false;
+  
+    if(locationRes.success === true){
+      const geoData = locationRes?.data;
+      if(allowedCountries.includes(geoData?.country)) isLocal = geoData;
+    }
+
+    const data = { 
+      userData: {...payload?.userData},
+      userAdditionalData: {
+        country: 'GLOBAL',
+        city: '',
+      }
+    };
+
+    if(isLocal) {
+      const foundCountry = Countries.find((country) => country.iso_code === isLocal.country);
+
+      if (foundCountry) {
+        data.userAdditionalData.country = foundCountry.iso_code;
+
+        foundCountry.cities.forEach((city) => {
+          if (city.value.toLocaleLowerCase() === isLocal.city.toLocaleLowerCase()) {
+            data.userAdditionalData.city = city.name.toLocaleLowerCase();
+          }
+        });
+      }
+    }
+
+    const savedUser = new User(data);
     const user = await savedUser.save();
 
     const response = {
@@ -96,7 +129,6 @@ export const Login = async ({ uid }, res) => {
 export const Products = async (payload, res) => {
   let { offset, limit, user, auth } = payload;
 
-  console.log({ offset, limit, user, auth })
   offset = parseInt(offset);
   limit = parseInt(limit);
 
@@ -106,14 +138,14 @@ export const Products = async (payload, res) => {
   }
 
   try {
-    let products = await Product.find(filter()).sort({createdAt: 1}).skip(offset).limit(limit);
+    let products = await Product.find(filter()).sort({createdAt: -1}).skip(offset).limit(limit);
     let countProducts = await Product.find(filter()).countDocuments();
 
     const response = {
       res,
       code: products ? 200 : 404,
       success: products ? true : false,
-      data: products ? { products, hasMore: countProducts <= offset } : [],
+      data: products ? { products, hasMore: countProducts > (offset + limit) } : [],
       message: products ? Messages.PRODUCTS_LIST_USER_SUCCESS : Messages.PRODUCTS_LIST_USER_ERROR,
     };
 
@@ -136,14 +168,15 @@ export const Products = async (payload, res) => {
 
 export const Update = async (payload, res) => {
   try {
-    const user = await Product.findOneAndUpdate(
-      {'userData.slug': payload.userData.slug}, 
+    const user = await User.findOneAndUpdate(
+      {'userData.username': payload.old_username}, 
       { $set: 
         { 
           userData: payload?.userData,
           userAdditionalData: payload?.userAdditionalData,
         }
       },
+      { new: true }
     );
 
     const response = {
@@ -204,3 +237,34 @@ export const View = async ({ username }, res) => {
     Response(response);
   }
 };
+
+export const CheckIfExist = async ({field, value}, res) => {
+  try {
+    const checkDuplicate = await User.findOne({[field]: value});
+
+    const response = {
+      res,
+      code: 200,
+      success: true,
+      data: checkDuplicate ? true : false,
+      message: checkDuplicate ? "Përdoruesi u gjet me sukses." : "Përdoruesi nuk u gjet.",
+      error: null,
+    };
+
+    Response(response);
+  }
+
+  catch(error){
+    const response = {
+      res,
+      code: 500,
+      success: false,
+      exists: false,
+      data: null,
+      message: "Ndodhi një gabim gjatë përpjekjes për të gjetur nje duplikate.",
+      error: error,
+    };
+
+    Response(response);
+  }
+}

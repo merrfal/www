@@ -6,10 +6,8 @@ export default function Category({ category }) {
 
   return (
     <Link href={`/kategorite/${selected.slug}`}>
-      <a>
-        <span class="text-xs font-semibold inline-block py-1 px-2 rounded text-[#377DFF] bg-[#377DFF30] last:mr-0 mr-1">
-          {selected?.name}
-        </span>
+      <a className="text-xs font-semibold inline-block py-1 px-2 rounded text-[#377DFF] bg-[#377DFF30] last:mr-0 mr-1">
+        {selected?.name}
       </a>
     </Link>
   );

@@ -21,7 +21,9 @@ export const Login = async (uid, dispatch) => {
       dispatch(LogoutAccount());
       Notification(alert);
     }
-  } catch (error) {
+  } 
+  
+  catch (error) {
     const alert = {
       dispatch,
       message: Messages.USER_AUTH_ERROR,
@@ -50,7 +52,9 @@ export const Register = async (initalUser, dispatch) => {
 
       Notification(alert);
     }
-  } catch (error) {
+  } 
+  
+  catch (error) {
     const alert = {
       dispatch,
       message: Messages.USER_AUTH_ERROR,
@@ -62,25 +66,33 @@ export const Register = async (initalUser, dispatch) => {
 };
 
 export const Update = async (
+  user,
   userClone,
   setUser,
   setIsLoading,
   setIsEdit,
   setUserClone,
-  dispatch,
+  router,
+  dispatch
 ) => {
   try {
     setIsLoading(true);
 
     const req = await Request("USERS/UPDATE", {
-      userData: userClone.userData,
-      userAdditionalData: userClone.userAdditionalData,
+      old_username: user.userData.username,
+      userData: {
+        ...user.userData,
+        ...userClone.userData
+      },
+      userAdditionalData: {
+        ...user.userAdditionalData,
+        ...userClone.userAdditionalData
+      },
     });
 
     const res = await req.json();
 
     if (res.success === true) {
-      console.log({ res });
       const { data } = res;
 
       const alert = {
@@ -90,9 +102,19 @@ export const Update = async (
       };
 
       Notification(alert);
+      
+      if(user.userData.username !== data.userData.username) {
+        router.push(
+          `/profili/${data.userData.username}`, 
+          undefined, 
+          { shallow: true }
+        )
+      }
 
       setUser(data);
+      dispatch(SetAccount(data));
       setUserClone(data);
+
       setIsEdit(false);
     } 
     
@@ -105,7 +127,9 @@ export const Update = async (
 
       Notification(alert);
     }
-  } catch (error) {
+  } 
+  
+  catch (error) {
     const alert = {
       dispatch,
       message: Messages.USER_UPDATE_ERROR,
@@ -126,16 +150,10 @@ export const View = async (username, setUser, dispatch) => {
     const res = await req.json();
 
     if (res.success === true) setUser(res.data);
-    else {
-      const alert = {
-        dispatch,
-        message: res.message,
-        type: "error",
-      };
-
-      Notification(alert);
-    }
-  } catch (error) {
+    else setUser(false);
+  } 
+  
+  catch (error) {
     const alert = {
       dispatch,
       message: Messages.USER_VIEW_ERROR,
@@ -160,7 +178,9 @@ export const Products = async (filters, products, setProducts, dispatch) => {
       };
 
       setProducts(next);
-    } else {
+    } 
+    
+    else {
       const alert = {
         dispatch,
         message: res.message,
@@ -169,7 +189,9 @@ export const Products = async (filters, products, setProducts, dispatch) => {
 
       Notification(alert);
     }
-  } catch (error) {
+  } 
+  
+  catch (error) {
     const alert = {
       dispatch,
       message: Messages.PRODUCTS_LIST_USER_ERROR,
@@ -179,3 +201,35 @@ export const Products = async (filters, products, setProducts, dispatch) => {
     Notification(alert);
   }
 };
+
+export const CheckIfExist = async (field, value, dispatch) => {
+  try {
+    const req = await Request("USERS/EXISTS", { field, value });
+    const res = await req.json();
+
+    if (res.success === true) {
+      const { data } = res;
+      return data;
+    }
+
+    else {
+      const alert = {
+        dispatch,
+        message: res.message,
+        type: "error",
+      };
+
+      Notification(alert);
+    }
+  }
+
+  catch (error){
+    const alert = {
+      dispatch,
+      message: "",
+      type: "error",
+    };
+
+    Notification(alert);
+  }
+}

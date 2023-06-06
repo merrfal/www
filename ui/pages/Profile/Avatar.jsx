@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { VerifiedBadge } from "../../icons";
-import { EditButton, Website } from "./";
-
+import { EditButton } from "./";
 import { NO_AVATAR } from "../../../configs/Constants";
+import { isStorageReadable } from "../../../utils/Firebase";
 
 export default function Avatar(props) {
   const { user, isEdit, setIsEdit, avatar, setAvatar } = props;
@@ -11,22 +11,21 @@ export default function Avatar(props) {
     if (user !== null) {
       let avtr = user?.userData?.avatar;
 
-      if (avtr !== undefined) {
-        if (avtr.isFirebase) {
+      if(avtr === NO_AVATAR) setAvatar(NO_AVATAR);
+
+      else {
+        let isFirebaseReadable = isStorageReadable(avtr);
+
+        if(isFirebaseReadable) {
           const file = `users/${avtr}`;
           const unextracted = ref(Storage, file);
 
           const url = getDownloadURL(unextracted);
-          setAvatar(url);
-        } 
-        
-        else {
-          if (avtr.url === "") setAvatar(NO_AVATAR);
-          else setAvatar(avtr.url);
+          setAvatar(url || NO_AVATAR);
         }
-      } 
-      
-      else setAvatar(NO_AVATAR);
+
+        else setAvatar(avtr);
+      }
     }
   }, [user]);
 
@@ -35,11 +34,8 @@ export default function Avatar(props) {
       <img
         src={avatar}
         alt="Profile Picture"
-        className={`h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32 z-10 ${
-          avatar === null
-            ? "scale-110 blur-2xl grayscale"
-            : "scale-100 blur-0 grayscale-0"
-        }`}
+        onError={() => setAvatar(NO_AVATAR)}
+        className={`h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32 z-10 ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
       />
       
       <div className="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
@@ -48,11 +44,11 @@ export default function Avatar(props) {
             {user?.userData?.name} {user?.userData?.surname}
             {user?.userAdditionalData?.isUserVerified && <VerifiedBadge className="ml-1" />}
           </h1>
+          
           <p className="text-gray-500">@{user?.userData?.username}</p>
         </div>
 
         <EditButton isEdit={isEdit} setIsEdit={setIsEdit} id={user?._id} />
-        {user?.userData?.website && <Website userData={userData} />}
       </div>
     </div>
   );
