@@ -9,6 +9,9 @@ import { onInput as Input } from "../../../utils/ProductManipulation"
 import { OpenConfirmation } from "../../../controllers/Slices";
 import { Translation } from "../../../utils/Translations";
 import { Permissonless } from "..";
+import { ref, deleteObject } from "firebase/storage";
+import { Storage } from "../../../configs/Firebase";
+import { Console } from "../../../utils/Console";
 
 import {
   Header,
@@ -25,6 +28,7 @@ import {
   Country,
   Given,
 } from ".";
+
 
 export default function EditProduct() {
   const account = useSelector((state) => state.Account);
@@ -46,19 +50,29 @@ export default function EditProduct() {
     event
   );
 
-  const onDeleteSuccess = () => {
+  const onDeleteSuccess = (gallery) => {
     const username = account?.User?.userData?.username;
+
+    gallery.map(async (image) => {
+      try {
+        const currentIterationImage = ref(Storage, `products/${image.id}`);
+        await deleteObject(currentIterationImage);
+      }
+
+      catch(error) { Console(error, "error"); }
+    })
+
     if(username !== undefined) router.push(`/profili/${username}`);
     else router.push("/");
 
     setIsHold(false);
   }
 
-  const on = (name, slug) => {    
+  const on = (name, slug, gallery) => {    
     dispatch(OpenConfirmation({
-      Title: `${Translation("product-deletion-confirmation-title")} "${name}"?`,
+      Title: `${Translation("product-deletion-confirmation-title")} "${name?.length > 22 ? name?.substring(0, 22) + "..." : name}"?`,
       Message: Translation("product-deletion-confirmation-message"),
-      Action: () => Delete(slug, setIsHold, onDeleteSuccess, dispatch),
+      Action: () => Delete(slug, setIsHold, onDeleteSuccess, gallery, dispatch),
     }))
   }
 
@@ -81,7 +95,8 @@ export default function EditProduct() {
               if(router?.query?.fshije === "po") {
                 setTimeout(() => on(
                   data?.data?.productData?.name,
-                  slug
+                  slug,
+                  data?.data?.productData?.gallery
                 ), 100)
               }
             }

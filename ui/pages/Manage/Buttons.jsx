@@ -134,7 +134,8 @@ export default function Buttons(props) {
 
   const handleDelete = () => onUpdate(
     product?.productData?.name, 
-    product?.productData?.slug
+    product?.productData?.slug,
+    product?.productData?.gallery,
   )
 
   return (

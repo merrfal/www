@@ -8,7 +8,11 @@ export default function Gallery({ gallery, index, setIndex }) {
         {gallery.map((image, iteration) => (
           <div key={iteration} className="relative h-24 rounded-lg p-1 cursor-pointer" onClick={() => index !== iteration && setIndex(iteration)}>
             <span className={index === iteration ? active : inactive}>
-              <img src={image} className="w-full h-full object-center object-cover"/>
+              <img 
+                src={image} 
+                className="w-full h-full object-center object-cover"
+                loading="lazy"
+              />
             </span>
           </div>
         ))}

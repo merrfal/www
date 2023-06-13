@@ -76,7 +76,7 @@ export default function Products({ user, dispatch, account }) {
       >
         {products.products.map(
           (product, index) => <Fragment key={index}>
-            <Product product={product}/>
+            <Product product={product} allowManage={true} />
           </Fragment>
         )}
       </InfiniteScroll>

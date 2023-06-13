@@ -65,6 +65,7 @@ const Auth = ({ account }) => {
         className="ml-0 inline-flex w-full justify-center bg-white text-sm font-medium text-gray-700 hover:opacity-[.85] transition-all"
       >
         <img
+          loading="lazy"
           src={avatar || NO_AVATAR}
           onError={() => setAvatar(NO_AVATAR)}
           className={`w-9 md:w-8 rounded-full ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}

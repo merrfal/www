@@ -1,6 +1,6 @@
 import { Translation } from "../../../utils/Translations";
 import { RequiredLabel, Wildcard } from "../"
-import { Countries } from "../../../data/Locations";
+import { AllCountries } from "../../../data/Locations";
 import { CountryValidation } from "../../../utils/Forms";
 
 export default function Country({ user, onInput, validations}) {
@@ -27,7 +27,7 @@ export default function Country({ user, onInput, validations}) {
           </option>
         }
 
-        {Countries.map((country, index) => (
+        {AllCountries.map((country, index) => (
           <option key={index} value={country["iso_code"]}>
             {country?.name}
           </option>

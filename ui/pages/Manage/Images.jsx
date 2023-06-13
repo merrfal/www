@@ -60,7 +60,11 @@ export default function Images({
                       if (mode === "create")
                         return (
                           <div className="flex items-center relative border border-gray-200 rounded-md" key={index}>
-                            <img src={image.data_url} className="w-[265px] lg:h-[40vh] h-[20vh] object-cover max-w-full align-middle rounded-md"/>
+                            <img 
+                              src={image.data_url} 
+                              loading="lazy"
+                              className="w-[265px] lg:h-[40vh] h-[20vh] object-cover max-w-full align-middle rounded-md"
+                            />
 
                             <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
                               <p className="text-gray-700 text-[13px]">
@@ -79,7 +83,11 @@ export default function Images({
                       if (mode === "edit")
                         return (
                           <div key={index} className="flex items-center relative border border-gray-200 rounded-md">
-                            <img src={image.url} className="w-[265px] lg:h-[40vh] h-[20vh] object-cover max-w-full align-middle rounded-md"/>
+                            <img 
+                              src={image.url} 
+                              className="w-[265px] lg:h-[40vh] h-[20vh] object-cover max-w-full align-middle rounded-md"
+                              loading="lazy"
+                            />
                             
                             <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
                               <p className="text-gray-700 text-[13px]">

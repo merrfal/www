@@ -42,6 +42,7 @@ export default function Avatar({ user, setUser, validations }) {
             <img
               className="h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24"
               src={avatar}
+              loading="lazy"
               width="100"
             />
 

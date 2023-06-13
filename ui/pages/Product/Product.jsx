@@ -19,6 +19,7 @@ import {
   Thumbnail,
   Category,
   Views,
+  Edit,
 } from "./";
 
 export default function Product() {
@@ -49,7 +50,7 @@ export default function Product() {
 
   useEffect(() => {
     if (product !== null && product !== false) {
-      let thumb = product.productData.gallery;
+      let thumb = product?.productData?.gallery;
 
       Promise.all(thumb.map((image) => {
         const file = `products/${image.id}`;
@@ -86,19 +87,24 @@ export default function Product() {
                     setIndex={setIndex}
                   />
 
-                  <Thumbnail gallery={gallery}  index={index} />
+                  <Thumbnail 
+                    gallery={gallery} 
+                    index={index} 
+                    isGiven={product?.productData?.isGiven}
+                  />
                 </div>
 
                 <div className="mt-10 ml-3 px-4 sm:px-0 sm:mt-16 lg:mt-0">
                   <div className="flex items-center mb-8">
-                    <Category category={product.productData.category} />
+                    <Category category={product?.productData?.category} />
                     <div className="h-5 border-r border-gray-200 mx-4" />
                     <Views product={product} />
+                    <Edit slug={product?.productData?.slug} user={product?.productData?.user} />
                   </div>
                   
-                  <Info productData={product.productData} />
-                  <Poster productData={product.productData} />
-                  <Phone productData={product.productData} />
+                  <Info productData={product?.productData} />
+                  <Poster productData={product?.productData} />
+                  <Phone productData={product?.productData} />
                   <Steps />
                 </div>
               </div>
