@@ -1,6 +1,6 @@
 import { Translation } from "../../../utils/Translations";
 import { RequiredLabel, Wildcard } from "../";
-import { Countries } from "../../../data/Locations";
+import { AllCountries } from "../../../data/Locations";
 import { CityValidation } from "../../../utils/Forms";
 
 export default function City({ user, onInput, validations }) {
@@ -30,7 +30,7 @@ export default function City({ user, onInput, validations }) {
           </option>
         }
 
-        {Countries.find((country) => country["iso_code"] === user?.userAdditionalData?.country)
+        {AllCountries.find((country) => country["iso_code"] === user?.userAdditionalData?.country)
           ?.cities?.map((city, index) => (
             <option key={index} value={city?.value}>
               {city?.name}

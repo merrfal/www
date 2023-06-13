@@ -53,6 +53,7 @@ export default function Poster({ productData }) {
             onError={() => setAvatar(NO_AVATAR)}
             src={productData?.postedAnonymously ? NO_AVATAR : avatar}
             className="w-10 h-10 rounded-full mr-4"
+            loading="lazy"
           />
               
             <div className="w-full">

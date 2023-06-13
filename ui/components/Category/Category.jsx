@@ -11,6 +11,7 @@ export default function Category({ category, kategori }) {
           <img
             src={icon === "" ? NO_CATEGORY : icon}
             alt={name + "s image"}
+            loading="lazy"
             className={`
               w-full h-full object-center object-cover duration-700 ease-in-out group-hover:opacity-75 rounded-xl
               ${!icon

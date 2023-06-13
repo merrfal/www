@@ -10,6 +10,7 @@ import Category from "./Category";
 import IsGiven from "./IsGiven";
 import Views from "./Views";
 import SimilarSkeleton from "./SimilarSkeleton";
+import Edit from "./Edit";
 
 export {
   Info,
@@ -23,6 +24,7 @@ export {
   Views,
   SimilarSkeleton,
   IsGiven,
+  Edit,
 };
 
 export default Product;

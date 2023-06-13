@@ -16,11 +16,11 @@ export default function Product(props) {
     <div className="group relative">
       {
         allowManage && 
-        <ManageBox 
-          account={account} 
-          user={productData?.user} 
-          slug={productData?.slug} 
-        />
+          <ManageBox 
+            account={account} 
+            user={productData?.user} 
+            slug={productData?.slug} 
+          />
       }
 
       <Link href={`/${productData?.slug}`}>

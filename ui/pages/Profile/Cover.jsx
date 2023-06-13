@@ -28,6 +28,7 @@ export default function Cover({ cover, setCover, user }) {
   return (
     <img
       src={cover}
+      loading="lazy"
       onError={() => setCover(NO_COVER)}
       className={`h-68 w-full object-cover max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:h-80 lg:h-84 ${cover === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
     />

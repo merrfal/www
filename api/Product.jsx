@@ -47,7 +47,7 @@ export const Create = async (page, router, setIsHold, dispatch) => {
   }
 };
 
-export const Delete = async (slug, setIsHold, onDeleteSuccess, dispatch) => {
+export const Delete = async (slug, setIsHold, onDeleteSuccess, gallery, dispatch) => {
   try {
     setIsHold(true);
 
@@ -63,7 +63,7 @@ export const Delete = async (slug, setIsHold, onDeleteSuccess, dispatch) => {
 
       Notification(alert);
 
-      onDeleteSuccess();
+      onDeleteSuccess(gallery);
     }
 
     else {

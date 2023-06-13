@@ -34,6 +34,7 @@ export default function Avatar(props) {
       <img
         src={avatar}
         alt="Profile Picture"
+        loading="lazy"
         onError={() => setAvatar(NO_AVATAR)}
         className={`h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32 z-10 ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
       />
