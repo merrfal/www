@@ -44,10 +44,11 @@ export default function ProductPost() {
   useEffect(() => {
     if(!account.Loading){
       if(account.Auth){ 
-          const { userAdditionalData, userData } = account?.User;
-          const { phone } = userData;
-          const { city, address, country } = userAdditionalData;
-    
+        const { userAdditionalData, userData } = account?.User;
+        const { phone } = userData;
+        const { city, address, country } = userAdditionalData;
+
+        if(allowedCountries.includes(country)){
           setProduct({
             ...product,
             productData: {
@@ -58,6 +59,7 @@ export default function ProductPost() {
               country: country !== "" ? country : "",
             }
           })
+        }
       }
 
       setLoading(false);
@@ -70,8 +72,7 @@ export default function ProductPost() {
 
   return (
     <Normal>
-      {loading || account.Loading && <Loading />}
-
+      {loading || account.Loading ? <Loading /> : null}
 
       {!loading && !account.Loading && account.Auth && <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16">

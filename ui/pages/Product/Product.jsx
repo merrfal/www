@@ -73,7 +73,7 @@ export default function Product() {
         thumbnail={product?.productData?.gallery[0].url}
       />
 
-      {product === null && <Loading />}
+      {product === null ? <Loading /> : null}
 
       {product !== null && (
         <div className="bg-white">

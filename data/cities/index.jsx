@@ -92,7 +92,6 @@ import GN_Cities from "./GN_Cities";
 import GW_Cities from "./GW_Cities";
 import GY_Cities from "./GY_Cities";
 import HT_Cities from "./HT_Cities";
-import HM_Cities from "./HM_Cities";
 import VA_Cities from "./VA_Cities";
 import HN_Cities from "./HN_Cities";
 import HK_Cities from "./HK_Cities";
@@ -228,7 +227,6 @@ import UA_Cities from "./UA_Cities";
 import AE_Cities from "./AE_Cities";
 import GB_Cities from "./GB_Cities";
 import US_Cities from "./US_Cities";
-import UM_Cities from "./UM_Cities";
 import UY_Cities from "./UY_Cities";
 import UZ_Cities from "./UZ_Cities";
 import VU_Cities from "./VU_Cities";
@@ -337,7 +335,6 @@ export {
     GW_Cities,
     GY_Cities,
     HT_Cities,
-    HM_Cities,
     VA_Cities,
     HN_Cities,
     HK_Cities,
@@ -473,7 +470,6 @@ export {
     AE_Cities,
     GB_Cities,
     US_Cities,
-    UM_Cities,
     UY_Cities,
     UZ_Cities,
     VU_Cities,

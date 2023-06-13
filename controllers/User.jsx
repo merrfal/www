@@ -3,38 +3,37 @@ import * as Messages from "../configs/Messages";
 import { User, Product } from "../configs/Models";
 import { Response } from "../utils/Response";
 import { ConnectionLocation } from "../utils/Connection";
-import { allowedCountries } from "../utils/Locations";
-import { Countries } from "../data/Locations";
+import { AllCountries} from "../data/Locations";
 
 export const Register = async (payload, res) => {
   try {
     let locationRes = await ConnectionLocation();
-    let isLocal = false;
-  
-    if(locationRes.success === true){
-      const geoData = locationRes?.data;
-      if(allowedCountries.includes(geoData?.country)) isLocal = geoData;
-    }
-
+    
     const data = { 
       userData: {...payload?.userData},
       userAdditionalData: {
-        country: 'GLOBAL',
+        country: '',
         city: '',
       }
     };
 
-    if(isLocal) {
-      const foundCountry = Countries.find((country) => country.iso_code === isLocal.country);
+    if(locationRes?.success === true){
+      const geoData = locationRes?.data;
+      const countryExists = AllCountries.find((country) => country.iso_code === geoData?.country);
 
-      if (foundCountry) {
-        data.userAdditionalData.country = foundCountry.iso_code;
+      if(countryExists) {
+        data.userAdditionalData.country = countryExists.iso_code;
+        let foundCity = false;
 
-        foundCountry.cities.forEach((city) => {
-          if (city.value.toLocaleLowerCase() === isLocal.city.toLocaleLowerCase()) {
-            data.userAdditionalData.city = city.name.toLocaleLowerCase();
-          }
-        });
+        const cityExists = AllCountries.map((country) => {
+          country.cities.find((city) => {
+            if(city.value === geoData?.city.toLocaleLowerCase()){
+              foundCity = city;
+            }
+          })
+        })
+
+        if(cityExists) data.userAdditionalData.city = foundCity.value;
       }
     }
 
@@ -53,6 +52,8 @@ export const Register = async (payload, res) => {
   } 
   
   catch (error) {
+    console.log(error);
+
     const response = {
       res,
       code: 500,

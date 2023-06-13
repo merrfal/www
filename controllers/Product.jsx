@@ -96,13 +96,13 @@ export const Delete = async (payload, res) => {
 };
 
 export const Category  = async (payload, res) => {
-  let locationRes = await ConnectionLocation();
-  let isLocal = false;
+  // let locationRes = await ConnectionLocation();
+  // let isLocal = false;
 
-  if(locationRes.success === true){
-    const country = locationRes?.data?.country;
-    if(allowedCountries.includes(country)) isLocal = country;
-  }
+  // if(locationRes.success === true){
+  //   const country = locationRes?.data?.country;
+  //   if(allowedCountries.includes(country)) isLocal = country;
+  // }
 
   let { offset, limit, cities, statuses, sort } = payload;
 
@@ -154,13 +154,13 @@ export const Category  = async (payload, res) => {
 }
 
 export const Search  = async (payload, res) => {
-  let locationRes = await ConnectionLocation();
-  let isLocal = false;
+  // let locationRes = await ConnectionLocation();
+  // let isLocal = false;
 
-  if(locationRes.success === true){
-    const country = locationRes?.data?.country;
-    if(allowedCountries.includes(country)) isLocal = country;
-  }
+  // if(locationRes.success === true){
+  //   const country = locationRes?.data?.country;
+  //   if(allowedCountries.includes(country)) isLocal = country;
+  // }
 
   let { offset, limit, categories, cities, sort, term } = payload;
 
@@ -245,24 +245,33 @@ export const Search  = async (payload, res) => {
 }
 
 export const Latest = async (payload, res) => {
-  let locationRes = await ConnectionLocation();
-  let productsFindObject = { 'productData.isGiven': false };
-
-  if(locationRes.success === true){
-    const country = locationRes?.data?.country;
-
-    if(allowedCountries.includes(country)){
-      productsFindObject = { 
-        'productData.isGiven': false,
-        'productData.country': country
-      };
-    }
-  }
-
   try {
-    const products = await Product
+    let usingGeo = false;
+    let locationRes = await ConnectionLocation();
+    let productsFindObject = { 'productData.isGiven': false };
+
+    if(locationRes.success === true){
+      const country = locationRes?.data?.country;
+
+      usingGeo = true;
+      productsFindObject['productData.country'] = country;
+    }
+
+    let products = await Product
       .find(productsFindObject)
-      .sort({ createdAt: -1}).limit(16);
+      .sort({ createdAt: -1})
+      .limit(16);
+
+    if(usingGeo === false){
+      usingGeo = false; 
+
+      const newProductsFindObject = { 'productData.isGiven': false }
+
+      products = await Product
+        .find(newProductsFindObject)
+        .sort({ createdAt: -1})
+        .limit(16);
+    }
 
     const payload = {
       res,
@@ -362,26 +371,40 @@ export const View = async ({ slug }, res) => {
 };
 
 export const Similar = async ({ category }, res) => {
-  let locationRes = await ConnectionLocation();
-  let productsFindObject = { 'productData.category': category, 'productData.isGiven': false };
-
-  if(locationRes.success === true){
-    const country = locationRes?.data?.country;
-
-    if(allowedCountries.includes(country)){
-      productsFindObject = { 
-        'productData.category': category, 
-        'productData.isGiven': false,
-        'productData.country': country
-      };
-    }
-  }
-
   try {
-    const products = await Product
+    let usingGeo = false;
+    let locationRes = await ConnectionLocation();
+
+    let productsFindObject = { 
+      'productData.category': category, 
+      'productData.isGiven': false 
+    };
+
+    if(locationRes.success === true){
+      const country = locationRes?.data?.country;
+      
+      usingGeo = true;
+      productsFindObject['productData.country'] = country;
+    }
+
+    let products = await Product
       .find(productsFindObject)
       .sort({ createdAt: -1 })
       .limit(5);
+
+    if(products.length === 0 && usingGeo){
+      usingGeo = false;
+
+      const newProductsFindObject = {
+        'productData.category': category,
+        'productData.isGiven': false
+      }
+
+      products = await Product
+        .find(newProductsFindObject)
+        .sort({ createdAt: -1 })
+        .limit(5);
+    }
 
     const response = {
       res,
