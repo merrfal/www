@@ -75,7 +75,7 @@ export default function Category() {
         />
       }
 
-      {category === null && <Loading />}
+      {category === null ? <Loading /> : null}
 
       {
         category !== null && category !== false &&

@@ -30,7 +30,7 @@ export const DescriptionValidation = (value) => {
 
   const minLength = 28;
   const maxLength = 320;
-  const regex = /^[a-zA-Z0-9- ,.]{32,500}$/;
+  const regex = /^[a-zA-Z0-9\s_()&, -, .]+$/;
 
   if (!regex.test(value)) {
     validation.error = true;

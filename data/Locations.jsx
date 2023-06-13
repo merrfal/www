@@ -1,11 +1,5 @@
 import * as Cities from "./cities";
 
-Object.keys(Cities).forEach((key) => {
-    if(Cities[key].length === 0) {
-        console.log("No cities found for" + " " + key);
-    }
-})
-
 export const AllCountries = [
     { 
         name: "Albania", 
@@ -481,11 +475,6 @@ export const AllCountries = [
         name: "Haiti", 
         iso_code: "HT", 
         cities: Cities.HT_Cities
-    },
-    { 
-        name: "Heard Island and Mcdonald Islands", 
-        iso_code: "HM", 
-        cities: Cities.HM_Cities
     },
     { 
         name: "Holy See (Vatican City State)", 
@@ -1156,11 +1145,6 @@ export const AllCountries = [
         name: "United States", 
         iso_code: "US", 
         cities: Cities.US_Cities
-    },
-    { 
-        name: "United States Minor Outlying Islands", 
-        iso_code: "UM", 
-        cities: Cities.UM_Cities
     },
     { 
         name: "Uruguay", 

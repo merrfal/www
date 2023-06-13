@@ -21,7 +21,7 @@ export default function City({ user, onInput, validations }) {
         disabled={disableCity}
         className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#387DFF] focus:ring-[#387DFF] sm:text-sm"
         onChange={(event) => onInput("city", event, true, "userAdditionalData")}
-        style={user?.userAdditionalData?.city === "" ? {color: "#777"} : {}}
+        style={disableCity ? {color: "#777"} : {}}
       >
         { 
           user?.userAdditionalData?.city === "" &&  

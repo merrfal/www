@@ -5,6 +5,7 @@ import { RequiredLabel, Wildcard } from "../../components";
 
 export default function Cities({product, onInput, validation: v}) {
   const validation = CityValidation(product?.productData?.city);
+  const disableCity = product?.productData?.country === "";
 
   return (
     <div className="col-span-6 sm:col-span-3 lg:col-span-3">
@@ -17,8 +18,9 @@ export default function Cities({product, onInput, validation: v}) {
         value={product?.productData?.city}
         onChange={(e) => onInput("city", e)}
         id="city"
+        disabled={disableCity}
         className="p-3 mt-1 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm"
-        style={product?.productData?.city === "" ? {color: "#777"} : {}}
+        style={disableCity ? {color: "#777"} : {}}
       >
         { 
           product?.productData?.city === "" &&  
