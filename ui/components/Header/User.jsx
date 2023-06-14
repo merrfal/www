@@ -9,6 +9,7 @@ import { AddIcon } from "../../icons";
 import { Dropdown } from "./";
 import { NO_AVATAR } from "../../../configs/Constants";
 import { isStorageReadable } from "../../../utils/Firebase";
+import Loading from "../Loading";
 
 const Auth = ({ account }) => {
   const [menu, setOpen] = useState();
@@ -89,8 +90,9 @@ export default function User() {
 
   return (
     <>
+      {account.Loading && <Loading withContainer={false} width="52px" height="52px"  />}
       {account.Auth && <Auth account={account} />}
-      {!account.Auth && <NotAuth account={account} />}
+      {!account.Auth && !account.Loading && <NotAuth account={account} />}
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { KosovoCities } from "../../../data";
+import { AllCountries } from "../../../data";
 import { OpenIcon } from "../../icons";
 import { Translation } from "../../../utils/Translations";
 
@@ -34,7 +34,7 @@ export default function Cities({filters, setFilters}) {
       {isCategoryOpen && (
         <div className="origin-top-right max-h-[280px] overflow-scroll absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
           <form className="space-y-4">
-            {KosovoCities.map((city) => {
+            {/* {AllCountries.map((city) => {
               return (
                 <div key={city.value} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
                   <input
@@ -48,6 +48,25 @@ export default function Cities({filters, setFilters}) {
                   
                   <label htmlFor={city.value} className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                     {city.name}
+                  </label>
+                </div>
+              );
+            })} */}
+
+            {AllCountries.map((country) => {
+              return (
+                <div key={country.iso_code} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
+                  <input
+                    id={country.iso_code}
+                    value={country.iso_code}
+                    type="radio"
+                    checked={filters.cities.includes(country.name)}
+                    className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
+                    onClick={() => setFilters({...filters, cities: [...filters.countries, country.value]})}
+                  />
+                  
+                  <label htmlFor={country.iso_code} className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                    {country.name}
                   </label>
                 </div>
               );

@@ -3,8 +3,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { IS_PROD } from './Envs';
 
-// let debug, devTools = IS_PROD === "true";
-let debug, devTools = true;
+let debug, devTools = IS_PROD === "true" ? false : true;
 const combinedReducer = combineReducers({ Account, Notification, Confirmation });
 
 const masterReducer = (state, action) => combinedReducer(state, action);

@@ -67,7 +67,7 @@ const Desktop = ({router}) => {
 
           <Link href="/kategorite/">
             <a className={allPath.all && !allPath.others ? activePathClasses : inactivePathClasses}>
-              {`${Translation("all")} \u2192`}
+              {Translation("all")}
             </a>
           </Link>
       </div>
@@ -109,9 +109,9 @@ const Mobile = ({router}) => {
                 const path = usePath(router, category.slug);
 
                 return (
-                  <div key={index} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
+                  <div key={index} className="flex items-center hover:cursor-pointer hover:text-[#377DFF] transition-all">
                     <Link href={`/kategorite/${category.slug}`}>
-                      <span className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap" onClick={() => setIsCategoryOpen(!isCategoryOpen)}>
+                      <span className={path ? "hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-700 whitespace-nowrap" : "hover:cursor-pointer ml-3 pr-6 text-sm font-medium whitespace-nowrap text-[#377DFF] transition-all"} onClick={() => setIsCategoryOpen(!isCategoryOpen)}>
                         {category.name}
                       </span>
                     </Link>

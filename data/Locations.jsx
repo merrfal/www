@@ -12,7 +12,7 @@ export const AllCountries = [
         cities: Cities.XK_Cities
     },
     {
-        name: "Macedonia, The Former Yugoslav Republic of",
+        name: "Macedonia",
         iso_code: "MK",
         cities: Cities.MK_Cities
     },

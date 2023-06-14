@@ -1,5 +1,4 @@
 import * as Users from "../controllers/User";
-import * as Categories from "../controllers/Category";
 import * as Products from "../controllers/Product";
 
 import { DatabaseConnection } from "./Connection";
@@ -12,7 +11,6 @@ export const RouteMethod = (target, payload, res) => {
 
   if (schema === "USERS") RouteUsers(action, payload, res);
   if (schema === "PRODUCTS") RouteProducts(action, payload, res);
-  if (schema === "CATEGORIES") RouteCategories(action, payload, res);
 };
 
 const RouteUsers = (action, payload, res) => {
@@ -34,14 +32,7 @@ const RouteProducts = (action, payload, res) => {
     case "SIMILAR": Products.Similar(payload, res); break;
     case "LATEST": Products.Latest(payload, res); break;
     case "DELETE": Products.Delete(payload, res); break;
-    case "CATEGORY": Products.Category(payload, res); break;
     case "SEARCH": Products.Search(payload, res); break;
     case "UPDATE": Products.Update(payload, res); break;
-  }
-};
-
-const RouteCategories = (action, payload, res) => {
-  switch (action) {
-    case "LIST": Categories.List(payload, res); break;
   }
 };

@@ -6,7 +6,7 @@ import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
 
 export const Create = async (page, router, setIsHold, dispatch) => {
   try {
-    const req = await Request("PRODUCTS/CREATE", {productData: {...page}});
+    const req = await Request("PRODUCTS/CREATE", { productData: {...page} });
     const res = await req.json();
 
     if (res.success === true) {

@@ -1,5 +1,3 @@
-import * as Messages from "../../../configs/Messages";
-
 import { uploadBytesResumable, ref, getDownloadURL } from "firebase/storage";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
@@ -98,7 +96,7 @@ export default function Buttons(props) {
       catch (error) {
         const alert = {
           type: "error",
-          message: Messages.COULDNT_UPLOAD_TO_FIREBASE,
+          message: Translation("couldnt-upload-to-firebase"),
           dispatch,
         }
 

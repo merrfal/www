@@ -1,9 +1,11 @@
-export default function Loading(){
+export default function Loading(props){
+  const { withContainer = true, width = "62px", height = "62px" } = props;
+
     const lottie = {
       src: "/json/LottieLoading.json",
       background: "transparent",
       speed: "1",
-      style: {width: '62px', height: '62px'},
+      style: { width: width, height: height},
       loop: true,
       autoplay: true
     }
@@ -15,11 +17,14 @@ export default function Loading(){
       justifyContent: 'center',
       alignItems: 'center'
     }
-  
-    return (
+
+    if (withContainer) return (
       <main style={container}>
         <lottie-player {...lottie} />
       </main>
     );
-  
+
+    else return (
+      <lottie-player {...lottie} />
+    )
 }

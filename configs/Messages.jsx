@@ -42,7 +42,6 @@ export const USER_REGISTER_SUCCESS = "Ju u regjistruat me sukses. Ju mund të hy
 export const USER_REGISTER_ERROR = "Ndodhi një gabim gjatë regjistrimit të juaj. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.";
 export const USER_VIEW_SUCCES = "Përdoruesi u mor me sukses nga baza e të dhënave.";
 export const USER_VIEW_ERROR = "Ndodhi një gabim gjatë marrjes së përdoruesit nga baza e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.";
-export const COULDNT_UPLOAD_TO_FIREBASE = "Ndodhi një gabim gjatë ngarkimit të fotove. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.";
 export const SEARCH_TITLE_ALL = "Të Gjitha Produktet";
 export const SEARCH_TITLE_TERM = "Ju keni kërkuar për: ";
 export const SEARCH_TITLE_DESCRIPTION ="Kërko produktet e dhuruara nga përdoruesit e tjerë neë bazë të kategorisë, emrit, qytetit apo edhe përshkrimit të produktit që keni nevojë për.";
