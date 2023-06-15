@@ -15,5 +15,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 _static
+package-lock.json
 /_static
 .todos
+.env

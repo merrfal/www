@@ -4,9 +4,7 @@
   "scripts": {
     "dev": "next dev -p 1234",
     "build": "next build",
-    "start": "next start -p 1234",
-    "lint": "next lint",
-    "export": "npm run build && next export -o _static"
+    "start": "next start -p 1234"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
