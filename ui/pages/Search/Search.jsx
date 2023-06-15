@@ -6,7 +6,7 @@ import { Global } from "../../../configs/Head";
 import { useRouter } from "next/router";
 import { Header, Filters, Skeleton } from ".";
 import { Search as Searching } from "../../../api/Product";
-import { Empty, End,  Product } from "../../components";
+import { Empty, End, Product } from "../../components";
 import { useDispatch } from "react-redux";
 import { Translation } from "../../../utils/Translations";
 
@@ -28,7 +28,8 @@ export default function Search() {
   const [filters, setFilters] = useState({
     sort: { createdAt: 1 },
     categories: [],
-    cities: [],
+    countries: [],
+    cities: []
   });
 
   useEffect(() => {

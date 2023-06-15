@@ -1,4 +1,5 @@
-import { Sort, Categories, Cities } from ".";
+import { Categories } from ".";
+import { Locations, Sort } from "../../components";
 
 export default function Filters({filters, setFilters}) {
   return (
@@ -11,7 +12,7 @@ export default function Filters({filters, setFilters}) {
             <div className="flow-root">
               <div className="-mx-4 flex items-center divide-x divide-gray-200">
                 <Categories filters={filters} setFilters={setFilters} />
-                <Cities filters={filters} setFilters={setFilters} />
+                <Locations filters={filters} setFilters={setFilters} />
               </div>
             </div>
           </div>

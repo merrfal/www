@@ -200,10 +200,6 @@ const MK_Cities = [
     value: "sedlarevo",
   },
   {
-    name: "Saraj",
-    value: "saraj",
-  },
-  {
     name: "Samokov",
     value: "samokov",
   },
@@ -392,10 +388,6 @@ const MK_Cities = [
     value: "logovardi",
   },
   {
-    name: "Ljubin",
-    value: "ljubin",
-  },
-  {
     name: "Lisičani",
     value: "lisicani",
   },
@@ -428,10 +420,6 @@ const MK_Cities = [
     value: "kuklis",
   },
   {
-    name: "Krušopek",
-    value: "krusopek",
-  },
-  {
     name: "Krusevo",
     value: "krusevo",
   },
@@ -454,10 +442,6 @@ const MK_Cities = [
   {
     name: "Kosel",
     value: "kosel",
-  },
-  {
-    name: "Kondovo",
-    value: "kondovo",
   },
   {
     name: "Konče",
@@ -496,10 +480,6 @@ const MK_Cities = [
     value: "kadino",
   },
   {
-    name: "Јурумлери",
-    value: "",
-  },
-  {
     name: "Jegunovce",
     value: "jegunovce",
   },
@@ -520,20 +500,12 @@ const MK_Cities = [
     value: "ilovica",
   },
   {
-    name: "Идризово",
-    value: "",
-  },
-  {
     name: "Gurgurnica",
     value: "gurgurnica",
   },
   {
     name: "Grnčari",
     value: "grncari",
-  },
-  {
-    name: "Grčec",
-    value: "grcec",
   },
   {
     name: "Gradsko",
@@ -592,10 +564,6 @@ const MK_Cities = [
     value: "dracevo",
   },
   {
-    name: "Gjorče Petro",
-    value: "gjorce-petro",
-  },
-  {
     name: "Dolno Palčište",
     value: "dolno-palciste",
   },
@@ -648,10 +616,6 @@ const MK_Cities = [
     value: "debar",
   },
   {
-    name: "Чучер - Сандево",
-    value: "---",
-  },
-  {
     name: "Crnilište",
     value: "crniliste",
   },
@@ -666,10 +630,6 @@ const MK_Cities = [
   {
     name: "Čelopek",
     value: "celopek",
-  },
-  {
-    name: "Cegrane",
-    value: "cegrane",
   },
   {
     name: "Čaška",
@@ -696,16 +656,8 @@ const MK_Cities = [
     value: "brvenica",
   },
   {
-    name: "Makedonski Brod",
-    value: "makedonski-brod",
-  },
-  {
     name: "Bosilovo",
     value: "bosilovo",
-  },
-  {
-    name: "Bojane",
-    value: "bojane",
   },
   {
     name: "Bogovinje",
@@ -752,10 +704,6 @@ const MK_Cities = [
     value: "batinci",
   },
   {
-    name: "Арачиново",
-    value: "",
-  },
-  {
     name: "Poroj",
     value: "poroj",
   },
@@ -774,14 +722,6 @@ const MK_Cities = [
   {
     name: "Šuto Orizare",
     value: "suto-orizare",
-  },
-  {
-    name: "Butel",
-    value: "butel",
-  },
-  {
-    name: "Čair",
-    value: "cair",
   },
   {
     name: "Ilinden",

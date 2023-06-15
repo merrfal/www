@@ -20,10 +20,6 @@ const AL_Cities = [
     value: "livadhja",
   },
   {
-    name: "Konispol",
-    value: "konispol",
-  },
-  {
     name: "Kakavijë",
     value: "kakavije",
   },
@@ -60,18 +56,6 @@ const AL_Cities = [
     value: "zapod",
   },
   {
-    name: "Zall-Reç",
-    value: "zall-rec",
-  },
-  {
-    name: "Zall-Dardhë",
-    value: "zall-dardhe",
-  },
-  {
-    name: "Xibër-Murrizë",
-    value: "xiber-murrize",
-  },
-  {
     name: "Vreshtas",
     value: "vreshtas",
   },
@@ -100,10 +84,6 @@ const AL_Cities = [
     value: "vergo",
   },
   {
-    name: "Vendresha e Vogël",
-    value: "vendresha-e-vogel",
-  },
-  {
     name: "Velçan",
     value: "velcan",
   },
@@ -122,10 +102,6 @@ const AL_Cities = [
   {
     name: "Tregan",
     value: "tregan",
-  },
-  {
-    name: "Trebisht-Muçinë",
-    value: "trebisht-mucine",
   },
   {
     name: "Trebinjë",
@@ -262,10 +238,6 @@ const AL_Cities = [
   {
     name: "Poroçan",
     value: "porocan",
-  },
-  {
-    name: "Polis-Gostimë",
-    value: "polis-gostime",
   },
   {
     name: "Poliçan",
@@ -440,10 +412,6 @@ const AL_Cities = [
     value: "kukes",
   },
   {
-    name: "Kthella e Epërme",
-    value: "kthella-e-eperme",
-  },
-  {
     name: "Krumë",
     value: "krume",
   },
@@ -508,10 +476,6 @@ const AL_Cities = [
     value: "golaj",
   },
   {
-    name: "Gjorica e Sipërme",
-    value: "gjorica-e-siperme",
-  },
-  {
     name: "Gjirokastër",
     value: "gjirokaster",
   },
@@ -530,14 +494,6 @@ const AL_Cities = [
   {
     name: "Gjegjan",
     value: "gjegjan",
-  },
-  {
-    name: "Fushë-Muhurr",
-    value: "fushe-muhurr",
-  },
-  {
-    name: "Fushë-Lurë",
-    value: "fushe-lure",
   },
   {
     name: "Fushë-Çidhnë",
@@ -676,10 +632,6 @@ const AL_Cities = [
     value: "bytyc",
   },
   {
-    name: "Librazhd-Qendër",
-    value: "librazhd-qender",
-  },
-  {
     name: "Funarë",
     value: "funare",
   },
@@ -710,14 +662,6 @@ const AL_Cities = [
   {
     name: "Zejmen",
     value: "zejmen",
-  },
-  {
-    name: "Zall-Herr",
-    value: "zall-herr",
-  },
-  {
-    name: "Zall-Bastar",
-    value: "zall-bastar",
   },
   {
     name: "Xhafzotaj",
@@ -756,10 +700,6 @@ const AL_Cities = [
     value: "uznove",
   },
   {
-    name: "Ura Vajgurore",
-    value: "ura-vajgurore",
-  },
-  {
     name: "Ungrej",
     value: "ungrej",
   },
@@ -782,10 +722,6 @@ const AL_Cities = [
   {
     name: "Tërbuf",
     value: "terbuf",
-  },
-  {
-    name: "Tapi",
-    value: "tapi",
   },
   {
     name: "Synej",
@@ -836,10 +772,6 @@ const AL_Cities = [
     value: "shales",
   },
   {
-    name: "Nicaj-Shalë",
-    value: "nicaj-shale",
-  },
-  {
     name: "Sevaster",
     value: "sevaster",
   },
@@ -878,10 +810,6 @@ const AL_Cities = [
   {
     name: "Rrashbull",
     value: "rrashbull",
-  },
-  {
-    name: "Rrasa e Sipërme",
-    value: "rrasa-e-siperme",
   },
   {
     name: "Rrapë",
@@ -946,14 +874,6 @@ const AL_Cities = [
   {
     name: "Peqin",
     value: "peqin",
-  },
-  {
-    name: "Patos Fshat",
-    value: "patos-fshat",
-  },
-  {
-    name: "Patos",
-    value: "patos",
   },
   {
     name: "Paskuqan",
@@ -1028,10 +948,6 @@ const AL_Cities = [
     value: "magjate",
   },
   {
-    name: "Luzi i Vogël",
-    value: "luzi-i-vogel",
-  },
-  {
     name: "Lushnjë",
     value: "lushnje",
   },
@@ -1096,10 +1012,6 @@ const AL_Cities = [
     value: "kryevidh",
   },
   {
-    name: "Krutja e Poshtme",
-    value: "krutja-e-poshtme",
-  },
-  {
     name: "Krujë",
     value: "kruje",
   },
@@ -1140,10 +1052,6 @@ const AL_Cities = [
     value: "kavaje",
   },
   {
-    name: "Katundi i Ri",
-    value: "katundi-i-ri",
-  },
-  {
     name: "Kastrat",
     value: "kastrat",
   },
@@ -1156,16 +1064,8 @@ const AL_Cities = [
     value: "karine",
   },
   {
-    name: "Karbunara e Vogël",
-    value: "karbunara-e-vogel",
-  },
-  {
     name: "Kamëz",
     value: "kamez",
-  },
-  {
-    name: "Kallmeti i Madh",
-    value: "kallmeti-i-madh",
   },
   {
     name: "Kallmet",
@@ -1218,14 +1118,6 @@ const AL_Cities = [
   {
     name: "Hajmel",
     value: "hajmel",
-  },
-  {
-    name: "Gurra e Vogël",
-    value: "gurra-e-vogel",
-  },
-  {
-    name: "Guri i Zi",
-    value: "guri-i-zi",
   },
   {
     name: "Gruemirë",
@@ -1292,10 +1184,6 @@ const AL_Cities = [
     value: "fratar",
   },
   {
-    name: "Frakulla e Madhe",
-    value: "frakulla-e-madhe",
-  },
-  {
     name: "Fier-Shegan",
     value: "fier-shegan",
   },
@@ -1343,18 +1231,7 @@ const AL_Cities = [
     name: "Dërmënas",
     value: "dermenas",
   },
-  {
-    name: "Vau i Dejës",
-    value: "vau-i-dejes",
-  },
-  {
-    name: "Dajt",
-    value: "dajt",
-  },
-  {
-    name: "Dajç",
-    value: "dajc",
-  },
+
   {
     name: "Dajç",
     value: "dajc",
@@ -1400,10 +1277,6 @@ const AL_Cities = [
     value: "berxull",
   },
   {
-    name: "Bërdica e Madhe",
-    value: "berdica-e-madhe",
-  },
-  {
     name: "Berat",
     value: "berat",
   },
@@ -1446,10 +1319,6 @@ const AL_Cities = [
   {
     name: "Golem",
     value: "golem",
-  },
-  {
-    name: "Balldreni i Ri",
-    value: "balldreni-i-ri",
   },
   {
     name: "Grudë-Fushë",

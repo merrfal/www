@@ -23,6 +23,7 @@ export default function Category() {
   const [filters, setFilters] = useState({
     sort: { createdAt: 1 },
     cities: [],
+    countries: [],
     statuses: [false],
   });
 

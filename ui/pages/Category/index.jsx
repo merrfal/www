@@ -1,10 +1,8 @@
 import Category from "./Category";
 import Header from "./Header";
 import Filters from "./Filters";
-import Sort from "./Sort";
 import Statuses from "./Statuses";
-import Cities from "./Cities";
 import Skeleton from "./Skeleton";
 
-export { Header, Filters, Sort, Statuses, Cities, Skeleton };
+export { Header, Filters, Statuses, Skeleton };
 export default Category;

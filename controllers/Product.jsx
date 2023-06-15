@@ -95,14 +95,6 @@ export const Delete = async (payload, res) => {
 };
 
 export const Category  = async (payload, res) => {
-  // let locationRes = await ConnectionLocation();
-  // let isLocal = false;
-
-  // if(locationRes.success === true){
-  //   const country = locationRes?.data?.country;
-  //   if(allowedCountries.includes(country)) isLocal = country;
-  // }
-
   let { offset, limit, cities, statuses, sort } = payload;
 
   offset = parseInt(offset);
@@ -153,14 +145,6 @@ export const Category  = async (payload, res) => {
 }
 
 export const Search  = async (payload, res) => {
-  // let locationRes = await ConnectionLocation();
-  // let isLocal = false;
-
-  // if(locationRes.success === true){
-  //   const country = locationRes?.data?.country;
-  //   if(allowedCountries.includes(country)) isLocal = country;
-  // }
-
   let { offset, limit, categories, cities, sort, term } = payload;
 
   offset = parseInt(offset);
@@ -261,7 +245,7 @@ export const Latest = async (payload, res) => {
       .sort({ createdAt: -1})
       .limit(16);
 
-    if(usingGeo === false){
+    if(products.length === 0 && usingGeo){
       usingGeo = false; 
 
       const newProductsFindObject = { 'productData.isGiven': false }

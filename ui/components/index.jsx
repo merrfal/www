@@ -22,6 +22,8 @@ import RequiredLabel from "./RequiredLabel";
 import Tooltip from "./Tooltip";
 import Alert from "./Alert";
 import RealTimeValidation from "./RealTimeValidation";
+import Locations from "./Locations";
+import Sort from "./Sort";
 
 export {
   Header,
@@ -48,4 +50,6 @@ export {
   Tooltip,
   Alert,
   RealTimeValidation,
+  Locations,
+  Sort
 };

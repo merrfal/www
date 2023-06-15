@@ -170,5 +170,6 @@
   "you-have-come-to-end": "Ju keni arritur ne fund.",
   "category-products-description-empty": "Nga filtrimet apo në këtë sektor nuk gjetem asnjë produkt që të përputhet me kërkesën tuaj.",
   "edit-product": "Përditëso Produktin",
-  "couldnt-upload-to-firebase": "Ndodhi një gabim gjatë ngarkimit të fotove. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë."
+  "couldnt-upload-to-firebase": "Ndodhi një gabim gjatë ngarkimit të fotove. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.",
+  "location": "Vendndodhja"
 }

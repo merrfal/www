@@ -65,7 +65,7 @@ const XK_Cities = [
     },
     { 
         name: "Kaçanik", 
-        value: "Kaçanik" 
+        value: "kacanik" 
     },
     { 
         name: "Klinë", 
