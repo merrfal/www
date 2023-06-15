@@ -9,8 +9,12 @@ import { Translation } from "../../../utils/Translations";
 
 import {
   AddressValidation,
+  CategoryValidation,
+  CityValidation,
+  CountryValidation,
   DescriptionValidation,
   ImagesValidation,
+  ModeValidation,
   NameValidation,
   PhoneValidation,
   SlugBuilder,
@@ -48,13 +52,21 @@ export default function Buttons(props) {
     const description = DescriptionValidation(product.productData.description);
     const address = AddressValidation(product.productData.address);
     const phone = PhoneValidation(product.productData.phone);
+    const city = CityValidation(product.productData.city);
+    const category = CategoryValidation(product.productData.category);
+    const country = CountryValidation(product.productData.country);
     const images = ImagesValidation(product.productData.gallery);
+    const mode = ModeValidation(product.productData.postedAnonymously);
 
     if (name.error) validations = false;
     if (description.error) validations = false;
     if (address.error) validations = false;
     if (phone.error) validations = false;
     if (images.error) validations = false;
+    if (city.error) validations = false;
+    if (category.error) validations = false;
+    if (country.error) validations = false;
+    if (mode.error) validations = false;
 
     return validations;
   };

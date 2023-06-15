@@ -7,11 +7,6 @@ export const NameValidation = (value) => {
   const maxLength = 80;
   const regex = /^[a-zA-Z0-9]+(?:[ ]?[a-zA-Z0-9]+)*$/;
 
-  if (!regex.test(value)) {
-    validation.error = true;
-    validation.message = Translation("product-name-regex-validations");
-  }
-
   if (value.length < minLength) {
     validation.error = true;
     validation.message = `${Translation("name-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
@@ -22,6 +17,11 @@ export const NameValidation = (value) => {
     validation.message = `${Translation("name-can-have-less-than")} ${maxLength} ${Translation("characters")}`;
   }
 
+  if (!regex.test(value)) {
+    validation.error = true;
+    validation.message = Translation("product-name-regex-validations");
+  }
+
   return validation;
 };
 
@@ -30,12 +30,7 @@ export const DescriptionValidation = (value) => {
 
   const minLength = 28;
   const maxLength = 320;
-  const regex = /^[a-zA-Z0-9\s_()&, -, .]+$/;
-
-  if (!regex.test(value)) {
-    validation.error = true;
-    validation.message = Translation("product-description-regex-validations");
-  }
+  const regex = /^[a-zA-Z0-9\s_()&, .-]+$/;
 
   if (value.length < minLength) {
     validation.error = true;
@@ -45,6 +40,11 @@ export const DescriptionValidation = (value) => {
   if (value.length > maxLength) {
     validation.error = true;
     validation.message = `${Translation("description-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
+  }
+
+  if (!regex.test(value)) {
+    validation.error = true;
+    validation.message = Translation("product-description-regex-validations");
   }
 
   return validation;
@@ -68,12 +68,7 @@ export const AddressValidation = (value) => {
 
   const minLength = 10;
   const maxLength = 40;
-  const regex = /^[a-zA-Z0-9\s,'-]*$/;
-
-  if (!regex.test(value)) {
-    validation.error = true;
-    validation.message = Translation("address-regex-validations");
-  }
+  const regex = /^[a-zA-Z0-9\s,'.-]*$/;
 
   if (value.length < minLength) {
     validation.error = true;
@@ -83,6 +78,11 @@ export const AddressValidation = (value) => {
   if (value.length > maxLength) {
     validation.error = true;
     validation.message = `${Translation("address-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
+  }
+
+  if (!regex.test(value)) {
+    validation.error = true;
+    validation.message = Translation("address-regex-validations");
   }
 
   return validation;

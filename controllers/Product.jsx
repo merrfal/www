@@ -3,7 +3,6 @@ import * as Messages from "../configs/Messages";
 import { Product, User, Category as CategoryModel } from "../configs/Models";
 import { ConnectionLocation } from "../utils/Connection";
 import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
-import { allowedCountries } from "../utils/Locations";
 import { Response } from "../utils/Response";
 
 export const Create = async (payload, res) => {

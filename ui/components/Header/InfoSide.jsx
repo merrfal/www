@@ -10,7 +10,7 @@ import { useRef } from "react";
 import { Translation } from "../../../utils/Translations";
 import { usePath } from "../../../hooks";
 
-const categories = structuredClone(Categories);
+const categories = JSON.parse(JSON.stringify(Categories));
 const activePathClasses = "flex items-center text-sm font-medium text-[#377DFF] transition-all";
 const inactivePathClasses = "flex items-center text-sm font-medium text-gray-700 hover:text-[#377DFF] transition-all";
 
