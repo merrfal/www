@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { UsernameValidation } from "../../../utils/Forms";
 import { Translation } from "../../../utils/Translations";
 import { Wildcard, RequiredLabel, RealTimeValidation } from "../";
@@ -44,4 +46,13 @@ export default function Username({ user, validations, setValidations, onInput, d
       {validations?.username && validation?.error ? <RequiredLabel message={validation?.message} /> : !newUsernameIsAvailable && <RealTimeValidation message={Translation("username-is-in-use")} />}
     </div>
   );
+}
+
+Username.propTypes = {
+  user: PropTypes.object.isRequired,
+  validations: PropTypes.object.isRequired,
+  setValidations: PropTypes.func.isRequired,
+  onInput: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  account: PropTypes.object.isRequired
 }

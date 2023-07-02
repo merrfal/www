@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { Statuses } from "./";
 import { Locations, Sort } from "../../components";
 
@@ -20,4 +22,10 @@ export default function Filters({ filters, setFilters }) {
       </div>
     </section>
   );
+}
+
+
+Filters.propTypes = {
+  filters: PropTypes.object.isRequired,
+  setFilters: PropTypes.func.isRequired,
 }

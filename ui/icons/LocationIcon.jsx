@@ -1,4 +1,6 @@
-export default function LocationIcon(props) {
+import { string } from "prop-types";
+
+export default function LocationIcon({ className }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +8,7 @@ export default function LocationIcon(props) {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className={props.className ? props.className : "mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"}
+      className={className ? className : "mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"}
     >
       <path
         strokeLinecap="round"
@@ -21,3 +23,7 @@ export default function LocationIcon(props) {
     </svg>
   );
 }
+
+LocationIcon.propTypes = {
+  className: string,
+};

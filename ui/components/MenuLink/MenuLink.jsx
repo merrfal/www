@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { string } from "prop-types";
 import { useRouter } from "next/router";
 import { usePath } from "../../../hooks";
 
@@ -17,4 +18,10 @@ export default function MenuLink({ name, link, username }) {
       </a>
     </Link>
   );
+}
+
+MenuLink.propTypes = {
+  name: string.isRequired,
+  link: string.isRequired,
+  username: string.isRequired,
 }

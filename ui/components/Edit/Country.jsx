@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { Translation } from "../../../utils/Translations";
 import { RequiredLabel, Wildcard } from "../"
 import { AllCountries } from "../../../data/Locations";
@@ -37,4 +39,10 @@ export default function Country({ user, onInput, validations}) {
       {validations.country && validation.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
+}
+
+Country.propTypes = {
+  user: PropTypes.object.isRequired,
+  onInput: PropTypes.func.isRequired,
+  validations: PropTypes.object.isRequired
 }

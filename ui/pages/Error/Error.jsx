@@ -1,3 +1,4 @@
+import { string } from "prop-types";
 import { Normal } from "../../layouts";
 import { Animation, Link, Info } from "./";
 
@@ -17,4 +18,8 @@ export default function Error({ code }) {
       </div>
     </Normal>
   );
+}
+
+Error.propTypes = {
+  code: string.isRequired,
 }

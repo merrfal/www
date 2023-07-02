@@ -1,3 +1,5 @@
+import { string, bool } from "prop-types";
+
 export default function Loading(props){
   const { withContainer = true, width = "62px", height = "62px" } = props;
 
@@ -19,12 +21,18 @@ export default function Loading(props){
     }
 
     if (withContainer) return (
-      <main style={container}>
+      <section style={container}>
         <lottie-player {...lottie} />
-      </main>
+      </section>
     );
 
     else return (
       <lottie-player {...lottie} />
     )
+}
+
+Loading.propTypes = {
+  withContainer: bool.isRequired,
+  width: string.isRequired,
+  height: string.isRequired
 }

@@ -1,8 +1,10 @@
+import { bool, func, object, string } from "prop-types";
 import { useEffect } from "react";
 import { VerifiedBadge } from "../../icons";
 import { EditButton } from "./";
 import { NO_AVATAR } from "../../../configs/Constants";
 import { isStorageReadable } from "../../../utils/Firebase";
+import { getDownloadURL, ref } from "firebase/storage";
 
 export default function Avatar(props) {
   const { user, isEdit, setIsEdit, avatar, setAvatar } = props;
@@ -53,4 +55,12 @@ export default function Avatar(props) {
       </div>
     </div>
   );
+}
+
+Avatar.propTypes = {
+  user: object.isRequired,
+  isEdit: bool.isRequired,
+  setIsEdit: func.isRequired,
+  setAvatar: func.isRequired,
+  avatar: string.isRequired
 }

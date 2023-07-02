@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { useState, useRef, useEffect } from "react";
 import { Categories as AllCategories } from "../../../data";
 import { OpenIcon } from "../../icons";
@@ -57,4 +59,9 @@ export default function Categories({filters, setFilters}) {
       )}
     </div>
   );
+}
+
+Categories.propTypes = {
+  filters: PropTypes.object.isRequired,
+  setFilters: PropTypes.func.isRequired,
 }

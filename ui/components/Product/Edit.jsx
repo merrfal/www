@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import { string } from "prop-types";
 import { EditIcon } from "../../icons";
 
 export default function Edit({ slug }) {
@@ -9,4 +11,8 @@ export default function Edit({ slug }) {
       </a>
     </Link>
   );
+}
+
+Edit.propTypes = {
+  slug: string.isRequired,
 }

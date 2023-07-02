@@ -95,35 +95,35 @@ export const Delete = async (payload, res) => {
 };
 
 export const Category  = async (payload, res) => {
-  let { offset, limit, cities, statuses, sort } = payload;
+  let { offset, limit, cities, statuses, sort, category } = payload;
 
   offset = parseInt(offset);
   limit = parseInt(limit);
 
-  const filter = () =>{
-    const filters = {}
-    const calength = cities.length
-    const salength = statuses.length
-
-    if(calength === 0 && salength === 0) return {}
-    if(calength === 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statuses }}
-    if(calength !== 0 && salength === 0 ) return { 'productData.city': { $in: cities }}
-    if(calength !== 0 && salength !== 0 ) return { 'productData.isGiven': { $in: statuses }, 'productData.city': { $in: cities }}
-
-    if(isLocal !== false) filters['productData.country'] = isLocal;
-
-    return filters
+  const filters = {
+    'productData.isGiven': { $in: statuses },
+    'productData.city': { $in: cities },
+    'productData.category': category
   }
 
+  if(statuses.length === 0) delete filters['productData.isGiven'];
+  if(cities.length === 0) delete filters['productData.city'];
+
+  if(Object.prototype.hasOwnProperty.call(sort, "views")) {
+    sort = { 'productAdditionalData.views': sort.views }
+  }
+
+  else sort = { 'createdAt': sort.createdAt }
+
   try {
-    let products = await Product.find(filter()).sort(sort).skip(offset).limit(limit);
-    let countProducts = await Product.find(filter()).countDocuments();
+    let products = await Product.find(filters).sort(sort).skip(offset).limit(limit);
+    let countProducts = await Product.find(filters).countDocuments();
 
     const response = {
       res,
       code: products ? 200 : 404,
       success: products ? true : false,
-      data: products ? {products, hasMore: countProducts <= offset} : [],
+      data: products ? { products, hasMore: countProducts >= offset + limit } : [],
       message: products ? Messages.PRODUCTS_CATEGORY_SUCCESS : Messages.PRODUCTS_CATEGORY_ERROR,
     };
 
@@ -152,13 +152,13 @@ export const Search  = async (payload, res) => {
 
   // const filter = () =>{
   //   const filters = {}
-  //   const calength = categories.length;
+  //   const categories_length = categories.length;
   //   const cilength = cities.length;
 
-  //   if(calength === 0 && cilength === 0) return filters;
-  //   if(calength === 0 && cilength !== 0 ) filters['productData.city'] = { $in: cities }
-  //   if(calength !== 0 && cilength === 0 ) filters['productData.category'] = { $in: categories }
-  //   if(calength !== 0 && cilength !== 0 ) filters['productData.category'] = { $in: categories }, filters['productData.city'] = { $in: cities }
+  //   if(categories_length === 0 && cilength === 0) return filters;
+  //   if(categories_length === 0 && cilength !== 0 ) filters['productData.city'] = { $in: cities }
+  //   if(categories_length !== 0 && cilength === 0 ) filters['productData.category'] = { $in: categories }
+  //   if(categories_length !== 0 && cilength !== 0 ) filters['productData.category'] = { $in: categories }, filters['productData.city'] = { $in: cities }
 
   //   if(term === "") return filters;
   //   if(term !== "") return { 
@@ -193,7 +193,7 @@ export const Search  = async (payload, res) => {
       filters.$or = orFilters;
     }
 
-    if(isLocal !== false) filters['productData.country'] = isLocal;
+    // if(isLocal !== false) filters['productData.country'] = isLocal;
   
     return filters;
   };

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { string } from "prop-types";
 import { EditIcon } from "../../icons";
 import { useSelector } from "react-redux";
 import { Translation } from "../../../utils/Translations";
@@ -22,4 +23,9 @@ export default function Edit({ slug, user }) {
   );
 
   else return null;
+}
+
+Edit.propTypes = {
+  slug: string.isRequired,
+  user: string.isRequired,
 }

@@ -1,3 +1,4 @@
+import { string } from "prop-types";
 import { EmptyIcon } from "../../icons";
 
 export default function Empty(props) {
@@ -11,4 +12,9 @@ export default function Empty(props) {
       <p className="mt-2 text-gray-500">{message}</p>
     </div>
   );
+}
+
+Empty.propTypes = {
+  heading: string.isRequired,
+  message: string.isRequired,
 }

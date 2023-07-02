@@ -1,3 +1,4 @@
+import { func, object } from "prop-types";
 import { DescriptionValidation } from "../../../utils/Forms";
 import { Translation } from "../../../utils/Translations";
 import { RequiredLabel, Wildcard } from "../../components";
@@ -25,4 +26,10 @@ export default function Description({product, onInput, validation: v}) {
       {v.description && validation.error && <RequiredLabel message={validation.message} />}
     </div>
   );
+}
+
+Description.propTypes = {
+  product: object.isRequired,
+  onInput: func.isRequired,
+  validation: object.isRequired,
 }

@@ -13,7 +13,7 @@ export const isStorageReadable = (url) => {
     return isFromStorage;
 };
 
-export const UploadFileToFirebase = async (file, path) => {
+export const UploadFileToFirebase = async (file, path, dispatch) => {
     const id = crypto.randomUUID();
 
     const imageReference = ref(Storage, `${path}/${id}`);

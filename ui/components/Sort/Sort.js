@@ -1,3 +1,4 @@
+import { func, object } from "prop-types";
 import { useState, useRef, useEffect } from "react";
 import { OpenIcon } from "../../icons";
 import { Translation } from "../../../utils/Translations"
@@ -34,38 +35,55 @@ export default function Sort({filters, setFilters}) {
                 <div>
                     <p
                         style={filters.sort.createdAt === 1 ? { color: "#377DFF" } : {}}
-                        onClick={() => setFilters({...filters, sort: {createdAt: 1}})}
                         className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
-                    >
-                        {Translation("most-popular")}
-                    </p>
-
-                    <p
-                        style={filters.sort.createdAt === -1 ? { color: "#377DFF" } : {}}
-                        onClick={() => setFilters({...filters, sort: {createdAt: -1}})}
-                        className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
-                    >
-                        {Translation("most-unpopular")}
-                    </p>
-
-                    <p
-                        style={filters.sort.views === 1 ? { color: "#377DFF" } : {}}
-                        onClick={() => setFilters({...filters, sort: {views: 1}})}
-                        className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
+                        onClick={() => {
+                            if(filters.sort.createdAt === 1) open();
+                            else setFilters({...filters, sort: { createdAt: 1 }})
+                        }}
                     >
                         {Translation("newest")}
                     </p>
 
                     <p
-                        style={filters.sort.views === -1 ? { color: "#377DFF" } : {}}
-                        onClick={() => setFilters({...filters, sort: {views: -1}})}
+                        style={filters.sort.createdAt === -1 ? { color: "#377DFF" } : {}}
                         className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
+                        onClick={() => {
+                            if(filters.sort.createdAt === -1) open();
+                            else setFilters({...filters, sort: { createdAt: -1 }})
+                        }}
                     >
                         {Translation("oldest")}
+                    </p>
+
+                    <p
+                        style={filters.sort.views === 1 ? { color: "#377DFF" } : {}}
+                        className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
+                        onClick={() => {
+                            if(filters.sort.views === 1) open();
+                            else setFilters({...filters, sort: { views: 1 }})
+                        }}
+                    >
+                        {Translation("most-popular")}
+                    </p>
+
+                    <p
+                        style={filters.sort.views === -1 ? { color: "#377DFF" } : {}}
+                        className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
+                        onClick={() => {
+                            if(filters.sort.views === -1) open();
+                            else setFilters({...filters, sort: { views: -1 }})
+                        }}
+                    >
+                        {Translation("most-unpopular")}
                     </p>
                 </div>
             </div>
         )}
         </div>
     );
+}
+
+Sort.propTypes = {
+    filters: object.isRequired,
+    setFilters: func.isRequired
 }

@@ -1,7 +1,9 @@
-export default function CloseIcon(props) {
+import { string } from "prop-types";
+
+export default function CloseIcon({ className }) {
   return (
     <svg
-      className={props.className ? props.className : "h-6 w-6"}
+      className={className ? className : "h-6 w-6"}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -16,3 +18,7 @@ export default function CloseIcon(props) {
     </svg>
   );
 }
+
+CloseIcon.propTypes = {
+  className: string,
+};

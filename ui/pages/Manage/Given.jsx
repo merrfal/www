@@ -1,3 +1,4 @@
+import { func, object } from "prop-types";
 import { Translation } from "../../../utils/Translations";
 import { Wildcard } from "../../components";
 
@@ -20,4 +21,10 @@ export default function Cities({product, onInput}) {
       </select>
     </div>
   );
+}
+
+
+Cities.propTypes = {
+  product: object.isRequired,
+  onInput: func.isRequired
 }

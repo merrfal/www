@@ -1,6 +1,9 @@
+import PropTypes from "prop-types";
+
 import { useDispatch } from "react-redux";
 import { Update } from "../../../api/User";
 import { Translation } from "../../../utils/Translations";
+import { useRouter } from "next/router";
 
 import {
   AddressValidation,
@@ -8,7 +11,6 @@ import {
   UserNameValidation,
   UserSurnameValidation,
 } from "../../../utils/Forms";
-import { useRouter } from "next/router";
 
 export default function Buttons(props) {
   const dispatch = useDispatch();
@@ -31,7 +33,6 @@ export default function Buttons(props) {
       city: true,
       country: true,
       cover: true,
-      avatar: true,
       phone: true
     });
 
@@ -85,3 +86,13 @@ export default function Buttons(props) {
     </div>
   );
 }
+
+Buttons.propTypes = {
+  user: PropTypes.object.isRequired,
+  setIsEdit: PropTypes.func.isRequired,
+  setIsLoading: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
+  userClone: PropTypes.object.isRequired,
+  setUserClone: PropTypes.func.isRequired,
+  setValidations: PropTypes.func.isRequired,
+};

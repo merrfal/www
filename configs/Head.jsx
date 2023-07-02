@@ -1,4 +1,5 @@
 import MetaTags from "next/head";
+import PropTypes from "prop-types";
 
 import { IS_PROD } from "./Envs";
 import { Translation } from "../utils/Translations";
@@ -22,3 +23,10 @@ export const Global = ({ title, description, image, index }) => {
     </MetaTags>
   );
 };
+
+Global.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  index: PropTypes.bool.isRequired
+}

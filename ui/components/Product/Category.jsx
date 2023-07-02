@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PropTypes from "prop-types";
+
 import { Categories } from "../../../data";
 
 export default function Category({ category }) {
@@ -11,4 +13,8 @@ export default function Category({ category }) {
             </span>
         </Link>
     );
+}
+
+Category.propTypes = {
+    category: PropTypes.string.isRequired,
 }

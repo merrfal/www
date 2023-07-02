@@ -1,3 +1,4 @@
+import { func, object } from "prop-types";
 import { ModeValidation } from "../../../utils/Forms";
 import { Translation } from "../../../utils/Translations";
 import { RequiredLabel, Wildcard } from "../../components";
@@ -32,4 +33,10 @@ export default function Mode({product, onInput, validation: v}){
       {v?.postedAnonymously && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
+}
+
+Mode.propTypes = {
+  product: object.isRequired,
+  onInput: func.isRequired,
+  validation: object.isRequired
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { string } from "prop-types";
 
 export default function CustomLink({ name, link }) {
   return (
@@ -8,4 +9,9 @@ export default function CustomLink({ name, link }) {
       </span>
     </Link>
   );
+}
+
+CustomLink.propTypes = {
+  name: string.isRequired,
+  link: string.isRequired,
 }

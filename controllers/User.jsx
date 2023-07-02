@@ -52,8 +52,6 @@ export const Register = async (payload, res) => {
   } 
   
   catch (error) {
-    console.log(error);
-
     const response = {
       res,
       code: 500,
@@ -69,25 +67,26 @@ export const Register = async (payload, res) => {
 
 export const Delete = async (payload, res) => {
   try {
-    const user = await User.findByIdAndDelete(req.query.id);
+    const user = await User.findByIdAndDelete(payload.userId);
 
-    if (user)
-      Response(
-        res,
-        200,
-        true,
-        "Përdoruesi u fshi me sukses dhe të gjitha produktet e tij.",
-        null
-      );
-    else
-      Response(
-        res,
-        404,
-        false,
-        "Përdoruesi nuk u gjet gjatë përpjekjes për tu fshirë, dhe as ndonjë prej produkteve të tij.",
-        null
-      );
-  } catch (error) {
+    if (user) Response(
+      res,
+      200,
+      true,
+      "Përdoruesi u fshi me sukses dhe të gjitha produktet e tij.",
+      null
+    );
+
+    else Response(
+      res,
+      404,
+      false,
+      "Përdoruesi nuk u gjet gjatë përpjekjes për tu fshirë, dhe as ndonjë prej produkteve të tij.",
+      null
+    );
+  } 
+  
+  catch (error) {
     Response(
       res,
       500,

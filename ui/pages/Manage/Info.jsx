@@ -1,3 +1,4 @@
+import { bool } from "prop-types";
 import { Translation } from "../../../utils/Translations";
 
 export default function Info({half = false}) {
@@ -20,4 +21,8 @@ export default function Info({half = false}) {
       </p>
     </>
   );
+}
+
+Info.propTypes = {
+  half: bool,
 }

@@ -1,3 +1,4 @@
+import { object, func } from "prop-types";
 import { useState, useRef, useEffect } from "react";
 import { OpenIcon } from "../../icons";
 import { Translation } from "../../../utils/Translations";
@@ -36,7 +37,7 @@ export default function Locations({ filters, setFilters }) {
                     <form className="space-y-4">
                         {Countries.map((country, index) => {
                             return (
-                                <div className="flex flex-col">
+                                <di key={index} className="flex flex-col">
                                     <div key={index} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
                                         <input
                                             id={country.iso_code}
@@ -55,8 +56,8 @@ export default function Locations({ filters, setFilters }) {
 
                                                 else setFilters({
                                                     ...filters, 
-                                                    cities: [...filters?.cities, ...country.cities.map((city) => city.value)],
-                                                    countries: [...filters?.countries, country?.iso_code]
+                                                    cities: [...filters.cities, ...country.cities.map((city) => city.value)],
+                                                    countries: [...filters.countries, country?.iso_code]
                                                 })
                                             }}
                                         />
@@ -92,7 +93,7 @@ export default function Locations({ filters, setFilters }) {
 
                                                     else setFilters({
                                                         ...filters, 
-                                                        cities: [...filters?.cities, city?.value]
+                                                        cities: [...filters.cities, city?.value]
                                                     })
                                                 }}
                                             />
@@ -103,7 +104,7 @@ export default function Locations({ filters, setFilters }) {
                                         </div>
                                         )
                                     )}
-                                </div>
+                                </di>
                             );
                         })}
                     </form>
@@ -111,4 +112,10 @@ export default function Locations({ filters, setFilters }) {
             )}
         </div>
     );
+}
+
+
+Locations.propTypes = {
+    filters: object.isRequired,
+    setFilters: func.isRequired,
 }

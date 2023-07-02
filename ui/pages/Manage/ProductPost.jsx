@@ -44,7 +44,7 @@ export default function ProductPost() {
   useEffect(() => {
     if(!account.Loading){
       if(account.Auth){ 
-        const { userAdditionalData, userData } = account?.User;
+        const { userAdditionalData, userData } = account?.User || {};
         const { phone } = userData;
         const { city, address, country } = userAdditionalData;
 

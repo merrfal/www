@@ -1,3 +1,4 @@
+import { object } from "prop-types";
 import { CapitalizeText } from "../../../utils/TextFormatting";
 
 export default function Info({ productData }) {
@@ -14,4 +15,8 @@ export default function Info({ productData }) {
       </div>
     </>
   );
+}
+
+Info.propTypes = { 
+  productData: object.isRequired,
 }

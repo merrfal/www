@@ -1,3 +1,4 @@
+import { func, object } from "prop-types";
 import { Categories as AllCategories } from "../../../data";
 import { CategoryValidation } from "../../../utils/Forms";
 import { Translation } from "../../../utils/Translations";
@@ -36,4 +37,10 @@ export default function Categories({product, onInput, validation: v}) {
       {v.category && validation.error && <RequiredLabel message={validation.message} />}
     </div>
   );
+}
+
+Categories.propTypes = {
+  product: object.isRequired,
+  onInput: func.isRequired,
+  validation: object.isRequired,
 }
