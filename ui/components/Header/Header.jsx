@@ -1,6 +1,6 @@
-import { InfoSide, Search, User } from "./";
+import { InfoSide, User } from "./";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchIcon } from "../../icons";
 import { Translation } from "../../../utils/Translations";
 

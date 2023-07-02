@@ -1,3 +1,5 @@
+import { string } from "prop-types";
+
 export default function Header({ name, description }) {
   return (
     <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
@@ -7,4 +9,9 @@ export default function Header({ name, description }) {
       <p className="mt-4 max-w-xl text-sm text-gray-700">{description}</p>
     </div>
   );
+}
+
+Header.propTypes = {
+  name: string.isRequired,
+  description: string.isRequired,
 }

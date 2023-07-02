@@ -1,11 +1,13 @@
-export default function VerifiedBadge(props) {
+import { string } from "prop-types";
+
+export default function VerifiedBadge({ className }) {
   return (
     <svg
       width="22"
       height="22"
       viewBox="0 0 22 22"
       fill="none"
-      className={props.className}
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -25,4 +27,8 @@ export default function VerifiedBadge(props) {
       />
     </svg>
   );
+}
+
+VerifiedBadge.propTypes = {
+  className: string,
 }

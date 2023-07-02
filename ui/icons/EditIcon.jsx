@@ -1,4 +1,6 @@
-export default function EditIcon(props) {
+import { string } from "prop-types";
+
+export default function EditIcon({ className }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +8,7 @@ export default function EditIcon(props) {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className={props.className ? props.className : "-ml-1 mr-2 h-5 w-5 text-gray-400"}
+      className={className ? className : "-ml-1 mr-2 h-5 w-5 text-gray-400"}
     >
       <path
         strokeLinecap="round"
@@ -16,3 +18,7 @@ export default function EditIcon(props) {
     </svg>
   );
 }
+
+EditIcon.propTypes = {
+  className: string,
+};

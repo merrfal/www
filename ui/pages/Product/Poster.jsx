@@ -6,6 +6,7 @@ import { NO_AVATAR } from "../../../configs/Constants";
 import { LocationIcon, VerifiedBadge } from "../../icons";
 import { Translation } from "../../../utils/Translations";
 import { isStorageReadable } from "../../../utils/Firebase";
+import { object } from "prop-types";
 
 export default function Poster({ productData }) {
   const { user } = productData;
@@ -78,4 +79,8 @@ export default function Poster({ productData }) {
       </Link>
     </div>
   );
+}
+
+Poster.propTypes = {
+  productData: object.isRequired,
 }

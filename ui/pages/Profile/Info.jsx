@@ -1,3 +1,4 @@
+import { bool, func, object, string } from "prop-types";
 import { VerifiedBadge } from "../../icons";
 import { Avatar } from "./";
 
@@ -26,4 +27,12 @@ export default function Info(props) {
       </div>
     </div>
   );
+}
+
+Info.propTypes = {
+  user: object.isRequired,
+  isEdit: bool.isRequired,
+  setIsEdit: func.isRequired,
+  setAvatar: func.isRequired,
+  avatar: string.isRequired
 }

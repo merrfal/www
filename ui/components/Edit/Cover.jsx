@@ -1,12 +1,16 @@
+import PropTypes from "prop-types";
+
 import { useState } from "react";
 import { EditIcon } from "../../icons";
 import { Translation } from "../../../utils/Translations";
-
+import { UploadFileToFirebase } from "../../../utils";
 import { NO_COVER } from "../../../configs/Constants";
+import { useDispatch } from "react-redux";
 
 export default function Cover({ user }) {
+  const dispatch = useDispatch();
   const [cover, setCover] = useState(user?.userData?.cover || NO_COVER);
-  const [temporalCover, setTemporalCover] = useState(user?.userData?.cover || NO_COVER);
+  // const [temporalCover, setTemporalCover] = useState(user?.userData?.cover || NO_COVER);
 
   // useEffect(() => {
   //   if (user !== null) {
@@ -40,7 +44,7 @@ export default function Cover({ user }) {
 
     if(file) {
       setCover(URL.createObjectURL(file))
-      UploadFileToFirebase(file, 'users');
+      UploadFileToFirebase(file, 'users', dispatch);
     }
   }
 
@@ -65,4 +69,8 @@ export default function Cover({ user }) {
       </div>
     </div>
   );
+}
+
+Cover.propTypes = {
+  user: PropTypes.object.isRequired,
 }

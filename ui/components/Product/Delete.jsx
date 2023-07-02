@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import { string } from "prop-types";
 import { TrashIcon } from "../../icons";
 
 export default function DeleteComponent({ slug }) {
@@ -9,4 +11,8 @@ export default function DeleteComponent({ slug }) {
       </a>
     </Link>
   );
+}
+
+DeleteComponent.propTypes = {
+  slug: string.isRequired,
 }

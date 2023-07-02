@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { object } from "prop-types";
 import { getDownloadURL, ref } from "firebase/storage";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +10,7 @@ import { AddIcon } from "../../icons";
 import { Dropdown } from "./";
 import { NO_AVATAR } from "../../../configs/Constants";
 import { isStorageReadable } from "../../../utils/Firebase";
-import Loading from "../Loading";
+import { Loading } from "..";
 
 const Auth = ({ account }) => {
   const [menu, setOpen] = useState();
@@ -95,4 +96,12 @@ export default function User() {
       {!account.Auth && !account.Loading && <NotAuth account={account} />}
     </>
   );
+}
+
+Auth.propTypes = {
+  account: object.isRequired,
+}
+
+NotAuth.propTypes = {
+  account: object.isRequired,
 }

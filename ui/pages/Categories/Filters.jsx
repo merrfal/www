@@ -1,3 +1,4 @@
+import { func, string } from "prop-types";
 import { Sort } from ".";
 
 export default function Filters({ ordering, setOrdering }) {
@@ -10,4 +11,9 @@ export default function Filters({ ordering, setOrdering }) {
       </div>
     </section>
   );
+}
+
+Filters.propTypes = {
+  ordering: string.isRequired,
+  setOrdering: func.isRequired,
 }

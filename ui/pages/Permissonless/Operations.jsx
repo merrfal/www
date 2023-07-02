@@ -3,8 +3,9 @@ import { Auth as AuthInstance } from "../../../configs/Firebase";
 import { LogoutAccount } from "../../../controllers/Slices";
 import { Notification } from "../../../utils/Response";
 import { useDispatch, useSelector } from "react-redux";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, getAdditionalUserInfo, signInWithPopup } from "firebase/auth";
 import { USER_AUTH_ERROR } from "../../../configs/Messages";
+import { Login, Register } from "../../../api/User";
 
 export default function Operations() {
   const account = useSelector((state) => state.Account);

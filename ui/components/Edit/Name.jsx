@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { UserNameValidation } from "../../../utils/Forms";
 import { Translation } from "../../../utils/Translations";
 import { RequiredLabel, Wildcard } from "..";
@@ -23,4 +25,10 @@ export default function Name({ user, onInput, validations }) {
       {validations?.name && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
+}
+
+Name.propTypes = {
+  user: PropTypes.object.isRequired,
+  onInput: PropTypes.func.isRequired,
+  validations: PropTypes.object.isRequired
 }

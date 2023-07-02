@@ -1,3 +1,4 @@
+import { bool } from "prop-types"
 import { Translation } from "../../../utils/Translations"
 
 export default function IsGiven({ isGiven }) {
@@ -13,4 +14,8 @@ export default function IsGiven({ isGiven }) {
     </span>
   )
   
+}
+
+IsGiven.propTypes = {
+  isGiven: bool.isRequired
 }

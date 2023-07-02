@@ -1,3 +1,5 @@
+import { array, func, number } from "prop-types";
+
 export default function Gallery({ gallery, index, setIndex }) {
   const active = "absolute ring-4 inset-0 ring-[#477DFF] rounded-md overflow-hidden";
   const inactive = "absolute inset-0 rounded-md overflow-hidden";
@@ -19,4 +21,10 @@ export default function Gallery({ gallery, index, setIndex }) {
       </div>
     </div>
   );
+}
+
+Gallery.propTypes = {
+  gallery: array.isRequired,
+  index: number.isRequired,
+  setIndex: func.isRequired
 }

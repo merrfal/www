@@ -1,6 +1,7 @@
+import { string } from "prop-types";
 import { QuestionIcon } from "../../icons";
 
-export default function Tooltip({ text, size = "auto" }) {
+export default function Tooltip({ text }) {
   return (
       <div className="group cursor-pointer relative inline-block border-b border-gray-400 text-center">
         <QuestionIcon width=".85em" height=".85em"/>
@@ -18,4 +19,8 @@ export default function Tooltip({ text, size = "auto" }) {
         </div>
       </div>
   );
+}
+
+Tooltip.propTypes = {
+  text: string.isRequired
 }

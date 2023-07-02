@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { bool, object } from "prop-types";
 import { ManageBox, Image, Info } from "./";
 import { useSelector } from "react-redux";
 
@@ -36,4 +37,10 @@ export default function Product(props) {
       </Link>
     </div>
   );
+}
+
+Product.propTypes = {
+  product: object.isRequired,
+  allowManage: bool,
+  showCategory: bool
 }

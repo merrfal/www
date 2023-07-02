@@ -1,11 +1,15 @@
+import PropTypes from "prop-types";
+
 import { useEffect, useState } from "react";
 import { EditIcon } from "../../icons";
 import { isStorageReadable } from "../../../utils/Firebase";
 import { UploadFileToFirebase } from "../../../utils";
-
+import { getDownloadURL, ref } from "firebase/storage";
 import { NO_AVATAR } from "../../../configs/Constants";
+import { useDispatch } from "react-redux";
 
-export default function Avatar({ user, setUser, validations }) {
+export default function Avatar({ user, setUser }) {
+  const dispatch = useDispatch();
   const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
@@ -41,7 +45,7 @@ export default function Avatar({ user, setUser, validations }) {
     if(file) {
       setAvatar(URL.createObjectURL(file))
 
-      const firebaseResponse = await UploadFileToFirebase(file, 'users');
+      const firebaseResponse = await UploadFileToFirebase(file, 'users', dispatch);
 
       if(firebaseResponse.success){
         const { data } = firebaseResponse;
@@ -84,4 +88,10 @@ export default function Avatar({ user, setUser, validations }) {
         </div>
     </div>
   );
+}
+
+
+Avatar.propTypes = {
+  user: PropTypes.object.isRequired,
+  setUser: PropTypes.func.isRequired,
 }

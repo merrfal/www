@@ -1,3 +1,4 @@
+import { object, string } from "prop-types";
 import { Global } from "../../../configs/Head";
 import { ManageMeta } from "../../../configs/Metas";
 import { Translation } from "../../../utils/Translations";
@@ -16,4 +17,10 @@ export default function Header({product, mode}) {
       <hr />
     </>
   );
+}
+
+
+Header.propTypes = {
+  product: object.isRequired,
+  mode: string.isRequired,
 }

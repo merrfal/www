@@ -1,5 +1,6 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 
+import { func, object } from "prop-types";
 import { Fragment, useEffect, useState } from "react";
 import { Empty, End, Product } from "../../components";
 import { Skeleton } from "./";
@@ -49,7 +50,7 @@ export default function Products({ user, dispatch, account }) {
   }, [user, account])
 
   return (
-    <main className="max-w-2xl mx-auto mt-8 py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <section className="max-w-2xl mx-auto mt-8 py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="max-w-xl">
         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
           {Translation("given-products")}
@@ -82,6 +83,12 @@ export default function Products({ user, dispatch, account }) {
       </InfiniteScroll>
 
       {!products.hasMore && products.products.length !== 0 && <End />}
-    </main>
+    </section>
   );
+}
+
+Products.propTypes = {
+  user: object.isRequired,
+  dispatch: func.isRequired,
+  account: object.isRequired
 }

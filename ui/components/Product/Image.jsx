@@ -1,8 +1,9 @@
+import { bool, object } from "prop-types";
 import { getDownloadURL, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { Storage } from "../../../configs/Firebase";
-import { NO_THUMBNAIL } from "../../../configs/Constants";
 import { Category, GivenStatus } from ".";
+import { NO_THUMBNAIL } from "../../../configs/Constants";
 
 export default function Image({ productData, showCategory, allowManage }) {
   const [thumbnail, setThumbnail] = useState(null);
@@ -42,4 +43,10 @@ export default function Image({ productData, showCategory, allowManage }) {
       />
     </div>
   );
+}
+
+Image.propTypes = {
+  productData: object.isRequired,
+  showCategory: bool.isRequired,
+  allowManage: bool.isRequired,
 }

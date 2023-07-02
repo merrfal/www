@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { object } from "prop-types";
 import { Categories } from "../../../data";
 import { LogoIcon, OpenIcon} from "../../icons";
 import { Search } from "./";
@@ -127,3 +128,11 @@ const Mobile = ({router}) => {
 };
 
 
+
+Desktop.propTypes = {
+  router: object.isRequired
+}
+
+Mobile.propTypes = {
+  router: object.isRequired
+}

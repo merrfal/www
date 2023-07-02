@@ -1,3 +1,4 @@
+import { object } from "prop-types";
 import { Translation } from "../../../utils/Translations";
 import { Wildcard } from "../../components";
 
@@ -20,4 +21,8 @@ export default function Url({product: { productData: { slug } }}) {
       />
     </div>
   );
+}
+
+Url.propTypes = {
+  product: object.isRequired
 }

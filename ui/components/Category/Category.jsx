@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PropTypes from 'prop-types';
+
 import { NO_CATEGORY } from "../../../configs/Constants";
 
 export default function Category({ category, kategori }) {
@@ -31,4 +33,9 @@ export default function Category({ category, kategori }) {
       </a>
     </Link >
   );
+}
+
+Category.propTypes = {
+  category: PropTypes.object.isRequired,
+  kategori: PropTypes.bool.isRequired,
 }

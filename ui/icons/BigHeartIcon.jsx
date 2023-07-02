@@ -1,3 +1,5 @@
+import { bool } from "prop-types";
+
 export default function BigHeartIcon({ saved }) {
   return (
     <svg
@@ -16,3 +18,7 @@ export default function BigHeartIcon({ saved }) {
     </svg>
   );
 }
+
+BigHeartIcon.propTypes = {
+  saved: bool.isRequired,
+};

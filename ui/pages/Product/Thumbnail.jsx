@@ -1,3 +1,4 @@
+import { array, bool, number } from "prop-types";
 import { IsGiven } from "./";
 
 export default function Thumbnail({ gallery, index, isGiven }) {
@@ -12,4 +13,10 @@ export default function Thumbnail({ gallery, index, isGiven }) {
       />
     </div>
   );
+}
+
+Thumbnail.propTypes = {
+  gallery: array.isRequired,
+  index: number.isRequired,
+  isGiven: bool.isRequired
 }

@@ -1,0 +1,23 @@
+{
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/*.tests.{js,jsx,ts,tsx}",
+    "**/*.test.{js,jsx,ts,tsx}",
+    "**/*.spec.{js,jsx,ts,tsx}",
+    "**/tests/**",
+    "**/__tests__/**",
+    "**/*.d.ts"
+  ],
+  "ignoreUnimported": [
+    "next.config.js",
+    "postcss.config.js",
+    "tailwind.config.js"
+  ],
+  "ignoreUnused": [
+    "next",
+    "react",
+    "react-dom",
+    "@tailwindcss/forms"
+  ],
+  "ignoreUnresolved": []
+}

@@ -281,7 +281,7 @@ export const Latest = async (setProducts, dispatch) => {
   }
 };
 
-export const Category = async (filters, products, setProducts, dispatch) => {
+export const Category = async (filters, scratch, products, setProducts, setLoading, dispatch) => {
   try {
     const req = await Request("PRODUCTS/CATEGORY", {...filters, limit: "8" });
     const res = await req.json();
@@ -289,10 +289,12 @@ export const Category = async (filters, products, setProducts, dispatch) => {
     if (res.success === true) {
       const { data } = res;
 
-      const next = { 
-        products: [...products.products, ...data.products], 
-        hasMore: data.hasMore
-      }
+      const next = {  hasMore: data.hasMore }
+
+      if (scratch) next.products = data.products;
+      else next.products = [...products.products, ...data.products];
+
+      if(!next.hasMore) setLoading(false)
 
       setProducts(next);
     }
@@ -316,5 +318,6 @@ export const Category = async (filters, products, setProducts, dispatch) => {
     };
 
     Notification(alert);
+    setLoading(false)
   }
 };

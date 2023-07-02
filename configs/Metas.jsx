@@ -16,7 +16,7 @@ export const ProfilePage = (profile) => {
   return meta;
 };
 
-export const ManageMeta = (mode, product) => {
+export const ManageMeta = (mode) => {
   if (mode === "create") {
     meta.title = "Dhuro Produkt";
     meta.description = "Shtoni një produkt për personat që kanë nevoj për atë produkt, mos harroni se dhënja nuk ju bën të varfër.";

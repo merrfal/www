@@ -1,5 +1,6 @@
 import ReactImageUploading from "react-images-uploading";
 
+import { func, object, string } from "prop-types";
 import { ImagesValidation } from "../../../utils/Forms";
 import { CloseIcon, PhotoIcon } from "../../icons";
 import { Info } from "./";
@@ -134,4 +135,11 @@ const EmptyGallery = () => {
       <Info />
     </div>
   )
+}
+
+Images.propTypes = {
+  setProduct: func.isRequired,
+  validation: object.isRequired,
+  mode: string.isRequired,
+  product: object.isRequired
 }

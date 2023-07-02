@@ -1,3 +1,4 @@
+import { func, object } from "prop-types";
 import { PhoneValidation } from "../../../utils/Forms";
 import { Translation } from "../../../utils/Translations";
 import { RequiredLabel, Wildcard } from "../../components";
@@ -24,4 +25,10 @@ export default function Phone({product, onInput, validation: v}) {
       {v?.phone && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
+}
+
+Phone.propTypes = {
+  product: object.isRequired,
+  onInput: func.isRequired,
+  validation: object.isRequired
 }

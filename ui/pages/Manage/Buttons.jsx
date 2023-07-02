@@ -19,6 +19,7 @@ import {
   PhoneValidation,
   SlugBuilder,
 } from "../../../utils/Forms";
+import { func, object, string } from "prop-types";
 
 export default function Buttons(props) {
   const { 
@@ -172,4 +173,14 @@ export default function Buttons(props) {
       }
     </div>
   );
+}
+
+Buttons.propTypes = {
+  product: object.isRequired,
+  account: object.isRequired,
+  setValidation: func.isRequired,
+  mode: string.isRequired,
+  onUpdate: func.isRequired,
+  setIsHold: func.isRequired,
+
 }
