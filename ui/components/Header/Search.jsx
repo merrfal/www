@@ -8,11 +8,18 @@ export default function Search() {
   const [term, setTerm] = useState("");
 
   useState(() => {
-    let path = typeof window !== "undefined" && window.location;
-    path = path?.pathname?.split("/")[2];
-    const base = path?.pathname?.split("/")[1];
+    let path = typeof window !== "undefined" && window.location.pathname;
 
-    if (path !== undefined && path !== "" && term === "" && base === "kerko") setTerm(path);
+    if(typeof path === "string"){
+      if(path.includes("/kerko/")){
+        let paths = path?.split("/");
+        let termRaw = paths[2];
+
+        if(termRaw !== undefined && termRaw !== "[term]"){
+          setTerm(termRaw);
+        }
+      }
+    }
   }, [router]);
 
   return (

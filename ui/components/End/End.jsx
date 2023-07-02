@@ -1,8 +1,9 @@
+import { bool } from "prop-types";
 import { Translation } from "../../../utils/Translations";
 import { EmptyIcon } from "../../icons";
 
-export default function End() {
-  return (
+export default function End({ show }) {
+  if(show) return (
     <div className="py-14 px-6 mt-4 text-center text-sm sm:px-14">
       <EmptyIcon />
       
@@ -11,4 +12,10 @@ export default function End() {
       </p>
     </div>
   );
+
+  else return null;
+}
+
+End.propTypes = {
+  show: bool.isRequired
 }

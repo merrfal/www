@@ -1,10 +1,10 @@
-import { string } from "prop-types";
+import { bool, string } from "prop-types";
 import { EmptyIcon } from "../../icons";
 
 export default function Empty(props) {
-  const { heading, message } = props;
+  const { heading, message, show } = props;
   
-  return (
+  if(show) return (
     <div className="py-14 px-6 text-center text-sm sm:px-14">
       <EmptyIcon />
       
@@ -12,9 +12,12 @@ export default function Empty(props) {
       <p className="mt-2 text-gray-500">{message}</p>
     </div>
   );
+
+  else return null;
 }
 
 Empty.propTypes = {
   heading: string.isRequired,
   message: string.isRequired,
+  show: bool.isRequired
 }

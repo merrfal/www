@@ -1,9 +1,8 @@
-import * as Messages from "../configs/Messages";
-
 import { User, Product } from "../configs/Models";
 import { Response } from "../utils/Response";
 import { ConnectionLocation } from "../utils/Connection";
 import { AllCountries} from "../data/Locations";
+import { Translation } from "../utils/Translations";
 
 export const Register = async (payload, res) => {
   try {
@@ -45,7 +44,7 @@ export const Register = async (payload, res) => {
       code: user ? 200 : 400,
       success: user ? true : false,
       data: user ? { ...user._doc } : null,
-      message: user ? Messages.USER_REGISTER_SUCCESS : Messages.USER_REGISTER_ERROR,
+      message: user ? Translation("user-register-success") : Translation("user-register-error"),
     };
 
     Response(response);
@@ -57,7 +56,7 @@ export const Register = async (payload, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.USER_REGISTER_ERROR,
+      message: Translation("user-register-error"),
       error,
     };
 
@@ -73,7 +72,7 @@ export const Delete = async (payload, res) => {
       res,
       200,
       true,
-      "Përdoruesi u fshi me sukses dhe të gjitha produktet e tij.",
+      Translation("user-delete-success"),
       null
     );
 
@@ -81,7 +80,7 @@ export const Delete = async (payload, res) => {
       res,
       404,
       false,
-      "Përdoruesi nuk u gjet gjatë përpjekjes për tu fshirë, dhe as ndonjë prej produkteve të tij.",
+      Translation("user-delete-error"),
       null
     );
   } 
@@ -91,7 +90,7 @@ export const Delete = async (payload, res) => {
       res,
       500,
       false,
-      "Gabim i brendshëm i serverit gjatë përpjekjes për të fshirë përdoruesin dhe produktet e tij.",
+      Translation("user-delete-error"),
       null
     );
   }
@@ -106,7 +105,7 @@ export const Login = async ({ uid }, res) => {
       code: user ? 200 : 404,
       success: user ? true : false,
       data: user ? { ...user._doc } : null,
-      message: user ? Messages.USER_AUTH_SUCCESS : Messages.USER_AUTH_ERROR,
+      message: user ? Translation("user-auth-success") : Translation("user-auth-error"),
     };
 
     Response(response);
@@ -118,7 +117,7 @@ export const Login = async ({ uid }, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.USER_AUTH_ERROR,
+      message:Translation("user-auth-error"),
       error,
     };
 
@@ -146,7 +145,7 @@ export const Products = async (payload, res) => {
       code: products ? 200 : 404,
       success: products ? true : false,
       data: products ? { products, hasMore: countProducts > (offset + limit) } : [],
-      message: products ? Messages.PRODUCTS_LIST_USER_SUCCESS : Messages.PRODUCTS_LIST_USER_ERROR,
+      message: products ? Translation("products-list-user-success") : Translation("products-list-user-error"),
     };
 
     Response(response);
@@ -158,7 +157,7 @@ export const Products = async (payload, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.PRODUCTS_LIST_USER_ERROR,
+      message: Translation("products-list-user-error"),
       error,
     };
 
@@ -184,7 +183,7 @@ export const Update = async (payload, res) => {
       code: user ? 200 : 404,
       success: user ? true : false,
       data: user ? user : null,
-      message: user ? Messages.USER_UPDATE_SUCCESS : Messages.USER_UPDATE_ERROR,
+      message: user ? Translation("user-update-success") : Translation("user-update-error"),
     }
     
     Response(response);
@@ -196,7 +195,7 @@ export const Update = async (payload, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.USER_UPDATE_ERROR,
+      message: Translation("user-update-error"),
       error: err,
     }
 
@@ -217,7 +216,7 @@ export const View = async ({ username }, res) => {
       code: user ? 200 : 404,
       success: user ? true : false,
       data: user ? user : null,
-      message: user ? "Përdoruesi u gjet me sukses." : "Përdoruesi nuk u gjet.",
+      message: user ? Translation("user-view-success") : Translation("user-view-error"),
       error: null,
     };
 
@@ -230,7 +229,7 @@ export const View = async ({ username }, res) => {
       code: 500,
       success: false,
       data: null,
-      message: "Ndodhi një gabim gjatë përpjekjes për të gjetur përdoruesin.",
+      message: Translation("user-view-error"),
       error: error,
     };
 
@@ -247,7 +246,7 @@ export const CheckIfExist = async ({field, value}, res) => {
       code: 200,
       success: true,
       data: checkDuplicate ? true : false,
-      message: checkDuplicate ? "Përdoruesi u gjet me sukses." : "Përdoruesi nuk u gjet.",
+      message: checkDuplicate ? Translation("check-if-exist-success") :  Translation("check-if-exist-error"),
       error: null,
     };
 
@@ -261,7 +260,7 @@ export const CheckIfExist = async ({field, value}, res) => {
       success: false,
       exists: false,
       data: null,
-      message: "Ndodhi një gabim gjatë përpjekjes për të gjetur nje duplikate.",
+      message:  Translation("check-if-exist-throw"),
       error: error,
     };
 

@@ -1,9 +1,8 @@
-import * as Messages from "../configs/Messages";
-
 import { Product, User, Category as CategoryModel } from "../configs/Models";
 import { ConnectionLocation } from "../utils/Connection";
 import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
 import { Response } from "../utils/Response";
+import { Translation } from "../utils/Translations";
 
 export const Create = async (payload, res) => {
   try {
@@ -124,7 +123,7 @@ export const Category  = async (payload, res) => {
       code: products ? 200 : 404,
       success: products ? true : false,
       data: products ? { products, hasMore: countProducts >= offset + limit } : [],
-      message: products ? Messages.PRODUCTS_CATEGORY_SUCCESS : Messages.PRODUCTS_CATEGORY_ERROR,
+      message: products ? Translation("products-category-success") : Translation("products-category-error"),
     };
 
     Response(response);
@@ -136,7 +135,7 @@ export const Category  = async (payload, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.PRODUCTS_CATEGORY_ERROR,
+      message: Translation("products-category-error"),
       error,
     };
 
@@ -150,64 +149,32 @@ export const Search  = async (payload, res) => {
   offset = parseInt(offset);
   limit = parseInt(limit);
 
-  // const filter = () =>{
-  //   const filters = {}
-  //   const categories_length = categories.length;
-  //   const cilength = cities.length;
+  let filters = {
+    'productData.city': { $in: cities },
+    'productData.category': { $in: categories },
+  }
 
-  //   if(categories_length === 0 && cilength === 0) return filters;
-  //   if(categories_length === 0 && cilength !== 0 ) filters['productData.city'] = { $in: cities }
-  //   if(categories_length !== 0 && cilength === 0 ) filters['productData.category'] = { $in: categories }
-  //   if(categories_length !== 0 && cilength !== 0 ) filters['productData.category'] = { $in: categories }, filters['productData.city'] = { $in: cities }
+  if(term !== ""){
+    filters = {
+      ...filters,
+      'productData.name': { $regex: term, $options: 'i' },
+      'productData.description': { $regex: term, $options: 'i' },
+    }
+  }
 
-  //   if(term === "") return filters;
-  //   if(term !== "") return { 
-  //     ...filters, 
-  //     $or: [
-  //       { 'productData.name': { $regex: term, $options: 'i' } }, 
-  //       { 'productData.description': { $regex: term, $options: 'i' } }
-  //     ] 
-  //   }
-  // }
-
-  const filter = () => {
-    const filters = {};
-    const orFilters = [];
-  
-    if (categories.length !== 0) {
-      orFilters.push({ 'productData.category': { $in: categories } });
-    }
-  
-    if (cities.length !== 0) {
-      orFilters.push({ 'productData.city': { $in: cities } });
-    }
-  
-    if (term !== "") {
-      orFilters.push(
-        { 'productData.name': { $regex: term, $options: 'i' } },
-        { 'productData.description': { $regex: term, $options: 'i' } }
-      );
-    }
-  
-    if (orFilters.length > 0) {
-      filters.$or = orFilters;
-    }
-
-    // if(isLocal !== false) filters['productData.country'] = isLocal;
-  
-    return filters;
-  };
+  if(cities.length === 0) delete filters['productData.city'];
+  if(categories.length === 0) delete filters['productData.category'];
 
   try {
-    let products = await Product.find(filter()).sort(sort).skip(offset).limit(limit);
-    let countProducts = await Product.find(filter()).countDocuments();
+    let products = await Product.find(filters).sort(sort).skip(offset).limit(limit);
+    let countProducts = await Product.find(filters).countDocuments();
 
     const response = {
       res,
       code: products ? 200 : 404,
       success: products ? true : false,
-      data: products ? {products, hasMore: countProducts > offset + limit} : [],
-      message: products ? Messages.PRODUCTS_SEARCH_SUCCESS : Messages.PRODUCTS_SEARCH_ERROR,
+      data: products ? { products, hasMore: countProducts >= offset + limit } : [],
+      message: products ? Translation("products-search-success") : Translation("products-search-error"),
     };
 
     Response(response);
@@ -219,7 +186,7 @@ export const Search  = async (payload, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.PRODUCTS_SEARCH_ERROR,
+      message: Translation("products-search-error"),
       error,
     };
 
@@ -261,7 +228,7 @@ export const Latest = async (payload, res) => {
       code: products ? 200 : 404,
       success: products ? true : false,
       data: products ? products : [],
-      message: products ? Messages.PRODUCTS_LATEST_SUCCESS : Messages.PRODUCTS_LATEST_ERROR,
+      message: products ? Translation("products-latest-success") : Translation("products-latest-error"),
     };
 
     Response(payload);
@@ -273,7 +240,7 @@ export const Latest = async (payload, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.PRODUCTS_LATEST_ERROR,
+      message: Translation("products-latest-error"),
       error,
     };
 
@@ -293,7 +260,7 @@ export const Update = async (payload, res) => {
       code: product ? 200 : 404,
       success: product ? true : false,
       data: product ? product : null,
-      message: product ? Messages.PRODUCT_UPDATE_SUCCESS : Messages.PRODUCT_UPDATE_ERROR,
+      message: product ? Translation("product-update-success") : Translation("product-update-error"),
     }
     
     Response(response);
@@ -305,7 +272,7 @@ export const Update = async (payload, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.PRODUCT_UPDATE_ERROR,
+      message: Translation("product-update-error"),
       error: err,
     }
 
@@ -334,7 +301,7 @@ export const View = async ({ slug }, res) => {
       code: product ? 200 : 404,
       success: product ? true : false,
       data: product ? {...product._doc, productData: {...product._doc.productData, user }} : null,
-      message: product ? Messages.PRODUCT_VIEW_SUCCESS : Messages.PRODUCT_VIEW_ERROR,
+      message: product ? Translation("product-view-success") : Translation("product-view-error"),
     };
 
     Response(response);
@@ -346,7 +313,7 @@ export const View = async ({ slug }, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.PRODUCT_VIEW_ERROR,
+      message: Translation("product-view-error"),
     };
 
     Response(response);
@@ -394,7 +361,7 @@ export const Similar = async ({ category }, res) => {
       code: products ? 200 : 404,
       success: products ? true : false,
       data: products ? products : null,
-      message: products ? Messages.PRODUCT_VIEW_SUCCESS : Messages.PRODUCT_VIEW_ERROR,
+      message: products ? Translation("product-view-success") : Translation("product-view-error"),
     };
 
     Response(response);
@@ -406,7 +373,7 @@ export const Similar = async ({ category }, res) => {
       code: 500,
       success: false,
       data: null,
-      message: Messages.PRODUCT_VIEW_ERROR,
+      message: Translation("product-view-error"),
     };
 
     Response(response);

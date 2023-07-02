@@ -5,7 +5,7 @@ export default function Skeleton() {
     return (
       <div key={index} className="group relative pointer-events-none opacity-75">
         <div className="animate-pulse w-full">
-          <div className="flex items-center justify-center w-full h-[39vh] mb-4 bg-gray-200 rounded-[6px]">
+          <div className="flex items-center justify-center w-full h-[20vh] mb-4 bg-gray-200 rounded-[6px]">
             <SkeletonIcon />
           </div>
           <div className="h-2.5 bg-gray-200 rounded-full w-full mb-2.5" />

@@ -1,8 +1,7 @@
-import * as Messages from "../configs/Messages";
-
 import { Notification } from "../utils/Response";
 import { Request } from "../utils/Http";
 import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
+import { Translation } from "../utils/Translations";
 
 export const Create = async (page, router, setIsHold, dispatch) => {
   try {
@@ -35,7 +34,7 @@ export const Create = async (page, router, setIsHold, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.PRODUCTS_LATEST_ERROR,
+      message: Translation("products-latest-error"),
       type: "error",
     };
 
@@ -120,7 +119,7 @@ export const Search = async (filters, products, setProducts, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.PRODUCTS_LATEST_ERROR,
+      message: Translation("products-latest-error"),
       type: "error",
     };
 
@@ -161,7 +160,7 @@ export const Update = async ( product, router, setLoading, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.PRODUCTS_LATEST_ERROR,
+      message: Translation("products-latest-error"),
       type: "error",
     };
 
@@ -190,7 +189,7 @@ export const View = async (slug, setProduct, dispatch, setLoading = null) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.PRODUCTS_LATEST_ERROR,
+      message: Translation("products-latest-error"),
       type: "error",
     };
 
@@ -212,7 +211,7 @@ export const ViewWithPermissions = async (slug, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.PRODUCTS_LATEST_ERROR,
+      message: Translation("products-latest-error"),
       type: "error",
     };
 
@@ -245,7 +244,7 @@ export const Similar = async (category, setProducts, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.PRODUCTS_LATEST_ERROR,
+      message: Translation("products-latest-error"),
       type: "error",
     };
 
@@ -273,7 +272,7 @@ export const Latest = async (setProducts, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.PRODUCTS_LATEST_ERROR,
+      message: Translation("products-latest-error"),
       type: "error",
     };
 
@@ -313,7 +312,7 @@ export const Category = async (filters, scratch, products, setProducts, setLoadi
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.PRODUCTS_LATEST_ERROR,
+      message: Translation("products-latest-error"),
       type: "error",
     };
 
