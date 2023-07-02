@@ -10,13 +10,6 @@ import { Empty, End, Product } from "../../components";
 import { useDispatch } from "react-redux";
 import { Translation } from "../../../utils/Translations";
 
-import { 
-  META_SEARCH, 
-  SEARCH_TITLE_ALL, 
-  SEARCH_TITLE_DESCRIPTION, 
-  SEARCH_TITLE_TERM 
-} from "../../../configs/Messages";
-
 export default function Search() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -35,7 +28,7 @@ export default function Search() {
   useEffect(() => {
     const { term } = router.query;
 
-    if (term === undefined) setAllMode(true);
+    if (term === undefined || term === "") setAllMode(true);
     else setAllMode(false);
     
     setProducts({ products: [], hasMore: true });
@@ -46,7 +39,7 @@ export default function Search() {
   const next = () => {
     const { term } = router.query;
     const offset = products.products.length.toString();
-    const filtering = { ...filters, offset, term: term === undefined ? "" : "" };
+    const filtering = { ...filters, offset, term: term === undefined ? "" : term };
 
     Searching(filtering, products, setProducts, dispatch);
   };
@@ -58,29 +51,40 @@ export default function Search() {
     }
   }, [filters]);
 
+  // useEffect(() => {
+  //   setLoading(true);
+
+  //   const validCategory = category !== null && category !== false;
+  //   if(validCategory) next({scratch: true});
+  // }, [filters])
+
   return (
     <Normal>
-      <Global title={META_SEARCH} description={SEARCH_TITLE_DESCRIPTION} />
+      <Global 
+        title={Translation("meta-search")} 
+        description={Translation("meta-search-description")} 
+      />
       
-      { allMode == true && <Header 
-        name={SEARCH_TITLE_ALL} 
-        description={SEARCH_TITLE_DESCRIPTION} /> 
-      }
+      <Header 
+        show={allMode === true ? true : false}
+        name={Translation("search-title-all")} 
+        description={Translation("meta-search-description")} 
+      /> 
 
-      { allMode == false && <Header 
-        name={`${SEARCH_TITLE_TERM} ${router?.query?.term}`} 
-        description={SEARCH_TITLE_DESCRIPTION} /> 
-      }
+      <Header 
+        show={allMode === false ? true : false}
+        name={`${Translation("search-title-term")} ${router?.query?.term}`} 
+        description={Translation("meta-search-description")} 
+      /> 
 
       <Filters filters={filters} setFilters={setFilters} />
 
       <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        {products.products.length === 0 && !products.hasMore && (
-          <Empty 
-            heading={Translation("no-products-found")} 
-            message={Translation("no-products-search-found-description")} 
-          />
-        )}
+        <Empty 
+          show={products.products.length === 0 && !products.hasMore}
+          heading={Translation("no-products-found")} 
+          message={Translation("no-products-search-found-description")} 
+        />
 
         <InfiniteScroll
           dataLength={products.products.length}
@@ -96,10 +100,9 @@ export default function Search() {
               </Fragment>
             )
           }
-
         </InfiniteScroll>
 
-        { !products.hasMore && products.products.length !== 0 && <End /> }
+        <End show={!products.hasMore && products.products.length !== 0} />
       </div>
     </Normal>
   );

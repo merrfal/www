@@ -32,7 +32,6 @@ export const HideNotification = (state) => {
   state.Visibility = false;
 };
 
-
 export const LogoutAccount = (state) => {
   Auth.signOut();
 

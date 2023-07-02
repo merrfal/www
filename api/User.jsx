@@ -1,9 +1,8 @@
-import * as Messages from "../configs/Messages";
-
 import { LogoutAccount, SetAccount } from "../controllers/Slices";
 import { Notification } from "../utils/Response";
 import { Request } from "../utils/Http";
 import { UserObject } from "../utils/DataBuilder";
+import { Translation } from "../utils/Translations";
 
 export const Login = async (uid, dispatch) => {
   try {
@@ -26,7 +25,7 @@ export const Login = async (uid, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.USER_AUTH_ERROR,
+      message: Translation("user-auth-error"),
       type: "error",
     };
 
@@ -57,7 +56,7 @@ export const Register = async (initalUser, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.USER_AUTH_ERROR,
+      message: Translation("user-auth-error"),
       type: "error",
     };
 
@@ -132,7 +131,7 @@ export const Update = async (
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.USER_UPDATE_ERROR,
+      message: Translation("user-update-error"),
       type: "error",
     };
 
@@ -156,7 +155,7 @@ export const View = async (username, setUser, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.USER_VIEW_ERROR,
+      message: Translation("user-view-error"),
       type: "error",
     };
 
@@ -194,7 +193,7 @@ export const Products = async (filters, products, setProducts, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Messages.PRODUCTS_LIST_USER_ERROR,
+      message: Translation("products-list-user-error"),
       type: "error",
     };
 

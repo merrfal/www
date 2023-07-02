@@ -1,7 +1,7 @@
-import { string } from "prop-types";
+import { bool, string } from "prop-types";
 
-export default function Header({ name, description }) {
-  return (
+export default function Header({ name, description, show }) {
+  if(show) return (
     <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
         {name}
@@ -12,9 +12,12 @@ export default function Header({ name, description }) {
       </p>
     </div>
   );
+
+  else return null;
 }
 
 Header.propTypes = {
   name: string.isRequired,
-  description: string.isRequired
+  description: string.isRequired,
+  show: bool.isRequired
 }

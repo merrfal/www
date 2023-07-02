@@ -4,7 +4,6 @@ import { LogoutAccount } from "../../../controllers/Slices";
 import { Notification } from "../../../utils/Response";
 import { useDispatch, useSelector } from "react-redux";
 import { GoogleAuthProvider, getAdditionalUserInfo, signInWithPopup } from "firebase/auth";
-import { USER_AUTH_ERROR } from "../../../configs/Messages";
 import { Login, Register } from "../../../api/User";
 
 export default function Operations() {
@@ -29,7 +28,7 @@ export default function Operations() {
       else {
         const alert = {
           dispatch,
-          message: USER_AUTH_ERROR,
+          message: Translation("user-auth-error"),
           type: "error",
         }
 
@@ -41,7 +40,7 @@ export default function Operations() {
     catch (error) {
       const alert = {
         dispatch,
-        message: USER_AUTH_ERROR,
+        message: Translation("user-auth-error"),
         type: "error",
       }
 

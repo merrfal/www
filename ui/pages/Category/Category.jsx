@@ -7,7 +7,7 @@ import { Global } from "../../../configs/Head";
 import { useRouter } from "next/router";
 import { Header, Filters, Skeleton } from "./";
 import { Category as Products } from "../../../api/Product";
-import { Empty, Loading, Product } from "../../components";
+import { Empty, End, Loading, Product } from "../../components";
 import { useDispatch } from "react-redux";
 import { Error } from "..";
 import { Translation } from "../../../utils/Translations";
@@ -127,6 +127,8 @@ export default function Category() {
               )}
             </InfiniteScroll>
           </div>
+
+          <End show={!products.hasMore && products.products.length !== 0 && !loading} />
         </>
       }
     </Normal>

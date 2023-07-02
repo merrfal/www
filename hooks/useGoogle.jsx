@@ -4,8 +4,7 @@ import { Notification } from "../utils/Response";
 import { LogoutAccount } from "../controllers/Slices";
 import { Auth as AuthInstance } from "../configs/Firebase";
 import { AccountIcon } from "../ui/icons";
-
-import { USER_AUTH_ERROR } from "../configs/Messages";
+import { Translation } from "../utils/Translations";
 
 export default function useGoogle({dispatch, account}) {
   const Auth = async () => {
@@ -26,7 +25,7 @@ export default function useGoogle({dispatch, account}) {
       else {
         const alert = {
           dispatch,
-          message: USER_AUTH_ERROR,
+          message: Translation("user-auth-error"),
           type: "error",
         }
 
@@ -38,7 +37,7 @@ export default function useGoogle({dispatch, account}) {
     catch (error) {
       const alert = {
         dispatch,
-        message: USER_AUTH_ERROR,
+        message: Translation("user-auth-error"),
         type: "error",
       }
 
