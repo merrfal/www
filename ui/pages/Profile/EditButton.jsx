@@ -14,7 +14,7 @@ export default function EditButton({ isEdit, setIsEdit, id }) {
           <EditIcon />
 
           <span>
-            {Translation("edit_profile")}
+            {Translation("edit-profile")}
           </span>
         </button>
       </div>

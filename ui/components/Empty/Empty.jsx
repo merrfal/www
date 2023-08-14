@@ -3,8 +3,10 @@ import { EmptyIcon } from "../../icons";
 
 export default function Empty(props) {
   const { heading, message, show } = props;
+
+  if(!show) return null;
   
-  if(show) return (
+  return (
     <div className="py-14 px-6 text-center text-sm sm:px-14">
       <EmptyIcon />
       
@@ -12,8 +14,6 @@ export default function Empty(props) {
       <p className="mt-2 text-gray-500">{message}</p>
     </div>
   );
-
-  else return null;
 }
 
 Empty.propTypes = {

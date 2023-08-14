@@ -100,7 +100,7 @@ export const UserNameValidation = (value) => {
     validation.message = `${Translation("first-name-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
   }
 
-  if (value.length > maxLength) {
+  if (value.length > maxLength) {3
     validation.error = true;
     validation.message = `${Translation("first-name-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
   }

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 import { useEffect, useState } from "react";
-import { EditIcon } from "../../icons";
+// import { EditIcon } from "../../icons";
 import { isStorageReadable } from "../../../utils/Firebase";
 import { UploadFileToFirebase } from "../../../utils";
 import { getDownloadURL, ref } from "firebase/storage";
@@ -81,9 +81,9 @@ export default function Avatar({ user, setUser }) {
               className="w-full h-full absolute cursor-pointer invisible"
             />
 
-            <button className="inline-flex justify-center p-2 border border-gray-300 shadow-sm text-sm font-medium rounded-[100%] text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
+            {/* <button className="inline-flex justify-center p-2 border border-gray-300 shadow-sm text-sm font-medium rounded-[100%] text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
               <EditIcon className="h-4 w-4 text-gray-400" />
-            </button>
+            </button> */}
           </div>
         </div>
     </div>

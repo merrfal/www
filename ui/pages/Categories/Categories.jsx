@@ -12,19 +12,14 @@ export default function Categories() {
   return (
     <Normal>
       <Header />
+      <Filters key="Categories" ordering={ordering} setOrdering={setOrdering} />
+      <Global title={Translation("categories")} description={Translation("categories-description")} />
 
-      <Filters ordering={ordering} setOrdering={setOrdering} />
-
-      <Global 
-        title={Translation("categories")} 
-        description={Translation("categories-description")}  
-      />
-
-      <div className="py-3 sm:py8 xl:max-w-7xl xl:mx-auto xl:px-8">
+      <div className="max-w-7xl mx-auto mt-5 px-4 sm:px-6 lg:px-8">
         <div className="mt-4 flow-root">
           <div className="-my-2">
             <div className="box-content py-2 relative overflow-visible">
-              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+              <div className="grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
                 {
                   AllCategories.sort((a, b) => 
                     {
@@ -41,7 +36,7 @@ export default function Categories() {
                 }
               </div>
 
-              <End />
+              <End show={true} />
             </div>
           </div>
         </div>

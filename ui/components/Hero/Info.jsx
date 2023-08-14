@@ -1,4 +1,3 @@
-import { Global } from "../../../configs/Head";
 import { Translation } from "../../../utils/Translations";
 
 export default function Info() {
@@ -7,8 +6,6 @@ export default function Info() {
 
   return (
     <>
-      <Global title={name} description={description} />
-
       <h1 className="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
         <span className="block text-white text-center">{name}</span>
       </h1>

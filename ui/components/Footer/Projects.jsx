@@ -3,7 +3,7 @@ import { Translation } from "../../../utils/Translations";
 
 export default function Projects() {
   return (
-    <div>
+    <div className="hidden sm:inline-block">
       <h3 className="text-sm font-medium text-gray-900 select-none">
         {Translation("other-projects")}
       </h3>

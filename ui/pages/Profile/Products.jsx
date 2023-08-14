@@ -61,12 +61,11 @@ export default function Products({ user, dispatch, account }) {
         </p>
       </div>
 
-      {products.products.length === 0 && !products.hasMore && (
-        <Empty 
-          heading={Translation("no-products-found")} 
-          message={user._id === account?.User?._id ? Translation("user-product-list") : Translation("users-product-list")} 
-        />
-      )}
+      <Empty 
+        heading={Translation("no-products-found")} 
+        message={user._id === account?.User?._id ? Translation("user-product-list") : Translation("users-product-list")} 
+        show={products.products.length === 0 && !products.hasMore}
+      />
 
       <InfiniteScroll
         dataLength={products.products.length}
@@ -82,7 +81,7 @@ export default function Products({ user, dispatch, account }) {
         )}
       </InfiniteScroll>
 
-      {!products.hasMore && products.products.length !== 0 && <End />}
+      <End show={!products.hasMore && products.products.length !== 0} />
     </section>
   );
 }

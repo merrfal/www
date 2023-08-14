@@ -5,13 +5,12 @@ import { Fragment } from "react";
 
 export default function Categories() {
   return (
-    <div className="py-16 sm:py-24 xl:max-w-7xl xl:mx-auto xl:px-8">
+    <div className="max-w-2xl mx-auto lg:mb-16 xl:mb-16 px-4 sm:max-w-5xl lg:max-w-7xl lg:px-8">
       <Header />
 
-      <div className="mt-4 flow-root">
-        <div className="-my-2">
-          <div className="box-content py-2 relative overflow-x-auto overflow-y-auto touch-none">
-            <div className="h-[400px] min-w-screen-xl flex xl:relative">
+      <div className="flow-root">
+        <div className="py-3 box-content relative overflow-x-auto overflow-y-auto touch-none">
+            <div className="h-[400px] min-w-screen-xl flex xl:relative gap-4">
               {
                 AllCategories.filter((category) => category.favorite)
                 .slice(0, 5)
@@ -22,7 +21,6 @@ export default function Categories() {
                 ))
               }
             </div>
-          </div>
         </div>
       </div>
     </div>

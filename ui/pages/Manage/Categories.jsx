@@ -27,11 +27,13 @@ export default function Categories({product, onInput, validation: v}) {
           </option>
         }
 
-        {AllCategories.map((category, index) => (
-          <option value={category?._id} key={index}>
-            {category?.name}
-          </option>
-        ))}
+        {
+          AllCategories.map((category, index) => (
+            <option value={category?._id} key={index}>
+              {category?.name}
+            </option>
+          ))
+        }
       </select>
 
       {v.category && validation.error && <RequiredLabel message={validation.message} />}

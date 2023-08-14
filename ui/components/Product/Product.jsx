@@ -10,7 +10,8 @@ export default function Product(props) {
   const { 
     product: { productData }, 
     allowManage = account?.User?.userAdditionalData?.role === "admin",
-    showCategory = true 
+    showCategory = true,
+    showGiven = true
   } = props;
 
   return (
@@ -30,6 +31,7 @@ export default function Product(props) {
             productData={productData} 
             showCategory={showCategory} 
             allowManage={allowManage}
+            showGiven={showGiven}
           />
           
           <Info productData={productData} />
@@ -42,5 +44,6 @@ export default function Product(props) {
 Product.propTypes = {
   product: object.isRequired,
   allowManage: bool,
-  showCategory: bool
+  showCategory: bool,
+  showGiven: bool
 }
