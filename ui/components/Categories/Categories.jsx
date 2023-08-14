@@ -5,7 +5,7 @@ import { Fragment } from "react";
 
 export default function Categories() {
   return (
-    <div className="max-w-2xl mx-auto lg:mb-16 xl:mb-16 px-4 sm:max-w-5xl lg:max-w-7xl lg:px-8">
+    <div className="mx-auto lg:mb-16 xl:mb-16 max-w-7xl px-4 sm:px-6 lg:px-8">
       <Header />
 
       <div className="flow-root">
@@ -13,7 +13,7 @@ export default function Categories() {
             <div className="h-[400px] min-w-screen-xl flex xl:relative gap-4">
               {
                 AllCategories.filter((category) => category.favorite)
-                .slice(0, 5)
+                .slice(0, 6)
                 .map((category, index) => (
                   <Fragment key={index}>
                     <Category category={category}  />

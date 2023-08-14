@@ -14,7 +14,7 @@ export default function Products() {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto mb-6 px-4 max-w-7xl lg:px-8">
+      <div className="mx-auto mb-6 px-4 max-w-7xl md:mt-12 sm:px-6 lg:px-8">
         <Header />
 
         <div className="py-3 grid grid-cols-2 gap-4 lg:gap-2 xl:gap-2 sm:grid-cols-2 sm:space-x-2 lg:grid-cols-3 xl:grid-cols-4">
