@@ -94,7 +94,7 @@ export default function Product() {
                   />
                 </div>
 
-                <div className="mt-10 ml-3 px-4 sm:px-0 sm:mt-16 lg:mt-0">
+                <div className="mt-10 lg:ml-3 xl:ml-3 md:ml-3 px-4 sm:px-0 sm:mt-16 lg:mt-0">
                   <div className="flex items-center mb-8">
                     <Category category={product?.productData?.category} />
                     <div className="h-5 border-r border-gray-200 mx-4" />

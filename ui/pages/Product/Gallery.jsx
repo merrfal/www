@@ -5,7 +5,7 @@ export default function Gallery({ gallery, index, setIndex }) {
   const inactive = "absolute inset-0 rounded-md overflow-hidden";
 
   return (
-    <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
+    <div className="w-full max-w-2xl mx-auto block lg:max-w-none p-4 mt-2 lg:mt-6 md:mt-6 xl:mt-6 lg:p-0 xl:p-0 md:lg-0">
       <div className="grid grid-cols-4 gap-6">
         {gallery.map((image, iteration) => (
           <div key={iteration} className="relative h-24 rounded-lg p-1 cursor-pointer" onClick={() => index !== iteration && setIndex(iteration)}>

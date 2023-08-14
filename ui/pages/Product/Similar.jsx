@@ -30,12 +30,11 @@ export default function Similar({ products: allProducts, productId }) {
         ))}
       </div>
 
-      {products !== null && products.length === 0 && (
         <Empty 
           heading={Translation("no-products-found")} 
-          message={Translation("similar-products-description")} 
+          message={Translation("similar-products-description")}
+          show={products !== null && products.length === 0} 
         />
-      )}
     </section>
   );
 }
