@@ -22,5 +22,5 @@ export const Notification = (props) => {
   const config = { Title: message, Type: type, Visibility: true };
 
   dispatch(ShowNotification(config));
-  setTimeout(() => dispatch(HideNotification()), NOTIFICATION_TIME);
+  setTimeout(() => dispatch(HideNotification()), typeof NOTIFICATION_TIME === "string" ? parseInt(NOTIFICATION_TIME) : NOTIFICATION_TIME);
 };
