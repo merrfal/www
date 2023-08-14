@@ -1,5 +1,3 @@
-import { bool, oneOfType, string } from "prop-types";
-
 export default function Header(props) {
   const { name, description, show } = props;
   
@@ -15,9 +13,3 @@ export default function Header(props) {
     </div>
   );
 }
-
-Header.propTypes = {
-  name: oneOfType([string, undefined]),
-  description: oneOfType([string, undefined]),
-  show: oneOfType([bool, undefined]),
-};

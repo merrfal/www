@@ -1,16 +1,15 @@
 import Link from "next/link";
 
-import { object } from "prop-types";
 import { getDownloadURL, ref } from "firebase/storage";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Storage } from "../../../configs/Firebase";
 import { useAuth, useGoogle as UseGoogle } from "../../../hooks";
 import { AddIcon } from "../../icons";
 import { Dropdown } from "./";
-import { NO_AVATAR } from "../../../configs/Constants";
 import { isStorageReadable } from "../../../utils/Firebase";
 import { Loading } from "..";
+import { NO_AVATAR } from "../../../configs/Constants";
 
 const Auth = ({ account }) => {
   const [menu, setOpen] = useState();
@@ -55,7 +54,7 @@ const Auth = ({ account }) => {
 
   return (
     <div className="relative accoount-menu flex items-center" ref={domNode}>
-      <Link href="/shto">
+      <Link href="/shto" legacyBehavior>
         <a className="p-1 mr-1 text-gray-400 hover:text-gray-500 lg:block hover:opacity-[.85] transition-all">
           <AddIcon />
         </a>
@@ -81,8 +80,19 @@ const Auth = ({ account }) => {
 };
 
 const NotAuth = ({account}) => {
-  const dispatch = useDispatch();
-  return <UseGoogle account={account} dispatch={dispatch} />;
+    const dispatch = useDispatch();
+
+    return (
+      <div className="relative accoount-menu flex items-center">
+        <Link href="/shto" legacyBehavior>
+          <a className=" text-gray-400 hover:text-gray-500 lg:block hover:opacity-[.85] transition-all ml-2">
+            <AddIcon />
+          </a>
+        </Link>
+        
+        <UseGoogle account={account} dispatch={dispatch} />
+      </div>
+    )
 };
 
 export default function User() {
@@ -90,18 +100,10 @@ export default function User() {
   useAuth(account);
 
   return (
-    <>
+    <Fragment>
       {account.Loading && <Loading withContainer={false} width="52px" height="52px"  />}
       {account.Auth && <Auth account={account} />}
       {!account.Auth && !account.Loading && <NotAuth account={account} />}
-    </>
+    </Fragment>
   );
-}
-
-Auth.propTypes = {
-  account: object.isRequired,
-}
-
-NotAuth.propTypes = {
-  account: object.isRequired,
 }

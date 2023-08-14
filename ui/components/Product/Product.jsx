@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { bool, object } from "prop-types";
 import { ManageBox, Image, Info } from "./";
 import { useSelector } from "react-redux";
 
@@ -25,7 +24,7 @@ export default function Product(props) {
           />
       }
 
-      <Link href={`/${productData?.slug}`}>
+      <Link href={`/${productData?.slug}`} legacyBehavior>
         <a>
           <Image 
             productData={productData} 
@@ -39,11 +38,4 @@ export default function Product(props) {
       </Link>
     </div>
   );
-}
-
-Product.propTypes = {
-  product: object.isRequired,
-  allowManage: bool,
-  showCategory: bool,
-  showGiven: bool
 }

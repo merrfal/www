@@ -1,4 +1,3 @@
-import { func, string } from "prop-types";
 import { useState, useRef, useEffect } from "react";
 import { OpenIcon } from "../../icons";
 import { Translation } from "../../../utils/Translations";
@@ -62,9 +61,4 @@ export default function Sort({ ordering, setOrdering }) {
       )}
     </div>
   );
-}
-
-Sort.propTypes = {
-  ordering: string.isRequired,
-  setOrdering: func.isRequired,
 }

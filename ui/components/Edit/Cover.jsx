@@ -1,16 +1,11 @@
-import PropTypes from "prop-types";
-
 import { useState } from "react";
-// import { EditIcon } from "../../icons";
-// import { Translation } from "../../../utils/Translations";
 import { UploadFileToFirebase } from "../../../utils";
 import { NO_COVER } from "../../../configs/Constants";
 import { useDispatch } from "react-redux";
 
-export default function Cover({ user }) {
-  const dispatch = useDispatch();
-  const [cover, setCover] = useState(user?.userData?.cover || NO_COVER);
-  // const [temporalCover, setTemporalCover] = useState(user?.userData?.cover || NO_COVER);
+// import { EditIcon } from "../../icons";
+// import { Translation } from "../../../utils/Translations";
+ // const [temporalCover, setTemporalCover] = useState(user?.userData?.cover || NO_COVER);
 
   // useEffect(() => {
   //   if (user !== null) {
@@ -34,6 +29,11 @@ export default function Cover({ user }) {
   //   }
   // }, [user]);
 
+export default function Cover({ user }) {
+  const dispatch = useDispatch();
+  const [cover, setCover] = useState(user?.userData?.cover || NO_COVER);
+
+
   const onUploadHelper = () => {
     const fileInput = document.getElementById("cover-file-input");
     fileInput.click();
@@ -55,7 +55,7 @@ export default function Cover({ user }) {
       <div onClick={onUploadHelper} className="absolute top-2 right-2 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
         <input 
           type="file" 
-          value={null}
+          value={undefined}
           id="cover-file-input"
           onChange={onUploadFile} 
           accept="image/png, image/jpeg"
@@ -69,8 +69,4 @@ export default function Cover({ user }) {
       </div>
     </div>
   );
-}
-
-Cover.propTypes = {
-  user: PropTypes.object.isRequired,
 }

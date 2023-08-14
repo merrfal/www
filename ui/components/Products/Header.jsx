@@ -8,7 +8,7 @@ export default function Header() {
         {Translation("explore-products")}
       </h2>
 
-      <Link href="/kerko">
+      <Link href="/kerko" legacyBehavior>
         <a className="text-sm font-semibold text-[#377DFF] hover:text-[#3073ee] transition-all">
           {Translation("explore-all-products")} &rarr;
         </a>

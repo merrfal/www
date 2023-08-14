@@ -1,4 +1,3 @@
-import { string } from "prop-types";
 import { Global } from "../../../configs/Head";
 import { Translation } from "../../../utils/Translations";
 
@@ -19,8 +18,4 @@ export default function Info({ code }) {
         </p>
       </div>
   );
-}
-
-Info.propTypes = {
-  code: string.isRequired,
 }

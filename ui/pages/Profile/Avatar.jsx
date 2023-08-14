@@ -1,10 +1,9 @@
-import { bool, func, object, string } from "prop-types";
 import { useEffect } from "react";
 import { VerifiedBadge } from "../../icons";
 import { EditButton } from "./";
-import { NO_AVATAR } from "../../../configs/Constants";
 import { isStorageReadable } from "../../../utils/Firebase";
 import { getDownloadURL, ref } from "firebase/storage";
+import { NO_AVATAR } from "../../../configs/Constants";
 
 export default function Avatar(props) {
   const { user, isEdit, setIsEdit, avatar, setAvatar } = props;
@@ -34,7 +33,7 @@ export default function Avatar(props) {
   return (
     <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
       <img
-        src={avatar}
+        src={avatar === null ? NO_AVATAR : avatar}
         alt="Profile Picture"
         loading="lazy"
         onError={() => setAvatar(NO_AVATAR)}
@@ -55,12 +54,4 @@ export default function Avatar(props) {
       </div>
     </div>
   );
-}
-
-Avatar.propTypes = {
-  user: object.isRequired,
-  isEdit: bool.isRequired,
-  setIsEdit: func.isRequired,
-  setAvatar: func.isRequired,
-  avatar: string.isRequired
 }

@@ -1,4 +1,3 @@
-import { object, string } from "prop-types";
 import { Delete, Edit } from "./";
 
 export default function ManageBox({user, slug, account}) {
@@ -8,10 +7,4 @@ export default function ManageBox({user, slug, account}) {
       <Edit slug={slug} />
     </div>
   );
-}
-
-ManageBox.propTypes = {
-  user: string.isRequired,
-  slug: string.isRequired,
-  account: object.isRequired,
 }

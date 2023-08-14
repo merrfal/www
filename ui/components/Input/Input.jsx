@@ -1,5 +1,3 @@
-import { string, func, object } from "prop-types";
-
 export default function Input(props) {
   const { label, value, values, setValues, placeholder, type } = props;
 
@@ -21,13 +19,4 @@ export default function Input(props) {
       </div>
     </div>
   );
-}
-
-Input.propTypes = {
-  label: string.isRequired,
-  value: string.isRequired,
-  values: object.isRequired,
-  setValues: func.isRequired,
-  placeholder: string.isRequired,
-  type: string.isRequired,
 }

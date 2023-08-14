@@ -7,7 +7,7 @@ import { Translation } from "../../../utils/Translations";
 export default function Info() {
   return (
     <div className="flex flex-col">
-      <Link href="/">
+      <Link href="/" legacyBehavior>
         <a className="hover:cursor-pointer col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1 hover:opacity-[.825] transition-all">
           <IconIcon />
         </a>

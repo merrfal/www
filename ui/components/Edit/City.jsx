@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import { Translation } from "../../../utils/Translations";
 import { RequiredLabel, Wildcard } from "../";
 import { AllCountries } from "../../../data/Locations";
@@ -27,9 +25,9 @@ export default function City({ user, onInput, validations }) {
       >
         { 
           user?.userAdditionalData?.city === "" &&  
-          <option value="" disabled>
-            {Translation("select-the-placeholder")}
-          </option>
+            <option value="" disabled>
+              {Translation("select-the-placeholder")}
+            </option>
         }
 
         {AllCountries.find((country) => country["iso_code"] === user?.userAdditionalData?.country)
@@ -43,11 +41,4 @@ export default function City({ user, onInput, validations }) {
       {validations.city && validation.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
-}
-
-
-City.propTypes = {
-  user: PropTypes.object.isRequired,
-  onInput: PropTypes.func.isRequired,
-  validations: PropTypes.object.isRequired
 }

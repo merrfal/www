@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { EditIcon } from "../../icons";
 import { Translation } from "../../../utils/Translations";
-import { bool, func, string } from "prop-types";
 
 export default function EditButton({ isEdit, setIsEdit, id }) {
   const account = useSelector((state) => state.Account);
@@ -20,10 +19,4 @@ export default function EditButton({ isEdit, setIsEdit, id }) {
       </div>
     )
   );
-}
-
-EditButton.propTypes = {
-  isEdit: bool.isRequired,
-  setIsEdit: func.isRequired,
-  id: string.isRequired,
 }

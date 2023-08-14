@@ -1,4 +1,3 @@
-import { string } from "prop-types";
 import { QuestionIcon } from "../../icons";
 
 export default function Tooltip({ text }) {
@@ -19,8 +18,4 @@ export default function Tooltip({ text }) {
         </div>
       </div>
   );
-}
-
-Tooltip.propTypes = {
-  text: string.isRequired
 }

@@ -1,6 +1,5 @@
-import PropTypes from "prop-types";
-
 import { useEffect, useRef, useState } from "react";
+
 import {
   Address,
   Avatar,
@@ -201,13 +200,4 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
       </div>
     </div>
   );
-}
-
-
-Edit.propTypes = {
-  user: PropTypes.object.isRequired,
-  setUser: PropTypes.func.isRequired,
-  setIsEdit: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  account: PropTypes.object.isRequired,
 }

@@ -1,5 +1,3 @@
-import { bool, string } from "prop-types";
-
 export default function Header({ name, description, show }) {
   if(show) return (
     <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
@@ -14,10 +12,4 @@ export default function Header({ name, description, show }) {
   );
 
   else return null;
-}
-
-Header.propTypes = {
-  name: string.isRequired,
-  description: string.isRequired,
-  show: bool.isRequired
 }

@@ -80,7 +80,7 @@ export default function Product() {
           <section className="max-w-7xl mx-auto sm:pt-16 sm:px-6 lg:px-8">
             <div className="max-w-2xl mx-auto lg:max-w-none">
               <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
-                <div className="flex flex-col-reverse">
+                <div className="flex flex-col-reverse ">
                   <Gallery
                     gallery={gallery}
                     index={index}

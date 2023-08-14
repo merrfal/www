@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import { useDispatch, useSelector } from "react-redux";
 import { CloseConfirmation } from "../../../controllers/Slices";
 import { Translation } from "../../../utils/Translations";
@@ -43,8 +41,4 @@ export default function Operations({ router }) {
       </button>
     </div>
   );
-}
-
-Operations.propTypes = {
-  router: PropTypes.object.isRequired
 }

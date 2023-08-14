@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 import { useDispatch } from "react-redux";
 import { MenuLink } from "../";
 import { LogoutAccount } from "../../../controllers/Slices";
@@ -24,8 +22,4 @@ export default function Dropdown({ username }) {
       </div>
     </div>
   );
-}
-
-Dropdown.propTypes = {
-  username: string.isRequired
 }

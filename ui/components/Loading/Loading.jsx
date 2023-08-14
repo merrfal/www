@@ -1,5 +1,3 @@
-import { string, bool } from "prop-types";
-
 export default function Loading(props){
   const { 
     withContainer = true, 
@@ -33,10 +31,4 @@ export default function Loading(props){
     else return (
       <lottie-player {...lottie} />
     )
-}
-
-Loading.propTypes = {
-  withContainer: bool,
-  width: string,
-  height: string
 }

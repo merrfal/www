@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import { useState, useRef, useEffect } from "react";
 import { Categories as AllCategories } from "../../../data";
 import { OpenIcon } from "../../icons";
@@ -45,6 +43,7 @@ export default function Categories({filters, setFilters}) {
                     type="radio"
                     checked={filters.categories.includes(category._id)}
                     className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
+                    onChange={() => {}}
                     onClick={() => setFilters({...filters, categories: [...filters.categories, category._id]})}
                   />
                   
@@ -59,9 +58,4 @@ export default function Categories({filters, setFilters}) {
       )}
     </div>
   );
-}
-
-Categories.propTypes = {
-  filters: PropTypes.object.isRequired,
-  setFilters: PropTypes.func.isRequired,
 }

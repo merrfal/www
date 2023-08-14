@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 
 import { useEffect, useState } from "react";
 // import { EditIcon } from "../../icons";
@@ -88,10 +87,4 @@ export default function Avatar({ user, setUser }) {
         </div>
     </div>
   );
-}
-
-
-Avatar.propTypes = {
-  user: PropTypes.object.isRequired,
-  setUser: PropTypes.func.isRequired,
 }

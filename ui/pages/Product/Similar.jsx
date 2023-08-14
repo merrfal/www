@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { Empty, Product } from "../../components";
 import { SimilarSkeleton } from "./";
 import { Translation } from "../../../utils/Translations";
-import { array, string } from "prop-types";
 
 export default function Similar({ products: allProducts, productId }) {
   let products = allProducts || null;
@@ -37,9 +36,4 @@ export default function Similar({ products: allProducts, productId }) {
         />
     </section>
   );
-}
-
-Similar.propTypes = {
-  products: array.isRequired,
-  productId: string.isRequired,
 }

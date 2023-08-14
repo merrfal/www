@@ -1,4 +1,3 @@
-import { func, object } from "prop-types";
 import { useState, useRef, useEffect } from "react";
 import { OpenIcon } from "../../icons";
 import { Translation } from "../../../utils/Translations"
@@ -81,9 +80,4 @@ export default function Sort({filters, setFilters}) {
         )}
         </div>
     );
-}
-
-Sort.propTypes = {
-    filters: object.isRequired,
-    setFilters: func.isRequired
 }

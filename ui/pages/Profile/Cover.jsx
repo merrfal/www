@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import { NO_COVER } from "../../../configs/Constants";
 import { isStorageReadable } from "../../../utils/Firebase";
 import { getDownloadURL, ref } from "firebase/storage";
-import { func, object, string } from "prop-types";
+import { NO_COVER } from "../../../configs/Constants";
 
 export default function Cover({ cover, setCover, user }) {
   useEffect(() => {
@@ -36,9 +35,3 @@ export default function Cover({ cover, setCover, user }) {
     />
   );
 }
-
-Cover.propTypes = {
-  user: object.isRequired,
-  cover: string.isRequired,
-  setCover: func.isRequired
-};

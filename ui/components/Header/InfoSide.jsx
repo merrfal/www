@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { array, bool, func, object } from "prop-types";
 import { Categories as AllCategories } from "../../../data";
 import { LogoIcon, OpenIcon} from "../../icons";
 import { Search } from "./";
@@ -18,7 +17,7 @@ export default function InfoSide() {
 
   return (
     <div className="h-full w-full flex space-x-6 items-center align-center place-content-between lg:place-content-start ">
-        <Link href="/">
+        <Link href="/" legacyBehavior>
           <a className="flex mr-2 hover:opacity-[.825] transition-all">
             <LogoIcon />
           </a>
@@ -102,19 +101,4 @@ const CategoriesList = (props) => {
       </form>
     </div>
   )
-}
-
-CategoriesList.propTypes = {
-  isCategoryOpen: bool.isRequired,
-  router: object.isRequired,
-  categories: array.isRequired,
-  setIsCategoryOpen: func.isRequired
-}
-
-Categories.propTypes = {
-  router: object.isRequired
-}
-
-Categories.propTypes = {
-  router: object.isRequired
 }

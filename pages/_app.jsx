@@ -1,5 +1,4 @@
 import Script from "next/script";
-import PropTypes from 'prop-types';
 
 import "../ui/styles/merrfal.css";
 import "../ui/styles/tailwind.css";
@@ -19,10 +18,5 @@ const Main = ({ Component, pageProps }) => {
     </Provider>
   );
 };
-
-Main.propTypes = {
-  Component: PropTypes.func.isRequired,
-  pageProps: PropTypes.object.isRequired,
-}
 
 export default Main;

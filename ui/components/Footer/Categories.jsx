@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { bool, string } from "prop-types";
 import { Categories as AllCategories } from "../../../data";
 import { Translation } from "../../../utils/Translations";
 import { usePath } from "../../../hooks";
@@ -56,18 +55,11 @@ const LinkItem = (props) => {
 
   return (
     <li className="text-sm" style={{ lineHeight: 1 }}>
-      <Link href={`/kategorite/${slug}`}>
+      <Link href={icon ? slug : `/kategorite/${slug}`} legacyBehavior>
         <a className={path ? activePathClasses : inactivePathClasses}>
           {name} { icon && `\u2192` }
         </a>
       </Link>
     </li>
   )
-}
-
-LinkItem.propTypes = {
-  name: string.isRequired,
-  path: bool.isRequired,
-  slug: string.isRequired,
-  icon: bool
 }

@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { EMPTY_VALUE } from "../../../configs/Constants";
 
 export default function Alert(props) {
@@ -23,10 +22,4 @@ export default function Alert(props) {
       </div>
     </div>
   );
-}
-
-Alert.propTypes = {
-  title: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired,
-  icon: PropTypes.element.isRequired,
 }

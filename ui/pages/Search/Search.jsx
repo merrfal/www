@@ -88,7 +88,7 @@ export default function Search() {
       /> 
 
       <Filters 
-        key="Search" 
+        key="Search"
         filters={filters} 
         setFilters={setFilters} 
         filtersLoading={filtersLoading}

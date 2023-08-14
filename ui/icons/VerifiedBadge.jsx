@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 export default function VerifiedBadge({ className }) {
   return (
     <svg
@@ -27,8 +25,4 @@ export default function VerifiedBadge({ className }) {
       />
     </svg>
   );
-}
-
-VerifiedBadge.propTypes = {
-  className: string,
 }

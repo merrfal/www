@@ -1,4 +1,3 @@
-import { func, object, string } from "prop-types";
 import { Categories } from ".";
 import { Locations, Sort } from "../../components";
 
@@ -23,11 +22,4 @@ export default function Filters(props) {
       </div>
     </section>
   );
-}
-
-Filters.propTypes = {
-  filters: object.isRequired,
-  setFilters: func.isRequired,
-  key: string,
-  filtersLoading: func.isRequired
 }

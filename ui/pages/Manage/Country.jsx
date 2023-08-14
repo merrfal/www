@@ -1,4 +1,3 @@
-import { func, object } from "prop-types";
 import { Countries } from "../../../data";
 import { CountryValidation } from "../../../utils/Forms";
 import { Translation } from "../../../utils/Translations";
@@ -38,10 +37,4 @@ export default function Country({product, onInput, validation: v}) {
       {v?.country && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
-}
-
-Country.propTypes = {
-  product: object.isRequired,
-  onInput: func.isRequired,
-  validation: object.isRequired,
 }

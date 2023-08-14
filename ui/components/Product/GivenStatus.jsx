@@ -1,7 +1,8 @@
-import { bool } from "prop-types";
 import { Translation } from "../../../utils/Translations";
 
-export default function GivenStatus({ isGiven }) {
+export default function GivenStatus(props) {
+    const { isGiven } = props;
+
     if (isGiven) return (
         <span className="text-xs font-medium inline-block py-[0.15rem] px-1.5 rounded text-[#C2473F] bg-[#fdf4f3]">
             {Translation("given")}
@@ -13,9 +14,4 @@ export default function GivenStatus({ isGiven }) {
             {Translation("not-given")}
         </span>
     );
-}
-
-
-GivenStatus.propTypes = {
-    isGiven: bool.isRequired,
 }

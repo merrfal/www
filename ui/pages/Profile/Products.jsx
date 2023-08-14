@@ -1,6 +1,5 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { func, object } from "prop-types";
 import { Fragment, useEffect, useState } from "react";
 import { Empty, End, Product } from "../../components";
 import { Skeleton } from "./";
@@ -84,10 +83,4 @@ export default function Products({ user, dispatch, account }) {
       <End show={!products.hasMore && products.products.length !== 0} />
     </section>
   );
-}
-
-Products.propTypes = {
-  user: object.isRequired,
-  dispatch: func.isRequired,
-  account: object.isRequired
 }
