@@ -87,36 +87,70 @@ export default function Buttons(props) {
 
     const gallery = [];
 
+    const compressImage = async (file, id, index) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+
+          img.src = event.target.result;
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 1080;
+            canvas.height = 720;
+            ctx.drawImage(img, 0, 0, 1080, 720);
+            canvas.toBlob(
+              (blob) => {
+                const compressedImageRef = ref(Storage, `products/${id}.webp`);
+                const uploadTask = uploadBytesResumable(compressedImageRef, blob);
+    
+                uploadTask
+                  .then(async (snapshot) => {
+                    const url = await getDownloadURL(snapshot.ref);
+                    const compressedImg = {
+                      url,
+                      id,
+                      isMain: index === 0,
+                      filename: `${file.name.split('.')[0]}-compressed.webp`,
+                    };
+    
+                    resolve(compressedImg);
+                  })
+                  
+                  .catch((error) => {
+                    console.error('Error uploading compressed image:', error);
+                    reject(error);
+                  });
+              },
+              'image/webp',
+              0.85
+            );
+          };
+        };
+        reader.readAsDataURL(file);
+      });
+    };
+    
     const promises = product.productData.gallery.map(async (image, index) => {
       const id = v4();
-      const newImage = ref(Storage, `products/${id}`);
-      const uploadTask = uploadBytesResumable(newImage, image.file);
-
+    
       try {
-        const snapshot = await uploadTask;
-        const url = await getDownloadURL(snapshot.ref);
-        const img = {
-          url,
-          isFirebase: true,
-          id,
-          isMain: index === 0,
-          filename: image.file.name,
-        };
-        
-        gallery.push(img);
+        const compressedImg = await compressImage(image.file, id, index);
+        gallery.push(compressedImg);
       } 
       
       catch (error) {
         const alert = {
-          type: "error",
-          message: Translation("couldnt-upload-to-firebase"),
+          type: 'error',
+          message: Translation('couldnt-upload-to-firebase'),
           dispatch,
-        }
-
+        };
+    
         Notification(alert);
       }
     });
-
+    
     await Promise.all(promises);
 
     const initalProduct = {
@@ -182,5 +216,4 @@ Buttons.propTypes = {
   mode: string.isRequired,
   onUpdate: func.isRequired,
   setIsHold: func.isRequired,
-
 }

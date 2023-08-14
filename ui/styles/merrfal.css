@@ -45,7 +45,7 @@ textarea {
   }
 
   .mobile-categories {
-    display: none;
+    display: flex;
   }
 
   .desktop-categories {

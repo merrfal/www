@@ -9,6 +9,7 @@ import { Search as Searching } from "../../../api/Product";
 import { Empty, End, Product } from "../../components";
 import { useDispatch } from "react-redux";
 import { Translation } from "../../../utils/Translations";
+import { HandleFiltersCurrentCountry } from "../../../utils/Locations";
 
 export default function Search() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function Search() {
   const [first, setFirst] = useState(true);
   const [products, setProducts] = useState({ products: [], hasMore: true });
   const [allMode, setAllMode] = useState(null);
+  const [filtersLoading, setFiltersLoading] = useState(true);
 
   const [filters, setFilters] = useState({
     sort: { createdAt: 1 },
@@ -24,6 +26,14 @@ export default function Search() {
     countries: [],
     cities: []
   });
+
+  useEffect(() => { 
+    HandleFiltersCurrentCountry({ 
+      filters, 
+      setFilters,
+      setFiltersLoading
+    }) 
+  }, [])
 
   useEffect(() => {
     const { term } = router.query;
@@ -45,7 +55,7 @@ export default function Search() {
   };
 
   useEffect(() => {
-    if (!first) {
+    if (!first && !filtersLoading) {
       setProducts({ products: [], hasMore: true });
       next();
     }
@@ -77,9 +87,14 @@ export default function Search() {
         description={Translation("meta-search-description")} 
       /> 
 
-      <Filters filters={filters} setFilters={setFilters} />
+      <Filters 
+        key="Search" 
+        filters={filters} 
+        setFilters={setFilters} 
+        filtersLoading={filtersLoading}
+      />
 
-      <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto mt-5 px-4 sm:px-6 lg:px-8">
         <Empty 
           show={products.products.length === 0 && !products.hasMore}
           heading={Translation("no-products-found")} 
@@ -91,7 +106,7 @@ export default function Search() {
           next={next}
           hasMore={products.hasMore}
           loader={<Skeleton />}
-          className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
+          className="mt-6 grid grid-cols-2 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
         >
           {products.products.map(
             (product, index) => 

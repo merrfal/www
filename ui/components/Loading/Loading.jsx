@@ -1,7 +1,11 @@
 import { string, bool } from "prop-types";
 
 export default function Loading(props){
-  const { withContainer = true, width = "62px", height = "62px" } = props;
+  const { 
+    withContainer = true, 
+    width = "62px", 
+    height = "62px" 
+  } = props;
 
     const lottie = {
       src: "/json/LottieLoading.json",
@@ -32,7 +36,7 @@ export default function Loading(props){
 }
 
 Loading.propTypes = {
-  withContainer: bool.isRequired,
-  width: string.isRequired,
-  height: string.isRequired
+  withContainer: bool,
+  width: string,
+  height: string
 }

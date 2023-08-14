@@ -14,15 +14,15 @@ export default function Products() {
 
   return (
     <div className="bg-white">
-      <div className="max-w-2xl py-20 mx-auto mb-6 px-4 sm:py-18 lg:py-6 sm:max-w-5xl lg:max-w-7xl lg:px-8">
+      <div className="mx-auto mb-6 px-4 max-w-7xl lg:px-8">
         <Header />
 
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 sm:space-x-2 lg:grid-cols-3 xl:grid-cols-4 pb-4 xl:gap-x-8 ">
+        <div className="py-3 grid grid-cols-2 gap-4 lg:gap-2 xl:gap-2 sm:grid-cols-2 sm:space-x-2 lg:grid-cols-3 xl:grid-cols-4">
           {products === null && <Skeleton />}
 
           {products !== null && products.map((product, index) => 
             <Fragment key={index}>
-              <Product product={product} />
+              <Product showGiven={false} product={product} />
             </Fragment>
           )}
         </div>

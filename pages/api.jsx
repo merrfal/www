@@ -9,9 +9,6 @@ export default async function handler(req, res) {
   RouteMethod(TARGET, PAYLOAD, res);
 }
 
-// TODO: not the right way to disable API resolved without... error
 export const config = {
-  api:{
-      externalResolver: true,
-  },
+  api: { externalResolver: true },
 }

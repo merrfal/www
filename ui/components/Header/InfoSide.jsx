@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { object } from "prop-types";
-import { Categories } from "../../../data";
+import { array, bool, func, object } from "prop-types";
+import { Categories as AllCategories } from "../../../data";
 import { LogoIcon, OpenIcon} from "../../icons";
 import { Search } from "./";
 import { useState } from "react";
@@ -11,9 +11,7 @@ import { useRef } from "react";
 import { Translation } from "../../../utils/Translations";
 import { usePath } from "../../../hooks";
 
-const categories = JSON.parse(JSON.stringify(Categories));
-const activePathClasses = "flex items-center text-sm font-medium text-[#377DFF] transition-all";
-const inactivePathClasses = "flex items-center text-sm font-medium text-gray-700 hover:text-[#377DFF] transition-all";
+const categories = JSON.parse(JSON.stringify(AllCategories));
 
 export default function InfoSide() {
   const router = useRouter();
@@ -28,55 +26,15 @@ export default function InfoSide() {
 
       <Search />
 
-      <div className="h-5 border-r border-gray-200 mx-4 hidden lg:block" />
-      {
-        <div className="categories-container">
-          <Desktop router={router} />
-          <Mobile router={router}/>
-        </div>
-        //qetu mi hek produktet duhet me bo diqka me z-index a naj sen me dal aj perpara
-      }
+      <div className="categories-container">
+        <Categories router={router}/>
+      </div>
     </div>
   );
 }
 
-const Desktop = ({router}) => {
-  const allPath = {
-    all: usePath(router, "kategorite", 1),
-    others: false
-  }
 
-  return (
-    <div className="desktop-categories">
-      <div className="h-full w-auto flex space-x-6 items-center align-center">
-        {categories?.filter((category) => category.favorite)
-          .slice(0, 8)
-          .map((link, index) => {
-            const path = usePath(router, link.slug);
-
-            if(path) allPath.others = true;
-          
-            return (
-            <Link key={index} href={`/kategorite/${link.slug}`}>
-              <a className={path ? activePathClasses : inactivePathClasses}>
-                {link.name}
-              </a>
-            </Link>
-            )
-          }
-        )}
-
-          <Link href="/kategorite/">
-            <a className={allPath.all && !allPath.others ? activePathClasses : inactivePathClasses}>
-              {Translation("all")}
-            </a>
-          </Link>
-      </div>
-    </div>
-  );
-};
-
-const Mobile = ({router}) => {
+const Categories = ({router}) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
 
   let clickOutside = (handler) => {
@@ -96,43 +54,67 @@ const Mobile = ({router}) => {
 
 
   return (
-    <div className="mobile-categories z-0">
-      <div ref={ref} className="px-4 relative inline-block text-left">
+    <div className="mobile-categories">
+      <div ref={ref} className="relative inline-block text-left">
         <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900 transition-all">
           <span>{Translation("categories")}</span>
           <OpenIcon />
         </button>
 
-        {isCategoryOpen && (
-          <div className="origin-top-right max-h-[280px] overflow-scroll absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <form className="space-y-4">
-              {categories?.map((category, index) => {
-                const path = usePath(router, category.slug);
-
-                return (
-                  <div key={index} className="flex items-center hover:cursor-pointer hover:text-[#377DFF] transition-all">
-                    <Link href={`/kategorite/${category.slug}`}>
-                      <span className={path ? "hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-700 whitespace-nowrap" : "hover:cursor-pointer ml-3 pr-6 text-sm font-medium whitespace-nowrap text-[#377DFF] transition-all"} onClick={() => setIsCategoryOpen(!isCategoryOpen)}>
-                        {category.name}
-                      </span>
-                    </Link>
-                  </div>
-                );
-              })}
-            </form>
-          </div>
-        )}
+        <CategoriesList 
+          isCategoryOpen={isCategoryOpen} 
+          setIsCategoryOpen={setIsCategoryOpen}
+          router={router} 
+          categories={categories} 
+        />
       </div>
     </div>
   );
 };
 
+const CategoriesList = (props) => {
+  const { isCategoryOpen, router, categories, setIsCategoryOpen } = props;
 
+  const activePathClasses = "hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-[#377DFF] whitespace-nowrap transition-all ease-in-out duration-500";
+  const inactivePathClasses = "hover:cursor-pointer hover:text-[#377DFF] ml-3 pr-6 text-sm font-medium whitespace-nowrap text-gray-600 transition-all whitespace-nowrap transition-all ease-in-out duration-500";
 
-Desktop.propTypes = {
+  if (!isCategoryOpen) return null;
+
+  return (
+    <div className="origin-top-right max-h-[280px] overflow-scroll absolute right-0 mt-3 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none z-[999]">
+      <form className="space-y-4">
+        {categories?.map((category, index) => {
+          const path = usePath(router, category.slug);
+          
+          return (
+            <div key={index} className="flex items-center hover:cursor-pointer transition-all ease-in-out duration-500">
+              <Link href={`/kategorite/${category.slug}`}>
+                <span 
+                  className={path ? activePathClasses : inactivePathClasses} 
+                  onClick={() => setIsCategoryOpen(!isCategoryOpen)}
+                >
+                  {category.name}
+                </span>
+              </Link>
+            </div>
+          );
+        })}
+      </form>
+    </div>
+  )
+}
+
+CategoriesList.propTypes = {
+  isCategoryOpen: bool.isRequired,
+  router: object.isRequired,
+  categories: array.isRequired,
+  setIsCategoryOpen: func.isRequired
+}
+
+Categories.propTypes = {
   router: object.isRequired
 }
 
-Mobile.propTypes = {
+Categories.propTypes = {
   router: object.isRequired
 }

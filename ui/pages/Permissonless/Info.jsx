@@ -6,7 +6,7 @@ export default function Info() {
 
   return (
     <>
-      <Global title={name} index={false} />
+      <Global title={name} index={true} />
       
       <h1 className="mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
         {name}

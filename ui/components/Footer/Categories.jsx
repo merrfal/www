@@ -1,15 +1,16 @@
 import Link from "next/link";
 
+import { bool, string } from "prop-types";
 import { Categories as AllCategories } from "../../../data";
 import { Translation } from "../../../utils/Translations";
 import { usePath } from "../../../hooks";
 import { useRouter } from "next/router";
+import { Fragment } from "react";
 
 export default function Categories() {
   const router = useRouter();
 
-  const activePathClasses = "text-[#377DFF] transition-all";
-  const inactivePathClasses = "text-gray-500 hover:text-[#377DFF] transition-all";
+  
 
   return (
     <div>
@@ -19,22 +20,54 @@ export default function Categories() {
 
       <ul className="mt-6 space-y-6">
         {AllCategories?.filter((category) => category.favorite)
-          .slice(0, 4)
+          .slice(0, 3)
           .map((link, index) => {
             const path = usePath(router, link.slug);
           
             return (
-              <li key={index} className="text-sm" style={{lineHeight: 1}}>
-                <Link href={`/kategorite/${link?.slug}`}>
-                  <a className={path ? activePathClasses : inactivePathClasses}>
-                    {link?.name}
-                  </a>
-                </Link>
-              </li>
+                <Fragment key={index}>
+                  <LinkItem 
+                    name={link.name}
+                    path={path}
+                    slug={link.slug}
+                  />
+                </Fragment>
             )
           }
         )}
+
+        <LinkItem 
+          name={Translation("view-all")} 
+          path={usePath(router, "kategorite")}
+          slug="/kategorite"
+          icon={true}
+        />
       </ul>
     </div>
   );
+}
+
+
+const LinkItem = (props) => {
+  const { name, path, slug, icon = false } = props;
+
+  const activePathClasses = "text-[#377DFF] transition-all";
+  const inactivePathClasses = "text-gray-500 hover:text-[#377DFF] transition-all";
+
+  return (
+    <li className="text-sm" style={{ lineHeight: 1 }}>
+      <Link href={`/kategorite/${slug}`}>
+        <a className={path ? activePathClasses : inactivePathClasses}>
+          {name} { icon && `\u2192` }
+        </a>
+      </Link>
+    </li>
+  )
+}
+
+LinkItem.propTypes = {
+  name: string.isRequired,
+  path: bool.isRequired,
+  slug: string.isRequired,
+  icon: bool
 }

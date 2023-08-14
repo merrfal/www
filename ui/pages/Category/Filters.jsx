@@ -1,11 +1,12 @@
-import PropTypes from "prop-types";
-
+import { func, object, string } from "prop-types";
 import { Statuses } from "./";
 import { Locations, Sort } from "../../components";
 
-export default function Filters({ filters, setFilters }) {
+export default function Filters(props) {
+  const { filters, setFilters, filtersLoading } = props;
+
   return (
-    <section>
+    <section className={filtersLoading ? "opacity-[75%] pointer-events-none" : ""}>
       <div className="relative z-10 bg-white border-b border-gray-200 pb-4">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between sm:px-6 lg:px-8">
           <Sort filters={filters} setFilters={setFilters} />
@@ -24,8 +25,9 @@ export default function Filters({ filters, setFilters }) {
   );
 }
 
-
 Filters.propTypes = {
-  filters: PropTypes.object.isRequired,
-  setFilters: PropTypes.func.isRequired,
+  filters: object.isRequired,
+  setFilters: func.isRequired,
+  key: string,
+  filtersLoading: func.isRequired
 }

@@ -11,6 +11,7 @@ import { Empty, End, Loading, Product } from "../../components";
 import { useDispatch } from "react-redux";
 import { Error } from "..";
 import { Translation } from "../../../utils/Translations";
+import { HandleFiltersCurrentCountry } from "../../../utils/Locations";
 
 export default function Category() {
   const router = useRouter();
@@ -19,13 +20,22 @@ export default function Category() {
   const [category, setCategory] = useState(null);
   const [products, setProducts] = useState({ products: [], hasMore: true });
   const [loading, setLoading] = useState(true);
+  const [filtersLoading, setFiltersLoading] = useState(true);
 
   const [filters, setFilters] = useState({
     sort: { createdAt: 1 },
     cities: [],
     countries: [],
-    statuses: [false],
+    statuses: [ false ],
   });
+
+  useEffect(() => { 
+    HandleFiltersCurrentCountry({ 
+      filters, 
+      setFilters,
+      setFiltersLoading
+    }) 
+  }, [])
 
   useEffect(() => {
     const { slug } = router.query;
@@ -53,10 +63,10 @@ export default function Category() {
     setLoading(true);
 
     const validCategory = category !== null && category !== false;
-    if(validCategory) next({scratch: true});
+    if(validCategory) next({ scratch: true });
   }, [category, filters])
 
-  const next = ({scratch}) => {
+  const next = ({ scratch }) => {
     scratch && setProducts({ products: [], hasMore: true });
     setLoading(true);
 
@@ -82,17 +92,13 @@ export default function Category() {
 
   return (
     <Normal>
-      <Global 
-        title={category?.name} 
-        description={category?.description} 
-      />
+      <Global title={category?.name} description={category?.description} />
 
-      {category !== null && category !== false && 
-        <Header 
-          name={category?.name} 
-          description={category?.description} 
-        />
-      }
+      <Header 
+        name={category?.name} 
+        description={category?.description}
+        show={category !== null && category !== false} 
+      />
 
       {category === null ? <Loading /> : null}
 
@@ -103,22 +109,22 @@ export default function Category() {
             key="Category" 
             filters={filters} 
             setFilters={setFilters} 
+            filtersLoading={filtersLoading}
           />
 
-          <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-            {products.products.length === 0 && !products.hasMore && !loading &&
-              <Empty 
-                heading={Translation("no-products-found")} 
-                message={Translation("category-products-description-empty")}
-              />
-            }
+          <div className="max-w-7xl mx-auto mt-5 px-4 sm:px-6 lg:px-8">
+            <Empty 
+              heading={Translation("no-products-found")} 
+              message={Translation("category-products-description-empty")}
+              show={products.products.length === 0 && !products.hasMore && !loading}
+            />
 
             <InfiniteScroll
               dataLength={products.products.length}
               next={() => next({scratch: false})}
               hasMore={products.hasMore || loading}
               loader={<Skeleton />}
-              className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
+              className="mt-6 grid grid-cols-2 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
             >
               {products.products.map(
                 (product, index) => <Fragment key={index}>

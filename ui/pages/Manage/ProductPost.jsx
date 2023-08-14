@@ -6,8 +6,7 @@ import { DisabledDefaultState, ProductDefaultState, ProductDefaultValidation } f
 import { onInput as Input } from "../../../utils/ProductManipulation"
 import { InfoIconAlert } from "../../icons";
 import { Translation } from "../../../utils/Translations";
-import { allowedCountries } from "../../../utils/Locations";
-import { Permissonless } from "..";
+import { AllowedCountries } from "../../../utils/Locations";
 
 import {
   Header,
@@ -48,7 +47,7 @@ export default function ProductPost() {
         const { phone } = userData;
         const { city, address, country } = userAdditionalData;
 
-        if(allowedCountries.includes(country)){
+        if(AllowedCountries.includes(country)){
           setProduct({
             ...product,
             productData: {
@@ -68,98 +67,99 @@ export default function ProductPost() {
 
   const onLoad = !isHold ? {} : DisabledDefaultState;
 
-  if (!loading && !account.Loading && !account.Auth) return <Permissonless />
-
   return (
     <Normal>
       {loading || account.Loading ? <Loading /> : null}
 
-      {!loading && !account.Loading && account.Auth && <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16">
-          <div className="mt-5 md:col-span-2 md:mt-0">
-            <div style={onLoad} className="sm:overflow-hidden sm:rounded-md">
-              <div className="space-y-6 p-2">
-                <Header product={product} mode="create" />
+      {
+        !loading && !account.Loading && 
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16">
+            <div className="mt-5 md:col-span-2 md:mt-0">
+              <div style={onLoad} className="sm:overflow-hidden sm:rounded-md">
+                <div className="space-y-6 p-2">
+                  <Header product={product} mode="create" />
 
-                {
-                  !allowedCountries.includes(account?.User?.userAdditionalData?.country) && account.Auth &&
-                    <Alert
-                      title={Translation("outside-operating-country")}
-                      message={Translation("outside-operating-country-description")}
-                      icon={<InfoIconAlert color="#1D4ED850" />}
+                  {
+                    !AllowedCountries.includes(account?.User?.userAdditionalData?.country) && account.Auth &&
+                      <Alert
+                        title={Translation("outside-operating-country")}
+                        message={Translation("outside-operating-country-description")}
+                        icon={<InfoIconAlert color="#1D4ED850" />}
+                      />
+                  }
+
+                  <Title
+                    product={product}
+                    onInput={onInput}
+                    validation={validation}
+                  />
+
+                  <Description
+                    product={product}
+                    onInput={onInput}
+                    validation={validation}
+                  />
+
+                  <div className="grid lg:grid-cols-9 xl:grid-cols-9 2x:grid-cols-9 md:grid-cols-2 sm:grid-cols-2 gap-3">
+                    <Categories
+                      product={product}
+                      onInput={onInput}
+                      validation={validation}
                     />
-                }
 
-                <Title
-                  product={product}
-                  onInput={onInput}
-                  validation={validation}
-                />
+                    <Mode
+                      product={product}
+                      onInput={onInput}
+                      validation={validation}
+                    />
 
-                <Description
-                  product={product}
-                  onInput={onInput}
-                  validation={validation}
-                />
+                    <Phone
+                      product={product}
+                      onInput={onInput}
+                      validation={validation}
+                    />
 
-                <div className="grid lg:grid-cols-9 xl:grid-cols-9 2x:grid-cols-9 md:grid-cols-2 sm:grid-cols-2 gap-3">
-                  <Categories
+                    <Country
+                      product={product}
+                      onInput={onInput}
+                      validation={validation}
+                    />
+
+                    <Cities
+                      product={product}
+                      onInput={onInput}
+                      validation={validation}
+                    />
+
+                    <Address
+                      product={product}
+                      onInput={onInput}
+                      validation={validation}
+                    />
+                  </div>
+
+                  <Images
                     product={product}
-                    onInput={onInput}
+                    setProduct={setProduct}
                     validation={validation}
-                  />
-
-                  <Mode
-                    product={product}
-                    onInput={onInput}
-                    validation={validation}
-                  />
-
-                  <Phone
-                    product={product}
-                    onInput={onInput}
-                    validation={validation}
-                  />
-
-                  <Country
-                    product={product}
-                    onInput={onInput}
-                    validation={validation}
-                  />
-
-                  <Cities
-                    product={product}
-                    onInput={onInput}
-                    validation={validation}
-                  />
-
-                  <Address
-                    product={product}
-                    onInput={onInput}
-                    validation={validation}
+                    mode="create"
                   />
                 </div>
 
-                <Images
-                  product={product}
-                  setProduct={setProduct}
-                  validation={validation}
+                <Buttons
                   mode="create"
+                  product={product}
+                  onInput={onInput}
+                  account={account}
+                  setValidation={setValidation}
+                  setIsHold={setIsHold}
                 />
               </div>
-
-              <Buttons
-                mode="create"
-                product={product}
-                onInput={onInput}
-                account={account}
-                setValidation={setValidation}
-                setIsHold={setIsHold}
-              />
             </div>
           </div>
         </div>
-      </div>}
+      }
     </Normal>
   );
 }

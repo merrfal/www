@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
 import { useState } from "react";
-import { EditIcon } from "../../icons";
-import { Translation } from "../../../utils/Translations";
+// import { EditIcon } from "../../icons";
+// import { Translation } from "../../../utils/Translations";
 import { UploadFileToFirebase } from "../../../utils";
 import { NO_COVER } from "../../../configs/Constants";
 import { useDispatch } from "react-redux";
@@ -62,10 +62,10 @@ export default function Cover({ user }) {
           className="w-full h-full absolute cursor-pointer invisible"
         />
 
-        <button className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
+        {/* <button className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
           <EditIcon />
           <span>{Translation("change-cover")}</span>
-        </button>
+        </button> */}
       </div>
     </div>
   );

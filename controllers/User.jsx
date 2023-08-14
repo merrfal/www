@@ -98,13 +98,13 @@ export const Delete = async (payload, res) => {
 
 export const Login = async ({ uid }, res) => {
   try {
-    const user = await User.findOne({ "userData.uid": uid });
+    const user = await User.findOne({ "userData.uid": uid }).lean();
 
     const response = {
       res,
       code: user ? 200 : 404,
       success: user ? true : false,
-      data: user ? { ...user._doc } : null,
+      data: user ? { ...user } : null,
       message: user ? Translation("user-auth-success") : Translation("user-auth-error"),
     };
 
@@ -137,7 +137,7 @@ export const Products = async (payload, res) => {
   }
 
   try {
-    let products = await Product.find(filter()).sort({createdAt: -1}).skip(offset).limit(limit);
+    let products = await Product.find(filter()).sort({createdAt: -1}).skip(offset).limit(limit).lean();
     let countProducts = await Product.find(filter()).countDocuments();
 
     const response = {
@@ -167,7 +167,8 @@ export const Products = async (payload, res) => {
 
 export const Update = async (payload, res) => {
   try {
-    const user = await User.findOneAndUpdate(
+    const user = await User
+    .findOneAndUpdate(
       {'userData.username': payload.old_username}, 
       { $set: 
         { 
@@ -176,7 +177,8 @@ export const Update = async (payload, res) => {
         }
       },
       { new: true }
-    );
+    )
+    .lean();
 
     const response = {
       res,
@@ -205,11 +207,13 @@ export const Update = async (payload, res) => {
 
 export const View = async ({ username }, res) => {
   try {
-    const user = await User.findOneAndUpdate(
+    const user = await User
+    .findOneAndUpdate(
       { "userData.username": username },
       { $inc: { "userActivities.views": 1 } },
       { new: true }
-    );
+    )
+    .lean();
 
     const response = {
       res,
@@ -239,7 +243,9 @@ export const View = async ({ username }, res) => {
 
 export const CheckIfExist = async ({field, value}, res) => {
   try {
-    const checkDuplicate = await User.findOne({[field]: value});
+    const checkDuplicate = await User.findOne({[field]: value})
+      .select({_id: 1})
+      .lean();
 
     const response = {
       res,

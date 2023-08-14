@@ -115,7 +115,13 @@ export const Category  = async (payload, res) => {
   else sort = { 'createdAt': sort.createdAt }
 
   try {
-    let products = await Product.find(filters).sort(sort).skip(offset).limit(limit);
+    let products = await Product
+      .find(filters)
+      .sort(sort)
+      .skip(offset)
+      .limit(limit)
+      .lean();
+
     let countProducts = await Product.find(filters).countDocuments();
 
     const response = {
@@ -166,7 +172,7 @@ export const Search  = async (payload, res) => {
   if(categories.length === 0) delete filters['productData.category'];
 
   try {
-    let products = await Product.find(filters).sort(sort).skip(offset).limit(limit);
+    let products = await Product.find(filters).sort(sort).skip(offset).limit(limit).lean();
     let countProducts = await Product.find(filters).countDocuments();
 
     const response = {
@@ -210,7 +216,8 @@ export const Latest = async (payload, res) => {
     let products = await Product
       .find(productsFindObject)
       .sort({ createdAt: -1})
-      .limit(16);
+      .limit(16)
+      .lean();
 
     if(products.length === 0 && usingGeo){
       usingGeo = false; 
@@ -220,7 +227,8 @@ export const Latest = async (payload, res) => {
       products = await Product
         .find(newProductsFindObject)
         .sort({ createdAt: -1})
-        .limit(16);
+        .limit(16)
+        .lean();
     }
 
     const payload = {
@@ -294,7 +302,7 @@ export const View = async ({ slug }, res) => {
       "userData.username": 1,
       "userData.avatar": 1,
       "userAdditionalData.isUserVerified": 1
-    });
+    }).lean();
 
     const response = {
       res,
@@ -340,7 +348,8 @@ export const Similar = async ({ category }, res) => {
     let products = await Product
       .find(productsFindObject)
       .sort({ createdAt: -1 })
-      .limit(5);
+      .limit(5)
+      .lean();
 
     if(products.length === 0 && usingGeo){
       usingGeo = false;
@@ -353,7 +362,8 @@ export const Similar = async ({ category }, res) => {
       products = await Product
         .find(newProductsFindObject)
         .sort({ createdAt: -1 })
-        .limit(5);
+        .limit(5)
+        .lean();
     }
 
     const response = {

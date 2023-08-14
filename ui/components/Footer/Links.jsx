@@ -13,7 +13,7 @@ export default function Links() {
   const inactivePathClasses = "text-gray-500 hover:text-[#377DFF] transition-all"
 
   return (
-    <div className="hidden sm:inline-block">
+    <div>
       <h3 className="text-sm font-medium text-gray-900 select-none">
         {Translation("more")}
       </h3>

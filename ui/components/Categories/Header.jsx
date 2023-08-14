@@ -3,7 +3,7 @@ import { Translation } from "../../../utils/Translations";
 
 export default function Header() {
   return (
-    <div className="px-4 sm:px-6 sm:flex sm:items-center sm:justify-between lg:px-8 xl:px-0">
+    <div className="sm:flex sm:items-center sm:justify-between">
       <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
         {Translation("explore-categories")}
       </h2>

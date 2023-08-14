@@ -1,14 +1,20 @@
 import MetaTags from "next/head";
 import PropTypes from "prop-types";
 
-import { IS_PROD } from "./Envs";
 import { Translation } from "../utils/Translations";
 
-export const Global = ({ title, description, image, index }) => {
+export const Global = (props) => {
+  const { 
+    title = null, 
+    description = Translation("merrfal-description"), 
+    image = '/merrfal-hero.png',
+    index = false 
+  } = props;
+  
   return (
     <MetaTags>
       <meta charSet="UTF-8" />
-      <link rel="icon" href="favicon.ico" sizes="any" />
+      <link rel="icon" href="/favicon.ico" sizes="any" />
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
       <meta name="author" content={Translation("merrfal")} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,16 +23,16 @@ export const Global = ({ title, description, image, index }) => {
 
       <meta property="og:title" content={`${title} - ${Translation("merrfal")}`} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image ? image : '/merrfal-hero.png'} />
+      <meta property="og:image" content={image} />
       
-      {index && IS_PROD && <meta name="robots" content="noindex" />}
+      {index === true && <meta name="robots" content="noindex" />}
     </MetaTags>
   );
 };
 
 Global.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  index: PropTypes.bool.isRequired
+  title: PropTypes.string,
+  description: PropTypes.string,
+  image: PropTypes.string,
+  index: PropTypes.bool
 }

@@ -1,27 +1,25 @@
 import Link from "next/link";
-import PropTypes from 'prop-types';
 
+import { bool, object } from 'prop-types';
 import { NO_CATEGORY } from "../../../configs/Constants";
 
-export default function Category({ category, kategori }) {
+// import { useState } from "react";
+// const [categoryThumbnail, setCategoryThumbnail] = useState("")
+// onError={() => setCategoryThumbnail(NO_CATEGORY)}
+
+export default function Category(props) {
+  const { category, kategori } = props;
   const { name, icon, slug } = category;
 
   return (
     <Link href={`/kategorite/${slug}`}>
-      <a className={kategori ? "hover:cursor-pointer relative h-[260px] sm:h-[400px] mb-6 rounded p-6 flex flex-col mx-2 hover:opacity-80 transition-all duration-1000" :"hover:cursor-pointer relative h-[350px] sm:h-[400px] mb-6 rounded p-6 flex flex-col mx-2 hover:opacity-80 transition-all duration-1000"}>
+      <a className={kategori ? "hover:cursor-pointer relative h-[260px] sm:h-[400px] rounded p-6 flex flex-col hover:opacity-80 transition-all duration-1000" :"hover:cursor-pointer relative h-[350px] sm:h-[400px] rounded p-6 flex flex-col hover:opacity-80 transition-all duration-1000"}>
         <span className="absolute inset-0">
           <img
             src={icon === "" ? NO_CATEGORY : icon}
             alt={name + "s image"}
             loading="lazy"
-            className={`
-              w-full h-full object-center object-cover duration-700 ease-in-out group-hover:opacity-75 rounded-xl
-              ${!icon
-                  ? "scale-110 blur-2xl grayscale"
-                  : "scale-100 blur-0 grayscale-0"
-                }
-              `
-            }
+            className={`w-full h-full object-center object-cover duration-700 ease-in-out group-hover:opacity-75 rounded-xl ${!icon ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0" }`}
           />
         </span>
         
@@ -31,11 +29,11 @@ export default function Category({ category, kategori }) {
           {name}
         </span>
       </a>
-    </Link >
+    </Link>
   );
 }
 
 Category.propTypes = {
-  category: PropTypes.object.isRequired,
-  kategori: PropTypes.bool.isRequired,
+  category: object.isRequired,
+  kategori: bool.isRequired,
 }

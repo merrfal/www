@@ -6,7 +6,7 @@ export default function AddIcon() {
       viewBox="0 0 24 24"
       strokeWidth="2"
       stroke="currentColor"
-      className="w-6 h-6"
+      className="w-6 h-6 text-gray-400 hover:text-gray-400 transition all-ease-out duration-500 mx-2"
     >
       <path
         strokeLinecap="round"

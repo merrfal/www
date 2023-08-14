@@ -5,7 +5,8 @@ import { Storage } from "../../../configs/Firebase";
 import { Category, GivenStatus } from ".";
 import { NO_THUMBNAIL } from "../../../configs/Constants";
 
-export default function Image({ productData, showCategory, allowManage }) {
+export default function Image(props) {
+  const { productData, showCategory, allowManage, showGiven } = props;
   const [thumbnail, setThumbnail] = useState(null);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function Image({ productData, showCategory, allowManage }) {
       <div className={allowManage ? "absolute top-2 z-[1] left-2 flex flex-col items-start" : "absolute top-2 left-2 z-[1] flex justify-center items-center"}>
         { showCategory && <Category category={productData.category} /> }
         { showCategory && <div className={allowManage ? "h-0 w-[0px] bg-[#f8f8f850] my-0.5" : "h-2.5 w-[1px] bg-[#f8f8f850] mr-1"} /> }
-        <GivenStatus isGiven={productData.isGiven} />
+        { showGiven && <GivenStatus given={productData.given} /> }
       </div>
 
       <img
@@ -49,4 +50,5 @@ Image.propTypes = {
   productData: object.isRequired,
   showCategory: bool.isRequired,
   allowManage: bool.isRequired,
+  showGiven: bool.isRequired
 }

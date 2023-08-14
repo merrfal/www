@@ -1,7 +1,7 @@
 export default function OpenIcon() {
   return (
     <svg
-      className="rotate-0 h-5 w-5 transform"
+      className="rotate-0 h-4 w-4 transform text-gray-400 mt-[3px]"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 20 20"
       fill="currentColor"
