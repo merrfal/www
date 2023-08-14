@@ -33,7 +33,7 @@ export default function Search() {
       setFilters,
       setFiltersLoading
     }) 
-  }, [])
+  }, [router])
 
   useEffect(() => {
     const { term } = router.query;

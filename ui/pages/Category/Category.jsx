@@ -35,7 +35,7 @@ export default function Category() {
       setFilters,
       setFiltersLoading
     }) 
-  }, [])
+  }, [router])
 
   useEffect(() => {
     const { slug } = router.query;
