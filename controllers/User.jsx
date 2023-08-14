@@ -1,12 +1,12 @@
 import { User, Product } from "../configs/Models";
 import { Response } from "../utils/Response";
-import { ConnectionLocation } from "../utils/Connection";
-import { AllCountries} from "../data/Locations";
+// import { ConnectionLocation } from "../utils/Connection";
+// import { AllCountries} from "../data/Locations";
 import { Translation } from "../utils/Translations";
 
 export const Register = async (payload, res) => {
   try {
-    let locationRes = await ConnectionLocation();
+    // let locationRes = await ConnectionLocation();
     
     const data = { 
       userData: {...payload?.userData},
@@ -16,25 +16,28 @@ export const Register = async (payload, res) => {
       }
     };
 
-    if(locationRes?.success === true){
-      const geoData = locationRes?.data;
-      const countryExists = AllCountries.find((country) => country.iso_code === geoData?.country);
+    // if(locationRes?.success === true){
+      // const geoData = locationRes?.data;
+      // const countryExists = AllCountries.find((country) => country.iso_code === geoData?.country);
 
-      if(countryExists) {
-        data.userAdditionalData.country = countryExists.iso_code;
-        let foundCity = false;
+      // if(countryExists) {
+      //   data.userAdditionalData.country = countryExists.iso_code;
+      //   let foundCity = false;
 
-        const cityExists = AllCountries.map((country) => {
-          country.cities.find((city) => {
-            if(city.value === geoData?.city.toLocaleLowerCase()){
-              foundCity = city;
-            }
-          })
-        })
+      //   const cityExists = AllCountries.map((country) => {
+      //     country.cities.find((city) => {
+      //       if(city.value === geoData?.city.toLocaleLowerCase()){
+      //         foundCity = city;
+      //       }
+      //     })
+      //   })
 
-        if(cityExists) data.userAdditionalData.city = foundCity.value;
-      }
-    }
+      //   if(cityExists) data.userAdditionalData.city = foundCity.value;
+      // }
+    // }
+
+    data.userAdditionalData.city = "aB2cD3eF";
+    data.userAdditionalData.country = "XK";
 
     const savedUser = new User(data);
     const user = await savedUser.save();
@@ -51,6 +54,8 @@ export const Register = async (payload, res) => {
   } 
   
   catch (error) {
+    console.log(error)
+    
     const response = {
       res,
       code: 500,

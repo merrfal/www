@@ -7,4 +7,4 @@ export const FB_APP_ID = process.env.NEXT_PUBLIC_FB_APP_ID;
 export const API_KEY = process.env.NEXT_PUBLIC_API_KEY
 export const MONGO_URI = process.env.MONGO_URI;
 export const IS_PROD = process.env.NEXT_PUBLIC_IS_PROD;
-export const NOTIFICATION_TIME = process.env.NEXT_PUBLIC_NOTIFICATION_TIMEOUT;
+export const NOTIFICATION_TIME = JSON.parse(process.env.NEXT_PUBLIC_NOTIFICATION_TIMEOUT);

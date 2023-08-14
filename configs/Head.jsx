@@ -4,7 +4,7 @@ import { Translation } from "../utils/Translations";
 
 export const Global = (props) => {
   const { 
-    title = null, 
+    title, 
     description = Translation("merrfal-description"), 
     image = '/merrfal-hero.png',
     index = false 

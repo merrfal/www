@@ -8,7 +8,7 @@ export default function Product(props) {
 
   const { 
     product: { productData }, 
-    allowManage = account?.User?.userAdditionalData?.role === "admin",
+    allowManage,
     showCategory = true,
     showGiven = true
   } = props;
