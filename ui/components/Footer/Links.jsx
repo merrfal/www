@@ -24,10 +24,10 @@ export default function Links() {
 
           return (
             <li className="text-sm" key={index} style={{lineHeight: 1}}>
-              <Link href={link.href} legacyBehavior>
-                <a className={path ? activePathClasses : inactivePathClasses}>
+              <Link href={link.href}>
+                <span className={path ? activePathClasses : inactivePathClasses}>
                   {link.name}
-                </a>
+                </span>
               </Link>
             </li>
           )

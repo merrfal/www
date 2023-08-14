@@ -11,10 +11,10 @@ export default function MenuLink({ name, link, username }) {
   const inactivePathClasses = "text-gray-700 block px-4 py-2 text-sm hover:text-[#377DFF] transition-all cursor-pointer";
 
   return (
-    <Link href={link} legacyBehavior>
-      <a className={path ? activePathClasses : inactivePathClasses}>
+    <Link href={link}>
+      <span className={path ? activePathClasses : inactivePathClasses}>
         {name}
-      </a>
+      </span>
     </Link>
   );
 }
