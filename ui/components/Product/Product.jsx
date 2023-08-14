@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ManageBox, Image, Info } from "./";
 import { useSelector } from "react-redux";
+import { Fragment } from "react";
 
 export default function Product(props) {
   const account = useSelector((state) => state.Account);
@@ -24,8 +25,8 @@ export default function Product(props) {
           />
       }
 
-      <Link href={`/${productData?.slug}`} legacyBehavior>
-        <a>
+      <Link href={`/${productData?.slug}`}>
+        <Fragment>
           <Image 
             productData={productData} 
             showCategory={showCategory} 
@@ -34,7 +35,7 @@ export default function Product(props) {
           />
           
           <Info productData={productData} />
-        </a>
+        </Fragment>
       </Link>
     </div>
   );

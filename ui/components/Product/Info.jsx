@@ -1,13 +1,15 @@
 import { SmLocationIcon } from "../../icons";
 import { CapitalizeText } from "../../../utils/TextFormatting";
+import { CityIdToName } from "../../../utils/Locations";
 
 export default function Info({ productData }) {
   const { name, address, city } = productData;
+  const cloneCity = CityIdToName(city)
 
   return (
     <div className="flex items-center py-4">
       <div className="flex-auto">
-        <FullLocation location={`${address}, ${city}`} />
+        <FullLocation location={`${address}, ${cloneCity}`} />
         <FullName name={name} />
       </div>
     </div>

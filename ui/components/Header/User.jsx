@@ -54,10 +54,10 @@ const Auth = ({ account }) => {
 
   return (
     <div className="relative accoount-menu flex items-center" ref={domNode}>
-      <Link href="/shto" legacyBehavior>
-        <a className="p-1 mr-1 text-gray-400 hover:text-gray-500 lg:block hover:opacity-[.85] transition-all">
+      <Link href="/shto">
+        <span className="p-1 mr-1 text-gray-400 hover:text-gray-500 lg:block hover:opacity-[.85] transition-all">
           <AddIcon />
-        </a>
+        </span>
       </Link>
 
       <button
@@ -84,10 +84,10 @@ const NotAuth = ({account}) => {
 
     return (
       <div className="relative accoount-menu flex items-center">
-        <Link href="/shto" legacyBehavior>
-          <a className=" text-gray-400 hover:text-gray-500 lg:block hover:opacity-[.85] transition-all ml-2">
+        <Link href="/shto">
+          <span className=" text-gray-400 hover:text-gray-500 lg:block hover:opacity-[.85] transition-all ml-2">
             <AddIcon />
-          </a>
+          </span>
         </Link>
         
         <UseGoogle account={account} dispatch={dispatch} />

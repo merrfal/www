@@ -202,34 +202,13 @@ export const Search  = async (payload, res) => {
 
 export const Latest = async (payload, res) => {
   try {
-    let usingGeo = false;
-    let locationRes = await ConnectionLocation();
     let productsFindObject = { 'productData.isGiven': false };
-
-    if(locationRes.success === true){
-      const country = locationRes?.data?.country;
-
-      usingGeo = true;
-      productsFindObject['productData.country'] = country;
-    }
 
     let products = await Product
       .find(productsFindObject)
       .sort({ createdAt: -1})
       .limit(16)
       .lean();
-
-    if(products.length === 0 && usingGeo){
-      usingGeo = false; 
-
-      const newProductsFindObject = { 'productData.isGiven': false }
-
-      products = await Product
-        .find(newProductsFindObject)
-        .sort({ createdAt: -1})
-        .limit(16)
-        .lean();
-    }
 
     const payload = {
       res,
@@ -330,41 +309,16 @@ export const View = async ({ slug }, res) => {
 
 export const Similar = async ({ category }, res) => {
   try {
-    let usingGeo = false;
-    let locationRes = await ConnectionLocation();
-
     let productsFindObject = { 
       'productData.category': category, 
       'productData.isGiven': false 
     };
-
-    if(locationRes.success === true){
-      const country = locationRes?.data?.country;
-      
-      usingGeo = true;
-      productsFindObject['productData.country'] = country;
-    }
 
     let products = await Product
       .find(productsFindObject)
       .sort({ createdAt: -1 })
       .limit(5)
       .lean();
-
-    if(products.length === 0 && usingGeo){
-      usingGeo = false;
-
-      const newProductsFindObject = {
-        'productData.category': category,
-        'productData.isGiven': false
-      }
-
-      products = await Product
-        .find(newProductsFindObject)
-        .sort({ createdAt: -1 })
-        .limit(5)
-        .lean();
-    }
 
     const response = {
       res,

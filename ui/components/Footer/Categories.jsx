@@ -55,10 +55,10 @@ const LinkItem = (props) => {
 
   return (
     <li className="text-sm" style={{ lineHeight: 1 }}>
-      <Link href={icon ? slug : `/kategorite/${slug}`} legacyBehavior>
-        <a className={path ? activePathClasses : inactivePathClasses}>
+      <Link href={icon ? slug : `/kategorite/${slug}`}>
+        <span className={path ? activePathClasses : inactivePathClasses}>
           {name} { icon && `\u2192` }
-        </a>
+        </span>
       </Link>
     </li>
   )

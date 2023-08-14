@@ -1,17 +1,13 @@
 import Link from "next/link";
 import { NO_CATEGORY } from "../../../configs/Constants";
 
-// import { useState } from "react";
-// const [categoryThumbnail, setCategoryThumbnail] = useState("")
-// onError={() => setCategoryThumbnail(NO_CATEGORY)}
-
 export default function Category(props) {
   const { category} = props;
   const { name, icon, slug } = category;
 
   return (
-    <Link href={`/kategorite/${slug}`} legacyBehavior>
-      <a className="hover:cursor-pointer relative h-[350px] sm:h-[400px] rounded p-6 flex flex-col hover:opacity-80 transition-all duration-1000">
+    <Link href={`/kategorite/${slug}`}>
+      <span className="hover:cursor-pointer relative h-[350px] sm:h-[400px] rounded p-6 flex flex-col hover:opacity-80 transition-all duration-1000">
         <span className="absolute inset-0">
           <img
             src={icon === "" ? NO_CATEGORY : icon}
@@ -26,7 +22,11 @@ export default function Category(props) {
         <span className="relative mt-auto sm:text-xl text-sm font-bold text-white w-[200px]">
           {name}
         </span>
-      </a>
+      </span>
     </Link>
   );
 }
+
+// import { useState } from "react";
+// const [categoryThumbnail, setCategoryThumbnail] = useState("")
+// onError={() => setCategoryThumbnail(NO_CATEGORY)}

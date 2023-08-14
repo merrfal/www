@@ -11,7 +11,6 @@ import { Empty, End, Loading, Product } from "../../components";
 import { useDispatch } from "react-redux";
 import { Error } from "..";
 import { Translation } from "../../../utils/Translations";
-import { HandleFiltersCurrentCountry } from "../../../utils/Locations";
 
 export default function Category() {
   const router = useRouter();
@@ -20,7 +19,6 @@ export default function Category() {
   const [category, setCategory] = useState(null);
   const [products, setProducts] = useState({ products: [], hasMore: true });
   const [loading, setLoading] = useState(true);
-  const [filtersLoading, setFiltersLoading] = useState(true);
 
   const [filters, setFilters] = useState({
     sort: { createdAt: 1 },
@@ -28,14 +26,6 @@ export default function Category() {
     countries: [],
     statuses: [ false ],
   });
-
-  useEffect(() => { 
-    HandleFiltersCurrentCountry({ 
-      filters, 
-      setFilters,
-      setFiltersLoading
-    }) 
-  }, [router])
 
   useEffect(() => {
     const { slug } = router.query;
@@ -109,14 +99,13 @@ export default function Category() {
             key="Category"
             filters={filters} 
             setFilters={setFilters} 
-            filtersLoading={filtersLoading}
           />
 
           <div className="max-w-7xl mx-auto mt-5 px-4 sm:px-6 lg:px-8">
             <Empty 
               heading={Translation("no-products-found")} 
               message={Translation("category-products-description-empty")}
-              show={products.products.length === 0 && !products.hasMore && !loading && !filtersLoading}
+              show={products.products.length === 0 && !products.hasMore && !loading}
             />
 
             <InfiniteScroll
@@ -134,7 +123,7 @@ export default function Category() {
             </InfiniteScroll>
           </div>
 
-          <End show={!products.hasMore && products.products.length !== 0 && !loading && !filtersLoading} />
+          <End show={!products.hasMore && products.products.length !== 0 && !loading} />
         </Fragment>
       }
     </Normal>
