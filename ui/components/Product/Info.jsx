@@ -1,4 +1,3 @@
-import { object, string } from "prop-types";
 import { SmLocationIcon } from "../../icons";
 import { CapitalizeText } from "../../../utils/TextFormatting";
 
@@ -30,15 +29,3 @@ const FullName = ({ name }) => (
     {CapitalizeText(name.length > 28 ? name.substring(0, 27) + "..." : name)}
   </div>
 );
-
-Info.propTypes = {
-  productData: object.isRequired,
-}
-
-FullLocation.propTypes = {
-  location: string.isRequired,
-}
-
-FullName.propTypes = {
-  name: string.isRequired,
-}

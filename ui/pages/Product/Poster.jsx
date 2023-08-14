@@ -6,7 +6,6 @@ import { NO_AVATAR } from "../../../configs/Constants";
 import { LocationIcon, VerifiedBadge } from "../../icons";
 import { Translation } from "../../../utils/Translations";
 import { isStorageReadable } from "../../../utils/Firebase";
-import { object } from "prop-types";
 
 export default function Poster({ productData }) {
   const { user } = productData;
@@ -47,7 +46,7 @@ export default function Poster({ productData }) {
         {Translation("donor")}
       </span>
       
-      <Link href={productData?.postedAnonymously ? `/` : `/profili/${user?.userData?.username}`}>
+      <Link href={productData?.postedAnonymously ? `/` : `/profili/${user?.userData?.username}`} legacyBehavior>
         <a className="w-auto mt-1.5 text-gray-600 hover:opacity-90 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all">
           <img 
             alt={user?.name} 
@@ -79,8 +78,4 @@ export default function Poster({ productData }) {
       </Link>
     </div>
   );
-}
-
-Poster.propTypes = {
-  productData: object.isRequired,
 }

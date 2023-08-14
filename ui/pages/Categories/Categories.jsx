@@ -12,7 +12,12 @@ export default function Categories() {
   return (
     <Normal>
       <Header />
-      <Filters key="Categories" ordering={ordering} setOrdering={setOrdering} />
+      <Filters 
+        key="Categories"
+        ordering={ordering} 
+        setOrdering={setOrdering} 
+      />
+      
       <Global title={Translation("categories")} description={Translation("categories-description")} />
 
       <div className="max-w-7xl mx-auto mt-5 px-4 sm:px-6 lg:px-8">

@@ -8,7 +8,7 @@ export default function Header() {
         {Translation("explore-categories")}
       </h2>
 
-      <Link href="/kategorite">
+      <Link href="/kategorite" legacyBehavior>
         <a className="text-sm font-semibold text-[#377DFF] hover:text-[#3073ee] transition-all">
           {Translation("explore-all-categories")} &rarr;
         </a>

@@ -52,10 +52,10 @@ export default function ProductPost() {
             ...product,
             productData: {
               ...product.productData,
-              phone: phone !== "" ? phone : "",
-              city: city !== "" ? city : "",
-              address: address !== "" ? address : "",
-              country: country !== "" ? country : "",
+              phone: phone !== "" ? phone : product.productData.phone === undefined ? "" : product.productData.phone,
+              city: city !== "" ? city : product.productData.city === undefined ? "" : product.productData.city,
+              address: address !== "" ? address : product?.productData?.address === undefined ? "" : product?.productData?.address,
+              country: country !== "" ? country : product?.productData?.country === undefined ? "" : product?.productData?.country,
             }
           })
         }

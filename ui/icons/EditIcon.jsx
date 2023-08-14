@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 export default function EditIcon({ className }) {
   return (
     <svg
@@ -18,7 +16,3 @@ export default function EditIcon({ className }) {
     </svg>
   );
 }
-
-EditIcon.propTypes = {
-  className: string,
-};

@@ -1,11 +1,10 @@
-import { array, bool, number } from "prop-types";
 import { IsGiven } from "./";
 
 export default function Thumbnail(props) {
   const { gallery, index, isGiven } = props;
   
   return (
-    <div className="w-full aspect-w-1 aspect-h-1 relative h-[50vh]">
+    <div className="w-full aspect-w-1 aspect-h-1 relative h-[50vh] lg:rounded-lg md:rounded-lg xl:rounded-lg">
       <IsGiven isGiven={isGiven} />
 
       <img
@@ -15,10 +14,4 @@ export default function Thumbnail(props) {
       />
     </div>
   );
-}
-
-Thumbnail.propTypes = {
-  gallery: array.isRequired,
-  index: number.isRequired,
-  isGiven: bool.isRequired
 }

@@ -6,6 +6,10 @@ import { Create, Update } from "../../../api/Product";
 import { Storage } from "../../../configs/Firebase";
 import { Notification } from "../../../utils/Response";
 import { Translation } from "../../../utils/Translations";
+import { Auth as AuthInstance } from "../../../configs/Firebase";
+import { GoogleAuthProvider, getAdditionalUserInfo, signInWithPopup } from "firebase/auth";
+import { Login, Register } from "../../../api/User";
+import { LogoutAccount } from "../../../controllers/Redux";
 
 import {
   AddressValidation,
@@ -19,7 +23,6 @@ import {
   PhoneValidation,
   SlugBuilder,
 } from "../../../utils/Forms";
-import { func, object, string } from "prop-types";
 
 export default function Buttons(props) {
   const { 
@@ -72,6 +75,45 @@ export default function Buttons(props) {
     return validations;
   };
 
+  const Auth = async () => {
+    if(account.Loading) return;
+    
+    try {
+      var Provider = new GoogleAuthProvider();
+      const data = await signInWithPopup(AuthInstance, Provider);
+
+      if (data) {
+        const user = data.user;
+        const { isNewUser } = getAdditionalUserInfo(data);
+
+        if (isNewUser) Register(user, dispatch);
+        else Login(user.uid, dispatch);
+      } 
+      
+      else {
+        const alert = {
+          dispatch,
+          message: Translation("user-auth-error"),
+          type: "error",
+        }
+
+        dispatch(LogoutAccount());
+        Notification(alert);
+      }
+    } 
+    
+    catch (error) {
+      const alert = {
+        dispatch,
+        message: Translation("user-auth-error"),
+        type: "error",
+      }
+
+      dispatch(LogoutAccount());
+      Notification(alert);
+    }
+  };
+
   const handlePublish = async () => {
     if (!onValidation()) {
       typeof window !== "undefined" &&
@@ -83,26 +125,58 @@ export default function Buttons(props) {
       return;
     }
 
+    if(!account.Auth) {
+      Auth();
+      return;
+    }
+
     setIsHold(true);
 
     const gallery = [];
 
-    const compressImage = async (file, id, index) => {
+    const compressImage = async (file, id, index, cropOptions = {}) => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = (event) => {
           const img = new Image();
-
+    
           img.src = event.target.result;
           img.onload = () => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
-            canvas.width = 1080;
-            canvas.height = 720;
-            ctx.drawImage(img, 0, 0, 1080, 720);
+            
+            // Set default cropping dimensions if not provided
+            const defaultWidth = 1080;
+            const defaultHeight = 720;
+            const targetWidth = cropOptions.width || defaultWidth;
+            const targetHeight = cropOptions.height || defaultHeight;
+    
+            // Calculate cropping dimensions while preserving aspect ratio
+            const sourceAspectRatio = img.width / img.height;
+            const targetAspectRatio = targetWidth / targetHeight;
+            let cropWidth, cropHeight;
+            
+            if (sourceAspectRatio > targetAspectRatio) {
+              cropWidth = img.height * targetAspectRatio;
+              cropHeight = img.height;
+            } else {
+              cropWidth = img.width;
+              cropHeight = img.width / targetAspectRatio;
+            }
+    
+            // Calculate cropping position
+            const cropX = (img.width - cropWidth) / 2;
+            const cropY = (img.height - cropHeight) / 2;
+    
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+            
+            // Draw the cropped portion of the image onto the canvas
+            ctx.drawImage(img, cropX, cropY, cropWidth, cropHeight, 0, 0, targetWidth, targetHeight);
+    
             canvas.toBlob(
               (blob) => {
-                const compressedImageRef = ref(Storage, `products/${id}.webp`);
+                const compressedImageRef = ref(Storage, `products/${id}`);
                 const uploadTask = uploadBytesResumable(compressedImageRef, blob);
     
                 uploadTask
@@ -112,25 +186,26 @@ export default function Buttons(props) {
                       url,
                       id,
                       isMain: index === 0,
-                      filename: `${file.name.split('.')[0]}-compressed.webp`,
+                      filename: `${file.name.split('.')[0]}.webp`,
                     };
     
                     resolve(compressedImg);
                   })
-                  
+    
                   .catch((error) => {
                     console.error('Error uploading compressed image:', error);
                     reject(error);
                   });
               },
               'image/webp',
-              0.85
+              1
             );
           };
         };
         reader.readAsDataURL(file);
       });
     };
+    
     
     const promises = product.productData.gallery.map(async (image, index) => {
       const id = v4();
@@ -207,13 +282,4 @@ export default function Buttons(props) {
       }
     </div>
   );
-}
-
-Buttons.propTypes = {
-  product: object.isRequired,
-  account: object.isRequired,
-  setValidation: func.isRequired,
-  mode: string.isRequired,
-  onUpdate: func.isRequired,
-  setIsHold: func.isRequired,
 }

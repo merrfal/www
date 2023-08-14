@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import { useState, useRef, useEffect } from "react";
 import { OpenIcon } from "../../icons";
 import { Translation } from "../../../utils/Translations";
@@ -42,6 +40,7 @@ export default function Statuses({ filters, setFilters }) {
                 type="radio"
                 checked={filters.statuses.includes(false)}
                 className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
+                onChange={() => {}}
                 onClick={() => {
                     if (filters.statuses.includes(false) && filters.statuses.includes(true)) {
                       let newStatuses = filters.statuses.filter((status) => status !== false);
@@ -77,6 +76,7 @@ export default function Statuses({ filters, setFilters }) {
                 type="radio"
                 checked={filters.statuses.includes(true)}
                 className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
+                onChange={() => {}}
                 onClick={() => {
                     if (filters.statuses.includes(true)  && filters.statuses.includes(false)) {
                       let newStatuses = filters.statuses.filter((status) => status !== true);
@@ -111,9 +111,4 @@ export default function Statuses({ filters, setFilters }) {
       )}
     </div>
   );
-}
-
-Statuses.propTypes = {
-  filters: PropTypes.object.isRequired,
-  setFilters: PropTypes.func.isRequired,
 }

@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import { useDispatch } from "react-redux";
 import { Update } from "../../../api/User";
 import { Translation } from "../../../utils/Translations";
@@ -86,13 +84,3 @@ export default function Buttons(props) {
     </div>
   );
 }
-
-Buttons.propTypes = {
-  user: PropTypes.object.isRequired,
-  setIsEdit: PropTypes.func.isRequired,
-  setIsLoading: PropTypes.func.isRequired,
-  setUser: PropTypes.func.isRequired,
-  userClone: PropTypes.object.isRequired,
-  setUserClone: PropTypes.func.isRequired,
-  setValidations: PropTypes.func.isRequired,
-};

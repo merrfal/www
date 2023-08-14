@@ -1,4 +1,3 @@
-import { object, func } from "prop-types";
 import { useState, useRef, useEffect } from "react";
 import { OpenIcon } from "../../icons";
 import { Translation } from "../../../utils/Translations";
@@ -37,7 +36,7 @@ export default function Locations({ filters, setFilters }) {
                     <form className="space-y-4">
                         {Countries.map((country, index) => {
                             return (
-                                <di key={index} className="flex flex-col">
+                                <div key={index} className="flex flex-col">
                                     <div key={index} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
                                         <input
                                             id={country.iso_code}
@@ -45,6 +44,7 @@ export default function Locations({ filters, setFilters }) {
                                             type="checkbox"
                                             checked={filters?.countries?.includes(country?.iso_code)}
                                             className="hover:cursor-pointer h-4 w-4 border-[#d6d9de] text-[#377DFF] focus:ring-[#377DFF] rounded-[3px]"
+                                            onChange={() => {}}
                                             onClick={() => {
                                                 const isCountryAddedAlready = filters?.countries?.includes(country?.iso_code)
 
@@ -75,6 +75,7 @@ export default function Locations({ filters, setFilters }) {
                                                 type="radio"
                                                 checked={filters?.cities?.includes(city?.value)}
                                                 className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
+                                                onChange={() => {}}
                                                 onClick={() => {
                                                     const isCityAlreadyAdded = filters?.cities?.includes(city.value);
 
@@ -104,7 +105,7 @@ export default function Locations({ filters, setFilters }) {
                                         </div>
                                         )
                                     )}
-                                </di>
+                                </div>
                             );
                         })}
                     </form>
@@ -112,10 +113,4 @@ export default function Locations({ filters, setFilters }) {
             )}
         </div>
     );
-}
-
-
-Locations.propTypes = {
-    filters: object.isRequired,
-    setFilters: func.isRequired,
 }

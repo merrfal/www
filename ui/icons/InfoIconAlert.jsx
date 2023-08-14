@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 export default function InfoIconAlert({ color }) {
   return (
     <svg
@@ -11,7 +9,3 @@ export default function InfoIconAlert({ color }) {
     </svg>
   );
 }
-
-InfoIconAlert.propTypes = {
-  color: string.isRequired
-};

@@ -1,4 +1,3 @@
-import { object } from "prop-types";
 import { Translation } from "../../../utils/Translations";
 import { EyeIcon } from "../../icons";
 
@@ -13,8 +12,4 @@ export default function Views({
       <p className="text-sm text-gray-500">{views} {Translation("views")}</p>
     </div>
   );
-}
-
-Views.propTypes = {
-  product: object.isRequired,
 }

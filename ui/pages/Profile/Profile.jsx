@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Normal } from "../../layouts";
 import { Loading } from "../../components";
@@ -40,7 +40,7 @@ export default function Profile() {
       {user === null ? <Loading /> : null}
 
       {user !== null && (
-        <>
+        <Fragment>
           <Cover 
             user={user} 
             cover={cover} 
@@ -71,7 +71,7 @@ export default function Profile() {
             dispatch={dispatch} 
             user={user} 
           />
-        </>
+        </Fragment>
       )}
     </Normal>
   );

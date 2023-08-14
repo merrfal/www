@@ -1,8 +1,9 @@
+import { Fragment } from "react";
 import { Translation } from "../../../utils/Translations";
 
 export default function Info() {
   return (
-    <>
+    <Fragment>
       <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
         <span className="block text-center lg:text-left">
           {Translation("cta-title")}
@@ -14,6 +15,6 @@ export default function Info() {
           </span>
         </span>
       </h2>
-    </>
+    </Fragment>
   );
 }

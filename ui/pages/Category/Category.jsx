@@ -104,9 +104,9 @@ export default function Category() {
 
       {
         category !== null && category !== false &&
-        <>
+        <Fragment>
           <Filters 
-            key="Category" 
+            key="Category"
             filters={filters} 
             setFilters={setFilters} 
             filtersLoading={filtersLoading}
@@ -116,7 +116,7 @@ export default function Category() {
             <Empty 
               heading={Translation("no-products-found")} 
               message={Translation("category-products-description-empty")}
-              show={products.products.length === 0 && !products.hasMore && !loading}
+              show={products.products.length === 0 && !products.hasMore && !loading && !filtersLoading}
             />
 
             <InfiniteScroll
@@ -134,8 +134,8 @@ export default function Category() {
             </InfiniteScroll>
           </div>
 
-          <End show={!products.hasMore && products.products.length !== 0 && !loading} />
-        </>
+          <End show={!products.hasMore && products.products.length !== 0 && !loading && !filtersLoading} />
+        </Fragment>
       }
     </Normal>
   );

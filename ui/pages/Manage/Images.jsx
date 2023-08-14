@@ -1,6 +1,5 @@
 import ReactImageUploading from "react-images-uploading";
 
-import { func, object, string } from "prop-types";
 import { ImagesValidation } from "../../../utils/Forms";
 import { CloseIcon, PhotoIcon } from "../../icons";
 import { Info } from "./";
@@ -108,7 +107,7 @@ export default function Images({
                   {product?.productData?.gallery.length === 0 && <EmptyGallery />}
 
                   {product?.productData?.gallery.length !== 0 && product?.productData?.gallery.length < 4 && (
-                    <div onClick={onImageUpload} className="flex items-center justify-center border border-gray-200  w-[265px] lg:h-[40vh] h-[20vh] object-cover max-w-full align-middle rounded-md right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+                    <div onClick={onImageUpload} className="flex items-center justify-center border border-gray-200  w-[265px] lg:h-[40vh] h-[20vh] object-cover max-w-full align-middle rounded-md right-1.5 top-1.5 flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
                       <div className="flex flex-col justify-center items-center">
                         <PhotoIcon />
                         <Info half={true} />
@@ -127,7 +126,6 @@ export default function Images({
   );
 }
 
-
 const EmptyGallery = () => {
   return (
     <div className="flex flex-col">
@@ -135,11 +133,4 @@ const EmptyGallery = () => {
       <Info />
     </div>
   )
-}
-
-Images.propTypes = {
-  setProduct: func.isRequired,
-  validation: object.isRequired,
-  mode: string.isRequired,
-  product: object.isRequired
 }

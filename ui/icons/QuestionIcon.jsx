@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 export default function QuestionIcon(props) {
   const { stroke, fill, strokeWidth, height, width } = props;
 
@@ -18,12 +16,3 @@ export default function QuestionIcon(props) {
     </svg>
   );
 }
-
-
-QuestionIcon.propTypes = {
-  stroke: string,
-  fill: string,
-  strokeWidth: string,
-  height: string,
-  width: string,
-};

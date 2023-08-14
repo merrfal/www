@@ -1,5 +1,3 @@
-import { func, object, string } from "prop-types";
-
 export default function Textarea(props) {
   const { label, value, values, setValues, placeholder, type } = props;
 
@@ -22,13 +20,4 @@ export default function Textarea(props) {
       </div>
     </div>
   );
-}
-
-Textarea.propTypes = {
-  label: string.isRequired,
-  value: string.isRequired,
-  values: object.isRequired,
-  setValues: func.isRequired,
-  placeholder: string.isRequired,
-  type: string.isRequired,
 }

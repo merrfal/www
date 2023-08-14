@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 export default function SearchIcon(props) {
   const { className } = props;
 
@@ -17,9 +15,4 @@ export default function SearchIcon(props) {
       />
     </svg>
   );
-}
-
-
-SearchIcon.propTypes = {
-  className: string
 }

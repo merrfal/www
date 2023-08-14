@@ -1,4 +1,3 @@
-import { bool, object } from "prop-types";
 import { getDownloadURL, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { Storage } from "../../../configs/Firebase";
@@ -44,11 +43,4 @@ export default function Image(props) {
       />
     </div>
   );
-}
-
-Image.propTypes = {
-  productData: object.isRequired,
-  showCategory: bool.isRequired,
-  allowManage: bool.isRequired,
-  showGiven: bool.isRequired
 }

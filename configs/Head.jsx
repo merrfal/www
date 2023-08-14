@@ -1,5 +1,4 @@
 import MetaTags from "next/head";
-import PropTypes from "prop-types";
 
 import { Translation } from "../utils/Translations";
 
@@ -29,10 +28,3 @@ export const Global = (props) => {
     </MetaTags>
   );
 };
-
-Global.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  image: PropTypes.string,
-  index: PropTypes.bool
-}

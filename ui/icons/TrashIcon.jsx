@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 export default function TrashIcon({ className }) {
   return (
     <svg
@@ -18,8 +16,3 @@ export default function TrashIcon({ className }) {
     </svg>
   );
 }
-
-
-TrashIcon.propTypes = {
-  className: string,
-};

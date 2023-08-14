@@ -1,4 +1,3 @@
-import { object } from "prop-types";
 import { Translation } from "../../../utils/Translations";
 import { PhoneIcon } from "../../icons";
 
@@ -19,9 +18,4 @@ export default function Phone({ productData }) {
       </div>
     </form>
   );
-}
-
-
-Phone.propTypes = {
-  productData: object.isRequired,
 }

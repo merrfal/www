@@ -1,10 +1,12 @@
-import { bool } from "prop-types";
+import { Fragment } from "react";
 import { Translation } from "../../../utils/Translations";
 
-export default function Info({half = false}) {
+export default function Info(props) {
+  const { half = false } = props;
+  
   return (
-    <>
-      <div className="flex text-sm text-gray-600">
+    <Fragment>
+      <div className="flex text-sm text-gray-600 justify-center items-center">
         <label className="relative cursor-pointer rounded-md bg-white font-medium text-[#377DFF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#377DFF] focus-within:ring-offset-2 hover:text-[#377DFF]">
           <span className="text-[#377DFF]">
             {Translation("upload-a-photo")}
@@ -19,10 +21,6 @@ export default function Info({half = false}) {
       <p className="text-xs text-gray-500">
         {Translation("supported-formats-info")}
       </p>
-    </>
+    </Fragment>
   );
-}
-
-Info.propTypes = {
-  half: bool,
 }

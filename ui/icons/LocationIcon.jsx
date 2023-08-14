@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 export default function LocationIcon({ className }) {
   return (
     <svg
@@ -23,7 +21,3 @@ export default function LocationIcon({ className }) {
     </svg>
   );
 }
-
-LocationIcon.propTypes = {
-  className: string,
-};

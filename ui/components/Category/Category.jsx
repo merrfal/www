@@ -1,6 +1,4 @@
 import Link from "next/link";
-
-import { bool, object } from 'prop-types';
 import { NO_CATEGORY } from "../../../configs/Constants";
 
 // import { useState } from "react";
@@ -8,12 +6,12 @@ import { NO_CATEGORY } from "../../../configs/Constants";
 // onError={() => setCategoryThumbnail(NO_CATEGORY)}
 
 export default function Category(props) {
-  const { category, kategori } = props;
+  const { category} = props;
   const { name, icon, slug } = category;
 
   return (
-    <Link href={`/kategorite/${slug}`}>
-      <a className={kategori ? "hover:cursor-pointer relative h-[260px] sm:h-[400px] rounded p-6 flex flex-col hover:opacity-80 transition-all duration-1000" :"hover:cursor-pointer relative h-[350px] sm:h-[400px] rounded p-6 flex flex-col hover:opacity-80 transition-all duration-1000"}>
+    <Link href={`/kategorite/${slug}`} legacyBehavior>
+      <a className="hover:cursor-pointer relative h-[350px] sm:h-[400px] rounded p-6 flex flex-col hover:opacity-80 transition-all duration-1000">
         <span className="absolute inset-0">
           <img
             src={icon === "" ? NO_CATEGORY : icon}
@@ -31,9 +29,4 @@ export default function Category(props) {
       </a>
     </Link>
   );
-}
-
-Category.propTypes = {
-  category: object.isRequired,
-  kategori: bool.isRequired,
 }

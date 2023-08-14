@@ -1,4 +1,3 @@
-import { bool } from "prop-types";
 import { Translation } from "../../../utils/Translations";
 import { EmptyIcon } from "../../icons";
 
@@ -14,8 +13,4 @@ export default function End({ show }) {
   );
 
   else return null;
-}
-
-End.propTypes = {
-  show: bool.isRequired
 }

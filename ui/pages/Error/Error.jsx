@@ -1,8 +1,9 @@
-import { number } from "prop-types";
 import { Normal } from "../../layouts";
 import { Animation, Link, Info } from "./";
 
-export default function Error({ code }) {
+export default function Error(props) {
+  const { code } = props;
+
   return (
     <Normal>
       <div className="min-h-full pt-12 pb-32 flex flex-col bg-white">
@@ -18,8 +19,4 @@ export default function Error({ code }) {
       </div>
     </Normal>
   );
-}
-
-Error.propTypes = {
-  code: number.isRequired,
 }

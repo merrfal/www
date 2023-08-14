@@ -1,4 +1,3 @@
-import { func, object } from "prop-types";
 import { AddressValidation } from "../../../utils/Forms";
 import { Translation } from "../../../utils/Translations";
 import { RequiredLabel, Wildcard } from "../../components";
@@ -24,10 +23,4 @@ export default function Address({product, onInput, validation: v}) {
       {v?.address && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
-}
-
-Address.propTypes = {
-  product: object.isRequired,
-  onInput: func.isRequired,
-  validation: object.isRequired,
 }

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Header, Footer, Confirmation, Notification } from "../../components";
 
 export default function Normal(props) {
@@ -13,8 +12,4 @@ export default function Normal(props) {
       <Footer />
     </main>
   );
-}
-
-Normal.propTypes = {
-  children: PropTypes.node.isRequired,
 }

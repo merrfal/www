@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import { RequiredLabel, Wildcard }from "../";
 import { EmailValidation } from "../../../utils/Forms";
 import { Translation } from "../../../utils/Translations";
@@ -26,10 +24,4 @@ export default function Email({ user, onInput, validations }) {
       {validations?.name && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
   );
-}
-
-Email.propTypes = {
-  user: PropTypes.object.isRequired,
-  onInput: PropTypes.func.isRequired,
-  validations: PropTypes.object.isRequired
 }
