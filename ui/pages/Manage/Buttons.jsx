@@ -159,19 +159,19 @@ export default function Buttons(props) {
             if (sourceAspectRatio > targetAspectRatio) {
               cropWidth = img.height * targetAspectRatio;
               cropHeight = img.height;
-            } else {
+            } 
+            
+            else {
               cropWidth = img.width;
               cropHeight = img.width / targetAspectRatio;
             }
     
-            // Calculate cropping position
             const cropX = (img.width - cropWidth) / 2;
             const cropY = (img.height - cropHeight) / 2;
     
             canvas.width = targetWidth;
             canvas.height = targetHeight;
             
-            // Draw the cropped portion of the image onto the canvas
             ctx.drawImage(img, cropX, cropY, cropWidth, cropHeight, 0, 0, targetWidth, targetHeight);
     
             canvas.toBlob(
@@ -198,7 +198,7 @@ export default function Buttons(props) {
                   });
               },
               'image/webp',
-              1
+              .85
             );
           };
         };
