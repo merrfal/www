@@ -9,7 +9,7 @@ export default function Categories() {
       <Header />
 
       <div className="flow-root">
-        <div className="py-3 box-content relative overflow-x-auto overflow-y-auto touch-none">
+        <div className="py-3 box-content relative overflow-x-auto overflow-y-auto">
             <div className="h-[400px] min-w-screen-xl flex xl:relative gap-4">
               {
                 AllCategories.filter((category) => category.favorite)

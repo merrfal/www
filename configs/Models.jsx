@@ -18,7 +18,7 @@ const UserModel = new Schema(
       role: { type: String, default: "user" },
       address: { type: String, default: '' },
       city: { type: String, default: '' },
-      country: { type: String, default: '' },
+      country: { type: String, default: 'XK' },
     },
     userActivities: {
       products: { type: Array, default: [] },
