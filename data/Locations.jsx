@@ -2,17 +2,17 @@ import * as Cities from "./cities";
 
 export const AllCountries = [
     { 
-        name: "Albania", 
+        name: "Shqipëri", 
         iso_code: "AL", 
         cities: Cities.AL_Cities
     },
     {
-        name: "Kosovo",
+        name: "Kosovë",
         iso_code: "XK",
         cities: Cities.XK_Cities
     },
     {
-        name: "Macedonia",
+        name: "Maqedoni",
         iso_code: "MK",
         cities: Cities.MK_Cities
     },
@@ -1210,17 +1210,17 @@ export const AllCountries = [
 
 export const Countries = [
     {
-        name: "Kosovo",
+        name: "Kosovë",
         iso_code: "XK",
         cities: Cities.XK_Cities,
     },
     {
-        name: "Albania",
+        name: "Shqipëri",
         iso_code: "AL",
         cities: Cities.AL_Cities,
     },
     {
-        name: "Macedonia",
+        name: "Maqedoni",
         iso_code: "MK",
         cities: Cities.MK_Cities,
     },

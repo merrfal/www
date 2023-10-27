@@ -13,5 +13,5 @@ export default function Header() {
         {meta?.title}
       </h1>
     </Fragment>
-  );
+  )
 }
