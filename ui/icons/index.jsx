@@ -41,6 +41,7 @@ import VerifiedBadge from "./VerifiedBadge";
 import SkeletonIcon from "./SkeletonIcon";
 import QuestionIcon from "./QuestionIcon";
 import InfoIconAlert from "./InfoIconAlert";
+import LinkedInIcon from './LinkedInIcon'
 
 export {
   AccountIcon,
@@ -86,4 +87,5 @@ export {
   WebsiteIcon,
   QuestionIcon,
   InfoIconAlert,
+  LinkedInIcon
 };

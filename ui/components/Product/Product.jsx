@@ -15,7 +15,7 @@ export default function Product(props) {
   } = props;
 
   return (
-    <div className="group relative">
+    <div className="group relative mb-4">
       {
         allowManage && 
           <ManageBox 

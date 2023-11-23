@@ -5,7 +5,7 @@ export const NameValidation = (value) => {
 
   const minLength = 4;
   const maxLength = 80;
-  const regex = /^[a-zA-Z0-9]+(?:[ ]?[a-zA-Z0-9]+)*$/;
+  const regex = /^[a-zA-Z0-9ëËÇç,_-\s()\[\].]*$/;
 
   if (value.length < minLength) {
     validation.error = true;
@@ -30,7 +30,7 @@ export const DescriptionValidation = (value) => {
 
   const minLength = 28;
   const maxLength = 320;
-  const regex = /^[a-zA-Z0-9\s_()&, .-]+$/;
+const regex = /^[a-zA-Z0-9ëËÇç,_-\s()\[\].]*$/;
 
   if (value.length < minLength) {
     validation.error = true;
@@ -53,8 +53,8 @@ export const DescriptionValidation = (value) => {
 export const PhoneValidation = (value) => {
   let validation = { error: false };
 
-  const regex = /^((\+)?(383)?([1-9]{1}|[2]{1}[0-9]{1}|[3]{1}[0-9]{1}|[4]{1}[0-9]{1}|[5]{1}[0-9]{1}|[6]{1}[0-9]{1}|[7]{1}[0-9]{1})[0-9]{10,15})$/;
-
+  const regex = /^\d{8,20}$/;
+  
   if (!regex.test(value)) {
     validation.error = true;
     validation.message = Translation("phone-number-is-not-valid");
@@ -68,7 +68,7 @@ export const AddressValidation = (value) => {
 
   const minLength = 10;
   const maxLength = 40;
-  const regex = /^[a-zA-Z0-9\s,'.-]*$/;
+  const regex = /^[a-zA-Z0-9ëËÇç,_-\s()\[\].]*$/;
 
   if (value.length < minLength) {
     validation.error = true;

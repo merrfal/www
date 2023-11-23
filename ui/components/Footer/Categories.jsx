@@ -14,12 +14,12 @@ export default function Categories() {
   return (
     <div>
       <h3 className="text-sm font-medium text-gray-900 select-none">
-        {Translation("categories")}
+        {Translation("popular-cateogires")}
       </h3>
 
       <ul className="mt-6 space-y-6">
         {AllCategories?.filter((category) => category.favorite)
-          .slice(0, 3)
+          .slice(0, 4)
           .map((link, index) => {
             const path = usePath(router, link.slug);
           
@@ -34,13 +34,6 @@ export default function Categories() {
             )
           }
         )}
-
-        <LinkItem 
-          name={Translation("view-all")} 
-          path={usePath(router, "kategorite")}
-          slug="/kategorite"
-          icon={true}
-        />
       </ul>
     </div>
   );

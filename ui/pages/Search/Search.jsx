@@ -19,7 +19,7 @@ export default function Search() {
   const [allMode, setAllMode] = useState(null);
 
   const [filters, setFilters] = useState({
-    sort: { createdAt: 1 },
+    sort: { createdAt: -1 },
     categories: [],
     countries: [],
     cities: []
@@ -36,27 +36,20 @@ export default function Search() {
     next();
   }, [router]);
 
-  const next = () => {
+  const next = (reset = false) => {
     const { term } = router.query;
     const offset = products.products.length.toString();
-    const filtering = { ...filters, offset, term: term === undefined ? "" : term };
+    const filtering = { ...filters, offset: reset ? 0 : offset, term: term === undefined ? "" : term };
 
-    Searching(filtering, products, setProducts, dispatch);
+    Searching(filtering, reset ? { products: [] } : products, setProducts, dispatch);
   };
 
   useEffect(() => {
     if (!first) {
       setProducts({ products: [], hasMore: true });
-      next();
+      next(true);
     }
   }, [filters]);
-
-  // useEffect(() => {
-  //   setLoading(true);
-
-  //   const validCategory = category !== null && category !== false;
-  //   if(validCategory) next({scratch: true});
-  // }, [filters])
 
   return (
     <Normal>

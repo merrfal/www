@@ -43,7 +43,7 @@ export default function Locations({ filters, setFilters }) {
                                             value={country.iso_code}
                                             type="checkbox"
                                             checked={filters?.countries?.includes(country?.iso_code)}
-                                            className="hover:cursor-pointer h-4 w-4 border-[#d6d9de] text-[#377DFF] focus:ring-[#377DFF] rounded-[3px]"
+                                            className="hover:cursor-pointer h-4 w-4 border-[#d6d9de] text-[#377DFF] focus:ring-[#377DFF] rounded-md"
                                             onChange={() => {}}
                                             onClick={() => {
                                                 const isCountryAddedAlready = filters?.countries?.includes(country?.iso_code)
@@ -72,9 +72,9 @@ export default function Locations({ filters, setFilters }) {
                                             <input
                                                 id={city.value}
                                                 value={city.value}
-                                                type="radio"
+                                                type="checkbox"
                                                 checked={filters?.cities?.includes(city?.value)}
-                                                className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
+                                                className="hover:cursor-pointer rounded-md h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
                                                 onChange={() => {}}
                                                 onClick={() => {
                                                     const isCityAlreadyAdded = filters?.cities?.includes(city.value);

@@ -6,5 +6,6 @@ export const APP_EMAIL = "tung@merrfal.com"
 export const EKONOMIA_ISLAME_WEB = "https://ekonomiaislame.com";
 export const DHURATA_E_BAJRAMIT_WEB = "https://dhurataebajramit.com";
 export const INSTITUTI_GERMA_WEB = "https://igerma.com";
+export const PRISHTINA_TALKS_WEB = "https://www.facebook.com/prishtinatalks/";
 export const VIEW_ALL_WEB = "";
 export const EMPTY_VALUE = "---";

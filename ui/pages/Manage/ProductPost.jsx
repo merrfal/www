@@ -80,15 +80,6 @@ export default function ProductPost() {
                 <div className="space-y-6 p-2">
                   <Header product={product} mode="create" />
 
-                  {
-                    !AllowedCountries.includes(account?.User?.userAdditionalData?.country) && account.Auth &&
-                      <Alert
-                        title={Translation("outside-operating-country")}
-                        message={Translation("outside-operating-country-description")}
-                        icon={<InfoIconAlert color="#1D4ED850" />}
-                      />
-                  }
-
                   <Title
                     product={product}
                     onInput={onInput}

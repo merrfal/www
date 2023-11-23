@@ -1,76 +1,76 @@
 const AL_Cities = [
   {
     name: "Kukës",
-    value: "kukes",
+    value: "aB2cD3eF291",
   },
   {
     name: "Shkodër",
-    value: "shkoder",
+    value: "gH4iJ5kL6mN72",
   },
   {
     name: "Shëngjin",
-    value: "shengjin",
+    value: "oP8qR9sUvW03",
   },
   {
     name: "Lezhë",
-    value: "lezhe",
+    value: "xY1zA2B3C4D54",
   },
   {
     name: "Peshkopi",
-    value: "peshkopi",
+    value: "E6F7G8H9I0J15",
   },
   {
     name: "Tirana",
-    value: "tirana",
+    value: "K2L3M4N5O6P7",
   },
   {
     name: "Durrës",
-    value: "durres",
+    value: "Q8R9S0T1U2V37",
   },
   {
     name: "Elbasan",
-    value: "elbasan",
+    value: "W4X5Y6Z7aB88",
   },
   {
     name: "Lushnjë",
-    value: "lushnje",
+    value: "cD9eF0gH1iJ29",
   },
   {
     name: "Pogradec",
-    value: "pogradec",
+    value: "1kL3mN4oP5qR6",
   },
   {
     name: "Fierzë",
-    value: "fierze",
+    value: "2sT7uV8wX9yZ0",
   },
   {
     name: "Berat",
-    value: "berat",
+    value: "3aB1cD2eF3gH4",
   },
   {
     name: "Korçë",
-    value: "korce",
+    value: "4iJ5kL6mN7oP8",
   },
   {
     name: "Vlorë",
-    value: "vlore",
+    value: "5qR9sU0vW1xY2",
   },
   {
     name: "Tepelenë",
-    value: "tepelene",
+    value: "6zA3B4C5D6E7",
   },
   {
     name: "Gjirokastër",
-    value: "gjirokaster",
+    value: "7F8G9H0I1J2K3",
   },
   {
     name: "Sarandë",
-    value: "sarande",
+    value: "8L4M5N6O7P8Q9",
   },
   {
     name: "Butrint",
-    value: "butrint",
-  }
+    value: "9R0S1T2U3V4W5",
+  },
 ];
 
 export default AL_Cities;

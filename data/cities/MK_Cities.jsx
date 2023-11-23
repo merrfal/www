@@ -1,55 +1,55 @@
 const MK_Cities = [
     {
       name: "Shkup",
-      value: "aB2G03eF",
+      value: "1aB2G03eF",
     },
     {
       name: "Kumanovë",
-      value: "gH4iJ5kL",
+      value: "2gH4iJ5kL",
     },
     {
       name: "Tetovë",
-      value: "mN6oP7qR",
+      value: "3mN6oP7qR",
     },
     {
       name: "Gostivar",
-      value: "sT8uV9wX",
+      value: "4sT8uV9wX",
     },
     {
       name: "Ohri",
-      value: "yZ0A1B2C",
+      value: "5yZ0A1B2C",
     },
     {
       name: "Veles",
-      value: "dE3F4G5H",
+      value: "6dE3F4G5H",
     },
     {
       name: "Prilep",
-      value: "iJ6K7L8M",
+      value: "7iJ6K7L8M",
     },
     {
       name: "Kiçevo",
-      value: "nO9P0Q1R",
+      value: "8nO9P0Q1R",
     },
     {
       name: "Strumicë",
-      value: "tS2U3V4W",
+      value: "9tS2U3V4W",
     },
     {
       name: "Kochan",
-      value: "xY5Z0A1B",
+      value: "xY5Z0A1B1",
     },
     {
       name: "Strugë",
-      value: "cD2E3F4G",
+      value: "cD2E3F4G2",
     },
     {
       name: "Shtip",
-      value: "hI5J6K7L",
+      value: "hI5J6K7L3",
     },
     {
       name: "Debar",
-      value: "oM8N9P0Q",
+      value: "oM8N9P0Q4",
     },
 ];
 

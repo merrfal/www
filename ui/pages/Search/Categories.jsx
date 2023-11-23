@@ -40,11 +40,22 @@ export default function Categories({filters, setFilters}) {
                   <input
                     id={category._id}
                     value={category.name}
-                    type="radio"
+                    type="checkbox"
                     checked={filters.categories.includes(category._id)}
-                    className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
+                    className="hover:cursor-pointer rounded-md h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
                     onChange={() => {}}
-                    onClick={() => setFilters({...filters, categories: [...filters.categories, category._id]})}
+                    onClick={() => {
+                      const alreadyAdded = filters.categories.includes(category._id);
+
+                      if (!alreadyAdded) {
+                        setFilters({...filters, categories: [...filters.categories, category._id]})
+                      }
+
+                      if (alreadyAdded) {
+                        const updatedCategories = filters.categories.filter((cat) => cat !== category._id);
+                        setFilters({...filters, categories: updatedCategories})
+                      }
+                    }}
                   />
                   
                   <label htmlFor={category._id} className="hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">

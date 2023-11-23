@@ -10,7 +10,7 @@ export default function Filters(props) {
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between sm:px-6 lg:px-8">
           <Sort filters={filters} setFilters={setFilters} />
 
-          <div className="hidden sm:block">
+          <div className="sm:block">
             <div className="flow-root">
               <div className="-mx-4 flex items-center divide-x divide-gray-200">
                 <Statuses filters={filters} setFilters={setFilters} />

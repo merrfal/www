@@ -21,7 +21,7 @@ export default function Category() {
   const [loading, setLoading] = useState(true);
 
   const [filters, setFilters] = useState({
-    sort: { createdAt: 1 },
+    sort: { createdAt: -1 },
     cities: [],
     countries: [],
     statuses: [ false ],
@@ -41,7 +41,7 @@ export default function Category() {
       setCategory(null);
       setProducts({ products: [], hasMore: true });
       setFilters({
-        sort: { createdAt: 1 },
+        sort: { createdAt: -1 },
         cities: [],
         countries: [],
         statuses: [false],

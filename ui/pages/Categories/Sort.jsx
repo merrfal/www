@@ -21,7 +21,7 @@ export default function Sort({ ordering, setOrdering }) {
   const open = () => setIsSortOpen(!isSortOpen);
 
   return (
-    <div ref={ref} className="relative inline-block text-left">
+    <div ref={ref} className="relative inline-block text-left z-[121231238]">
       <div>
         <button
           onClick={open}
@@ -33,7 +33,7 @@ export default function Sort({ ordering, setOrdering }) {
       </div>
 
       {isSortOpen && (
-        <div className="w-56 origin-top-left absolute left-0 mt-2 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="w-56 origin-top-left absolute left-0 mt-2 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-[121231238]">
           <div>
             <p
               style={ordering === "asc" ? { color: "#377DFF" } : {}}

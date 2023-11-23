@@ -37,9 +37,9 @@ export default function Statuses({ filters, setFilters }) {
               <input
                 id="not-given"
                 value={false}
-                type="radio"
+                type="checkbox"
                 checked={filters.statuses.includes(false)}
-                className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
+                className="hover:cursor-pointer h-4 w-4 rounded-md border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
                 onChange={() => {}}
                 onClick={() => {
                     if (filters.statuses.includes(false) && filters.statuses.includes(true)) {
@@ -73,9 +73,9 @@ export default function Statuses({ filters, setFilters }) {
               <input
                 id="given"
                 value={true}
-                type="radio"
+                type="checkbox"
                 checked={filters.statuses.includes(true)}
-                className="hover:cursor-pointer h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
+                className="hover:cursor-pointer rounded-md h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
                 onChange={() => {}}
                 onClick={() => {
                     if (filters.statuses.includes(true)  && filters.statuses.includes(false)) {

@@ -26,7 +26,3 @@ export default function Category(props) {
     </Link>
   );
 }
-
-// import { useState } from "react";
-// const [categoryThumbnail, setCategoryThumbnail] = useState("")
-// onError={() => setCategoryThumbnail(NO_CATEGORY)}

@@ -171,6 +171,12 @@ export const Search  = async (payload, res) => {
   if(cities.length === 0) delete filters['productData.city'];
   if(categories.length === 0) delete filters['productData.category'];
 
+  if(Object.prototype.hasOwnProperty.call(sort, "views")) {
+    sort = { 'productAdditionalData.views': sort.views }
+  }
+
+  else sort = { 'createdAt': sort.createdAt }
+
   try {
     let products = await Product.find(filters).sort(sort).skip(offset).limit(limit).lean();
     let countProducts = await Product.find(filters).countDocuments();
@@ -206,7 +212,7 @@ export const Latest = async (payload, res) => {
 
     let products = await Product
       .find(productsFindObject)
-      .sort({ createdAt: -1})
+      .sort({ createdAt: -1 })
       .limit(16)
       .lean();
 

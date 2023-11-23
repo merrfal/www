@@ -33,17 +33,6 @@ export default function Sort({filters, setFilters}) {
             <div className="origin-top-left absolute left-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div>
                     <p
-                        style={filters.sort.createdAt === 1 ? { color: "#377DFF" } : {}}
-                        className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
-                        onClick={() => {
-                            if(filters.sort.createdAt === 1) open();
-                            else setFilters({...filters, sort: { createdAt: 1 }})
-                        }}
-                    >
-                        {Translation("newest")}
-                    </p>
-
-                    <p
                         style={filters.sort.createdAt === -1 ? { color: "#377DFF" } : {}}
                         className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
                         onClick={() => {
@@ -51,18 +40,18 @@ export default function Sort({filters, setFilters}) {
                             else setFilters({...filters, sort: { createdAt: -1 }})
                         }}
                     >
-                        {Translation("oldest")}
+                        {Translation("newest")}
                     </p>
 
                     <p
-                        style={filters.sort.views === 1 ? { color: "#377DFF" } : {}}
+                        style={filters.sort.createdAt === 1 ? { color: "#377DFF" } : {}}
                         className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
                         onClick={() => {
-                            if(filters.sort.views === 1) open();
-                            else setFilters({...filters, sort: { views: 1 }})
+                            if(filters.sort.createdAt === 1) open();
+                            else setFilters({...filters, sort: { createdAt: 1 }})
                         }}
                     >
-                        {Translation("most-popular")}
+                        {Translation("oldest")}
                     </p>
 
                     <p
@@ -71,6 +60,17 @@ export default function Sort({filters, setFilters}) {
                         onClick={() => {
                             if(filters.sort.views === -1) open();
                             else setFilters({...filters, sort: { views: -1 }})
+                        }}
+                    >
+                        {Translation("most-popular")}
+                    </p>
+
+                    <p
+                        style={filters.sort.views === 1 ? { color: "#377DFF" } : {}}
+                        className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
+                        onClick={() => {
+                            if(filters.sort.views === 1) open();
+                            else setFilters({...filters, sort: { views: 1 }})
                         }}
                     >
                         {Translation("most-unpopular")}

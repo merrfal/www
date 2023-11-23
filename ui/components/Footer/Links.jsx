@@ -20,24 +20,30 @@ export default function Links() {
 
       <ul className="mt-6 space-y-6">
         {HelpfulLinks.map((link, index) => {
-          const path = usePath(router, link.href.split("/")[1], 1);
+          const path = link.href ? false : usePath(router, link.link.split("/")[1], 1);
 
           return (
             <li className="text-sm" key={index} style={{lineHeight: 1}}>
-              <Link href={link.href}>
-                <span className={path ? activePathClasses : inactivePathClasses}>
-                  {link.name}
-                </span>
-              </Link>
+              {
+                link?.link &&
+                <Link href={link.link}>
+                  <span className={path ? activePathClasses : inactivePathClasses}>
+                    {link.name}
+                  </span>
+                </Link>
+              }
+
+              {
+                link?.href &&
+                <a href={link.href} target="_blank">
+                  <span className={path ? activePathClasses : inactivePathClasses}>
+                    {link.name}
+                  </span>
+                </a>
+              }
             </li>
           )
         })}
-
-        <li className="text-sm">
-          <a href={`mailto:${APP_EMAIL}`} className="text-gray-500 hover:text-[#377DFF] transition-all">
-            {Translation("contact-us")}
-          </a>
-        </li>
       </ul>
     </div>
   );

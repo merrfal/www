@@ -20,7 +20,7 @@ export default function Categories() {
       
       <Global title={Translation("categories")} description={Translation("categories-description")} />
 
-      <div className="max-w-7xl mx-auto mt-5 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto mt-5 px-4 sm:px-6 lg:px-8 ">
         <div className="mt-4 flow-root">
           <div className="-my-2">
             <div className="box-content py-2 relative overflow-visible">
