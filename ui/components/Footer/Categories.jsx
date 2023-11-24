@@ -1,18 +1,16 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { Categories as AllCategories } from "../../../data";
-import { Translation } from "../../../utils/Translations";
-import { usePath } from "../../../hooks";
-import { useRouter } from "next/router";
-import { Fragment } from "react";
+import { Categories as AllCategories } from "../../../data"
+import { Translation } from "../../../utils/Translations"
+import { usePath } from "../../../hooks"
+import { useRouter } from "next/router"
+import { Fragment } from "react"
 
 export default function Categories() {
-  const router = useRouter();
-
-  
+  const router = useRouter()
 
   return (
-    <div>
+    <div className="hidden md:block md:opacity-[0]">
       <h3 className="text-sm font-medium text-gray-900 select-none">
         {Translation("popular-cateogires")}
       </h3>
@@ -21,7 +19,7 @@ export default function Categories() {
         {AllCategories?.filter((category) => category.favorite)
           .slice(0, 4)
           .map((link, index) => {
-            const path = usePath(router, link.slug);
+            const path = usePath(router, link.slug)
           
             return (
                 <Fragment key={index}>
@@ -36,15 +34,15 @@ export default function Categories() {
         )}
       </ul>
     </div>
-  );
+  )
 }
 
 
 const LinkItem = (props) => {
-  const { name, path, slug, icon = false } = props;
+  const { name, path, slug, icon = false } = props
 
-  const activePathClasses = "text-[#377DFF] transition-all";
-  const inactivePathClasses = "text-gray-500 hover:text-[#377DFF] transition-all";
+  const activePathClasses = "text-[#377DFF] transition-all"
+  const inactivePathClasses = "text-gray-500 hover:text-[#377DFF] transition-all"
 
   return (
     <li className="text-sm" style={{ lineHeight: 1 }}>

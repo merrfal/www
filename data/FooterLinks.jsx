@@ -1,6 +1,6 @@
 import { FacebookIcon, InstagramIcon, LinkedInIcon, TwitterIcon } from "../ui/icons";
 import { Translation } from "../utils/Translations";
-import { DHURATA_E_BAJRAMIT_WEB, EKONOMIA_ISLAME_WEB, INSTITUTI_GERMA_WEB, PRISHTINA_TALKS_WEB, VIEW_ALL_WEB } from "../configs/Constants";
+import { DHURATA_E_BAJRAMIT_WEB, EKONOMIA_ISLAME_WEB, INSTITUTI_GERMA_WEB, PRINDERIMI_WEB, PRISHTINA_TALKS_WEB, VIEW_ALL_WEB } from "../configs/Constants";
 
 export const ProjectsList = [
   {
@@ -9,13 +9,8 @@ export const ProjectsList = [
     icon: false,
   },
   {
-    name: Translation("dhurata-e-bajramit"),
-    path: DHURATA_E_BAJRAMIT_WEB,
-    icon: false,
-  },
-  {
-    name: Translation("ekonomia-islame"),
-    path: EKONOMIA_ISLAME_WEB,
+    name: Translation("prinderimi"),
+    path: PRINDERIMI_WEB,
     icon: false,
   },
   {
@@ -26,10 +21,6 @@ export const ProjectsList = [
 ]
 
 export const HelpfulLinks = [
-  {
-    name: Translation("give-a-product"),
-    link: "/shto",
-  },
   {
     name: Translation("terms-of-service"),
     link: "/kushtet-e-sherbimit",

@@ -20,11 +20,11 @@ export default function Categories() {
       
       <Global title={Translation("categories")} description={Translation("categories-description")} />
 
-      <div className="max-w-7xl mx-auto mt-5 px-4 sm:px-6 lg:px-8 ">
-        <div className="mt-4 flow-root">
-          <div className="-my-2">
-            <div className="box-content py-2 relative overflow-visible">
-              <div className="grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+      <div className="max-w-7xl mx-auto mt-5 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+        <div className="mt-4 overflow-x-hidden">
+          <div className="-my-2 overflow-x-hidden">
+            <div className="py-2 relative overflow-x-hidden">
+              <div className="grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 overflow-x-hidden">
                 {
                   AllCategories.sort((a, b) => 
                     {

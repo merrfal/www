@@ -1,5 +1,5 @@
 {
-  "jap": "Jap",
+  "jap": "Organizata JAP",
   "merrfal": "Merrfal",
   "merrfal-tagline": "Dhuro se nuk pakësohet.",
   "merrfal-description": "Një platformë që mundëson të dhuroni gjëra për njerëzit që kanë nevoja për ato produkte, përdorimi është falas si produktet që dhurohen.",
@@ -107,8 +107,8 @@
   "select-the-chosen-giving-mode": "Zgjidheni një opsion për mënyrën e dhurimit të produktit!",
   "select-the-placeholder": "Zgjidhni një opsion",
   "select-one-category": "Produkti duhet te ketë një kategori përkatëse!",
-  "select-one-city": "Ju lutem zgjidhni qytetin ku produkti dhurohet!",
-  "select-one-country": "Ju lutem zgjidhni shtetin ku produkti dhurohet!",
+  "select-one-city": "Ju lutem zgjidhni qytetin!",
+  "select-one-country": "Ju lutem zgjidhni shtetin!",
   "select-posting-mode": "Ju lutem zgjidhni një opsion për mënyrën e postimit të produktit!",
   "phone-number-is-not-valid": "Numri i telefonit është i pavlefshëm!",
   "name-regex-validation": "Emri duhet të përmbajë vetëm shkronja, numra dhe një hapësirë të vetme midis fjalëve",
@@ -200,5 +200,6 @@
   "check-if-exist-error": "Targeti nuk ekziston ne databazë!",
   "check-if-exist-throw": "Ndodhi një gabim gjatë kontrollimit te targetit në bazën e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.",
   "prishtina-talks": "Prishtina Talks",
-  "popular-cateogires": "Kategoritë më Popullore"
+  "popular-cateogires": "Kategoritë më Popullore",
+  "prinderimi": "Prindërimi"
 }

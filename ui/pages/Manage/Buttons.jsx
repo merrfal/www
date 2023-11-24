@@ -146,8 +146,8 @@ export default function Buttons(props) {
             const ctx = canvas.getContext('2d');
             
             // Set default cropping dimensions if not provided
-            const defaultWidth = 1080;
-            const defaultHeight = 720;
+            const defaultWidth = img.width;
+            const defaultHeight = img.height;
             const targetWidth = cropOptions.width || defaultWidth;
             const targetHeight = cropOptions.height || defaultHeight;
     
@@ -205,7 +205,6 @@ export default function Buttons(props) {
         reader.readAsDataURL(file);
       });
     };
-    
     
     const promises = product.productData.gallery.map(async (image, index) => {
       const id = v4();
