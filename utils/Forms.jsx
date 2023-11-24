@@ -28,7 +28,7 @@ export const NameValidation = (value) => {
 export const DescriptionValidation = (value) => {
   let validation = { error: false };
 
-  const minLength = 28;
+  const minLength = 10;
   const maxLength = 320;
 const regex = /^[a-zA-Z0-9ëËÇç,_-\s()\[\].]*$/;
 
@@ -66,8 +66,8 @@ export const PhoneValidation = (value) => {
 export const AddressValidation = (value) => {
   let validation = { error: false };
 
-  const minLength = 10;
-  const maxLength = 40;
+  const minLength = 6;
+  const maxLength = 32;
   const regex = /^[a-zA-Z0-9ëËÇç,_-\s()\[\].]*$/;
 
   if (value.length < minLength) {

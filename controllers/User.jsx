@@ -27,8 +27,6 @@ export const Register = async (payload, res) => {
   } 
   
   catch (error) {
-    console.log(error)
-    
     const response = {
       res,
       code: 500,
