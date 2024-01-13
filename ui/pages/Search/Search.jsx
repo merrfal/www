@@ -1,13 +1,13 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Normal } from "../../layouts";
 import { Global } from "../../../configs/Head";
 import { useRouter } from "next/router";
 import { Header, Filters, Skeleton } from ".";
 import { Search as Searching } from "../../../api/Product";
 import { Empty, End, Product } from "../../components";
-import { useDispatch } from "react-redux";
 import { Translation } from "../../../utils/Translations";
 
 export default function Search() {
@@ -33,7 +33,7 @@ export default function Search() {
     
     setProducts({ products: [], hasMore: true });
     setFirst(false);
-    next();
+    next(true);
   }, [router]);
 
   const next = (reset = false) => {

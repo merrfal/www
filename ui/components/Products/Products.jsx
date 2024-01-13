@@ -22,7 +22,7 @@ export default function Products() {
 
           {products !== null && products.map((product, index) => 
             <Fragment key={index}>
-              <Product showGiven={false} product={product} />
+              <Product product={product} />
             </Fragment>
           )}
         </div>
