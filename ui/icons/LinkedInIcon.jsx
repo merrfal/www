@@ -4,12 +4,11 @@ export default function LinkedInIcon() {
       fill="#356fbb"
       className="w-[18px] h-[18px] -mt-[2px] -ml-[2px]"
       version="1.1"
-      id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 310 310"
       stroke="#356fbb"
     >
-      <g stroke-width="0"></g>
+      <g strokeWidth="0"></g>
       <g strokeLinecap="round" strokeLinejoin="round"></g>
       <g>
         <g id="XMLID_801_">

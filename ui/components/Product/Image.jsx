@@ -25,8 +25,8 @@ export default function Image(props) {
     <div className="-mb-1 relative h-[240px] mt-0 md:h-[360px] aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-[.999999999999] transition-all lg:aspect-none hover:cursor-pointer">
       <div className={allowManage ? "absolute top-2 z-[1] left-2 flex flex-col items-start" : "absolute top-2 left-2 z-[1] flex justify-center items-center"}>
         { showCategory && <Category category={productData.category} /> }
-        { showCategory && <div className={allowManage ? "h-0 font-bold w-[0px] bg-[#f8f8f850] my-0.5" : "h-2.5 w-[1px] bg-[#f8f8f850] mr-1"} /> }
-        { showGiven && <GivenStatus given={productData.given} /> }
+        { showCategory && <div className={allowManage ? "h-0 font-bold w-[0px] bg-[#f8f8f850] my-0.5" : "h-2.5 w-[1px] bg-[#f8f8f850] mr-[3.5px] ml-[0px]"} /> }
+        { showGiven && <GivenStatus isGiven={productData.isGiven} /> }
       </div>
 
       <img

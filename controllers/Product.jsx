@@ -1,5 +1,4 @@
 import { Product, User, Category as CategoryModel } from "../configs/Models";
-import { ConnectionLocation } from "../utils/Connection";
 import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
 import { Response } from "../utils/Response";
 import { Translation } from "../utils/Translations";
@@ -158,14 +157,15 @@ export const Search  = async (payload, res) => {
   let filters = {
     'productData.city': { $in: cities },
     'productData.category': { $in: categories },
+    'productData.isGiven': false
   }
 
   if(term !== ""){
-    filters = {
-      ...filters,
-      'productData.name': { $regex: term, $options: 'i' },
-      'productData.description': { $regex: term, $options: 'i' },
-    }
+    filters.$or = [
+      {'productData.name': { $regex: term, $options: 'i' }},
+      {'productData.description': { $regex: term, $options: 'i' }},
+      {'productData.address': { $regex: term, $options: 'i' }}
+    ]
   }
 
   if(cities.length === 0) delete filters['productData.city'];
