@@ -11,7 +11,7 @@ export default function Info() {
         <span className="block text-white text-center">{name}</span>
       </h1>
 
-      <p className="mt-3 max-w-lg mx-auto text-center text-[19px] text-white sm:max-w-3xl">
+      <p className="mt-3 max-w-lg mx-auto text-center text-[18px] lg:text-[19px] text-white sm:max-w-3xl">
         {description}
       </p>
     </Fragment>

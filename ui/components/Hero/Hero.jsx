@@ -10,7 +10,7 @@ export default function Hero() {
           <div className="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
             <Image />
             
-            <div className="relative px-4 py-32 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+            <div className="relative px-4 py-24 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
               <Info />
               <Buttons />
             </div>

@@ -36,6 +36,15 @@ export default function Image() {
     }
   }, [isVideoOpen])
 
+
+  useEffect(() => {
+    const videoElement = document.querySelector('video')
+
+    if (videoElement) {
+      videoElement.play()
+    }
+  }, [])
+
   return (
     <Fragment>
       {isVideoOpen && <YouTubeVideo setIsVideoOpen={setIsVideoOpen} />}
