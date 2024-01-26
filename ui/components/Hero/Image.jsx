@@ -41,6 +41,7 @@ export default function Image() {
     const videoElement = document.querySelector('video')
 
     if (videoElement) {
+      videoElement.muted = true
       videoElement.play()
     }
   }, [])
@@ -51,6 +52,7 @@ export default function Image() {
 
       <div className="absolute inset-0">
         <video
+          preload="none"
           autoPlay
           playsInline
           muted
