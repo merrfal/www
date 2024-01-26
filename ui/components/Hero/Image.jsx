@@ -3,10 +3,10 @@ import { YOUTUBE_HERO_VIDEO } from "../../../configs/Envs"
 
 const YouTubeVideo = ({ setIsVideoOpen }) => {
   return (
-    <section onClick={() => setIsVideoOpen(false)} className="fixed select-none z-[999999] top-0 right-0 bottom-0 left-0 bg-[#00000099] flex justify-center items-center">
+    <section onClick={() => setIsVideoOpen(false)} className="fixed select-none p-8 z-[999999] top-0 right-0 bottom-0 left-0 bg-[#00000099] flex justify-center items-center">
       <iframe
         onClick={(e) => e.stopPropagation()}
-        className="inset-0 rounded-md w-[940px] h-[529px]"
+        className="inset-0 rounded-md w-full h-[272px] md:h-[380px] lg:w-[940px] lg:h-[529px]"
         src={YOUTUBE_HERO_VIDEO}
         title="Merrfal.com"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -51,7 +51,7 @@ export default function Image() {
 
         <div className="absolute inset-0 bg-[#00000085] mix-blend-multiply" />
 
-        <div onClick={() => OpenVideoEmbedYoutube()} className="absolute bottom-5 right-6 p-2 rounded-full border-gray-200 border hover:bg-[#ffffff20] transition-all ease-in-out duration-500 cursor-pointer z-[999]">
+        <div onClick={() => OpenVideoEmbedYoutube()} className="absolute bottom-4 right-4 p-2 rounded-full border-gray-200 border hover:bg-[#ffffff20] transition-all ease-in-out duration-500 cursor-pointer z-[999]">
           <svg
             width="24"
             height="24"

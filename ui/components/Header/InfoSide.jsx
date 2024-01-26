@@ -74,13 +74,13 @@ const Categories = ({router}) => {
 const CategoriesList = (props) => {
   const { isCategoryOpen, router, categories, setIsCategoryOpen } = props;
 
-  const activePathClasses = "hover:cursor-pointer ml-3 pr-6 text-sm font-medium text-[#377DFF] whitespace-nowrap transition-all ease-in-out duration-500";
-  const inactivePathClasses = "hover:cursor-pointer hover:text-[#377DFF] ml-3 pr-6 text-sm font-medium whitespace-nowrap text-gray-600 transition-all whitespace-nowrap transition-all ease-in-out duration-500";
+  const activePathClasses = "hover:cursor-pointer ml-1 pr-6 text-sm font-medium text-[#377DFF] whitespace-nowrap transition-all ease-in-out duration-500";
+  const inactivePathClasses = "hover:cursor-pointer hover:text-[#377DFF] ml-1 pr-6 text-sm font-medium whitespace-nowrap text-gray-600 transition-all whitespace-nowrap transition-all ease-in-out duration-500";
 
   if (!isCategoryOpen) return null;
 
   return (
-    <div className="origin-top-right max-h-[20px] overflow-scroll absolute right-0 mt-3 bg-white rounded-md shadow-2xl p-2 ring-1 ring-black ring-opacity-5 focus:outline-none z-[999]">
+    <div className="origin-top-right max-h-[260px] overflow-scroll absolute right-0 mt-3 bg-white rounded-md shadow-2xl p-2 ring-1 ring-black ring-opacity-5 focus:outline-none z-[999]">
       <form className="space-y-3 h-full">
         {categories?.map((category, index) => {
           const path = usePath(router, category.slug);
