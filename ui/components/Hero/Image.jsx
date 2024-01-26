@@ -52,6 +52,7 @@ export default function Image() {
       <div className="absolute inset-0">
         <video
           autoPlay
+          playsInline
           muted
           loop
           className="h-full w-full object-cover"
