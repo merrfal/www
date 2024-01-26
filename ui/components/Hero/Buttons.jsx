@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { Translation } from "../../../utils/Translations";
+import Link from "next/link"
+import { Translation } from "../../../utils/Translations"
 
 export default function Buttons() {
   return (
@@ -13,11 +13,11 @@ export default function Buttons() {
 
         
         <Link href="/kerko">
-          <span className="flex items-center justify-center w-full px-4 py-3 border border-white text-base font-medium rounded-md shadow-sm text-white bg-opacity-50 hover:bg-opacity-70 hover:cursor:pointer hover:bg-[#ffffff05] transition-all md:py-4 md:px-8">
+          <span className="flex items-center justify-center w-full px-4 py-3 border border-white text-base font-medium rounded-md shadow-sm text-white bg-opacity-50 hover:cursor:pointer hover:bg-[#ffffff15] transition-all md:py-4 md:px-8">
             {Translation("explore")}
           </span>
         </Link>
       </div>
     </div>
-  );
+  )
 }

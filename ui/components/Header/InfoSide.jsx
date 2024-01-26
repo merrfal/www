@@ -80,7 +80,7 @@ const CategoriesList = (props) => {
   if (!isCategoryOpen) return null;
 
   return (
-    <div className="origin-top-right max-h-[280px] overflow-scroll absolute right-0 mt-3 bg-white rounded-md shadow-2xl p-2 ring-1 ring-black ring-opacity-5 focus:outline-none z-[999]">
+    <div className="origin-top-right max-h-[20px] overflow-scroll absolute right-0 mt-3 bg-white rounded-md shadow-2xl p-2 ring-1 ring-black ring-opacity-5 focus:outline-none z-[999]">
       <form className="space-y-3 h-full">
         {categories?.map((category, index) => {
           const path = usePath(router, category.slug);

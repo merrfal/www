@@ -1,13 +1,13 @@
 import { FacebookIcon, InstagramIcon, LinkedInIcon, TwitterIcon } from "../ui/icons";
 import { Translation } from "../utils/Translations";
-import { DHURATA_E_BAJRAMIT_WEB, EKONOMIA_ISLAME_WEB, INSTITUTI_GERMA_WEB, PRINDERIMI_WEB, PRISHTINA_TALKS_WEB, VIEW_ALL_WEB } from "../configs/Constants";
+import { PRINDERIMI_WEB, PRISHTINA_TALKS_WEB } from "../configs/Constants";
 
 export const ProjectsList = [
-  {
-    name: Translation("instituti-germa"),
-    path: INSTITUTI_GERMA_WEB,
-    icon: false,
-  },
+  // {
+  //   name: Translation("instituti-germa"),
+  //   path: INSTITUTI_GERMA_WEB,
+  //   icon: false,
+  // },
   {
     name: Translation("prinderimi"),
     path: PRINDERIMI_WEB,
