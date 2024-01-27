@@ -6,15 +6,17 @@ export const Global = (props) => {
   const { 
     title, 
     description = Translation("merrfal-description"), 
-    image = './general-images/merrfal-hero.png',
+    image = './general-images/merrfal-hero.webp',
     index = false
   } = props;
   
   return (
     <MetaTags>
       <meta charSet="UTF-8" />
+
       <link rel="icon" href="/favicon.ico" sizes="any" />
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+
       <meta name="author" content={Translation("merrfal")} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
