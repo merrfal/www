@@ -6,9 +6,9 @@ export const Global = (props) => {
   const { 
     title, 
     description = Translation("merrfal-description"), 
-    image = '/general-images/merrfal-hero.webp',
+    image = '/general-images/merrfal-hero.png',
     index = false
-  } = props;
+  } = props
   
   return (
     <MetaTags>
