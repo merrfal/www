@@ -6,8 +6,8 @@ export const Global = (props) => {
   const { 
     title, 
     description = Translation("merrfal-description"), 
-    image = '/merrfal-hero.png',
-    index = false 
+    image = './general-images/merrfal-hero.png',
+    index = false
   } = props;
   
   return (
@@ -26,5 +26,5 @@ export const Global = (props) => {
       
       {index === true && <meta name="robots" content="noindex" />}
     </MetaTags>
-  );
-};
+  )
+}
