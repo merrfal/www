@@ -27,8 +27,6 @@ export const Register = async (payload, res) => {
   } 
   
   catch (error) {
-    console.log(error)
-    
     const response = {
       res,
       code: 500,
@@ -77,8 +75,6 @@ export const Delete = async (payload, res) => {
 export const Login = async ({ uid }, res) => {
   try {
     const user = await User.findOne({ "userData.uid": uid }).lean();
-
-    console.log(user)
 
     const response = {
       res,
