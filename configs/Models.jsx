@@ -4,8 +4,8 @@ import { NO_AVATAR, NO_COVER } from "./Constants";
 const UserModel = new Schema(
   {
     userData: {
-      name: { type: String, required: true },
-      surname: { type: String, required: true },
+      name: { type: String, required: false, default: '' },
+      surname: { type: String, required: false, default: '' },
       username: { type: String, required: true, unique: true },
       email: { type: String, required: true, unique: true },
       uid: { type: String, required: true, unique: true },
