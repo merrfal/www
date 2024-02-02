@@ -1,17 +1,17 @@
-import { Normal } from "../../layouts";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { Delete, ViewWithPermissions } from "../../../api/Product";
-import { Loading } from "../../components";
-import { DisabledDefaultState, ProductDefaultState, ProductDefaultValidation } from "../../../configs/Defaults";
+import { Normal } from "../../layouts"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import { useDispatch, useSelector } from "react-redux"
+import { Delete, ViewWithPermissions } from "../../../api/Product"
+import { Loading } from "../../components"
+import { DisabledDefaultState, ProductDefaultState, ProductDefaultValidation } from "../../../configs/Defaults"
 import { onInput as Input } from "../../../utils/ProductManipulation"
-import { OpenConfirmation } from "../../../controllers/Slices";
-import { Translation } from "../../../utils/Translations";
-import { Permissonless } from "..";
-import { ref, deleteObject } from "firebase/storage";
-import { Storage } from "../../../configs/Firebase";
-import { Console } from "../../../utils/Console";
+import { OpenConfirmation } from "../../../controllers/Slices"
+import { Translation } from "../../../utils/Translations"
+import { Permissonless } from ".."
+import { ref, deleteObject } from "firebase/storage"
+import { Storage } from "../../../configs/Firebase"
+import { Console } from "../../../utils/Console"
 
 import {
   Header,
@@ -27,18 +27,18 @@ import {
   Url,
   Country,
   Given,
-} from ".";
+} from "."
 
 
 export default function EditProduct() {
-  const account = useSelector((state) => state.Account);
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const account = useSelector((state) => state.Account)
+  const dispatch = useDispatch()
+  const router = useRouter()
 
-  const [loading, setLoading] = useState(true);
-  const [validation, setValidation] = useState(ProductDefaultValidation);
-  const [product, setProduct] = useState(ProductDefaultState);
-  const [isHold, setIsHold] = useState(false);
+  const [loading, setLoading] = useState(true)
+  const [validation, setValidation] = useState(ProductDefaultValidation)
+  const [product, setProduct] = useState(ProductDefaultState)
+  const [isHold, setIsHold] = useState(false)
 
   const onInput = (key, e, event = true) => Input(
     product, 
@@ -48,24 +48,24 @@ export default function EditProduct() {
     key, 
     e, 
     event
-  );
+  )
 
   const onDeleteSuccess = (gallery) => {
-    const username = account?.User?.userData?.username;
+    const username = account?.User?.userData?.username
 
     gallery.map(async (image) => {
       try {
-        const currentIterationImage = ref(Storage, `products/${image.id}`);
-        await deleteObject(currentIterationImage);
+        const currentIterationImage = ref(Storage, `products/${image.id}`)
+        await deleteObject(currentIterationImage)
       }
 
-      catch(error) { Console(error, "error"); }
+      catch(error) { Console(error, "error") }
     })
 
-    if(username !== undefined) router.push(`/profili/${username}`);
-    else router.push("/");
+    if(username !== undefined) router.push(`/profili/${username}`)
+    else router.push("/")
 
-    setIsHold(false);
+    setIsHold(false)
   }
 
   const on = (name, slug, gallery) => {    
@@ -77,20 +77,20 @@ export default function EditProduct() {
   }
 
   useEffect(() => {
-    const { slug } = router.query;
+    const { slug } = router.query
 
     if(!account.Loading && slug !== undefined){
       if(account.Auth) {
-        const userId = account?.User?._id;
+        const userId = account?.User?._id
 
         ViewWithPermissions(slug, dispatch).then((data) => {
           if(data.success){
-            const isAllowedToEdit = userId === data?.data?.productData?.user._id;
-            const isAdmin = account?.User?.userAdditionalData?.role === "admin";
+            const isAllowedToEdit = userId === data?.data?.productData?.user._id
+            const isAdmin = account?.User?.userAdditionalData?.role === "admin"
 
             if(isAllowedToEdit || isAdmin){
-              setProduct(data?.data);
-              setLoading(false);
+              setProduct(data?.data)
+              setLoading(false)
 
               if(router?.query?.fshije === "po") {
                 setTimeout(() => on(
@@ -107,9 +107,9 @@ export default function EditProduct() {
 
       }
     }
-  }, [account, router]);
+  }, [account, router])
 
-  const onLoad = !isHold ? {} : DisabledDefaultState;
+  const onLoad = !isHold ? {} : DisabledDefaultState
 
   if(!account.Auth && !account.Loading) return <Permissonless />
 
@@ -204,5 +204,5 @@ export default function EditProduct() {
         </div>
       </div>}
     </Normal>
-  );
+  )
 }

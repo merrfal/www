@@ -1,6 +1,6 @@
 export const NO_AVATAR = "/placeholders/no-avatar.png"
 export const NO_COVER = "/placeholders/no-cover.png"
-export const NO_THUMBNAIL = "/placeholders/no-thumbnail.png"
+export const NO_THUMBNAIL = "/placeholders/no-product.png"
 export const NO_CATEGORY = "/placeholders/no-category.png"
 export const APP_EMAIL = "info.merrfal@gmail.com"
 export const EKONOMIA_ISLAME_WEB = "https://ekonomiaislame.com"

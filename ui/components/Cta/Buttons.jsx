@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { Translation } from "../../../utils/Translations";
+import Link from "next/link"
+import { Translation } from "../../../utils/Translations"
 
 export default function Buttons() {
   return (
@@ -17,5 +17,5 @@ export default function Buttons() {
             </span>
         </Link>
     </div>
-  );
+  )
 }

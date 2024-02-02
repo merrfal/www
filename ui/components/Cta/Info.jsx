@@ -1,5 +1,5 @@
-import { Fragment } from "react";
-import { Translation } from "../../../utils/Translations";
+import { Fragment } from "react"
+import { Translation } from "../../../utils/Translations"
 
 export default function Info() {
   return (
@@ -16,5 +16,5 @@ export default function Info() {
         </span>
       </h2>
     </Fragment>
-  );
+  )
 }

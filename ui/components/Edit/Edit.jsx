@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react"
 
 import {
   Address,
@@ -12,10 +12,10 @@ import {
   Phone,
   Surname,
   Username,
-} from "./";
+} from "./"
 
 export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
-  const [loading, setIsLoading] = useState(false);
+  const [loading, setIsLoading] = useState(false)
 
   const [userClone, setUserClone] = useState(
     {
@@ -28,6 +28,7 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
         cover: user.userData.cover,
         avatar: user.userData.avatar,
         phone: user.userData.phone,
+        phoneCode: user.userData.phoneCode
       },
       userAdditionalData: {
         address: user.userAdditionalData.address,
@@ -35,7 +36,7 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
         country: user.userAdditionalData.country,
       }
     }
-  );
+  )
 
   const [validations, setValidations] = useState({
     cover: false,
@@ -47,7 +48,7 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
     country: false,
     city: false,
     address: false,
-  });
+  })
 
   const onInput = (key, e, event = true, target = "userData") => {
     if(target === "userData") {
@@ -57,7 +58,7 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
             ...userClone.userData,
             [key]: event ? e.target.value : e,
           },
-        });
+        })
     }
 
     else {
@@ -68,7 +69,7 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
             [key]: event ? e.target.value : e,
             city: "",
           },
-        });
+        })
       
       else setUserClone({
         ...userClone,
@@ -76,36 +77,36 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
           ...userClone.userAdditionalData,
           [key]: event ? e.target.value : e,
         },
-      });
+      })
     }
 
     if(key === "contry") setValidations({
       ...validations,
       [key]: true,
       city: false,
-    });
+    })
 
     else setValidations({
       ...validations,
       [key]: true,
-    });
-  };
+    })
+  }
 
-  const load = loading ? { opacity: ".75", pointerEvents: "none" } : {};
+  const load = loading ? { opacity: ".75", pointerEvents: "none" } : {}
 
   let clickOutside = (handler) => {
-    let refInstance = useRef();
+    let refInstance = useRef()
 
     useEffect(() => {
-      let method = (e) => !refInstance.current?.contains(e.target) && handler();
-      document.addEventListener("mousedown", method);
-      return () => document.removeEventListener("mousedown", method);
-    });
+      let method = (e) => !refInstance.current?.contains(e.target) && handler()
+      document.addEventListener("mousedown", method)
+      return () => document.removeEventListener("mousedown", method)
+    })
 
-    return refInstance;
-  };
+    return refInstance
+  }
 
-  let ref = clickOutside(() => setIsEdit(false));
+  let ref = clickOutside(() => setIsEdit(false))
 
   return (
     <div style={load} className="relative z-[55]">
@@ -199,5 +200,5 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

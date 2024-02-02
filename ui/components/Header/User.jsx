@@ -1,56 +1,56 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { getDownloadURL, ref } from "firebase/storage";
-import { useState, useRef, useEffect, Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Storage } from "../../../configs/Firebase";
-import { useAuth, useGoogle as UseGoogle } from "../../../hooks";
-import { AddIcon } from "../../icons";
-import { Dropdown } from "./";
-import { isStorageReadable } from "../../../utils/Firebase";
-import { Loading } from "..";
-import { NO_AVATAR } from "../../../configs/Constants";
+import { getDownloadURL, ref } from "firebase/storage"
+import { useState, useRef, useEffect, Fragment } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Storage } from "../../../configs/Firebase"
+import { useAuth, useGoogle as UseGoogle } from "../../../hooks"
+import { AddIcon } from "../../icons"
+import { Dropdown } from "./"
+import { isStorageReadable } from "../../../utils/Firebase"
+import { Loading } from ".."
+import { NO_AVATAR } from "../../../configs/Constants"
 
 const Auth = ({ account }) => {
-  const [menu, setOpen] = useState();
-  const [avatar, setAvatar] = useState(null);
+  const [menu, setOpen] = useState()
+  const [avatar, setAvatar] = useState(null)
 
   useEffect(() => {
     if (account.Auth) {
-      let avtr = account?.User?.userData?.avatar;
+      let avtr = account?.User?.userData?.avatar
 
-      if(avtr === NO_AVATAR) setAvatar(NO_AVATAR);
+      if(avtr === NO_AVATAR) setAvatar(NO_AVATAR)
 
       else {
-        let isFirebaseReadable = isStorageReadable(avtr);
+        let isFirebaseReadable = isStorageReadable(avtr)
 
         if(isFirebaseReadable) {
-          const file = `users/${avtr}`;
-          const unextracted = ref(Storage, file);
+          const file = `users/${avtr}`
+          const unextracted = ref(Storage, file)
 
-          const url = getDownloadURL(unextracted);
-          setAvatar(url || NO_AVATAR);
+          const url = getDownloadURL(unextracted)
+          setAvatar(url || NO_AVATAR)
         }
 
-        else setAvatar(avtr);
+        else setAvatar(avtr)
       }
     }
-  }, [account]);
+  }, [account])
 
   let clickOutside = (handler) => {
-    let domNode = useRef();
+    let domNode = useRef()
 
     useEffect(() => {
-      let maybeHandler = (event) => !domNode.current.contains(event.target) && handler();
-      document.addEventListener("mousedown", maybeHandler);
+      let maybeHandler = (event) => !domNode.current.contains(event.target) && handler()
+      document.addEventListener("mousedown", maybeHandler)
 
-      return () => document.removeEventListener("mousedown", maybeHandler);
-    });
+      return () => document.removeEventListener("mousedown", maybeHandler)
+    })
 
-    return domNode;
-  };
+    return domNode
+  }
 
-  let domNode = clickOutside(() => setOpen(false));
+  let domNode = clickOutside(() => setOpen(false))
 
   return (
     <div className="relative accoount-menu flex items-center" ref={domNode}>
@@ -67,6 +67,7 @@ const Auth = ({ account }) => {
       >
         <img
           loading="lazy"
+          onDragStart={(e) => e.preventDefault()}
           src={avatar || NO_AVATAR}
           onError={() => setAvatar(NO_AVATAR)}
           className={`w-[32px] h-[32px] border-gray-200 rounded-full ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
@@ -76,11 +77,11 @@ const Auth = ({ account }) => {
 
       {menu && <Dropdown username={account.User.userData.username} />}
     </div>
-  );
-};
+  )
+}
 
 const NotAuth = ({account}) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     return (
       <div className="relative accoount-menu flex items-center">
@@ -93,11 +94,11 @@ const NotAuth = ({account}) => {
         <UseGoogle account={account} dispatch={dispatch} />
       </div>
     )
-};
+}
 
 export default function User() {
-  const account = useSelector((state) => state.Account);
-  useAuth(account);
+  const account = useSelector((state) => state.Account)
+  useAuth(account)
 
   return (
     <Fragment>
@@ -105,5 +106,5 @@ export default function User() {
       {account.Auth && <Auth account={account} />}
       {!account.Auth && !account.Loading && <NotAuth account={account} />}
     </Fragment>
-  );
+  )
 }

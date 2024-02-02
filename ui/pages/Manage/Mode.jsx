@@ -1,9 +1,9 @@
-import { ModeValidation } from "../../../utils/Forms";
-import { Translation } from "../../../utils/Translations";
-import { RequiredLabel, Wildcard } from "../../components";
+import { ModeValidation } from "../../../utils/Forms"
+import { Translation } from "../../../utils/Translations"
+import { RequiredLabel, Wildcard } from "../../components"
 
 export default function Mode({product, onInput, validation: v}){
-  const validation = ModeValidation(product?.productData?.postedAnonymously);
+  const validation = ModeValidation(product?.productData?.postedAnonymously)
 
   return (
     <div className="col-span-6 sm:col-span-3 lg:col-span-3">
@@ -25,11 +25,11 @@ export default function Mode({product, onInput, validation: v}){
           </option>
         }
         
-        <option value={false}>{Translation("post-anonymously")}</option>
-        <option value={true}>{Translation("post-not-anonymously")}</option>
+        <option value={true}>{Translation("post-anonymously")}</option>
+        <option value={false}>{Translation("post-not-anonymously")}</option>
       </select>
 
       {v?.postedAnonymously && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
-  );
+  )
 }

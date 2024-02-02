@@ -1,5 +1,5 @@
-import { Normal } from "../../layouts";
-import { Products, Cta, Categories, Hero } from "../../components";
+import { Normal } from "../../layouts"
+import { Products, Cta, Categories, Hero } from "../../components"
 
 export default function Home() {
   return (
@@ -9,5 +9,5 @@ export default function Home() {
       <Products />
       <Cta />
     </Normal>
-  );
+  )
 }

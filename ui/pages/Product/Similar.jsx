@@ -1,39 +1,33 @@
-import { Fragment } from "react";
-import { Empty, Product } from "../../components";
-import { SimilarSkeleton } from "./";
-import { Translation } from "../../../utils/Translations";
+import { Fragment } from "react"
+import { Empty, Product } from "../../components"
+import { SimilarSkeleton } from "./"
+import { Translation } from "../../../utils/Translations"
 
-export default function Similar({ products: allProducts, productId }) {
-  let products = allProducts || null;
-
-  if (products !== null && productId !== undefined) {
-    const index = products.findIndex((p) => p._id === productId);
-    
-    if (index !== -1) products = products.splice(index, 1);
-    else products = products.splice(products.length - 1, 1);
-  }
-
+export default function Similar({ products, productId, isSimilar }) {
   return (
     <section className="mt-10 border-t border-gray-200 py-16 px-4 sm:px-0">
       <h2 id="related-heading" className="text-xl font-bold text-gray-900">
-        {Translation("similar-products")}
+        {isSimilar ? Translation("similar-products") : Translation("other-products")}
       </h2>
 
-      <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+      <div className="py-6 grid grid-cols-2 gap-4 lg:gap-2 xl:gap-2 sm:grid-cols-2 sm:space-x-2 lg:grid-cols-3 xl:grid-cols-4">
         {products === null && <SimilarSkeleton />}
 
-        {products !== null && products.length !== 0 && products.map((product, index) => (
-          <Fragment key={index}>
-            <Product product={product} />
-          </Fragment>
-        ))}
+        {products?.map((product, index) => {
+
+          if(product._id !== productId) return (
+            <Fragment key={index}>
+              <Product product={product} />
+            </Fragment>
+          )
+        })}
       </div>
 
         <Empty 
           heading={Translation("no-products-found")} 
-          message={Translation("similar-products-description")}
+          message={isSimilar ? Translation("similar-products-description") : Translation("other-products-description")}
           show={products !== null && products.length === 0} 
         />
     </section>
-  );
+  )
 }

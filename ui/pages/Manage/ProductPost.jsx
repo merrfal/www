@@ -1,12 +1,10 @@
-import { Normal } from "../../layouts";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Alert, Loading } from "../../components";
-import { DisabledDefaultState, ProductDefaultState, ProductDefaultValidation } from "../../../configs/Defaults";
+import { Normal } from "../../layouts"
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { Loading } from "../../components"
+import { DisabledDefaultState, ProductDefaultState, ProductDefaultValidation } from "../../../configs/Defaults"
 import { onInput as Input } from "../../../utils/ProductManipulation"
-import { InfoIconAlert } from "../../icons";
-import { Translation } from "../../../utils/Translations";
-import { AllowedCountries } from "../../../utils/Locations";
+import { AllowedCountries } from "../../../utils/Locations"
 
 import {
   Header,
@@ -20,15 +18,15 @@ import {
   Buttons,
   Title,
   Country
-} from ".";
+} from "."
 
 export default function ProductPost() {
-  const account = useSelector((state) => state.Account);
+  const account = useSelector((state) => state.Account)
 
-  const [loading, setLoading] = useState(true);
-  const [validation, setValidation] = useState(ProductDefaultValidation);
-  const [product, setProduct] = useState(ProductDefaultState);
-  const [isHold, setIsHold] = useState(false);
+  const [loading, setLoading] = useState(true)
+  const [validation, setValidation] = useState(ProductDefaultValidation)
+  const [product, setProduct] = useState(ProductDefaultState)
+  const [isHold, setIsHold] = useState(false)
 
   const onInput = (key, e, event = true) => Input(
     product, 
@@ -38,20 +36,21 @@ export default function ProductPost() {
     key, 
     e, 
     event
-  );
+  )
 
   useEffect(() => {
     if(!account.Loading){
       if(account.Auth){ 
-        const { userAdditionalData, userData } = account?.User || {};
-        const { phone } = userData;
-        const { city, address, country } = userAdditionalData;
+        const { userAdditionalData, userData } = account?.User || {}
+        const { phone, phoneCode } = userData
+        const { city, address, country } = userAdditionalData
 
         if(AllowedCountries.includes(country)){
           setProduct({
             ...product,
             productData: {
               ...product.productData,
+              phoneCode: phoneCode !== "" ? phoneCode : product.productData.phoneCode === undefined ? "+383" : product.productData.phoneCode,
               phone: phone !== "" ? phone : product.productData.phone === undefined ? "" : product.productData.phone,
               city: city !== "" ? city : product.productData.city === undefined ? "" : product.productData.city,
               address: address !== "" ? address : product?.productData?.address === undefined ? "" : product?.productData?.address,
@@ -61,19 +60,22 @@ export default function ProductPost() {
         }
       }
 
-      setLoading(false);
+      setLoading(false)
     }
-  }, [account]);
+  }, [account])
 
-  const onLoad = !isHold ? {} : DisabledDefaultState;
+  const onLoad = !isHold ? {} : DisabledDefaultState
 
   return (
     <Normal>
-      {loading || account.Loading ? <Loading /> : null}
-
       {
-        !loading && !account.Loading && 
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        (loading || account.Loading || isHold) && 
+        <div className='fixed z-[99999999999999999] flex items-center justify-center w-screen h-screen top-0 right-0 bottom-0 left-0 bg-[#ffffff75]'>
+          <Loading loading={true} withContainer={false} />
+        </div>
+      }
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16">
             <div className="mt-5 md:col-span-2 md:mt-0">
               <div style={onLoad} className="sm:overflow-hidden sm:rounded-md">
@@ -149,8 +151,7 @@ export default function ProductPost() {
               </div>
             </div>
           </div>
-        </div>
-      }
+      </div>
     </Normal>
-  );
+  )
 }

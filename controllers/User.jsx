@@ -1,6 +1,6 @@
-import { User, Product } from "../configs/Models";
-import { Response } from "../utils/Response";
-import { Translation } from "../utils/Translations";
+import { User, Product } from "../configs/Models"
+import { Response } from "../utils/Response"
+import { Translation } from "../utils/Translations"
 
 export const Register = async (payload, res) => {
   try {
@@ -10,10 +10,10 @@ export const Register = async (payload, res) => {
         country: '',
         city: '',
       }
-    };
+    }
 
-    const savedUser = new User(data);
-    const user = await savedUser.save();
+    const savedUser = new User(data)
+    const user = await savedUser.save()
 
     const response = {
       res,
@@ -21,9 +21,9 @@ export const Register = async (payload, res) => {
       success: user ? true : false,
       data: user ? { ...user._doc } : null,
       message: user ? Translation("user-register-success") : Translation("user-register-error"),
-    };
+    }
 
-    Response(response);
+    Response(response)
   } 
   
   catch (error) {
@@ -34,15 +34,15 @@ export const Register = async (payload, res) => {
       data: null,
       message: Translation("user-register-error"),
       error,
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
-};
+}
 
 export const Delete = async (payload, res) => {
   try {
-    const user = await User.findByIdAndDelete(payload.userId);
+    const user = await User.findByIdAndDelete(payload.userId)
 
     if (user) Response(
       res,
@@ -50,7 +50,7 @@ export const Delete = async (payload, res) => {
       true,
       Translation("user-delete-success"),
       null
-    );
+    )
 
     else Response(
       res,
@@ -58,7 +58,7 @@ export const Delete = async (payload, res) => {
       false,
       Translation("user-delete-error"),
       null
-    );
+    )
   } 
   
   catch (error) {
@@ -68,13 +68,13 @@ export const Delete = async (payload, res) => {
       false,
       Translation("user-delete-error"),
       null
-    );
+    )
   }
-};
+}
 
 export const Login = async ({ uid }, res) => {
   try {
-    const user = await User.findOne({ "userData.uid": uid }).lean();
+    const user = await User.findOne({ "userData.uid": uid }).lean()
 
     const response = {
       res,
@@ -82,9 +82,9 @@ export const Login = async ({ uid }, res) => {
       success: user ? true : false,
       data: user ? { ...user } : null,
       message: user ? Translation("user-auth-success") : Translation("user-auth-error"),
-    };
+    }
 
-    Response(response);
+    Response(response)
   } 
   
   catch (error) {
@@ -95,17 +95,17 @@ export const Login = async ({ uid }, res) => {
       data: null,
       message:Translation("user-auth-error"),
       error,
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
-};
+}
 
 export const Products = async (payload, res) => {
-  let { offset, limit, user, auth } = payload;
+  let { offset, limit, user, auth } = payload
 
-  offset = parseInt(offset);
-  limit = parseInt(limit);
+  offset = parseInt(offset)
+  limit = parseInt(limit)
 
   const filter = () => {
     if (auth === user) return { 'productData.user': user}
@@ -113,8 +113,8 @@ export const Products = async (payload, res) => {
   }
 
   try {
-    let products = await Product.find(filter()).sort({createdAt: -1}).skip(offset).limit(limit).lean();
-    let countProducts = await Product.find(filter()).countDocuments();
+    let products = await Product.find(filter()).sort({createdAt: -1}).skip(offset).limit(limit).lean()
+    let countProducts = await Product.find(filter()).countDocuments()
 
     const response = {
       res,
@@ -122,9 +122,9 @@ export const Products = async (payload, res) => {
       success: products ? true : false,
       data: products ? { products, hasMore: countProducts > (offset + limit) } : [],
       message: products ? Translation("products-list-user-success") : Translation("products-list-user-error"),
-    };
+    }
 
-    Response(response);
+    Response(response)
   } 
   
   catch (error) {
@@ -135,11 +135,11 @@ export const Products = async (payload, res) => {
       data: null,
       message: Translation("products-list-user-error"),
       error,
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
-};
+}
 
 export const Update = async (payload, res) => {
   try {
@@ -154,7 +154,7 @@ export const Update = async (payload, res) => {
       },
       { new: true }
     )
-    .lean();
+    .lean()
 
     const response = {
       res,
@@ -164,7 +164,7 @@ export const Update = async (payload, res) => {
       message: user ? Translation("user-update-success") : Translation("user-update-error"),
     }
     
-    Response(response);
+    Response(response)
   } 
   
   catch (err) {
@@ -177,9 +177,9 @@ export const Update = async (payload, res) => {
       error: err,
     }
 
-    Response(response);
+    Response(response)
   }
-};
+}
 
 export const View = async ({ username }, res) => {
   try {
@@ -189,7 +189,7 @@ export const View = async ({ username }, res) => {
       { $inc: { "userActivities.views": 1 } },
       { new: true }
     )
-    .lean();
+    .lean()
 
     const response = {
       res,
@@ -198,9 +198,9 @@ export const View = async ({ username }, res) => {
       data: user ? user : null,
       message: user ? Translation("user-view-success") : Translation("user-view-error"),
       error: null,
-    };
+    }
 
-    Response(response);
+    Response(response)
   } 
   
   catch (error) {
@@ -211,17 +211,17 @@ export const View = async ({ username }, res) => {
       data: null,
       message: Translation("user-view-error"),
       error: error,
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
-};
+}
 
 export const CheckIfExist = async ({field, value}, res) => {
   try {
     const checkDuplicate = await User.findOne({[field]: value})
-      .select({_id: 1})
-      .lean();
+      .select({ _id: 1 })
+      .lean()
 
     const response = {
       res,
@@ -230,9 +230,9 @@ export const CheckIfExist = async ({field, value}, res) => {
       data: checkDuplicate ? true : false,
       message: checkDuplicate ? Translation("check-if-exist-success") :  Translation("check-if-exist-error"),
       error: null,
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
 
   catch(error){
@@ -244,8 +244,8 @@ export const CheckIfExist = async ({field, value}, res) => {
       data: null,
       message:  Translation("check-if-exist-throw"),
       error: error,
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
 }

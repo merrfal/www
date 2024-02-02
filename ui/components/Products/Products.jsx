@@ -1,16 +1,16 @@
-import { Fragment, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Latest } from "../../../api/Product";
-import { None, Product } from "..";
-import { Header, Skeleton } from "./";
+import { Fragment, useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import { Latest } from "../../../api/Product"
+import { None, Product } from ".."
+import { Header, Skeleton } from "./"
 
 export default function Products() {
-  const dispatch = useDispatch();
-  const [products, setProducts] = useState(null);
+  const dispatch = useDispatch()
+  const [products, setProducts] = useState(null)
 
   useEffect(() => {
-    if (products === null) Latest(setProducts, dispatch);
-  }, [products]);
+    if (products === null) Latest(setProducts, dispatch)
+  }, [products])
 
   return (
     <div className="bg-white">
@@ -30,5 +30,5 @@ export default function Products() {
         {products?.length === 0 && <None />}
       </div>
     </div>
-  );
+  )
 }

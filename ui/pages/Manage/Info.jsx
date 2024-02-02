@@ -1,8 +1,8 @@
-import { Fragment } from "react";
-import { Translation } from "../../../utils/Translations";
+import { Fragment } from "react"
+import { Translation } from "../../../utils/Translations"
 
 export default function Info(props) {
-  const { half = false } = props;
+  const { half = false } = props
   
   return (
     <Fragment>
@@ -22,5 +22,5 @@ export default function Info(props) {
         {Translation("supported-formats-info")}
       </p>
     </Fragment>
-  );
+  )
 }

@@ -1,34 +1,34 @@
-import { useEffect } from "react";
-import { VerifiedBadge } from "../../icons";
-import { EditButton } from "./";
-import { isStorageReadable } from "../../../utils/Firebase";
-import { getDownloadURL, ref } from "firebase/storage";
-import { NO_AVATAR } from "../../../configs/Constants";
+import { useEffect } from "react"
+import { VerifiedBadge } from "../../icons"
+import { EditButton } from "./"
+import { isStorageReadable } from "../../../utils/Firebase"
+import { getDownloadURL, ref } from "firebase/storage"
+import { NO_AVATAR } from "../../../configs/Constants"
 
 export default function Avatar(props) {
-  const { user, isEdit, setIsEdit, avatar, setAvatar } = props;
+  const { user, isEdit, setIsEdit, avatar, setAvatar } = props
 
   useEffect(() => {
     if (user !== null) {
-      let avtr = user?.userData?.avatar;
+      let avtr = user?.userData?.avatar
 
-      if(avtr === NO_AVATAR) setAvatar(NO_AVATAR);
+      if(avtr === NO_AVATAR) setAvatar(NO_AVATAR)
 
       else {
-        let isFirebaseReadable = isStorageReadable(avtr);
+        let isFirebaseReadable = isStorageReadable(avtr)
 
         if(isFirebaseReadable) {
-          const file = `users/${avtr}`;
-          const unextracted = ref(Storage, file);
+          const file = `users/${avtr}`
+          const unextracted = ref(Storage, file)
 
-          const url = getDownloadURL(unextracted);
-          setAvatar(url || NO_AVATAR);
+          const url = getDownloadURL(unextracted)
+          setAvatar(url || NO_AVATAR)
         }
 
-        else setAvatar(avtr);
+        else setAvatar(avtr)
       }
     }
-  }, [user]);
+  }, [user])
 
   return (
     <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
@@ -36,6 +36,7 @@ export default function Avatar(props) {
         src={avatar === null ? NO_AVATAR : avatar}
         alt="Profile Picture"
         loading="lazy"
+        onDragStart={(e) => e.preventDefault()}
         onError={() => setAvatar(NO_AVATAR)}
         className={`h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32 z-10 ${avatar === null ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}`}
       />
@@ -53,5 +54,5 @@ export default function Avatar(props) {
         <EditButton isEdit={isEdit} setIsEdit={setIsEdit} id={user?._id} />
       </div>
     </div>
-  );
+  )
 }

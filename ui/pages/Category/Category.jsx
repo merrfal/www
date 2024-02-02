@@ -1,68 +1,68 @@
-import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from "react-infinite-scroll-component"
 
-import { Fragment, useEffect, useState } from "react";
-import { Normal } from "../../layouts";
-import { Categories } from "../../../data";
-import { Global } from "../../../configs/Head";
-import { useRouter } from "next/router";
-import { Header, Filters, Skeleton } from "./";
-import { Category as Products } from "../../../api/Product";
-import { Empty, End, Loading, Product } from "../../components";
-import { useDispatch } from "react-redux";
-import { Error } from "..";
-import { Translation } from "../../../utils/Translations";
+import { Fragment, useEffect, useState } from "react"
+import { Normal } from "../../layouts"
+import { Categories } from "../../../data"
+import { Global } from "../../../configs/Head"
+import { useRouter } from "next/router"
+import { Header, Filters, Skeleton } from "./"
+import { Category as Products } from "../../../api/Product"
+import { Empty, End, Loading, Product } from "../../components"
+import { useDispatch } from "react-redux"
+import { Error } from ".."
+import { Translation } from "../../../utils/Translations"
 
 export default function Category() {
-  const router = useRouter();
-  const dispatch = useDispatch();
+  const router = useRouter()
+  const dispatch = useDispatch()
 
-  const [category, setCategory] = useState(null);
-  const [products, setProducts] = useState({ products: [], hasMore: true });
-  const [loading, setLoading] = useState(true);
+  const [category, setCategory] = useState(null)
+  const [products, setProducts] = useState({ products: [], hasMore: true })
+  const [loading, setLoading] = useState(true)
 
   const [filters, setFilters] = useState({
     sort: { createdAt: -1 },
     cities: [],
     countries: [],
     statuses: [ false ],
-  });
+  })
 
   useEffect(() => {
-    const { slug } = router.query;
+    const { slug } = router.query
 
     if (slug !== undefined && slug !== "") {
-      const selectedCategory = Categories.find((c) => c.slug === slug);
+      const selectedCategory = Categories.find((c) => c.slug === slug)
 
-      if(!selectedCategory) setCategory(false);
-      else setCategory(selectedCategory);
+      if(!selectedCategory) setCategory(false)
+      else setCategory(selectedCategory)
     }
 
     return () => {
-      setCategory(null);
-      setProducts({ products: [], hasMore: true });
+      setCategory(null)
+      setProducts({ products: [], hasMore: true })
       setFilters({
         sort: { createdAt: -1 },
         cities: [],
         countries: [],
         statuses: [false],
-      });
+      })
     }
-  }, [router]);
+  }, [router])
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(true)
 
-    const validCategory = category !== null && category !== false;
-    if(validCategory) next({ scratch: true });
+    const validCategory = category !== null && category !== false
+    if(validCategory) next({ scratch: true })
   }, [category, filters])
 
   const next = ({ scratch }) => {
-    scratch && setProducts({ products: [], hasMore: true });
-    setLoading(true);
+    scratch && setProducts({ products: [], hasMore: true })
+    setLoading(true)
 
-    let offset = 0;
+    let offset = 0
 
-    if(!scratch) offset = products.products.length;
+    if(!scratch) offset = products.products.length
 
     Products(
       { 
@@ -75,8 +75,8 @@ export default function Category() {
       setProducts, 
       setLoading,
       dispatch
-    );
-  };
+    )
+  }
 
   if (category === false) return <Error code={404} />
 
@@ -127,5 +127,5 @@ export default function Category() {
         </Fragment>
       }
     </Normal>
-  );
+  )
 }
