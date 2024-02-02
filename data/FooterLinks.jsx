@@ -1,6 +1,6 @@
-import { FacebookIcon, InstagramIcon, LinkedInIcon, TwitterIcon } from "../ui/icons";
-import { Translation } from "../utils/Translations";
-import { PRINDERIMI_WEB, PRISHTINA_TALKS_WEB } from "../configs/Constants";
+import { FacebookIcon, InstagramIcon, LinkedInIcon, TwitterIcon } from "../ui/icons"
+import { Translation } from "../utils/Translations"
+import { PRINDERIMI_WEB, PRISHTINA_TALKS_WEB } from "../configs/Constants"
 
 export const ProjectsList = [
   // {
@@ -46,7 +46,7 @@ export const SocialMediaLinks = [
   },
   {
     component: <TwitterIcon />,
-    path: "https://twitter.com/MerrF4l",
+    path: "https://twitter.com/merrfal_",
   },
   {
     component: <LinkedInIcon />,

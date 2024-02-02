@@ -45,7 +45,7 @@ export default function Steps() {
                   <StepThreeIcon />
                   
                   <h3 className="mt-6 text-sm font-medium text-gray-900">
-                    Mereni Produktin
+                    Merreni Produktin
                   </h3>
 
                   <p className="mt-2 text-sm text-gray-500">

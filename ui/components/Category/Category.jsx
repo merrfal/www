@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { NO_CATEGORY } from "../../../configs/Constants";
+import Link from "next/link"
+import { NO_CATEGORY } from "../../../configs/Constants"
 
 export default function Category(props) {
-  const { category} = props;
-  const { name, icon, slug } = category;
+  const { category} = props
+  const { name, icon, slug } = category
 
   return (
     <Link href={`/kategorite/${slug}`}>
@@ -13,6 +13,7 @@ export default function Category(props) {
             src={icon === "" ? NO_CATEGORY : icon}
             alt={name + "s image"}
             loading="lazy"
+            onDragStart={(e) => e.preventDefault()}
             className={`w-full h-full object-center object-cover duration-700 ease-in-out group-hover:opacity-75 rounded-xl ${!icon ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0" }`}
           />
         </span>
@@ -24,5 +25,5 @@ export default function Category(props) {
         </span>
       </span>
     </Link>
-  );
+  )
 }

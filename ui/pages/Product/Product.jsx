@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { View, Similar as Recommendations } from "../../../api/Product";
-import { Normal } from "../../layouts";
-import { useRouter } from "next/router";
-import { Global } from "../../../configs/Head";
-import { getDownloadURL, ref } from "firebase/storage";
-import { Storage } from "../../../configs/Firebase";
-import { Error } from "..";
-import { Loading } from "../../components";
+import "yet-another-react-lightbox/styles.css"
+
+import Lightbox from "yet-another-react-lightbox"
+
+import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import { View, Similar as Recommendations } from "../../../api/Product"
+import { Normal } from "../../layouts"
+import { useRouter } from "next/router"
+import { Global } from "../../../configs/Head"
+import { getDownloadURL, ref } from "firebase/storage"
+import { Storage } from "../../../configs/Firebase"
+import { Error } from ".."
+import { Loading } from "../../components"
 
 import {
   Info,
@@ -20,63 +24,104 @@ import {
   Category,
   Views,
   Edit,
-} from "./";
+} from "./"
 
 export default function Product() {
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const dispatch = useDispatch()
+  const router = useRouter()
 
-  const [product, setProduct] = useState(null);
-  const [products, setProducts] = useState(null);
-  const [gallery, setGallery] = useState([]);
-  const [index, setIndex] = useState(0);
+  const [product, setProduct] = useState(null)
+  const [products, setProducts] = useState(null)
+  const [gallery, setGallery] = useState([])
+  const [index, setIndex] = useState(0)
+  const [open, setOpen] = useState(false)
+  const [isSimilar, setIsSimilar] = useState(null)
 
   useEffect(() => {
     if (router) {
-      const { slug } = router.query;
+      const { slug } = router.query
 
       if (slug !== "" && slug !== undefined) {
-        View(slug, setProduct, dispatch);
+        View(slug, setProduct, dispatch)
       }
     }
-  }, [router]);
+  }, [router])
 
   useEffect(() => {
     if (product !== null && product !== false && products === null) {
-      const { category = "" } = product.productData;
-      Recommendations(category, setProducts, dispatch);
+      const { category = "" } = product.productData
+      Recommendations(category, setProducts, setIsSimilar, dispatch)
     }
-  }, [product, router]);
+  }, [product, router])
 
   useEffect(() => {
     if (product !== null && product !== false) {
-      let thumb = product?.productData?.gallery;
+      let thumb = product?.productData?.gallery
 
       Promise.all(thumb.map((image) => {
-        const file = `products/${image.id}`;
-        const unextracted = ref(Storage, file);
+        const file = `products/${image.id}`
+        const unextracted = ref(Storage, file)
 
-        return getDownloadURL(unextracted);
+        return getDownloadURL(unextracted)
       }))
       
-      .then((urls) => setGallery(urls));
+      .then((urls) => setGallery(urls))
+      .catch(() => setGallery([]))
     }
-  }, [product]);
+  }, [product])
 
   if (product === false) return <Error code={404} />
+
+  const HandleChange = () => {
+    const prev = document.querySelector('.yarl__navigation_prev')
+    const next = document.querySelector('.yarl__navigation_next')
+
+    if (prev) {
+      if (index === 0)  prev.style.display = "none"
+      else prev.style.display = "block"
+    }
+
+    if (next) {
+      if (index === gallery.length - 1) next.style.display = "none"
+      else next.style.display = "block"
+    }
+  }
+
+  useEffect(() => HandleChange(), [index, product, open])
 
   return (
     <Normal>
       <Global
         title={product?.productData?.name}
         description={product?.productData?.description }
-        thumbnail={product?.productData?.gallery[0].url}
+        thumbnail={product?.productData?.gallery[0]?.url}
       />
 
       {product === null ? <Loading /> : null}
 
       {product !== null && (
         <div className="bg-white">
+          <Lightbox
+            open={open}
+            close={() => setOpen(false)}
+            slides={gallery.map((image) => ({ src: image }))}
+            index={index}
+            carousel={{ finite: true }}
+            on={{ 
+              "view": ({ index }) => setIndex(index),
+              "click": () => HandleChange(),
+              "entering": () => HandleChange(),
+              "entered": () => HandleChange(),
+              "exiting": () => HandleChange(),
+              "exited": () => HandleChange(),
+            }}
+            controller={{
+              closeOnPullUp: true,
+              closeOnPullDown: true,
+              closeOnBackdropClick: true,
+            }}
+          />
+
           <section className="max-w-7xl mx-auto sm:pt-16 sm:px-6 lg:px-8">
             <div className="max-w-2xl mx-auto lg:max-w-none">
               <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
@@ -91,13 +136,16 @@ export default function Product() {
                     gallery={gallery} 
                     index={index} 
                     isGiven={product?.productData?.isGiven}
+                    setOpen={setOpen}
                   />
                 </div>
 
                 <div className="mt-10 lg:ml-3 xl:ml-3 md:ml-3 px-4 sm:px-0 sm:mt-16 lg:mt-0">
                   <div className="flex items-center mb-8">
                     <Category category={product?.productData?.category} />
+                    
                     <div className="h-5 border-r border-gray-200 mx-4" />
+
                     <Views product={product} />
                     <Edit slug={product?.productData?.slug} user={product?.productData?.user} />
                   </div>
@@ -109,12 +157,16 @@ export default function Product() {
                 </div>
               </div>
 
-              <Similar products={products} productId={product?._id} />
+              <Similar 
+                products={products} 
+                productId={product?._id} 
+                isSimilar={isSimilar} 
+              />
             </div>
           </section>
 
         </div>
       )}
     </Normal>
-  );
+  )
 }

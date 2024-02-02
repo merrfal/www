@@ -1,8 +1,7 @@
-import { Statuses } from "./";
-import { Locations, Sort } from "../../components";
+import { Locations, Sort } from "../../components"
 
 export default function Filters(props) {
-  const { filters, setFilters } = props;
+  const { filters, setFilters } = props
 
   return (
     <section>
@@ -13,7 +12,6 @@ export default function Filters(props) {
           <div className="sm:block">
             <div className="flow-root">
               <div className="-mx-4 flex items-center divide-x divide-gray-200">
-                <Statuses filters={filters} setFilters={setFilters} />
                 <Locations filters={filters} setFilters={setFilters} />
               </div>
             </div>
@@ -21,5 +19,5 @@ export default function Filters(props) {
         </div>
       </div>
     </section>
-  );
+  )
 }

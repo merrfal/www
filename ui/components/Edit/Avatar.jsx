@@ -1,53 +1,53 @@
 
-import { useEffect, useState } from "react";
-// import { EditIcon } from "../../icons";
-import { isStorageReadable } from "../../../utils/Firebase";
-import { UploadFileToFirebase } from "../../../utils";
-import { getDownloadURL, ref } from "firebase/storage";
-import { NO_AVATAR } from "../../../configs/Constants";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react"
+import { EditIcon } from "../../icons"
+import { isStorageReadable } from "../../../utils/Firebase"
+import { UploadFileToFirebase } from "../../../utils"
+import { getDownloadURL, ref } from "firebase/storage"
+import { useDispatch } from "react-redux"
+import { NO_AVATAR } from "../../../configs/Constants"
 
 export default function Avatar({ user, setUser }) {
-  const dispatch = useDispatch();
-  const [avatar, setAvatar] = useState("");
+  const dispatch = useDispatch()
+  const [avatar, setAvatar] = useState("")
 
   useEffect(() => {
     if (user !== null) {
-      let avtr = user?.userData?.avatar;
+      let avtr = user?.userData?.avatar
 
-      if(avtr === NO_AVATAR) setAvatar(NO_AVATAR);
+      if(avtr === NO_AVATAR) setAvatar(NO_AVATAR)
 
       else {
-        let isFirebaseReadable = isStorageReadable(avtr);
+        let isFirebaseReadable = isStorageReadable(avtr)
 
         if(isFirebaseReadable) {
-          const file = `users/${avtr}`;
-          const unextracted = ref(Storage, file);
+          const file = `users/${avtr}`
+          const unextracted = ref(Storage, file)
 
-          const url = getDownloadURL(unextracted);
-          setAvatar(url || NO_AVATAR);
+          const url = getDownloadURL(unextracted)
+          setAvatar(url || NO_AVATAR)
         }
 
-        else setAvatar(avtr);
+        else setAvatar(avtr)
       }
     }
-  }, [user]);
+  }, [user])
 
   const onUploadHelper = () => {
-    const fileInput = document.getElementById("avatar-file-input");
-    fileInput.click();
+    const fileInput = document.getElementById("avatar-file-input")
+    fileInput.click()
   }
 
   const onUploadFile = async (e)  => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
 
     if(file) {
       setAvatar(URL.createObjectURL(file))
 
-      const firebaseResponse = await UploadFileToFirebase(file, 'users', dispatch);
+      const firebaseResponse = await UploadFileToFirebase(file, 'users', dispatch)
 
       if(firebaseResponse.success){
-        const { data } = firebaseResponse;
+        const { data } = firebaseResponse
 
         setUser({
           ...user,
@@ -55,7 +55,7 @@ export default function Avatar({ user, setUser }) {
             ...user.userData,
             avatar: data,
           }
-        });
+        })
       }
     }
   }
@@ -66,6 +66,7 @@ export default function Avatar({ user, setUser }) {
           <img
             className="h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24 object-cover"
             src={avatar}
+            onDragStart={(e) => e.preventDefault()}
             loading="lazy"
             width="100"
           />
@@ -86,5 +87,5 @@ export default function Avatar({ user, setUser }) {
           </div>
         </div>
     </div>
-  );
+  )
 }

@@ -1,40 +1,40 @@
-import { InfoSide, User } from "./";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { SearchIcon } from "../../icons";
-import { Translation } from "../../../utils/Translations";
+import { InfoSide, User } from "./"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import { SearchIcon } from "../../icons"
+import { Translation } from "../../../utils/Translations"
 
 export default function Header() {
-  const router = useRouter();
+  const router = useRouter()
   const [openSearch, setOpenSearch] = useState(false)
-  const [term, setTerm] = useState("");
+  const [term, setTerm] = useState("")
 
   useState(() => {
-    let path = typeof window !== "undefined" && window.location;
-    path = path?.pathname?.split("/")[2];
-    const base = path?.pathname?.split("/")[1];
+    let path = typeof window !== "undefined" && window.location
+    path = path?.pathname?.split("/")[2]
+    const base = path?.pathname?.split("/")[1]
 
-    if (path !== undefined && path !== "" && term === "" && base === "kerko") setTerm(path);
-  }, [router]);
+    if (path !== undefined && path !== "" && term === "" && base === "kerko") setTerm(path)
+  }, [router])
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (!e.target.closest(".showSerch")) setOpenSearch(false);
-    };
+      if (!e.target.closest(".showSerch")) setOpenSearch(false)
+    }
 
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+    document.addEventListener("click", handleClickOutside)
+    return () => document.removeEventListener("click", handleClickOutside)
+  }, [])
 
   const onKeyPress = (e) => {
     if (e.key === "Enter") {
-      e.preventDefault();
-      router.push(`/kerko/${term}`);
+      e.preventDefault()
+      router.push(`/kerko/${term}`)
     }
   }
 
   const searchOpenerHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     setOpenSearch(!openSearch)
   }
 
@@ -75,5 +75,5 @@ export default function Header() {
         </div>
       </nav>
     </header>
-  );
+  )
 }

@@ -36,6 +36,7 @@ export const ProductDefaultState = {
     description: "",
     address: "",
     phone: "",
+    phoneCode: "+383",
     country: "",
     city: "",
     category: "",

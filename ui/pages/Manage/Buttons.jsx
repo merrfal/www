@@ -1,15 +1,15 @@
-import { uploadBytesResumable, ref, getDownloadURL } from "firebase/storage";
-import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { v4 } from "uuid";
-import { Create, Update } from "../../../api/Product";
-import { Storage } from "../../../configs/Firebase";
-import { Notification } from "../../../utils/Response";
-import { Translation } from "../../../utils/Translations";
-import { Auth as AuthInstance } from "../../../configs/Firebase";
-import { GoogleAuthProvider, getAdditionalUserInfo, signInWithPopup } from "firebase/auth";
-import { Login, Register } from "../../../api/User";
-import { LogoutAccount } from "../../../controllers/Redux";
+import { uploadBytesResumable, ref, getDownloadURL } from "firebase/storage"
+import { GoogleAuthProvider, getAdditionalUserInfo, signInWithPopup } from "firebase/auth"
+import { useRouter } from "next/router"
+import { useDispatch } from "react-redux"
+import { v4 } from "uuid"
+import { Create, Update } from "../../../api/Product"
+import { Storage } from "../../../configs/Firebase"
+import { Notification } from "../../../utils/Response"
+import { Translation } from "../../../utils/Translations"
+import { Auth as AuthInstance } from "../../../configs/Firebase"
+import { Login, Register } from "../../../api/User"
+import { LogoutAccount } from "../../../controllers/Redux"
 
 import {
   AddressValidation,
@@ -22,7 +22,7 @@ import {
   NameValidation,
   PhoneValidation,
   SlugBuilder,
-} from "../../../utils/Forms";
+} from "../../../utils/Forms"
 
 export default function Buttons(props) {
   const { 
@@ -32,10 +32,10 @@ export default function Buttons(props) {
     mode, 
     onUpdate, 
     setIsHold 
-  } = props;
+  } = props
 
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const dispatch = useDispatch()
+  const router = useRouter()
 
   const onValidation = () => {
     setValidation({
@@ -48,46 +48,46 @@ export default function Buttons(props) {
       country: true,
       gallery: true,
       postedAnonymously: true,
-    });
+    })
 
-    let validations = true;
+    let validations = true
 
-    const name = NameValidation(product.productData.name);
-    const description = DescriptionValidation(product.productData.description);
-    const address = AddressValidation(product.productData.address);
-    const phone = PhoneValidation(product.productData.phone);
-    const city = CityValidation(product.productData.city);
-    const category = CategoryValidation(product.productData.category);
-    const country = CountryValidation(product.productData.country);
-    const images = ImagesValidation(product.productData.gallery);
-    const mode = ModeValidation(product.productData.postedAnonymously);
+    const name = NameValidation(product.productData.name)
+    const description = DescriptionValidation(product.productData.description)
+    const address = AddressValidation(product.productData.address)
+    const phone = PhoneValidation(product.productData.phone)
+    const city = CityValidation(product.productData.city)
+    const category = CategoryValidation(product.productData.category)
+    const country = CountryValidation(product.productData.country)
+    const images = ImagesValidation(product.productData.gallery)
+    const mode = ModeValidation(product.productData.postedAnonymously)
 
-    if (name.error) validations = false;
-    if (description.error) validations = false;
-    if (address.error) validations = false;
-    if (phone.error) validations = false;
-    if (images.error) validations = false;
-    if (city.error) validations = false;
-    if (category.error) validations = false;
-    if (country.error) validations = false;
-    if (mode.error) validations = false;
+    if (name.error) validations = false
+    if (description.error) validations = false
+    if (address.error) validations = false
+    if (phone.error) validations = false
+    if (images.error) validations = false
+    if (city.error) validations = false
+    if (category.error) validations = false
+    if (country.error) validations = false
+    if (mode.error) validations = false
 
-    return validations;
-  };
+    return validations
+  }
 
   const Auth = async () => {
-    if(account.Loading) return;
+    if(account.Loading) return
     
     try {
-      var Provider = new GoogleAuthProvider();
-      const data = await signInWithPopup(AuthInstance, Provider);
+      var Provider = new GoogleAuthProvider()
+      const data = await signInWithPopup(AuthInstance, Provider)
 
       if (data) {
-        const user = data.user;
-        const { isNewUser } = getAdditionalUserInfo(data);
+        const user = data.user
+        const { isNewUser } = getAdditionalUserInfo(data)
 
-        if (isNewUser) Register(user, dispatch);
-        else Login(user.uid, dispatch);
+        if (isNewUser) Register(user, dispatch)
+        else Login(user.uid, dispatch)
       } 
       
       else {
@@ -97,8 +97,8 @@ export default function Buttons(props) {
           type: "error",
         }
 
-        dispatch(LogoutAccount());
-        Notification(alert);
+        dispatch(LogoutAccount())
+        Notification(alert)
       }
     } 
     
@@ -109,10 +109,10 @@ export default function Buttons(props) {
         type: "error",
       }
 
-      dispatch(LogoutAccount());
-      Notification(alert);
+      dispatch(LogoutAccount())
+      Notification(alert)
     }
-  };
+  }
 
   const handlePublish = async () => {
     if (!onValidation()) {
@@ -120,98 +120,103 @@ export default function Buttons(props) {
         window.scrollTo({
           top: 0,
           behavior: "smooth",
-        });
+        })
 
-      return;
+      return
     }
 
     if(!account.Auth) {
-      Auth();
-      return;
+      Auth()
+      return
     }
 
-    setIsHold(true);
+    setIsHold(true)
 
-    const gallery = [];
+    const gallery = []
 
     const compressImage = async (file, id, index, cropOptions = {}) => {
       return new Promise((resolve, reject) => {
-        const reader = new FileReader();
+        const reader = new FileReader()
         reader.onload = (event) => {
-          const img = new Image();
+          const img = new Image()
     
-          img.src = event.target.result;
+          img.src = event.target.result
           img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
+            const canvas = document.createElement('canvas')
+            const ctx = canvas.getContext('2d')
             
             // Set default cropping dimensions if not provided
-            const defaultWidth = img.width;
-            const defaultHeight = img.height;
-            const targetWidth = cropOptions.width || defaultWidth;
-            const targetHeight = cropOptions.height || defaultHeight;
+            const defaultWidth = img.width
+            const defaultHeight = img.height
+            const targetWidth = cropOptions.width || defaultWidth
+            const targetHeight = cropOptions.height || defaultHeight
     
             // Calculate cropping dimensions while preserving aspect ratio
-            const sourceAspectRatio = img.width / img.height;
-            const targetAspectRatio = targetWidth / targetHeight;
-            let cropWidth, cropHeight;
+            const sourceAspectRatio = img.width / img.height
+            const targetAspectRatio = targetWidth / targetHeight
+
+            let cropWidth, cropHeight
             
             if (sourceAspectRatio > targetAspectRatio) {
-              cropWidth = img.height * targetAspectRatio;
-              cropHeight = img.height;
+              cropWidth = img.height * targetAspectRatio
+              cropHeight = img.height
             } 
             
             else {
-              cropWidth = img.width;
-              cropHeight = img.width / targetAspectRatio;
+              cropWidth = img.width
+              cropHeight = img.width / targetAspectRatio
             }
     
-            const cropX = (img.width - cropWidth) / 2;
-            const cropY = (img.height - cropHeight) / 2;
+            const cropX = cropOptions.skipCrop ? 0 : (img.width - cropWidth) / 2;
+            const cropY = cropOptions.skipCrop ? 0 : (img.height - cropHeight) / 2;
     
-            canvas.width = targetWidth;
-            canvas.height = targetHeight;
+            canvas.width = targetWidth
+            canvas.height = targetHeight
             
-            ctx.drawImage(img, cropX, cropY, cropWidth, cropHeight, 0, 0, targetWidth, targetHeight);
+            ctx.drawImage(img, cropX, cropY, cropWidth, cropHeight, 0, 0, targetWidth, targetHeight)
     
             canvas.toBlob(
-              (blob) => {
-                const compressedImageRef = ref(Storage, `products/${id}`);
-                const uploadTask = uploadBytesResumable(compressedImageRef, blob);
-    
-                uploadTask
-                  .then(async (snapshot) => {
-                    const url = await getDownloadURL(snapshot.ref);
-                    const compressedImg = {
-                      url,
-                      id,
-                      isMain: index === 0,
-                      filename: `${file.name.split('.')[0]}.webp`,
-                    };
-    
-                    resolve(compressedImg);
-                  })
-    
-                  .catch((error) => {
-                    console.error('Error uploading compressed image:', error);
-                    reject(error);
-                  });
+              async (blob) => {
+                if (blob.size > 2 * 1024 * 1024) await compressImage(file, id, index, { skipCrop: true })                
+
+                else {
+                  const compressedImageRef = ref(Storage, `products/${id}`)
+                  const uploadTask = uploadBytesResumable(compressedImageRef, blob)
+      
+                  uploadTask
+                    .then(async (snapshot) => {
+                      const url = await getDownloadURL(snapshot.ref)
+                      const compressedImg = {
+                        url,
+                        id,
+                        isMain: index === 0,
+                        filename: `${file.name.split('.')[0]}.webp`,
+                      }
+      
+                      resolve(compressedImg)
+                    })
+      
+                    .catch((error) => {
+                      console.error('Error uploading compressed image:', error)
+                      reject(error)
+                    })
+                }
               },
               'image/webp',
               .85
-            );
-          };
-        };
-        reader.readAsDataURL(file);
-      });
-    };
+            )
+          }
+        }
+        reader.readAsDataURL(file)
+      })
+    }
     
     const promises = product.productData.gallery.map(async (image, index) => {
-      const id = v4();
+      const id = v4()
     
       try {
-        const compressedImg = await compressImage(image.file, id, index);
-        gallery.push(compressedImg);
+        const compressedImg = await compressImage(image.file, id, index, dispatch)
+        gallery.push(compressedImg)
       } 
       
       catch (error) {
@@ -219,23 +224,23 @@ export default function Buttons(props) {
           type: 'error',
           message: Translation('couldnt-upload-to-firebase'),
           dispatch,
-        };
+        }
     
-        Notification(alert);
+        Notification(alert)
       }
-    });
+    })
     
-    await Promise.all(promises);
+    await Promise.all(promises)
 
     const initalProduct = {
       ...product.productData,
       user: account.User._id,
       slug: SlugBuilder(product.productData.name),
       gallery,
-    };
+    }
 
-    Create(initalProduct, router, setIsHold, dispatch);
-  };
+    Create(initalProduct, router, setIsHold, dispatch)
+  }
 
   const handleUpdate = async () => {
     if (!onValidation()) {
@@ -243,12 +248,12 @@ export default function Buttons(props) {
         window.scrollTo({
           top: 0,
           behavior: "smooth",
-        });
+        })
 
-      return;
+      return
     }
 
-    Update({...product.productData}, router, setIsHold, dispatch);
+    Update({...product.productData}, router, setIsHold, dispatch)
   }
 
   const handleDelete = () => onUpdate(
@@ -280,5 +285,5 @@ export default function Buttons(props) {
           </button>
       }
     </div>
-  );
+  )
 }

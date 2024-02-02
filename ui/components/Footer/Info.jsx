@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { SocialMediaLinks } from "../../../data/FooterLinks";
-import { IconIcon } from "../../icons";
-import { Translation } from "../../../utils/Translations";
+import { SocialMediaLinks } from "../../../data/FooterLinks"
+import { IconIcon } from "../../icons"
+import { Translation } from "../../../utils/Translations"
 
 export default function Info() {
   return (
@@ -19,12 +19,12 @@ export default function Info() {
 
         <div className="flex flex-wrap mt-8 space-x-4 items-center">
             {SocialMediaLinks.map((link, index) => (
-                <a className="hover:opacity-[.9] transition-all" href={link.path} key={index}>
+                <a className="hover:opacity-[.9] transition-all" href={link.path} key={index} target="_blank">
                     {link.component}
                 </a>
             ))}
         </div>
     </div>
 
-  );
+  )
 }

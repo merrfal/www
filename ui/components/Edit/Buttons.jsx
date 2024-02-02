@@ -1,18 +1,18 @@
-import { useDispatch } from "react-redux";
-import { Update } from "../../../api/User";
-import { Translation } from "../../../utils/Translations";
-import { useRouter } from "next/router";
+import { useDispatch } from "react-redux"
+import { Update } from "../../../api/User"
+import { Translation } from "../../../utils/Translations"
+import { useRouter } from "next/router"
 
 import {
   AddressValidation,
   PhoneValidation,
   UserNameValidation,
   UserSurnameValidation,
-} from "../../../utils/Forms";
+} from "../../../utils/Forms"
 
 export default function Buttons(props) {
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const dispatch = useDispatch()
+  const router = useRouter()
 
   const {
     user,
@@ -22,7 +22,7 @@ export default function Buttons(props) {
     userClone,
     setUserClone,
     setValidations,
-  } = props;
+  } = props
 
   const onValidation = () => {
     setValidations({
@@ -32,22 +32,22 @@ export default function Buttons(props) {
       country: true,
       cover: true,
       phone: true
-    });
+    })
 
-    let validations = true;
+    let validations = true
 
-    const name = UserNameValidation(userClone?.userData?.name);
-    const surname = UserSurnameValidation(userClone?.userData?.surname);
-    const address = AddressValidation(userClone?.userAdditionalData?.address);
-    const phone = PhoneValidation(userClone?.userData?.phone);
+    const name = UserNameValidation(userClone?.userData?.name)
+    const surname = UserSurnameValidation(userClone?.userData?.surname)
+    const address = AddressValidation(userClone?.userAdditionalData?.address)
+    const phone = PhoneValidation(userClone?.userData?.phone)
 
-    if (name?.error) validations = false;
-    if (surname?.error) validations = false;
-    if (phone?.error) validations = false;
-    if (address?.error) validations = false;
+    if (name?.error) validations = false
+    if (surname?.error) validations = false
+    if (phone?.error) validations = false
+    if (address?.error) validations = false
 
-    return validations;
-  };
+    return validations
+  }
 
   const HandleUpdate = () => {
     if (!onValidation()) {
@@ -55,9 +55,9 @@ export default function Buttons(props) {
         window.scrollTo({
           top: 0,
           behavior: "smooth",
-        });
+        })
 
-      return;
+      return
     }
 
     Update(
@@ -69,8 +69,8 @@ export default function Buttons(props) {
       setUserClone, 
       router,
       dispatch
-    );
-  };
+    )
+  }
 
   return (
     <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
@@ -82,5 +82,5 @@ export default function Buttons(props) {
         {Translation("on-cancel")}
       </button>
     </div>
-  );
+  )
 }

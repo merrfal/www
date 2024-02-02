@@ -13,7 +13,7 @@ export default function Country({product, onInput, validation: v}) {
       </label>
 
       <select
-        defaultValue={Translation("country-placeholder")}
+        placeholder={Translation("country-placeholder")}
         value={product?.productData?.country}
         id="country"
         className="p-3 mt-1 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-[#377DFF] focus:outline-none focus:ring-[#377DFF] sm:text-sm"

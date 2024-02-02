@@ -1,12 +1,12 @@
-import { Notification } from "../utils/Response";
-import { Request } from "../utils/Http";
-import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
-import { Translation } from "../utils/Translations";
+import { Notification } from "../utils/Response"
+import { Request } from "../utils/Http"
+import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages"
+import { Translation } from "../utils/Translations"
 
 export const Create = async (page, router, setIsHold, dispatch) => {
   try {
-    const req = await Request("PRODUCTS/CREATE", { productData: {...page} });
-    const res = await req.json();
+    const req = await Request("PRODUCTS/CREATE", { productData: {...page} })
+    const res = await req.json()
 
     if (res.success === true) {
       router.push(`/${res.data.productData.slug}`)
@@ -15,9 +15,9 @@ export const Create = async (page, router, setIsHold, dispatch) => {
         dispatch,
         message: res.message,
         type: "success",
-      };
+      }
 
-      Notification(alert);
+      Notification(alert)
     }
 
     else {
@@ -25,9 +25,9 @@ export const Create = async (page, router, setIsHold, dispatch) => {
         dispatch,
         message: CreateMessage("product", false),
         type: "error",
-      };
+      }
 
-      Notification(alert);
+      Notification(alert)
     }
   } 
   
@@ -36,33 +36,33 @@ export const Create = async (page, router, setIsHold, dispatch) => {
       dispatch,
       message: Translation("products-latest-error"),
       type: "error",
-    };
+    }
 
-    Notification(alert);
+    Notification(alert)
   }
 
   finally {
-    setIsHold(false);
+    setIsHold(false)
   }
-};
+}
 
 export const Delete = async (slug, setIsHold, onDeleteSuccess, gallery, dispatch) => {
   try {
-    setIsHold(true);
+    setIsHold(true)
 
-    const req = await Request("PRODUCTS/DELETE", {slug});
-    const res = await req.json();
+    const req = await Request("PRODUCTS/DELETE", {slug})
+    const res = await req.json()
 
     if (res.success === true) {
       const alert = {
         dispatch,
         message: res.message,
         type: "success",
-      };
+      }
 
-      Notification(alert);
+      Notification(alert)
 
-      onDeleteSuccess(gallery);
+      onDeleteSuccess(gallery)
     }
 
     else {
@@ -70,9 +70,9 @@ export const Delete = async (slug, setIsHold, onDeleteSuccess, gallery, dispatch
         dispatch,
         message: res.message,
         type: "error",
-      };
+      }
 
-      Notification(alert);
+      Notification(alert)
     }
   } 
   
@@ -81,28 +81,28 @@ export const Delete = async (slug, setIsHold, onDeleteSuccess, gallery, dispatch
       dispatch,
       message: DeleteMesage("product", false),
       type: "error",
-    };
+    }
 
-    Notification(alert);
+    Notification(alert)
 
-    setIsHold(false);
+    setIsHold(false)
   }
-};
+}
 
 export const Search = async (filters, products, setProducts, dispatch) => {
   try {
-    const req = await Request("PRODUCTS/SEARCH", {...filters, limit: "8" });
-    const res = await req.json();
+    const req = await Request("PRODUCTS/SEARCH", {...filters, limit: "8" })
+    const res = await req.json()
 
     if (res.success === true) {
-      const { data } = res;
+      const { data } = res
 
       const next = { 
         products: [...products.products, ...data.products], 
         hasMore: data.hasMore
       }
 
-      setProducts(next);
+      setProducts(next)
     }
 
     else {
@@ -110,9 +110,9 @@ export const Search = async (filters, products, setProducts, dispatch) => {
         dispatch,
         message: res.message,
         type: "error",
-      };
+      }
 
-      Notification(alert);
+      Notification(alert)
     }
   } 
   
@@ -121,18 +121,18 @@ export const Search = async (filters, products, setProducts, dispatch) => {
       dispatch,
       message: Translation("products-latest-error"),
       type: "error",
-    };
+    }
 
-    Notification(alert);
+    Notification(alert)
   }
-};
+}
 
 export const Update = async ( product, router, setLoading, dispatch) => {
   try{
-    setLoading(true);
+    setLoading(true)
 
-    const req = await Request("PRODUCTS/UPDATE", { ...product });
-    const res = await req.json();
+    const req = await Request("PRODUCTS/UPDATE", { ...product })
+    const res = await req.json()
 
     if (res.success === true) {
       router.push(`/${res.data.productData.slug}`)
@@ -141,9 +141,9 @@ export const Update = async ( product, router, setLoading, dispatch) => {
         dispatch,
         message: res.message,
         type: "success",
-      };
+      }
   
-      Notification(alert);
+      Notification(alert)
     }
 
     else {
@@ -151,9 +151,9 @@ export const Update = async ( product, router, setLoading, dispatch) => {
         dispatch,
         message: res.message,
         type: "error",
-      };
+      }
 
-      Notification(alert);
+      Notification(alert)
     }
   }
 
@@ -162,45 +162,45 @@ export const Update = async ( product, router, setLoading, dispatch) => {
       dispatch,
       message: Translation("products-latest-error"),
       type: "error",
-    };
+    }
 
-    Notification(alert);
+    Notification(alert)
   }
 
   finally {
-    setLoading(false);
+    setLoading(false)
   }
-};
+}
 
 export const View = async (slug, setProduct, dispatch, setLoading = null) => {
   try {
-    if (setLoading) setLoading(true);
-    const req = await Request("PRODUCTS/VIEW", { slug });
-    const res = await req.json();
+    if (setLoading) setLoading(true)
+    const req = await Request("PRODUCTS/VIEW", { slug })
+    const res = await req.json()
 
     if (res.success === true) {
-      setProduct(res.data);
-      if (setLoading !== null) setLoading(false);
+      setProduct(res.data)
+      if (setLoading !== null) setLoading(false)
     }
 
-    else setProduct(false);
+    else setProduct(false)
   } 
   
   catch (error) {
-    const alert = {
-      dispatch,
-      message: Translation("products-latest-error"),
-      type: "error",
-    };
+    // const alert = {
+    //   dispatch,
+    //   message: Translation("products-latest-error"),
+    //   type: "error",
+    // }
 
-    Notification(alert);
+    // Notification(alert)
   }
-};
+}
 
 export const ViewWithPermissions = async (slug, dispatch) => {
   try {
-    const req = await Request("PRODUCTS/VIEW", { slug });
-    const res = await req.json();
+    const req = await Request("PRODUCTS/VIEW", { slug })
+    const res = await req.json()
 
     return {
       success: res.success,
@@ -209,35 +209,39 @@ export const ViewWithPermissions = async (slug, dispatch) => {
   } 
   
   catch (error) {
-    const alert = {
-      dispatch,
-      message: Translation("products-latest-error"),
-      type: "error",
-    };
+    // const alert = {
+    //   dispatch,
+    //   message: Translation("products-latest-error"),
+    //   type: "error",
+    // }
 
-    Notification(alert);
+    // Notification(alert)
 
     return {
       success: false,
       data: null
     }
   }
-};
+}
 
-export const Similar = async (category, setProducts, dispatch) => {
+export const Similar = async (category, setProducts, setIsSimilar, dispatch) => {
   try {
-    const req = await Request("PRODUCTS/SIMILAR", { category });
-    const res = await req.json();
+    const req = await Request("PRODUCTS/SIMILAR", { category })
+    const res = await req.json()
 
-    if (res.success === true) setProducts(res.data);
+    if (res.success === true) {
+      setProducts(res.data)
+      setIsSimilar(res.isSimilar)
+    }
+
     else {
       const alert = {
         dispatch,
         message: res.message,
         type: "error",
-      };
+      }
 
-      Notification(alert);
+      Notification(alert)
     }
   } 
   
@@ -246,26 +250,26 @@ export const Similar = async (category, setProducts, dispatch) => {
       dispatch,
       message: Translation("products-latest-error"),
       type: "error",
-    };
+    }
 
-    Notification(alert);
+    Notification(alert)
   }
-};
+}
 
 export const Latest = async (setProducts, dispatch) => {
   try {
-    const req = await Request("PRODUCTS/LATEST", {});
-    const res = await req.json();
+    const req = await Request("PRODUCTS/LATEST", {})
+    const res = await req.json()
 
-    if (res.success === true) setProducts(res.data);
+    if (res.success === true) setProducts(res.data)
     else {
       const alert = {
         dispatch,
         message: res.message,
         type: "error",
-      };
+      }
 
-      Notification(alert);
+      Notification(alert)
     }
   } 
   
@@ -274,28 +278,28 @@ export const Latest = async (setProducts, dispatch) => {
       dispatch,
       message: Translation("products-latest-error"),
       type: "error",
-    };
+    }
 
-    Notification(alert);
+    Notification(alert)
   }
-};
+}
 
 export const Category = async (filters, scratch, products, setProducts, setLoading, dispatch) => {
   try {
-    const req = await Request("PRODUCTS/CATEGORY", {...filters, limit: "8" });
-    const res = await req.json();
+    const req = await Request("PRODUCTS/CATEGORY", {...filters, limit: "8" })
+    const res = await req.json()
 
     if (res.success === true) {
-      const { data } = res;
+      const { data } = res
 
       const next = {  hasMore: data.hasMore }
 
-      if (scratch) next.products = data.products;
-      else next.products = [...products.products, ...data.products];
+      if (scratch) next.products = data.products
+      else next.products = [...products.products, ...data.products]
 
       if(!next.hasMore) setLoading(false)
 
-      setProducts(next);
+      setProducts(next)
     }
 
     else {
@@ -303,9 +307,9 @@ export const Category = async (filters, scratch, products, setProducts, setLoadi
         dispatch,
         message: res.message,
         type: "error",
-      };
+      }
 
-      Notification(alert);
+      Notification(alert)
     }
   } 
   
@@ -314,9 +318,9 @@ export const Category = async (filters, scratch, products, setProducts, setLoadi
       dispatch,
       message: Translation("products-latest-error"),
       type: "error",
-    };
+    }
 
-    Notification(alert);
+    Notification(alert)
     setLoading(false)
   }
-};
+}

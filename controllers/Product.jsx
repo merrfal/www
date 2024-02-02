@@ -1,23 +1,23 @@
-import { Product, User, Category as CategoryModel } from "../configs/Models";
-import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages";
-import { Response } from "../utils/Response";
-import { Translation } from "../utils/Translations";
+import { Product, User, Category as CategoryModel } from "../configs/Models"
+import { CreateMessage, DeleteMesage } from "../utils/FormattedMessages"
+import { Response } from "../utils/Response"
+import { Translation } from "../utils/Translations"
 
 export const Create = async (payload, res) => {
   try {
-    const initalProduct = new Product(payload);
-    const product = await initalProduct.save();
-    const id = product._id.toString();
+    const initalProduct = new Product(payload)
+    const product = await initalProduct.save()
+    const id = product._id.toString()
 
     await User.findByIdAndUpdate(payload.productData.user, {
       $inc: { 'userActivities.productCount': 1 },
       $addToSet: { 'userActivities.products': id }
-    });
+    })
 
     await CategoryModel.findByIdAndUpdate(payload.productData.category, {
       $inc: { 'additionalData.productCount': 1 },
       $addToSet: { 'additionalData.products': id }
-    });
+    })
 
     const response = {
       res,
@@ -25,9 +25,9 @@ export const Create = async (payload, res) => {
       success: product ? true : false,
       data: product ? { ...product._doc } : null,
       message: CreateMessage("product", product ? true : false),
-    };
+    }
 
-    Response(response);
+    Response(response)
   } 
   
   catch (error) {
@@ -38,20 +38,20 @@ export const Create = async (payload, res) => {
       data: null,
       message: CreateMessage("product", false),
       error,
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
-};
+}
 
 export const Delete = async (payload, res) => {
   try {
-    let { slug } = payload;
+    let { slug } = payload
 
     const productData = await Product.findOne({'productData.slug': slug}).select({ 
         'productData.user': 1, 
         'productData.category': 1,
-    });
+    })
 
     let productId = productData._id.toString()
 
@@ -65,7 +65,7 @@ export const Delete = async (payload, res) => {
       $pull: { 'additionalData.products': productId }
     })
 
-    const deletedProduct = await Product.findByIdAndDelete(productId);
+    const deletedProduct = await Product.findByIdAndDelete(productId)
 
     const response = {
       res,
@@ -75,7 +75,7 @@ export const Delete = async (payload, res) => {
       message: DeleteMesage("product", deletedProduct ? true : false)
     }
 
-    Response(response);
+    Response(response)
   } 
   
   catch (error) {
@@ -88,15 +88,15 @@ export const Delete = async (payload, res) => {
       error,
     }
 
-    Response(response);
+    Response(response)
   }
-};
+}
 
 export const Category  = async (payload, res) => {
-  let { offset, limit, cities, statuses, sort, category } = payload;
+  let { offset, limit, cities, statuses, sort, category } = payload
 
-  offset = parseInt(offset);
-  limit = parseInt(limit);
+  offset = parseInt(offset)
+  limit = parseInt(limit)
 
   const filters = {
     'productData.isGiven': { $in: statuses },
@@ -104,8 +104,8 @@ export const Category  = async (payload, res) => {
     'productData.category': category
   }
 
-  if(statuses.length === 0) delete filters['productData.isGiven'];
-  if(cities.length === 0) delete filters['productData.city'];
+  if(statuses.length === 0) delete filters['productData.isGiven']
+  if(cities.length === 0) delete filters['productData.city']
 
   if(Object.prototype.hasOwnProperty.call(sort, "views")) {
     sort = { 'productAdditionalData.views': sort.views }
@@ -119,9 +119,9 @@ export const Category  = async (payload, res) => {
       .sort(sort)
       .skip(offset)
       .limit(limit)
-      .lean();
+      .lean()
 
-    let countProducts = await Product.find(filters).countDocuments();
+    let countProducts = await Product.find(filters).countDocuments()
 
     const response = {
       res,
@@ -129,9 +129,9 @@ export const Category  = async (payload, res) => {
       success: products ? true : false,
       data: products ? { products, hasMore: countProducts >= offset + limit } : [],
       message: products ? Translation("products-category-success") : Translation("products-category-error"),
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
 
   catch(error){
@@ -142,17 +142,17 @@ export const Category  = async (payload, res) => {
       data: null,
       message: Translation("products-category-error"),
       error,
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
 }
 
 export const Search  = async (payload, res) => {
-  let { offset, limit, categories, cities, sort, term } = payload;
+  let { offset, limit, categories, cities, sort, term } = payload
 
-  offset = parseInt(offset);
-  limit = parseInt(limit);
+  offset = parseInt(offset)
+  limit = parseInt(limit)
 
   let filters = {
     'productData.city': { $in: cities },
@@ -168,8 +168,8 @@ export const Search  = async (payload, res) => {
     ]
   }
 
-  if(cities.length === 0) delete filters['productData.city'];
-  if(categories.length === 0) delete filters['productData.category'];
+  if(cities.length === 0) delete filters['productData.city']
+  if(categories.length === 0) delete filters['productData.category']
 
   if(Object.prototype.hasOwnProperty.call(sort, "views")) {
     sort = { 'productAdditionalData.views': sort.views }
@@ -178,8 +178,8 @@ export const Search  = async (payload, res) => {
   else sort = { 'createdAt': sort.createdAt }
 
   try {
-    let products = await Product.find(filters).sort(sort).skip(offset).limit(limit).lean();
-    let countProducts = await Product.find(filters).countDocuments();
+    let products = await Product.find(filters).sort(sort).skip(offset).limit(limit).lean()
+    let countProducts = await Product.find(filters).countDocuments()
 
     const response = {
       res,
@@ -187,9 +187,9 @@ export const Search  = async (payload, res) => {
       success: products ? true : false,
       data: products ? { products, hasMore: countProducts >= offset + limit } : [],
       message: products ? Translation("products-search-success") : Translation("products-search-error"),
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
 
   catch(error){
@@ -200,21 +200,21 @@ export const Search  = async (payload, res) => {
       data: null,
       message: Translation("products-search-error"),
       error,
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
 }
 
 export const Latest = async (payload, res) => {
   try {
-    let productsFindObject = { 'productData.isGiven': false };
+    let productsFindObject = { 'productData.isGiven': false }
 
     let products = await Product
       .find(productsFindObject)
       .sort({ createdAt: -1 })
       .limit(16)
-      .lean();
+      .lean()
 
     const payload = {
       res,
@@ -222,9 +222,9 @@ export const Latest = async (payload, res) => {
       success: products ? true : false,
       data: products ? products : [],
       message: products ? Translation("products-latest-success") : Translation("products-latest-error"),
-    };
+    }
 
-    Response(payload);
+    Response(payload)
   } 
   
   catch (error) {
@@ -235,18 +235,18 @@ export const Latest = async (payload, res) => {
       data: null,
       message: Translation("products-latest-error"),
       error,
-    };
+    }
 
-    Response(payload);
+    Response(payload)
   }
-};
+}
 
 export const Update = async (payload, res) => {
   try {
     const product = await Product.findOneAndUpdate(
       {'productData.slug': payload.slug}, 
       { $set: { productData: payload } },
-    );
+    )
 
     const response = {
       res,
@@ -256,7 +256,7 @@ export const Update = async (payload, res) => {
       message: product ? Translation("product-update-success") : Translation("product-update-error"),
     }
     
-    Response(response);
+    Response(response)
   } 
   
   catch (err) {
@@ -269,9 +269,9 @@ export const Update = async (payload, res) => {
       error: err,
     }
 
-    Response(response);
+    Response(response)
   }
-};
+}
 
 export const View = async ({ slug }, res) => {
   try {
@@ -279,7 +279,7 @@ export const View = async ({ slug }, res) => {
       { "productData.slug": slug },
       { $inc: { "productAdditionalData.views": 1 } },
       { new: true }
-    );
+    )
 
     const user = await User.findById(product.productData.user).select({
       "userData.name": 1,
@@ -287,7 +287,7 @@ export const View = async ({ slug }, res) => {
       "userData.username": 1,
       "userData.avatar": 1,
       "userAdditionalData.isUserVerified": 1
-    }).lean();
+    }).lean()
 
     const response = {
       res,
@@ -295,9 +295,9 @@ export const View = async ({ slug }, res) => {
       success: product ? true : false,
       data: product ? {...product._doc, productData: {...product._doc.productData, user }} : null,
       message: product ? Translation("product-view-success") : Translation("product-view-error"),
-    };
+    }
 
-    Response(response);
+    Response(response)
   } 
   
   catch (error) {
@@ -307,34 +307,47 @@ export const View = async ({ slug }, res) => {
       success: false,
       data: null,
       message: Translation("product-view-error"),
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
-};
+}
 
 export const Similar = async ({ category }, res) => {
   try {
     let productsFindObject = { 
       'productData.category': category, 
       'productData.isGiven': false 
-    };
+    }
+
+    let isSimilar = true
 
     let products = await Product
       .find(productsFindObject)
       .sort({ createdAt: -1 })
       .limit(5)
-      .lean();
+      .lean()
+
+    if (products.length === 1 || products.length === 0) {
+      products = await Product
+        .find({ 'productData.isGiven': false })
+        .sort({ createdAt: -1 })
+        .limit(5)
+        .lean()
+
+      isSimilar = false
+    }
 
     const response = {
       res,
       code: products ? 200 : 404,
       success: products ? true : false,
       data: products ? products : null,
+      isSimilar,
       message: products ? Translation("product-view-success") : Translation("product-view-error"),
-    };
+    }
 
-    Response(response);
+    Response(response)
   } 
   
   catch (error) {
@@ -344,8 +357,8 @@ export const Similar = async ({ category }, res) => {
       success: false,
       data: null,
       message: Translation("product-view-error"),
-    };
+    }
 
-    Response(response);
+    Response(response)
   }
-};
+}

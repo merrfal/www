@@ -1,4 +1,4 @@
-import { Delete, Edit } from "./";
+import { Delete, Edit } from "./"
 
 export default function ManageBox({user, slug, account}) {
   if (account?.User?._id === user || account?.User?.userAdditionalData?.role === "admin") return (
@@ -6,5 +6,5 @@ export default function ManageBox({user, slug, account}) {
       <Delete slug={slug} />
       <Edit slug={slug} />
     </div>
-  );
+  )
 }

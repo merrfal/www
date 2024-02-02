@@ -1,45 +1,45 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { getDownloadURL, ref } from "firebase/storage";
-import { useEffect, useState } from "react";
-import { NO_AVATAR } from "../../../configs/Constants";
-import { LocationIcon, VerifiedBadge } from "../../icons";
-import { Translation } from "../../../utils/Translations";
-import { isStorageReadable } from "../../../utils/Firebase";
-import { CityIdToName } from "../../../utils/Locations";
+import { getDownloadURL, ref } from "firebase/storage"
+import { useEffect, useState } from "react"
+import { NO_AVATAR } from "../../../configs/Constants"
+import { LocationIcon, VerifiedBadge } from "../../icons"
+import { Translation } from "../../../utils/Translations"
+import { isStorageReadable } from "../../../utils/Firebase"
+import { CityIdToName } from "../../../utils/Locations"
 
 export default function Poster({ productData }) {
-  const { user } = productData;
-  const { address, city } = productData;
+  const { user } = productData
+  const { address, city } = productData
 
-  const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState(null)
   
-  const cloneAddress = address?.charAt(0).toUpperCase() + address?.slice(1) || "";
+  const cloneAddress = address?.charAt(0).toUpperCase() + address?.slice(1) || ""
   const cloneCity = CityIdToName(city)
 
   useEffect(() => {
     if (user !== null) {
-      let avtr = productData?.user?.userData?.avatar;
+      let avtr = productData?.user?.userData?.avatar
 
-      if(avtr === NO_AVATAR) setAvatar(NO_AVATAR);
+      if(avtr === NO_AVATAR) setAvatar(NO_AVATAR)
 
       else {
-        let isFirebaseReadable = isStorageReadable(avtr);
+        let isFirebaseReadable = isStorageReadable(avtr)
 
         if(isFirebaseReadable) {
-          const file = `users/${avtr}`;
-          const unextracted = ref(Storage, file);
+          const file = `users/${avtr}`
+          const unextracted = ref(Storage, file)
 
-          const url = getDownloadURL(unextracted);
-          setAvatar(url || NO_AVATAR);
+          const url = getDownloadURL(unextracted)
+          setAvatar(url || NO_AVATAR)
         }
 
-        else setAvatar(avtr);
+        else setAvatar(avtr)
       }
     }
-  }, [productData]);
+  }, [productData])
 
-  const canUseLink = () => !productData?.postedAnonymously ? { cursor: "pointer" } : {pointerEvents: "none", PointerEvent: 'none', cursor: "default"};
+  const canUseLink = () => !productData?.postedAnonymously ? { cursor: "pointer" } : {pointerEvents: "none", PointerEvent: 'none', cursor: "default"}
   
   return (
     <div style={canUseLink()} >
@@ -50,6 +50,7 @@ export default function Poster({ productData }) {
       <Link href={productData?.postedAnonymously ? `/` : `/profili/${user?.userData?.username}`}>
         <div className="w-auto mt-1.5 text-gray-600 hover:opacity-90 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all">
           <img 
+            onDragStart={(e) => e.preventDefault()}
             alt={user?.name} 
             onError={() => setAvatar(NO_AVATAR)}
             src={productData?.postedAnonymously ? NO_AVATAR : avatar}
@@ -78,5 +79,5 @@ export default function Poster({ productData }) {
           </div>
       </Link>
     </div>
-  );
+  )
 }
