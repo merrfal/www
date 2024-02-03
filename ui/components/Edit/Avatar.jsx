@@ -1,15 +1,22 @@
 
 import { useEffect, useState } from "react"
+import { getDownloadURL, ref } from "firebase/storage"
 import { EditIcon } from "../../icons"
 import { isStorageReadable } from "../../../utils/Firebase"
-import { UploadFileToFirebase } from "../../../utils"
-import { getDownloadURL, ref } from "firebase/storage"
-import { useDispatch } from "react-redux"
 import { NO_AVATAR } from "../../../configs/Constants"
 
-export default function Avatar({ user, setUser }) {
-  const dispatch = useDispatch()
-  const [avatar, setAvatar] = useState("")
+export default function Avatar({ user, tempAvatar, setTempAvatar }) {
+  const [avatar, setAvatar] = useState(user?.userData?.avatar || NO_AVATAR)
+
+  const onUploadHelper = () => {
+    const fileInput = document.getElementById("avatar-file-input")
+    fileInput.click()
+  }
+
+  const onUploadFile = (e) => {
+    const file = e.target.files[0]
+    if(file) setTempAvatar(file)
+  }
 
   useEffect(() => {
     if (user !== null) {
@@ -33,45 +40,25 @@ export default function Avatar({ user, setUser }) {
     }
   }, [user])
 
-  const onUploadHelper = () => {
-    const fileInput = document.getElementById("avatar-file-input")
-    fileInput.click()
-  }
-
-  const onUploadFile = async (e)  => {
-    const file = e.target.files[0]
-
-    if(file) {
-      setAvatar(URL.createObjectURL(file))
-
-      const firebaseResponse = await UploadFileToFirebase(file, 'users', dispatch)
-
-      if(firebaseResponse.success){
-        const { data } = firebaseResponse
-
-        setUser({
-          ...user,
-          userData: {
-            ...user.userData,
-            avatar: data,
-          }
-        })
-      }
-    }
-  }
+  const PreviewImage = tempAvatar !== null ? URL.createObjectURL(tempAvatar) : avatar
 
   return (
-    <div className="col-span-12 sm:col-span-6 mt-[-40px] z-50 flex justify-center">
-        <div className="mt-1 flex items-center relative">
+    <div className="w-full mt-[-40px] z-50 flex justify-center">
+        <div className="mt-1 flex items-center relative bg-gray-50 rounded-full">
           <img
             className="h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24 object-cover"
-            src={avatar}
+            src={PreviewImage}
             onDragStart={(e) => e.preventDefault()}
+            onError={() => setAvatar(NO_AVATAR)}
             loading="lazy"
             width="100"
           />
 
-          <div onClick={onUploadHelper} className="absolute bottom-[-1em] right-[30%] flex flex-col justify-stretch sm:flex-row sm:space-y-0 sm:space-x-4 cursor-pointer">
+          <button onClick={onUploadHelper} className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 inline-flex justify-center p-2 border border-gray-300 shadow-sm text-sm font-medium rounded-[100%] text-gray-700 bg-white hover:bg-gray-50 outline-none focus:outline-none transition-all duration-500">
+              <EditIcon className="h-4 w-4 text-gray-400" />
+          </button>
+
+          <div onClick={onUploadHelper} className="w-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-stretch sm:flex-row sm:space-y-0 sm:space-x-4 cursor-pointer">            
             <input 
               type="file" 
               value={null}
@@ -80,10 +67,6 @@ export default function Avatar({ user, setUser }) {
               accept="image/png, image/jpeg"
               className="w-full h-full absolute cursor-pointer invisible"
             />
-
-            {/* <button className="inline-flex justify-center p-2 border border-gray-300 shadow-sm text-sm font-medium rounded-[100%] text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
-              <EditIcon className="h-4 w-4 text-gray-400" />
-            </button> */}
           </div>
         </div>
     </div>

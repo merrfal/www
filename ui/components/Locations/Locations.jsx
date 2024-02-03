@@ -1,25 +1,25 @@
-import { useState, useRef, useEffect } from "react";
-import { OpenIcon } from "../../icons";
-import { Translation } from "../../../utils/Translations";
+import { useState, useRef, useEffect } from "react"
+import { OpenIcon } from "../../icons"
+import { Translation } from "../../../utils/Translations"
 import { Countries } from "../../../data"
 
 export default function Locations({ filters, setFilters }) {
-    const [isLocationsOpen, setIsLocationsOpen] = useState(false);
+    const [isLocationsOpen, setIsLocationsOpen] = useState(false)
 
     let clickOutside = (handler) => {
-        let refInstance = useRef();
+        let refInstance = useRef()
 
         useEffect(() => {
-            let method = (e) => !refInstance.current?.contains(e.target) && handler();
-            document.addEventListener("mousedown", method);
-            return () => document.removeEventListener("mousedown", method);
-        });
+            let method = (e) => !refInstance?.current?.contains(e?.target) && handler()
+            document.addEventListener("mousedown", method)
+            return () => document.removeEventListener("mousedown", method)
+        })
 
-        return refInstance;
-    };
+        return refInstance
+    }
 
-    let ref = clickOutside(() => setIsLocationsOpen(false));
-    const open = () => setIsLocationsOpen(!isLocationsOpen);
+    let ref = clickOutside(() => setIsLocationsOpen(false))
+    const open = () => setIsLocationsOpen(!isLocationsOpen)
 
     return (
         <div ref={ref} className="px-4 relative inline-block text-left">
@@ -77,7 +77,7 @@ export default function Locations({ filters, setFilters }) {
                                                 className="hover:cursor-pointer rounded-md h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
                                                 onChange={() => {}}
                                                 onClick={() => {
-                                                    const isCityAlreadyAdded = filters?.cities?.includes(city.value);
+                                                    const isCityAlreadyAdded = filters?.cities?.includes(city.value)
 
                                                     if (isCityAlreadyAdded) {
                                                         if(filters.cities.length === 1) setFilters({
@@ -106,11 +106,11 @@ export default function Locations({ filters, setFilters }) {
                                         )
                                     )}
                                 </div>
-                            );
+                            )
                         })}
                     </form>
                 </div>
             )}
         </div>
-    );
+    )
 }

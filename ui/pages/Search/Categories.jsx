@@ -1,24 +1,24 @@
-import { useState, useRef, useEffect } from "react";
-import { Categories as AllCategories } from "../../../data";
-import { OpenIcon } from "../../icons";
-import { Translation } from "../../../utils/Translations";
+import { useState, useRef, useEffect } from "react"
+import { Categories as AllCategories } from "../../../data"
+import { OpenIcon } from "../../icons"
+import { Translation } from "../../../utils/Translations"
 
 export default function Categories({filters, setFilters}) {
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false)
 
   let clickOutside = (handler) => {
-    let refInstance = useRef();
+    let refInstance = useRef()
 
     useEffect(() => {
-      let method = (e) => !refInstance.current?.contains(e.target) && handler();
-      document.addEventListener("mousedown", method);
-      return () => document.removeEventListener("mousedown", method);
-    });
+      let method = (e) => !refInstance?.current?.contains(e?.target) && handler()
+      document.addEventListener("mousedown", method)
+      return () => document.removeEventListener("mousedown", method)
+    })
 
-    return refInstance;
-  };
+    return refInstance
+  }
 
-  let ref = clickOutside(() => setIsCategoryOpen(false));
+  let ref = clickOutside(() => setIsCategoryOpen(false))
   const open = () => setIsCategoryOpen(!isCategoryOpen)
 
 
@@ -45,14 +45,14 @@ export default function Categories({filters, setFilters}) {
                     className="hover:cursor-pointer rounded-md h-4 w-4 border-gray-300 text-[#377DFF] focus:ring-[#377DFF]"
                     onChange={() => {}}
                     onClick={() => {
-                      const alreadyAdded = filters.categories.includes(category._id);
+                      const alreadyAdded = filters.categories.includes(category._id)
 
                       if (!alreadyAdded) {
                         setFilters({...filters, categories: [...filters.categories, category._id]})
                       }
 
                       if (alreadyAdded) {
-                        const updatedCategories = filters.categories.filter((cat) => cat !== category._id);
+                        const updatedCategories = filters.categories.filter((cat) => cat !== category._id)
                         setFilters({...filters, categories: updatedCategories})
                       }
                     }}
@@ -62,11 +62,11 @@ export default function Categories({filters, setFilters}) {
                     {category.name}
                   </label>
                 </div>
-              );
+              )
             })}
           </form>
         </div>
       )}
     </div>
-  );
+  )
 }

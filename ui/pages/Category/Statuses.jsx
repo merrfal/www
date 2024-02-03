@@ -1,25 +1,25 @@
-import { useState, useRef, useEffect } from "react";
-import { OpenIcon } from "../../icons";
-import { Translation } from "../../../utils/Translations";
+import { useState, useRef, useEffect } from "react"
+import { OpenIcon } from "../../icons"
+import { Translation } from "../../../utils/Translations"
 
 export default function Statuses({ filters, setFilters }) {
-  const [isStatusOpen, setIsStatusOpen] = useState(false);
+  const [isStatusOpen, setIsStatusOpen] = useState(false)
 
   let clickOutside = (handler) => {
-    let refInstance = useRef();
+    let refInstance = useRef()
 
     useEffect(() => {
-      let method = (e) => !refInstance.current?.contains(e.target) && handler();
-      document.addEventListener("mousedown", method);
+      let method = (e) => !refInstance?.current?.contains(e?.target) && handler()
+      document.addEventListener("mousedown", method)
 
-      return () => document.removeEventListener("mousedown", method);
-    });
+      return () => document.removeEventListener("mousedown", method)
+    })
 
-    return refInstance;
-  };
+    return refInstance
+  }
 
-  let ref = clickOutside(() => setIsStatusOpen(false));
-  const open = () => setIsStatusOpen(!isStatusOpen);
+  let ref = clickOutside(() => setIsStatusOpen(false))
+  const open = () => setIsStatusOpen(!isStatusOpen)
 
   return (
     <div ref={ref} className="px-4 relative inline-block text-left">
@@ -43,12 +43,12 @@ export default function Statuses({ filters, setFilters }) {
                 onChange={() => {}}
                 onClick={() => {
                     if (filters.statuses.includes(false) && filters.statuses.includes(true)) {
-                      let newStatuses = filters.statuses.filter((status) => status !== false);
+                      let newStatuses = filters.statuses.filter((status) => status !== false)
 
                       setFilters({
                         ...filters,
                         statuses: newStatuses,
-                      });
+                      })
                     }
 
                     else {
@@ -56,10 +56,10 @@ export default function Statuses({ filters, setFilters }) {
                         setFilters({
                           ...filters,
                           statuses: [...filters.statuses, false],
-                        });
+                        })
                       }
 
-                      else open();
+                      else open()
                     }
                   }
                 }
@@ -79,12 +79,12 @@ export default function Statuses({ filters, setFilters }) {
                 onChange={() => {}}
                 onClick={() => {
                     if (filters.statuses.includes(true)  && filters.statuses.includes(false)) {
-                      let newStatuses = filters.statuses.filter((status) => status !== true);
+                      let newStatuses = filters.statuses.filter((status) => status !== true)
 
                       setFilters({
                         ...filters,
                         statuses: newStatuses,
-                      });
+                      })
                     }
 
                     else {
@@ -92,7 +92,7 @@ export default function Statuses({ filters, setFilters }) {
                         setFilters({
                           ...filters,
                           statuses: [...filters.statuses, true],
-                        });
+                        })
                       }
 
                       else open()
@@ -110,5 +110,5 @@ export default function Statuses({ filters, setFilters }) {
         </div>
       )}
     </div>
-  );
+  )
 }

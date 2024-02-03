@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
-import { EditIcon } from "../../icons";
-import { Translation } from "../../../utils/Translations";
+import { useSelector } from "react-redux"
+import { EditIcon } from "../../icons"
+import { Translation } from "../../../utils/Translations"
 
 export default function EditButton({ isEdit, setIsEdit, id }) {
-  const account = useSelector((state) => state.Account);
-  const edit = () => setIsEdit(!isEdit);
+  const account = useSelector((state) => state.Account)
+  const edit = () => setIsEdit(!isEdit)
 
   return (
     account?.User?._id === id && (
@@ -18,5 +18,5 @@ export default function EditButton({ isEdit, setIsEdit, id }) {
         </button>
       </div>
     )
-  );
+  )
 }

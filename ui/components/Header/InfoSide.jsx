@@ -40,7 +40,7 @@ const Categories = ({router}) => {
     let refInstance = useRef()
 
     useEffect(() => {
-      let method = (e) => !refInstance.current?.contains(e.target) && handler()
+      let method = (e) => !refInstance?.current?.contains(e?.target) && handler()
       document.addEventListener("mousedown", method)
       return () => document.removeEventListener("mousedown", method)
     })
