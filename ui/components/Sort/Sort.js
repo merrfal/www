@@ -1,23 +1,23 @@
-import { useState, useRef, useEffect } from "react";
-import { OpenIcon } from "../../icons";
+import { useState, useRef, useEffect } from "react"
+import { OpenIcon } from "../../icons"
 import { Translation } from "../../../utils/Translations"
 
 export default function Sort({filters, setFilters}) {
-    const [isSortOpen, setIsSortOpen] = useState(false);
+    const [isSortOpen, setIsSortOpen] = useState(false)
 
     let clickOutside = (handler) => {
-        let refInstance = useRef();
+        let refInstance = useRef()
 
         useEffect(() => {
-            let method = (e) => !refInstance.current?.contains(e.target) && handler();
-            document.addEventListener("mousedown", method);
-            return () => document.removeEventListener("mousedown", method);
-        });
+            let method = (e) => !refInstance?.current?.contains(e?.target) && handler()
+            document.addEventListener("mousedown", method)
+            return () => document.removeEventListener("mousedown", method)
+        })
 
-        return refInstance;
-    };
+        return refInstance
+    }
 
-    let ref = clickOutside(() => setIsSortOpen(false));
+    let ref = clickOutside(() => setIsSortOpen(false))
     const open = () => setIsSortOpen(!isSortOpen)
 
     return (
@@ -36,7 +36,7 @@ export default function Sort({filters, setFilters}) {
                         style={filters.sort.createdAt === -1 ? { color: "#377DFF" } : {}}
                         className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
                         onClick={() => {
-                            if(filters.sort.createdAt === -1) open();
+                            if(filters.sort.createdAt === -1) open()
                             else setFilters({...filters, sort: { createdAt: -1 }})
                         }}
                     >
@@ -47,7 +47,7 @@ export default function Sort({filters, setFilters}) {
                         style={filters.sort.createdAt === 1 ? { color: "#377DFF" } : {}}
                         className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
                         onClick={() => {
-                            if(filters.sort.createdAt === 1) open();
+                            if(filters.sort.createdAt === 1) open()
                             else setFilters({...filters, sort: { createdAt: 1 }})
                         }}
                     >
@@ -58,7 +58,7 @@ export default function Sort({filters, setFilters}) {
                         style={filters.sort.views === -1 ? { color: "#377DFF" } : {}}
                         className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
                         onClick={() => {
-                            if(filters.sort.views === -1) open();
+                            if(filters.sort.views === -1) open()
                             else setFilters({...filters, sort: { views: -1 }})
                         }}
                     >
@@ -69,7 +69,7 @@ export default function Sort({filters, setFilters}) {
                         style={filters.sort.views === 1 ? { color: "#377DFF" } : {}}
                         className="text-gray-500 font-medium block px-4 py-2 text-sm hover:cursor-pointer hover:text-gray-700"
                         onClick={() => {
-                            if(filters.sort.views === 1) open();
+                            if(filters.sort.views === 1) open()
                             else setFilters({...filters, sort: { views: 1 }})
                         }}
                     >
@@ -79,5 +79,5 @@ export default function Sort({filters, setFilters}) {
             </div>
         )}
         </div>
-    );
+    )
 }

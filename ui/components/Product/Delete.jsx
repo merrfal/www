@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { TrashIcon } from "../../icons";
+import Link from "next/link"
+import { TrashIcon } from "../../icons"
 
 export default function DeleteComponent({ slug }) {
   return (
@@ -8,5 +8,5 @@ export default function DeleteComponent({ slug }) {
         <TrashIcon className="h-5 w-5 text-gray-400" />
       </span>
     </Link>
-  );
+  )
 }

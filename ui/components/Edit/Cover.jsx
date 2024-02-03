@@ -1,15 +1,11 @@
 import { useState, useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { UploadFileToFirebase } from "../../../utils"
 import { EditIcon } from "../../icons"
 import { Translation } from "../../../utils/Translations"
+import { isStorageReadable } from "../../../utils/Firebase"
 import { NO_COVER } from "../../../configs/Constants"
 
-export default function Cover({ user }) {
-  const dispatch = useDispatch()
-
+export default function Cover({ user, tempCover, setTempCover }) {
   const [cover, setCover] = useState(user?.userData?.cover || NO_COVER)
-  const [temporalCover, setTemporalCover] = useState(user?.userData?.cover || NO_COVER)
 
   const onUploadHelper = () => {
     const fileInput = document.getElementById("cover-file-input")
@@ -18,11 +14,7 @@ export default function Cover({ user }) {
 
   const onUploadFile = (e) => {
     const file = e.target.files[0]
-
-    if(file) {
-      setCover(URL.createObjectURL(file))
-      UploadFileToFirebase(file, 'users', dispatch)
-    }
+    if(file) setTempCover(file)
   }
 
   useEffect(() => {
@@ -35,7 +27,7 @@ export default function Cover({ user }) {
         let isFirebaseReadable = isStorageReadable(covr)
 
         if(isFirebaseReadable) {
-          const file = `users/${covr}`
+          const file = `covers/${covr}`
           const unextracted = ref(Storage, file)
 
           const url = getDownloadURL(unextracted)
@@ -47,12 +39,15 @@ export default function Cover({ user }) {
     }
   }, [user])
 
+  const PreviewImage = tempCover !== null ? URL.createObjectURL(tempCover) : cover
+
   return (
-    <div className="relative">
+    <div className="relative bg-gray-50 border-gray-100 rounded-xl">
       <img 
         loading="lazy" 
         className="h-32 rounded-xl w-full object-cover lg:h-64" 
-        src={cover} 
+        src={PreviewImage} 
+        onError={() => setCover(NO_COVER)}
         onDragStart={(e) => e.preventDefault()}
       />
 
@@ -66,10 +61,13 @@ export default function Cover({ user }) {
           className="w-full h-full absolute cursor-pointer invisible"
         />
 
-        {/* <button className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
+        <button className="inline-flex outline-none ring-0 items-center justify-center px-3 py-1.5 border text-gray-500 border-gray-300 shadow-sm text-xs font-medium rounded-md bg-white hover:bg-gray-50 focus:outline-none transition-all cursor-pointer duration-500">
           <EditIcon />
-          <span>{Translation("change-cover")}</span>
-        </button> */}
+
+          <span>
+            {Translation("change-cover")}
+          </span>
+        </button>
       </div>
     </div>
   )

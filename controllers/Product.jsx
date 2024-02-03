@@ -99,12 +99,13 @@ export const Category  = async (payload, res) => {
   limit = parseInt(limit)
 
   const filters = {
-    'productData.isGiven': { $in: statuses },
+    // 'productData.isGiven': { $in: statuses },
+    'productData.isGiven': false,
     'productData.city': { $in: cities },
     'productData.category': category
   }
 
-  if(statuses.length === 0) delete filters['productData.isGiven']
+  // if(statuses.length === 0) delete filters['productData.isGiven']
   if(cities.length === 0) delete filters['productData.city']
 
   if(Object.prototype.hasOwnProperty.call(sort, "views")) {

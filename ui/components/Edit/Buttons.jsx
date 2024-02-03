@@ -22,6 +22,11 @@ export default function Buttons(props) {
     userClone,
     setUserClone,
     setValidations,
+    tempAvatar,
+    tempCover,
+    setTempAvatar,
+    setTempCover,
+    setShowLoading
   } = props
 
   const onValidation = () => {
@@ -68,6 +73,11 @@ export default function Buttons(props) {
       setIsEdit, 
       setUserClone, 
       router,
+      tempAvatar,
+      tempCover,
+      setTempAvatar,
+      setTempCover,
+      setShowLoading,
       dispatch
     )
   }

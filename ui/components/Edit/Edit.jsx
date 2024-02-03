@@ -1,3 +1,5 @@
+import Loading from "../Loading"
+
 import { useEffect, useRef, useState } from "react"
 
 import {
@@ -16,6 +18,10 @@ import {
 
 export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
   const [loading, setIsLoading] = useState(false)
+  const [showLoading, setShowLoading] = useState(false)
+
+  const [tempCover, setTempCover] = useState(null)
+  const [tempAvatar, setTempAvatar] = useState(null)
 
   const [userClone, setUserClone] = useState(
     {
@@ -92,13 +98,13 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
     })
   }
 
-  const load = loading ? { opacity: ".75", pointerEvents: "none" } : {}
+  const load = loading ? { pointerEvents: "none" } : {}
 
   let clickOutside = (handler) => {
     let refInstance = useRef()
 
     useEffect(() => {
-      let method = (e) => !refInstance.current?.contains(e.target) && handler()
+      let method = (e) => !refInstance?.current?.contains(e?.target) && handler()
       document.addEventListener("mousedown", method)
       return () => document.removeEventListener("mousedown", method)
     })
@@ -115,6 +121,13 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
         <div className="flex min-h-full items-end justify-center text-center sm:items-center sm:p-0">
           {userClone && (
             <div ref={ref} className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl">
+              {
+                showLoading &&
+                <div className='absolute z-[99999999999999999] flex items-center justify-center w-full h-full top-0 right-0 bottom-0 left-0 bg-[#ffffff75]'>
+                  <Loading loading={true} withContainer={false} />
+                </div>
+              }
+
               <div className="mt-3 text-center sm:mt-0 p-4 sm:text-left">
                 <div className=" mt-5 md:col-span-2 md:mt-0">
                   <div className="p-2 overflow-hidden">
@@ -122,15 +135,19 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
                       user={userClone}
                       setUserClone={setUserClone}
                       validations={validations}
+                      tempCover={tempCover}
+                      setTempCover={setTempCover}
                     />
 
-                    <div className="grid grid-cols-6 gap-6">
-                      <Avatar
-                        user={userClone}
-                        setUser={setUserClone}
-                        validations={validations}
-                      />
+                    <Avatar
+                      user={userClone}
+                      setUser={setUserClone}
+                      validations={validations}
+                      tempAvatar={tempAvatar}
+                      setTempAvatar={setTempAvatar}
+                    />
 
+                    <div className="grid grid-cols-6 gap-6 mt-6">
                       <Name
                         user={userClone}
                         onInput={onInput}
@@ -194,6 +211,11 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
                 setIsLoading={setIsLoading}
                 setIsEdit={setIsEdit}
                 setValidations={setValidations}
+                tempAvatar={tempAvatar}
+                tempCover={tempCover}
+                setTempAvatar={setTempAvatar}
+                setTempCover={setTempCover}
+                setShowLoading={setShowLoading}
               />
             </div>
           )}

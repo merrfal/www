@@ -206,5 +206,9 @@
   "prinderimi": "Prindërimi",
   "we-removed-photos-with-size-more-than-50mb": "Fotot me madhësi më të madhe se 50MB nuk jan ngarkuar. Lejohet vetëm fotogravi me madhesi me te vogel se 50MB!",
   "we-removed-photos-with-transparency": "Fotografite me transparencë nuk janë ngarkuar. Lejohet vetëm fotografi me sfond jo transparent.",
-  "something-went-wrong-while-uploading-photos": "Ndodhi një gabim gjatë ngarkimit të fotove. Ju lutemi provoni përsëri!"
+  "something-went-wrong-while-uploading-photos": "Ndodhi një gabim gjatë ngarkimit të fotove. Ju lutemi provoni përsëri!",
+  "avatar-size-can-not-be-more-than-50mb": "Fotografia e profilit nuk mund të jetë më e madhe se 50MB!",
+  "cover-size-can-not-be-more-than-50mb": "Fotografia e kopertinës nuk mund të jetë më e madhe se 50MB!",
+  "avatar-can-not-be-transparent": "Fotografia e profilit nuk mund të jetë transparente!",
+  "cover-can-not-be-transparent": "Fotografia e kopertinës nuk mund të jetë transparente!"
 }

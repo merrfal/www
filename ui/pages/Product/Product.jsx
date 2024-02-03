@@ -87,6 +87,23 @@ export default function Product() {
     }
   }
 
+  useEffect(() => {
+    if (open) {
+      const body = document.querySelector('body')
+      body.style.overflow = "hidden"
+    }
+
+    else {
+      const body = document.querySelector('body')
+      body.style.overflow = "auto"
+    }
+
+    return () => {
+      const body = document.querySelector('body')
+      body.style.overflow = "auto"
+    }
+  }, [open])
+
   useEffect(() => HandleChange(), [index, product, open])
 
   return (

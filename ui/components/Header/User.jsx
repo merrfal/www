@@ -41,7 +41,7 @@ const Auth = ({ account }) => {
     let domNode = useRef()
 
     useEffect(() => {
-      let maybeHandler = (event) => !domNode.current.contains(event.target) && handler()
+      let maybeHandler = (event) => !domNode?.current?.contains(event?.target) && handler()
       document.addEventListener("mousedown", maybeHandler)
 
       return () => document.removeEventListener("mousedown", maybeHandler)
