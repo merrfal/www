@@ -145,3 +145,7 @@ textarea {
 .yarl__slide_image {
   border-radius: 8px !important;
 }
+
+button, img, svg {
+  user-select: none !important;
+}

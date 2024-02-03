@@ -39,7 +39,7 @@ export default function Poster({ productData }) {
     }
   }, [productData])
 
-  const canUseLink = () => !productData?.postedAnonymously ? { cursor: "pointer" } : {pointerEvents: "none", PointerEvent: 'none', cursor: "default"}
+  const canUseLink = () => !productData?.postedAnonymously ? { cursor: "pointer" } : { pointerEvents: "none", PointerEvent: 'none', cursor: "default" }
   
   return (
     <div style={canUseLink()} >
@@ -54,7 +54,7 @@ export default function Poster({ productData }) {
             alt={user?.name} 
             onError={() => setAvatar(NO_AVATAR)}
             src={productData?.postedAnonymously ? NO_AVATAR : avatar}
-            className="w-10 h-10 rounded-full mr-4"
+            className="w-[40px] h-[40px] max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-full mr-4"
             loading="lazy"
           />
               

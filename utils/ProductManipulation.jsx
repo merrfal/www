@@ -3,14 +3,24 @@ import { Translation } from "./Translations"
 
 export const onUpload = async (product, setProduct, imageList, setLoading, dispatch) => {
     setLoading(true)
+
     const formattedList = []
 
     const splitIfMoreThanFour = imageList.length > 4 ? imageList.slice(0, 4) : imageList
 
     try {
         for (const image of splitIfMoreThanFour) {
-            await new Promise((resolve, reject) => {
-                const img = new Image();
+            if (image?.isSaved) formattedList.push({
+                id: image.id,
+                data_url: image.data_url,
+                isSaved: true,
+                file: {
+                    name: image.file.name
+                }
+            })
+
+            else await new Promise((resolve) => {
+                const img = new Image()
 
                 img.src = image.data_url
                 img.onload = () => {
@@ -60,7 +70,7 @@ export const onUpload = async (product, setProduct, imageList, setLoading, dispa
 
                         else {
                             canvas.toBlob((blob) => {
-                                const newFile = new File([blob], image.file.name, { type: blob.type });
+                                const newFile = new File([blob], image.file.name, { type: blob.type })
 
                                 formattedList.push({
                                     file: newFile,
@@ -75,12 +85,13 @@ export const onUpload = async (product, setProduct, imageList, setLoading, dispa
             })
         }
 
-        setProduct({
+        setProduct(prevProduct => ({
+            ...prevProduct,
             productData: {
-                ...product.productData,
+                ...prevProduct.productData,
                 gallery: formattedList
             }
-        })
+        }));
     }
 
     finally {
@@ -96,13 +107,13 @@ export const onInput = (product, setProduct, validation, setValidation, key, e, 
                 [key]: event ? e.target.value : e,
                 city: ""
             },
-        }); 
+        }) 
 
         setValidation({
             ...validation,
             [key]: true,
             city: false
-        });
+        })
     }
 
     else {
@@ -111,11 +122,11 @@ export const onInput = (product, setProduct, validation, setValidation, key, e, 
                 ...product.productData,
                 [key]: event ? e.target.value : e
             },
-        }); 
+        }) 
     
         setValidation({
             ...validation,
             [key]: true
-        });
+        })
     }
-};
+}

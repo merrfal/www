@@ -29,6 +29,7 @@ import {
   Given,
 } from "."
 
+let FIRST_TIME = true
 
 export default function EditProduct() {
   const account = useSelector((state) => state.Account)
@@ -39,6 +40,8 @@ export default function EditProduct() {
   const [validation, setValidation] = useState(ProductDefaultValidation)
   const [product, setProduct] = useState(ProductDefaultState)
   const [isHold, setIsHold] = useState(false)
+  const [originalImageList, setOriginalImageList] = useState()
+  const [loadingImage, setLoadingImage] = useState(false)
 
   const onInput = (key, e, event = true) => Input(
     product, 
@@ -89,7 +92,28 @@ export default function EditProduct() {
             const isAdmin = account?.User?.userAdditionalData?.role === "admin"
 
             if(isAllowedToEdit || isAdmin){
-              setProduct(data?.data)
+              const static_images = data?.data?.productData?.gallery.map((image) => {
+                return {
+                  id: image.id,
+                  data_url: image.url,
+                  isSaved: true,
+                  original: image,
+                  file: {
+                    name: image.filename
+                  },
+                }
+              })
+              
+              setOriginalImageList(static_images)
+
+              setProduct({
+                ...data?.data,
+                productData: {
+                  ...data?.data?.productData,
+                  gallery: static_images
+                }
+              })
+
               setLoading(false)
 
               if(router?.query?.fshije === "po") {
@@ -104,7 +128,6 @@ export default function EditProduct() {
             else router.push(`/${slug}`)
           }
         })
-
       }
     }
   }, [account, router])
@@ -186,7 +209,8 @@ export default function EditProduct() {
                   product={product}
                   setProduct={setProduct}
                   validation={validation}
-                  mode="edit"
+                  loadingImage={loadingImage}
+                  setLoadingImage={setLoadingImage}
                 />
               </div>
 
@@ -197,7 +221,11 @@ export default function EditProduct() {
                 onInput={onInput}
                 account={account}
                 setValidation={setValidation}
+                isHold={isHold}
+                isLoading={loading}
                 setIsHold={setIsHold}
+                loadingImage={loadingImage}
+                originalImageList={originalImageList}
               />
             </div>
           </div>

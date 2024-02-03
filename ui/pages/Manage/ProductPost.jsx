@@ -27,6 +27,7 @@ export default function ProductPost() {
   const [validation, setValidation] = useState(ProductDefaultValidation)
   const [product, setProduct] = useState(ProductDefaultState)
   const [isHold, setIsHold] = useState(false)
+  const [loadingImage, setLoadingImage] = useState(false)
 
   const onInput = (key, e, event = true) => Input(
     product, 
@@ -133,10 +134,12 @@ export default function ProductPost() {
                   </div>
 
                   <Images
+                    mode="create"
                     product={product}
                     setProduct={setProduct}
                     validation={validation}
-                    mode="create"
+                    loadingImage={loadingImage}
+                    setLoadingImage={setLoadingImage}
                   />
                 </div>
 
@@ -144,9 +147,12 @@ export default function ProductPost() {
                   mode="create"
                   product={product}
                   onInput={onInput}
+                  isHold={isHold}
+                  isLoading={loading}
                   account={account}
                   setValidation={setValidation}
                   setIsHold={setIsHold}
+                  loadingImage={loadingImage}
                 />
               </div>
             </div>
