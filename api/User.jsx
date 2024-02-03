@@ -67,7 +67,7 @@ export const Register = async (initalUser, dispatch) => {
   }
 }
 
-const CompressAvatar = async (file) => {
+const CompressAvatar = async (file, dispatch) => {
   return await new Promise((resolve) => {
     const img = new Image()
 
@@ -81,7 +81,7 @@ const CompressAvatar = async (file) => {
             }
         
             Notification(alert)
-            resolve(null)
+            resolve(false)
         }
 
         else {
@@ -131,7 +131,7 @@ const CompressAvatar = async (file) => {
                 }
             
                 Notification(alert)
-                resolve(null)
+                resolve(false)
             }
 
             else {
@@ -145,7 +145,7 @@ const CompressAvatar = async (file) => {
   })
 }
 
-const CompressCover = async (file) => {
+const CompressCover = async (file, dispatch) => {
   return await new Promise((resolve) => {
     const img = new Image()
 
@@ -159,7 +159,7 @@ const CompressCover = async (file) => {
             }
         
             Notification(alert)
-            resolve(null)
+            resolve(false)
         }
 
         else {
@@ -169,7 +169,6 @@ const CompressCover = async (file) => {
               canvas.width = img.width / 4
               canvas.height = img.height / 4
             }
-
 
             else if (img.width > 2000) {
               canvas.width = img.width / 3
@@ -205,7 +204,7 @@ const CompressCover = async (file) => {
                 }
             
                 Notification(alert)
-                resolve(null)
+                resolve(false)
             }
 
             else {
@@ -239,107 +238,115 @@ export const Update = async (
 
     if (tempAvatar !== null || tempCover !== null) setShowLoading(true)
 
-    const avatar = tempAvatar === null ? null : await CompressAvatar(tempAvatar)
-    const cover = tempCover === null ? null : await CompressCover(tempCover)
+    const avatar = tempAvatar === null ? null : await CompressAvatar(tempAvatar, dispatch)
+    const cover = tempCover === null ? null : await CompressCover(tempCover, dispatch)
 
-    const usr = {
-      old_username: user.userData.username,
-      userData: {
-        ...user.userData,
-        ...userClone.userData,
-      },
-      userAdditionalData: {
-        ...user.userAdditionalData,
-        ...userClone.userAdditionalData
-      },
-    }
-
-    if (avatar !== null) {
-      setShowLoading(true)
-
-      const { success: successAvatar, data: dataAvatar } = await UploadFileToFirebase(avatar, 'users', dispatch)
-      
-      if (successAvatar) {
-        try {
-          const parts = user?.userData?.avatar?.split('/');
-          const encodedId = parts[parts.length - 1].split('?')[0];
-          const id = decodeURIComponent(encodedId);
-          
-          if (id) {
-            const cover_object = ref(Storage, id)
-            await deleteObject(cover_object)
-          }
-        }
-  
-        catch(error) {}
-
-        usr.userData.avatar = dataAvatar
-      }
-    }
-
-    if (cover !== null) {
-      setShowLoading(true)
-
-      const { success: successCover, data: dataCover } = await UploadFileToFirebase(cover, 'covers', dispatch)
-      
-      if (successCover) {
-        try {
-          const parts = user?.userData?.cover?.split('/');
-          const encodedId = parts[parts.length - 1].split('?')[0];
-          const id = decodeURIComponent(encodedId);
-
-          if (id) {
-            const cover_object = ref(Storage, id)
-            await deleteObject(cover_object)
-          }
-        }
-  
-        catch(error) {}
-
-        usr.userData.cover = dataCover
-      }
-    }
-
-    const req = await Request("USERS/UPDATE", usr)
-    const res = await req.json()
-
-    if (res.success === true) {
-      const { data } = res
-
-      const alert = {
-        dispatch,
-        message: res.message,
-        type: "success",
-      }
-
-      Notification(alert)
-      
-      if(user.userData.username !== data.userData.username) {
-        router.push(
-          `/profili/${data.userData.username}`, 
-          undefined, 
-          { shallow: true }
-        )
-      }
-
-      setTempAvatar(null)
-      setTempCover(null)
-      setUser(data)
-      dispatch(SetAccount(data))
-      setUserClone(data)
-
+    if (avatar === false || cover === false) {
       setShowLoading(false)
-      setIsEdit(false)
-    } 
-    
-    else {
-      const alert = {
-        dispatch,
-        message: res.message,
-        type: "error",
-      }
+      setIsLoading(false)
+      return
+    }
 
-      Notification(alert)
+    else {
+      const usr = {
+        old_username: user.userData.username,
+        userData: {
+          ...user.userData,
+          ...userClone.userData,
+        },
+        userAdditionalData: {
+          ...user.userAdditionalData,
+          ...userClone.userAdditionalData
+        },
+      }
+  
+      if (avatar !== null) {
+        setShowLoading(true)
+  
+        const { success: successAvatar, data: dataAvatar } = await UploadFileToFirebase(avatar, 'users', dispatch)
+        
+        if (successAvatar) {
+          try {
+            const parts = user?.userData?.avatar?.split('/');
+            const encodedId = parts[parts.length - 1].split('?')[0];
+            const id = decodeURIComponent(encodedId);
+            
+            if (id) {
+              const cover_object = ref(Storage, id)
+              await deleteObject(cover_object)
+            }
+          }
+    
+          catch(error) {}
+  
+          usr.userData.avatar = dataAvatar
+        }
+      }
+  
+      if (cover !== null) {
+        setShowLoading(true)
+  
+        const { success: successCover, data: dataCover } = await UploadFileToFirebase(cover, 'covers', dispatch)
+        
+        if (successCover) {
+          try {
+            const parts = user?.userData?.cover?.split('/');
+            const encodedId = parts[parts.length - 1].split('?')[0];
+            const id = decodeURIComponent(encodedId);
+  
+            if (id) {
+              const cover_object = ref(Storage, id)
+              await deleteObject(cover_object)
+            }
+          }
+    
+          catch(error) {}
+  
+          usr.userData.cover = dataCover
+        }
+      }
+  
+      const req = await Request("USERS/UPDATE", usr)
+      const res = await req.json()
+  
+      if (res.success === true) {
+        const { data } = res
+  
+        const alert = {
+          dispatch,
+          message: res.message,
+          type: "success",
+        }
+  
+        Notification(alert)
+        
+        if(user.userData.username !== data.userData.username) {
+          router.push(
+            `/profili/${data.userData.username}`, 
+            undefined, 
+            { shallow: true }
+          )
+        }
+  
+        setTempAvatar(null)
+        setTempCover(null)
+        setUser(data)
+        dispatch(SetAccount(data))
+        setUserClone(data)
+  
+        setShowLoading(false)
+        setIsEdit(false)
+      } 
+      
+      else {
+        const alert = {
+          dispatch,
+          message: res.message,
+          type: "error",
+        }
+  
+        Notification(alert)
+      }
     }
   } 
   

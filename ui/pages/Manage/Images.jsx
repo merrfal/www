@@ -6,22 +6,19 @@ import { ImagesValidation } from "../../../utils/Forms"
 import { CloseIcon, PhotoIcon } from "../../icons"
 import { Info } from "./"
 import { Translation } from "../../../utils/Translations"
-import { AllowedImageTypes, DisabledDefaultState } from "../../../configs/Defaults"
+import { AllowedImageTypes } from "../../../configs/Defaults"
 import { onUpload } from "../../../utils/ProductManipulation"
 import { Loading, RequiredLabel, Wildcard } from "../../components"
 
 export default function Images({
   setProduct,
   validation: v,
-  mode,
-  product
+  product,
+  loadingImage: loading,
+  setLoadingImage: setLoading,
 }) {
-  const [loading, setLoading] = useState(false)
-
   const validation = ImagesValidation(product?.productData?.gallery)
   const dispatch = useDispatch()
-
-  const onMode = mode === "create" ? {} : DisabledDefaultState
 
   const onRemove = (event, onImageRemove, index) => {
     event.stopPropagation()
@@ -29,7 +26,7 @@ export default function Images({
   }
 
   return (
-    <div style={onMode} className='relative'>
+    <div className='relative'>
       {
         loading &&
         <div className='absolute z-[99999999999999999] flex items-center justify-center w-full h-full top-0 right-0 bottom-0 left-0 bg-[#ffffff75]'>
@@ -39,7 +36,6 @@ export default function Images({
 
       <label className="block text-sm font-medium text-gray-700">
         {Translation("photos-of-the-product")}<Wildcard />{" "}
-        {mode === "edit" && `(${Translation("change-is-not-allowd-for-the-moment")})`}
       </label>
 
       <ReactImageUploading
@@ -67,56 +63,30 @@ export default function Images({
                 className={product?.productData?.gallery && product?.productData?.gallery.length === 0 ? "mt-1 w-full flex justify-center rounded-md border-2 border-dashed border-gray-200 pt-10 pb-14 cursor-pointer" : "mt-1 w-full flex justify-center rounded-md border-2 border-dashed border-gray-200 p-8 cursor-pointer"}
               >
                 <div className={`${product?.productData?.gallery?.length === 0 ? 'flex items-center justify-center text-center' : 'grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4'}`}>
-                  {product?.productData?.gallery.length !== 0 &&
-                    imageList.map((image, index) => {
-                      if (mode === "create")
-                        return (
-                          <div className="flex overflow-hidden items-center relative border border-gray-200 rounded-md w-[200px] md:w-[265px] 2xl:w-[300px] lg:h-[40vh] h-[20vh]" key={index}>
-                            <img 
-                              onDragStart={(e) => e.preventDefault()}
-                              src={image.data_url} 
-                              loading="lazy"
-                              className="w-full object-cover h-full align-middle rounded-md"
-                            />
+                  {product?.productData?.gallery.length !== 0 && imageList.map((image, index) => {
+                      return (
+                        <div className="flex overflow-hidden items-center relative border border-gray-200 rounded-md w-[200px] md:w-[265px] 2xl:w-[300px] lg:h-[40vh] h-[20vh]" key={index}>
+                          <img 
+                            onDragStart={(e) => e.preventDefault()}
+                            src={image.data_url} 
+                            loading="lazy"
+                            className="w-full object-cover h-full align-middle rounded-md"
+                          />
 
-                            <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
-                              <p className="text-gray-700 text-[13px]">
-                                {image?.file?.name?.length > 20 ? image?.file?.name?.slice(0, 20) + "..." : image?.file?.name}
-                              </p>
-                            </div>
-
-                            <div onClick={(event) => onRemove(event, onImageRemove, index)} className="absolute flex right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0">
-                              <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
-                                <CloseIcon className="h-4 w-4" />
-                              </button>
-                            </div>
+                          <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
+                            <p className="text-gray-700 text-[13px]">
+                              {image?.file?.name?.length > 20 ? image?.file?.name?.slice(0, 20) + "..." : image?.file?.name}
+                            </p>
                           </div>
-                        )
 
-                      if (mode === "edit")
-                        return (
-                          <div className="flex overflow-hidden items-center relative border border-gray-200 rounded-md w-[200px] md:w-[265px] 2xl:w-[300px] lg:h-[40vh] h-[20vh]" key={index}>
-                            <img 
-                              onDragStart={(e) => e.preventDefault()}
-                              src={image.url} 
-                              className="w-full object-cover h-full align-middle rounded-md"
-                              loading="lazy"
-                            />
-                            
-                            <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
-                              <p className="text-gray-700 text-[13px]">
-                                {image?.filename?.length > 20 ? image?.filename?.slice(0, 20) + "..." : image?.filename}
-                              </p>
-                            </div>
-
-                            <div className="absolute flex right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0" onClick={(event) => onRemove(event, onImageRemove, index)}>
-                              <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
-                                <CloseIcon className="h-4 w-4" />
-                              </button>
-                            </div>
+                          <div onClick={(event) => onRemove(event, onImageRemove, index)} className="absolute flex right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0">
+                            <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
+                              <CloseIcon className="h-4 w-4" />
+                            </button>
                           </div>
-                        )
-                    })}
+                        </div>
+                      )
+                  })}
 
                   {product?.productData?.gallery.length === 0 && <EmptyGallery />}
 
@@ -148,3 +118,28 @@ const EmptyGallery = () => {
     </div>
   )
 }
+
+
+// if (mode === "edit")
+// return (
+//   <div className="flex overflow-hidden items-center relative border border-gray-200 rounded-md w-[200px] md:w-[265px] 2xl:w-[300px] lg:h-[40vh] h-[20vh]" key={index}>
+//     <img 
+//       onDragStart={(e) => e.preventDefault()}
+//       src={image.url} 
+//       className="w-full object-cover h-full align-middle rounded-md"
+//       loading="lazy"
+//     />
+    
+//     <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
+//       <p className="text-gray-700 text-[13px]">
+//         {image?.filename?.length > 20 ? image?.filename?.slice(0, 20) + "..." : image?.filename}
+//       </p>
+//     </div>
+
+//     <div className="absolute flex right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0" onClick={(event) => onRemove(event, onImageRemove, index)}>
+//       <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
+//         <CloseIcon className="h-4 w-4" />
+//       </button>
+//     </div>
+//   </div>
+// )

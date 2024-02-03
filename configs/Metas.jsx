@@ -24,7 +24,7 @@ export const ManageMeta = (mode) => {
   
   else {
     meta.title = "Përdisimi i Produktit";
-    meta.description = "Editoni produktin që keni shtuar, mos harroni se dhënja nuk ju bën të varfër.";
+    meta.description = "Redaktoni produktin që keni shtuar, mos harroni se dhënja nuk ju bën të varfër.";
   }
 
   return meta;
