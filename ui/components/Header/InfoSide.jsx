@@ -52,7 +52,7 @@ const Categories = ({router}) => {
   const open = () => setIsCategoryOpen(!isCategoryOpen)
 
   return (
-    <div className="mobile-categories bg-gray-50 p-1.5 px-3 pl-4 rounded-full border border-gray-100">
+    <div className="mobile-categories">
       <div ref={ref} className="relative inline-block text-left">
         <button onClick={open} className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900 transition-all">
           <span>{Translation("categories")}</span>

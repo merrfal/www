@@ -1,8 +1,8 @@
 import { useEffect } from "react"
+import { getDownloadURL, ref } from "firebase/storage"
 import { VerifiedBadge } from "../../icons"
 import { EditButton } from "./"
 import { isStorageReadable } from "../../../utils/Firebase"
-import { getDownloadURL, ref } from "firebase/storage"
 import { NO_AVATAR } from "../../../configs/Constants"
 
 export default function Avatar(props) {
