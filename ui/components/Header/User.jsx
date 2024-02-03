@@ -85,11 +85,14 @@ const NotAuth = ({account}) => {
 
     return (
       <div className="relative accoount-menu flex items-center">
+        {
+          account?._id &&
           <span className="text-gray-400 hover:text-gray-500 lg:block hover:opacity-[.85] transition-all ml-2">
             <Link href="/shto">
                 <AddIcon />
             </Link>
           </span>
+        }
         
         <UseGoogle account={account} dispatch={dispatch} />
       </div>

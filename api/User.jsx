@@ -1,10 +1,10 @@
+import { ref, deleteObject } from "firebase/storage"
 import { LogoutAccount, SetAccount } from "../controllers/Slices"
 import { Notification } from "../utils/Response"
 import { Request } from "../utils/Http"
 import { UserObject } from "../utils/DataBuilder"
 import { Translation } from "../utils/Translations"
 import { UploadFileToFirebase } from "../utils/Firebase"
-import { ref, deleteObject } from "firebase/storage"
 import { Storage } from "../configs/Firebase"
 
 export const Login = async (uid, dispatch) => {

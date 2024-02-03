@@ -3,7 +3,7 @@ import { Global } from "../../../configs/Head"
 import { ManageMeta } from "../../../configs/Metas"
 import { Translation } from "../../../utils/Translations"
 
-export default function Header({product, mode}) {
+export default function Header({ product, mode }) {
   const meta = ManageMeta(mode, product)
 
   return (

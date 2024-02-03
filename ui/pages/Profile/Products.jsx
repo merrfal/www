@@ -1,17 +1,17 @@
-import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from "react-infinite-scroll-component"
 
-import { Fragment, useEffect, useState } from "react";
-import { Empty, End, Product } from "../../components";
-import { Skeleton } from "./";
-import { Products as UserProducts } from "../../../api/User";
-import { Translation } from "../../../utils/Translations";
+import { Fragment, useEffect, useState } from "react"
+import { Empty, End, Product } from "../../components"
+import { Skeleton } from "./"
+import { Products as UserProducts } from "../../../api/User"
+import { Translation } from "../../../utils/Translations"
 
 export default function Products({ user, dispatch, account }) {
-  const [products, setProducts] = useState({ products: [], hasMore: true });
-  const [first, setFirst] = useState(true);
+  const [products, setProducts] = useState({ products: [], hasMore: true })
+  const [first, setFirst] = useState(true)
 
   const next = (reset = false) => {
-    let filters;
+    let filters
 
     if(reset === false){
       filters = {
@@ -23,7 +23,7 @@ export default function Products({ user, dispatch, account }) {
     }
 
     else {
-      setProducts({ products: [], hasMore: false });
+      setProducts({ products: [], hasMore: false })
 
       filters = {
         offset: "0",
@@ -33,18 +33,18 @@ export default function Products({ user, dispatch, account }) {
       }
     }
 
-    UserProducts(filters, products, setProducts, dispatch);
-  };
+    UserProducts(filters, products, setProducts, dispatch)
+  }
 
   useEffect(() => {
     if (first && user !== null && !account.Loading) {
-      setFirst(false);
-      next();
+      setFirst(false)
+      next()
     }
 
     if (!first && user !== null && !account.Loading){
-      setProducts({ products: [], hasMore: true });
-      setTimeout(() => next(), 1000);
+      setProducts({ products: [], hasMore: true })
+      setTimeout(() => next(), 1000)
     }
   }, [user, account])
 
@@ -85,5 +85,5 @@ export default function Products({ user, dispatch, account }) {
 
       <End show={!products.hasMore && products.products.length !== 0} />
     </section>
-  );
+  )
 }
