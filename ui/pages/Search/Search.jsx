@@ -1,55 +1,55 @@
-import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from "react-infinite-scroll-component"
 
-import { Fragment, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Normal } from "../../layouts";
-import { Global } from "../../../configs/Head";
-import { useRouter } from "next/router";
-import { Header, Filters, Skeleton } from ".";
-import { Search as Searching } from "../../../api/Product";
-import { Empty, End, Product } from "../../components";
-import { Translation } from "../../../utils/Translations";
+import { Fragment, useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import { Normal } from "../../layouts"
+import { Global } from "../../../configs/Head"
+import { useRouter } from "next/router"
+import { Header, Filters, Skeleton } from "."
+import { Search as Searching } from "../../../api/Product"
+import { Empty, End, Product } from "../../components"
+import { Translation } from "../../../utils/Translations"
 
 export default function Search() {
-  const router = useRouter();
-  const dispatch = useDispatch();
+  const router = useRouter()
+  const dispatch = useDispatch()
 
-  const [first, setFirst] = useState(true);
-  const [products, setProducts] = useState({ products: [], hasMore: true });
-  const [allMode, setAllMode] = useState(null);
+  const [first, setFirst] = useState(true)
+  const [products, setProducts] = useState({ products: [], hasMore: true })
+  const [allMode, setAllMode] = useState(null)
 
   const [filters, setFilters] = useState({
     sort: { createdAt: -1 },
     categories: [],
     countries: [],
     cities: []
-  });
+  })
 
   useEffect(() => {
-    const { term } = router.query;
+    const { term } = router.query
 
-    if (term === undefined || term === "") setAllMode(true);
-    else setAllMode(false);
+    if (term === undefined || term === "") setAllMode(true)
+    else setAllMode(false)
     
-    setProducts({ products: [], hasMore: true });
-    setFirst(false);
-    next(true);
-  }, [router]);
+    setProducts({ products: [], hasMore: true })
+    setFirst(false)
+    next(true)
+  }, [router])
 
   const next = (reset = false) => {
-    const { term } = router.query;
-    const offset = products.products.length.toString();
-    const filtering = { ...filters, offset: reset ? 0 : offset, term: term === undefined ? "" : term };
+    const { term } = router.query
+    const offset = products.products.length.toString()
+    const filtering = { ...filters, offset: reset ? 0 : offset, term: term === undefined ? "" : term }
 
-    Searching(filtering, reset ? { products: [] } : products, setProducts, dispatch);
-  };
+    Searching(filtering, reset ? { products: [] } : products, setProducts, dispatch)
+  }
 
   useEffect(() => {
     if (!first) {
-      setProducts({ products: [], hasMore: true });
-      next(true);
+      setProducts({ products: [], hasMore: true })
+      next(true)
     }
-  }, [filters]);
+  }, [filters])
 
   return (
     <Normal>
@@ -102,5 +102,5 @@ export default function Search() {
         <End show={!products.hasMore && products.products.length !== 0} />
       </div>
     </Normal>
-  );
+  )
 }
