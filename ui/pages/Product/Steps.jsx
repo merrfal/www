@@ -49,8 +49,7 @@ export default function Steps() {
                   </h3>
 
                   <p className="mt-2 text-sm text-gray-500">
-                    Pastaj takohuni me dhënësin për ta marrë produktin dhe ta
-                    shfrytëzoni.
+                    {Translation("get-the-product-description")}
                   </p>
                 </div>
               </div>

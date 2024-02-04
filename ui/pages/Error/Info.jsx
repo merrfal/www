@@ -9,7 +9,7 @@ export default function Info({ code }) {
       <div className="w-full flex justify-center items-center flex-col align-center">
         <Global title={name} description={message} index={true} />
 
-        <h1 className="mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
+        <h1 className="mt-2 text-4xl font-extrabold text-gray-700 tracking-tight sm:text-5xl">
           {name}
         </h1>
 

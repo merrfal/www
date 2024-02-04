@@ -29,8 +29,6 @@ import {
   Given,
 } from "."
 
-let FIRST_TIME = true
-
 export default function EditProduct() {
   const account = useSelector((state) => state.Account)
   const dispatch = useDispatch()
@@ -91,19 +89,25 @@ export default function EditProduct() {
             const isAllowedToEdit = userId === data?.data?.productData?.user._id
             const isAdmin = account?.User?.userAdditionalData?.role === "admin"
 
-            if(isAllowedToEdit || isAdmin){
-              const static_images = data?.data?.productData?.gallery.map((image) => {
+            if(isAllowedToEdit || isAdmin) {
+              const hasMainSelected = data?.data?.productData?.gallery?.some(image => image.isMain)
+
+              const static_images = data?.data?.productData?.gallery.map((image, index) => {
                 return {
                   id: image.id,
                   data_url: image.url,
                   isSaved: true,
-                  original: image,
+                  original: {
+                    ...image,
+                    isMain: hasMainSelected ? image.isMain : index === 0 ? true : false,
+                  },
+                  isMain: hasMainSelected ? image.isMain : index === 0 ? true : false,
                   file: {
                     name: image.filename
                   },
                 }
               })
-              
+
               setOriginalImageList(static_images)
 
               setProduct({
@@ -138,9 +142,14 @@ export default function EditProduct() {
 
   return (
     <Normal>
-      {loading ? <Loading /> : null}
+      {
+        (loading || account.Loading || isHold) && 
+        <div className='fixed z-[99999999999999999] flex items-center overflow-hidden justify-center w-screen h-screen top-0 right-0 bottom-0 left-0 bg-[#ffffff75]'>
+          <Loading loading={true} withContainer={false} />
+        </div>
+      }
 
-      {!loading && <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      {!loading && <div className="mx-auto max-w-7xl px-4 sm:px-6 overflow-x-hidden">
         <div className="md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16">
           <div className="mt-5 md:col-span-2 md:mt-0">
             <div style={onLoad} className="sm:overflow-hidden sm:rounded-md">

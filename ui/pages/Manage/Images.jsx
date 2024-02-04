@@ -1,6 +1,5 @@
 import ReactImageUploading from "react-images-uploading"
 
-import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { ImagesValidation } from "../../../utils/Forms"
 import { CloseIcon, PhotoIcon } from "../../icons"
@@ -15,16 +14,73 @@ export default function Images({
   validation: v,
   product,
   loadingImage: loading,
-  setLoadingImage: setLoading,
+  setLoadingImage: setLoading
 }) {
   const validation = ImagesValidation(product?.productData?.gallery)
   const dispatch = useDispatch()
 
-  const onRemove = (event, onImageRemove, index) => {
+  const onRemove = (event, index) => {
     event.stopPropagation()
-    onImageRemove(index)
+
+    const isMainProduct = product?.productData?.gallery[index]?.isMain
+
+    if (isMainProduct) {
+      setProduct(prevProduct => {
+        const product_cloned = structuredClone(prevProduct)
+        const gallery = product_cloned?.productData?.gallery
+    
+        gallery.splice(index, 1)
+    
+        if (gallery.length > 0) {
+          gallery[gallery.length - 1].isMain = true
+        }
+    
+        return {
+          ...prevProduct,
+          productData: {
+            ...product_cloned.productData,
+            gallery
+          }
+        }
+      })
+    }
+
+    else {
+      setProduct(prevProduct => {
+        const product_cloned = structuredClone(prevProduct)
+        const gallery = product_cloned?.productData?.gallery
+    
+        gallery.splice(index, 1)
+    
+        return {
+          ...prevProduct,
+          productData: {
+            ...product_cloned.productData,
+            gallery
+          }
+        }
+      })
+    }
   }
 
+  const onSelectedMainImage = (index) => {
+    const product_cloned = structuredClone(product)
+    const gallery = product_cloned?.productData?.gallery
+
+    gallery.forEach((image, i) => {
+      if (i !== index) image.isMain = false
+      else image.isMain = true
+    })
+
+    setProduct({ 
+      ...product, 
+      productData: { 
+        ...product_cloned.productData, 
+        gallery 
+      } 
+    })
+  }
+  
   return (
     <div className='relative'>
       {
@@ -50,27 +106,39 @@ export default function Images({
         {({
           imageList,
           onImageUpload,
-          onImageRemove,
           isDragging,
           dragProps,
         }) => (
           <div>
-            <div className="flex flex-wrap mb-2">
+            <div className="flex flex-wrap mb-2 w-full overflow-x-hidden">
               <div
                 {...dragProps}
                 style={isDragging ? { borderColor: "#377DFF" } : null}
                 onClick={product?.productData?.gallery && product?.productData?.gallery.length !== 0 ? null : onImageUpload}
-                className={product?.productData?.gallery && product?.productData?.gallery.length === 0 ? "mt-1 w-full flex justify-center rounded-md border-2 border-dashed border-gray-200 pt-10 pb-14 cursor-pointer" : "mt-1 w-full flex justify-center rounded-md border-2 border-dashed border-gray-200 p-8 cursor-pointer"}
+                className={product?.productData?.gallery && product?.productData?.gallery.length === 0 ? "mt-1 w-full flex justify-center rounded-md border-2 border-dashed border-gray-200 pt-10 pb-14" : "mt-1 w-full flex justify-center rounded-md border-2 border-dashed border-gray-200 p-4 cursor-pointer"}
               >
-                <div className={`${product?.productData?.gallery?.length === 0 ? 'flex items-center justify-center text-center' : 'grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4'}`}>
+                <div className={`${product?.productData?.gallery?.length === 0 ? 'w-full flex items-center justify-center text-center' : ' w-full grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4'}`}>
                   {product?.productData?.gallery.length !== 0 && imageList.map((image, index) => {
+                      const img = product?.productData?.gallery.find((item) => item.data_url === image.data_url)
+
                       return (
-                        <div className="flex overflow-hidden items-center relative border border-gray-200 rounded-md w-[200px] md:w-[265px] 2xl:w-[300px] lg:h-[40vh] h-[20vh]" key={index}>
+                        <div 
+                          key={image.id}
+                          className={`flex overflow-hidden items-center relative rounded-xl w-full min-h-[60vh] max-h-[60vh] h-[60vh] lg:h-[45vh] lg:min-h-[45vh] lg:max-h-[45vh] ${img.isMain ? 'border-4 border-[#477DFF] cursor-default' : 'border-4 border-gray-200 cursor-pointer'}`} 
+                          onClick={() => onSelectedMainImage(index)}
+                        >
+                          { 
+                            img.isMain &&
+                            <div className='bg-[#377DFF] text-white rounded-br-xl absolute top-0 left-0 py-0.5 px-3 text-[13px]'>
+                              Fotoja Kryesore
+                            </div>
+                          }
+
                           <img 
                             onDragStart={(e) => e.preventDefault()}
                             src={image.data_url} 
                             loading="lazy"
-                            className="w-full object-cover h-full align-middle rounded-md"
+                            className="w-full h-full object-cover align-middle rounded-md"
                           />
 
                           <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
@@ -79,7 +147,7 @@ export default function Images({
                             </p>
                           </div>
 
-                          <div onClick={(event) => onRemove(event, onImageRemove, index)} className="absolute flex right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0">
+                          <div onClick={(event) => onRemove(event, index)} className="absolute flex right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0">
                             <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
                               <CloseIcon className="h-4 w-4" />
                             </button>
@@ -91,7 +159,7 @@ export default function Images({
                   {product?.productData?.gallery.length === 0 && <EmptyGallery />}
 
                   {product?.productData?.gallery.length !== 0 && product?.productData?.gallery.length < 4 && (
-                    <div onClick={onImageUpload} className="flex items-center justify-center border border-gray-200 w-[265px] lg:h-[40vh] h-[20vh] object-cover rounded-md right-1.5 top-1.5 flex-col space-y-3 sm:flex-row sm:space-y-0">
+                    <div onClick={onImageUpload} className="flex items-center justify-center border border-gray-200 w-full min-h-[60vh] max-h-[60vh] h-[60vh] lg:h-[45vh] lg:min-h-[45vh] lg:max-h-[45vh] object-cover rounded-md right-1.5 top-1.5 flex-col space-y-3 sm:flex-row sm:space-y-0">
                       <div className="flex flex-col justify-center items-center">
                         <PhotoIcon />
                         <Info half={true} />
@@ -118,28 +186,3 @@ const EmptyGallery = () => {
     </div>
   )
 }
-
-
-// if (mode === "edit")
-// return (
-//   <div className="flex overflow-hidden items-center relative border border-gray-200 rounded-md w-[200px] md:w-[265px] 2xl:w-[300px] lg:h-[40vh] h-[20vh]" key={index}>
-//     <img 
-//       onDragStart={(e) => e.preventDefault()}
-//       src={image.url} 
-//       className="w-full object-cover h-full align-middle rounded-md"
-//       loading="lazy"
-//     />
-    
-//     <div className="flex w-full p-1 justify-center bg-[#faf9f999] absolute bottom-0">
-//       <p className="text-gray-700 text-[13px]">
-//         {image?.filename?.length > 20 ? image?.filename?.slice(0, 20) + "..." : image?.filename}
-//       </p>
-//     </div>
-
-//     <div className="absolute flex right-1.5 top-1.5 flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0" onClick={(event) => onRemove(event, onImageRemove, index)}>
-//       <button className="inline-flex justify-center px-1 py-1 border border-gray-200 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-all">
-//         <CloseIcon className="h-4 w-4" />
-//       </button>
-//     </div>
-//   </div>
-// )

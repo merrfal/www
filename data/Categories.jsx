@@ -11,7 +11,7 @@ export const Categories = [
     _id: "641c49e1b24ea4453a054360",
     name: "Aksesorë",
     slug: "aksesore",
-    description: "Aksesorët janë ndër elementët kryesorë të pamjes personale, andaj kjo kategori ofron një shumëllojshmëri të produkteve të nevojshme për të plotësuar stilin e veshjes suaj. Kategoria përfshin produkte si kapele, xhaketa, shalla, çanta, syze dielli, orë dhe produkte të tjera të cilat mund të shtojnë një ndikim të veçantë në pamjen tuaj.",
+    description: "Aksesorët janë ndër elementët kryesorë të jetës sonë, andaj kjo kategori ofron një shumëllojshmëri të produkteve të nevojshme për të plotësuar atë.",
     icon: "/categories/aksesore.webp",
     favorite: false,
   },

@@ -31,9 +31,6 @@ export default function Profile() {
 
   const meta = ProfilePage(user)
 
-  if (user === false) return <Error code={404} />
-
-
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === "Escape") setIsEdit(false)
@@ -54,6 +51,8 @@ export default function Profile() {
       window.removeEventListener("keydown", handleEscape)
     }
   }, [isEdit])
+
+  if (user === false) return <Error code={404} />
 
   return (
     <Normal>
