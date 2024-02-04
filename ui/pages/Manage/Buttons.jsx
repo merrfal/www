@@ -127,112 +127,111 @@ export default function Buttons(props) {
       return
     }
 
-    if(!account.Auth) {
-      Auth()
-      return
-    }
+    if(!account.Auth) Auth()
 
     else {
       setIsHold(true)
 
       const gallery = []
 
-      const compressImage = async (file, id, index, cropOptions = {}) => {
+      const compressAndUpload = (file, image, id, quality, maxWidth = 720, maxHeight = 720) => {
         return new Promise((resolve, reject) => {
-          const reader = new FileReader()
+          const reader = new FileReader();
+      
           reader.onload = (event) => {
-            const img = new Image()
+            const img = new Image();
       
-            img.src = event.target.result
+            img.src = event.target.result;
             img.onload = () => {
-              const canvas = document.createElement('canvas')
-              const ctx = canvas.getContext('2d')
-              
-              // Set default cropping dimensions if not provided
-              const defaultWidth = img.width
-              const defaultHeight = img.height
-              const targetWidth = cropOptions.width || defaultWidth
-              const targetHeight = cropOptions.height || defaultHeight
+              const canvas = document.createElement('canvas');
+              const ctx = canvas.getContext('2d');
       
-              // Calculate cropping dimensions while preserving aspect ratio
-              const sourceAspectRatio = img.width / img.height
-              const targetAspectRatio = targetWidth / targetHeight
-
-              let cropWidth, cropHeight
-              
-              if (sourceAspectRatio > targetAspectRatio) {
-                cropWidth = img.height * targetAspectRatio
-                cropHeight = img.height
+              let width = img.width;
+              let height = img.height;
+      
+              if (width > height) {
+                if (width > maxWidth) {
+                  height *= maxWidth / width;
+                  width = maxWidth;
+                }
               } 
               
               else {
-                cropWidth = img.width
-                cropHeight = img.width / targetAspectRatio
+                if (height > maxHeight) {
+                  width *= maxHeight / height;
+                  height = maxHeight;
+                }
               }
       
-              const cropX = cropOptions.skipCrop ? 0 : (img.width - cropWidth) / 2;
-              const cropY = cropOptions.skipCrop ? 0 : (img.height - cropHeight) / 2;
+              canvas.width = width;
+              canvas.height = height;
       
-              canvas.width = targetWidth
-              canvas.height = targetHeight
-              
-              ctx.drawImage(img, cropX, cropY, cropWidth, cropHeight, 0, 0, targetWidth, targetHeight)
+              ctx.drawImage(img, 0, 0, width, height);
       
               canvas.toBlob(
                 async (blob) => {
-                  if (blob.size > 2 * 1024 * 1024) await compressImage(file, id, index, { skipCrop: true })                
-
+                  if (blob.size / 1024 > 1000 && quality > 0) {
+                    const newQuality = quality - 0.1;
+                    compressAndUpload(file, image, id, newQuality).then(resolve).catch(reject);
+                  } 
+                  
                   else {
-                    const compressedImageRef = ref(Storage, `products/${id}`)
-                    const uploadTask = uploadBytesResumable(compressedImageRef, blob)
-        
+                    const compressedImageRef = ref(Storage, `products/${id}`);
+                    const uploadTask = uploadBytesResumable(compressedImageRef, blob);
+      
                     uploadTask
                       .then(async (snapshot) => {
-                        const url = await getDownloadURL(snapshot.ref)
+                        const url = await getDownloadURL(snapshot.ref);
                         const compressedImg = {
                           url,
                           id,
-                          isMain: index === 0,
+                          isMain: image.isMain || false,
                           filename: `${file.name.split('.')[0]}.webp`,
-                        }
-        
-                        resolve(compressedImg)
+                        };
+      
+                        resolve(compressedImg);
                       })
-        
+
                       .catch((error) => {
-                        console.error('Error uploading compressed image:', error)
-                        reject(error)
-                      })
+                        reject(error);
+                      });
                   }
                 },
                 'image/webp',
-                .85
-              )
-            }
-          }
-          reader.readAsDataURL(file)
-        })
+                quality
+              );
+            };
+          };
+          reader.readAsDataURL(file);
+        });
       }
       
-      const promises = product.productData.gallery.map(async (image, index) => {
-        const id = v4()
-      
-        try {
-          const compressedImg = await compressImage(image.file, id, index, dispatch)
-          gallery.push(compressedImg)
-        } 
-        
-        catch (error) {
-          const alert = {
-            type: 'error',
-            message: Translation('couldnt-upload-to-firebase'),
-            dispatch,
-          }
-      
-          Notification(alert)
-        }
-      })
-      
+      const promises = []
+
+      for (let index = 0; index < product.productData.gallery.length; index++) {
+          const image = product.productData.gallery[index]
+          const id = v4()
+
+          promises.push(
+              (async () => {
+                  try {
+                      const compressedImg = await compressAndUpload(image.file, image, id, .9, 720, 720)
+                      gallery.push(compressedImg)
+                  } 
+                  
+                  catch (error) {
+                      const alert = {
+                          type: 'error',
+                          message: Translation('couldnt-upload-to-firebase'),
+                          dispatch,
+                      }
+
+                      Notification(alert)
+                  }
+              })()
+          )
+      }
+
       await Promise.all(promises)
 
       const initalProduct = {
@@ -242,7 +241,12 @@ export default function Buttons(props) {
         gallery,
       }
 
-      Create(initalProduct, router, setIsHold, dispatch)
+      Create(
+        initalProduct, 
+        router, 
+        setIsHold, 
+        dispatch
+      )
     }
   }
 
@@ -285,94 +289,93 @@ export default function Buttons(props) {
   
       await Promise.all(deletions)
   
-      const compressImage = async (file, id, index, cropOptions = {}) => {
+      const compressAndUpload = (file, image, id, quality, maxWidth = 720, maxHeight = 720) => {
         return new Promise((resolve, reject) => {
-          const reader = new FileReader()
+          const reader = new FileReader();
+      
           reader.onload = (event) => {
-            const img = new Image()
+            const img = new Image();
       
-            img.src = event.target.result
+            img.src = event.target.result;
             img.onload = () => {
-              const canvas = document.createElement('canvas')
-              const ctx = canvas.getContext('2d')
-              
-              // Set default cropping dimensions if not provided
-              const defaultWidth = img.width
-              const defaultHeight = img.height
-              const targetWidth = cropOptions.width || defaultWidth
-              const targetHeight = cropOptions.height || defaultHeight
+              const canvas = document.createElement('canvas');
+              const ctx = canvas.getContext('2d');
       
-              // Calculate cropping dimensions while preserving aspect ratio
-              const sourceAspectRatio = img.width / img.height
-              const targetAspectRatio = targetWidth / targetHeight
-  
-              let cropWidth, cropHeight
-              
-              if (sourceAspectRatio > targetAspectRatio) {
-                cropWidth = img.height * targetAspectRatio
-                cropHeight = img.height
+              let width = img.width;
+              let height = img.height;
+      
+              if (width > height) {
+                if (width > maxWidth) {
+                  height *= maxWidth / width;
+                  width = maxWidth;
+                }
               } 
               
               else {
-                cropWidth = img.width
-                cropHeight = img.width / targetAspectRatio
+                if (height > maxHeight) {
+                  width *= maxHeight / height;
+                  height = maxHeight;
+                }
               }
       
-              const cropX = cropOptions.skipCrop ? 0 : (img.width - cropWidth) / 2;
-              const cropY = cropOptions.skipCrop ? 0 : (img.height - cropHeight) / 2;
+              canvas.width = width;
+              canvas.height = height;
       
-              canvas.width = targetWidth
-              canvas.height = targetHeight
-              
-              ctx.drawImage(img, cropX, cropY, cropWidth, cropHeight, 0, 0, targetWidth, targetHeight)
+              ctx.drawImage(img, 0, 0, width, height);
       
               canvas.toBlob(
                 async (blob) => {
-                  if (blob.size > 2 * 1024 * 1024) await compressImage(file, id, index, { skipCrop: true })                
-  
+                  if (blob.size / 1024 > 1000 && quality > 0) {
+                    const newQuality = quality - 0.1;
+                    compressAndUpload(file, image, id, newQuality).then(resolve).catch(reject);
+                  } 
+                  
                   else {
-                    const compressedImageRef = ref(Storage, `products/${id}`)
-                    const uploadTask = uploadBytesResumable(compressedImageRef, blob)
-        
+                    const compressedImageRef = ref(Storage, `products/${id}`);
+                    const uploadTask = uploadBytesResumable(compressedImageRef, blob);
+      
                     uploadTask
                       .then(async (snapshot) => {
-                        const url = await getDownloadURL(snapshot.ref)
+                        const url = await getDownloadURL(snapshot.ref);
                         const compressedImg = {
                           url,
                           id,
-                          isMain: index === 0,
+                          isMain: image.isMain || false,
                           filename: `${file.name.split('.')[0]}.webp`,
-                        }
-        
-                        resolve(compressedImg)
+                        };
+      
+                        resolve(compressedImg);
                       })
-        
+
                       .catch((error) => {
-                        console.error('Error uploading compressed image:', error)
-                        reject(error)
-                      })
+                        reject(error);
+                      });
                   }
                 },
                 'image/webp',
-                .85
-              )
-            }
-          }
-          reader.readAsDataURL(file)
-        })
+                quality
+              );
+            };
+          };
+          reader.readAsDataURL(file);
+        });
       }
       
       const promises = product.productData.gallery.map(async (image, index) => {
         if (image?.isSaved) {
           const original = originalImageList.find((file) => file.id === image.id)
-          gallery.push(original.original)
+
+          gallery.push({
+            ...original.original,
+            isMain: image.isMain
+          })
         }
 
         else {
           const id = v4()
 
           try {
-            const compressedImg = await compressImage(image.file, id, index, dispatch)
+            const compressedImg = await compressAndUpload(image.file, image, id, .9, 720, 720)
             gallery.push(compressedImg)
           } 
           

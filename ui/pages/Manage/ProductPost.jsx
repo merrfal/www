@@ -71,12 +71,12 @@ export default function ProductPost() {
     <Normal>
       {
         (loading || account.Loading || isHold) && 
-        <div className='fixed z-[99999999999999999] flex items-center justify-center w-screen h-screen top-0 right-0 bottom-0 left-0 bg-[#ffffff75]'>
+        <div className='fixed z-[99999999999999999] flex items-center overflow-hidden justify-center w-screen h-screen top-0 right-0 bottom-0 left-0 bg-[#ffffff75]'>
           <Loading loading={true} withContainer={false} />
         </div>
       }
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 overflow-x-hidden">
           <div className="md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16">
             <div className="mt-5 md:col-span-2 md:mt-0">
               <div style={onLoad} className="sm:overflow-hidden sm:rounded-md">

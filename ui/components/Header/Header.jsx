@@ -6,6 +6,7 @@ import { Translation } from "../../../utils/Translations"
 
 export default function Header() {
   const router = useRouter()
+  
   const [openSearch, setOpenSearch] = useState(false)
   const [term, setTerm] = useState("")
 
@@ -38,10 +39,12 @@ export default function Header() {
     setOpenSearch(!openSearch)
   }
 
+  const isHomepage = router.pathname === "/"
+
   return (
     <header className="relative bg-white showSerch">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="border-b border-gray-200">
+        <div className={`${isHomepage ? '' : 'border-b border-gray-200'}`}>
           <div className="h-16 flex items-center justify-around">
             { !openSearch && <InfoSide /> }
 

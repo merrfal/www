@@ -19,8 +19,12 @@ export default function Edit({ slug, user }) {
             <div className="bg-white px-2 py-1 h-8 w-auto flex justify-center items-center align-middle rounded-md hover:bg-gray-50 border-gray-150 border transition-all">
                 <EditIcon className="h-5 w-5 text-gray-400" />
 
-                <span className="text-gray-500 text-sm ml-1.5">
+                <span className="text-gray-500 text-sm ml-1.5 hidden md:block">
                     {Translation("edit-product")}
+                </span>
+
+                <span className="text-gray-500 text-sm ml-1.5 block md:hidden">
+                    {Translation("edit")}
                 </span>
             </div>
         </Link>

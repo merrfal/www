@@ -34,7 +34,7 @@ export const Create = async (page, router, setIsHold, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Translation("products-latest-error"),
+      message: CreateMessage("product", false),
       type: "error",
     }
 
@@ -119,7 +119,7 @@ export const Search = async (filters, products, setProducts, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Translation("products-latest-error"),
+      message: Translation("something-went-wrong-while-searching"),
       type: "error",
     }
 
@@ -160,7 +160,7 @@ export const Update = async ( product, router, setLoading, dispatch) => {
   catch (error) {
     const alert = {
       dispatch,
-      message: Translation("products-latest-error"),
+      message: Translation("something-went-wrong-while-trying-to-update-product"),
       type: "error",
     }
 
@@ -179,7 +179,24 @@ export const View = async (slug, setProduct, dispatch, setLoading = null) => {
     const res = await req.json()
 
     if (res.success === true) {
-      setProduct(res.data)
+      const gallery = res.data.productData.gallery
+
+      const main = gallery?.filter((image) => image?.isMain === true)
+      const rest = gallery?.filter((image) => image?.isMain === false)
+
+      const array_gallery = []
+
+      if (main.length > 0) array_gallery.push(...main)
+      if (rest.length > 0) array_gallery.push(...rest)
+      
+      setProduct({
+        ...res.data,
+        productData: {
+          ...res.data.productData,
+          gallery: array_gallery
+        }
+      })
+
       if (setLoading !== null) setLoading(false)
     }
 
@@ -187,13 +204,13 @@ export const View = async (slug, setProduct, dispatch, setLoading = null) => {
   } 
   
   catch (error) {
-    // const alert = {
-    //   dispatch,
-    //   message: Translation("products-latest-error"),
-    //   type: "error",
-    // }
+    const alert = {
+      dispatch,
+      message: Translation("products-view-error"),
+      type: "error",
+    }
 
-    // Notification(alert)
+    Notification(alert)
   }
 }
 
@@ -209,13 +226,13 @@ export const ViewWithPermissions = async (slug, dispatch) => {
   } 
   
   catch (error) {
-    // const alert = {
-    //   dispatch,
-    //   message: Translation("products-latest-error"),
-    //   type: "error",
-    // }
+    const alert = {
+      dispatch,
+      message: Translation("view-with-permission"),
+      type: "error",
+    }
 
-    // Notification(alert)
+    Notification(alert)
 
     return {
       success: false,
@@ -248,7 +265,7 @@ export const Similar = async (category, setProducts, setIsSimilar, dispatch) => 
   catch (error) {
     const alert = {
       dispatch,
-      message: Translation("products-latest-error"),
+      message: Translation("something-went-wrong-while-fetching-similar-products"),
       type: "error",
     }
 
@@ -316,7 +333,7 @@ export const Category = async (filters, scratch, products, setProducts, setLoadi
   catch (error) {
     const alert = {
       dispatch,
-      message: Translation("products-latest-error"),
+      message: Translation("categories-fetch-error"),
       type: "error",
     }
 

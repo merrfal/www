@@ -2,7 +2,7 @@ import { Image, Buttons, Info } from "."
 
 export default function Hero() {
   return (
-    <div className="mt-0 sm:mt-6 md:mt-6 mb-16 lg:mt-4 xl:mt-4 2xl:mt-4">
+    <div className="mt-0 mb-16">
       <div className="relative">
         <div className="absolute inset-x-0 bottom-0 h-1/2" />
         

@@ -9,8 +9,8 @@ export default function Image(props) {
   const [thumbnail, setThumbnail] = useState(null)
 
   useEffect(() => {
-    let thumb = productData.gallery?.length > 0 ? productData.gallery[0].id : "product-no.png"
-    
+    let thumb = productData.gallery?.find((image) => image?.isMain === true)?.id || "product-no.png"
+
     if (thumb !== undefined) {
       const file = `products/${thumb}`
       const unextracted = ref(Storage, file)

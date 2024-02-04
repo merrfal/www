@@ -4,11 +4,11 @@ import Lightbox from "yet-another-react-lightbox"
 
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
+import { getDownloadURL, ref } from "firebase/storage"
+import { useRouter } from "next/router"
 import { View, Similar as Recommendations } from "../../../api/Product"
 import { Normal } from "../../layouts"
-import { useRouter } from "next/router"
 import { Global } from "../../../configs/Head"
-import { getDownloadURL, ref } from "firebase/storage"
 import { Storage } from "../../../configs/Firebase"
 import { Error } from ".."
 import { Loading } from "../../components"
@@ -42,6 +42,7 @@ export default function Product() {
       const { slug } = router.query
 
       if (slug !== "" && slug !== undefined) {
+        setProduct(null)
         View(slug, setProduct, dispatch)
       }
     }
@@ -50,7 +51,13 @@ export default function Product() {
   useEffect(() => {
     if (product !== null && product !== false && products === null) {
       const { category = "" } = product.productData
-      Recommendations(category, setProducts, setIsSimilar, dispatch)
+
+      Recommendations(
+        category, 
+        setProducts, 
+        setIsSimilar, 
+        dispatch
+      )
     }
   }, [product, router])
 
@@ -69,8 +76,6 @@ export default function Product() {
       .catch(() => setGallery([]))
     }
   }, [product])
-
-  if (product === false) return <Error code={404} />
 
   const HandleChange = () => {
     const prev = document.querySelector('.yarl__navigation_prev')
@@ -105,6 +110,8 @@ export default function Product() {
   }, [open])
 
   useEffect(() => HandleChange(), [index, product, open])
+
+  if (product === false) return <Error code={404} />
 
   return (
     <Normal>

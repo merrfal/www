@@ -3,7 +3,6 @@ import { GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo } from "fire
 import { Notification } from "../utils/Response"
 import { LogoutAccount } from "../controllers/Slices"
 import { Auth as AuthInstance } from "../configs/Firebase"
-import { AccountIcon } from "../ui/icons"
 import { Translation } from "../utils/Translations"
 
 export default function useGoogle({dispatch, account}) {
@@ -47,7 +46,7 @@ export default function useGoogle({dispatch, account}) {
   }
 
   return (
-    <div onClick={() => Auth()} className="ml-2 w-full flex whitespace-nowrap gap-2 items-center bg-gray-50 p-1.5 px-3 rounded-full border border-gray-100 text-gray-400 hover:text-gray-500 hover:cursor-pointer hover:opacity-[.9] transition-all">
+    <div onClick={() => Auth()} className="ml-2 md:ml-4 w-full flex whitespace-nowrap gap-3 items-center bg-gray-50 p-1.5 px-3 rounded-full border border-gray-100 text-gray-400 hover:text-gray-500 hover:cursor-pointer hover:opacity-[.9] transition-all">
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="block w-[18px] h-[18px]">
         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
         <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
@@ -56,8 +55,8 @@ export default function useGoogle({dispatch, account}) {
         <path fill="none" d="M0 0h48v48H0z"></path>
       </svg>
 
-      <span className="text-gray-600 text-[14.5px]">
-        Kyçu me Google
+      <span className="text-gray-600 flex items-center text-[14.5px]">
+        Kyçu <span className="hidden lg:flex">&nbsp;me Google</span>
       </span>
     </div>
   )

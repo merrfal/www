@@ -33,9 +33,7 @@ export default function Thumbnail(props) {
         </div>
       }
 
-      {
-        (thumbnail === null || !loaded) && <SkeletonIcon />
-      }
+      {(thumbnail === null || !loaded) && <SkeletonIcon />}
 
       <img
         onClick={() => setOpen(true)}
@@ -43,7 +41,6 @@ export default function Thumbnail(props) {
         onLoad={() => setLoaded(true)}
         src={thumbnail}
         style={(thumbnail === null || !loaded) ? { display: 'none' } : {}}
-        loading="lazy"
         onDragStart={(e) => e.preventDefault()}
         className="w-full object-center cursor-pointer object-cover lg:rounded-lg md:rounded-lg xl:rounded-lg h-full outline-none border-none"
       />

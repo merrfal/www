@@ -30,7 +30,7 @@ export default function Sort({filters, setFilters}) {
             </div>
 
         {isSortOpen && (
-            <div className="origin-top-left absolute left-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="origin-top-left absolute left-0 mt-2 w-44 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div>
                     <p
                         style={filters.sort.createdAt === -1 ? { color: "#377DFF" } : {}}
