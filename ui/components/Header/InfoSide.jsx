@@ -17,11 +17,11 @@ export default function InfoSide() {
 
   return (
     <div className="h-full w-full flex space-x-3 md:space-x-6 items-center align-center place-content-between lg:place-content-start">
-        <Link href="/">
-          <span className="flex mr-2 hover:opacity-[.825] transition-all">
-            <LogoIcon />
-          </span>
-        </Link>
+      <Link href="/">
+        <span className="flex mr-2 hover:opacity-[.825] transition-all">
+          <LogoIcon />
+        </span>
+      </Link>
 
       <Search />
 

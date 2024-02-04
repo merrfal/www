@@ -1,14 +1,28 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { CountryCodes } from "../../../data"
 import { PhoneValidation } from "../../../utils/Forms"
 import { Translation } from "../../../utils/Translations"
 import { RequiredLabel, Wildcard } from "../../components"
 
 export default function Phone({product, onInput, validation: v}) {
+  const [isCountryCodeOpen, setIsCountryCodeOpen] = useState(false)
+
   const validation = PhoneValidation(product?.productData?.phone)
   const selectedCountry = CountryCodes.find(country => country.code === product?.productData?.phoneCode)
 
-  const [isCountryCodeOpen, setIsCountryCodeOpen] = useState(false)
+  let clickOutside = (handler) => {
+    let refInstance = useRef()
+
+    useEffect(() => {
+      let method = (e) => !refInstance?.current?.contains(e?.target) && handler()
+      document.addEventListener("mousedown", method)
+      return () => document.removeEventListener("mousedown", method)
+    })
+
+    return refInstance
+  }
+
+  let ref = clickOutside(() => setIsCountryCodeOpen(false))
 
   return (
     <div className="col-span-6 sm:col-span-3 lg:col-span-3">
@@ -16,7 +30,7 @@ export default function Phone({product, onInput, validation: v}) {
         {Translation("phone-number")}<Wildcard />
       </label>
 
-      <div className="flex relative items-center">
+      <div ref={ref} className="flex relative items-center">
         <button onClick={() => setIsCountryCodeOpen(!isCountryCodeOpen)} className="z-10 shadow-sm mt-1 inline-flex items-center p-3 font-medium text-center text-gray-500 border-y border-l border-gray-300 rounded-s-lg hover:bg-gray-50 transition-all ease-in-out duration-500">
             <span className="flex gap-2 sm:text-sm h-auto">
               {selectedCountry?.flag}
