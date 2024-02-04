@@ -45,6 +45,8 @@ import LinkedInIcon from './LinkedInIcon'
 import MacedoniaIcon from "./MacedoniaIcon"
 import KosovoIcon from "./KosovoIcon"
 import AlbaniaIcon from "./AlbaniaIcon"
+import WhatsAppIcon from "./WhatsAppIcon"
+import ViberIcon from "./ViberIcon"
 
 export {
   AccountIcon,
@@ -93,5 +95,7 @@ export {
   LinkedInIcon,
   MacedoniaIcon,
   KosovoIcon,
-  AlbaniaIcon
+  AlbaniaIcon,
+  WhatsAppIcon,
+  ViberIcon
 }
