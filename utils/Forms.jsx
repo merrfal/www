@@ -1,142 +1,142 @@
-import { Translation } from "./Translations";
+import { Translation } from "./Translations"
 
 export const NameValidation = (value) => {
-  let validation = { error: false };
+  let validation = { error: false }
 
-  const minLength = 4;
-  const maxLength = 80;
-  const regex = /^[\s\S]*$/;
+  const minLength = 4
+  const maxLength = 80
+  const regex = /^[\s\S]*$/
 
   if (value.length < minLength) {
-    validation.error = true;
-    validation.message = `${Translation("name-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
+    validation.error = true
+    validation.message = `${Translation("name-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`
   }
 
   if (value.length > maxLength) {
-    validation.error = true;
-    validation.message = `${Translation("name-can-have-less-than")} ${maxLength} ${Translation("characters")}`;
+    validation.error = true
+    validation.message = `${Translation("name-can-have-less-than")} ${maxLength} ${Translation("characters")}`
   }
 
   if (!regex.test(value)) {
-    validation.error = true;
-    validation.message = Translation("product-name-regex-validations");
+    validation.error = true
+    validation.message = Translation("product-name-regex-validations")
   }
 
-  return validation;
-};
+  return validation
+}
 
 export const DescriptionValidation = (value) => {
-  let validation = { error: false };
+  let validation = { error: false }
 
-  const minLength = 10;
-  const maxLength = 320;
-  const regex = /^[\s\S]*$/;
+  const minLength = 10
+  const maxLength = 320
+  const regex = /^[\s\S]*$/
 
   if (value.length < minLength) {
-    validation.error = true;
-    validation.message = `${Translation("description-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
+    validation.error = true
+    validation.message = `${Translation("description-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`
   }
 
   if (value.length > maxLength) {
-    validation.error = true;
-    validation.message = `${Translation("description-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
+    validation.error = true
+    validation.message = `${Translation("description-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`
   }
 
   if (!regex.test(value)) {
-    validation.error = true;
-    validation.message = Translation("product-description-regex-validations");
+    validation.error = true
+    validation.message = Translation("product-description-regex-validations")
   }
 
-  return validation;
-};
+  return validation
+}
 
 export const PhoneValidation = (value) => {
-  let validation = { error: false };
+  let validation = { error: false }
 
-  const regex = /^\d{8,9}$/;
+  const regex = /^\d{8,9}$/
   
   if (!regex.test(value)) {
-    validation.error = true;
-    validation.message = Translation("phone-number-is-not-valid");
+    validation.error = true
+    validation.message = Translation("phone-number-is-not-valid")
   }
 
-  return validation;
-};
+  return validation
+}
 
 export const AddressValidation = (value) => {
-  let validation = { error: false };
+  let validation = { error: false }
 
-  const minLength = 6;
-  const maxLength = 42;
-  const regex = /^[a-zA-Z0-9ëËÇç,_-\s()\[\].]*$/;
+  const minLength = 6
+  const maxLength = 80
+  const regex = /^[a-zA-Z0-9ëËÇç,_-\s()\[\].]*$/
 
   if (value.length < minLength) {
-    validation.error = true;
-    validation.message = `${Translation("address-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
+    validation.error = true
+    validation.message = `${Translation("address-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`
   }
 
   if (value.length > maxLength) {
-    validation.error = true;
-    validation.message = `${Translation("address-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
+    validation.error = true
+    validation.message = `${Translation("address-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`
   }
 
   if (!regex.test(value)) {
-    validation.error = true;
-    validation.message = Translation("address-regex-validations");
+    validation.error = true
+    validation.message = Translation("address-regex-validations")
   }
 
-  return validation;
-};
+  return validation
+}
 
 export const UserNameValidation = (value) => {
-  let validation = { error: false };
+  let validation = { error: false }
 
-  const minLength = 3;
-  const maxLength = 20;
-  const regex = /^[a-zA-Z0-9]+(?:[ ]?[a-zA-Z0-9]+)*$/;
+  const minLength = 3
+  const maxLength = 20
+  const regex = /^[a-zA-Z0-9]+(?:[ ]?[a-zA-Z0-9]+)*$/
 
   if (value.length < minLength) {
-    validation.error = true;
-    validation.message = `${Translation("first-name-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
+    validation.error = true
+    validation.message = `${Translation("first-name-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`
   }
 
   if (value.length > maxLength) {3
-    validation.error = true;
-    validation.message = `${Translation("first-name-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
+    validation.error = true
+    validation.message = `${Translation("first-name-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`
   }
 
   if (!regex.test(value)) {
-    validation.error = true;
-    validation.message = Translation("name-regex-validation");
+    validation.error = true
+    validation.message = Translation("name-regex-validation")
   }
 
-  return validation;
-};
+  return validation
+}
 
 export const UserSurnameValidation = (value) => {
-  let validation = { error: false };
+  let validation = { error: false }
 
-  const minLength = 3;
-  const maxLength = 20;
-  const regex = /^[a-zA-Z0-9]+(?:[ ]?[a-zA-Z0-9]+)*$/;
+  const minLength = 3
+  const maxLength = 20
+  const regex = /^[a-zA-Z0-9]+(?:[ ]?[a-zA-Z0-9]+)*$/
 
   if (value.length < minLength) {
-    validation.error = true;
-    validation.message = `${Translation("surname-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
+    validation.error = true
+    validation.message = `${Translation("surname-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`
   }
 
   if (value.length > maxLength) {
-    validation.error = true;
-    validation.message = `${Translation("surname-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
+    validation.error = true
+    validation.message = `${Translation("surname-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`
   }
 
   if (!regex.test(value)) {
-    validation.error = true;
-    validation.message = Translation("surname-regex-validation");
+    validation.error = true
+    validation.message = Translation("surname-regex-validation")
   }
 
-  return validation;
-};
+  return validation
+}
 
 export const SlugBuilder = (value) => {
   return (
@@ -147,104 +147,104 @@ export const SlugBuilder = (value) => {
     "-" +
     Math.floor(Math.random() * (300 - 100 + 1)) +
     100
-  );
-};
+  )
+}
 
 export const UsernameBuilderAndValidation = (value) => {
-  const regex = /^[a-zA-Z0-9]+$/;
+  const regex = /^[a-zA-Z0-9]+$/
   const username = value
     .trim()
-    .replace(/[^a-zA-Z0-9]+/g, () => Math.floor(Math.random() * 10));
-  return regex.test(username);
-};
+    .replace(/[^a-zA-Z0-9]+/g, () => Math.floor(Math.random() * 10))
+  return regex.test(username)
+}
 
 export const UsernameValidation = (value) => {
-  const validation = { error: false };
+  const validation = { error: false }
 
-  const minLength = 3;
-  const maxLength = 20;
-  const regex = /^[a-zA-Z0-9-]+(?:-[a-zA-Z0-9]+)*$/;
+  const minLength = 3
+  const maxLength = 20
+  const regex = /^[a-zA-Z0-9-]+(?:-[a-zA-Z0-9]+)*$/
 
   if (value.length < minLength) {
-    validation.error = true;
-    validation.message = `${Translation("username-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`;
+    validation.error = true
+    validation.message = `${Translation("username-needs-to-be-at-least")} ${minLength} ${Translation("characters")}`
   }
 
   if (value.length > maxLength) {
-    validation.error = true;
-    validation.message = `${Translation("username-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`;
+    validation.error = true
+    validation.message = `${Translation("username-can-not-have-less-than")} ${maxLength} ${Translation("characters")}`
   }
 
   if (!regex.test(value)) {
-    validation.error = true;
-    validation.message = Translation("username-regex-validation");
+    validation.error = true
+    validation.message = Translation("username-regex-validation")
   }
 
-  return validation;
-};
+  return validation
+}
 
 export const CityValidation = (value) => {
-  const validation = { error: false };
+  const validation = { error: false }
 
   if (value === "") {
-    validation.error = true;
-    validation.message = Translation("select-one-city");
+    validation.error = true
+    validation.message = Translation("select-one-city")
   }
 
-  return validation;
-};
+  return validation
+}
 
 export const CountryValidation = (value) => {
-  const validation = { error: false };
+  const validation = { error: false }
 
   if (value === "") {
-    validation.error = true;
-    validation.message = Translation("select-one-country");
+    validation.error = true
+    validation.message = Translation("select-one-country")
   }
 
-  return validation;
-};
+  return validation
+}
 
 export const CategoryValidation = (value) => {
-  const validation = { error: false };
+  const validation = { error: false }
 
   if (value === "") {
-    validation.error = true;
-    validation.message = Translation("select-one-category");
+    validation.error = true
+    validation.message = Translation("select-one-category")
   }
 
-  return validation;
-};
+  return validation
+}
 
 export const EmailValidation = (value) => {
-  const validation = { error: false };
+  const validation = { error: false }
 
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
   if (!regex.test(value)) {
-    validation.error = true;
-    validation.message = Translation("email-is-not-valid");
+    validation.error = true
+    validation.message = Translation("email-is-not-valid")
   }
 }
 
 export const ModeValidation = (value) => {
-  const validation = { error: false };
+  const validation = { error: false }
 
   if (value === "") {
-    validation.error = true;
-    validation.message = Translation("select-the-chosen-giving-mode");
+    validation.error = true
+    validation.message = Translation("select-the-chosen-giving-mode")
   }
 
-  return validation;
-};
+  return validation
+}
 
 export const ImagesValidation = (value) => {
-  const validation = { error: false };
+  const validation = { error: false }
 
   if (value.length < 1) {
-    validation.error = true;
-    validation.message = Translation("at-least-one-image-needs-to-be-uploaded");
+    validation.error = true
+    validation.message = Translation("at-least-one-image-needs-to-be-uploaded")
   }
 
-  return validation;
-};
+  return validation
+}

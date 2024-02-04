@@ -1,6 +1,5 @@
 import { Translation } from "../../../utils/Translations"
-import { PhoneIcon, ViberIcon } from "../../icons"
-import WhatsAppIcon from "../../icons/WhatsAppIcon"
+import { PhoneIcon, WhatsAppIcon } from "../../icons"
 
 export default function Phone({ productData }) {
   return (
@@ -22,17 +21,7 @@ export default function Phone({ productData }) {
           className="w-12 flex-1 bg-[#25D366] border border-transparent rounded-md p-3 flex justify-center text-sm font-medium text-white hover:bg-[#26c661] focus:outline-none sm:w-full cursor-pointer transition-all"
         >
           <WhatsAppIcon />
-
-          {/* {Translation("call-to")} */}
         </a>
-
-        {/* <a
-          target="_blank"
-          href={`https://api.viber.com/send?phone=${productData?.phoneCode?.replace('+', '')}${productData?.phone}`}
-          className="w-auto flex-1 bg-[#7360F2] border border-transparent rounded-md p-3 flex justify-center items-center text-sm font-medium text-white hover:bg-[#5c4bc6] focus:outline-none sm:w-full cursor-pointer transition-all"
-        >
-          <ViberIcon />
-        </a> */}
       </div>
     </form>
   )
