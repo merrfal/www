@@ -100,7 +100,7 @@ export const Category  = async (payload, res) => {
 
   const filters = {
     // 'productData.isGiven': { $in: statuses },
-    'productData.isGiven': false,
+    // 'productData.isGiven': false,
     'productData.city': { $in: cities },
     'productData.category': category
   }
@@ -158,7 +158,7 @@ export const Search  = async (payload, res) => {
   let filters = {
     'productData.city': { $in: cities },
     'productData.category': { $in: categories },
-    'productData.isGiven': false
+    // 'productData.isGiven': false
   }
 
   if(term !== ""){
@@ -209,7 +209,8 @@ export const Search  = async (payload, res) => {
 
 export const Latest = async (payload, res) => {
   try {
-    let productsFindObject = { 'productData.isGiven': false }
+    // let productsFindObject = { 'productData.isGiven': false }
+    let productsFindObject = {  }
 
     let products = await Product
       .find(productsFindObject)
