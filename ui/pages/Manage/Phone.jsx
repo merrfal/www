@@ -76,9 +76,9 @@ export default function Phone({product, onInput, validation: v}) {
           placeholder={Translation("phone-number-placeholder")}
           className="p-3 mt-1 block w-full rounded-tr-md rounded-br-md border-gray-300 shadow-sm focus:border-[#377DFF] focus:ring-[#377DFF] sm:text-sm"
           onChange={(e) => {
-              if (e.target.value.match(/^[0-9+]*$/)) {
-                onInput("phone", e)
-              }
+            if (e.target.value.match(/^[0-9+]*$/)) {
+              onInput("phone", e)
+            }
           }}
         />
       </div>

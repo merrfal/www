@@ -16,7 +16,8 @@ import {
   ModeValidation, 
   NameValidation, 
   PhoneCodeValidation, 
-  PhoneValidation 
+  PhoneValidation, 
+  SlugBuilder
 } from "@/utils/Forms"
 
 const Create = async (payload, res, req) => {
@@ -81,7 +82,7 @@ const Create = async (payload, res, req) => {
                             name: payload.productData.name,
                             description: payload.productData.description,
                             gallery: payload.productData.gallery,
-                            slug: payload.productData.slug,
+                            slug: SlugBuilder(payload.productData.name),
                             category: category.toString(),
                             user: user._id.toString(),
                             city: city,

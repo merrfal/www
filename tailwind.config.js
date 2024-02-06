@@ -7,10 +7,10 @@ module.exports = {
     "./ui/layouts/**/*.{js,ts,jsx,tsx}",
     "./ui/views/**/*.{js,ts,jsx,tsx}",
     "./ui/icons/**/*.{js,ts,jsx,tsx}",
-    "./ui/skeletons/**/*.{js,ts,jsx,tsx}",
+    "./ui/skeletons/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {}
   },
-  plugins: [require("@tailwindcss/forms")],
-};
+  plugins: [require("@tailwindcss/forms")]
+}

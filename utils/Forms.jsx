@@ -1,3 +1,4 @@
+import { NO_AVATAR, NO_COVER } from "@/configs/Constants"
 import { Translation } from "./Translations"
 
 export const NameValidation = (value) => {
@@ -297,6 +298,42 @@ export const GalleryImageValidation = (images) => {
     if (mainIs > 1) {
       validation.error = true
       validation.message = Translation("only-one-main-image-allowed")
+    }
+  }
+
+  return validation
+}
+
+export const AvatarValidation = (value) => {
+  const validation = { error: false }
+
+  if (value !== NO_AVATAR) {
+    if (value?.includes("google") === false && value?.includes('firebasestorage') === false) {
+      validation.error = true
+      validation.message = Translation("avatar-url-is-not-valid")
+    }
+  
+    if (typeof value !== 'string') {
+      validation.error = true
+      validation.message = Translation("avatar-url-is-not-valid")
+    }
+  }
+  
+  return validation
+}
+
+export const CoverValidation = (value) => {
+  const validation = { error: false }
+
+  if (value !== NO_COVER) {
+    if (value?.includes("google") === false && value?.includes('firebasestorage') === false) {
+      validation.error = true
+      validation.message = Translation("cover-url-is-not-valid")
+    }
+  
+    if (typeof value !== 'string') {
+      validation.error = true
+      validation.message = Translation("cover-url-is-not-valid")
     }
   }
 

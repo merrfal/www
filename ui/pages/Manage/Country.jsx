@@ -1,10 +1,10 @@
-import { Countries } from "../../../data";
-import { CountryValidation } from "../../../utils/Forms";
-import { Translation } from "../../../utils/Translations";
-import { RequiredLabel, Wildcard } from "../../components";
+import { Countries } from "../../../data"
+import { CountryValidation } from "../../../utils/Forms"
+import { Translation } from "../../../utils/Translations"
+import { RequiredLabel, Wildcard } from "../../components"
 
 export default function Country({product, onInput, validation: v}) {
-  const validation = CountryValidation(product?.productData?.country);
+  const validation = CountryValidation(product?.productData?.country)
 
   return (
     <div className="col-span-6 sm:col-span-3 lg:col-span-3">
@@ -36,5 +36,5 @@ export default function Country({product, onInput, validation: v}) {
 
       {v?.country && validation?.error && <RequiredLabel message={validation?.message} />}
     </div>
-  );
+  )
 }

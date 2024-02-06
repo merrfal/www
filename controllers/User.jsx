@@ -1,26 +1,50 @@
 import { User, Product } from "../configs/Models"
+import { UserAuth } from "../middlewares"
 import { Response } from "../utils/Response"
 import { Translation } from "../utils/Translations"
+import { AL_Cities, MK_Cities, XK_Cities } from "../data/cities"
 
-export const Register = async (payload, res) => {
+import { 
+  AddressValidation, AvatarValidation, CityValidation, CountryValidation, EmailValidation, 
+  PhoneCodeValidation, 
+  PhoneValidation, 
+  UserNameValidation, 
+  UserSurnameValidation, 
+  UsernameValidation 
+} from "../utils/Forms"
+
+export const Register = async (payload, res, req) => {
   try {
-    const data = { 
-      userData: {...payload?.userData},
-      userAdditionalData: {
-        country: '',
-        city: '',
+    const uid = await UserAuth(req)
+    
+    if (uid) {
+      const data = { 
+        userData: {...payload?.userData},
+        userAdditionalData: {
+          country: '',
+          city: '',
+        }
       }
+  
+      const savedUser = new User(data)
+      const user = await savedUser.save()
+  
+      Response({
+        res,
+        code: user ? 200 : 400,
+        success: user ? true : false,
+        data: user ? { ...user._doc } : null,
+        message: user ? Translation("user-register-success") : Translation("user-register-error"),
+      })
     }
 
-    const savedUser = new User(data)
-    const user = await savedUser.save()
-
-    Response({
+    else Response({
       res,
-      code: user ? 200 : 400,
-      success: user ? true : false,
-      data: user ? { ...user._doc } : null,
-      message: user ? Translation("user-register-success") : Translation("user-register-error"),
+      code: 401,
+      success: false,
+      data: null,
+      message: Translation("unotharized-user-access"),
+      error: null,
     })
   } 
   
@@ -38,52 +62,31 @@ export const Register = async (payload, res) => {
   }
 }
 
-export const Delete = async (payload, res) => {
+export const Login = async (payload, res, req) => {
   try {
-    const user = await User.findByIdAndDelete(payload.userId)
+    const uid = await UserAuth(req)
 
-    if (user) Response(
-      res,
-      200,
-      true,
-      Translation("user-delete-success"),
-      null
-    )
+    if (uid) {
+      const user = await User
+        .findOne({ "userData.uid": uid })
+        .lean()
 
-    else Response(
-      res,
-      404,
-      false,
-      Translation("user-delete-error"),
-      null
-    )
-  } 
-  
-  catch (error) {
-    Response(
-      res,
-      500,
-      false,
-      Translation("user-delete-error"),
-      null
-    )
-  }
-}
+      Response({
+        res,
+        code: user ? 200 : 404,
+        success: user ? true : false,
+        data: user ? { ...user } : null,
+        message: user ? Translation("user-auth-success") : Translation("user-auth-error"),
+      })
+    }
 
-export const Login = async (payload, res) => {
-  try {
-    const { uid } = payload
-    
-    const user = await User
-      .findOne({ "userData.uid": uid })
-      .lean()
-
-    Response({
+    else Response({
       res,
-      code: user ? 200 : 404,
-      success: user ? true : false,
-      data: user ? { ...user } : null,
-      message: user ? Translation("user-auth-success") : Translation("user-auth-error"),
+      code: 401,
+      success: false,
+      data: null,
+      message: Translation("unotharized-user-access"),
+      error: null,
     })
   } 
   
@@ -139,27 +142,114 @@ export const Products = async (payload, res) => {
   }
 }
 
-export const Update = async (payload, res) => {
+export const Update = async (payload, res, req) => {
   try {
-    const user = await User
-      .findOneAndUpdate(
-        {'userData.username': payload.old_username}, 
-        { $set: 
-          { 
-            userData: payload?.userData,
-            userAdditionalData: payload?.userAdditionalData,
-          }
-        },
-        { new: true }
-      )
-      .lean()
+    const uid = await UserAuth(req)
 
-    Response({
+    if (uid) {
+      const user_find = await User
+        .findOne({ 'userData.uid': uid })
+        .lean()
+
+      if (user_find) {
+        let validations = true
+
+        const name_validation = UserNameValidation(payload?.userData?.name)
+        const surname_validation = UserSurnameValidation(payload?.userData?.surname)
+        const email_validation = EmailValidation(payload?.userData?.email)
+        const username_validation = UsernameValidation(payload?.userData?.username)
+        const address_validation = AddressValidation(payload?.userAdditionalData?.address)
+        const phone_validation = PhoneValidation(payload?.userData?.phone)
+        const phone_code_validation = PhoneCodeValidation(payload?.userData?.phoneCode)
+        const avatar_validation = AvatarValidation(payload?.userData?.avatar)
+        const cover_validation = AvatarValidation(payload?.userData?.cover)
+        const adress_validation = AddressValidation(payload?.userAdditionalData?.address)
+        const city_validation = CityValidation(payload?.userAdditionalData?.city)
+        const country_validation = CountryValidation(payload?.userAdditionalData?.country)
+
+        if (name_validation?.error) validations = false
+        if (surname_validation?.error) validations = false
+        if (phone_validation?.error) validations = false
+        if (address_validation?.error) validations = false
+        if (email_validation?.error) validations = false
+        if (username_validation?.error) validations = false
+        if (phone_code_validation?.error) validations = false
+        if (avatar_validation?.error) validations = false
+        if (cover_validation?.error) validations = false
+        if (adress_validation?.error) validations = false
+        if (city_validation?.error) validations = false
+        if (country_validation?.error) validations = false
+          
+        if (validations) {
+          let 
+            city = payload?.userAdditionalData?.city, 
+            country = payload?.userAdditionalData?.country
+
+          const cities = [...AL_Cities, ...XK_Cities, ...MK_Cities]
+          const city_find = cities.find((c) => c.value === city).value
+          
+          if(city_find) city = city_find
+          else city = country === 'XK' ? 'aB2cD3eF29' : country === 'AL' ? 'K2L3M4N5O6P7' : country === 'MK' ? '1aB2G03eF' : 'aB2cD3eF29' 
+          
+          if(country === 'XK') country = 'XK'
+          else if(country === 'AL') country = 'AL'
+          else if(country === 'MK') country = 'MK'
+          else country = 'XK'
+
+          const user_structure = {
+            userData: {
+              ...user_find.userData,
+              name: payload?.userData?.name,
+              surname: payload?.userData?.surname,
+              phone: payload?.userData?.phone,
+              phoneCode: payload?.userData?.phoneCode,
+              username: payload?.userData?.username,
+              avatar: payload?.userData?.avatar,
+              cover: payload?.userData?.cover
+            },
+            userAdditionalData: {
+              ...user_find.userAdditionalData,
+              address: payload?.userAdditionalData?.address,
+              city: city,
+              country: country,
+            }
+          }
+
+          const user = await User
+            .findOneAndUpdate(
+              {'userData.username': payload.old_username}, 
+              { $set: user_structure },
+              { new: true }
+            )
+            .lean()
+
+          Response({
+            res,
+            code: user ? 200 : 404,
+            success: user ? true : false,
+            data: user ? user : null,
+            message: user ? Translation("user-update-success") : Translation("user-update-error"),
+          })
+        }
+
+        else Response({
+          res,
+          code: 400,
+          success: false,
+          data: null,
+          message: Translation("user-update-validation-error"),
+          error: null,
+        })
+      }
+    }
+
+    else Response({
       res,
-      code: user ? 200 : 404,
-      success: user ? true : false,
-      data: user ? user : null,
-      message: user ? Translation("user-update-success") : Translation("user-update-error"),
+      code: 401,
+      success: false,
+      data: null,
+      message: Translation("unotharized-user-access"),
+      error: null,
     })
   } 
   
@@ -172,13 +262,15 @@ export const Update = async (payload, res) => {
       success: false,
       data: null,
       message: Translation("user-update-error"),
-      error: err,
+      error: error,
     })
   }
 }
 
-export const View = async ({ username }, res) => {
+export const View = async (payload, res) => {
   try {
+    const { username } = payload
+
     const user = await User
       .findOneAndUpdate(
         { "userData.username": username },
@@ -211,8 +303,10 @@ export const View = async ({ username }, res) => {
   }
 }
 
-export const CheckIfExist = async ({field, value}, res) => {
+export const CheckIfExist = async (payload, res) => {
   try {
+    const {field, value} = payload
+
     const checkDuplicate = await User
       .findOne({[field]: value})
       .select({ _id: 1 })

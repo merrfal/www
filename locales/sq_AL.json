@@ -181,6 +181,7 @@
   "search-title-term": "Ju keni kërkuar për: ",
   "user-update-success": "Përdoruesi u azhurnua me sukses në bazën e të dhënave.",
   "user-update-error": "Ndodhi një gabim gjatë azhurnimit të përdoruesit në bazën e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.",
+  "unotharized-user-access": "Ju nuk keni leje për të hyrë në këtë llogari!",
   "user-auth-error": "Gabim gjatë autentifikimit, Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.",
   "user-auth-success": "Autentifikimi u krye me sukses.",
   "products-latest-success": "Lista e produkteve më të fundit u mor me sukses nga baza e të dhënave.",
@@ -224,5 +225,8 @@
   "add_the_first_product": "Dhuro një produkt",
   "phone_code_is_not_valid": "Kodi i hyrjes i telefonit nuk është valid!",
   "product-was-not-found": "Produkti nuk u gjet!",
-  "product-update-unauthorized": "Nuk keni leje për të përditësuar këtë produkt!"
+  "product-update-unauthorized": "Nuk keni leje për të përditësuar këtë produkt!",
+  "user-update-validation-error": "Gabim gjatë validimit të të dhënave të përdoruesit, ju lutemi kontrolloni të dhënat!",
+  "avatar-url-is-not-valid": "Fotografia nuk është valide, ju lutem provoni përseri më vonë!",
+  "cover-url-is-not-valid": "Kopertina nuk është valide, ju lutem provoni përseri më vonë!"
 }
