@@ -40,7 +40,7 @@ const AL_Cities = [
     value: "1kL3mN4oP5qR6",
   },
   {
-    name: "Fierzë",
+    name: "Fier",
     value: "2sT7uV8wX9yZ0",
   },
   {
