@@ -9,6 +9,7 @@ export default function Edit({ slug, user }) {
   const account = useSelector(state => state.Account);
   const allowManage = account?.User?._id === user || account?.User?.userAdditionalData?.role === "admin";
 
+  return null
   if(!allowManage) return null;
 
   return (
