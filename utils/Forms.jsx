@@ -63,6 +63,17 @@ export const PhoneValidation = (value) => {
   return validation
 }
 
+export const PhoneCodeValidation = (value) => {
+  let validation = { error: false }
+  
+  if (value !== "+383" && value !== "+389" && value !== "+355") {
+    validation.error = true
+    validation.message = Translation("phone-code-is-not-valid")
+  }
+
+  return validation
+}
+
 export const AddressValidation = (value) => {
   let validation = { error: false }
 
@@ -244,6 +255,49 @@ export const ImagesValidation = (value) => {
   if (value.length < 1) {
     validation.error = true
     validation.message = Translation("at-least-one-image-needs-to-be-uploaded")
+  }
+
+  return validation
+}
+
+export const GalleryImageValidation = (images) => {
+  const validation = { error: false }
+
+  // so we need here a complex validation, there is an array that contains objexts, objects can't be more than 4 items,
+  // if it contains then return false, beside that the obect is trcutred like this: { url: 'mustbefirebastestoragelink', id: 'mustbeuniqueid', isMain: needs to be true or false, and only one can be true of them all, filename needs to be with the extension }
+  // anything more than those properties will trhow an error and the upload will not be accepted
+
+  if (images.length > 4) {
+    validation.error = true
+    validation.message = Translation("maximum-4-images-allowed")
+  }
+
+  else {
+    let mainIs = 0
+
+    images.map((image) => {
+      if (image.isMain) mainIs++
+
+      if (image.url.includes("firebasestorage.googleapis.com") === false) {
+        validation.error = true
+        validation.message = Translation("image-url-is-not-valid")
+      }
+
+      if (typeof image.id === 'string' && image.id.length < 10) {
+        validation.error = true
+        validation.message = Translation("image-id-is-not-valid")
+      }
+
+      if (!image.url || !image.id || !image.isMain || !image.filename) {
+        validation.error = true
+        validation.message = Translation("image-object-structure-is-not-valid")
+      }
+    })
+
+    if (mainIs > 1) {
+      validation.error = true
+      validation.message = Translation("only-one-main-image-allowed")
+    }
   }
 
   return validation
