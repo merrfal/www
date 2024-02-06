@@ -2,7 +2,7 @@ import * as Users from "../controllers/User"
 import * as Products from "../controllers/Product"
 
 import { DatabaseConnection } from "./Connection"
-import { Create, Delete, Update } from '../controllers/product/index'
+import { Create, Delete, Update } from '@/controllers/product'
 
 export const RouteMethod = (target, payload, res, req) => {
   DatabaseConnection()
@@ -20,7 +20,6 @@ const RouteUsers = (action, payload, res, req) => {
     case "LOGIN": Users.Login(payload, res, req); break
     case "VIEW": Users.View(payload, res, req); break
     case "UPDATE": Users.Update(payload, res, req); break
-    case "DELETE": Users.Delete(payload, res, req); break
     case "PRODUCTS": Users.Products(payload, res, req); break
     case "EXISTS": Users.CheckIfExist(payload, res, req); break
   }
@@ -37,4 +36,4 @@ const RouteProducts = (action, payload, res, req) => {
     case "UPDATE": Update(payload, res, req); break
     case "CATEGORY": Products.Category(payload, res, req); break
   }
-};
+}

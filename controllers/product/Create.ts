@@ -1,8 +1,10 @@
-import { Product, User, Category as CategoryModel } from "../configs/Models"
-import { UserAuth } from "../middlewares"
-import { CreateMessage } from "../utils/FormattedMessages"
-import { Response } from "../utils/Response"
-import { AL_Cities, MK_Cities, XK_Cities } from "../data/cities"
+// @ts-nocheck
+
+import { Product, User, Category as CategoryModel } from "@/configs/Models"
+import { UserAuth } from "@/middlewares"
+import { CreateMessage } from "@/utils/FormattedMessages"
+import { Response } from "@/utils/Response"
+import { AL_Cities, MK_Cities, XK_Cities } from "@/data/cities"
 
 import { 
   AddressValidation, 
@@ -15,7 +17,7 @@ import {
   NameValidation, 
   PhoneCodeValidation, 
   PhoneValidation 
-} from "../utils/Forms"
+} from "@/utils/Forms"
 
 const Create = async (payload, res, req) => {
     try {
@@ -53,9 +55,7 @@ const Create = async (payload, res, req) => {
                 if (entry_validation.error) validations = false
         
                 if (validations) {
-                    let category 
-                    let city
-                    let country
+                    let category, city, country
         
                     const category_find = await CategoryModel
                         .findOne({ _id: payload.productData.category })

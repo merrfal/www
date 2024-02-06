@@ -1,7 +1,9 @@
-import { Product, User, Category as CategoryModel } from "../configs/Models"
-import { UserAuth } from "../middlewares"
-import { DeleteMesage } from "../utils/FormattedMessages"
-import { Response } from "../utils/Response"
+// @ts-nocheck
+
+import { Product, User, Category as CategoryModel } from "@/configs/Models"
+import { UserAuth } from "@/middlewares"
+import { DeleteMesage } from "@/utils/FormattedMessages"
+import { Response } from "@/utils/Response"
 
 const Delete = async ({ slug }, res, req) => {
     try {

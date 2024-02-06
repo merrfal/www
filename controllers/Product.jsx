@@ -3,28 +3,22 @@ import { Response } from "../utils/Response"
 import { Translation } from "../utils/Translations"
 
 export const Category  = async (payload, res) => {
-  let { offset, limit, cities, statuses, sort, category } = payload
-
-  offset = parseInt(offset)
-  limit = parseInt(limit)
-
-  const filters = {
-    // 'productData.isGiven': { $in: statuses },
-    // 'productData.isGiven': false,
-    'productData.city': { $in: cities },
-    'productData.category': category
-  }
-
-  // if(statuses.length === 0) delete filters['productData.isGiven']
-  if(cities.length === 0) delete filters['productData.city']
-
-  if(Object.prototype.hasOwnProperty.call(sort, "views")) {
-    sort = { 'productAdditionalData.views': sort.views }
-  }
-
-  else sort = { 'createdAt': sort.createdAt }
-
   try {
+    let { offset, limit, cities, sort, category } = payload
+
+    offset = parseInt(offset)
+    limit = parseInt(limit)
+
+    const filters = {
+      'productData.city': { $in: cities },
+      'productData.category': category,
+      'productData.isPublished': true
+    }
+
+    if(cities.length === 0) delete filters['productData.city']
+    if(Object.prototype.hasOwnProperty.call(sort, "views")) sort = { 'productAdditionalData.views': sort.views }
+    else sort = { 'createdAt': sort.createdAt }
+
     let products = await Product
       .find(filters)
       .sort(sort)
@@ -34,61 +28,55 @@ export const Category  = async (payload, res) => {
 
     let countProducts = await Product.find(filters).countDocuments()
 
-    const response = {
+    Response({
       res,
       code: products ? 200 : 404,
       success: products ? true : false,
       data: products ? { products, hasMore: countProducts >= offset + limit } : [],
       message: products ? Translation("products-category-success") : Translation("products-category-error"),
-    }
-
-    Response(response)
+    })
   }
 
   catch(error){
-    const response = {
+    console.error(error)
+
+    Response({
       res,
       code: 500,
       success: false,
       data: null,
       message: Translation("products-category-error"),
       error,
-    }
-
-    Response(response)
+    })
   }
 }
 
 export const Search  = async (payload, res) => {
-  let { offset, limit, categories, cities, sort, term } = payload
-
-  offset = parseInt(offset)
-  limit = parseInt(limit)
-
-  let filters = {
-    'productData.city': { $in: cities },
-    'productData.category': { $in: categories },
-    // 'productData.isGiven': false
-  }
-
-  if(term !== ""){
-    filters.$or = [
-      {'productData.name': { $regex: term, $options: 'i' }},
-      {'productData.description': { $regex: term, $options: 'i' }},
-      {'productData.address': { $regex: term, $options: 'i' }}
-    ]
-  }
-
-  if(cities.length === 0) delete filters['productData.city']
-  if(categories.length === 0) delete filters['productData.category']
-
-  if(Object.prototype.hasOwnProperty.call(sort, "views")) {
-    sort = { 'productAdditionalData.views': sort.views }
-  }
-
-  else sort = { 'createdAt': sort.createdAt }
-
   try {
+    let { offset, limit, categories, cities, sort, term } = payload
+
+    offset = parseInt(offset)
+    limit = parseInt(limit)
+
+    let filters = {
+      'productData.city': { $in: cities },
+      'productData.category': { $in: categories },
+      'productData.isPublished': true
+    }
+
+    if(term !== ""){
+      filters.$or = [
+        {'productData.name': { $regex: term, $options: 'i' }},
+        {'productData.description': { $regex: term, $options: 'i' }},
+        {'productData.address': { $regex: term, $options: 'i' }}
+      ]
+    }
+
+    if(cities.length === 0) delete filters['productData.city']
+    if(categories.length === 0) delete filters['productData.category']
+    if(Object.prototype.hasOwnProperty.call(sort, "views")) sort = { 'productAdditionalData.views': sort.views }
+    else sort = { 'createdAt': sort.createdAt }
+
     let products = await Product.find(filters).sort(sort).skip(offset).limit(limit).lean()
     let countProducts = await Product.find(filters).countDocuments()
 
@@ -104,100 +92,102 @@ export const Search  = async (payload, res) => {
   }
 
   catch(error){
-    const response = {
+    console.error(error)
+
+    Response({
       res,
       code: 500,
       success: false,
       data: null,
       message: Translation("products-search-error"),
       error,
-    }
-
-    Response(response)
+    })
   }
 }
 
 export const Latest = async (payload, res) => {
   try {
-    // let productsFindObject = { 'productData.isGiven': false }
-    let productsFindObject = {  }
-
     let products = await Product
-      .find(productsFindObject)
+      .find({ 'productData.isPublished': true })
       .sort({ createdAt: -1 })
       .limit(16)
       .lean()
 
-    const payload = {
+    Response({
       res,
       code: products ? 200 : 404,
       success: products ? true : false,
       data: products ? products : [],
       message: products ? Translation("products-latest-success") : Translation("products-latest-error"),
-    }
-
-    Response(payload)
+    })
   } 
   
   catch (error) {
-    const payload = {
+    console.error(error)
+
+    Response({
       res,
       code: 500,
       success: false,
       data: null,
       message: Translation("products-latest-error"),
-      error,
-    }
-
-    Response(payload)
+      error
+    })
   }
 }
 
-export const View = async ({ slug }, res) => {
+export const View = async (payload, res) => {
   try {
-    const product = await Product.findOneAndUpdate(
-      { "productData.slug": slug },
-      { $inc: { "productAdditionalData.views": 1 } },
-      { new: true }
-    )
+    const { slug } = payload
 
-    const user = await User.findById(product.productData.user).select({
-      "userData.name": 1,
-      "userData.surname": 1,
-      "userData.username": 1,
-      "userData.avatar": 1,
-      "userAdditionalData.isUserVerified": 1
-    }).lean()
+    const product = await Product
+      .findOneAndUpdate(
+        { "productData.slug": slug, 'productData.isPublished': true },
+        { $inc: { "productAdditionalData.views": 1 } },
+        { new: true }
+      )
 
-    const response = {
+    const user = await User
+      .findById(product.productData.user)
+      .select({
+        "userData.name": 1,
+        "userData.surname": 1,
+        "userData.username": 1,
+        "userData.avatar": 1,
+        "userAdditionalData.isUserVerified": 1
+      })
+      .lean()
+
+    Response({
       res,
       code: product ? 200 : 404,
       success: product ? true : false,
       data: product ? {...product._doc, productData: {...product._doc.productData, user }} : null,
       message: product ? Translation("product-view-success") : Translation("product-view-error"),
-    }
-
-    Response(response)
+    })
   } 
   
   catch (error) {
-    const response = {
+    console.error(error)
+
+    Response({
       res,
       code: 500,
       success: false,
       data: null,
       message: Translation("product-view-error"),
-    }
-
-    Response(response)
+    })
   }
 }
 
-export const Similar = async ({ category }, res) => {
+export const Similar = async (payload, res) => {
   try {
+    const { category } = payload
+
     let productsFindObject = { 
       'productData.category': category, 
-      'productData.isGiven': false 
+      'productData.isGiven': false,
+      'productData.isPublished': true
     }
 
     let isSimilar = true
@@ -218,27 +208,25 @@ export const Similar = async ({ category }, res) => {
       isSimilar = false
     }
 
-    const response = {
+    Response({
       res,
       code: products ? 200 : 404,
       success: products ? true : false,
       data: products ? products : null,
       isSimilar,
       message: products ? Translation("product-view-success") : Translation("product-view-error"),
-    }
-
-    Response(response)
+    })
   } 
   
   catch (error) {
-    const response = {
+    console.error(error)
+
+    Response({
       res,
       code: 500,
       success: false,
       data: null,
-      message: Translation("product-view-error"),
-    }
-
-    Response(response)
+      message: Translation("product-view-error")
+    })
   }
 }
