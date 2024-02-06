@@ -4,7 +4,7 @@ import { RouteMethod } from "../utils/Routing"
 
 const RunMiddlewares = async (req, res, next) => {
   const allowed_origin = await Cors(req, res)
-  console.log(allowed_origin)
+
   if (allowed_origin) next()
 
   else Response({
@@ -12,7 +12,7 @@ const RunMiddlewares = async (req, res, next) => {
     code: 401,
     success: false,
     data: null,
-    message: 'This origin is not allowed to access this resource.',
+    message: 'Kjo origjine nuk lejohet te aksesoj kete resurs. Ju lutem kontaktoni administratorin e sistemit.',
     error: error,
   })
 }

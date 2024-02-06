@@ -1,6 +1,7 @@
 /node_modules
 /.next
 /build
+/testimet
 .DS_Store
 next-env.d.ts
 package-lock.json
