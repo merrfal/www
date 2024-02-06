@@ -33,7 +33,7 @@ export const Create = async (payload, res) => {
       Response(response)
     }
 
-    Response({
+    else Response({
       res,
       code: 400,
       success: false,
