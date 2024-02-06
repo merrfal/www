@@ -9,25 +9,37 @@ export const Create = async (payload, res) => {
     const product = await initalProduct.save()
     const id = product._id.toString()
 
-    await User.findByIdAndUpdate(payload.productData.user, {
-      $inc: { 'userActivities.productCount': 1 },
-      $addToSet: { 'userActivities.products': id }
-    })
+    const user = await User.findOne({ _id: payload.productData.user })
 
-    await CategoryModel.findByIdAndUpdate(payload.productData.category, {
-      $inc: { 'additionalData.productCount': 1 },
-      $addToSet: { 'additionalData.products': id }
-    })
+    if (user) {
+      await User.findByIdAndUpdate(payload.productData.user, {
+        $inc: { 'userActivities.productCount': 1 },
+        $addToSet: { 'userActivities.products': id }
+      })
+  
+      await CategoryModel.findByIdAndUpdate(payload.productData.category, {
+        $inc: { 'additionalData.productCount': 1 },
+        $addToSet: { 'additionalData.products': id }
+      })
 
-    const response = {
-      res,
-      code: product ? 200 : 400,
-      success: product ? true : false,
-      data: product ? { ...product._doc } : null,
-      message: CreateMessage("product", product ? true : false),
+      const response = {
+        res,
+        code: product ? 200 : 400,
+        success: product ? true : false,
+        data: product ? { ...product._doc } : null,
+        message: CreateMessage("product", product ? true : false),
+      }
+  
+      Response(response)
     }
 
-    Response(response)
+    Response({
+      res,
+      code: 400,
+      success: false,
+      data: null,
+      message: CreateMessage("product", false),
+    })
   } 
   
   catch (error) {
