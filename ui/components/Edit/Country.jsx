@@ -1,10 +1,10 @@
-import { Translation } from "../../../utils/Translations";
+import { Translation } from "../../../utils/Translations"
 import { RequiredLabel, Wildcard } from "../"
-import { AllCountries } from "../../../data/Locations";
-import { CountryValidation } from "../../../utils/Forms";
+import { Countries } from "../../../data"
+import { CountryValidation } from "../../../utils/Forms"
 
 export default function Country({ user, onInput, validations}) {
-  const validation = CountryValidation(user?.userAdditionalData?.country);
+  const validation = CountryValidation(user?.userAdditionalData?.country)
 
   return (
     <div className="col-span-12 lg:col-span-3 flex flex-col justify-start items-start">
@@ -27,7 +27,7 @@ export default function Country({ user, onInput, validations}) {
           </option>
         }
 
-        {AllCountries.map((country, index) => (
+        {Countries.map((country, index) => (
           <option key={index} value={country["iso_code"]}>
             {country?.name}
           </option>
@@ -36,5 +36,5 @@ export default function Country({ user, onInput, validations}) {
 
       {validations.country && validation.error && <RequiredLabel message={validation?.message} />}
     </div>
-  );
+  )
 }

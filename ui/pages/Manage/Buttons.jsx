@@ -237,7 +237,6 @@ export default function Buttons(props) {
       const initalProduct = {
         ...product.productData,
         user: account.User._id,
-        slug: SlugBuilder(product.productData.name),
         gallery,
       }
 
