@@ -413,12 +413,12 @@ export default function Buttons(props) {
 
   return (
     <div className="text-right mb-2 mr-2" style={loadingImage ? { opacity: '.75', pointerEvents: 'none' } : {}}>
-      {/* {
+      {
         mode === "edit" && 
           <button onClick={handleDelete} className="inline-flex mt-8 justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium shadow-sm focus:outline-none mr-2 outline-none text-[#dc2828] bg-[#dc282824] hover:bg-[#dc282835] transition-all">
             {Translation("delete-product")}
           </button>
-      } */}
+      }
 
       {
         mode === "edit" &&

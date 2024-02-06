@@ -47,6 +47,7 @@ const ProductSchema = new Schema(
       phoneCode: { type: String, default: '+393' },
       country: { type: String, default: '' },
       isGiven: { type: Boolean, default: false },
+      isPublished: { type: Boolean, default: true },
       postedAnonymously: { type: Boolean, default: false},
     },
     productAdditionalData: {

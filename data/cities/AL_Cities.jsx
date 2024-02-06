@@ -71,6 +71,6 @@ const AL_Cities = [
     name: "Butrint",
     value: "9R0S1T2U3V4W5",
   },
-];
+]
 
-export default AL_Cities;
+export default AL_Cities

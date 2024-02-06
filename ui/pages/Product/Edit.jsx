@@ -1,18 +1,15 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { EditIcon } from "../../icons";
-import { useSelector } from "react-redux";
-import { Translation } from "../../../utils/Translations";
-import { Fragment } from "react";
+import { Fragment } from "react"
+import { EditIcon } from "../../icons"
+import { useSelector } from "react-redux"
+import { Translation } from "../../../utils/Translations"
 
 export default function Edit({ slug, user }) {
-  const account = useSelector(state => state.Account);
-  const allowManage = account?.User?._id === user || account?.User?.userAdditionalData?.role === "admin";
-
-  return null
-  if(!allowManage) return null;
-
-  return (
+  const account = useSelector(state => state.Account)
+  const allowManage = account?.User?._id === user || account?.User?.userAdditionalData?.role === "admin"
+    console.log(account, user)
+  if(allowManage) return (
     <Fragment>
         <div className="h-5 border-r border-gray-200 mx-4" />
 
@@ -30,5 +27,5 @@ export default function Edit({ slug, user }) {
             </div>
         </Link>
     </Fragment>
-  );
+  )
 }

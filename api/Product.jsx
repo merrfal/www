@@ -11,34 +11,26 @@ export const Create = async (page, router, setIsHold, dispatch) => {
     if (res.success === true) {
       router.push(`/${res.data.productData.slug}`)
 
-      const alert = {
+      Notification({
         dispatch,
         message: res.message,
         type: "success",
-      }
-
-      Notification(alert)
+      })
     }
 
-    else {
-      const alert = {
-        dispatch,
-        message: CreateMessage("product", false),
-        type: "error",
-      }
-
-      Notification(alert)
-    }
-  } 
-  
-  catch (error) {
-    const alert = {
+    else Notification({
       dispatch,
       message: CreateMessage("product", false),
       type: "error",
-    }
-
-    Notification(alert)
+    })
+  } 
+  
+  catch (error) {
+    Notification({
+      dispatch,
+      message: CreateMessage("product", false),
+      type: "error",
+    })
   }
 
   finally {
