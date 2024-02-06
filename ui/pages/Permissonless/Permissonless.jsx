@@ -1,5 +1,5 @@
-import { Normal } from "../../layouts";
-import { Animation, Info, Operations } from "./";
+import { Normal } from "../../layouts"
+import { Animation, Info, Operations } from "./"
 
 export default function Permissonless() {
   return (
@@ -16,5 +16,5 @@ export default function Permissonless() {
         </div>
       </div>
     </Normal>
-  );
+  )
 }
