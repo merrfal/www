@@ -45,6 +45,7 @@ export const Create = async (payload, res) => {
 }
 
 export const Delete = async (payload, res) => {
+  return
   try {
     let { slug } = payload
 
@@ -244,6 +245,7 @@ export const Latest = async (payload, res) => {
 }
 
 export const Update = async (payload, res) => {
+  return
   try {
     const product = await Product.findOneAndUpdate(
       {'productData.slug': payload.slug}, 
