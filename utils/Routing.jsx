@@ -19,7 +19,6 @@ const RouteUsers = (action, payload, res) => {
     case "LOGIN": Users.Login(payload, res); break;
     case "VIEW": Users.View(payload, res); break;
     case "UPDATE": Users.Update(payload, res); break;
-    case "DELETE": Users.Delete(payload, res); break;
     case "PRODUCTS": Users.Products(payload, res); break;
     case "EXISTS": Users.CheckIfExist(payload, res); break;
   }
