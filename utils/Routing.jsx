@@ -22,6 +22,7 @@ const RouteUsers = (action, payload, res, req) => {
     case "UPDATE": Users.Update(payload, res, req); break
     case "PRODUCTS": Users.Products(payload, res, req); break
     case "EXISTS": Users.CheckIfExist(payload, res, req); break
+    case "BAN": Users.BanUser(payload, res, req); break
   }
 };
 
