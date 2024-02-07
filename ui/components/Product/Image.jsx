@@ -10,7 +10,6 @@ export default function Image(props) {
   const { 
     productData, 
     showCategory, 
-    allowManage, 
     showGiven 
   } = props
   
@@ -26,6 +25,7 @@ export default function Image(props) {
         .catch(() => setThumbnail("product-no.png"))
     }
   }, [productData.gallery])
+
   return (
     <div className="-mb-1 relative h-[240px] mt-0 md:h-[360px] aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-[.999999999999] transition-all lg:aspect-none hover:cursor-pointer">
       <div className="absolute top-1.5 z-[1] left-2 flex flex-col items-start">

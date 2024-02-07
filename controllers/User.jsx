@@ -5,7 +5,10 @@ import { Translation } from "../utils/Translations"
 import { AL_Cities, MK_Cities, XK_Cities } from "../data/cities"
 
 import { 
-  AddressValidation, AvatarValidation, CityValidation, CountryValidation, EmailValidation, 
+  AddressValidation, 
+  AvatarValidation, 
+  CityValidation, 
+  CountryValidation,
   PhoneCodeValidation, 
   PhoneValidation, 
   UserNameValidation, 
@@ -156,7 +159,6 @@ export const Update = async (payload, res, req) => {
 
         const name_validation = UserNameValidation(payload?.userData?.name)
         const surname_validation = UserSurnameValidation(payload?.userData?.surname)
-        const email_validation = EmailValidation(payload?.userData?.email)
         const username_validation = UsernameValidation(payload?.userData?.username)
         const address_validation = AddressValidation(payload?.userAdditionalData?.address)
         const phone_validation = PhoneValidation(payload?.userData?.phone)
@@ -171,7 +173,6 @@ export const Update = async (payload, res, req) => {
         if (surname_validation?.error) validations = false
         if (phone_validation?.error) validations = false
         if (address_validation?.error) validations = false
-        if (email_validation?.error) validations = false
         if (username_validation?.error) validations = false
         if (phone_code_validation?.error) validations = false
         if (avatar_validation?.error) validations = false
@@ -179,7 +180,7 @@ export const Update = async (payload, res, req) => {
         if (adress_validation?.error) validations = false
         if (city_validation?.error) validations = false
         if (country_validation?.error) validations = false
-          
+
         if (validations) {
           let 
             city = payload?.userAdditionalData?.city, 

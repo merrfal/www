@@ -7,7 +7,7 @@ import { Translation } from "../../../utils/Translations"
 
 export default function Edit({ slug, user }) {
   const account = useSelector(state => state.Account)
-  const allowManage = account?.User?._id === user || account?.User?.userAdditionalData?.role === "admin"
+  const allowManage = (account?.User?._id === user) || (account?.User?._id === user._id) || account?.User?.userAdditionalData?.role === "admin"
 
   if(allowManage) return (
     <Fragment>

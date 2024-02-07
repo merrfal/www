@@ -15,7 +15,7 @@ export default function Product(props) {
   } = props
 
   return (
-    <div className="group relative mb-4">
+    <div className="w-full group relative mb-4">
       {
         allowManage && 
           <ManageBox 
@@ -25,17 +25,15 @@ export default function Product(props) {
           />
       }
 
-      <Link href={`/${productData?.slug}`}>
-        <Fragment>
-          <Image 
-            productData={productData} 
-            showCategory={showCategory} 
-            allowManage={allowManage}
-            showGiven={showGiven}
-          />
-          
-          <Info productData={productData} />
-        </Fragment>
+      <Link className="w-full" href={`/${productData?.slug}`}>
+        <Image 
+          productData={productData} 
+          showCategory={showCategory} 
+          allowManage={allowManage}
+          showGiven={showGiven}
+        />
+        
+        <Info productData={productData} />
       </Link>
     </div>
   )

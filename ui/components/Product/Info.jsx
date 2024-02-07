@@ -1,23 +1,24 @@
-import { SmLocationIcon } from "../../icons";
-import { CapitalizeText } from "../../../utils/TextFormatting";
-import { CityIdToName } from "../../../utils/Locations";
+import { SmLocationIcon } from "../../icons"
+import { CapitalizeText } from "../../../utils/TextFormatting"
+import { CityIdToName } from "../../../utils/Locations"
 
 export default function Info({ productData }) {
-  const { name, address, city } = productData;
+  const { name, address, city } = productData
   const cloneCity = CityIdToName(city)
 
   return (
-    <div className="flex items-center py-4">
+    <div className="flex items-center pt-4">
       <div className="flex-auto">
         <FullLocation location={`${address?.trim()}, ${cloneCity?.trim()}`} />
         <FullName name={name?.trim()} />
       </div>
     </div>
-  );
+  )
 }
 
-const FullLocation = ({ location }) => (
-  <div className="flex items-center mb-.5 hover:cursor-pointer">
+const FullLocation = ({ location }) => {
+  return (
+    <div className="flex items-center mb-.5 hover:cursor-pointer">
     <SmLocationIcon />
 
     <p className="hidden md:block text-slate-600 font-medium text-[12px] mt-[-0.5px]">
@@ -28,10 +29,11 @@ const FullLocation = ({ location }) => (
       {CapitalizeText(location?.trim()?.length > 28 ? location.substring(0, 28)?.trim() + "..." : location?.trim())}
     </p>
   </div>
-);
+  )
+}
 
 const FullName = ({ name }) => (
   <div className="font-bold text-gray-900 text-lg hover:cursor-pointer ml-[2px]">
     {CapitalizeText(name?.length > 28 ? name?.substring(0, 27) + "..." : name)}
   </div>
-);
+)
