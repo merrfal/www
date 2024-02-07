@@ -5,11 +5,25 @@ import { EditIcon } from "../../icons"
 import { useSelector } from "react-redux"
 import { Translation } from "../../../utils/Translations"
 
-export default function Edit({ slug, user }) {  
+export default function Edit({ slug, user, postedAnonymously }) {  
   const account = useSelector(state => state.Account)
-  const allowManage = (account?.User?._id === user) || (account?.User?._id === user._id) || account?.User?.userAdditionalData?.role === "admin"
+  const allowManage = () => {
+    if (account?.User?.userAdditionalData?.role === "admin") return true
 
-  if(allowManage) return (
+    else {
+        if (postedAnonymously) {
+            if(account?.User?._id === user) return true
+            else return false
+        }
+    
+        else {
+            if (account?.User?._id === user?._id) return true
+            else return false
+        }
+    }
+  }
+  
+  if(allowManage()) return (
     <Fragment>
         <div className="h-5 border-r border-gray-200 mx-4" />
 

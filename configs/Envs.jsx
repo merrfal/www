@@ -1,5 +1,6 @@
 // Generals
 export const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS
+export const GITHUB_ACTION_SECRET = process.env.GITHUB_ACTION_SECRET
 export const MONGO_URI = process.env.MONGO_URI
 
 // Firebase Client
