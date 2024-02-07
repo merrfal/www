@@ -26,14 +26,13 @@ export const Login = async (uid, dispatch) => {
   } 
   
   catch (error) {
-    const alert = {
+    dispatch(LogoutAccount())
+
+    Notification({
       dispatch,
       message: Translation("user-auth-error"),
       type: "error",
-    }
-
-    dispatch(LogoutAccount())
-    Notification(alert)
+    })
   }
 }
 
@@ -45,25 +44,20 @@ export const Register = async (initalUser, dispatch) => {
     const res = await req.json()
 
     if (res.success === true) dispatch(SetAccount(res.data))
-    else {
-      const alert = {
-        dispatch,
-        message: res.message,
-        type: "error",
-      }
-
-      Notification(alert)
-    }
+    
+    else Notification({
+      dispatch,
+      message: res.message,
+      type: "error",
+    })
   } 
   
   catch (error) {
-    const alert = {
+    Notification({
       dispatch,
       message: Translation("user-auth-error"),
       type: "error",
-    }
-
-    Notification(alert)
+    })
   }
 }
 

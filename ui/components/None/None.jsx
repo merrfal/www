@@ -5,7 +5,7 @@ import { Translation } from "../../../utils/Translations";
 
 export default function None() {
   return (
-    <div className="text-center">
+    <div className="text-center py-32">
       <NoneIcon />
 
       <h3 className="mt-2 text-sm font-medium text-gray-900">

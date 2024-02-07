@@ -10,12 +10,13 @@ const UserModel = new Schema(
       email: { type: String, required: true, unique: true },
       uid: { type: String, required: true, unique: true },
       phone: { type: String, default: '' },
-      phoneCode: { type: String, default: '+393' },
-      avatar: { type: String, default: NO_AVATAR},
-      cover: { type: String, default: NO_COVER},
+      phoneCode: { type: String, default: '+383' },
+      avatar: { type: String, default: NO_AVATAR },
+      cover: { type: String, default: NO_COVER }
     },
     userAdditionalData: {
       isUserVerified: { type: Boolean, default: false },
+      isBanned: { type: Boolean, default: false },
       role: { type: String, default: "user" },
       address: { type: String, default: '' },
       city: { type: String, default: '' },
@@ -29,8 +30,8 @@ const UserModel = new Schema(
   {
     timestamps: true,
     versionKey: false,
-  },
-);
+  }
+)
 
 const ProductSchema = new Schema(
   {
@@ -44,9 +45,10 @@ const ProductSchema = new Schema(
       phone: { type: String, default: '' },
       address: { type: String, default: '' },
       city: { type: String, default: '' },
-      phoneCode: { type: String, default: '+393' },
+      phoneCode: { type: String, default: '+383' },
       country: { type: String, default: '' },
       isGiven: { type: Boolean, default: false },
+      isPublished: { type: Boolean, default: true },
       postedAnonymously: { type: Boolean, default: false},
     },
     productAdditionalData: {

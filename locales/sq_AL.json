@@ -181,6 +181,7 @@
   "search-title-term": "Ju keni kërkuar për: ",
   "user-update-success": "Përdoruesi u azhurnua me sukses në bazën e të dhënave.",
   "user-update-error": "Ndodhi një gabim gjatë azhurnimit të përdoruesit në bazën e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.",
+  "unotharized-user-access": "Ju nuk keni leje për të hyrë në këtë llogari!",
   "user-auth-error": "Gabim gjatë autentifikimit, Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.",
   "user-auth-success": "Autentifikimi u krye me sukses.",
   "products-latest-success": "Lista e produkteve më të fundit u mor me sukses nga baza e të dhënave.",
@@ -193,8 +194,8 @@
   "products-list-user-error": "Ndodhi një gabim gjatë marrjes së listës së produkteve të përdoruesit nga baza e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.",
   "products-search-success": "Produktet u gjetën me sukses nga bazë të filtrimeve të dhënë.",
   "products-search-error": "Ndodhi një gabim gjatë marrjes së listës së produkteve nga baza e të dhënave me filtrimet që kërkoni. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.",
-  "product-VIEW-success": "Produkti u lexua me sukses nga baza e të dhënave.",
-  "product-VIEW-error": "Ndodhi një gabim gjatë leximit të produktit nga baza e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.",
+  "product-view-success": "Produkti u lexua me sukses nga baza e të dhënave.",
+  "product-view-error": "Ndodhi një gabim gjatë leximit të produktit nga baza e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.",
   "user-register-success": "Ju u regjistruat me sukses. Ju mund të hyni tani.",
   "user-register-error": "Ndodhi një gabim gjatë regjistrimit të juaj. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.",
   "user-view-error": "Ndodhi një gabim gjatë marrjes së përdoruesit nga baza e të dhënave. Ju lutemi kontrolloni lidhjen tuaj të rrjetit dhe provoni përsëri më vonë.",
@@ -220,5 +221,13 @@
   "products-view-error": "Ndodhi një gabim gjatë marrjes së produktit nga baza e të dhënave!",
   "view-with-permission": "Ju nuk keni leje për të parë këtë produkt ose produkti nuk ekziston!",
   "something-went-wrong-while-fetching-similar-products": "Ndodhi një gabim gjatë marrjes së produkteve të ngjashme. Ju lutemi provoni përsëri!",
-  "categories-fetch-error": "Ndodhi një gabim gjatë marrjes së kategorive nga baza e të dhënave!"
+  "categories-fetch-error": "Ndodhi një gabim gjatë marrjes së kategorive nga baza e të dhënave!",
+  "add_the_first_product": "Dhuro një produkt",
+  "phone_code_is_not_valid": "Kodi i hyrjes i telefonit nuk është valid!",
+  "product-was-not-found": "Produkti nuk u gjet!",
+  "product-update-unauthorized": "Nuk keni leje për të përditësuar këtë produkt!",
+  "user-update-validation-error": "Gabim gjatë validimit të të dhënave të përdoruesit, ju lutemi kontrolloni të dhënat!",
+  "avatar-url-is-not-valid": "Fotografia nuk është valide, ju lutem provoni përseri më vonë!",
+  "cover-url-is-not-valid": "Kopertina nuk është valide, ju lutem provoni përseri më vonë!",
+  "unotharized-product-access": "Ju nuk keni leje për të parë këtë produkt!" 
 }

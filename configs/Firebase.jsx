@@ -1,13 +1,13 @@
-import * as Envs from "./Envs";
+import * as Envs from "./Envs"
 
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getStorage } from "firebase/storage";
-import { Translation } from "../utils/Translations";
+import { initializeApp } from "firebase/app"
+import { getAuth } from "firebase/auth"
+import { getStorage } from "firebase/storage"
+import { Translation } from "../utils/Translations"
 
-let Firebase;
-let Storage;
-let Auth;
+let Firebase
+let Storage
+let Auth
 
 const Config = {
   apiKey: Envs.FB_API_KEY,
@@ -16,19 +16,23 @@ const Config = {
   storageBucket: Envs.FB_STORAGE_BUCKET,
   messagingSenderId: Envs.FB_MESSAGING_SENDER_ID,
   appId: Envs.FB_APP_ID,
-};
+}
 
 try {
-  Firebase = initializeApp(Config);
-  Storage = getStorage(Firebase);
-  Auth = getAuth(Firebase);
+  Firebase = initializeApp(Config)
+  Storage = getStorage(Firebase)
+  Auth = getAuth(Firebase)
 } 
 
 catch (err) {
   if (!/already exists/.test(err.message)) {
-    console.error(Translation("firebase-init-error"), err.stack);
+    console.error(Translation("firebase-init-error"), err.stack)
+
+    document.body.innerHTML = `<h1>
+      ${Translation("firebase-init-error")}
+    </h1>`
   }
 }
 
-export { Storage, Auth};
-export default Firebase;
+export { Storage, Auth}
+export default Firebase

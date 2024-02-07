@@ -1,242 +1,332 @@
 import { User, Product } from "../configs/Models"
+import { UserAuth } from "../middlewares"
 import { Response } from "../utils/Response"
 import { Translation } from "../utils/Translations"
+import { AL_Cities, MK_Cities, XK_Cities } from "../data/cities"
 
-export const Register = async (payload, res) => {
+import { 
+  AddressValidation, 
+  AvatarValidation, 
+  CityValidation, 
+  CountryValidation,
+  PhoneCodeValidation, 
+  PhoneValidation, 
+  UserNameValidation, 
+  UserSurnameValidation, 
+  UsernameValidation 
+} from "../utils/Forms"
+
+export const Register = async (payload, res, req) => {
   try {
-    const data = { 
-      userData: {...payload?.userData},
-      userAdditionalData: {
-        country: '',
-        city: '',
+    const uid = await UserAuth(req)
+    
+    if (uid) {
+      const data = { 
+        userData: {...payload?.userData},
+        userAdditionalData: {
+          country: '',
+          city: '',
+        }
       }
+  
+      const savedUser = new User(data)
+      const user = await savedUser.save()
+  
+      Response({
+        res,
+        code: user ? 200 : 400,
+        success: user ? true : false,
+        data: user ? { ...user._doc } : null,
+        message: user ? Translation("user-register-success") : Translation("user-register-error"),
+      })
     }
 
-    const savedUser = new User(data)
-    const user = await savedUser.save()
-
-    const response = {
+    else Response({
       res,
-      code: user ? 200 : 400,
-      success: user ? true : false,
-      data: user ? { ...user._doc } : null,
-      message: user ? Translation("user-register-success") : Translation("user-register-error"),
-    }
-
-    Response(response)
+      code: 401,
+      success: false,
+      data: null,
+      message: Translation("unotharized-user-access"),
+      error: null,
+    })
   } 
   
   catch (error) {
-    const response = {
+    console.error(error)
+
+    Response({
       res,
       code: 500,
       success: false,
       data: null,
       message: Translation("user-register-error"),
       error,
-    }
-
-    Response(response)
+    })
   }
 }
 
-export const Delete = async (payload, res) => {
+export const Login = async (payload, res, req) => {
   try {
-    const user = await User.findByIdAndDelete(payload.userId)
+    const uid = await UserAuth(req)
 
-    if (user) Response(
-      res,
-      200,
-      true,
-      Translation("user-delete-success"),
-      null
-    )
+    if (uid) {
+      const user = await User
+        .findOne({ "userData.uid": uid })
+        .lean()
 
-    else Response(
-      res,
-      404,
-      false,
-      Translation("user-delete-error"),
-      null
-    )
-  } 
-  
-  catch (error) {
-    Response(
-      res,
-      500,
-      false,
-      Translation("user-delete-error"),
-      null
-    )
-  }
-}
-
-export const Login = async ({ uid }, res) => {
-  try {
-    const user = await User.findOne({ "userData.uid": uid }).lean()
-
-    const response = {
-      res,
-      code: user ? 200 : 404,
-      success: user ? true : false,
-      data: user ? { ...user } : null,
-      message: user ? Translation("user-auth-success") : Translation("user-auth-error"),
+      Response({
+        res,
+        code: user ? 200 : 404,
+        success: user ? true : false,
+        data: user ? { ...user } : null,
+        message: user ? Translation("user-auth-success") : Translation("user-auth-error"),
+      })
     }
 
-    Response(response)
+    else Response({
+      res,
+      code: 401,
+      success: false,
+      data: null,
+      message: Translation("unotharized-user-access"),
+      error: null,
+    })
   } 
   
   catch (error) {
-    const response = {
+    console.error(error)
+
+    Response({
       res,
       code: 500,
       success: false,
       data: null,
       message:Translation("user-auth-error"),
       error,
-    }
-
-    Response(response)
+    })
   }
 }
 
 export const Products = async (payload, res) => {
-  let { offset, limit, user, auth } = payload
-
-  offset = parseInt(offset)
-  limit = parseInt(limit)
-
-  const filter = () => {
-    if (auth === user) return { 'productData.user': user}
-    else return { 'productData.user': user, 'productData.postedAnonymously': false }
-  }
-
   try {
-    let products = await Product.find(filter()).sort({createdAt: -1}).skip(offset).limit(limit).lean()
+    let { offset, limit, user, auth } = payload
+
+    offset = parseInt(offset)
+    limit = parseInt(limit)
+
+    const filter = () => {
+      if (auth === user) return { 'productData.user': user, 'productData.isPublished': true }
+      else return { 'productData.user': user, 'productData.postedAnonymously': false, 'productData.isPublished': true }
+    }
+
+    let products = await Product.find(filter()).sort({ createdAt: -1 }).skip(offset).limit(limit).lean()
     let countProducts = await Product.find(filter()).countDocuments()
 
-    const response = {
+    Response({
       res,
       code: products ? 200 : 404,
       success: products ? true : false,
       data: products ? { products, hasMore: countProducts > (offset + limit) } : [],
       message: products ? Translation("products-list-user-success") : Translation("products-list-user-error"),
-    }
-
-    Response(response)
+    })
   } 
   
   catch (error) {
-    const response = {
+    console.error(error)
+
+    Response({
       res,
       code: 500,
       success: false,
       data: null,
       message: Translation("products-list-user-error"),
       error,
-    }
-
-    Response(response)
+    })
   }
 }
 
-export const Update = async (payload, res) => {
+export const Update = async (payload, res, req) => {
   try {
-    const user = await User
-    .findOneAndUpdate(
-      {'userData.username': payload.old_username}, 
-      { $set: 
-        { 
-          userData: payload?.userData,
-          userAdditionalData: payload?.userAdditionalData,
-        }
-      },
-      { new: true }
-    )
-    .lean()
+    const uid = await UserAuth(req)
 
-    const response = {
-      res,
-      code: user ? 200 : 404,
-      success: user ? true : false,
-      data: user ? user : null,
-      message: user ? Translation("user-update-success") : Translation("user-update-error"),
+    if (uid) {
+      const user_find = await User
+        .findOne({ 'userData.uid': uid })
+        .lean()
+
+      if (user_find) {
+        let validations = true
+
+        const name_validation = UserNameValidation(payload?.userData?.name)
+        const surname_validation = UserSurnameValidation(payload?.userData?.surname)
+        const username_validation = UsernameValidation(payload?.userData?.username)
+        const address_validation = AddressValidation(payload?.userAdditionalData?.address)
+        const phone_validation = PhoneValidation(payload?.userData?.phone)
+        const phone_code_validation = PhoneCodeValidation(payload?.userData?.phoneCode)
+        const avatar_validation = AvatarValidation(payload?.userData?.avatar)
+        const cover_validation = AvatarValidation(payload?.userData?.cover)
+        const adress_validation = AddressValidation(payload?.userAdditionalData?.address)
+        const city_validation = CityValidation(payload?.userAdditionalData?.city)
+        const country_validation = CountryValidation(payload?.userAdditionalData?.country)
+
+        if (name_validation?.error) validations = false
+        if (surname_validation?.error) validations = false
+        if (phone_validation?.error) validations = false
+        if (address_validation?.error) validations = false
+        if (username_validation?.error) validations = false
+        if (phone_code_validation?.error) validations = false
+        if (avatar_validation?.error) validations = false
+        if (cover_validation?.error) validations = false
+        if (adress_validation?.error) validations = false
+        if (city_validation?.error) validations = false
+        if (country_validation?.error) validations = false
+
+        if (validations) {
+          let 
+            city = payload?.userAdditionalData?.city, 
+            country = payload?.userAdditionalData?.country
+
+          const cities = [...AL_Cities, ...XK_Cities, ...MK_Cities]
+          const city_find = cities.find((c) => c.value === city).value
+          
+          if(city_find) city = city_find
+          else city = country === 'XK' ? 'aB2cD3eF29' : country === 'AL' ? 'K2L3M4N5O6P7' : country === 'MK' ? '1aB2G03eF' : 'aB2cD3eF29' 
+          
+          if(country === 'XK') country = 'XK'
+          else if(country === 'AL') country = 'AL'
+          else if(country === 'MK') country = 'MK'
+          else country = 'XK'
+
+          const user_structure = {
+            userData: {
+              ...user_find.userData,
+              name: payload?.userData?.name,
+              surname: payload?.userData?.surname,
+              phone: payload?.userData?.phone,
+              phoneCode: payload?.userData?.phoneCode,
+              username: payload?.userData?.username,
+              avatar: payload?.userData?.avatar,
+              cover: payload?.userData?.cover
+            },
+            userAdditionalData: {
+              ...user_find.userAdditionalData,
+              address: payload?.userAdditionalData?.address,
+              city: city,
+              country: country,
+            }
+          }
+
+          const user = await User
+            .findOneAndUpdate(
+              {'userData.username': payload.old_username}, 
+              { $set: user_structure },
+              { new: true }
+            )
+            .lean()
+
+          Response({
+            res,
+            code: user ? 200 : 404,
+            success: user ? true : false,
+            data: user ? user : null,
+            message: user ? Translation("user-update-success") : Translation("user-update-error"),
+          })
+        }
+
+        else Response({
+          res,
+          code: 400,
+          success: false,
+          data: null,
+          message: Translation("user-update-validation-error"),
+          error: null,
+        })
+      }
     }
-    
-    Response(response)
+
+    else Response({
+      res,
+      code: 401,
+      success: false,
+      data: null,
+      message: Translation("unotharized-user-access"),
+      error: null,
+    })
   } 
   
-  catch (err) {
-    const response ={
+  catch (error) {
+    console.error(error)
+
+    Response({
       res,
       code: 500,
       success: false,
       data: null,
       message: Translation("user-update-error"),
-      error: err,
-    }
-
-    Response(response)
+      error: error,
+    })
   }
 }
 
-export const View = async ({ username }, res) => {
+export const View = async (payload, res) => {
   try {
-    const user = await User
-    .findOneAndUpdate(
-      { "userData.username": username },
-      { $inc: { "userActivities.views": 1 } },
-      { new: true }
-    )
-    .lean()
+    const { username } = payload
 
-    const response = {
+    const user = await User
+      .findOneAndUpdate(
+        { "userData.username": username },
+        { $inc: { "userActivities.views": 1 } },
+        { new: true }
+      )
+      .lean()
+
+    Response({
       res,
       code: user ? 200 : 404,
       success: user ? true : false,
       data: user ? user : null,
       message: user ? Translation("user-view-success") : Translation("user-view-error"),
       error: null,
-    }
-
-    Response(response)
+    })
   } 
   
   catch (error) {
-    const response = {
+    console.error(error)
+
+    Response({
       res,
       code: 500,
       success: false,
       data: null,
       message: Translation("user-view-error"),
       error: error,
-    }
-
-    Response(response)
+    })
   }
 }
 
-export const CheckIfExist = async ({field, value}, res) => {
+export const CheckIfExist = async (payload, res) => {
   try {
-    const checkDuplicate = await User.findOne({[field]: value})
+    const {field, value} = payload
+
+    const checkDuplicate = await User
+      .findOne({[field]: value})
       .select({ _id: 1 })
       .lean()
 
-    const response = {
+    Response({
       res,
       code: 200,
       success: true,
       data: checkDuplicate ? true : false,
       message: checkDuplicate ? Translation("check-if-exist-success") :  Translation("check-if-exist-error"),
       error: null,
-    }
-
-    Response(response)
+    })
   }
 
   catch(error){
-    const response = {
+    console.error(error)
+
+    Response({
       res,
       code: 500,
       success: false,
@@ -244,8 +334,6 @@ export const CheckIfExist = async ({field, value}, res) => {
       data: null,
       message:  Translation("check-if-exist-throw"),
       error: error,
-    }
-
-    Response(response)
+    })
   }
 }
