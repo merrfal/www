@@ -14,8 +14,7 @@ export default function Similar({ products, productId, isSimilar }) {
         {products === null && <SimilarSkeleton />}
 
         {products?.map((product, index) => {
-
-          if(product._id !== productId) return (
+          if(product?._id !== productId) return (
             <Fragment key={index}>
               <Product product={product} />
             </Fragment>

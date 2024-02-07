@@ -337,3 +337,99 @@ export const CheckIfExist = async (payload, res) => {
     })
   }
 }
+
+export const BanUser = async (payload, res, req) => {
+  try {
+    const { userId } = payload
+    const uid = await UserAuth(req)
+
+    if (uid) {
+      const admin = await User
+        .findOne(
+          { 
+            "userData.uid": uid, 
+            "userAdditionalData.role": "admin" 
+          },
+        )
+        .select({ _id: 1 })
+        .lean()
+
+      if (admin) {
+        const profile = await User
+          .findOne({ "_id": userId })
+          .select({ _id: 1 })
+
+        if (profile) {
+          const ban = profile.userAdditionalData.isBanned
+          const user = await profile.save()
+
+          if (ban) {
+            user.userAdditionalData.isBanned = false
+            await user.save()
+
+            Response({
+              res,
+              code: user ? 200 : 404,
+              success: user ? true : false,
+              data: user ? user : null,
+              message: user ? Translation("unban-user-success") : Translation("unban-user-error"),
+            })
+          }
+
+          else {
+            user.userAdditionalData.isBanned = true
+            await user.save()
+
+            Response({
+              res,
+              code: user ? 200 : 404,
+              success: user ? true : false,
+              data: user ? user : null,
+              message: user ? Translation("ban-user-success") : Translation("ban-user-error"),
+            })
+          }
+        }
+
+        else Response({
+          res,
+          code: 404,
+          success: false,
+          data: null,
+          message: Translation("user-was-not-found"),
+          error: null,
+        })
+      }
+
+      else Response({
+        res,
+        code: 401,
+        success: false,
+        data: null,
+        message: Translation("unotharized-user-access"),
+        error: null,
+      })
+    }
+
+    else Response({
+      res,
+      code: 401,
+      success: false,
+      data: null,
+      message: Translation("unotharized-user-access"),
+      error: null,
+    })
+  } 
+  
+  catch (error) {
+    console.error(error)
+
+    Response({
+      res,
+      code: 500,
+      success: false,
+      data: null,
+      message: Translation("ban-user-error"),
+      error: error,
+    })
+  }
+}

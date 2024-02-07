@@ -54,14 +54,14 @@ export default function EditProduct() {
   const onDeleteSuccess = (gallery) => {
     const username = account?.User?.userData?.username
 
-    gallery.map(async (image) => {
-      try {
-        const currentIterationImage = ref(Storage, `products/${image.id}`)
-        await deleteObject(currentIterationImage)
-      }
+    // gallery.map(async (image) => {
+    //   try {
+    //     const currentIterationImage = ref(Storage, `products/${image.id}`)
+    //     await deleteObject(currentIterationImage)
+    //   }
 
-      catch(error) { Console(error, "error") }
-    })
+    //   catch(error) { Console(error, "error") }
+    // })
 
     if(username !== undefined) router.push(`/profili/${username}`)
     else router.push("/")

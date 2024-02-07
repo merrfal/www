@@ -54,6 +54,7 @@ export default function Avatar(props) {
         </div>
 
         <EditButton 
+          user={user}
           isEdit={isEdit} 
           setIsEdit={setIsEdit} 
           id={user?._id} 

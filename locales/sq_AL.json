@@ -229,5 +229,13 @@
   "user-update-validation-error": "Gabim gjatë validimit të të dhënave të përdoruesit, ju lutemi kontrolloni të dhënat!",
   "avatar-url-is-not-valid": "Fotografia nuk është valide, ju lutem provoni përseri më vonë!",
   "cover-url-is-not-valid": "Kopertina nuk është valide, ju lutem provoni përseri më vonë!",
-  "unotharized-product-access": "Ju nuk keni leje për të parë këtë produkt!" 
+  "unotharized-product-access": "Ju nuk keni leje për të parë këtë produkt!",
+  "ban-user": "Blloko",
+  "unban-user": "Zhblloko",
+  "user-was-not-found": "Përdoruesi nuk u gjet në databazë!",
+  "ban-user-success": "Përdoruesi u bllokua me sukses!",
+  "ban-user-error": "Ndodhi një gabim gjatë bllokimit të përdoruesit!",
+  "unban-user-success": "Përdoruesi u zhbllokua me sukses!",
+  "unban-user-error": "Ndodhi një gabim gjatë zhbllokimit të përdoruesit!",
+  "user-banning-process-failed": "Procesi i bllokimit ose zhbllokimit të përdoruesit dështoi!"
 }
