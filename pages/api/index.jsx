@@ -1,6 +1,6 @@
-import { Cors } from "../middlewares"
-import { ValidateVariables } from "../utils/Http"
-import { RouteMethod } from "../utils/Routing"
+import { Cors } from "../../middlewares"
+import { ValidateVariables } from "../../utils/Http"
+import { RouteMethod } from "../../utils/Routing"
 
 const RunMiddlewares = async (req, res, next) => {
   const allowed_origin = await Cors(req, res)

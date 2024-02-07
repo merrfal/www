@@ -9,6 +9,7 @@ import {
   AvatarValidation, 
   CityValidation, 
   CountryValidation,
+  CoverValidation,
   PhoneCodeValidation, 
   PhoneValidation, 
   UserNameValidation, 
@@ -164,7 +165,7 @@ export const Update = async (payload, res, req) => {
         const phone_validation = PhoneValidation(payload?.userData?.phone)
         const phone_code_validation = PhoneCodeValidation(payload?.userData?.phoneCode)
         const avatar_validation = AvatarValidation(payload?.userData?.avatar)
-        const cover_validation = AvatarValidation(payload?.userData?.cover)
+        const cover_validation = CoverValidation(payload?.userData?.cover)
         const adress_validation = AddressValidation(payload?.userAdditionalData?.address)
         const city_validation = CityValidation(payload?.userAdditionalData?.city)
         const country_validation = CountryValidation(payload?.userAdditionalData?.country)
@@ -357,7 +358,8 @@ export const BanUser = async (payload, res, req) => {
       if (admin) {
         const profile = await User
           .findOne({ "_id": userId })
-          .select({ _id: 1 })
+          .select({ _id: 1, "userAdditionalData.isBanned": 1})
+        console.log(profile)
 
         if (profile) {
           const ban = profile.userAdditionalData.isBanned

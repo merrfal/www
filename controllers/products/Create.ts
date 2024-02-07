@@ -36,7 +36,7 @@ const Create = async (payload, res, req) => {
                     code: 403,
                     success: false,
                     data: null,
-                    message: "Ju jeni i bllokuar për te bërë këtë veprim, nëse mendoni se keni bere nje gabim ju lutem kontaktoni staffin e platformës!",
+                    message: "Ju jeni i bllokuar për te bërë këtë veprim, nëse mendoni se keni bere nje gabim ju lutem kontaktoni ekipin e mbështetjes!",
                 })
 
                 else {
