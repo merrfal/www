@@ -462,7 +462,7 @@ export const BanUser = async (id, dispatch) => {
         type: "success",
       })
 
-      window.reload()
+      window.location.reload()
     }
 
     else Notification({
@@ -477,7 +477,7 @@ export const BanUser = async (id, dispatch) => {
 
     Notification({
       dispatch,
-      message: "user-banning-process-failed",
+      message: Translation("user-banning-process-failed"),
       type: "error"
     })
   }

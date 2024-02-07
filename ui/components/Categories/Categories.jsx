@@ -11,7 +11,7 @@ export default function Categories() {
       <div className="flow-root relative py-3">
         <div 
           style={{ background: `linear-gradient(270deg, #ffffff90 0%, #ffffff00 100%)` }}
-          className="w-80 h-full absolute top-0 right-0 z-[9999] pointer-events-none" 
+          className="w-80 h-full absolute top-0 right-0 z-10 pointer-events-none" 
         />
 
         <div className="box-content relative overflow-x-auto overflow-y-auto">

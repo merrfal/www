@@ -1,15 +1,19 @@
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { EditIcon } from "../../icons"
 import { Translation } from "../../../utils/Translations"
 import { BanUser } from "../../../api/User"
 
 export default function EditButton({ user, isEdit, setIsEdit, id }) {
+  const [loading, setLoading] = useState(false)
+
   const dispatch = useDispatch()
   const account = useSelector((state) => state.Account)
   const edit = () => setIsEdit(!isEdit)
 
   const HandleBlock = () => {
-    if (account?.User?.userAdditionalData?.role === 'admin') {
+    if (account?.User?.userAdditionalData?.role === 'admin' && !loading) {
+      setLoading(true)
       BanUser(user?._id, dispatch)
     }
   }
