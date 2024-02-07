@@ -12,10 +12,11 @@ const UserModel = new Schema(
       phone: { type: String, default: '' },
       phoneCode: { type: String, default: '+383' },
       avatar: { type: String, default: NO_AVATAR },
-      cover: { type: String, default: NO_COVER },
+      cover: { type: String, default: NO_COVER }
     },
     userAdditionalData: {
       isUserVerified: { type: Boolean, default: false },
+      isBanned: { type: Boolean, default: false },
       role: { type: String, default: "user" },
       address: { type: String, default: '' },
       city: { type: String, default: '' },
@@ -29,8 +30,8 @@ const UserModel = new Schema(
   {
     timestamps: true,
     versionKey: false,
-  },
-);
+  }
+)
 
 const ProductSchema = new Schema(
   {

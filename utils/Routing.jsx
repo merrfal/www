@@ -2,7 +2,7 @@ import * as Users from "../controllers/User"
 import * as Products from "../controllers/Product"
 
 import { DatabaseConnection } from "./Connection"
-import { Create, Delete, Update } from '@/controllers/product'
+import { Create, Delete, Update } from '../controllers/products'
 
 export const RouteMethod = (target, payload, res, req) => {
   DatabaseConnection()

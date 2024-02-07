@@ -20,8 +20,7 @@ import {
   ImagesValidation,
   ModeValidation,
   NameValidation,
-  PhoneValidation,
-  SlugBuilder,
+  PhoneValidation
 } from "../../../utils/Forms"
 
 export default function Buttons(props) {

@@ -1,4 +1,5 @@
 import { Product, User } from "../configs/Models"
+import { UserAuth } from "../middlewares"
 import { Response } from "../utils/Response"
 import { Translation } from "../utils/Translations"
 
@@ -136,35 +137,95 @@ export const Latest = async (payload, res) => {
   }
 }
 
-export const View = async (payload, res) => {
+export const View = async (payload, res, req) => {
   try {
-    const { slug } = payload
+    const { slug, edit } = payload
 
-    const product = await Product
-      .findOneAndUpdate(
-        { "productData.slug": slug, 'productData.isPublished': true },
-        { $inc: { "productAdditionalData.views": 1 } },
-        { new: true }
-      )
+    if (edit) {
+      const product = await Product.findOne({ 
+        "productData.slug": slug, 
+        'productData.isPublished': true 
+      }).lean()
 
-    const user = await User
-      .findById(product.productData.user)
-      .select({
-        "userData.name": 1,
-        "userData.surname": 1,
-        "userData.username": 1,
-        "userData.avatar": 1,
-        "userAdditionalData.isUserVerified": 1
+      if (product) {
+        const uid = await UserAuth(req)
+
+        if (uid) {
+          const user_product = product.productData.user?.toString()
+          const user = await User
+            .findOne({ 'userData.uid': uid })
+            .lean()
+
+          if ((user_product === user._id?.toString()) || user?.userAdditionalData?.role === "admin") {
+            product.productData.user = user
+            
+            Response({
+              res,
+              code: 200,
+              success: true,
+              data: product,
+              message: Translation("product-view-success"),
+            })
+          }
+
+          else Response({
+            res,
+            code: 401,
+            success: false,
+            data: null,
+            message: Translation("unotharized-user-access"),
+          })
+        }
+
+        else Response({
+          res,
+          code: 401,
+          success: false,
+          data: null,
+          message: Translation("unotharized-user-access"),
+        })
+      }
+
+      else Response({
+        res,
+        code: 404,
+        success: false,
+        data: null,
+        message: Translation("product-view-error"),
       })
-      .lean()
+    }
 
-    Response({
-      res,
-      code: product ? 200 : 404,
-      success: product ? true : false,
-      data: product ? {...product._doc, productData: {...product._doc.productData, user }} : null,
-      message: product ? Translation("product-view-success") : Translation("product-view-error"),
-    })
+    else {
+      const product = await Product
+        .findOneAndUpdate(
+          { "productData.slug": slug, 'productData.isPublished': true },
+          { $inc: { "productAdditionalData.views": 1 } },
+          { new: true }
+        )
+
+      if (!product.productData?.postedAnonymously) {
+        const user = await User
+          .findById(product.productData.user)
+          .select({
+            "userData.name": 1,
+            "userData.surname": 1,
+            "userData.username": 1,
+            "userData.avatar": 1,
+            "userAdditionalData.isUserVerified": 1
+          })
+          .lean()
+
+        if (user) product._doc.productData.user = user
+      }
+
+      Response({
+        res,
+        code: product ? 200 : 404,
+        success: product ? true : false,
+        data: product ? product._doc : null,
+        message: product ? Translation("product-view-success") : Translation("product-view-error"),
+      })
+    }
   } 
   
   catch (error) {

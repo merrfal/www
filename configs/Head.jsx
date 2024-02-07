@@ -1,5 +1,7 @@
 import MetaTags from "next/head"
+
 import { Translation } from "../utils/Translations"
+import { FB_PROJECT_ID } from "../configs/Envs"
 
 export const Global = (props) => {
   const { 
@@ -8,6 +10,8 @@ export const Global = (props) => {
     image = '/general-images/merrfal-hero.png',
     index = false
   } = props
+
+  let local_index = FB_PROJECT_ID.includes('local') ? true : index
   
   return (
     <MetaTags>
@@ -29,7 +33,7 @@ export const Global = (props) => {
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       
-      {index === true && <meta name="robots" content="noindex" />}
+      {local_index === true && <meta name="robots" content="noindex" />}
     </MetaTags>
   )
 }

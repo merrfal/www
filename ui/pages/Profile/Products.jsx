@@ -71,7 +71,7 @@ export default function Products({ user, dispatch, account }) {
         next={next}
         hasMore={products.hasMore}
         loader={<Skeleton />}
-        className="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4"
+        className="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-6 lg:grid-cols-3 lg:gap-x-4 xl:grid-cols-4"
       >
         {products.products.map(
           (product, index) => <Fragment key={index}>

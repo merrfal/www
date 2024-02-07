@@ -20,7 +20,7 @@ export const Create = async (page, router, setIsHold, dispatch) => {
 
     else Notification({
       dispatch,
-      message: CreateMessage("product", false),
+      message: res.message,
       type: "error",
     })
   } 
@@ -167,7 +167,7 @@ export const Update = async ( product, router, setLoading, dispatch) => {
 export const View = async (slug, setProduct, dispatch, setLoading = null) => {
   try {
     if (setLoading) setLoading(true)
-    const req = await Request("PRODUCTS/VIEW", { slug })
+    const req = await Request("PRODUCTS/VIEW", { slug, edit: false })
     const res = await req.json()
 
     if (res.success === true) {
@@ -208,7 +208,7 @@ export const View = async (slug, setProduct, dispatch, setLoading = null) => {
 
 export const ViewWithPermissions = async (slug, dispatch) => {
   try {
-    const req = await Request("PRODUCTS/VIEW", { slug })
+    const req = await Request("PRODUCTS/VIEW", { slug, edit: true })
     const res = await req.json()
 
     return {

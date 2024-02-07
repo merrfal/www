@@ -86,7 +86,7 @@ export default function EditProduct() {
 
         ViewWithPermissions(slug, dispatch).then((data) => {
           if(data.success){
-            const isAllowedToEdit = userId === data?.data?.productData?.user._id
+            const isAllowedToEdit = userId === data?.data?.productData?.user?._id
             const isAdmin = account?.User?.userAdditionalData?.role === "admin"
 
             if(isAllowedToEdit || isAdmin) {
