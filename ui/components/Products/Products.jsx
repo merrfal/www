@@ -2,15 +2,15 @@ import InfiniteScroll from "react-infinite-scroll-component"
 
 import { Fragment, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
+import { useRouter } from "next/router"
 import { Latest } from "../../../api/Product"
 import { None, Product } from ".."
 import { Header, Skeleton } from "./"
-import { useRouter } from "next/router"
 
 export default function Products() {
   const dispatch = useDispatch()
   const router = useRouter()
-  
+
   const [products, setProducts] = useState({ products: [], hasMore: true })
   const [loading, setLoading] = useState(true)
 

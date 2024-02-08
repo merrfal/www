@@ -3,13 +3,12 @@
 import { Product } from "@/configs/Models"
 import { DatabaseConnection } from "@/utils/Connection"
 
-const List = async () => {
+const Fetch = async (slug) => {
   try {
     await DatabaseConnection()
 
     return await Product
-      .find({})
-      .select({'productData.slug': 1})
+      .findOne({ 'productData.slug': slug })
       .lean()
   } 
 
@@ -20,4 +19,4 @@ const List = async () => {
   }
 }
 
-export default List
+export default Fetch
