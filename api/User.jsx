@@ -449,3 +449,36 @@ export const CheckIfExist = async (field, value, dispatch) => {
     Notification(alert)
   }
 }
+
+export const BanUser = async (id, dispatch) => {
+  try {
+    const req = await Request("USERS/BAN", { userId: id })
+    const res = await req.json()
+
+    if (res?.success === true) {
+      Notification({
+        dispatch,
+        message: res.message,
+        type: "success",
+      })
+
+      window.location.reload()
+    }
+
+    else Notification({
+      dispatch,
+      message: res.message,
+      type: "error",
+    })
+  }
+
+  catch (error){
+    console.error(error) 
+
+    Notification({
+      dispatch,
+      message: Translation("user-banning-process-failed"),
+      type: "error"
+    })
+  }
+}

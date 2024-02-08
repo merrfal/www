@@ -261,7 +261,7 @@ export const Similar = async (payload, res) => {
 
     if (products.length === 1 || products.length === 0) {
       products = await Product
-        .find({ 'productData.isGiven': false })
+        .find({ 'productData.isGiven': false, 'productData.isPublished': true })
         .sort({ createdAt: -1 })
         .limit(5)
         .lean()

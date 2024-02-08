@@ -103,7 +103,6 @@ export const Update = async (payload, res, req) => {
                                 isGiven: payload?.isGiven,
                             }
 
-
                             const product = await Product.findOneAndUpdate(
                                 { 'productData.slug': product_find?.productData?.slug }, 
                                 { $set: { productData: product_structure } }

@@ -171,7 +171,11 @@ export default function Product() {
                     <div className="h-5 border-r border-gray-200 mx-4" />
 
                     <Views product={product} />
-                    <Edit slug={product?.productData?.slug} user={product?.productData?.user} />
+                    <Edit 
+                      slug={product?.productData?.slug} 
+                      user={product?.productData?.user} 
+                      postedAnonymously={product?.productData?.postedAnonymously}
+                    />
                   </div>
                   
                   <Info productData={product?.productData} />

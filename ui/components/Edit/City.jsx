@@ -1,12 +1,12 @@
-import { Translation } from "../../../utils/Translations";
-import { RequiredLabel, Wildcard } from "../";
-import { AllCountries } from "../../../data/Locations";
-import { CityValidation } from "../../../utils/Forms";
+import { Translation } from "../../../utils/Translations"
+import { RequiredLabel, Wildcard } from "../"
+import { Countries } from "../../../data/Locations"
+import { CityValidation } from "../../../utils/Forms"
 
 export default function City({ user, onInput, validations }) {
-  const validation = CityValidation(user?.userAdditionalData?.city);
+  const validation = CityValidation(user?.userAdditionalData?.city)
 
-  const disableCity = user?.userAdditionalData?.country === "GLOBAL" || user?.userAdditionalData?.country === "";
+  const disableCity = user?.userAdditionalData?.country === "GLOBAL" || user?.userAdditionalData?.country === ""
   
   return (
     <div className={disableCity ? "col-span-12 lg:col-span-3 flex flex-col justify-start items-start opacity-50 pointer-events-none" : "col-span-12 lg:col-span-3 flex flex-col justify-start items-start"}>
@@ -30,7 +30,7 @@ export default function City({ user, onInput, validations }) {
             </option>
         }
 
-        {AllCountries.find((country) => country["iso_code"] === user?.userAdditionalData?.country)
+        {Countries?.find((country) => country["iso_code"] === user?.userAdditionalData?.country)
           ?.cities?.map((city, index) => (
             <option key={index} value={city?.value}>
               {city?.name}
@@ -40,5 +40,5 @@ export default function City({ user, onInput, validations }) {
 
       {validations.city && validation.error && <RequiredLabel message={validation?.message} />}
     </div>
-  );
+  )
 }
