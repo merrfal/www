@@ -11,11 +11,16 @@ function useAuth(account) {
   const [allow, setAllow] = useState(true)
   const [user, loading] = useAuthState(Auth)
 
+  const AsyncLogout = async () => {
+    await Auth.signOut()
+    dispatch(LogoutAccount())
+  }
+
   useEffect(() => {
     if (!loading && allow) {
       if (!user && !account.Auth) {
         setAllow(false)
-        dispatch(LogoutAccount())
+        AsyncLogout()
       }
 
       if (user && !account.Auth) {

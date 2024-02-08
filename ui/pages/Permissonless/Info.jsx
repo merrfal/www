@@ -1,9 +1,9 @@
-import { Fragment } from "react";
-import { Global } from "../../../configs/Head";
-import { Translation } from "../../../utils/Translations";
+import { Fragment } from "react"
+import { Global } from "../../../configs/Head"
+import { Translation } from "../../../utils/Translations"
 
 export default function Info() {
-  const name = Translation("no-permissions-title");
+  const name = Translation("no-permissions-title")
 
   return (
     <Fragment>
@@ -17,5 +17,5 @@ export default function Info() {
         {Translation("no-permissions-description")}
       </p>
     </Fragment>
-  );
+  )
 }

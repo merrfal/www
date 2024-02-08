@@ -1,28 +1,33 @@
-import { Translation } from "../../../utils/Translations";
-import { Auth as AuthInstance } from "../../../configs/Firebase";
-import { LogoutAccount } from "../../../controllers/Slices";
-import { Notification } from "../../../utils/Response";
-import { useDispatch, useSelector } from "react-redux";
-import { GoogleAuthProvider, getAdditionalUserInfo, signInWithPopup } from "firebase/auth";
-import { Login, Register } from "../../../api/User";
+import { Translation } from "../../../utils/Translations"
+import { Auth as AuthInstance } from "../../../configs/Firebase"
+import { LogoutAccount } from "../../../controllers/Slices"
+import { Notification } from "../../../utils/Response"
+import { useDispatch, useSelector } from "react-redux"
+import { GoogleAuthProvider, getAdditionalUserInfo, signInWithPopup } from "firebase/auth"
+import { Login, Register } from "../../../api/User"
 
 export default function Operations() {
-  const account = useSelector((state) => state.Account);
-  const dispatch = useDispatch();
+  const account = useSelector((state) => state.Account)
+  const dispatch = useDispatch()
+
+  const AsyncLogout = async () => {
+    await AuthInstance.signOut()
+    dispatch(LogoutAccount())
+  }
 
   const Auth = async () => {
-    if(account.Loading) return;
+    if(account.Loading) return
     
     try {
-      var Provider = new GoogleAuthProvider();
-      const data = await signInWithPopup(AuthInstance, Provider);
+      var Provider = new GoogleAuthProvider()
+      const data = await signInWithPopup(AuthInstance, Provider)
 
       if (data) {
-        const user = data.user;
-        const { isNewUser } = getAdditionalUserInfo(data);
+        const user = data.user
+        const { isNewUser } = getAdditionalUserInfo(data)
 
-        if (isNewUser) Register(user, dispatch);
-        else Login(user.uid, dispatch);
+        if (isNewUser) Register(user, dispatch)
+        else Login(user.uid, dispatch)
       } 
       
       else {
@@ -32,8 +37,8 @@ export default function Operations() {
           type: "error",
         }
 
-        dispatch(LogoutAccount());
-        Notification(alert);
+        await AsyncLogout()
+        Notification(alert)
       }
     } 
     
@@ -44,10 +49,10 @@ export default function Operations() {
         type: "error",
       }
 
-      dispatch(LogoutAccount());
-      Notification(alert);
+      await AsyncLogout()
+      Notification(alert)
     }
-  };
+  }
 
   return (
     <div className="mt-6">
@@ -57,5 +62,5 @@ export default function Operations() {
         </p>
       </div>
     </div>
-  );
+  )
 }

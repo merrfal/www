@@ -38,6 +38,11 @@ export default function Buttons(props) {
   const dispatch = useDispatch()
   const router = useRouter()
 
+  const AsyncLogout = async () => {
+    await AuthInstance.signOut()
+    dispatch(LogoutAccount())
+  }
+
   const onValidation = () => {
     setValidation({
       name: true,
@@ -98,7 +103,7 @@ export default function Buttons(props) {
           type: "error",
         }
 
-        dispatch(LogoutAccount())
+        await AsyncLogout()
         Notification(alert)
       }
     } 
@@ -110,7 +115,7 @@ export default function Buttons(props) {
         type: "error",
       }
 
-      dispatch(LogoutAccount())
+      await AsyncLogout()
       Notification(alert)
     }
   }

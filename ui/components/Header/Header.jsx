@@ -15,7 +15,10 @@ export default function Header() {
     path = path?.pathname?.split("/")[2]
     const base = path?.pathname?.split("/")[1]
 
-    if (path !== undefined && path !== "" && term === "" && base === "kerko") setTerm(path)
+    if (path !== undefined && path !== "" && term === "" && base === "kerko") {
+      const decodedPath = decodeURIComponent(path)
+      setTerm(decodedPath)
+    }
   }, [router])
 
   useEffect(() => {
@@ -64,7 +67,7 @@ export default function Header() {
               </div>             
 
               <input
-                value={term}
+                value={decodeURIComponent(term)}
                 onChange={(e) => setTerm(e.target.value)}
                 maxLength={32}
                 required
