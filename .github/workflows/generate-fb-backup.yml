@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Generate Firebase Backup Prod
-        run: curl -X POST -d '{"token":"${{ secrets.PROD_BACKUP_SECRET_KEY }}"}' "${{ secrets.PROD_BACKUP_ENDPOINT }}/api/v1/generate-fb-backup"
+        run: "curl -X POST -H 'Content-Type: application/json' -d '{\"token\":\"${{ secrets.PROD_BACKUP_SECRET_KEY }}\"}' '${{ secrets.PROD_BACKUP_ENDPOINT }}/api/v1/generate-fb-backup'"
       - name: Generate Firebase Backup Dev
-        run: curl -X POST -d '{"token":"${{ secrets.DEV_BACKUP_SECRET_KEY }}"}' "${{ secrets.DEV_BACKUP_ENDPOINT }}/api/v1/generate-fb-backup"
+        run: "curl -X POST -H 'Content-Type: application/json' -d '{\"token\":\"${{ secrets.DEV_BACKUP_SECRET_KEY }}\"}' '${{ secrets.DEV_BACKUP_ENDPOINT }}/api/v1/generate-fb-backup'"
