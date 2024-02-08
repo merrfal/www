@@ -3,7 +3,7 @@ import Firebase from 'firebase-admin'
 import { MongoClient, ObjectId } from "mongodb"
 import { mkdirSync, unlinkSync, writeFileSync } from 'fs'
 import { dirname, join } from 'path'
-import { MONGO_URI } from "../../../configs/Envs"
+import { GITHUB_ACTION_SECRET, MONGO_URI } from "../../../configs/Envs"
 
 import {
   FB_STORAGE_BUCKET,
@@ -19,8 +19,6 @@ import {
   FB_ADMIN_CLIENT_X509_CERT_URL,
   FB_ADMIN_UNIVERSE_DOMAIN
 } from '../../../configs/Envs'
-
-const SECRET = '12321123123wewerwrqq'
 
 if (!Firebase.apps.length) {
   Firebase.initializeApp({ 
@@ -56,13 +54,15 @@ async function connectToDatabase() {
 }
 
 export default async function handler(req, res) {
+  return
+  
   if (req.method !== 'POST') res.redirect('https://merrfal.com')
 
   else {
     const body = req.body
 
     if (body && body.token) {
-      if (body?.token === SECRET) {
+      if (body?.token === GITHUB_ACTION_SECRET) {
         const db = await connectToDatabase()
         const collections = await db.listCollections().toArray()
       
