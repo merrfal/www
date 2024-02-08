@@ -126,3 +126,9 @@ export default async function handler(req, res) {
     })
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: true
+  }
+}
