@@ -68,6 +68,11 @@ export default async function handler(req, res) {
                 })
                 
                 else {
+                    res.status(200).json({ 
+                        success: true,
+                        message: "Backup created successfully."
+                    })
+                    
                     const now = new Date()
                     const dateTime = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}_${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`
 
@@ -79,11 +84,6 @@ export default async function handler(req, res) {
                             await file.copy(destinationFile)
                         }
                     }
-
-                    res.status(200).json({ 
-                        success: true,
-                        message: "Backup created successfully."
-                    })
                 }
             }
 
