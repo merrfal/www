@@ -1,8 +1,6 @@
 import Firebase from 'firebase-admin'
 
 import { MongoClient, ObjectId } from "mongodb"
-import { mkdirSync, unlinkSync, writeFileSync } from 'fs'
-import { dirname, join } from 'path'
 import { GITHUB_ACTION_SECRET, MONGO_URI } from "../../../configs/Envs"
 
 import {
@@ -78,7 +76,8 @@ export default async function handler(req, res) {
           const backup = {}
         
           const now = new Date()
-          const dateTime = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}_${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`
+          const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+          const dateTime = `${now.getDate()}-${months[now.getMonth()]}-${now.getFullYear()}:${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
           const bucket = `backups/db-${dateTime}`
           
           for (const collection of collections) {

@@ -1,11 +1,18 @@
-import { useDispatch } from "react-redux";
-import { MenuLink } from "../";
-import { LogoutAccount } from "../../../controllers/Slices";
-import { Translation } from "../../../utils/Translations";
+import { useDispatch } from "react-redux"
+import { Auth } from "../../../configs/Firebase"
+import { MenuLink } from "../"
+import { LogoutAccount } from "../../../controllers/Slices"
+import { Translation } from "../../../utils/Translations"
 
 export default function Dropdown({ username }) {
-  const dispatch = useDispatch();
-  const out = () => dispatch(LogoutAccount());
+  const dispatch = useDispatch()
+
+  const AsyncLogout = async () => {
+    await Auth.signOut()
+    dispatch(LogoutAccount())
+  }
+
+  const out = () => AsyncLogout()
 
   return (
     <div className="absolute w-28 right-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg border border-gray-100 outline-none" style={{ marginTop: '124px' }}>
@@ -23,5 +30,5 @@ export default function Dropdown({ username }) {
         {Translation("logout")}
       </button>
     </div>
-  );
+  )
 }

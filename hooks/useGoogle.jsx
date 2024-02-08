@@ -6,6 +6,11 @@ import { Auth as AuthInstance } from "../configs/Firebase"
 import { Translation } from "../utils/Translations"
 
 export default function useGoogle({dispatch, account}) {
+  const AsyncLogout = async () => {
+    await Auth.signOut()
+    dispatch(LogoutAccount())
+  }
+
   const Auth = async () => {
     if(account.Loading) return
     
@@ -28,7 +33,7 @@ export default function useGoogle({dispatch, account}) {
           type: "error",
         }
 
-        dispatch(LogoutAccount())
+        await AsyncLogout()
         Notification(alert)
       }
     } 
@@ -40,7 +45,7 @@ export default function useGoogle({dispatch, account}) {
         type: "error",
       }
 
-      dispatch(LogoutAccount())
+      await AsyncLogout()
       Notification(alert)
     }
   }
