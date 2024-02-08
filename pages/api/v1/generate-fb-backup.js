@@ -57,7 +57,7 @@ export default async function handler(req, res) {
 
         else {
             const body = req.body
-
+            
             if (body && body.token && body.token === GITHUB_ACTION_SECRET) {
                 const db = await connectToDatabase()
                 const collections = await db.listCollections().toArray()
@@ -102,4 +102,10 @@ export default async function handler(req, res) {
             message: "Internal server error." 
         })
     }
+}
+
+export const config = {
+  api: {
+    bodyParser: true
+  }
 }
