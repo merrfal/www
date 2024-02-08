@@ -359,7 +359,6 @@ export const BanUser = async (payload, res, req) => {
         const profile = await User
           .findOne({ "_id": userId })
           .select({ _id: 1, "userAdditionalData.isBanned": 1})
-        console.log(profile)
 
         if (profile) {
           const ban = profile.userAdditionalData.isBanned

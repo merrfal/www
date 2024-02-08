@@ -54,30 +54,28 @@ async function connectToDatabase() {
 }
 
 export default async function handler(req, res) {
-  return
-  
-  if (req.method !== 'POST') res.redirect('https://merrfal.com')
+  try {
+    if (req.method !== 'POST') res.redirect('https://merrfal.com')
 
-  else {
-    const body = req.body
+    else {
+      const body = req.body
 
-    if (body && body.token) {
-      if (body?.token === GITHUB_ACTION_SECRET) {
+      if (body && body.token && body.token === GITHUB_ACTION_SECRET) {
         const db = await connectToDatabase()
         const collections = await db.listCollections().toArray()
-      
+        
         if (collections.length === 0) return res.status(200).json({ 
           success: false,
           message: "No collections found" 
         })
-      
+        
         else {
           const backup = {}
         
           const now = new Date()
           const dateTime = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}_${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`
           const bucket = `backups/db-${dateTime}`
-        
+          
           for (const collection of collections) {
             const documents = await db.collection(collection.name).find().toArray()
         
@@ -89,24 +87,20 @@ export default async function handler(req, res) {
                 else if (value instanceof Date) convertedDocument[key] = { $date: value.toISOString() }
                 else convertedDocument[key] = value
               }
-        
+          
               return convertedDocument
             })
-        
-            const localFilePath = join(__dirname, `${bucket}/${collection.name}.json`)
-        
-            mkdirSync(dirname(localFilePath), { recursive: true })
-            writeFileSync(localFilePath, JSON.stringify(backup, null, 2))
-        
-            await storageBucket.upload(localFilePath, {
-              destination: `${bucket}/${collection.name}.json`,
+          
+            const file = storageBucket.file(`${bucket}/${collection.name}.json`)
+            const writeStream = file.createWriteStream({
               metadata: {
                 contentType: 'application/json',
                 cacheControl: 'no-cache',
               },
             })
-        
-            unlinkSync(localFilePath)
+
+            writeStream.write(JSON.stringify(backup, null, 2))
+            writeStream.end()
           }
 
           res.status(200).json({ 
@@ -121,10 +115,14 @@ export default async function handler(req, res) {
         message: "Your are not authorized to access this resource!" 
       })
     }
+  }
 
-    else res.status(401).json({ 
+  catch (error) {
+    console.error(error)
+    
+    res.status(500).json({ 
       success: false,
-      message: "Your are not authorized to access this resource!" 
+      message: "An error occurred while creating the backup."
     })
   }
 }
