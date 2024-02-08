@@ -265,12 +265,30 @@ export const Similar = async (category, setProducts, setIsSimilar, dispatch) => 
   }
 }
 
-export const Latest = async (setProducts, dispatch) => {
+export const Latest = async (products, setProducts, offset, scratch, setLoading, dispatch) => {
   try {
-    const req = await Request("PRODUCTS/LATEST", {})
+    setLoading(true)
+
+    const req = await Request("PRODUCTS/LATEST", {
+      offset,
+      limit: 4
+    })
+
     const res = await req.json()
 
-    if (res.success === true) setProducts(res.data)
+    if (res.success === true) {
+      const { data } = res
+
+      const next = {  hasMore: data.hasMore }
+
+      if (scratch) next.products = data.products
+      else next.products = [...products.products, ...data.products]
+
+      if(!next.hasMore) setLoading(false)
+
+      setProducts(next)
+    }
+
     else {
       const alert = {
         dispatch,
@@ -290,6 +308,10 @@ export const Latest = async (setProducts, dispatch) => {
     }
 
     Notification(alert)
+  }
+
+  finally {
+    setLoading(false)
   }
 }
 
