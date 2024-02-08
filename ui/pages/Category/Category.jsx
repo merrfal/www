@@ -82,7 +82,10 @@ export default function Category() {
 
   return (
     <Normal>
-      <Global title={category?.name} description={category?.description} />
+      <Global 
+        title={category?.name} 
+        description={category?.description} 
+      />
 
       <Header 
         name={category?.name} 

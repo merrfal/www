@@ -8,7 +8,7 @@ export const Global = (props) => {
     title, 
     description = Translation("merrfal-description"), 
     image = '/general-images/merrfal-hero.png',
-    index = false
+    index = true
   } = props
 
   let local_index = FB_PROJECT_ID.includes('local') ? true : index
@@ -33,7 +33,7 @@ export const Global = (props) => {
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       
-      {local_index === true && <meta name="robots" content="noindex" />}
+      {local_index !== true && <meta name="robots" content="noindex" />}
     </MetaTags>
   )
 }

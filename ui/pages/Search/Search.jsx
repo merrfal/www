@@ -56,6 +56,7 @@ export default function Search() {
       <Global 
         title={Translation("meta-search")} 
         description={Translation("meta-search-description")} 
+        index={false}
       />
       
       <Header 

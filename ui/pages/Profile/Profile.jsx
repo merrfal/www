@@ -56,7 +56,10 @@ export default function Profile() {
 
   return (
     <Normal>
-      <Global title={meta?.title} description={meta?.description} />
+      <Global 
+        title={meta?.title} 
+        description={meta?.description} 
+      />
 
       {user === null ? <Loading /> : null}
 
