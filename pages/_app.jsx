@@ -1,19 +1,16 @@
-import Script from "next/script";
+import Script from "next/script"
 
-import "../ui/styles/merrfal.css";
-import "../ui/styles/tailwind.css";
+import "../ui/styles/merrfal.css"
+import "../ui/styles/tailwind.css"
 
-import { Redux } from "../configs/Redux";
-import { Provider } from "react-redux";
-import { Global } from "../configs/Head";
-import { Translation } from "../utils/Translations";
+import { Provider } from "react-redux"
+import { Redux } from "../configs/Redux"
 
 const Main = ({ Component, pageProps }) => {
-  const { store, props } = Redux.useWrappedStore(pageProps);
+  const { store, props } = Redux.useWrappedStore(pageProps)
 
   return (
     <Provider store={store}>
-      <Global title={Translation("merrfal-tagline")} description={Translation("merrfal-description")} />
       <Component {...props} />
       <Script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" />
     
@@ -33,7 +30,7 @@ const Main = ({ Component, pageProps }) => {
         `}
       </Script>
     </Provider>
-  );
-};
+  )
+}
 
-export default Main;
+export default Main

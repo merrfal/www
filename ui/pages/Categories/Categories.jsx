@@ -18,7 +18,10 @@ export default function Categories() {
         setOrdering={setOrdering} 
       />
       
-      <Global title={Translation("categories")} description={Translation("categories-description")} />
+      <Global 
+        title={Translation("categories")} 
+        description={Translation("categories-description")} 
+      />
 
       <div className="max-w-7xl mx-auto mt-5 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
         <div className="mt-4 overflow-x-hidden">

@@ -8,7 +8,11 @@ export default function Header({ product, mode }) {
 
   return (
     <Fragment>
-      <Global title={meta.title} description={meta.description} />
+      <Global 
+        title={meta.title} 
+        description={meta.description} 
+        index={false}
+      />
 
       <h3 className="text-3xl font-bold leading-6 text-gray-900 mb-10">
         {Translation("give-a-product")}

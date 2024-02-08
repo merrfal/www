@@ -118,7 +118,7 @@ export default function Product({ product: prd }) {
       <Global
         title={prd?.productData?.name || product?.productData?.name}
         description={prd?.productData?.description || product?.productData?.description }
-        thumbnail={prd?.productData?.gallery?.find(image => image.isMain)?.url || product?.productData?.gallery?.find(image => image.isMain)?.url}
+        image={prd?.productData?.gallery?.find(image => image.isMain)?.url || product?.productData?.gallery?.find(image => image.isMain)?.url}
       />
 
       {product === null ? <Loading /> : null}
