@@ -10,7 +10,7 @@ import { Products, Cover, Info } from "./"
 import { ProfilePage } from "../../../configs/Metas"
 import { Error } from ".."
 
-export default function Profile() {
+export default function Profile({ profile: prf }) {
   const dispatch = useDispatch()
   const router = useRouter()
 
@@ -56,7 +56,11 @@ export default function Profile() {
 
   return (
     <Normal>
-      <Global title={meta?.title} description={meta?.description} />
+      <Global 
+        title={prf?.userData?.name + ' ' + prf?.userData?.surname  || meta?.title} 
+        description={meta?.description} 
+        image={prf?.userData?.avatar || meta?.image}
+      />
 
       {user === null ? <Loading /> : null}
 

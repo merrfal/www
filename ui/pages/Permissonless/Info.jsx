@@ -7,7 +7,10 @@ export default function Info() {
 
   return (
     <Fragment>
-      <Global title={name} index={true} />
+      <Global 
+        title={name} 
+        index={false} 
+      />
       
       <h1 className="mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
         {name}

@@ -1,19 +1,32 @@
-import Script from "next/script";
+import Script from "next/script"
+import Head from "next/head"
 
-import "../ui/styles/merrfal.css";
-import "../ui/styles/tailwind.css";
+import "../ui/styles/merrfal.css"
+import "../ui/styles/tailwind.css"
 
-import { Redux } from "../configs/Redux";
-import { Provider } from "react-redux";
-import { Global } from "../configs/Head";
-import { Translation } from "../utils/Translations";
+import { Provider } from "react-redux"
+import { Redux } from "../configs/Redux"
+import { Translation } from "../utils/Translations"
 
 const Main = ({ Component, pageProps }) => {
-  const { store, props } = Redux.useWrappedStore(pageProps);
+  const { store, props } = Redux.useWrappedStore(pageProps)
 
   return (
     <Provider store={store}>
-      <Global title={Translation("merrfal-tagline")} description={Translation("merrfal-description")} />
+      <Head>
+        <meta charSet="UTF-8" />
+
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
+
+        <meta name="author" content={Translation("merrfal")} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+
       <Component {...props} />
       <Script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" />
     
@@ -33,7 +46,7 @@ const Main = ({ Component, pageProps }) => {
         `}
       </Script>
     </Provider>
-  );
-};
+  )
+}
 
-export default Main;
+export default Main

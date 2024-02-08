@@ -9,7 +9,7 @@ const YouTubeVideo = ({ setIsVideoOpen }) => {
         className="inset-0 rounded-md w-full h-[272px] md:h-[380px] lg:w-[940px] lg:h-[529px]"
         title="Merrfal.com"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen="true"
+        allowFullScreen={true}
       />
     </section>
   )

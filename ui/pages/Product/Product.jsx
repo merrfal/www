@@ -26,7 +26,7 @@ import {
   Edit,
 } from "./"
 
-export default function Product() {
+export default function Product({ product: prd }) {
   const dispatch = useDispatch()
   const router = useRouter()
 
@@ -116,9 +116,9 @@ export default function Product() {
   return (
     <Normal>
       <Global
-        title={product?.productData?.name}
-        description={product?.productData?.description }
-        thumbnail={product?.productData?.gallery[0]?.url}
+        title={prd?.productData?.name || product?.productData?.name}
+        description={prd?.productData?.description || product?.productData?.description }
+        image={prd?.productData?.gallery?.find(image => image.isMain)?.url || product?.productData?.gallery?.find(image => image.isMain)?.url}
       />
 
       {product === null ? <Loading /> : null}
@@ -192,7 +192,6 @@ export default function Product() {
               />
             </div>
           </section>
-
         </div>
       )}
     </Normal>

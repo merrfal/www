@@ -1,15 +1,15 @@
 // @ts-nocheck
 
-import { Product } from "@/configs/Models"
+import { User } from "@/configs/Models"
 import { DatabaseConnection } from "@/utils/Connection"
 
 const List = async () => {
   try {
     await DatabaseConnection()
 
-    return await Product
+    return await User
       .find({})
-      .select({'productData.slug': 1})
+      .select({ 'userData.username': 1 })
       .lean()
   } 
 

@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import { NO_AVATAR, NO_COVER } from "./Constants";
+import { Schema, model } from "mongoose"
+import { NO_AVATAR, NO_COVER } from "./Constants"
 
 const UserModel = new Schema(
   {
@@ -59,7 +59,7 @@ const ProductSchema = new Schema(
     timestamps: true,
     versionKey: false,
   },
-);
+)
 
 const CategorySchema = new Schema(
   {
@@ -77,22 +77,22 @@ const CategorySchema = new Schema(
     timestamps: true,
     versionKey: false,
   },
-);
+)
 
-let Product;
-let User;
-let Category;
+let Product
+let User
+let Category
 
 try {
-  Product = model("Product");
-  User = model("User");
-  Category = model("Category");
+  Product = model("Product")
+  User = model("User")
+  Category = model("Category")
 } 
 
 catch (error) {
-  Product = model("Product", ProductSchema);
-  User = model("User", UserModel);
-  Category = model("Category", CategorySchema);
+  Product = model("Product", ProductSchema)
+  User = model("User", UserModel)
+  Category = model("Category", CategorySchema)
 }
 
-export { Product, User, Category };
+export { Product, User, Category }
