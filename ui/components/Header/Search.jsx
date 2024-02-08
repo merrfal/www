@@ -16,7 +16,8 @@ export default function Search() {
         let termRaw = paths[2]
 
         if(termRaw !== undefined && termRaw !== "[term]"){
-          setTerm(termRaw)
+          const term = decodeURIComponent(termRaw)
+          setTerm(term)
         }
       }
     }
@@ -36,7 +37,7 @@ export default function Search() {
       </div>
 
       <input
-        value={term}
+        value={decodeURIComponent(term)}
         onChange={(e) => setTerm(e.target.value)}
         maxLength={32}
         required
