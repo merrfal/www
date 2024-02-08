@@ -1,0 +1,11 @@
+on:
+  schedule:
+    - cron: "10 0 * * *"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Daily Rebuilder Prod
+        run: curl -X GET "${{ secrets.PROD_REDEPLOY_URL }}"
+      - name: Daily Rebuilder Dev
+        run: curl -X GET "${{ secrets.DEV_REDEPLOY_URL }}"
