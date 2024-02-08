@@ -1,0 +1,12 @@
+name: Generate Database Backup
+on:
+  schedule:
+    - cron: "0 * * * *"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Database Backup Prod
+        run: curl -X POST -d '{"token":"${{ secrets.PROD_BACKUP_SECRET_KEY }}"}' "${{ secrets.PROD_BACKUP_ENDPOINT }}/api/v1/generate-db-backup"
+      - name: Generate Database Backup Dev
+        run: curl -X POST -d '{"token":"${{ secrets.DEV_BACKUP_SECRET_KEY }}"}' "${{ secrets.DEV_BACKUP_ENDPOINT }}/api/v1/generate-db-backup"

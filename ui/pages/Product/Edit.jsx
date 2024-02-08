@@ -7,6 +7,7 @@ import { Translation } from "../../../utils/Translations"
 
 export default function Edit({ slug, user, postedAnonymously }) {  
   const account = useSelector(state => state.Account)
+  
   const allowManage = () => {
     if (account?.User?.userAdditionalData?.role === "admin") return true
 
