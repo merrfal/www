@@ -70,6 +70,11 @@ export default async function handler(req, res) {
         })
         
         else {
+          res.status(200).json({ 
+            success: true,
+            message: "Backup created successfully."
+          })
+
           const backup = {}
         
           const now = new Date()
@@ -102,11 +107,6 @@ export default async function handler(req, res) {
             writeStream.write(JSON.stringify(backup, null, 2))
             writeStream.end()
           }
-
-          res.status(200).json({ 
-            success: true,
-            message: "Backup created successfully."
-          })
         }
       }
 
