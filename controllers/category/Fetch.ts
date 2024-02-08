@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { Product } from "@/configs/Models"
+import { Category } from "@/configs/Models"
 import { DatabaseConnection } from "@/utils/Connection"
 
 const Fetch = async (slug) => {
@@ -8,14 +8,13 @@ const Fetch = async (slug) => {
     await DatabaseConnection()
 
     const select = {
-      'productData.name': 1,
-      'productData.description': 1,
-      'productData.slug': 1,
-      'productData.gallery': 1,
+      'categoryData.name': 1,
+      'categoryData.description': 1,
+      'categoryData.slug': 1,
     }
 
-    return await Product
-      .findOne({ 'productData.slug': slug })
+    return await Category
+      .findOne({ 'categoryData.slug': slug })
       .select(select)
       .lean()
   } 
