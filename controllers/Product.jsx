@@ -108,17 +108,22 @@ export const Search  = async (payload, res) => {
 
 export const Latest = async (payload, res) => {
   try {
+    const { limit, offset } = payload
+
+    let countProducts = await Product.countDocuments({ 'productData.isPublished': true })
+    
     let products = await Product
       .find({ 'productData.isPublished': true })
       .sort({ createdAt: -1 })
-      .limit(16)
+      .skip(offset)
+      .limit(limit)
       .lean()
 
     Response({
       res,
       code: products ? 200 : 404,
       success: products ? true : false,
-      data: products ? products : [],
+      data: products ? { products, hasMore: countProducts >= offset + limit } : [],
       message: products ? Translation("products-latest-success") : Translation("products-latest-error"),
     })
   } 
