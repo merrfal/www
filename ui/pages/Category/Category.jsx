@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux"
 import { Error } from ".."
 import { Translation } from "../../../utils/Translations"
 
-export default function Category() {
+export default function Category({ category: cat }) {
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -83,8 +83,9 @@ export default function Category() {
   return (
     <Normal>
       <Global 
-        title={category?.name} 
-        description={category?.description} 
+        title={cat?.categoryData?.name || category?.name} 
+        description={cat?.categoryData?.description || category?.description} 
+        image={'/categories/' + cat?.categoryData?.slug + '.webp' || category?.slug + '.webp'}
       />
 
       <Header 
