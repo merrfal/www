@@ -25,12 +25,10 @@ export default async function handler(req, res) {
     return
   }
 
-  else {
-    await RunMiddlewares(req, res, () => {
-      ValidateVariables(TARGET, PAYLOAD, res, req)
-      RouteMethod(TARGET, PAYLOAD, res, req)
-    })
-  }
+  else await RunMiddlewares(req, res, () => {
+    ValidateVariables(TARGET, PAYLOAD, res, req)
+    RouteMethod(TARGET, PAYLOAD, res, req)
+  })
 }
 
 export const config = {
