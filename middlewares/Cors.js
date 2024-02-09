@@ -21,6 +21,8 @@ const Cors = async (req, res) => {
             host: req.headers['host'],
             origin: req.headers['origin'],
             referer: req.headers['referer'],
+            xforwardedHost: req.headers['x-forwarded-host'],
+            
         })
         const ORIGIN = req.headers['origin'] || req.headers['host']
         console.error({ ORIGIN })
