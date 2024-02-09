@@ -3,7 +3,7 @@ export default function Loading(props){
     withContainer = true, 
     width = "62px", 
     height = "62px" 
-  } = props;
+  } = props
 
     const lottie = {
       src: "/json/LottieLoading.json",
@@ -19,14 +19,15 @@ export default function Loading(props){
       height: '80vh',
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      userSelect: 'none'
     }
 
     if (withContainer) return (
       <section style={container}>
         <lottie-player {...lottie} />
       </section>
-    );
+    )
 
     else return (
       <lottie-player {...lottie} />
