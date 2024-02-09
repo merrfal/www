@@ -12,7 +12,7 @@ export const Global = (props) => {
   } = props
 
   let local_index = FB_PROJECT_ID.includes('local') ? true : index
-  let formatted_title = (title === undefined || title.includes?.('undefined')) ? Translation("merrfal") : `${title?.replace(/\b\w/g, (char) => char.toUpperCase())} - ${Translation("merrfal")}`
+  let formatted_title = (title === undefined || title?.includes?.('undefined')) ? Translation("merrfal") : `${title?.replace(/(^\w|\s\w)/g, (char) => char.toUpperCase())} - ${Translation("merrfal")}`
 
   return (
     <MetaTags>
@@ -24,7 +24,7 @@ export const Global = (props) => {
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       
-      {local_index !== true && <meta name="robots" content="noindex" />}
+      {local_index && <meta name="robots" content="noindex" />}
     </MetaTags>
   )
 }

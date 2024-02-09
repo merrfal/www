@@ -18,6 +18,8 @@ const Cors = async (req, res) => {
     else {
         const ORIGIN = req.headers['origin'] || req.headers['host']
 
+        console.log('ORIGIN', ORIGIN)
+
         if (ORIGINS.includes(ORIGIN)) {
             await cors(req, res, {
                 methods: '*',
