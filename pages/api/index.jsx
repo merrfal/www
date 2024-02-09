@@ -1,5 +1,6 @@
 import { Cors } from "../../middlewares"
 import { ValidateVariables } from "../../utils/Http"
+import { Response } from "../../utils/Response"
 import { RouteMethod } from "../../utils/Routing"
 
 const RunMiddlewares = async (req, res, next) => {
@@ -9,11 +10,9 @@ const RunMiddlewares = async (req, res, next) => {
 
   else Response({
     res,
-    code: 401,
+    code: 403,
     success: false,
-    data: null,
     message: 'Kjo origjine nuk lejohet te aksesoj kete resurs. Ju lutem kontaktoni administratorin e sistemit.',
-    error: error,
   })
 }
 
@@ -26,12 +25,10 @@ export default async function handler(req, res) {
     return
   }
 
-  else {
-    await RunMiddlewares(req, res, () => {
-      ValidateVariables(TARGET, PAYLOAD, res, req)
-      RouteMethod(TARGET, PAYLOAD, res, req)
-    })
-  }
+  else await RunMiddlewares(req, res, () => {
+    ValidateVariables(TARGET, PAYLOAD, res, req)
+    RouteMethod(TARGET, PAYLOAD, res, req)
+  })
 }
 
 export const config = {
