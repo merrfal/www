@@ -36,7 +36,7 @@ export default function Categories({filters, setFilters}) {
           <form className="space-y-4">
             {AllCategories.map((category) => {
               return (
-                <div key={category._id} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
+                <div key={category._id} className="flex select-none items-center hover:cursor-pointer hover:text-gray-500 transition-all">
                   <input
                     id={category._id}
                     value={category.name}

@@ -115,7 +115,7 @@ export default function Edit({ user, setUser, setIsEdit, dispatch, account }) {
   let ref = clickOutside(() => setIsEdit(false))
 
   return (
-    <div style={load} className="relative z-[55]">
+    <div style={load} className="relative z-[10000000]">
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
       <div className="fixed inset-0 z-10 overflow-y-auto">
         <div className="flex min-h-full items-end justify-center text-center sm:items-center sm:p-0">

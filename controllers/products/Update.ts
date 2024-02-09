@@ -125,7 +125,9 @@ export const Update = async (payload, res, req) => {
                                     },
                                 )
                             }
-                    
+
+                            await res.revalidate(`/${product_structure?.slug}`)
+
                             Response({
                                 res,
                                 code: product ? 200 : 404,

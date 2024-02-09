@@ -38,6 +38,8 @@ export default function Sort({filters, setFilters}) {
                         onClick={() => {
                             if(filters.sort.createdAt === -1) open()
                             else setFilters({...filters, sort: { createdAt: -1 }})
+
+                            setIsSortOpen(false)
                         }}
                     >
                         {Translation("newest")}
@@ -49,6 +51,8 @@ export default function Sort({filters, setFilters}) {
                         onClick={() => {
                             if(filters.sort.createdAt === 1) open()
                             else setFilters({...filters, sort: { createdAt: 1 }})
+
+                            setIsSortOpen(false)
                         }}
                     >
                         {Translation("oldest")}
@@ -60,6 +64,8 @@ export default function Sort({filters, setFilters}) {
                         onClick={() => {
                             if(filters.sort.views === -1) open()
                             else setFilters({...filters, sort: { views: -1 }})
+
+                            setIsSortOpen(false)
                         }}
                     >
                         {Translation("most-popular")}
@@ -71,6 +77,8 @@ export default function Sort({filters, setFilters}) {
                         onClick={() => {
                             if(filters.sort.views === 1) open()
                             else setFilters({...filters, sort: { views: 1 }})
+
+                            setIsSortOpen(false)
                         }}
                     >
                         {Translation("most-unpopular")}
