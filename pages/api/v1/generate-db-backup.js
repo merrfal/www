@@ -76,9 +76,20 @@ export default async function handler(req, res) {
           const backup = {}
         
           const now = new Date()
-          const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-          const dateTime = `${now.getDate()}-${months[now.getMonth()]}-${now.getFullYear()}:${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
-          const bucket = `backups/db-${dateTime}`
+          const utcTimestamp = now.toISOString()
+          const parsedDate = new Date(utcTimestamp)
+
+          const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+          const monthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+          const dayOfWeek = daysOfWeek[parsedDate.getDay()]
+          const dayOfMonth = parsedDate.getDate()
+          const month = monthsOfYear[parsedDate.getMonth()]
+          const hours = parsedDate.getHours()
+          const minutes = parsedDate.getMinutes()
+
+          const formattedDate = `${dayOfWeek} ${dayOfMonth} ${month} ${hours}:${minutes}`
+          const bucket = `backups/DB (${formattedDate})`
           
           for (const collection of collections) {
             const documents = await db.collection(collection.name).find().toArray()

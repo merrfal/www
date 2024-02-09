@@ -37,28 +37,13 @@ if (!Firebase.apps.length) {
 
 const storageBucket = Firebase.storage().bucket()
 
-function getBackupDate(dirName) {
-    const match = dirName.match(/(\d{4})-(\d{1,2})-(\d{1,2})/)
-    
-    if (match) {
-        const year = parseInt(match[1], 10)
-        const month = parseInt(match[2], 10) - 1
-        const day = parseInt(match[3], 10)
-        return new Date(year, month, day)
-    }
-
-    return null
-}
-
-function isOlderThanThreeDays(date) {
+function OlderThanThreeDays(date) {
     const threeDaysAgo = new Date()
     threeDaysAgo.setDate(threeDaysAgo.getDate() - 3)
     return date < threeDaysAgo
 }
 
 export default async function handler(req, res) {
-    res.status(200).json({ success: true, message: "This is a POST request." })
-    return
     try {
         if (req.method !== 'POST') res.redirect('https://merrfal.com')
 
@@ -68,12 +53,16 @@ export default async function handler(req, res) {
             if (body && body.token && body.token === GITHUB_ACTION_SECRET) {
                 const [files] = await storageBucket.getFiles({ prefix: 'backups' })
 
+                res.status(200).json({ 
+                    success: true,
+                    message: "Clenup check completed successfully." 
+                })
+
                 for (const file of files) {
-                    const date = getBackupDate(file.name)
+                    const metadata = await file.getMetadata()
+                    const creationDate = new Date(metadata[0].timeCreated)
                     
-                    if (date && isOlderThanThreeDays(date)) {
-                        await file.delete()
-                    }
+                    if (OlderThanThreeDays(creationDate)) await file.delete()
                 }
             }
 

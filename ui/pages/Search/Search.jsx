@@ -25,17 +25,6 @@ export default function Search() {
     cities: []
   })
 
-  useEffect(() => {
-    const { term } = router.query
-
-    if (term === undefined || term === "") setAllMode(true)
-    else setAllMode(false)
-    
-    setProducts({ products: [], hasMore: true })
-    setFirst(false)
-    next(true)
-  }, [router])
-
   const next = (reset = false) => {
     const { term } = router.query
     const offset = products.products.length.toString()
@@ -45,11 +34,26 @@ export default function Search() {
   }
 
   useEffect(() => {
-    if (!first) {
+    if (router.isReady) {
+      const { term } = router.query
+
+      if (term === undefined || term === "") setAllMode(true)
+      else setAllMode(false)
+      
       setProducts({ products: [], hasMore: true })
+      setFirst(false)
       next(true)
     }
-  }, [filters])
+  }, [router])
+
+  useEffect(() => {
+    if (router?.isReady) {
+      if (!first) {
+        setProducts({ products: [], hasMore: true })
+        next(true)
+      }
+    }
+  }, [filters, router])
 
   return (
     <Normal>
