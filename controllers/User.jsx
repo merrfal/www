@@ -227,8 +227,14 @@ export const Update = async (payload, res, req) => {
             )
             .lean()
 
-          await res.revalidate(`/profili/${payload?.old_username}`)
-          await res.revalidate(`/profili/${payload?.userData?.username}`)
+          if (payload?.old_username === payload?.userData?.username) {
+            await res.revalidate(`/profili/${payload?.userData?.username}`)
+          }
+
+          else {
+            await res.revalidate(`/profili/${payload?.old_username}`)
+            await res.revalidate(`/profili/${payload?.userData?.username}`)
+          }
 
           Response({
             res,

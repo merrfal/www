@@ -12,12 +12,15 @@ export const Global = (props) => {
   } = props
 
   let local_index = FB_PROJECT_ID.includes('local') ? true : index
-  
+  let formatted_title = (title === undefined || title.includes?.('undefined')) ? Translation("merrfal") : `${title?.replace('.', '')} - ${Translation("merrfal")}`
+
   return (
     <MetaTags>
-      <title>{title ? `${title?.replace('.', '')} - ${Translation("merrfal")}` : Translation("merrfal")}</title>
+      <title>
+        {formatted_title}
+      </title>
 
-      <meta property="og:title" content={`${title?.replace('.', '')} - ${Translation("merrfal")}`} />
+      <meta property="og:title" content={formatted_title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       

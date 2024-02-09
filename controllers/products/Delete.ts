@@ -18,7 +18,7 @@ const Delete = async (payload, res, req) => {
     
             if (user) {
                 const productData = await Product
-                    .findOne({'productData.slug': slug })
+                    .findOne({ 'productData.slug': slug })
                     .select({ 'productData.user': 1, 'productData.category': 1 })
                     .lean()
     
@@ -32,6 +32,8 @@ const Delete = async (payload, res, req) => {
                             id, 
                             { 'productData.isPublished': false }
                         )
+
+                        await res.revalidate(`/${slug}`)
     
                         Response({
                             res,
