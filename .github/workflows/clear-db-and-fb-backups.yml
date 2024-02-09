@@ -2,7 +2,7 @@ name: Clear Database and Firebase Backups
 
 on:
   schedule:
-    - cron: "45 11 * * *"
+    - cron: "00 11 * * *"
   workflow_dispatch:
     
 jobs:

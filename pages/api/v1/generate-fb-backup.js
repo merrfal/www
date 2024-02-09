@@ -74,14 +74,25 @@ export default async function handler(req, res) {
                     })
                     
                     const now = new Date()
-                    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                    const dateTime = `${now.getDate()}-${months[now.getMonth()]}-${now.getFullYear()}:${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
+                    const utcTimestamp = now.toISOString()
+                    const parsedDate = new Date(utcTimestamp)
+          
+                    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+                    const monthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+          
+                    const dayOfWeek = daysOfWeek[parsedDate.getDay()]
+                    const dayOfMonth = parsedDate.getDate()
+                    const month = monthsOfYear[parsedDate.getMonth()]
+                    const hours = parsedDate.getHours()
+                    const minutes = parsedDate.getMinutes()
+          
+                    const formattedDate = `${dayOfWeek} ${dayOfMonth} ${month} ${hours}:${minutes}`
 
                     for (const collection of ['products', 'users', 'covers']) {
                         const [files] = await storageBucket.getFiles({ prefix: `${collection}/` })
                 
                         for (const file of files) {
-                            const destinationFile = storageBucket.file(`backups/fb-${dateTime}/${file.name}`)
+                            const destinationFile = storageBucket.file(`backups/FB (${formattedDate})/${file.name}`)
                             await file.copy(destinationFile)
                         }
                     }
