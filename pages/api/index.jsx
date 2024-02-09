@@ -30,9 +30,3 @@ export default async function handler(req, res) {
     RouteMethod(TARGET, PAYLOAD, res, req)
   })
 }
-
-export const config = {
-  api: { 
-    externalResolver: true 
-  }
-}
