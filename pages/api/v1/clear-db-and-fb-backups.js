@@ -57,6 +57,8 @@ function isOlderThanThreeDays(date) {
 }
 
 export default async function handler(req, res) {
+    res.status(200).json({ success: true, message: "This is a POST request." })
+    return
     try {
         if (req.method !== 'POST') res.redirect('https://merrfal.com')
 
