@@ -8,7 +8,7 @@ import { DisabledDefaultState, ProductDefaultState, ProductDefaultValidation } f
 import { onInput as Input } from "../../../utils/ProductManipulation"
 import { OpenConfirmation } from "../../../controllers/Slices"
 import { Translation } from "../../../utils/Translations"
-import { Permissonless } from ".."
+import { Error, Permissonless } from ".."
 
 import {
   Header,
@@ -37,6 +37,7 @@ export default function EditProduct() {
   const [isHold, setIsHold] = useState(false)
   const [originalImageList, setOriginalImageList] = useState()
   const [loadingImage, setLoadingImage] = useState(false)
+  const [notFound, setNotFound] = useState(false)
 
   const onInput = (key, e, event = true) => Input(
     product, 
@@ -119,6 +120,8 @@ export default function EditProduct() {
 
             else router.push(`/${slug}`)
           }
+
+          else setNotFound(true)
         })
       }
     }
@@ -126,6 +129,8 @@ export default function EditProduct() {
 
   const onLoad = !isHold ? {} : DisabledDefaultState
 
+  
+  if (notFound) return <Error code={404}  />
   if(!account.Auth && !account.Loading) return <Permissonless />
 
   return (
@@ -136,6 +141,8 @@ export default function EditProduct() {
           <Loading loading={true} withContainer={false} />
         </div>
       }
+
+      {loading && <div className="h-[88.5vh]" />}
 
       {!loading && <div className="mx-auto max-w-7xl px-4 sm:px-6 overflow-x-hidden">
         <div className="md:auto md:grid-cols-3 md:gap-6 mt-12 mb-16">
