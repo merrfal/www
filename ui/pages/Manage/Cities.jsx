@@ -1,11 +1,11 @@
-import { Countries } from "../../../data";
-import { CityValidation } from "../../../utils/Forms";
-import { Translation } from "../../../utils/Translations";
-import { RequiredLabel, Wildcard } from "../../components";
+import { Countries } from "../../../data"
+import { CityValidation } from "../../../utils/Forms"
+import { Translation } from "../../../utils/Translations"
+import { RequiredLabel, Wildcard } from "../../components"
 
 export default function Cities({product, onInput, validation: v}) {
-  const validation = CityValidation(product?.productData?.city);
-  const disableCity = product?.productData?.country === "";
+  const validation = CityValidation(product?.productData?.city)
+  const disableCity = product?.productData?.country === ""
 
   return (
     <div className="col-span-6 sm:col-span-3 lg:col-span-3">
@@ -39,5 +39,5 @@ export default function Cities({product, onInput, validation: v}) {
 
       {v.city && validation.error && <RequiredLabel message={validation.message} />}
     </div>
-  );
+  )
 }

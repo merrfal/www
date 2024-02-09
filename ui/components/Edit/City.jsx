@@ -5,8 +5,7 @@ import { CityValidation } from "../../../utils/Forms"
 
 export default function City({ user, onInput, validations }) {
   const validation = CityValidation(user?.userAdditionalData?.city)
-
-  const disableCity = user?.userAdditionalData?.country === "GLOBAL" || user?.userAdditionalData?.country === ""
+  const disableCity = user?.userAdditionalData?.country === "" || user?.userAdditionalData?.country === undefined || user?.userAdditionalData?.country === null
   
   return (
     <div className={disableCity ? "col-span-12 lg:col-span-3 flex flex-col justify-start items-start opacity-50 pointer-events-none" : "col-span-12 lg:col-span-3 flex flex-col justify-start items-start"}>
