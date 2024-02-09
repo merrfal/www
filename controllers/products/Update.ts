@@ -26,7 +26,7 @@ export const Update = async (payload, res, req) => {
         if (uid) {
             const user = await User
                 .findOne({ 'userData.uid': uid })
-                .select({ _id: 1 })
+                .select({ _id: 1, 'userAdditionalData.role': 1 })
                 .lean()
   
             if (user) {
@@ -38,7 +38,7 @@ export const Update = async (payload, res, req) => {
                     const product_owner = product_find?.productData?.user?.toString()
                     const user_id = user?._id.toString()
 
-                    if (product_owner === user_id) {
+                    if ((product_owner === user_id) || user.userAdditionalData.role === 'admin') {
                         let validations = true
             
                         const name_validation = NameValidation(payload?.name)
