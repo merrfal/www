@@ -21,8 +21,6 @@ const Fetch = async (username) => {
   } 
 
   catch (error) {
-    console.error(error)
-  
     return false
   }
 }

@@ -9,13 +9,11 @@ const List = async () => {
 
     return await Product
       .find({})
-      .select({'productData.slug': 1})
+      .select({ 'productData.slug': 1 })
       .lean()
   } 
 
   catch (error) {
-    console.error(error)
-  
     return false
   }
 }

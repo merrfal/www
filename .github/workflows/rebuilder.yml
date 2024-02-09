@@ -1,15 +1,15 @@
-name: Daily Rebuilder
+name: Rebuilder
 
 on:
   schedule:
-    - cron: "10 0 * * *"
+    - cron: "0 0 * * *"
   workflow_dispatch:
     
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Daily Rebuilder Prod
+      - name: Rebuilder Prod
         run: curl -X GET "${{ secrets.PROD_REDEPLOY_URL }}"
-      - name: Daily Rebuilder Dev
+      - name: Rebuilder Dev
         run: curl -X GET "${{ secrets.DEV_REDEPLOY_URL }}"

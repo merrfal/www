@@ -138,6 +138,8 @@ const Create = async (payload, res, req) => {
                                 $inc: { 'additionalData.productCount': 1 },
                                 $addToSet: { 'additionalData.products': id }
                             })
+
+                            await res.revalidate(`/${product_structure.productData.slug}`)
                 
                             Response({
                                 res,

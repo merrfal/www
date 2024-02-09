@@ -5,8 +5,7 @@ export async function getStaticPaths() {
     let products = await List()
 
     let paths = products?.map((product) => {
-        const { productData } = product
-        const { slug } = productData
+        const slug = product?.productData?.slug
 
         return {
             params: {
@@ -22,16 +21,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const product = await Fetch(params.slug)
-
-    if (product._id) product._id = product._id.toString()
-    if (product.createdAt) product.createdAt = product.createdAt.toString()
-    if (product.updatedAt) product.updatedAt = product.updatedAt.toString()
+    const product = await Fetch(params?.slug)
+    
+    if (product?._id) product._id = product?._id?.toString()
 
     return { 
-        revalidate: 1,
         props: { 
-            product: product?._id ? product : null
+            product: product && product?._id ? product : null
         }
     }
 }

@@ -5,8 +5,7 @@ export async function getStaticPaths() {
     let categories = await List()
     
     let paths = categories?.map((category) => {
-        const { categoryData } = category
-        const { slug } = categoryData
+        const slug = category?.categoryData?.slug
 
         return {
             params: {
@@ -22,15 +21,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const category = await Fetch(params.slug)
+    const category = await Fetch(params?.slug)
 
-    if (category._id) category._id = category._id.toString()
-    if (category.updatedAt) category.updatedAt = category.updatedAt.toString()
+    if (category?._id) category._id = category?._id?.toString()
 
     return { 
-        revalidate: 1,
         props: { 
-            category: category?._id ? category : null
+            category: category && category?._id ? category : null
         }
     }
 }
