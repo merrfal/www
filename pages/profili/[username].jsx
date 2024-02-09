@@ -5,8 +5,7 @@ export async function getStaticPaths() {
     let users = await List()
 
     let paths = users?.map((user) => {
-        const { userData } = user
-        const { username } = userData
+        const username = user?.userData?.username
 
         return {
             params: {
@@ -22,16 +21,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const profile = await Fetch(params.username)
+    const profile = await Fetch(params?.username)
 
-    if (profile._id) profile._id = profile._id.toString()
-    if (profile.createdAt) profile.createdAt = profile.createdAt.toString()
-    if (profile.updatedAt) profile.updatedAt = profile.updatedAt.toString()
+    if (profile?._id) profile._id = profile?._id?.toString()
 
     return { 
-        revalidate: 1,
         props: { 
-            profile: profile?._id ? profile : null
+            profile: profile && profile?._id ? profile : null
         }
     }
 }

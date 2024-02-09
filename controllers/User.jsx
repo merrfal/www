@@ -32,6 +32,8 @@ export const Register = async (payload, res, req) => {
   
       const savedUser = new User(data)
       const user = await savedUser.save()
+
+      await res.revalidate(`/profili/${payload?.userData?.username}`)
   
       Response({
         res,
@@ -224,6 +226,15 @@ export const Update = async (payload, res, req) => {
               { new: true }
             )
             .lean()
+
+          if (payload?.old_username === payload?.userData?.username) {
+            await res.revalidate(`/profili/${payload?.userData?.username}`)
+          }
+
+          else {
+            await res.revalidate(`/profili/${payload?.old_username}`)
+            await res.revalidate(`/profili/${payload?.userData?.username}`)
+          }
 
           Response({
             res,

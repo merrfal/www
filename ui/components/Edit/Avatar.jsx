@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react"
 import { getDownloadURL, ref } from "firebase/storage"
 import { EditIcon } from "../../icons"
@@ -46,7 +45,7 @@ export default function Avatar({ user, tempAvatar, setTempAvatar }) {
     <div className="w-full mt-[-40px] z-50 flex justify-center">
         <div className="mt-1 flex items-center relative bg-gray-50 rounded-full">
           <img
-            className="h-15 w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24 object-cover"
+            className="h-15 w-15 min-h-15 max-h-15 min-w-15 max-w-15 rounded-full ring-4 ring-white sm:h-24 sm:w-24 sm:h-min-24 sm:h-max-24 sm:min-w-24 sm:max-w-24 object-cover"
             src={PreviewImage}
             onDragStart={(e) => e.preventDefault()}
             onError={() => setAvatar(NO_AVATAR)}

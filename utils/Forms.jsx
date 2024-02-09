@@ -198,7 +198,7 @@ export const UsernameValidation = (value) => {
 export const CityValidation = (value) => {
   const validation = { error: false }
 
-  if (value === "") {
+  if (value === ""  || value === undefined || value === null) {
     validation.error = true
     validation.message = Translation("select-one-city")
   }

@@ -37,13 +37,13 @@ export default function Locations({ filters, setFilters }) {
                         {Countries.map((country, index) => {
                             return (
                                 <div key={index} className="flex flex-col">
-                                    <div key={index} className="flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
+                                    <div key={index} className="flex select-none items-center hover:cursor-pointer hover:text-gray-500 transition-all">
                                         <input
                                             id={country.iso_code}
                                             value={country.iso_code}
                                             type="checkbox"
                                             checked={filters?.countries?.includes(country?.iso_code)}
-                                            className="hover:cursor-pointer h-4 w-4 border-[#d6d9de] text-[#377DFF] focus:ring-[#377DFF] rounded-md"
+                                            className="hover:cursor-pointe h-4 w-4 border-[#d6d9de] text-[#377DFF] focus:ring-[#377DFF] rounded-md"
                                             onChange={() => {}}
                                             onClick={() => {
                                                 const isCountryAddedAlready = filters?.countries?.includes(country?.iso_code)
@@ -67,7 +67,7 @@ export default function Locations({ filters, setFilters }) {
                                         </label>
                                     </div>
 
-                                    {filters?.countries?.includes(country?.iso_code) && country.cities.map((city, index) => (
+                                    {country.cities.map((city, index) => (
                                         <div key={index} className="ml-6 mt-2 flex items-center hover:cursor-pointer hover:text-gray-500 transition-all">
                                             <input
                                                 id={city.value}

@@ -7,7 +7,7 @@ import { Translation } from "../utils/Translations"
 
 export default function useGoogle({dispatch, account}) {
   const AsyncLogout = async () => {
-    await Auth.signOut()
+    await AuthInstance.signOut()
     dispatch(LogoutAccount())
   }
 

@@ -45,13 +45,13 @@ export default function Cover({ user, tempCover, setTempCover }) {
     <div className="relative bg-gray-50 border-gray-100 rounded-xl">
       <img 
         loading="lazy" 
-        className="h-32 rounded-xl w-full object-cover lg:h-64" 
+        className="h-52 min-h-52 max-h-52 rounded-xl w-full object-cover lg:h-64 lg:max-h-52 lg:min-h-52" 
         src={PreviewImage} 
         onError={() => setCover(NO_COVER)}
         onDragStart={(e) => e.preventDefault()}
       />
 
-      <div onClick={onUploadHelper} className="absolute top-2 right-2 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+      <div onClick={onUploadHelper} className="absolute top-2 right-2 flex flex-col justify-stretch">
         <input 
           type="file" 
           value={undefined}
@@ -61,7 +61,7 @@ export default function Cover({ user, tempCover, setTempCover }) {
           className="w-full h-full absolute cursor-pointer invisible"
         />
 
-        <button className="inline-flex outline-none ring-0 items-center justify-center px-3 py-1.5 border text-gray-500 border-gray-300 shadow-sm text-xs font-medium rounded-md bg-white hover:bg-gray-50 focus:outline-none transition-all cursor-pointer duration-500">
+        <button className="inline-flex ring-0 items-center justify-center px-3 py-1.5 border text-gray-500 border-gray-300 shadow-sm text-xs font-medium rounded-md bg-white hover:bg-gray-50 outline-none transition-all cursor-pointer duration-500">
           <EditIcon />
 
           <span>

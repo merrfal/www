@@ -21,8 +21,6 @@ const Fetch = async (slug) => {
   } 
 
   catch (error) {
-    console.error(error)
-  
     return false
   }
 }

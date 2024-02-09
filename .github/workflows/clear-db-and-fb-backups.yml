@@ -1,0 +1,15 @@
+name: Clear Database and Firebase Backups
+
+on:
+  schedule:
+    - cron: "45 11 * * *"
+  workflow_dispatch:
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clear Database and Firebase Backups Prod
+        run: "curl -X POST -H 'Content-Type: application/json' -d '{\"token\":\"${{ secrets.PROD_BACKUP_SECRET_KEY }}\"}' '${{ secrets.PROD_BACKUP_ENDPOINT }}/api/v1/clear-db-and-fb-backups'"
+      - name: Clear Database and Firebase Backups Dev
+        run: "curl -X POST -H 'Content-Type: application/json' -d '{\"token\":\"${{ secrets.DEV_BACKUP_SECRET_KEY }}\"}' '${{ secrets.DEV_BACKUP_ENDPOINT }}/api/v1/clear-db-and-fb-backups'"

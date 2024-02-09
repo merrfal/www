@@ -1,2 +1,2 @@
-import Wildcard from './Wildcard';
-export default Wildcard;
+import Wildcard from './Wildcard'
+export default Wildcard
