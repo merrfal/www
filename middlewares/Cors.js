@@ -19,7 +19,8 @@ const Cors = async (req, res) => {
     else {
         console.log({
             host: req.headers['host'],
-            origin: req.headers['origin']
+            origin: req.headers['origin'],
+            referer: req.headers['referer'],
         })
         const ORIGIN = req.headers['origin'] || req.headers['host']
         console.error({ ORIGIN })
