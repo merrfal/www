@@ -132,7 +132,7 @@ export default function EditProduct() {
     <Normal>
       {
         (loading || account.Loading || isHold) && 
-        <div className='fixed z-[99999999999999999] flex items-center overflow-hidden justify-center w-screen h-screen top-0 right-0 bottom-0 left-0 bg-[#ffffff75]'>
+        <div className='fixed select-none z-[99999999999999999] flex items-center overflow-hidden justify-center w-screen h-screen top-0 right-0 bottom-0 left-0 bg-[#ffffff75]'>
           <Loading loading={true} withContainer={false} />
         </div>
       }

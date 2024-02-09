@@ -85,7 +85,7 @@ export default function Images({
     <div className='relative'>
       {
         loading &&
-        <div className='absolute z-[99999999999999999] flex items-center justify-center w-full h-full top-0 right-0 bottom-0 left-0 bg-[#ffffff75]'>
+        <div className='absolute select-none z-[99999999999999999] flex items-center justify-center w-full h-full top-0 right-0 bottom-0 left-0 bg-[#ffffff75]'>
           <Loading loading={true} withContainer={false} />
         </div>
       }
