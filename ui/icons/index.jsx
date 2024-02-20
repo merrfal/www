@@ -47,6 +47,8 @@ import KosovoIcon from "./KosovoIcon"
 import AlbaniaIcon from "./AlbaniaIcon"
 import WhatsAppIcon from "./WhatsAppIcon"
 import ViberIcon from "./ViberIcon"
+import ThreadsIcon from "./ThreadsIcon"
+import TikTokIcon from "./TikTokIcon"
 
 export {
   AccountIcon,
@@ -97,5 +99,7 @@ export {
   KosovoIcon,
   AlbaniaIcon,
   WhatsAppIcon,
-  ViberIcon
+  ViberIcon,
+  ThreadsIcon,
+  TikTokIcon
 }
