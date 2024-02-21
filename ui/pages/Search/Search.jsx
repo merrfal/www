@@ -93,6 +93,7 @@ export default function Search() {
           next={next}
           hasMore={products.hasMore}
           loader={<Skeleton />}
+          scrollThreshold="400px"
           className="mt-6 grid grid-cols-2 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
         >
           {products.products.map(
