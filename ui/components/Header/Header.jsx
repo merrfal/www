@@ -45,8 +45,8 @@ export default function Header() {
   const isHomepage = router.pathname === "/"
 
   return (
-    <header className="relative bg-white showSerch">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-[99] bg-white showSerch">
+      <nav className="sticky max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`${isHomepage ? '' : 'border-b border-gray-200'}`}>
           <div className="h-16 flex items-center justify-around">
             { !openSearch && <InfoSide /> }
