@@ -5,6 +5,7 @@
   ],
   "ignoreUnimported": [
     "next.config.js",
+    "next-sitemap",
     "postcss.config.js",
     "tailwind.config.js"
   ],

@@ -2,6 +2,7 @@
 export const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS
 export const GITHUB_ACTION_SECRET = process.env.GITHUB_ACTION_SECRET
 export const MONGO_URI = process.env.MONGO_URI
+export const SITEMAP_URL = process.env.SITEMAP_URL
 
 // Firebase Client
 export const FB_API_KEY = process.env.NEXT_PUBLIC_FB_API_KEY

@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
+    "postbuild": "next-sitemap --config sitemap.config.js",
     "dev": "next dev -p 1234",
     "build": "next build",
     "start": "next start -p 1234"
@@ -19,6 +20,7 @@
     "nextjs-cors": "^2.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "next-sitemap": "^4.2.3",
     "react-firebase-hooks": "^5.1.1",
     "react-images-uploading": "^3.1.7",
     "react-infinite-scroll-component": "^6.1.0",

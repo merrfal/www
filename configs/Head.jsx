@@ -14,6 +14,8 @@ export const Global = (props) => {
   let local_index = FB_PROJECT_ID.includes('local') ? true : index
   let formatted_title = (title === undefined || title?.includes?.('undefined')) ? Translation("merrfal") : `${title?.replace(/(^\w|\s\w)/g, (char) => char.toUpperCase())} - ${Translation("merrfal")}`
 
+  console.log('formatted_title', formatted_title)
+
   return (
     <MetaTags>
       <title>
